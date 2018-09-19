@@ -16,13 +16,22 @@ using System.Windows.Shapes;
 namespace HR_Portal.View.Usercontrol.Panels
 {
     /// <summary>
-    /// Interaction logic for FavouritesPanel.xaml
+    /// Interaction logic for favourites_panel.xaml
     /// </summary>
     public partial class FavouritesPanel : UserControl
     {
-        public FavouritesPanel()
+        private Grid grid;
+
+        public FavouritesPanel(Grid grid)
         {
+            this.grid = grid;
             InitializeComponent();
+            startMethods();
+        }
+
+        protected void startMethods()
+        {
+
         }
     }
 }

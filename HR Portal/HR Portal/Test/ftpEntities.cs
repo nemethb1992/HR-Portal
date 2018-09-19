@@ -1,4 +1,4 @@
-﻿using HRCloud.Model;
+﻿using HR_Portal.Model;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HRCloud.Control
+namespace HR_Portal.Control
 {
     class ftpEntities
     {

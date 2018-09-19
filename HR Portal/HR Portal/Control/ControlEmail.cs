@@ -7,12 +7,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using ActiveUp.Net.Mail;
-using HRCloud.Model;
-using static HRCloud.Model.ModelEmail;
-using HRCloud.Public.templates;
+using HR_Portal.Model;
+using static HR_Portal.Model.ModelEmail;
+using HR_Portal.Public.templates;
 using System.Security.Cryptography;
 
-namespace HRCloud.Control
+namespace HR_Portal.Control
 {
     class ControlEmail
     {

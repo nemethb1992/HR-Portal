@@ -1,5 +1,5 @@
-﻿using HRCloud.Control;
-using HRCloud.View.Usercontrol.Panels;
+﻿using HR_Portal.Control;
+using HR_Portal.View.Usercontrol.Panels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace HRCloud.Test
+namespace HR_Portal.Test
 {
     public class ThreadTest
     {

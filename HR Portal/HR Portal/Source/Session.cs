@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace HRCloud.Source
+namespace HR_Portal.Source
 {
     public struct UserSessData
     {

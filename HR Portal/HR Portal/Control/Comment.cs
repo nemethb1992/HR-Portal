@@ -1,7 +1,7 @@
 ﻿using System;
-using HRCloud.Source;
+using HR_Portal.Source;
 
-namespace HRCloud.Control
+namespace HR_Portal.Control
 {
     class Comment
     {

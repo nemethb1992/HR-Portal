@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using HRCloud.Model;
-using HRCloud.Source;
+using HR_Portal.Model;
+using HR_Portal.Source;
 
-namespace HRCloud.Control
+namespace HR_Portal.Control
 {
     class ControlApplicantProject
     {

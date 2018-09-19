@@ -1,4 +1,4 @@
-﻿using HRCloud.Model;
+﻿using HR_Portal.Model;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -6,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using static HRCloud.Model.ModelEmail;
+using static HR_Portal.Model.ModelEmail;
 
-namespace HRCloud.Control
+namespace HR_Portal.Control
 {
     class ControlFile
     {

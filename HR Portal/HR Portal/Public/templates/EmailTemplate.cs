@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HRCloud.Public.templates
+namespace HR_Portal.Public.templates
 {
     class EmailTemplate
     {

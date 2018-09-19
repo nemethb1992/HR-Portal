@@ -1,7 +1,7 @@
-﻿using HRCloud.Model;
+﻿using HR_Portal.Model;
 using System.Collections.Generic;
 
-namespace HRCloud.Control
+namespace HR_Portal.Control
 {
     class ControlSettings
     {

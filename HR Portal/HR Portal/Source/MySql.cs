@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using MySql.Data.MySqlClient;
-using static HRCloud.Model.ModelEmail;
-using static HRCloud.Model.ModelSzakmai;
-using HRCloud.Source;
+using static HR_Portal.Model.ModelEmail;
+using static HR_Portal.Model.ModelSzakmai;
+using HR_Portal.Source;
 
-namespace HRCloud.Model
+namespace HR_Portal.Model
 {
     public class MySql
     {

@@ -1,9 +1,9 @@
-﻿using HRCloud.Model;
+﻿using HR_Portal.Model;
 using System.Collections.Generic;
-using static HRCloud.Model.ModelSzakmai;
-using HRCloud.Source;
+using static HR_Portal.Model.ModelSzakmai;
+using HR_Portal.Source;
 
-namespace HRCloud.Control
+namespace HR_Portal.Control
 {
     class ControlSzakmai
     {
