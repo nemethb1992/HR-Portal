@@ -139,12 +139,12 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Public\templates\EmailTemplate.cs" />
-    <Compile Include="Source\ActivityLog.cs" />
+    <Compile Include="Source\Model\ModelOther.cs" />
     <Compile Include="Source\MySql.cs" />
     <Compile Include="Source\Session.cs" />
     <Compile Include="Source\SqLite.cs" />
-    <Compile Include="Test\ftpEntities.cs" />
-    <Compile Include="Test\ThreadTest.cs" />
+    <Compile Include="Source\Test\ftpEntities.cs" />
+    <Compile Include="Source\Test\ThreadTest.cs" />
     <Compile Include="View\Usercontrol\Login.xaml.cs">
       <DependentUpon>login.xaml</DependentUpon>
     </Compile>
@@ -206,16 +206,16 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Control\Comment.cs" />
-    <Compile Include="Control\ControlApplicant.cs" />
-    <Compile Include="Control\ControlApplicantProject.cs" />
-    <Compile Include="Control\ControlEmail.cs" />
-    <Compile Include="Control\ControlFile.cs" />
-    <Compile Include="Control\ControlLogin.cs" />
-    <Compile Include="Control\ControlPage.cs" />
-    <Compile Include="Control\ControlProject.cs" />
-    <Compile Include="Control\ControlSettings.cs" />
-    <Compile Include="Control\ControlSzakmai.cs" />
+    <Compile Include="Source\Control\Comment.cs" />
+    <Compile Include="Source\Control\ControlApplicant.cs" />
+    <Compile Include="Source\Control\ControlApplicantProject.cs" />
+    <Compile Include="Source\Control\ControlEmail.cs" />
+    <Compile Include="Source\Control\ControlFile.cs" />
+    <Compile Include="Source\Control\ControlLogin.cs" />
+    <Compile Include="Source\Control\ControlPage.cs" />
+    <Compile Include="Source\Control\ControlProject.cs" />
+    <Compile Include="Source\Control\ControlSettings.cs" />
+    <Compile Include="Source\Control\ControlSzakmai.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -298,11 +298,11 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Model\ModelApplicant.cs" />
-    <Compile Include="Model\ModelEmail.cs" />
-    <Compile Include="Model\ModelProject.cs" />
-    <Compile Include="Model\ModelProjectApplicant.cs" />
-    <Compile Include="Model\ModelSzakmai.cs" />
+    <Compile Include="Source\Model\ModelApplicant.cs" />
+    <Compile Include="Source\Model\ModelEmail.cs" />
+    <Compile Include="Source\Model\ModelProject.cs" />
+    <Compile Include="Source\Model\ModelProjectApplicant.cs" />
+    <Compile Include="Source\Model\ModelSzakmai.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -343,7 +343,9 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Source\ViewModel\" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Public\imgs\add.png" />
     <Resource Include="Public\imgs\appointment.png" />

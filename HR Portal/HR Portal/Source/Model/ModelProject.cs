@@ -26,11 +26,6 @@ namespace HR_Portal.Model
         public string megnevezes_projekt { get; set; }
     }
 
-    public class ComboBox_Seged_Struct
-    {
-        public int id { get; set; }
-    }
-
     public class ProjectListItems
     {
         public int id { get; set; }
@@ -99,18 +94,5 @@ namespace HR_Portal.Model
         public string feladatok { get; set; }
         public string elvarasok { get; set; }
         public string kinalunk { get; set; }
-    }
-
-    public class kompetenciak
-    {
-        public int id { get; set; }
-        public string kompetencia_megnevezes { get; set; }
-    }
-
-    public class koltsegek
-    {
-        public int id { get; set; }
-        public int osszeg { get; set; }
-        public string koltseg_megnevezes { get; set; }
     }
 }

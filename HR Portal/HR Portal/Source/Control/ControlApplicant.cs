@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using HR_Portal.Source;
+using HR_Portal.Source.Model;
 
 namespace HR_Portal.Control
 {
@@ -135,66 +136,66 @@ namespace HR_Portal.Control
             return list;
         }
 
-        public List<munkakor_struct> Data_Munkakor() //javított
+        public List<ModelMunkakor> Data_Munkakor() //javított
         {
             string command = "SELECT * FROM munkakor";
-            List<munkakor_struct> list = mySql.getMunkakorok(command);
+            List<ModelMunkakor> list = mySql.getMunkakorok(command);
             mySql.close();
             return list;
         }
 
-        public List<statusz_struct> Data_Statusz() //javított
+        public List<ModelStatusz> Data_Statusz() //javított
         {
             string command = "SELECT * FROM statusz";
-            List<statusz_struct> list = mySql.Statusz_MySql_listQuery(command);
+            List<ModelStatusz> list = mySql.Statusz_MySql_listQuery(command);
             mySql.close();
             return list;
         }
 
-        public List<pc_struct> Data_Pc() //javított
+        public List<ModelPc> Data_Pc() //javított
         {
             string command = "SELECT * FROM pc";
-            List<pc_struct> list = mySql.getPc(command);
+            List<ModelPc> list = mySql.getPc(command);
             mySql.close();
             return list;
         }
 
-        public List<vegzettseg_struct> Data_Vegzettseg() //javított
+        public List<ModelVegzettseg> Data_Vegzettseg() //javított
         {
             string command = "SELECT * FROM vegzettsegek";
-            List<vegzettseg_struct> list = mySql.Vegzettseg_MySql_listQuery(command);
+            List<ModelVegzettseg> list = mySql.Vegzettseg_MySql_listQuery(command);
             mySql.close();
             return list;
         }
 
-        public List<nyelv_struct> Data_Nyelv() //javított
+        public List<ModelNyelv> Data_Nyelv() //javított
         {
             string command = "SELECT * FROM nyelv";
-            List<nyelv_struct> list = mySql.getNyelv(command);
+            List<ModelNyelv> list = mySql.getNyelv(command);
             mySql.close();
             return list;
         }
 
-        public List<ertesulesek> Data_Ertesulesek() //javított
+        public List<ModelErtesulesek> Data_Ertesulesek() //javított
         {
             string command = "SELECT * FROM ertesulesek";
-            List<ertesulesek> list = mySql.Ertesulesek_MySql_listQuery(command);
+            List<ModelErtesulesek> list = mySql.Ertesulesek_MySql_listQuery(command);
             mySql.close();
             return list;
         }
 
-        public List<neme_struct> Data_Nemek() //javított
+        public List<ModelNeme> Data_Nemek() //javított
         {
             string command = "SELECT * FROM nemek";
-            List<neme_struct> list = mySql.Nem_MySql_listQuery(command);
+            List<ModelNeme> list = mySql.Nem_MySql_listQuery(command);
             mySql.close();
             return list;
         }
 
-        public List<megjegyzes_struct> Data_Comment() //javított
+        public List<ModelComment> Data_Comment() //javított
         {
             string command = "SELECT id, jelolt_id, projekt_id, hr_id, hr_nev, megjegyzes, datum, ertekeles FROM megjegyzesek WHERE jelolt_id=" + ApplicantID;
-            List<megjegyzes_struct> list = mySql.Megjegyzesek_MySql_listQuery(command);
+            List<ModelComment> list = mySql.Megjegyzesek_MySql_listQuery(command);
             mySql.close();
             return list;
         }

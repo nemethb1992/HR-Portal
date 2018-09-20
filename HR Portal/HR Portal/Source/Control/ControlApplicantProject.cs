@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using HR_Portal.Model;
 using HR_Portal.Source;
+using HR_Portal.Source.Model;
 
 namespace HR_Portal.Control
 {
@@ -107,18 +108,18 @@ namespace HR_Portal.Control
             return response;
         }
 
-        public List<ertesitendok_struct> Data_ProjektErtesitendokKapcsolt() // javítva használja: interviewpanel
+        public List<ModelErtesitendok> Data_ProjektErtesitendokKapcsolt() // javítva használja: interviewpanel
         {
             string command = "SELECT users.id, name, email FROM users INNER JOIN projekt_ertesitendok_kapcs ON ertesitendok_id = users.id WHERE projekt_id = "+pControl.ProjektID+"";
-            List<ertesitendok_struct> list = mySql.getErtesitendok(command);
+            List<ModelErtesitendok> list = mySql.getErtesitendok(command);
             mySql.close();
             return list;
         }
 
-        public List<ertesitendok_struct> Data_InterjuErtesitendokKapcsolt() // javítva használja: interviewpanel
+        public List<ModelErtesitendok> Data_InterjuErtesitendokKapcsolt() // javítva használja: interviewpanel
         {
             string command = "SELECT users.id, name, email FROM interju_resztvevo_kapcs left JOIN users ON user_id = users.id WHERE interju_id = " + InterjuID + " GROUP BY users.id";
-            List<ertesitendok_struct> list = mySql.getErtesitendok(command);
+            List<ModelErtesitendok> list = mySql.getErtesitendok(command);
             mySql.close();
             return list;
         }

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using HR_Portal.Source;
+using HR_Portal.Source.Model;
 
 namespace HR_Portal.Control
 {
@@ -116,66 +117,66 @@ namespace HR_Portal.Control
             return list;
         }
 
-        public List<vegzettseg_struct> Data_Vegzettseg()
+        public List<ModelVegzettseg> Data_Vegzettseg()
         {
             string command = "SELECT * FROM vegzettsegek";
-            List<vegzettseg_struct> list = mySql.Vegzettseg_MySql_listQuery(command);
+            List<ModelVegzettseg> list = mySql.Vegzettseg_MySql_listQuery(command);
             mySql.close();
             return list;
         }
 
-        public List<nyelv_struct> Data_Nyelv()
+        public List<ModelNyelv> Data_Nyelv()
         {
             string command = "SELECT * FROM nyelv";
-            List<nyelv_struct> list = mySql.getNyelv(command); 
+            List<ModelNyelv> list = mySql.getNyelv(command); 
             mySql.close();
             return list;
         }
 
-        public List<megjegyzes_struct> Data_CommentProject()
+        public List<ModelComment> Data_CommentProject()
         {
             string command = "SELECT id, jelolt_id, projekt_id, hr_id, hr_nev, megjegyzes, datum, ertekeles FROM megjegyzesek WHERE projekt_id=" + ProjektID;
-            List<megjegyzes_struct> list = mySql.Megjegyzesek_MySql_listQuery(command);
+            List<ModelComment> list = mySql.Megjegyzesek_MySql_listQuery(command);
             mySql.close();
             return list;
         }
 
-        public List<megjegyzes_struct> Data_CommentKapcs()
+        public List<ModelComment> Data_CommentKapcs()
         {
             string command = "SELECT id, jelolt_id, projekt_id, hr_id, hr_nev, megjegyzes, datum, ertekeles FROM megjegyzesek WHERE projekt_id=" + ProjektID +" AND jelolt_id="+aControl.ApplicantID+"";
-            List<megjegyzes_struct> list = mySql.Megjegyzesek_MySql_listQuery(command);
+            List<ModelComment> list = mySql.Megjegyzesek_MySql_listQuery(command);
             mySql.close();
             return list;
         }
 
-        public List<ertesitendok_struct> Data_ErtesitendokCheckbox(string ertesitendok_src)
+        public List<ModelErtesitendok> Data_ErtesitendokCheckbox(string ertesitendok_src)
         {
             string command = "SELECT id, name ,email FROM users WHERE name LIKE '%"+ertesitendok_src+"%' AND kategoria = 0";
-            List<ertesitendok_struct> list = mySql.getErtesitendok(command);
+            List<ModelErtesitendok> list = mySql.getErtesitendok(command);
             mySql.close();
             return list;
         }
 
-        public List<hr_struct> Data_HrCheckbox(string nev_src)
+        public List<ModelHr> Data_HrCheckbox(string nev_src)
         {
             string command = "SELECT id, name, kategoria, jogosultsag, validitas FROM users WHERE name LIKE '%" + nev_src + "%' AND kategoria = 1 GROUP BY users.name";
-            List<hr_struct> list = mySql.getHrShort(command);
+            List<ModelHr> list = mySql.getHrShort(command);
             mySql.close();
             return list;
         }
 
-        public List<hr_struct> Data_HrProject()
+        public List<ModelHr> Data_HrProject()
         {
             string command = "SELECT users.id, name, kategoria, jogosultsag, validitas FROM users INNER JOIN projekt_hr_kapcs ON users.id = projekt_hr_kapcs.hr_id INNER JOIN projektek ON projektek.id = projekt_hr_kapcs.projekt_id WHERE projektek.id = " + ProjektID + " AND users.kategoria = 1 GROUP BY users.id";
-            List<hr_struct> list = mySql.getHrShort(command);
+            List<ModelHr> list = mySql.getHrShort(command);
             mySql.close();
             return list;
         }
       
-        public List<ertesitendok_struct> Data_ErtesitendokKapcs() // javítva
+        public List<ModelErtesitendok> Data_ErtesitendokKapcs() // javítva
         {
             string command = "SELECT users.id, name, email FROM users INNER JOIN projekt_ertesitendok_kapcs ON users.id = projekt_ertesitendok_kapcs.ertesitendok_id  WHERE projekt_ertesitendok_kapcs.projekt_id =" + ProjektID+ " AND kategoria = 0 GROUP BY users.id";
-            List<ertesitendok_struct> list = mySql.getErtesitendok(command);
+            List<ModelErtesitendok> list = mySql.getErtesitendok(command);
             mySql.close();
             return list;
         }

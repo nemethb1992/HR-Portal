@@ -1,12 +1,8 @@
-﻿using HR_Portal.Model;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using static HR_Portal.Model.ModelEmail;
+using HR_Portal.Source.Model;
 
 namespace HR_Portal.Control
 {

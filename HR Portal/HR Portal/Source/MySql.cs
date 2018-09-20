@@ -4,6 +4,7 @@ using MySql.Data.MySqlClient;
 using static HR_Portal.Model.ModelEmail;
 using static HR_Portal.Model.ModelSzakmai;
 using HR_Portal.Source;
+using HR_Portal.Source.Model;
 
 namespace HR_Portal.Model
 {
@@ -290,16 +291,16 @@ namespace HR_Portal.Model
             return items;
         }
 
-        public List<ertesulesek> Ertesulesek_MySql_listQuery(string query)
+        public List<ModelErtesulesek> Ertesulesek_MySql_listQuery(string query)
         {
-            List<ertesulesek> items = new List<ertesulesek>();
+            List<ModelErtesulesek> items = new List<ModelErtesulesek>();
             if (this.open() == true)
             {
                 cmd = new MySqlCommand(query, conn);
                 sdr = cmd.ExecuteReader();
                 while (sdr.Read())
                 {
-                    items.Add(new ertesulesek
+                    items.Add(new ModelErtesulesek
                     {
                         id = Convert.ToInt32(sdr["id"]),
                         ertesules_megnevezes = sdr["ertesules_megnevezes"].ToString(),
@@ -329,16 +330,16 @@ namespace HR_Portal.Model
             return items;
         }
 
-        public List<pc_struct> getPc(string query)
+        public List<ModelPc> getPc(string query)
         {
-            List<pc_struct> items = new List<pc_struct>();
+            List<ModelPc> items = new List<ModelPc>();
             if (this.open() == true)
             {
                 cmd = new MySqlCommand(query, conn);
                 sdr = cmd.ExecuteReader();
                 while (sdr.Read())
                 {
-                    items.Add(new pc_struct
+                    items.Add(new ModelPc
                     {
                         id = Convert.ToInt32(sdr["id"]),
                         megnevezes_pc = sdr["megnevezes_pc"].ToString(),
@@ -349,16 +350,16 @@ namespace HR_Portal.Model
             return items;
         }
 
-        public List<vegzettseg_struct> Vegzettseg_MySql_listQuery(string query)
+        public List<ModelVegzettseg> Vegzettseg_MySql_listQuery(string query)
         {
-            List<vegzettseg_struct> items = new List<vegzettseg_struct>();
+            List<ModelVegzettseg> items = new List<ModelVegzettseg>();
             if (this.open() == true)
             {
                 cmd = new MySqlCommand(query, conn);
                 sdr = cmd.ExecuteReader();
                 while (sdr.Read())
                 {
-                    items.Add(new vegzettseg_struct
+                    items.Add(new ModelVegzettseg
                     {
                         id = Convert.ToInt32(sdr["id"]),
                         megnevezes_vegzettseg = sdr["megnevezes_vegzettseg"].ToString(),
@@ -369,16 +370,16 @@ namespace HR_Portal.Model
             return items;
         }
 
-        public List<statusz_struct> Statusz_MySql_listQuery(string query)
+        public List<ModelStatusz> Statusz_MySql_listQuery(string query)
         {
-            List<statusz_struct> items = new List<statusz_struct>();
+            List<ModelStatusz> items = new List<ModelStatusz>();
             if (this.open() == true)
             {
                 cmd = new MySqlCommand(query, conn);
                 sdr = cmd.ExecuteReader();
                 while (sdr.Read())
                 {
-                    items.Add(new statusz_struct
+                    items.Add(new ModelStatusz
                     {
                         id = Convert.ToInt32(sdr["id"]),
                         allapot = sdr["allapot"].ToString(),
@@ -611,16 +612,16 @@ namespace HR_Portal.Model
             return items;
         }
 
-        public List<nyelv_struct> getNyelv(string query)
+        public List<ModelNyelv> getNyelv(string query)
         {
-            List<nyelv_struct> items = new List<nyelv_struct>();
+            List<ModelNyelv> items = new List<ModelNyelv>();
             if (this.open() == true)
             {
                 cmd = new MySqlCommand(query, conn);
                 sdr = cmd.ExecuteReader();
                 while (sdr.Read())
                 {
-                    items.Add(new nyelv_struct
+                    items.Add(new ModelNyelv
                     {
                         id = Convert.ToInt32(sdr["id"]),
                         nyelv = sdr["megnevezes_nyelv"].ToString(),
@@ -632,16 +633,16 @@ namespace HR_Portal.Model
             return items;
         }
 
-        public List<munkakor_struct> getMunkakorok(string query)
+        public List<ModelMunkakor> getMunkakorok(string query)
         {
-            List<munkakor_struct> items = new List<munkakor_struct>();
+            List<ModelMunkakor> items = new List<ModelMunkakor>();
             if (this.open() == true)
             {
                 MySqlCommand cmd = new MySqlCommand(query, conn);
                 MySqlDataReader sdr = cmd.ExecuteReader();
                 while (sdr.Read())
                 {
-                    items.Add(new munkakor_struct
+                    items.Add(new ModelMunkakor
                     {
                         id = Convert.ToInt32(sdr["id"]),
                         munkakor = sdr["megnevezes_munka"].ToString(),
@@ -653,16 +654,16 @@ namespace HR_Portal.Model
             return items;
         }
 
-        public List<neme_struct> Nem_MySql_listQuery(string query)
+        public List<ModelNeme> Nem_MySql_listQuery(string query)
         {
-            List<neme_struct> items = new List<neme_struct>();
+            List<ModelNeme> items = new List<ModelNeme>();
             if (this.open() == true)
             {
                 MySqlCommand cmd = new MySqlCommand(query, conn);
                 MySqlDataReader sdr = cmd.ExecuteReader();
                 while (sdr.Read())
                 {
-                    items.Add(new neme_struct
+                    items.Add(new ModelNeme
                     {
                         id = Convert.ToInt32(sdr["id"]),
                         nem = sdr["nem"].ToString(),
@@ -698,16 +699,16 @@ namespace HR_Portal.Model
         //    return items;
         //}
 
-        public List<megjegyzes_struct> Megjegyzesek_MySql_listQuery(string query)
+        public List<ModelComment> Megjegyzesek_MySql_listQuery(string query)
         {
-            List<megjegyzes_struct> items = new List<megjegyzes_struct>();
+            List<ModelComment> items = new List<ModelComment>();
             if (this.open() == true)
             {
                 cmd = new MySqlCommand(query, conn);
                 sdr = cmd.ExecuteReader();
                 while (sdr.Read())
                 {
-                    items.Add(new megjegyzes_struct
+                    items.Add(new ModelComment
                     {
                         id = Convert.ToInt32(sdr["id"]),
                         jelolt_id = Convert.ToInt32(sdr["jelolt_id"]),
@@ -725,16 +726,16 @@ namespace HR_Portal.Model
             return items;
         }
 
-        public List<ertesitendok_struct> getErtesitendok(string query)
+        public List<ModelErtesitendok> getErtesitendok(string query)
         {
-            List<ertesitendok_struct> items = new List<ertesitendok_struct>();
+            List<ModelErtesitendok> items = new List<ModelErtesitendok>();
             if (this.open() == true)
             {
                 cmd = new MySqlCommand(query, conn);
                 sdr = cmd.ExecuteReader();
                 while (sdr.Read())
                 {
-                    items.Add(new ertesitendok_struct
+                    items.Add(new ModelErtesitendok
                     {
                         id = Convert.ToInt32(sdr["id"]),
                         name = sdr["name"].ToString(),
@@ -747,16 +748,16 @@ namespace HR_Portal.Model
             return items;
         }
         
-        public List<hr_struct> getHrShort(string query)
+        public List<ModelHr> getHrShort(string query)
         {
-            List<hr_struct> items = new List<hr_struct>();
+            List<ModelHr> items = new List<ModelHr>();
             if (this.open() == true)
             {
                 cmd = new MySqlCommand(query, conn);
                 sdr = cmd.ExecuteReader();
                 while (sdr.Read())
                 {
-                    items.Add(new hr_struct
+                    items.Add(new ModelHr
                     {
                         id = Convert.ToInt32(sdr["id"]),
                         name = sdr["name"].ToString(),
