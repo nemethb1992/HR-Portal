@@ -6,7 +6,6 @@ using System;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
-using HR_Portal.Source;
 using HR_Portal.Source.Model;
 
 namespace HR_Portal.View.Usercontrol.Panels
@@ -19,7 +18,6 @@ namespace HR_Portal.View.Usercontrol.Panels
         ControlApplicant aControl = new ControlApplicant();
         ControlProject pControl = new ControlProject();
         ControlApplicantProject paControl = new ControlApplicantProject();
-        Session session = new Session();
 
         private Grid grid;
         private ProjektJeloltDataSheet projektJeloltDataSheet;
@@ -31,7 +29,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             InitializeComponent();
 
             interviewLoader();
-            if (session.UserData[0].kategoria == 0)
+            if (Session.UserData[0].kategoria == 0)
             {
                 addPerson.Visibility = Visibility.Hidden;
                 invitePerson.Visibility = Visibility.Hidden;
@@ -40,7 +38,7 @@ namespace HR_Portal.View.Usercontrol.Panels
 
         protected void navigateBackFromInterview(object sender, RoutedEventArgs e)
         {
-            if(session.UserData[0].kategoria == 1)
+            if(Session.UserData[0].kategoria == 1)
             {
                 grid.Children.Clear();
                 grid.Children.Add(projektJeloltDataSheet = new ProjektJeloltDataSheet(grid));
@@ -136,7 +134,7 @@ namespace HR_Portal.View.Usercontrol.Panels
 
         protected void removeColleague(object sender, RoutedEventArgs e)
         {
-            if(session.UserData[0].kategoria == 1)
+            if(Session.UserData[0].kategoria == 1)
             {
                 MenuItem menu = sender as MenuItem;
                 ModelErtesitendok items = menu.DataContext as ModelErtesitendok;

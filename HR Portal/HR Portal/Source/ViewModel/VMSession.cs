@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
+using HR_Portal.Source.Model;
 
 namespace HR_Portal.Source
 
@@ -13,13 +14,16 @@ namespace HR_Portal.Source
         private static List<UserSessionData> Datas = new List<UserSessionData>();
         
         MySql mySql = new MySql();
+        Session session = new Session();
 
         public VMSession()
         {
-
+            Session.UserData = setUserSession(Session.ActiveDirectoryDomain);
         }
-        public static void setUserSession(string username)
+
+        public static List<UserSessionData> setUserSession(string username)
         {
+            List<UserSessionData> list = new List<UserSessionData>();
             MySqlDataReader sdr;
             if (MySql.open() == true)
             {
@@ -27,7 +31,7 @@ namespace HR_Portal.Source
                 sdr = MySql.cmd.ExecuteReader();
                 while (sdr.Read())
                 {
-                    Datas.Add(new UserSessionData
+                    list.Add(new UserSessionData
                     {
                         id = Convert.ToInt32(sdr["id"]),
                         username = sdr["username"].ToString(),
@@ -43,10 +47,13 @@ namespace HR_Portal.Source
                 sdr.Close();
             }
             MySql.close();
+
+            return list;
         }
-        public static List<UserSessionData> getDatas(string username)
+
+        public List<UserSessionData> getDatas()
         {
-            List<UserSessionData> list = Datas;
+            List<UserSessionData> list = Session.UserData;
             return list;
         }
     }

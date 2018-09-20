@@ -26,7 +26,6 @@ namespace HR_Portal.View.Usercontrol.Panels
         public string HeaderSelected { get { return HeaderSelecteds; } set { HeaderSelecteds = value; } }
         
         ControlApplicant aControl = new ControlApplicant();
-        Session session = new Session();
 
         private ApplicantDataSheet applicantDataSheet;
         private NewApplicantPanel newApplicantPanel;
@@ -126,7 +125,7 @@ namespace HR_Portal.View.Usercontrol.Panels
         {
             Button button = sender as Button;
             JeloltListItems items = button.DataContext as JeloltListItems;
-            session.ApplicantID = items.id;
+            Session.ApplicantID = items.id;
             grid.Children.Clear();
             grid.Children.Add(applicantDataSheet = new ApplicantDataSheet(grid));
         }
@@ -235,8 +234,8 @@ namespace HR_Portal.View.Usercontrol.Panels
         {
             MenuItem item = sender as MenuItem;
             JeloltListItems itemSource = item.DataContext as JeloltListItems;
-            session.isUpdate = true;
-            session.ApplicantID = itemSource.id;
+            Session.isUpdate = true;
+            Session.ApplicantID = itemSource.id;
             grid.Children.Clear();
             grid.Children.Add(newApplicantPanel = new NewApplicantPanel(grid));
         }

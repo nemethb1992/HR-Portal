@@ -143,6 +143,7 @@
     </Compile>
     <Compile Include="Public\templates\EmailTemplate.cs" />
     <Compile Include="Source\Model\ModelOther.cs" />
+    <Compile Include="Source\Model\ModelUserData.cs" />
     <Compile Include="Source\MySql.cs" />
     <Compile Include="Source\Session.cs" />
     <Compile Include="Source\SqLite.cs" />

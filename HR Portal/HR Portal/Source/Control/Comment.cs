@@ -6,7 +6,6 @@ namespace HR_Portal.Control
     class Comment
     {
         Source.MySql mySql = new Source.MySql();
-        Session sess = new Session();
         public void add(string comment, int project_id, int applicant_id, int teljesites)
         {
             DateTime dateTime = DateTime.Now;
@@ -14,7 +13,7 @@ namespace HR_Portal.Control
             {
                 teljesites = 10;
             }
-            string command = "INSERT INTO megjegyzesek (jelolt_id,projekt_id,hr_id,hr_nev,megjegyzes,datum,ertekeles) VALUES (" + applicant_id + "," + project_id + "," + sess.UserData[0].id + ",'" + sess.UserData[0].name + "','" + comment + "','" + dateTime.ToString("yyyy. MM. dd.") + "'," + teljesites + ")";
+            string command = "INSERT INTO megjegyzesek (jelolt_id,projekt_id,hr_id,hr_nev,megjegyzes,datum,ertekeles) VALUES (" + applicant_id + "," + project_id + "," + Session.UserData[0].id + ",'" + Session.UserData[0].name + "','" + comment + "','" + dateTime.ToString("yyyy. MM. dd.") + "'," + teljesites + ")";
             mySql.update(command);
             Source.MySql.close();
         }

@@ -58,14 +58,14 @@ namespace HR_Portal.Control
         {
             string command = "SELECT * FROM ConnectionSMTP WHERE type = 'imap'";
             List<MailServer_m> list = mySql.ConnectionSMTP_DataSource(command);
-            mySql.close();
+            Source.MySql.close();
             return list;
         }
         public List<MailServer_m> SMTP_List()
         {
             string command = "SELECT * FROM ConnectionSMTP WHERE type = 'smtp'";
             List<MailServer_m> list = mySql.ConnectionSMTP_DataSource(command);
-            mySql.close();
+            Source.MySql.close();
             return list;
         }
         //public void ReadImap()

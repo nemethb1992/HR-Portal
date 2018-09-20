@@ -13,7 +13,6 @@ namespace HR_Portal.View.Usercontrol
     public partial class Login : UserControl
     {
         ControlLogin lcontrol = new ControlLogin();
-        Session session = new Session();
 
         private Grid grid;
 
@@ -30,7 +29,7 @@ namespace HR_Portal.View.Usercontrol
         {
             Source.MySql mySql = new Source.MySql();
 
-            if (!MySql.isConnected())
+            if (!Source.MySql.isConnected())
             {
                 LoginSign.Text = "Nincs adatkapcsolat!";
             }
@@ -43,14 +42,14 @@ namespace HR_Portal.View.Usercontrol
         
         private void usernameEnterKeyUp(object sender, KeyEventArgs e)
         {
-            if (e.Key != System.Windows.Input.Key.Enter) return;
+            if (e.Key != Key.Enter) return;
             e.Handled = true;
             enter();
         }
 
         private void passwordEnterKeyUp(object sender, KeyEventArgs e)
         {
-            if (e.Key != System.Windows.Input.Key.Enter) return;
+            if (e.Key != Key.Enter) return;
             e.Handled = true;
             enter();
         }
@@ -82,8 +81,8 @@ namespace HR_Portal.View.Usercontrol
         {
                 if (lcontrol.mySqlUserValidation(Luser_tbx.Text))
                 {
-                    
-                    session.ActiveDirectoryDomain = Luser_tbx.Text;
+                Session.ActiveDirectoryDomain = Luser_tbx.Text;
+                    VMSession vMSession = new VMSession();
                     Main mw = new Main();
                     var window = Window.GetWindow(this);
                     usernameRemember();

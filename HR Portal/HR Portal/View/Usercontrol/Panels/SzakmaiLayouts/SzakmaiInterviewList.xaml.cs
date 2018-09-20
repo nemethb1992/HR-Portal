@@ -1,6 +1,5 @@
 ﻿using HR_Portal.Control;
 using HR_Portal.Source;
-using HR_Portal.Source;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,7 +23,6 @@ namespace HR_Portal.View.Usercontrol.Panels.SzakmaiLayouts
     public partial class SzakmaiInterviewList : UserControl
     {
         ControlSzakmai szControl = new ControlSzakmai();
-        Session session = new Session();
 
         private Grid grid;
         private SzakmaiKezdolap szakmaiKezdolap;
@@ -48,9 +46,9 @@ namespace HR_Portal.View.Usercontrol.Panels.SzakmaiLayouts
             Button button = sender as Button;
             interju_struct items = button.DataContext as interju_struct;
 
-            session.InterViewID = items.id;
-            session.ProjektID = items.projekt_id;
-            session.ApplicantID = items.jelolt_id;
+            Session.InterViewID = items.id;
+            Session.ProjektID = items.projekt_id;
+            Session.ApplicantID = items.jelolt_id;
 
             grid.Children.Clear();
             grid.Children.Add(interviewPanel = new InterviewPanel(grid));

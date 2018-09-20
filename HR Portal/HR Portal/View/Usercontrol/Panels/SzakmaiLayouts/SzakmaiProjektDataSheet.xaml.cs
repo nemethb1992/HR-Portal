@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using HR_Portal.Source;
 using HR_Portal.Source.Model;
 
 namespace HR_Portal.View.Usercontrol.Panels.SzakmaiLayouts
@@ -18,7 +17,6 @@ namespace HR_Portal.View.Usercontrol.Panels.SzakmaiLayouts
         ControlProject pControl = new ControlProject();
         //ControlApplicant aControl = new ControlApplicant();
         ControlApplicantProject paControl = new ControlApplicantProject();
-        Session session = new Session();
         Comment comment = new Comment();
 
         private SzakmaiApplicantDataView szakmaiApplicantDataView;
@@ -77,7 +75,7 @@ namespace HR_Portal.View.Usercontrol.Panels.SzakmaiLayouts
             MenuItem menuItem = sender as MenuItem;
             ModelComment items = menuItem.DataContext as ModelComment;
 
-            comment.delete(items.id, session.UserData[0].id, session.ProjektID, 0);
+            comment.delete(items.id, Session.UserData[0].id, Session.ProjektID, 0);
             megjegyzes_listBox.ItemsSource = pControl.Data_CommentProject();
         }
 
@@ -87,7 +85,7 @@ namespace HR_Portal.View.Usercontrol.Panels.SzakmaiLayouts
 
             if (e.Key != System.Windows.Input.Key.Enter) return;
             e.Handled = true;
-            comment.add(comment_tartalom.Text, session.ProjektID, 0, 0);
+            comment.add(comment_tartalom.Text, Session.ProjektID, 0, 0);
             megjegyzes_listBox.ItemsSource = pControl.Data_CommentProject();
             tbx.Text = "";
         }
@@ -117,7 +115,7 @@ namespace HR_Portal.View.Usercontrol.Panels.SzakmaiLayouts
             Button button = sender as Button;
             JeloltListItems items = button.DataContext as JeloltListItems;
 
-            session.ApplicantID = items.id;
+            Session.ApplicantID = items.id;
             grid.Children.Clear();
             grid.Children.Add(szakmaiApplicantDataView = new SzakmaiApplicantDataView(grid));
         }

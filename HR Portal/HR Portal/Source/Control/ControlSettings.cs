@@ -11,7 +11,7 @@ namespace HR_Portal.Control
         {
             string command = "SELECT * FROM users WHERE kategoria = 0";
             List <ModelErtesitendok> list = mySql.getErtesitendok(command);
-            mySql.close();
+            Source.MySql.close();
             return list;
         }
 
@@ -19,7 +19,7 @@ namespace HR_Portal.Control
         {
             string query = "SELECT * FROM nyelv";
             List <ModelNyelv> list = mySql.getNyelv(query);
-            mySql.close();
+            Source.MySql.close();
             return list;
         }
 
@@ -27,7 +27,7 @@ namespace HR_Portal.Control
         {
             string command = "SELECT * FROM munkakor";
             List <ModelMunkakor> list = mySql.getMunkakorok(command);
-            mySql.close();
+            Source.MySql.close();
             return list;
         }
 
@@ -35,7 +35,7 @@ namespace HR_Portal.Control
         {
             string command = "SELECT * FROM pc";
             List <ModelPc> list = mySql.getPc(command);
-            mySql.close();
+            Source.MySql.close();
             return list;
         }
 
@@ -43,7 +43,7 @@ namespace HR_Portal.Control
         {
             string query = "SELECT * FROM vegzettsegek";
             List <ModelVegzettseg> list = mySql.Vegzettseg_MySql_listQuery(query);
-            mySql.close();
+            Source.MySql.close();
             return list;
         }
 
@@ -51,7 +51,7 @@ namespace HR_Portal.Control
         {
             string command = "SELECT * FROM ertesulesek";
             List <ModelErtesulesek> list = mySql.Ertesulesek_MySql_listQuery(command);
-            mySql.close();
+            Source.MySql.close();
             return list;
         }
 
@@ -59,7 +59,7 @@ namespace HR_Portal.Control
         {
             string command = "DELETE FROM "+table+" WHERE id="+id+"";
             mySql.update(command);
-            mySql.close();
+            Source.MySql.close();
         }
 
         public void settingInsert(string content, string table)
@@ -91,7 +91,7 @@ namespace HR_Portal.Control
                     break;
             }
             mySql.update(command);
-            mySql.close();
+            Source.MySql.close();
         }
         //public void kompetenciaíró()
         //{

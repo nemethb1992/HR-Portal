@@ -7,7 +7,6 @@ namespace HR_Portal.Control
 {
     class ControlApplicant
     {
-        Session session = new Session();
         Source.MySql mySql = new Source.MySql();
 
         public List<JeloltListItems> applicantList(List<string> searchValue) //javított
@@ -122,7 +121,7 @@ namespace HR_Portal.Control
                 "coalesce((SELECT ertesulesek.id FROM ertesulesek WHERE ertesulesek.id = jeloltek.ertesult),0) AS id_ertesult, " +
                 "coalesce((SELECT megnevezes_vegzettseg FROM vegzettsegek WHERE vegzettsegek.id = jeloltek.vegz_terulet),'') AS vegz_terulet, " +
                 "coalesce((SELECT vegzettsegek.id FROM vegzettsegek WHERE vegzettsegek.id = jeloltek.vegz_terulet),0) AS id_vegz_terulet " +
-                "FROM jeloltek WHERE jeloltek.id = " + session.ApplicantID + "";
+                "FROM jeloltek WHERE jeloltek.id = " + Session.ApplicantID + "";
             //string query = "SELECT * FROM jeloltek INNER JOIN nyelv on jeloltek.nyelvtudas = nyelv.id INNER JOIN munkakor on jeloltek.munkakor = munkakor.id INNER JOIN ertesulesek ON jeloltek.ertesult = ertesulesek.id WHERE jeloltek.id = " + ApplicantID + "";
             List<JeloltExtendedList> list = mySql.JeloltExtended_MySql_listQuery(command);
             Source.MySql.close();
@@ -187,7 +186,7 @@ namespace HR_Portal.Control
 
         public List<ModelComment> Data_Comment() //javított
         {
-            string command = "SELECT id, jelolt_id, projekt_id, hr_id, hr_nev, megjegyzes, datum, ertekeles FROM megjegyzesek WHERE jelolt_id=" + session.ApplicantID;
+            string command = "SELECT id, jelolt_id, projekt_id, hr_id, hr_nev, megjegyzes, datum, ertekeles FROM megjegyzesek WHERE jelolt_id=" + Session.ApplicantID;
             List<ModelComment> list = mySql.Megjegyzesek_MySql_listQuery(command);
             Source.MySql.close();
             return list;
@@ -198,7 +197,7 @@ namespace HR_Portal.Control
             string query = "SELECT projektek.id, megnevezes_projekt FROM projektek " +
                 "INNER JOIN projekt_jelolt_kapcs ON projektek.id = projekt_jelolt_kapcs.projekt_id " +
                 "INNER JOIN jeloltek ON jeloltek.id = projekt_jelolt_kapcs.jelolt_id " +
-                "WHERE jeloltek.id = "+ session.ApplicantID +" " +
+                "WHERE jeloltek.id = "+ Session.ApplicantID +" " +
                 "GROUP BY projektek.id";
             List<SmallProjectListItems> list = mySql.Small_Projekt_MySql_listQuery(query);
             Source.MySql.close();
@@ -214,7 +213,7 @@ namespace HR_Portal.Control
         }
         public void applicalntProjectListDelete(int id)  //javított
         {
-            string command = "DELETE FROM projekt_jelolt_kapcs WHERE projekt_id = " + id + " AND jelolt_id = " + session.ApplicantID + ";";
+            string command = "DELETE FROM projekt_jelolt_kapcs WHERE projekt_id = " + id + " AND jelolt_id = " + Session.ApplicantID + ";";
             mySql.update(command);
             Source.MySql.close();
         }
@@ -239,7 +238,7 @@ namespace HR_Portal.Control
             mySql.update(command);
             command = "SELECT jeloltek.id FROM jeloltek WHERE jeloltek.email = '" + items[0].email + "' AND jeloltek.nev = '" + items[0].nev + "'";
             Source.MySql.close();
-            session.ApplicantID = Convert.ToInt16(mySql.listQuery(command, "jeloltek", 1)[0]);
+            Session.ApplicantID = Convert.ToInt16(mySql.listQuery(command, "jeloltek", 1)[0]);
             Source.MySql.close();
         }
 
@@ -261,10 +260,10 @@ namespace HR_Portal.Control
                 ", `nyelvtudas` = " + items[0].nyelvtudas + "" +
                 ",`nyelvtudas2` = " + items[0].nyelvtudas2 + "" +
                 ", `reg_date`  = '" + items[0].reg_date + "'" +
-                "WHERE jeloltek.id = " + session.ApplicantID +"";
+                "WHERE jeloltek.id = " + Session.ApplicantID +"";
             mySql.update(query);
             int appID = Convert.ToInt16(mySql.listQuery("SELECT jeloltek.id FROM jeloltek WHERE jeloltek.email = '" + items[0].email + "' AND jeloltek.nev = '" + items[0].nev + "' AND jeloltek.lakhely = '" + items[0].lakhely + "'", "jeloltek", 1)[0]);
-            session.ApplicantID = appID;
+            Session.ApplicantID = appID;
             Source.MySql.close();
         }
 

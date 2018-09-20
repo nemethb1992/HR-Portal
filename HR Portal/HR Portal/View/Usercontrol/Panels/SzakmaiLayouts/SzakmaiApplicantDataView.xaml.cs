@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using HR_Portal.Source;
 using HR_Portal.Source.Model;
 
 namespace HR_Portal.View.Usercontrol.Panels.SzakmaiLayouts
@@ -56,7 +55,7 @@ namespace HR_Portal.View.Usercontrol.Panels.SzakmaiLayouts
             MenuItem item = sender as MenuItem;
             ModelComment items = item.DataContext as ModelComment;
 
-            comment.delete(items.id, session.UserData[0].id, 0, session.ApplicantID);
+            comment.delete(items.id, Session.UserData[0].id, 0, Session.ApplicantID);
             commentLoader(megjegyzes_listBox);
         }
 
@@ -66,7 +65,7 @@ namespace HR_Portal.View.Usercontrol.Panels.SzakmaiLayouts
 
             if (e.Key != System.Windows.Input.Key.Enter) return;
             e.Handled = true;
-            comment.add(comment_tartalom.Text, 0, session.ApplicantID, 0);
+            comment.add(comment_tartalom.Text, 0, Session.ApplicantID, 0);
             commentLoader(megjegyzes_listBox);
             textbox.Text = "";
         }

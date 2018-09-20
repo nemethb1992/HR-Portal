@@ -1,6 +1,5 @@
 ﻿using HR_Portal.Control;
 using HR_Portal.Source;
-using HR_Portal.Source;
 using HR_Portal.Source.Model;
 using System;
 using System.Collections.Generic;
@@ -17,7 +16,6 @@ namespace HR_Portal.View.Usercontrol.Panels
     public partial class NewApplicantPanel : UserControl
     {
         ControlApplicant aControl = new ControlApplicant();
-        Session session = new Session();
 
         private Grid grid;
         private ApplicantDataSheet applicantDataSheet;
@@ -40,7 +38,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             ertesules_cbx.ItemsSource = aControl.Data_Ertesulesek();
             neme_cbx.ItemsSource = aControl.Data_Nemek();
 
-            if (session.isUpdate == true)
+            if (Session.isUpdate == true)
             {
                 uj_cim.Visibility = Visibility.Hidden;
                 applicant_INSERT_btn.Visibility = Visibility.Hidden;

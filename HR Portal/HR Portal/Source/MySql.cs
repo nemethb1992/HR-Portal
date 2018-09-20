@@ -100,6 +100,27 @@ namespace HR_Portal.Source
             
             return rows[0];
         }
+        public static bool isExists(string command)
+        {
+            int[] rows = new int[1];
+            if (open() == true)
+            {
+                cmd = new MySqlCommand(command, conn);
+                sdr = cmd.ExecuteReader();
+                while (sdr.Read())
+                {
+                    rows[0] = Convert.ToInt32(sdr[0]);
+                    if(rows.Length > 0)
+                    {
+                        sdr.Close();
+                        return true;
+                    }
+                }
+                sdr.Close();
+            }
+
+            return false;
+        }
 
         public List<string> listQuery(string command, string table, int b)
         {

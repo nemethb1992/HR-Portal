@@ -6,7 +6,6 @@ using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using HR_Portal.Source;
 using HR_Portal.Source.Model;
 
 namespace HR_Portal.View.Usercontrol.Panels
@@ -19,7 +18,6 @@ namespace HR_Portal.View.Usercontrol.Panels
         ControlProject pControl = new ControlProject();
         ControlApplicant aControl = new ControlApplicant();
         ControlApplicantProject paControl = new ControlApplicantProject();
-        Session session = new Session();
 
         private Grid grid;
         private ProjectDataSheet projectDataSheet;
@@ -43,7 +41,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             k4_cbx.ItemsSource = paControl.Data_Kompetencia();
             k5_cbx.ItemsSource = paControl.Data_Kompetencia();
 
-            if (session.isUpdate == true)
+            if (Session.isUpdate == true)
             {
                 uj_cim.Visibility = Visibility.Hidden;
                 projekt_INSERT_btn.Visibility = Visibility.Hidden;
@@ -101,7 +99,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             items.Add(new ProjectInsertListItems
             {
                 id = 0,
-                hr_id = session.UserData[0].id,
+                hr_id = Session.UserData[0].id,
                 megnevezes_projekt = nev_tbx.Text,
                 pc = pcComboBox.id,
                 vegzettseg = vegzettsegComboBox.id,
@@ -125,7 +123,7 @@ namespace HR_Portal.View.Usercontrol.Panels
 
         protected void projektInsertClick(object sender, RoutedEventArgs e)
         {
-            session.isUpdate = false;
+            Session.isUpdate = false;
             try
             {
                 pControl.projectInsert(getData());
@@ -140,7 +138,7 @@ namespace HR_Portal.View.Usercontrol.Panels
 
         protected void projektUpdateClick(object sender, RoutedEventArgs e)
         {
-            session.isUpdate = false;
+            Session.isUpdate = false;
             pControl.projectUpdate(getData());
             grid.Children.Clear();
             grid.Children.Add(projectDataSheet = new ProjectDataSheet(grid));

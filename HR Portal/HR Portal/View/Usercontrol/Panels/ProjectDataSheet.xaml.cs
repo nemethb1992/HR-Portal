@@ -7,7 +7,6 @@ using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using HR_Portal.Source;
 using HR_Portal.Source.Model;
 
 namespace HR_Portal.View.Usercontrol.Panels
@@ -19,7 +18,6 @@ namespace HR_Portal.View.Usercontrol.Panels
         EmailTemplate emailTemplate = new EmailTemplate();
         ControlEmail email = new ControlEmail();
         Comment comment = new Comment();
-        Session session = new Session();
 
         private Grid grid;
         private ProjektJeloltDataSheet projektJeloltDataSheet;
@@ -98,15 +96,15 @@ namespace HR_Portal.View.Usercontrol.Panels
             Button button = sender as Button;
             JeloltListItems items = button.DataContext as JeloltListItems;
 
-            session.ApplicantID = items.id;
+            Session.ApplicantID = items.id;
 
             if(items.allapota >= 1)
             {
-                session.TelefonSzurt = 1;
+                Session.TelefonSzurt = 1;
             }
             else
             {
-                session.TelefonSzurt = 0;
+                Session.TelefonSzurt = 0;
             }
             grid.Children.Clear();
             grid.Children.Add(projektJeloltDataSheet = new ProjektJeloltDataSheet(grid));
@@ -203,7 +201,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             MenuItem delete = sender as MenuItem;
             ModelComment items = delete.DataContext as ModelComment;
 
-            comment.delete(items.id, session.UserData[0].id, session.ProjektID, 0);
+            comment.delete(items.id, Session.UserData[0].id, Session.ProjektID, 0);
             listLoader();
         }
 
@@ -243,7 +241,7 @@ namespace HR_Portal.View.Usercontrol.Panels
 
             if (e.Key != System.Windows.Input.Key.Enter) return;
             e.Handled = true;
-            comment.add(comment_tartalom.Text, session.ProjektID, 0,0);
+            comment.add(comment_tartalom.Text, Session.ProjektID, 0,0);
             listLoader();
             tbx.Text = "";
         }
@@ -320,7 +318,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             if(selectedTabCode == 1)
             {
                 SubJelolt items = btn.DataContext as SubJelolt;
-                pControl.addJeloltInsert(items.id, session.ProjektID);
+                pControl.addJeloltInsert(items.id, Session.ProjektID);
                 projekt_kapcsolodo_list.ItemsSource = pControl.Data_JeloltForCheckbox(Ember_Search_tbx.Text);
                 kapcs_jeloltek_listBox.ItemsSource = pControl.Data_JeloltKapcs();
             }

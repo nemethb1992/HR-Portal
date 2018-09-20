@@ -153,10 +153,10 @@
                 <Button x:Name="ertesitendok_addbtn" Tag="ertesitendo" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Visibility="Hidden" Margin="0,0,0,5" Style="{StaticResource StandardButton}" Content="Értesítendők hozzáadása" Click="addPersonPanelOpenClick"/>
                 <Button x:Name="hr_addbtn" Tag="hr" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Visibility="Hidden" Margin="0,0,0,5" Style="{StaticResource StandardButton}" Content="HR hozzáadása" Click="addPersonPanelOpenClick"/>
             <Border Grid.ColumnSpan="3" Grid.Row="1" Background="{StaticResource SD_Element_Background}" CornerRadius="15,15,0,0"/>
-            <Button x:Name="jeloltek_tabbtn" Grid.Column="0" Grid.Row="1" Panel.ZIndex="1" Style="{StaticResource TabButton}" Content="Jelöltek" Click="jeloltTabClick"/>
-                <Button x:Name="ertesitendok_tabbtn" Grid.Column="1" Grid.Row="1"  Panel.ZIndex="1" Style="{StaticResource TabButton}" Content="Értesítendők" Click="ertesitendokTabClick"/>
-                <Button x:Name="hr_tabbtn" Grid.Column="2" Grid.Row="1"  Panel.ZIndex="1" Style="{StaticResource TabButton}" Content="HR" Click="hrTabClick"/>
-                <ListBox x:Name="kapcs_jeloltek_listBox" Grid.Column="0" Background="{StaticResource Listbox_light}" Panel.ZIndex="3" Grid.ColumnSpan="3" Grid.Row="2" Grid.RowSpan="5" Visibility="Visible"  Style="{StaticResource small_listBox_style}"   HorizontalContentAlignment="Stretch" SelectionMode="Extended">
+            <Button x:Name="jeloltek_tabbtn" Grid.Column="0" Grid.Row="1" Panel.ZIndex="4" Style="{StaticResource TabButton}" Content="Jelöltek" Click="jeloltTabClick"/>
+                <Button x:Name="ertesitendok_tabbtn" Grid.Column="1" Grid.Row="1"  Panel.ZIndex="4" Style="{StaticResource TabButton}" Content="Értesítendők" Click="ertesitendokTabClick"/>
+                <Button x:Name="hr_tabbtn" Grid.Column="2" Grid.Row="1"  Panel.ZIndex="4" Style="{StaticResource TabButton}" Content="HR" Click="hrTabClick"/>
+                <ListBox x:Name="kapcs_jeloltek_listBox" Grid.Column="0" Background="{StaticResource Listbox_light}" Panel.ZIndex="1" Grid.ColumnSpan="3" Grid.Row="2" Grid.RowSpan="5" Visibility="Visible"  Style="{StaticResource small_listBox_style}"   HorizontalContentAlignment="Stretch" SelectionMode="Extended">
                 <ListBox.Resources>
                     <Style TargetType="{x:Type Border}" BasedOn="{StaticResource listCorner}">
                         <Setter Property="CornerRadius" Value="0,0,10,10"/>

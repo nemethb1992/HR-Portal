@@ -1,6 +1,5 @@
 ﻿using HR_Portal.Control;
 using HR_Portal.Source;
-using HR_Portal.Source;
 using HR_Portal.View.Usercontrol.Panels.SzakmaiLayouts;
 using System;
 using System.Collections.Generic;
@@ -26,7 +25,6 @@ namespace HR_Portal.View.Usercontrol.Panels
     public partial class SzakmaiList : UserControl
     {
         ControlSzakmai szControl = new ControlSzakmai();
-        Session session = new Session();
 
         private SzakmaiProjektDataSheet szakmaiProjektDataSheet;
         private SzakmaiKezdolap szakmaiKezdolap;
@@ -44,7 +42,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             Button button = sender as Button;
             Projekt_Bevont_struct items = button.DataContext as Projekt_Bevont_struct;
 
-            session.ProjektID = items.id;
+            Session.ProjektID = items.id;
             grid.Children.Clear();
             grid.Children.Add(szakmaiProjektDataSheet = new SzakmaiProjektDataSheet(grid));
         }

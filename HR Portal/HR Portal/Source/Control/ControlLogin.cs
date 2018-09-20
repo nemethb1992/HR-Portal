@@ -5,12 +5,12 @@ using System.Net;
 using System.DirectoryServices.Protocols;
 using MySql.Data.MySqlClient;
 using HR_Portal.Source;
+using HR_Portal.Source.Model;
 
 namespace HR_Portal.Control
 {
     class ControlLogin
     {
-        Session session = new Session();
         Source.MySql mySql = new Source.MySql();
         SqLite sqLite = new SqLite();
 
@@ -47,11 +47,11 @@ namespace HR_Portal.Control
             {
                 DateTime dateTime = DateTime.Now;
                 sqLite.update("UPDATE users SET belepve = '" + dateTime.ToString("yyyy. MM. dd.") + "' WHERE username = '" + name + "';");
-                mySql.close();
+                Source.MySql.close();
                 return true;
             }
             else{
-                mySql.close();
+                Source.MySql.close();
             }
             return false;
         }
@@ -67,24 +67,24 @@ namespace HR_Portal.Control
                 sqLite.update("CREATE TABLE IF NOT EXISTS 'app' ('username' TEXT);");
                 user = sqLite.query("SELECT 'username' FROM 'app';");
             }
-            mySql.close();
+            Source.MySql.close();
             return user;
         }
         public void writeRememberedUser(string username) //javítva használja: login
         {
             sqLite.update("DELETE FROM 'app';");
             sqLite.update("INSERT INTO 'app' (username) VALUES ('" + username + "');");
-            mySql.close();
+            Source.MySql.close();
         }
         public void deleteRememberedUser() //javítva használja: login
         {
             sqLite.update("DELETE FROM 'app';");
-            mySql.close();
+            Source.MySql.close();
         }
         public bool mySqlUserValidation(string user) //javítva használja: login
         {
             bool respond = mySql.bind("SELECT count(id) FROM users WHERE username='" + user + "'");
-            mySql.close();
+            Source.MySql.close();
             return respond;
         }
 
@@ -92,7 +92,7 @@ namespace HR_Portal.Control
         {
             DateTime dateTime = DateTime.Now;
             mySql.update("INSERT INTO `users` (`id`, `username`, `name`, `email`, `kategoria`, `jogosultsag`, `validitas`, `belepve`, `reg_datum`) VALUES (NULL, '"+ username + "', '"+ name + "', '"+ email + "', '"+ kategoria + "', '1', '1', '" + dateTime.ToString("yyyy. MM. dd.") + "', '" + dateTime.ToString("yyyy. MM. dd.") + "');");
-            mySql.close();
+            Source.MySql.close();
         }
 
         //UserSessionData   általános

@@ -6,7 +6,6 @@ using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using HR_Portal.Source;
 using HR_Portal.Source.Model;
 
 namespace HR_Portal.View.Usercontrol.Panels
@@ -21,7 +20,6 @@ namespace HR_Portal.View.Usercontrol.Panels
         ControlProject pControl = new ControlProject();
         ControlApplicantProject paControl = new ControlApplicantProject();
         Comment comment = new Comment();
-        Session session = new Session();
 
         private ProjectDataSheet projectDataSheet;
         private InterviewPanel interviewPanel;
@@ -82,7 +80,7 @@ namespace HR_Portal.View.Usercontrol.Panels
 
         protected void telephoneInspectedLayout()
         {
-            if (session.TelefonSzurt == 1)
+            if (Session.TelefonSzurt == 1)
             {
                 telefonos_igen_btn.Visibility = Visibility.Hidden;
                 szurt_tbl.Visibility = Visibility.Visible;
@@ -101,7 +99,7 @@ namespace HR_Portal.View.Usercontrol.Panels
 
             if (e.Key != System.Windows.Input.Key.Enter) return;
             e.Handled = true;
-            comment.add(comment_tartalom.Text, session.ProjektID, session.ApplicantID, 0);
+            comment.add(comment_tartalom.Text, Session.ProjektID, Session.ApplicantID, 0);
             megjegyzes_listBox.ItemsSource = pControl.Data_CommentKapcs();
             tbx.Text = "";
         }
@@ -130,7 +128,7 @@ namespace HR_Portal.View.Usercontrol.Panels
         {
             ModelComment items = (sender as MenuItem).DataContext as ModelComment;
 
-            comment.delete(items.id, session.UserData[0].id, session.ProjektID, session.ApplicantID);
+            comment.delete(items.id, Session.UserData[0].id, Session.ProjektID, Session.ApplicantID);
             megjegyzes_listBox.ItemsSource = pControl.Data_CommentKapcs();
         }
 
@@ -163,7 +161,7 @@ namespace HR_Portal.View.Usercontrol.Panels
                 ismerte = 1;
             }
             paControl.telephoneFilterInsert(ismerte,Convert.ToInt32(muszakok_tbx.Text),utazas_tbx.Text);
-            session.TelefonSzurt = 1;
+            Session.TelefonSzurt = 1;
             grid_telefonosszuro.Height = 100;
             telefonos_igen_btn.IsEnabled = true;
             telefonos_nem_btn.IsEnabled = true;
@@ -177,7 +175,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             switch (result)
             {
                 case MessageBoxResult.Yes:
-                    pControl.jeloltKapcsUpdate(session.ApplicantID, 3);
+                    pControl.jeloltKapcsUpdate(Session.ApplicantID, 3);
                     grid.Children.Clear();
                     grid.Children.Add(projectDataSheet = new ProjectDataSheet(grid));
                     break;
@@ -247,7 +245,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             Button btn = sender as Button;
             interju_struct items = btn.DataContext as interju_struct;
 
-            session.InterViewID = items.id;
+            Session.InterViewID = items.id;
             grid.Children.Clear();
             grid.Children.Add(interviewPanel = new InterviewPanel(grid));
         }
