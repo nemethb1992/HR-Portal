@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using HR_Portal.Source;
+using HR_Portal.Source.Model;
 
 namespace HR_Portal.View.Usercontrol.Panels
 {
@@ -161,7 +162,7 @@ namespace HR_Portal.View.Usercontrol.Panels
         {
             EmailTemplate et = new EmailTemplate();
             ControlEmail email = new ControlEmail();
-            List<ertesitendok_struct> szemelyek = paControl.Data_InterjuErtesitendokKapcsolt();
+            List<ModelErtesitendok> szemelyek = paControl.Data_InterjuErtesitendokKapcsolt();
             List<interju_struct> interju = paControl.Data_InterviewById();
             List<String> resztvevok = new List<string>();
 

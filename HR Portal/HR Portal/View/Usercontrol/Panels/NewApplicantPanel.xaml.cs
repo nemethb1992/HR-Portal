@@ -1,5 +1,6 @@
 ﻿using HR_Portal.Control;
 using HR_Portal.Model;
+using HR_Portal.Source.Model;
 using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -58,17 +59,17 @@ namespace HR_Portal.View.Usercontrol.Panels
             eletkor_tbx.Text = li[0].szuldatum.ToString();
             tapasztalat_tbx.Text = li[0].tapasztalat_ev.ToString();
 
-            munkakor_cbx.SelectedIndex = checkboxCounter(aControl.Data_Munkakor().ConvertAll(x => new ComboBox_Seged_Struct { id = x.id, }), li.ConvertAll(x => new ComboBox_Seged_Struct { id = x.id_munkakor, }));
-            munkakor2_cbx.SelectedIndex = checkboxCounter(aControl.Data_Munkakor().ConvertAll(x => new ComboBox_Seged_Struct { id = x.id, }), li.ConvertAll(x => new ComboBox_Seged_Struct { id = x.id_munkakor2, }));
-            munkakor3_cbx.SelectedIndex = checkboxCounter(aControl.Data_Munkakor().ConvertAll(x => new ComboBox_Seged_Struct { id = x.id, }), li.ConvertAll(x => new ComboBox_Seged_Struct { id = x.id_munkakor3, }));
-            nyelv_cbx.SelectedIndex = checkboxCounter(aControl.Data_Nyelv().ConvertAll(x => new ComboBox_Seged_Struct { id = x.id, }), li.ConvertAll(x => new ComboBox_Seged_Struct { id = x.id_nyelvtudas, }));
-            nyelv2_cbx.SelectedIndex = checkboxCounter(aControl.Data_Nyelv().ConvertAll(x => new ComboBox_Seged_Struct { id = x.id, }), li.ConvertAll(x => new ComboBox_Seged_Struct { id = x.id_nyelvtudas2, }));
-            ertesules_cbx.SelectedIndex = checkboxCounter(aControl.Data_Ertesulesek().ConvertAll(x => new ComboBox_Seged_Struct { id = x.id, }), li.ConvertAll(x => new ComboBox_Seged_Struct { id = x.id_ertesult, }));
-            vegzettseg_cbx.SelectedIndex = checkboxCounter(aControl.Data_Vegzettseg().ConvertAll(x => new ComboBox_Seged_Struct { id = x.id, }), li.ConvertAll(x => new ComboBox_Seged_Struct { id = x.id_vegz_terulet, }));
-            neme_cbx.SelectedIndex = checkboxCounter(aControl.Data_Nemek().ConvertAll(x => new ComboBox_Seged_Struct { id = x.id, }), li.ConvertAll(x => new ComboBox_Seged_Struct { id = x.id_neme, }));
+            munkakor_cbx.SelectedIndex = checkboxCounter(aControl.Data_Munkakor().ConvertAll(x => new ModelId { id = x.id, }), li.ConvertAll(x => new ModelId { id = x.id_munkakor, }));
+            munkakor2_cbx.SelectedIndex = checkboxCounter(aControl.Data_Munkakor().ConvertAll(x => new ModelId { id = x.id, }), li.ConvertAll(x => new ModelId { id = x.id_munkakor2, }));
+            munkakor3_cbx.SelectedIndex = checkboxCounter(aControl.Data_Munkakor().ConvertAll(x => new ModelId { id = x.id, }), li.ConvertAll(x => new ModelId { id = x.id_munkakor3, }));
+            nyelv_cbx.SelectedIndex = checkboxCounter(aControl.Data_Nyelv().ConvertAll(x => new ModelId { id = x.id, }), li.ConvertAll(x => new ModelId { id = x.id_nyelvtudas, }));
+            nyelv2_cbx.SelectedIndex = checkboxCounter(aControl.Data_Nyelv().ConvertAll(x => new ModelId { id = x.id, }), li.ConvertAll(x => new ModelId { id = x.id_nyelvtudas2, }));
+            ertesules_cbx.SelectedIndex = checkboxCounter(aControl.Data_Ertesulesek().ConvertAll(x => new ModelId { id = x.id, }), li.ConvertAll(x => new ModelId { id = x.id_ertesult, }));
+            vegzettseg_cbx.SelectedIndex = checkboxCounter(aControl.Data_Vegzettseg().ConvertAll(x => new ModelId { id = x.id, }), li.ConvertAll(x => new ModelId { id = x.id_vegz_terulet, }));
+            neme_cbx.SelectedIndex = checkboxCounter(aControl.Data_Nemek().ConvertAll(x => new ModelId { id = x.id, }), li.ConvertAll(x => new ModelId { id = x.id_neme, }));
         }
 
-        protected int checkboxCounter(List<ComboBox_Seged_Struct> ossz_li, List<ComboBox_Seged_Struct> projekt_li)
+        protected int checkboxCounter(List<ModelId> ossz_li, List<ModelId> projekt_li)
         {
             int i = 0;
             foreach (var item in ossz_li)
@@ -87,14 +88,14 @@ namespace HR_Portal.View.Usercontrol.Panels
             DateTime localDate = DateTime.Now;
             List<JeloltExtendedList> items = new List<JeloltExtendedList>();
 
-            neme_struct nemeComboBoxItem = (neme_cbx as ComboBox).SelectedItem as neme_struct;
-            nyelv_struct nyelvComboBoxItem = (nyelv_cbx as ComboBox).SelectedItem as nyelv_struct;
-            nyelv_struct nyelv2ComboBoxItem = (nyelv2_cbx as ComboBox).SelectedItem as nyelv_struct;
-            ertesulesek ertesulesComboBoxItem = (ertesules_cbx as ComboBox).SelectedItem as ertesulesek;
-            munkakor_struct munkakorComboBoxItem = (munkakor_cbx as ComboBox).SelectedItem as munkakor_struct;
-            munkakor_struct munkakor2ComboBoxItem = (munkakor2_cbx as ComboBox).SelectedItem as munkakor_struct;
-            munkakor_struct munkakor3ComboBoxItem = (munkakor3_cbx as ComboBox).SelectedItem as munkakor_struct;
-            vegzettseg_struct vegzettsegComboBoxItem = (vegzettseg_cbx as ComboBox).SelectedItem as vegzettseg_struct;
+            ModelNeme nemeComboBoxItem = (neme_cbx as ComboBox).SelectedItem as ModelNeme;
+            ModelNyelv nyelvComboBoxItem = (nyelv_cbx as ComboBox).SelectedItem as ModelNyelv;
+            ModelNyelv nyelv2ComboBoxItem = (nyelv2_cbx as ComboBox).SelectedItem as ModelNyelv;
+            ModelErtesulesek ertesulesComboBoxItem = (ertesules_cbx as ComboBox).SelectedItem as ModelErtesulesek;
+            ModelMunkakor munkakorComboBoxItem = (munkakor_cbx as ComboBox).SelectedItem as ModelMunkakor;
+            ModelMunkakor munkakor2ComboBoxItem = (munkakor2_cbx as ComboBox).SelectedItem as ModelMunkakor;
+            ModelMunkakor munkakor3ComboBoxItem = (munkakor3_cbx as ComboBox).SelectedItem as ModelMunkakor;
+            ModelVegzettseg vegzettsegComboBoxItem = (vegzettseg_cbx as ComboBox).SelectedItem as ModelVegzettseg;
             
             items.Add(new JeloltExtendedList
             {

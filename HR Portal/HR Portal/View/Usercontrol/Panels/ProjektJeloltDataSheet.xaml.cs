@@ -7,6 +7,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using HR_Portal.Source;
+using HR_Portal.Source.Model;
 
 namespace HR_Portal.View.Usercontrol.Panels
 {

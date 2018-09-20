@@ -7,6 +7,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using HR_Portal.Source;
+using HR_Portal.Source.Model;
 
 namespace HR_Portal.View.Usercontrol.Panels
 {
@@ -58,18 +59,18 @@ namespace HR_Portal.View.Usercontrol.Panels
             nev_tbx.Text = list[0].megnevezes_projekt;
             tapasztalat_tbx.Text = list[0].tapasztalat_ev.ToString();
             ber_tbx.Text = list[0].ber.ToString();
-            pc_cbx.SelectedIndex = checkboxCounter(aControl.Data_Pc().ConvertAll(x => new ComboBox_Seged_Struct { id = x.id, }), list.ConvertAll(x => new ComboBox_Seged_Struct { id = x.pc, }));
-            vegzettseg_cbx.SelectedIndex = checkboxCounter(aControl.Data_Vegzettseg().ConvertAll(x => new ComboBox_Seged_Struct { id = x.id, }), list.ConvertAll(x => new ComboBox_Seged_Struct { id = x.vegzettseg, }));
-            nyelv_cbx.SelectedIndex = checkboxCounter(aControl.Data_Nyelv().ConvertAll(x => new ComboBox_Seged_Struct { id = x.id, }), list.ConvertAll(x => new ComboBox_Seged_Struct { id = x.nyelvtudas, }));
-            munkakor_cbx.SelectedIndex = checkboxCounter(aControl.Data_Munkakor().ConvertAll(x => new ComboBox_Seged_Struct { id = x.id, }), list.ConvertAll(x => new ComboBox_Seged_Struct { id = x.munkakor, }));
-            k1_cbx.SelectedIndex = checkboxCounter(paControl.Data_Kompetencia().ConvertAll(x => new ComboBox_Seged_Struct { id = x.id, }), list.ConvertAll(x => new ComboBox_Seged_Struct { id = x.kepesseg1, }));
-            k2_cbx.SelectedIndex = checkboxCounter(paControl.Data_Kompetencia().ConvertAll(x => new ComboBox_Seged_Struct { id = x.id, }), list.ConvertAll(x => new ComboBox_Seged_Struct { id = x.kepesseg2, }));
-            k3_cbx.SelectedIndex = checkboxCounter(paControl.Data_Kompetencia().ConvertAll(x => new ComboBox_Seged_Struct { id = x.id, }), list.ConvertAll(x => new ComboBox_Seged_Struct { id = x.kepesseg3, }));
-            k4_cbx.SelectedIndex = checkboxCounter(paControl.Data_Kompetencia().ConvertAll(x => new ComboBox_Seged_Struct { id = x.id, }), list.ConvertAll(x => new ComboBox_Seged_Struct { id = x.kepesseg4, }));
-            k5_cbx.SelectedIndex = checkboxCounter(paControl.Data_Kompetencia().ConvertAll(x => new ComboBox_Seged_Struct { id = x.id, }), list.ConvertAll(x => new ComboBox_Seged_Struct { id = x.kepesseg5, }));
+            pc_cbx.SelectedIndex = checkboxCounter(aControl.Data_Pc().ConvertAll(x => new ModelId { id = x.id, }), list.ConvertAll(x => new ModelId { id = x.pc, }));
+            vegzettseg_cbx.SelectedIndex = checkboxCounter(aControl.Data_Vegzettseg().ConvertAll(x => new ModelId { id = x.id, }), list.ConvertAll(x => new ModelId { id = x.vegzettseg, }));
+            nyelv_cbx.SelectedIndex = checkboxCounter(aControl.Data_Nyelv().ConvertAll(x => new ModelId { id = x.id, }), list.ConvertAll(x => new ModelId { id = x.nyelvtudas, }));
+            munkakor_cbx.SelectedIndex = checkboxCounter(aControl.Data_Munkakor().ConvertAll(x => new ModelId { id = x.id, }), list.ConvertAll(x => new ModelId { id = x.munkakor, }));
+            k1_cbx.SelectedIndex = checkboxCounter(paControl.Data_Kompetencia().ConvertAll(x => new ModelId { id = x.id, }), list.ConvertAll(x => new ModelId { id = x.kepesseg1, }));
+            k2_cbx.SelectedIndex = checkboxCounter(paControl.Data_Kompetencia().ConvertAll(x => new ModelId { id = x.id, }), list.ConvertAll(x => new ModelId { id = x.kepesseg2, }));
+            k3_cbx.SelectedIndex = checkboxCounter(paControl.Data_Kompetencia().ConvertAll(x => new ModelId { id = x.id, }), list.ConvertAll(x => new ModelId { id = x.kepesseg3, }));
+            k4_cbx.SelectedIndex = checkboxCounter(paControl.Data_Kompetencia().ConvertAll(x => new ModelId { id = x.id, }), list.ConvertAll(x => new ModelId { id = x.kepesseg4, }));
+            k5_cbx.SelectedIndex = checkboxCounter(paControl.Data_Kompetencia().ConvertAll(x => new ModelId { id = x.id, }), list.ConvertAll(x => new ModelId { id = x.kepesseg5, }));
         }
 
-        protected int checkboxCounter(List<ComboBox_Seged_Struct> ossz_li, List<ComboBox_Seged_Struct> projekt_li)
+        protected int checkboxCounter(List<ModelId> ossz_li, List<ModelId> projekt_li)
         {
             int i = 0;
             foreach (var item in ossz_li)
@@ -85,15 +86,15 @@ namespace HR_Portal.View.Usercontrol.Panels
 
         protected List<ProjectInsertListItems> getData()
         {
-            vegzettseg_struct vegzettsegComboBox = (vegzettseg_cbx as ComboBox).SelectedItem as vegzettseg_struct;
-            munkakor_struct munkakorComboBox = (munkakor_cbx as ComboBox).SelectedItem as munkakor_struct;
-            nyelv_struct nyelvComboBox = (nyelv_cbx as ComboBox).SelectedItem as nyelv_struct;
+            ModelVegzettseg vegzettsegComboBox = (vegzettseg_cbx as ComboBox).SelectedItem as ModelVegzettseg;
+            ModelMunkakor munkakorComboBox = (munkakor_cbx as ComboBox).SelectedItem as ModelMunkakor;
+            ModelNyelv nyelvComboBox = (nyelv_cbx as ComboBox).SelectedItem as ModelNyelv;
             kompetenciak kepzettseg1ComboBox = (k1_cbx as ComboBox).SelectedItem as kompetenciak;
             kompetenciak kepzettseg2ComboBox = (k2_cbx as ComboBox).SelectedItem as kompetenciak;
             kompetenciak kepzettseg3ComboBox = (k3_cbx as ComboBox).SelectedItem as kompetenciak;
             kompetenciak kepzettseg4ComboBox = (k4_cbx as ComboBox).SelectedItem as kompetenciak;
             kompetenciak kepzettseg5ComboBox = (k5_cbx as ComboBox).SelectedItem as kompetenciak;
-            pc_struct pcComboBox = (pc_cbx as ComboBox).SelectedItem as pc_struct;
+            ModelPc pcComboBox = (pc_cbx as ComboBox).SelectedItem as ModelPc;
             DateTime localDate = DateTime.Now;
             List<ProjectInsertListItems> items = new List<ProjectInsertListItems>();
 

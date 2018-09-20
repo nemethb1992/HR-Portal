@@ -90,4 +90,8 @@ namespace HR_Portal.Source.Model
         public int osszeg { get; set; }
         public string koltseg_megnevezes { get; set; }
     }
+    public class ModelId
+    {
+        public int id { get; set; }
+    }
 }
