@@ -167,7 +167,7 @@ namespace HR_Portal.Model
         public string kep { get; set; }
     }
 
-    public class Jelolt_File_Struct
+    public class Jelolt_File_Struc
     {
         public string fajlnev { get; set; }
         public string path { get; set; }

@@ -102,6 +102,7 @@ namespace HR_Portal.View.Usercontrol.Panels
 
             try{
                 List<ProjectListItems> lista = pControl.Data_ProjectFull(getSearchData());
+                project_listBox.ItemsSource = lista;
                 talalat_tbl.Text = "Találatok:  " + lista.Count.ToString();
             }
             catch (Exception e)
@@ -109,18 +110,6 @@ namespace HR_Portal.View.Usercontrol.Panels
                 MessageBox.Show(e.ToString());
             }
         }
-
-        //protected List<ProjectListItems> projectListLoader2()
-        //{
-        //    List<Projekt_Search_Memory> list = new List<Projekt_Search_Memory>();
-        //    List<ProjectListItems> lista = new List<ProjectListItems>();
-
-        //    list.Add(new Projekt_Search_Memory() { statusz = 1 });
-        //    pControl.projectSearchMemory = list;
-        //    //buttonColorChange();
-        //    lista = pControl.Data_ProjectFull(getSearchData());
-        //    return lista;
-        //}
 
         protected void buttonColorChange()
         {
