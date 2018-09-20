@@ -1,13 +1,13 @@
-﻿using HR_Portal.Model;
+﻿using HR_Portal.Source;
 using System.Collections.Generic;
-using static HR_Portal.Model.ModelSzakmai;
+using static HR_Portal.Source.ModelSzakmai;
 using HR_Portal.Source;
 
 namespace HR_Portal.Control
 {
     class ControlSzakmai
     {
-        Model.MySql mySql = new Model.MySql();
+        Source.MySql mySql = new Source.MySql();
         Session session = new Session();
 
         public List<Projekt_Bevont_struct> Data_SzakmaiProject()

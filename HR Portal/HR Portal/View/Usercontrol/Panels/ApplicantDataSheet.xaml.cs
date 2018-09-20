@@ -1,5 +1,5 @@
 ﻿using HR_Portal.Control;
-using HR_Portal.Model;
+using HR_Portal.Source;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Windows;
@@ -17,7 +17,6 @@ namespace HR_Portal.View.Usercontrol.Panels
     {
         Comment comment = new Comment();
         ControlApplicant aControl = new ControlApplicant();
-        ControlProject pControl = new ControlProject();
         ControlFile fControl = new ControlFile();
         Session session = new Session();
 
@@ -44,7 +43,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             app_input_9.Text = list[0].ertesult.ToString();
             app_input_10.Text = list[0].szuldatum.ToString();
             projekt_cbx.ItemsSource = aControl.Data_PorjectListSmall();
-            csatolmany_listBox.ItemsSource = fControl.Applicant_FolderReadOut(aControl.ApplicantID);
+            csatolmany_listBox.ItemsSource = fControl.Applicant_FolderReadOut(session.ApplicantID);
             commentLoader(megjegyzes_listBox);
             kapcsolodo_projekt_list.ItemsSource = aControl.Data_ProjectList();
         }
@@ -60,7 +59,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             Button button = sender as Button;
             SmallProjectListItems items = button.DataContext as SmallProjectListItems;
 
-            pControl.ProjektID = items.id;
+            session.ProjektID = items.id;
             grid.Children.Clear();
             grid.Children.Add(projectDataSheet = new ProjectDataSheet(grid));
         }
@@ -79,7 +78,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             MenuItem item = sender as MenuItem;
             ModelComment items = item.DataContext as ModelComment;
 
-            comment.delete(items.id, session.UserData[0].id, 0, aControl.ApplicantID);
+            comment.delete(items.id, session.UserData[0].id, 0, session.ApplicantID);
             commentLoader(megjegyzes_listBox);
         }
 
@@ -89,7 +88,7 @@ namespace HR_Portal.View.Usercontrol.Panels
 
             if (e.Key != System.Windows.Input.Key.Enter) return;
             e.Handled = true;
-            comment.add(comment_tartalom.Text, 0,aControl.ApplicantID, 0);
+            comment.add(comment_tartalom.Text, 0, session.ApplicantID, 0);
             commentLoader(megjegyzes_listBox);
             textbox.Text = "";
         }
@@ -115,10 +114,12 @@ namespace HR_Portal.View.Usercontrol.Panels
 
         protected void projektClick(object sender, RoutedEventArgs e)
         {
+            ControlProject pControl = new ControlProject();
+
             ComboBox cbx = projekt_cbx as ComboBox;
             SmallProjectListItems item = cbx.SelectedItem as SmallProjectListItems;
 
-            pControl.addJeloltInsert(aControl.ApplicantID , item.id);
+            pControl.addJeloltInsert(session.ApplicantID , item.id);
             kapcsolodo_projekt_list.ItemsSource = aControl.Data_ProjectList();
         }
 

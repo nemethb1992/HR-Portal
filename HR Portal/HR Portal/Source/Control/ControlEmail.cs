@@ -7,8 +7,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using ActiveUp.Net.Mail;
-using HR_Portal.Model;
-using static HR_Portal.Model.ModelEmail;
+using HR_Portal.Source;
+using static HR_Portal.Source.ModelEmail;
 using HR_Portal.Public.templates;
 using System.Security.Cryptography;
 
@@ -16,7 +16,7 @@ namespace HR_Portal.Control
 {
     class ControlEmail
     {
-        Model.MySql mySql = new Model.MySql();
+        Source.MySql mySql = new Source.MySql();
         EmailTemplate emailTemplate = new EmailTemplate();
 
         public class MailRepository

@@ -1,30 +1,21 @@
-﻿using HR_Portal.Model;
+﻿using HR_Portal.Source;
 using System;
 using System.Collections.Generic;
-using HR_Portal.Source;
 using HR_Portal.Source.Model;
 
 namespace HR_Portal.Control
 {
     class ControlProject
     {
-        private static bool Changes;
-        public bool Change { get { return Changes; } set { Changes = value; } }
 
-        private static int ProjektIDs;
-        public int ProjektID { get { return ProjektIDs; } set { ProjektIDs = value; } }
-
-        private static List<Projekt_Search_Memory> ProjectSearchMemory;
-        public List<Projekt_Search_Memory> projectSearchMemory { get { return ProjectSearchMemory; } set { ProjectSearchMemory = value; } }
-
-        Model.MySql mySql = new Model.MySql();
+        Source.MySql mySql = new Source.MySql();
         Session session = new Session();
         ControlApplicant aControl = new ControlApplicant();
 
         public List<ProjectListItems> Data_ProjectFull(List<string> searchValue)
         {
             string command = "SELECT coalesce((SELECT count(jelolt_id) FROM projekt_jelolt_kapcs WHERE projekt_id = projektek.id GROUP BY jeloltek.id),0) as jeloltek_db, coalesce((SELECT count(jelolt_id) FROM interjuk_kapcs WHERE projekt_id = projektek.id),0) as interjuk_db, projektek.id, projektek.publikalt, megnevezes_projekt, megnevezes_munka, fel_datum, statusz FROM projektek LEFT JOIN projekt_jelolt_kapcs ON projektek.id = projekt_jelolt_kapcs.projekt_id LEFT JOIN jeloltek ON jeloltek.id = projekt_jelolt_kapcs.jelolt_id LEFT JOIN munkakor ON munkakor.id = projektek.munkakor LEFT JOIN pc ON pc.id = projektek.pc LEFT JOIN megjegyzesek ON projektek.id = megjegyzesek.projekt_id " +
-            " WHERE projektek.statusz = " + projectSearchMemory[0].statusz;
+            " WHERE projektek.statusz = " + session.projectSearchMemory[0].statusz;
             if (searchValue[0] != "")
             {
                 command += " AND projektek.megnevezes_projekt LIKE '%" + searchValue[0] + "%' ";
@@ -103,7 +94,7 @@ namespace HR_Portal.Control
                 "LEFT JOIN users ON users.id = projektek.hr_id " +
                 "LEFT JOIN pc ON pc.id = projektek.pc " +
                 "LEFT JOIN statusz ON projektek.statusz = statusz.id " +
-                "WHERE projektek.id = " + ProjektID + " GROUP BY projektek.id";
+                "WHERE projektek.id = " + session.ProjektID + " GROUP BY projektek.id";
             List<ProjectExtendedListItems> list = mySql.Projekt_Extended_MySql_listQuery(command);
             mySql.close();
             return list;
@@ -111,7 +102,7 @@ namespace HR_Portal.Control
 
         public List<JeloltListItems> Data_JeloltKapcs()
         {
-            string command = "SELECT coalesce((SELECT count(projekt_id) FROM interjuk_kapcs WHERE jelolt_id = jeloltek.id AND projekt_id = " + ProjektID + " Group by projekt_id),0) as interjuk_db, jeloltek.id,nev,jeloltek.szuldatum,megnevezes_munka,email,reg_date,kepesseg1,kepesseg2,kepesseg3,kepesseg4,kepesseg5, jeloltek.munkakor, jeloltek.munkakor2, jeloltek.munkakor3, allapota, kolcsonzott FROM jeloltek INNER JOIN projekt_jelolt_kapcs ON jeloltek.id = projekt_jelolt_kapcs.jelolt_id INNER JOIN projektek ON projektek.id = projekt_jelolt_kapcs.projekt_id INNER JOIN munkakor ON jeloltek.munkakor = munkakor.id WHERE projektek.id =" + ProjektID + " GROUP BY jeloltek.id ";
+            string command = "SELECT coalesce((SELECT count(projekt_id) FROM interjuk_kapcs WHERE jelolt_id = jeloltek.id AND projekt_id = " + session.ProjektID + " Group by projekt_id),0) as interjuk_db, jeloltek.id,nev,jeloltek.szuldatum,megnevezes_munka,email,reg_date,kepesseg1,kepesseg2,kepesseg3,kepesseg4,kepesseg5, jeloltek.munkakor, jeloltek.munkakor2, jeloltek.munkakor3, allapota, kolcsonzott FROM jeloltek INNER JOIN projekt_jelolt_kapcs ON jeloltek.id = projekt_jelolt_kapcs.jelolt_id INNER JOIN projektek ON projektek.id = projekt_jelolt_kapcs.projekt_id INNER JOIN munkakor ON jeloltek.munkakor = munkakor.id WHERE projektek.session.id =" + session.ProjektID + " GROUP BY jeloltek.id ";
             List<JeloltListItems> list = mySql.getApplicantList(command);
             mySql.close();
             return list;
@@ -135,7 +126,7 @@ namespace HR_Portal.Control
 
         public List<ModelComment> Data_CommentProject()
         {
-            string command = "SELECT id, jelolt_id, projekt_id, hr_id, hr_nev, megjegyzes, datum, ertekeles FROM megjegyzesek WHERE projekt_id=" + ProjektID;
+            string command = "SELECT id, jelolt_id, projekt_id, hr_id, hr_nev, megjegyzes, datum, ertekeles FROM megjegyzesek WHERE projekt_id=" + session.ProjektID;
             List<ModelComment> list = mySql.Megjegyzesek_MySql_listQuery(command);
             mySql.close();
             return list;
@@ -143,7 +134,7 @@ namespace HR_Portal.Control
 
         public List<ModelComment> Data_CommentKapcs()
         {
-            string command = "SELECT id, jelolt_id, projekt_id, hr_id, hr_nev, megjegyzes, datum, ertekeles FROM megjegyzesek WHERE projekt_id=" + ProjektID +" AND jelolt_id="+aControl.ApplicantID+"";
+            string command = "SELECT id, jelolt_id, projekt_id, hr_id, hr_nev, megjegyzes, datum, ertekeles FROM megjegyzesek WHERE projekt_id=" + session.ProjektID +" AND jelolt_id="+ session.ApplicantID +"";
             List<ModelComment> list = mySql.Megjegyzesek_MySql_listQuery(command);
             mySql.close();
             return list;
@@ -167,7 +158,7 @@ namespace HR_Portal.Control
 
         public List<ModelHr> Data_HrProject()
         {
-            string command = "SELECT users.id, name, kategoria, jogosultsag, validitas FROM users INNER JOIN projekt_hr_kapcs ON users.id = projekt_hr_kapcs.hr_id INNER JOIN projektek ON projektek.id = projekt_hr_kapcs.projekt_id WHERE projektek.id = " + ProjektID + " AND users.kategoria = 1 GROUP BY users.id";
+            string command = "SELECT users.id, name, kategoria, jogosultsag, validitas FROM users INNER JOIN projekt_hr_kapcs ON users.id = projekt_hr_kapcs.hr_id INNER JOIN projektek ON projektek.id = projekt_hr_kapcs.projekt_id WHERE projektek.id = " + session.ProjektID + " AND users.kategoria = 1 GROUP BY users.id";
             List<ModelHr> list = mySql.getHrShort(command);
             mySql.close();
             return list;
@@ -175,7 +166,7 @@ namespace HR_Portal.Control
       
         public List<ModelErtesitendok> Data_ErtesitendokKapcs() // javítva
         {
-            string command = "SELECT users.id, name, email FROM users INNER JOIN projekt_ertesitendok_kapcs ON users.id = projekt_ertesitendok_kapcs.ertesitendok_id  WHERE projekt_ertesitendok_kapcs.projekt_id =" + ProjektID+ " AND kategoria = 0 GROUP BY users.id";
+            string command = "SELECT users.id, name, email FROM users INNER JOIN projekt_ertesitendok_kapcs ON users.id = projekt_ertesitendok_kapcs.ertesitendok_id  WHERE projekt_ertesitendok_kapcs.projekt_id =" + session.ProjektID + " AND kategoria = 0 GROUP BY users.id";
             List<ModelErtesitendok> list = mySql.getErtesitendok(command);
             mySql.close();
             return list;
@@ -183,7 +174,7 @@ namespace HR_Portal.Control
 
         public List<SubJelolt> Data_JeloltForCheckbox(string nevsrc)
         {
-            string command = "SELECT jeloltek.id, nev FROM jeloltek LEFT JOIN projekt_jelolt_kapcs ON projekt_jelolt_kapcs.jelolt_id = jeloltek.id WHERE projekt_jelolt_kapcs.projekt_id != "+ProjektID+" OR projekt_jelolt_kapcs.projekt_id IS NULL GROUP BY jeloltek.id";
+            string command = "SELECT jeloltek.id, nev FROM jeloltek LEFT JOIN projekt_jelolt_kapcs ON projekt_jelolt_kapcs.jelolt_id = jeloltek.id WHERE projekt_jelolt_kapcs.projekt_id != "+ session.ProjektID +" OR projekt_jelolt_kapcs.projekt_id IS NULL GROUP BY jeloltek.id";
             List<SubJelolt> list = mySql.getApplicantShort(command);
             mySql.close();
             return list;
@@ -212,14 +203,14 @@ namespace HR_Portal.Control
 
         public void addHrInsert(int index)
         {
-            string command = "INSERT INTO projekt_hr_kapcs (id, projekt_id, hr_id) VALUES (NULL, " + ProjektID + ", " + index + " );";
+            string command = "INSERT INTO projekt_hr_kapcs (id, projekt_id, hr_id) VALUES (NULL, " + session.ProjektID + ", " + index + " );";
             mySql.update(command);
             mySql.close();
         }
 
         public void addErtesitendokInsert(int index)
         {
-            string command = "INSERT INTO projekt_ertesitendok_kapcs (id, projekt_id, ertesitendok_id) VALUES (NULL, " + ProjektID + ", " + index + " );";
+            string command = "INSERT INTO projekt_ertesitendok_kapcs (id, projekt_id, ertesitendok_id) VALUES (NULL, " + session.ProjektID + ", " + index + " );";
             mySql.update(command);
             mySql.close();
         }
@@ -227,37 +218,37 @@ namespace HR_Portal.Control
         public void jeloltKapcsDelete(int id)
         {
             string command;
-            command = "DELETE FROM projekt_jelolt_kapcs WHERE jelolt_id = "+id+" AND projekt_id = " + ProjektID + ";";
+            command = "DELETE FROM projekt_jelolt_kapcs WHERE jelolt_id = "+id+" AND projekt_id = " + session.ProjektID + ";";
             mySql.update(command);
-            command = "DELETE FROM interjuk_kapcs WHERE jelolt_id = " + id + " AND projekt_id = " + ProjektID + ";";
+            command = "DELETE FROM interjuk_kapcs WHERE jelolt_id = " + id + " AND projekt_id = " + session.ProjektID + ";";
             mySql.update(command);
             mySql.close();
         }
 
         public void jeloltKapcsUpdate(int id, int allapota)
         {
-            string command = "UPDATE projekt_jelolt_kapcs SET allapota = "+allapota+" WHERE jelolt_id = " + id + " AND projekt_id = " + ProjektID + ";";
+            string command = "UPDATE projekt_jelolt_kapcs SET allapota = "+allapota+" WHERE jelolt_id = " + id + " AND projekt_id = " + session.ProjektID + ";";
             mySql.update(command);
             mySql.close();
         }
 
         public void ertesitendokKapcsDelete(int id)
         {
-            string command = "DELETE FROM projekt_ertesitendok_kapcs WHERE ertesitendok_id = " + id + " AND projekt_id = " + ProjektID + ";";
+            string command = "DELETE FROM projekt_ertesitendok_kapcs WHERE ertesitendok_id = " + id + " AND projekt_id = " + session.ProjektID + ";";
             mySql.update(command);
             mySql.close();
         }
 
         public void hrKapcsDelete(int id)
         {
-            string command = "DELETE FROM projekt_hr_kapcs WHERE hr_id = " + id + " AND projekt_id = " + ProjektID + ";";
+            string command = "DELETE FROM projekt_hr_kapcs WHERE hr_id = " + id + " AND projekt_id = " + session.ProjektID + ";";
             mySql.update(command);
             mySql.close();
         }
 
         public void publishProject(int stat)
         {
-            string command = "UPDATE projektek SET publikalt= "+ stat + " WHERE projektek.id = " + ProjektID + ";";
+            string command = "UPDATE projektek SET publikalt= "+ stat + " WHERE projektek.id = " + session.ProjektID + ";";
             mySql.update(command);
             mySql.close();
         }
@@ -305,7 +296,7 @@ namespace HR_Portal.Control
                 " VALUES (NULL, "+items[0].hr_id+ ", '" + items[0].megnevezes_projekt+ "'," + items[0].pc+ "," + items[0].vegzettseg+ "," + items[0].tapasztalat_ev+ "," + items[0].statusz+ ",'" + items[0].fel_datum+ "','" + items[0].le_datum+ "'," + items[0].nyelvtudas+ "," + items[0].munkakor+ "," + items[0].szuldatum + "," + items[0].ber+ "," + items[0].kepesseg1+ "," + items[0].kepesseg2+ "," + items[0].kepesseg3+ "," + items[0].kepesseg4+ "," + items[0].kepesseg5+ ",'" + items[0].feladatok+ "','" + items[0].elvarasok+ "','" + items[0].kinalunk+ "');";
             mySql.update(command);
             int proID = Convert.ToInt16(mySql.listQuery("SELECT projektek.id FROM projektek WHERE projektek.megnevezes_projekt = '" + items[0].megnevezes_projekt + "' AND projektek.pc = " + items[0].pc + " AND projektek.munkakor = '" + items[0].munkakor + "'", "projektek", 1)[0]);
-            ProjektID = proID;
+            session.ProjektID = proID;
             mySql.close();
         }
 
@@ -326,18 +317,18 @@ namespace HR_Portal.Control
                 "`kepesseg2` =  " + items[0].kepesseg2 + ", " +
                 "`kepesseg3` =  " + items[0].kepesseg3 + ", " +
                 "`kepesseg4` =  " + items[0].kepesseg4 + ", " +
-                "`kepesseg5` =  " + items[0].kepesseg5 + " WHERE id = "+ ProjektID + "";
+                "`kepesseg5` =  " + items[0].kepesseg5 + " WHERE id = "+ session.ProjektID + "";
             mySql.update(command);
             int proID = Convert.ToInt16(mySql.listQuery("SELECT projektek.id FROM projektek WHERE projektek.megnevezes_projekt = '" + items[0].megnevezes_projekt + "' AND projektek.pc = " + items[0].pc + " AND projektek.munkakor = '" + items[0].munkakor + "'", "projektek", 1)[0]);
-            ProjektID = proID;
+            session.ProjektID = proID;
             mySql.close();
         }
 
         public void statusChange(int stat) // javított
         {
-            if(projectSearchMemory != null)
-            projectSearchMemory.Clear();
-            projectSearchMemory.Add(new Projekt_Search_Memory() { statusz = stat });
+            if(session.projectSearchMemory != null)
+                session.projectSearchMemory.Clear();
+            session.projectSearchMemory.Add(new Projekt_Search_Memory() { statusz = stat });
         }
 
         public void projectDescriptionUpdate(string type, string content) // javított
@@ -346,16 +337,16 @@ namespace HR_Portal.Control
             switch (type)
             {
                 case "feladatok":
-                    command = "UPDATE projektek SET feladatok='" + content + "' WHERE projektek.id = " + ProjektID + " AND hr_id = "+session.UserData[0].id+"";
+                    command = "UPDATE projektek SET feladatok='" + content + "' WHERE projektek.id = " + session.ProjektID + " AND hr_id = "+session.UserData[0].id+"";
                     break;
                 case "elvarasok":
-                    command = "UPDATE projektek SET elvarasok='" + content + "' WHERE projektek.id = " + ProjektID + " AND hr_id = " + session.UserData[0].id + "";
+                    command = "UPDATE projektek SET elvarasok='" + content + "' WHERE projektek.id = " + session.ProjektID + " AND hr_id = " + session.UserData[0].id + "";
                     break;
                 case "kinalunk":
-                    command = "UPDATE projektek SET kinalunk='" + content + "' WHERE projektek.id = " + ProjektID + " AND hr_id = " + session.UserData[0].id + "";
+                    command = "UPDATE projektek SET kinalunk='" + content + "' WHERE projektek.id = " + session.ProjektID + " AND hr_id = " + session.UserData[0].id + "";
                     break;
                 case "elonyok":
-                    command = "UPDATE projektek SET elonyok='" + content + "' WHERE projektek.id = " + ProjektID + " AND hr_id = " + session.UserData[0].id + "";
+                    command = "UPDATE projektek SET elonyok='" + content + "' WHERE projektek.id = " + session.ProjektID + " AND hr_id = " + session.UserData[0].id + "";
                     break;
                 default:
                     break;
@@ -366,7 +357,7 @@ namespace HR_Portal.Control
 
         public List<ModelKoltsegek> Data_ProjectCost()  // javított
         {
-            string command = "SELECT * FROM projekt_koltsegek WHERE projekt_id = "+ProjektID+"";
+            string command = "SELECT * FROM projekt_koltsegek WHERE projekt_id = "+ session.ProjektID +"";
             List<ModelKoltsegek> list = mySql.Koltsegek_MySql_listQuery(command);
             mySql.close();
             return list;
@@ -374,7 +365,7 @@ namespace HR_Portal.Control
 
         public void projectCostInsert(string megnevezes, string osszeg)  // javított
         {
-            string command = "INSERT INTO `projekt_koltsegek` (id, projekt_id, koltseg_megnevezes, osszeg) VALUES (null, "+ProjektID+", '"+megnevezes+"', "+osszeg+");";
+            string command = "INSERT INTO `projekt_koltsegek` (id, projekt_id, koltseg_megnevezes, osszeg) VALUES (null, "+ session.ProjektID +", '"+megnevezes+"', "+osszeg+");";
             mySql.update(command);
             mySql.close();
         }

@@ -1,5 +1,5 @@
 ﻿using HR_Portal.Control;
-using HR_Portal.Model;
+using HR_Portal.Source;
 using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -82,7 +82,7 @@ namespace HR_Portal.View.Usercontrol.Panels
 
         protected void telephoneInspectedLayout()
         {
-            if (paControl.TelefonSzurt == 1)
+            if (session.TelefonSzurt == 1)
             {
                 telefonos_igen_btn.Visibility = Visibility.Hidden;
                 szurt_tbl.Visibility = Visibility.Visible;
@@ -101,7 +101,7 @@ namespace HR_Portal.View.Usercontrol.Panels
 
             if (e.Key != System.Windows.Input.Key.Enter) return;
             e.Handled = true;
-            comment.add(comment_tartalom.Text, pControl.ProjektID, aControl.ApplicantID, 0);
+            comment.add(comment_tartalom.Text, session.ProjektID, session.ApplicantID, 0);
             megjegyzes_listBox.ItemsSource = pControl.Data_CommentKapcs();
             tbx.Text = "";
         }
@@ -130,7 +130,7 @@ namespace HR_Portal.View.Usercontrol.Panels
         {
             ModelComment items = (sender as MenuItem).DataContext as ModelComment;
 
-            comment.delete(items.id, session.UserData[0].id, pControl.ProjektID, aControl.ApplicantID);
+            comment.delete(items.id, session.UserData[0].id, session.ProjektID, session.ApplicantID);
             megjegyzes_listBox.ItemsSource = pControl.Data_CommentKapcs();
         }
 
@@ -163,7 +163,7 @@ namespace HR_Portal.View.Usercontrol.Panels
                 ismerte = 1;
             }
             paControl.telephoneFilterInsert(ismerte,Convert.ToInt32(muszakok_tbx.Text),utazas_tbx.Text);
-            paControl.TelefonSzurt = 1;
+            session.TelefonSzurt = 1;
             grid_telefonosszuro.Height = 100;
             telefonos_igen_btn.IsEnabled = true;
             telefonos_nem_btn.IsEnabled = true;
@@ -177,7 +177,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             switch (result)
             {
                 case MessageBoxResult.Yes:
-                    pControl.jeloltKapcsUpdate(aControl.ApplicantID, 3);
+                    pControl.jeloltKapcsUpdate(session.ApplicantID, 3);
                     grid.Children.Clear();
                     grid.Children.Add(projectDataSheet = new ProjectDataSheet(grid));
                     break;
@@ -247,7 +247,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             Button btn = sender as Button;
             interju_struct items = btn.DataContext as interju_struct;
 
-            paControl.InterjuID = items.id;
+            session.InterViewID = items.id;
             grid.Children.Clear();
             grid.Children.Add(interviewPanel = new InterviewPanel(grid));
         }

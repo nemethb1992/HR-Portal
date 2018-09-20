@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using MySql.Data.MySqlClient;
-using static HR_Portal.Model.ModelEmail;
-using static HR_Portal.Model.ModelSzakmai;
-using HR_Portal.Source;
+using static HR_Portal.Source.ModelEmail;
+using static HR_Portal.Source.ModelSzakmai;
 using HR_Portal.Source.Model;
 
-namespace HR_Portal.Model
+namespace HR_Portal.Source
 {
     public class MySql
     {
@@ -16,9 +15,9 @@ namespace HR_Portal.Model
 
         private const string CONNECTION_URL = "Data Source = s7.nethely.hu; Initial Catalog = pmkcvtest; User ID=pmkcvtest; Password=pmkcvtest2018";
 
-        public MySqlConnection conn;
-        public MySqlCommand cmd;
-        public MySqlDataReader sdr;
+        public static MySqlConnection conn;
+        public static MySqlCommand cmd;
+        public static MySqlDataReader sdr;
 
         public MySql()
         {
@@ -29,7 +28,7 @@ namespace HR_Portal.Model
         }
 
         //Initialize values
-        public bool isConnected()
+        public static bool isConnected()
         {
             try
             {
@@ -47,7 +46,7 @@ namespace HR_Portal.Model
             return false;
         }
 
-        public bool open()
+        public static bool open()
         {
             try
             {
@@ -60,18 +59,7 @@ namespace HR_Portal.Model
             }
         }
 
-        public void commit()
-        {
-            try
-            {
-                conn.BeginTransaction();
-            }
-            catch (Exception)
-            {
-            }
-        }
-
-        public bool close()
+        public static bool close()
         {
             try
             {
@@ -89,7 +77,7 @@ namespace HR_Portal.Model
 
         public void update(string query)
         {
-            if (this.open() == true)
+            if (open() == true)
             {
                 cmd = new MySqlCommand(query, conn);
                 cmd.ExecuteNonQuery();
@@ -99,7 +87,7 @@ namespace HR_Portal.Model
         public int rowCount(string command)
         {
             int[] rows = new int[1];
-            if (this.open() == true)
+            if (open() == true)
             {
                 cmd = new MySqlCommand(command, conn);
                 sdr = cmd.ExecuteReader();
@@ -116,7 +104,7 @@ namespace HR_Portal.Model
         public List<string> listQuery(string command, string table, int b)
         {
             List<string> dataSource = new List<string>();
-            if (this.open() == true)
+            if (open() == true)
             {
                 cmd = new MySqlCommand(command, conn);
                 sdr = cmd.ExecuteReader();
@@ -159,7 +147,7 @@ namespace HR_Portal.Model
         public bool bind(string query)
         {
             bool valid = false;
-            if (this.open() == true)
+            if (open() == true)
             {
                 int seged = 0;
                 cmd = new MySqlCommand(query, conn);
@@ -188,7 +176,7 @@ namespace HR_Portal.Model
         public List<SmallProjectListItems> Small_Projekt_MySql_listQuery(string command)
         {
             List<SmallProjectListItems> items = new List<SmallProjectListItems>();
-            if (this.open() == true)
+            if (open() == true)
             {
                 cmd = new MySqlCommand(command, conn);
                 sdr = cmd.ExecuteReader();
@@ -211,7 +199,7 @@ namespace HR_Portal.Model
         public List<SubProjekt> Sub_Projekt_MySql_listQuery(string query)
         {
             List<SubProjekt> items = new List<SubProjekt>();
-            if (this.open() == true)
+            if (open() == true)
             {
                 cmd = new MySqlCommand(query, conn);
                 sdr = cmd.ExecuteReader();
@@ -233,7 +221,7 @@ namespace HR_Portal.Model
         public List<ProjectListItems> Projekt_MySql_listQuery  (string query)
         {
         List<ProjectListItems> items = new List<ProjectListItems>();
-            if (this.open() == true)
+            if (open() == true)
             {
                 cmd = new MySqlCommand(query, conn);
                 sdr = cmd.ExecuteReader();
@@ -270,7 +258,7 @@ namespace HR_Portal.Model
         public List<ModelErtesulesek> Ertesulesek_MySql_listQuery(string query)
         {
             List<ModelErtesulesek> items = new List<ModelErtesulesek>();
-            if (this.open() == true)
+            if (open() == true)
             {
                 cmd = new MySqlCommand(query, conn);
                 sdr = cmd.ExecuteReader();
@@ -290,7 +278,7 @@ namespace HR_Portal.Model
         public List<file_url> file_url_ROOT_MySql_listQuery(string query)
         {
             List<file_url> items = new List<file_url>();
-            if (this.open() == true)
+            if (open() == true)
             {
                 cmd = new MySqlCommand(query, conn);
                 sdr = cmd.ExecuteReader();
@@ -309,7 +297,7 @@ namespace HR_Portal.Model
         public List<ModelPc> getPc(string query)
         {
             List<ModelPc> items = new List<ModelPc>();
-            if (this.open() == true)
+            if (open() == true)
             {
                 cmd = new MySqlCommand(query, conn);
                 sdr = cmd.ExecuteReader();
@@ -329,7 +317,7 @@ namespace HR_Portal.Model
         public List<ModelVegzettseg> Vegzettseg_MySql_listQuery(string query)
         {
             List<ModelVegzettseg> items = new List<ModelVegzettseg>();
-            if (this.open() == true)
+            if (open() == true)
             {
                 cmd = new MySqlCommand(query, conn);
                 sdr = cmd.ExecuteReader();
@@ -349,7 +337,7 @@ namespace HR_Portal.Model
         public List<ModelStatusz> Statusz_MySql_listQuery(string query)
         {
             List<ModelStatusz> items = new List<ModelStatusz>();
-            if (this.open() == true)
+            if (open() == true)
             {
                 cmd = new MySqlCommand(query, conn);
                 sdr = cmd.ExecuteReader();
@@ -369,7 +357,7 @@ namespace HR_Portal.Model
         public List<ProjectExtendedListItems> Projekt_Extended_MySql_listQuery(string query)
         {
             List<ProjectExtendedListItems> items = new List<ProjectExtendedListItems>();
-            if (this.open() == true)
+            if (open() == true)
             {
                 cmd = new MySqlCommand(query, conn);
                 sdr = cmd.ExecuteReader();
@@ -426,7 +414,7 @@ namespace HR_Portal.Model
         public List<SubJelolt> Jelolt_Short_MySql_listQuery(string query)
         {
             List<SubJelolt> items = new List<SubJelolt>();
-            if (this.open() == true)
+            if (open() == true)
             {
                 cmd = new MySqlCommand(query, conn);
                 sdr = cmd.ExecuteReader();
@@ -446,7 +434,7 @@ namespace HR_Portal.Model
         public List<JeloltListItems> getApplicantList(string query)
         {
             List<JeloltListItems> items = new List<JeloltListItems>();
-            if (this.open() == true)
+            if (open() == true)
             {
                 cmd = new MySqlCommand(query, conn);
                 sdr = cmd.ExecuteReader();
@@ -504,7 +492,7 @@ namespace HR_Portal.Model
         public List<SubJelolt> getApplicantShort(string query)
         {
             List<SubJelolt> items = new List<SubJelolt>();
-            if (this.open() == true)
+            if (open() == true)
             {
                 cmd = new MySqlCommand(query, conn);
                 sdr = cmd.ExecuteReader();
@@ -525,7 +513,7 @@ namespace HR_Portal.Model
         public List<JeloltExtendedList> JeloltExtended_MySql_listQuery(string query)
         {
             List<JeloltExtendedList> items = new List<JeloltExtendedList>();
-            if (this.open() == true)
+            if (open() == true)
             {
                 cmd = new MySqlCommand(query, conn);
                 sdr = cmd.ExecuteReader();
@@ -569,7 +557,7 @@ namespace HR_Portal.Model
         public List<JeloltListBox> JeloltekDatasourceListbox_MySql_listQuery(string query)
         {
             List<JeloltListBox> items = new List<JeloltListBox>();
-            if (this.open() == true)
+            if (open() == true)
             {
                 cmd = new MySqlCommand(query, conn);
                 sdr = cmd.ExecuteReader();
@@ -591,7 +579,7 @@ namespace HR_Portal.Model
         public List<ModelNyelv> getNyelv(string query)
         {
             List<ModelNyelv> items = new List<ModelNyelv>();
-            if (this.open() == true)
+            if (open() == true)
             {
                 cmd = new MySqlCommand(query, conn);
                 sdr = cmd.ExecuteReader();
@@ -612,7 +600,7 @@ namespace HR_Portal.Model
         public List<ModelMunkakor> getMunkakorok(string query)
         {
             List<ModelMunkakor> items = new List<ModelMunkakor>();
-            if (this.open() == true)
+            if (open() == true)
             {
                 MySqlCommand cmd = new MySqlCommand(query, conn);
                 MySqlDataReader sdr = cmd.ExecuteReader();
@@ -633,7 +621,7 @@ namespace HR_Portal.Model
         public List<ModelNem> Nem_MySql_listQuery(string query)
         {
             List<ModelNem> items = new List<ModelNem>();
-            if (this.open() == true)
+            if (open() == true)
             {
                 MySqlCommand cmd = new MySqlCommand(query, conn);
                 MySqlDataReader sdr = cmd.ExecuteReader();
@@ -678,7 +666,7 @@ namespace HR_Portal.Model
         public List<ModelComment> Megjegyzesek_MySql_listQuery(string query)
         {
             List<ModelComment> items = new List<ModelComment>();
-            if (this.open() == true)
+            if (open() == true)
             {
                 cmd = new MySqlCommand(query, conn);
                 sdr = cmd.ExecuteReader();
@@ -705,7 +693,7 @@ namespace HR_Portal.Model
         public List<ModelErtesitendok> getErtesitendok(string query)
         {
             List<ModelErtesitendok> items = new List<ModelErtesitendok>();
-            if (this.open() == true)
+            if (open() == true)
             {
                 cmd = new MySqlCommand(query, conn);
                 sdr = cmd.ExecuteReader();
@@ -727,7 +715,7 @@ namespace HR_Portal.Model
         public List<ModelHr> getHrShort(string query)
         {
             List<ModelHr> items = new List<ModelHr>();
-            if (this.open() == true)
+            if (open() == true)
             {
                 cmd = new MySqlCommand(query, conn);
                 sdr = cmd.ExecuteReader();
@@ -750,7 +738,7 @@ namespace HR_Portal.Model
         public List<ModelKoltsegek> Koltsegek_MySql_listQuery(string query)
         {
             List<ModelKoltsegek> items = new List<ModelKoltsegek>();
-            if (this.open() == true)
+            if (open() == true)
             {
                 cmd = new MySqlCommand(query, conn);
                 sdr = cmd.ExecuteReader();
@@ -772,7 +760,7 @@ namespace HR_Portal.Model
         public List<projekt_jelolt_kapcs> getPojectApplicantRelation(string query)
         {
             List<projekt_jelolt_kapcs> items = new List<projekt_jelolt_kapcs>();
-            if (this.open() == true)
+            if (open() == true)
             {
                 cmd = new MySqlCommand(query, conn);
                 sdr = cmd.ExecuteReader();
@@ -794,7 +782,7 @@ namespace HR_Portal.Model
         public List<interju_struct> Interju_MySql_listQuery(string query)
         {
             List<interju_struct> items = new List<interju_struct>();
-            if (this.open() == true)
+            if (open() == true)
             {
                 cmd = new MySqlCommand(query, conn);
                 sdr = cmd.ExecuteReader();
@@ -825,7 +813,7 @@ namespace HR_Portal.Model
         public List<interju_struct> getSzakmaiInterview(string query)
         {
             List<interju_struct> items = new List<interju_struct>();
-            if (this.open() == true)
+            if (open() == true)
             {
                 cmd = new MySqlCommand(query, conn);
                 sdr = cmd.ExecuteReader();
@@ -851,7 +839,7 @@ namespace HR_Portal.Model
         public List<JeloltSearchItems> Jelolt_Search_MySql_listQuery(string query)
         {
             List<JeloltSearchItems> items = new List<JeloltSearchItems>();
-            if (this.open() == true)
+            if (open() == true)
             {
                 cmd = new MySqlCommand(query, conn);
                 sdr = cmd.ExecuteReader();
@@ -879,7 +867,7 @@ namespace HR_Portal.Model
         public List<Projekt_Bevont_struct> getSzakmaiProject(string query)
         {
             List<Projekt_Bevont_struct> items = new List<Projekt_Bevont_struct>();
-            if (this.open() == true)
+            if (open() == true)
             {
                 cmd = new MySqlCommand(query, conn);
                 sdr = cmd.ExecuteReader();
@@ -902,7 +890,7 @@ namespace HR_Portal.Model
         public List<ModelKompetenciak> Kompetenciak_MySql_listQuery(string query)
         {
             List<ModelKompetenciak> items = new List<ModelKompetenciak>();
-            if (this.open() == true)
+            if (open() == true)
             {
                 cmd = new MySqlCommand(query, conn);
                 sdr = cmd.ExecuteReader();
@@ -922,7 +910,7 @@ namespace HR_Portal.Model
         public List<kompetencia_jelolt_kapcs_struct> Kompetenciak_jelolt_kapcs_MySql_listQuery(string query)
         {
             List<kompetencia_jelolt_kapcs_struct> items = new List<kompetencia_jelolt_kapcs_struct>();
-            if (this.open() == true)
+            if (open() == true)
             {
                 cmd = new MySqlCommand(query, conn);
                 sdr = cmd.ExecuteReader();
@@ -956,7 +944,7 @@ namespace HR_Portal.Model
         public List<kompetencia_summary_struct> Kompetencia_summary_MySql_listQuery(string query)
         {
             List<kompetencia_summary_struct> items = new List<kompetencia_summary_struct>();
-            if (this.open() == true)
+            if (open() == true)
             {
                 try
                 {
@@ -987,7 +975,7 @@ namespace HR_Portal.Model
         public List<kompetencia_tamogatas> Kompetencia_tamogatas_MySql_listQuery(string query)
         {
             List<kompetencia_tamogatas> items = new List<kompetencia_tamogatas>();
-            if (this.open() == true)
+            if (open() == true)
             {
                 try
                 {
@@ -1013,7 +1001,7 @@ namespace HR_Portal.Model
         public List<MailServer_m> ConnectionSMTP_DataSource(string query)
         {
             List<MailServer_m> items = new List<MailServer_m>();
-            if (this.open() == true)
+            if (open() == true)
             {
                 cmd = new MySqlCommand(query, conn);
                 sdr = cmd.ExecuteReader();

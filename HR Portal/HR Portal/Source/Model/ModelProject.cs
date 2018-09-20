@@ -1,11 +1,11 @@
-﻿using HR_Portal.Model;
+﻿using HR_Portal.Source;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HR_Portal.Model
+namespace HR_Portal.Source
 {
     public class Projekt_Search_Memory
     {

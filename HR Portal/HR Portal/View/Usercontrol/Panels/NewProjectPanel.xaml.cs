@@ -1,5 +1,5 @@
 ﻿using HR_Portal.Control;
-using HR_Portal.Model;
+using HR_Portal.Source;
 using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -43,7 +43,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             k4_cbx.ItemsSource = paControl.Data_Kompetencia();
             k5_cbx.ItemsSource = paControl.Data_Kompetencia();
 
-            if (pControl.Change == true)
+            if (session.isUpdate == true)
             {
                 uj_cim.Visibility = Visibility.Hidden;
                 projekt_INSERT_btn.Visibility = Visibility.Hidden;
@@ -125,7 +125,7 @@ namespace HR_Portal.View.Usercontrol.Panels
 
         protected void projektInsertClick(object sender, RoutedEventArgs e)
         {
-            pControl.Change = false;
+            session.isUpdate = false;
             try
             {
                 pControl.projectInsert(getData());
@@ -140,7 +140,7 @@ namespace HR_Portal.View.Usercontrol.Panels
 
         protected void projektUpdateClick(object sender, RoutedEventArgs e)
         {
-            pControl.Change = false;
+            session.isUpdate = false;
             pControl.projectUpdate(getData());
             grid.Children.Clear();
             grid.Children.Add(projectDataSheet = new ProjectDataSheet(grid));

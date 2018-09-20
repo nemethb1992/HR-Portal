@@ -148,6 +148,7 @@
     <Compile Include="Source\SqLite.cs" />
     <Compile Include="Source\Test\ftpEntities.cs" />
     <Compile Include="Source\Test\ThreadTest.cs" />
+    <Compile Include="Source\ViewModel\VMSession.cs" />
     <Compile Include="View\Usercontrol\Login.xaml.cs">
       <DependentUpon>login.xaml</DependentUpon>
     </Compile>
@@ -346,9 +347,7 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Source\ViewModel\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="Public\imgs\add.png" />
     <Resource Include="Public\imgs\appointment.png" />

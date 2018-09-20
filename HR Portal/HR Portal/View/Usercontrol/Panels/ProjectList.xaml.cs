@@ -6,7 +6,8 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using HR_Portal.Control;
-using HR_Portal.Model;
+using HR_Portal.Source;
+using HR_Portal.Source;
 using HR_Portal.Source.Model;
 
 namespace HR_Portal.View.Usercontrol.Panels
@@ -20,6 +21,7 @@ namespace HR_Portal.View.Usercontrol.Panels
         protected string HeaderSelected { get { return HeaderSelecteds; } set { HeaderSelecteds = value; } }
 
         ControlProject pControl = new ControlProject();
+        Session session = new Session();
 
         private ProjectDataSheet projectDataSheet;
         private NewProjectPanel newProjectPanel;
@@ -98,7 +100,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             List<Projekt_Search_Memory> list = new List<Projekt_Search_Memory>();
             
             list.Add(new Projekt_Search_Memory() { statusz = 1 });
-            pControl.projectSearchMemory = list;
+            session.projectSearchMemory = list;
             buttonColorChange();
 
             try{
@@ -115,7 +117,7 @@ namespace HR_Portal.View.Usercontrol.Panels
         protected void buttonColorChange()
         {
             var bc = new BrushConverter();
-            if (pControl.projectSearchMemory[0].statusz == 1)
+            if (session.projectSearchMemory[0].statusz == 1)
             {
                 projekt_aktiv_btn.Background = (Brush)bc.ConvertFrom("#bfbfbf");
                 projekt_aktiv_btn.BorderBrush = (Brush)bc.ConvertFrom("#bfbfbf");
@@ -136,7 +138,7 @@ namespace HR_Portal.View.Usercontrol.Panels
         protected void projectOpenClick(object sender, RoutedEventArgs e)
         {
             ProjectListItems items = (sender as Button).DataContext as ProjectListItems;
-            pControl.ProjektID = items.id;
+            session.ProjektID = items.id;
             grid.Children.Clear();
             grid.Children.Add(projectDataSheet = new ProjectDataSheet(grid));
         }
@@ -248,10 +250,10 @@ namespace HR_Portal.View.Usercontrol.Panels
 
         protected void modositasClick(object sender, RoutedEventArgs e)
         {
-            pControl.Change = true;
+            session.isUpdate = true;
             ProjectListItems itemSource = (sender as MenuItem).DataContext as ProjectListItems;
 
-            pControl.ProjektID = itemSource.id;
+            session.ProjektID = itemSource.id;
             grid.Children.Clear();
             grid.Children.Add(newProjectPanel = new NewProjectPanel(grid));
         }

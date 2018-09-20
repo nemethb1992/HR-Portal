@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using static HR_Portal.Model.ModelEmail;
+using static HR_Portal.Source.ModelEmail;
 using HR_Portal.Source.Model;
 
 namespace HR_Portal.Control
 {
     class ControlFile
     {
-        Model.MySql mySql = new Model.MySql();
+        Source.MySql mySql = new Source.MySql();
 
         public List<ModelJeloltFile> Applicant_FolderReadOut(int ApplicantID)
         {

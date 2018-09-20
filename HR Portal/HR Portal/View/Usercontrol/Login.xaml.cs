@@ -28,9 +28,9 @@ namespace HR_Portal.View.Usercontrol
 
         private void dbConnectionOpener()
         {
-            Model.MySql mySql = new Model.MySql();
+            Source.MySql mySql = new Source.MySql();
 
-            if (!mySql.isConnected())
+            if (!MySql.isConnected())
             {
                 LoginSign.Text = "Nincs adatkapcsolat!";
             }
@@ -80,12 +80,10 @@ namespace HR_Portal.View.Usercontrol
         }
         private void enter()
         {
-            //if (lcontrol.ActiveDirectoryValidation(Luser_tbx.Text, Lpass_pwd.Password))
-            //{
                 if (lcontrol.mySqlUserValidation(Luser_tbx.Text))
                 {
-                    session.UserData = lcontrol.Data_UserSession(Luser_tbx.Text);
-                    session.tartomanyi = Luser_tbx.Text;
+                    
+                    session.ActiveDirectoryDomain = Luser_tbx.Text;
                     Main mw = new Main();
                     var window = Window.GetWindow(this);
                     usernameRemember();

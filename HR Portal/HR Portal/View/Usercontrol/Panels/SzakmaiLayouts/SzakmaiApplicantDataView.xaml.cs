@@ -1,5 +1,5 @@
 ﻿using HR_Portal.Control;
-using HR_Portal.Model;
+using HR_Portal.Source;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -56,7 +56,7 @@ namespace HR_Portal.View.Usercontrol.Panels.SzakmaiLayouts
             MenuItem item = sender as MenuItem;
             ModelComment items = item.DataContext as ModelComment;
 
-            comment.delete(items.id, session.UserData[0].id, 0, aControl.ApplicantID);
+            comment.delete(items.id, session.UserData[0].id, 0, session.ApplicantID);
             commentLoader(megjegyzes_listBox);
         }
 
@@ -66,7 +66,7 @@ namespace HR_Portal.View.Usercontrol.Panels.SzakmaiLayouts
 
             if (e.Key != System.Windows.Input.Key.Enter) return;
             e.Handled = true;
-            comment.add(comment_tartalom.Text, 0, aControl.ApplicantID, 0);
+            comment.add(comment_tartalom.Text, 0, session.ApplicantID, 0);
             commentLoader(megjegyzes_listBox);
             textbox.Text = "";
         }

@@ -5,7 +5,7 @@ namespace HR_Portal.Control
 {
     class ControlSettings
     {
-        Model.MySql mySql = new Model.MySql();
+        Source.MySql mySql = new Source.MySql();
 
         public List<ModelErtesitendok> Data_Ertesitendok()
         {

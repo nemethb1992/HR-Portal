@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HR_Portal.Model
+namespace HR_Portal.Source
 {
     public class ModelEmail
     {

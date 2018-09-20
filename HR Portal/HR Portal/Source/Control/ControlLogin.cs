@@ -1,17 +1,17 @@
-﻿using HR_Portal.Model;
+﻿
 using System;
 using System.Collections.Generic;
 using System.Net;
 using System.DirectoryServices.Protocols;
-using HR_Portal.Source;
 using MySql.Data.MySqlClient;
+using HR_Portal.Source;
 
 namespace HR_Portal.Control
 {
     class ControlLogin
     {
         Session session = new Session();
-        Model.MySql mySql = new Model.MySql();
+        Source.MySql mySql = new Source.MySql();
         SqLite sqLite = new SqLite();
 
         public bool ActiveDirectoryValidation(string username, string password)
@@ -87,17 +87,26 @@ namespace HR_Portal.Control
             mySql.close();
             return respond;
         }
-        public List<UserSessData> Data_UserSession(string username)  //javítva használja: login
+
+        public void userRegistration(string username, string name, string email, int kategoria)
+        {
+            DateTime dateTime = DateTime.Now;
+            mySql.update("INSERT INTO `users` (`id`, `username`, `name`, `email`, `kategoria`, `jogosultsag`, `validitas`, `belepve`, `reg_datum`) VALUES (NULL, '"+ username + "', '"+ name + "', '"+ email + "', '"+ kategoria + "', '1', '1', '" + dateTime.ToString("yyyy. MM. dd.") + "', '" + dateTime.ToString("yyyy. MM. dd.") + "');");
+            mySql.close();
+        }
+
+        //UserSessionData   általános
+        public List<UserSessionData> Data_UserSession(string username)  //javítva használja: login
         {
             MySqlDataReader sdr;
-            List<UserSessData> list = new List<UserSessData>();
-            if(mySql.open() == true)
+            List<UserSessionData> list = new List<UserSessionData>();
+            if (Source.MySql.open() == true)
             {
-                mySql.cmd = new MySqlCommand("SELECT * FROM users WHERE username='" + username + "'", mySql.conn);
-                sdr = mySql.cmd.ExecuteReader();
+                Source.MySql.cmd = new MySqlCommand("SELECT * FROM users WHERE username='" + username + "'", Source.MySql.conn);
+                sdr = Source.MySql.cmd.ExecuteReader();
                 while (sdr.Read())
                 {
-                    list.Add(new UserSessData
+                    list.Add(new UserSessionData
                     {
                         id = Convert.ToInt32(sdr["id"]),
                         username = sdr["username"].ToString(),
@@ -112,14 +121,8 @@ namespace HR_Portal.Control
                 }
                 sdr.Close();
             }
-            mySql.close();
+            Source.MySql.close();
             return list;
-        }
-        public void userRegistration(string username, string name, string email, int kategoria)
-        {
-            DateTime dateTime = DateTime.Now;
-            mySql.update("INSERT INTO `users` (`id`, `username`, `name`, `email`, `kategoria`, `jogosultsag`, `validitas`, `belepve`, `reg_datum`) VALUES (NULL, '"+ username + "', '"+ name + "', '"+ email + "', '"+ kategoria + "', '1', '1', '" + dateTime.ToString("yyyy. MM. dd.") + "', '" + dateTime.ToString("yyyy. MM. dd.") + "');");
-            mySql.close();
         }
     }
 }
