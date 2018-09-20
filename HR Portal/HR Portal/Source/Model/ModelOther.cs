@@ -14,7 +14,7 @@ namespace HR_Portal.Source.Model
         public string ertesules_megnevezes { get; set; }
     }
 
-    public class ModelNeme
+    public class ModelNem
     {
         public int id { get; set; }
         public string nem { get; set; }
@@ -72,19 +72,19 @@ namespace HR_Portal.Source.Model
         public int ertekeles { get; set; }
     }
 
-    public class Jelolt_File_Struct
+    public class ModelJeloltFile
     {
         public string fajlnev { get; set; }
         public string path { get; set; }
     }
 
-    public class kompetenciak
+    public class ModelKompetenciak
     {
         public int id { get; set; }
         public string kompetencia_megnevezes { get; set; }
     }
 
-    public class koltsegek
+    public class ModelKoltsegek
     {
         public int id { get; set; }
         public int osszeg { get; set; }

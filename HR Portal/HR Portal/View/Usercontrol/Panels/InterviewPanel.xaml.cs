@@ -56,7 +56,7 @@ namespace HR_Portal.View.Usercontrol.Panels
         {
             List<interju_struct> list = paControl.Data_InterviewById();
             List<ProjectExtendedListItems> li = pControl.Data_ProjectFull();
-            List<kompetenciak> li_k = paControl.Data_Kompetencia();
+            List<ModelKompetenciak> li_k = paControl.Data_Kompetencia();
 
             foreach (var item in li_k)
             {
@@ -127,7 +127,7 @@ namespace HR_Portal.View.Usercontrol.Panels
         protected void addColleagueToInterview(object sender, RoutedEventArgs e)
         {
             Button btn = sender as Button;
-            ertesitendok_struct items = btn.DataContext as ertesitendok_struct;
+            ModelErtesitendok items = btn.DataContext as ModelErtesitendok;
 
             paControl.insertInterviewInvited(items.id);
             choose_editlist.ItemsSource = paControl.Data_ProjektErtesitendokKapcsolt();
@@ -139,7 +139,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             if(session.UserData[0].kategoria == 1)
             {
                 MenuItem menu = sender as MenuItem;
-                ertesitendok_struct items = menu.DataContext as ertesitendok_struct;
+                ModelErtesitendok items = menu.DataContext as ModelErtesitendok;
 
                 paControl.deleteInterviewInvited(items.id);
                 choose_editlist.ItemsSource = paControl.Data_ProjektErtesitendokKapcsolt();

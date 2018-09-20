@@ -364,10 +364,10 @@ namespace HR_Portal.Control
             mySql.close();
         }
 
-        public List<koltsegek> Data_ProjectCost()  // javított
+        public List<ModelKoltsegek> Data_ProjectCost()  // javított
         {
             string command = "SELECT * FROM projekt_koltsegek WHERE projekt_id = "+ProjektID+"";
-            List<koltsegek> list = mySql.Koltsegek_MySql_listQuery(command);
+            List<ModelKoltsegek> list = mySql.Koltsegek_MySql_listQuery(command);
             mySql.close();
             return list;
         }

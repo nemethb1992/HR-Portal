@@ -89,11 +89,11 @@ namespace HR_Portal.View.Usercontrol.Panels
             ModelVegzettseg vegzettsegComboBox = (vegzettseg_cbx as ComboBox).SelectedItem as ModelVegzettseg;
             ModelMunkakor munkakorComboBox = (munkakor_cbx as ComboBox).SelectedItem as ModelMunkakor;
             ModelNyelv nyelvComboBox = (nyelv_cbx as ComboBox).SelectedItem as ModelNyelv;
-            kompetenciak kepzettseg1ComboBox = (k1_cbx as ComboBox).SelectedItem as kompetenciak;
-            kompetenciak kepzettseg2ComboBox = (k2_cbx as ComboBox).SelectedItem as kompetenciak;
-            kompetenciak kepzettseg3ComboBox = (k3_cbx as ComboBox).SelectedItem as kompetenciak;
-            kompetenciak kepzettseg4ComboBox = (k4_cbx as ComboBox).SelectedItem as kompetenciak;
-            kompetenciak kepzettseg5ComboBox = (k5_cbx as ComboBox).SelectedItem as kompetenciak;
+            ModelKompetenciak kepzettseg1ComboBox = (k1_cbx as ComboBox).SelectedItem as ModelKompetenciak;
+            ModelKompetenciak kepzettseg2ComboBox = (k2_cbx as ComboBox).SelectedItem as ModelKompetenciak;
+            ModelKompetenciak kepzettseg3ComboBox = (k3_cbx as ComboBox).SelectedItem as ModelKompetenciak;
+            ModelKompetenciak kepzettseg4ComboBox = (k4_cbx as ComboBox).SelectedItem as ModelKompetenciak;
+            ModelKompetenciak kepzettseg5ComboBox = (k5_cbx as ComboBox).SelectedItem as ModelKompetenciak;
             ModelPc pcComboBox = (pc_cbx as ComboBox).SelectedItem as ModelPc;
             DateTime localDate = DateTime.Now;
             List<ProjectInsertListItems> items = new List<ProjectInsertListItems>();

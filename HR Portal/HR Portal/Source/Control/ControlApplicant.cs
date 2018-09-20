@@ -184,10 +184,10 @@ namespace HR_Portal.Control
             return list;
         }
 
-        public List<ModelNeme> Data_Nemek() //javított
+        public List<ModelNem> Data_Nemek() //javított
         {
             string command = "SELECT * FROM nemek";
-            List<ModelNeme> list = mySql.Nem_MySql_listQuery(command);
+            List<ModelNem> list = mySql.Nem_MySql_listQuery(command);
             mySql.close();
             return list;
         }

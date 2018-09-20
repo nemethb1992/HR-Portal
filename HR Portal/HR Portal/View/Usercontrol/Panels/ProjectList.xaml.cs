@@ -7,6 +7,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using HR_Portal.Control;
 using HR_Portal.Model;
+using HR_Portal.Source.Model;
 
 namespace HR_Portal.View.Usercontrol.Panels
 {
@@ -43,15 +44,15 @@ namespace HR_Portal.View.Usercontrol.Panels
         protected List<string> getSearchData()
         {
             List<string> list = new List<string>();
-            nyelv_struct nyelvItem = null;
-            vegzettseg_struct vegzettsegItem = null;
+            ModelNyelv nyelvItem = null;
+            ModelVegzettseg vegzettsegItem = null;
             string nyelvkStr = "";
             string vegzettsegStr = "";
 
             try
             {
-                nyelvItem = (nyelv_srccbx as ComboBox).SelectedItem as nyelv_struct;
-                vegzettsegItem = (vegzettseg_srccbx as ComboBox).SelectedItem as vegzettseg_struct;
+                nyelvItem = (nyelv_srccbx as ComboBox).SelectedItem as ModelNyelv;
+                vegzettsegItem = (vegzettseg_srccbx as ComboBox).SelectedItem as ModelVegzettseg;
             }
             catch (Exception){
             }

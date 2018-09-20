@@ -16,9 +16,10 @@ namespace HR_Portal.Model
 
         private const string CONNECTION_URL = "Data Source = s7.nethely.hu; Initial Catalog = pmkcvtest; User ID=pmkcvtest; Password=pmkcvtest2018";
 
-        private MySqlConnection conn;
-        private MySqlCommand cmd;
-        private MySqlDataReader sdr;
+        public MySqlConnection conn;
+        public MySqlCommand cmd;
+        public MySqlDataReader sdr;
+
         public MySql()
         {
             if (conn == null)
@@ -46,7 +47,7 @@ namespace HR_Portal.Model
             return false;
         }
 
-        protected bool open()
+        public bool open()
         {
             try
             {
@@ -182,32 +183,7 @@ namespace HR_Portal.Model
 
         //MySQL  Specific 
 
-        public List<UserSessData> getUserSession(string query)
-        {
-            List<UserSessData> list = new List<UserSessData>();
-            if(this.open() == true)
-            {
-                cmd = new MySqlCommand(query, conn);
-                sdr = cmd.ExecuteReader();
-                while (sdr.Read())
-                {
-                    list.Add(new UserSessData
-                    {
-                        id = Convert.ToInt32(sdr["id"]),
-                        username = sdr["username"].ToString(),
-                        name = sdr["name"].ToString(),
-                        email = sdr["email"].ToString(),
-                        kategoria = Convert.ToInt32(sdr["kategoria"]),
-                        jogosultsag = Convert.ToInt32(sdr["jogosultsag"]),
-                        validitas = Convert.ToInt32(sdr["validitas"]),
-                        belepve = sdr["belepve"].ToString(),
-                        reg_datum = sdr["reg_datum"].ToString(),
-                    });
-                }
-                sdr.Close();
-            }
-            return list;
-        }
+
 
         public List<SmallProjectListItems> Small_Projekt_MySql_listQuery(string command)
         {
@@ -654,16 +630,16 @@ namespace HR_Portal.Model
             return items;
         }
 
-        public List<ModelNeme> Nem_MySql_listQuery(string query)
+        public List<ModelNem> Nem_MySql_listQuery(string query)
         {
-            List<ModelNeme> items = new List<ModelNeme>();
+            List<ModelNem> items = new List<ModelNem>();
             if (this.open() == true)
             {
                 MySqlCommand cmd = new MySqlCommand(query, conn);
                 MySqlDataReader sdr = cmd.ExecuteReader();
                 while (sdr.Read())
                 {
-                    items.Add(new ModelNeme
+                    items.Add(new ModelNem
                     {
                         id = Convert.ToInt32(sdr["id"]),
                         nem = sdr["nem"].ToString(),
@@ -771,16 +747,16 @@ namespace HR_Portal.Model
             return items;
         }
 
-        public List<koltsegek> Koltsegek_MySql_listQuery(string query)
+        public List<ModelKoltsegek> Koltsegek_MySql_listQuery(string query)
         {
-            List<koltsegek> items = new List<koltsegek>();
+            List<ModelKoltsegek> items = new List<ModelKoltsegek>();
             if (this.open() == true)
             {
                 cmd = new MySqlCommand(query, conn);
                 sdr = cmd.ExecuteReader();
                 while (sdr.Read())
                 {
-                    items.Add(new koltsegek
+                    items.Add(new ModelKoltsegek
                     {
                         id = Convert.ToInt32(sdr["id"]),
                         koltseg_megnevezes = sdr["koltseg_megnevezes"].ToString(),
@@ -923,16 +899,16 @@ namespace HR_Portal.Model
             return items;
         }
 
-        public List<kompetenciak> Kompetenciak_MySql_listQuery(string query)
+        public List<ModelKompetenciak> Kompetenciak_MySql_listQuery(string query)
         {
-            List<kompetenciak> items = new List<kompetenciak>();
+            List<ModelKompetenciak> items = new List<ModelKompetenciak>();
             if (this.open() == true)
             {
                 cmd = new MySqlCommand(query, conn);
                 sdr = cmd.ExecuteReader();
                 while (sdr.Read())
                 {
-                    items.Add(new kompetenciak
+                    items.Add(new ModelKompetenciak
                     {
                         id = Convert.ToInt32(sdr["id"]),
                         kompetencia_megnevezes = sdr["kompetencia_megnevezes"].ToString(),

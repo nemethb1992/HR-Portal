@@ -59,7 +59,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             projekt_input_9.Text = li[0].ber.ToString() + " Ft";
             projekt_input_10.Text = li[0].tapasztalat_ev.ToString();
 
-            List<kompetenciak> li_k = paControl.Data_Kompetencia();
+            List<ModelKompetenciak> li_k = paControl.Data_Kompetencia();
             foreach (var item in li_k)
             {
                 if(item.id == li[0].kepesseg1)
@@ -185,7 +185,7 @@ namespace HR_Portal.View.Usercontrol.Panels
         protected void ertesitendoDeleteClick(object sender, RoutedEventArgs e)
         {
             Button delete = sender as Button;
-            ertesitendok_struct items = delete.DataContext as ertesitendok_struct;
+            ModelErtesitendok items = delete.DataContext as ModelErtesitendok;
 
             pControl.ertesitendokKapcsDelete(items.id);
             kapcs_ertesitendo_listBox.ItemsSource = pControl.Data_ErtesitendokKapcs();
@@ -194,7 +194,7 @@ namespace HR_Portal.View.Usercontrol.Panels
         protected void hrDeleteClick(object sender, RoutedEventArgs e)
         {
             Button delete = sender as Button;
-            hr_struct items = delete.DataContext as hr_struct;
+            ModelHr items = delete.DataContext as ModelHr;
 
             pControl.hrKapcsDelete(items.id);
             kapcs_hr_listBox.ItemsSource = pControl.Data_HrProject();
@@ -204,7 +204,7 @@ namespace HR_Portal.View.Usercontrol.Panels
         protected void commentDeleteClick(object sender, RoutedEventArgs e)
         {
             MenuItem delete = sender as MenuItem;
-            megjegyzes_struct items = delete.DataContext as megjegyzes_struct;
+            ModelComment items = delete.DataContext as ModelComment;
 
             comment.delete(items.id, session.UserData[0].id, pControl.ProjektID, 0);
             listLoader();
@@ -329,14 +329,14 @@ namespace HR_Portal.View.Usercontrol.Panels
             }
             if (selectedTabCode == 2)
             {
-                ertesitendok_struct items = btn.DataContext as ertesitendok_struct;
+                ModelErtesitendok items = btn.DataContext as ModelErtesitendok;
                 pControl.addErtesitendokInsert(items.id);
                 projekt_kapcsolodo_list.ItemsSource = pControl.Data_ErtesitendokCheckbox(Ember_Search_tbx.Text);
                 kapcs_ertesitendo_listBox.ItemsSource = pControl.Data_ErtesitendokKapcs();
             }
             if (selectedTabCode == 3)
             {
-                hr_struct items = btn.DataContext as hr_struct;
+                ModelHr items = btn.DataContext as ModelHr;
                 pControl.addHrInsert(items.id);
                 projekt_kapcsolodo_list.ItemsSource = pControl.Data_HrCheckbox(Ember_Search_tbx.Text);
                 kapcs_hr_listBox.ItemsSource = pControl.Data_HrProject();
@@ -360,7 +360,7 @@ namespace HR_Portal.View.Usercontrol.Panels
         protected void projectCost()
         {
             int sum = 0;
-            List<koltsegek> list = pControl.Data_ProjectCost();
+            List<ModelKoltsegek> list = pControl.Data_ProjectCost();
 
             foreach (var item in list)
             {
@@ -398,7 +398,7 @@ namespace HR_Portal.View.Usercontrol.Panels
         protected void deleteCost(object sender, RoutedEventArgs e)
         {
             MenuItem menu = sender as MenuItem;
-            koltsegek item = menu.DataContext as koltsegek;
+            ModelKoltsegek item = menu.DataContext as ModelKoltsegek;
             pControl.projectCostDelete(item.id);
             koltseg_listBox.ItemsSource = pControl.Data_ProjectCost();
             projectCost();

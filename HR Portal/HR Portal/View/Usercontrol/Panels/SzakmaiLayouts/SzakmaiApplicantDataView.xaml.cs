@@ -9,6 +9,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using HR_Portal.Source;
+using HR_Portal.Source.Model;
 
 namespace HR_Portal.View.Usercontrol.Panels.SzakmaiLayouts
 {
@@ -53,7 +54,7 @@ namespace HR_Portal.View.Usercontrol.Panels.SzakmaiLayouts
         protected void commentDelete(object sender, RoutedEventArgs e)
         {
             MenuItem item = sender as MenuItem;
-            megjegyzes_struct items = item.DataContext as megjegyzes_struct;
+            ModelComment items = item.DataContext as ModelComment;
 
             comment.delete(items.id, session.UserData[0].id, 0, aControl.ApplicantID);
             commentLoader(megjegyzes_listBox);

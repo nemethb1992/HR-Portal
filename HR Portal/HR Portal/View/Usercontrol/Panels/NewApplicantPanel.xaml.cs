@@ -88,7 +88,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             DateTime localDate = DateTime.Now;
             List<JeloltExtendedList> items = new List<JeloltExtendedList>();
 
-            ModelNeme nemeComboBoxItem = (neme_cbx as ComboBox).SelectedItem as ModelNeme;
+            ModelNem nemeComboBoxItem = (neme_cbx as ComboBox).SelectedItem as ModelNem;
             ModelNyelv nyelvComboBoxItem = (nyelv_cbx as ComboBox).SelectedItem as ModelNyelv;
             ModelNyelv nyelv2ComboBoxItem = (nyelv2_cbx as ComboBox).SelectedItem as ModelNyelv;
             ModelErtesulesek ertesulesComboBoxItem = (ertesules_cbx as ComboBox).SelectedItem as ModelErtesulesek;

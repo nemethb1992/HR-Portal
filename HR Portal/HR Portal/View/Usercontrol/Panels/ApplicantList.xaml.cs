@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using HR_Portal.Control;
 using HR_Portal.Model;
+using HR_Portal.Source.Model;
 using HR_Portal.Test;
 
 namespace HR_Portal.View.Usercontrol.Panels
@@ -52,9 +53,9 @@ namespace HR_Portal.View.Usercontrol.Panels
         {
             List<string> list = new List<string>();
             
-            munkakor_struct munkakor_item = (munkakor_srccbx as ComboBox).SelectedItem as munkakor_struct;
-            vegzettseg_struct vegzettseg_item = (vegzettseg_srccbx as ComboBox).SelectedItem as vegzettseg_struct;
-            neme_struct nemek_item = (nemek_srccbx as ComboBox).SelectedItem as neme_struct;
+            ModelMunkakor munkakor_item = (munkakor_srccbx as ComboBox).SelectedItem as ModelMunkakor;
+            ModelVegzettseg vegzettseg_item = (vegzettseg_srccbx as ComboBox).SelectedItem as ModelVegzettseg;
+            ModelNem nemek_item = (nemek_srccbx as ComboBox).SelectedItem as ModelNem;
 
             string munkakorStr = "";
             string vegzettsegStr = "";

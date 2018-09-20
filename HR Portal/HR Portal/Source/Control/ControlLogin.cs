@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.DirectoryServices.Protocols;
 using HR_Portal.Source;
+using MySql.Data.MySqlClient;
 
 namespace HR_Portal.Control
 {
@@ -88,7 +89,29 @@ namespace HR_Portal.Control
         }
         public List<UserSessData> Data_UserSession(string username)  //javítva használja: login
         {
-            List<UserSessData> list = mySql.getUserSession("SELECT * FROM users WHERE username='" + username + "'");
+            MySqlDataReader sdr;
+            List<UserSessData> list = new List<UserSessData>();
+            if(mySql.open() == true)
+            {
+                mySql.cmd = new MySqlCommand("SELECT * FROM users WHERE username='" + username + "'", mySql.conn);
+                sdr = mySql.cmd.ExecuteReader();
+                while (sdr.Read())
+                {
+                    list.Add(new UserSessData
+                    {
+                        id = Convert.ToInt32(sdr["id"]),
+                        username = sdr["username"].ToString(),
+                        name = sdr["name"].ToString(),
+                        email = sdr["email"].ToString(),
+                        kategoria = Convert.ToInt32(sdr["kategoria"]),
+                        jogosultsag = Convert.ToInt32(sdr["jogosultsag"]),
+                        validitas = Convert.ToInt32(sdr["validitas"]),
+                        belepve = sdr["belepve"].ToString(),
+                        reg_datum = sdr["reg_datum"].ToString(),
+                    });
+                }
+                sdr.Close();
+            }
             mySql.close();
             return list;
         }

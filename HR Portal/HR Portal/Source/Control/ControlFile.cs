@@ -10,10 +10,10 @@ namespace HR_Portal.Control
     {
         Model.MySql mySql = new Model.MySql();
 
-        public List<Jelolt_File_Struct> Applicant_FolderReadOut(int ApplicantID)
+        public List<ModelJeloltFile> Applicant_FolderReadOut(int ApplicantID)
         {
             DirectoryInfo directory;
-            List<Jelolt_File_Struct> list = new List<Jelolt_File_Struct>();
+            List<ModelJeloltFile> list = new List<ModelJeloltFile>();
             FileInfo[] articles;
 
             try
@@ -22,7 +22,7 @@ namespace HR_Portal.Control
                 articles = directory.GetFiles("*.pdf");
                 foreach (FileInfo file in articles)
                 {
-                    list.Add(new Jelolt_File_Struct { fajlnev = file.Name.Split('.')[0], path = file.FullName });
+                    list.Add(new ModelJeloltFile { fajlnev = file.Name.Split('.')[0], path = file.FullName });
                 }
             }
             catch (Exception)

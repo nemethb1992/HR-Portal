@@ -53,7 +53,7 @@ namespace HR_Portal.View.Usercontrol.Panels.SzakmaiLayouts
             projekt_input_9.Text = list[0].ber.ToString() + " Ft";
             projekt_input_10.Text = list[0].tapasztalat_ev.ToString();
 
-            List<kompetenciak> listKompetencia = paControl.Data_Kompetencia();
+            List<ModelKompetenciak> listKompetencia = paControl.Data_Kompetencia();
             foreach (var item in listKompetencia)
             {
                 if (item.id == list[0].kepesseg1)
@@ -75,7 +75,7 @@ namespace HR_Portal.View.Usercontrol.Panels.SzakmaiLayouts
         protected void commentDelete(object sender, RoutedEventArgs e)
         {
             MenuItem menuItem = sender as MenuItem;
-            megjegyzes_struct items = menuItem.DataContext as megjegyzes_struct;
+            ModelComment items = menuItem.DataContext as ModelComment;
 
             comment.delete(items.id, session.UserData[0].id, pControl.ProjektID, 0);
             megjegyzes_listBox.ItemsSource = pControl.Data_CommentProject();

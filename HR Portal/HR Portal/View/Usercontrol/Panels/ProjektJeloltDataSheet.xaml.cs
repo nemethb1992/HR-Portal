@@ -38,7 +38,7 @@ namespace HR_Portal.View.Usercontrol.Panels
         {
             List<JeloltExtendedList> a_li = aControl.Data_JeloltFull();
             List<ProjectExtendedListItems> p_li = pControl.Data_ProjectFull();
-            List<kompetenciak> li_k = paControl.Data_Kompetencia();
+            List<ModelKompetenciak> li_k = paControl.Data_Kompetencia();
             List<kompetencia_summary_struct> li_kvalue = paControl.Data_KompetenciaJeloltKapcs();
 
             projekt_jelolt_title_tbl.Text = p_li[0].megnevezes_projekt + " - " + a_li[0].nev;
@@ -128,7 +128,7 @@ namespace HR_Portal.View.Usercontrol.Panels
 
         protected void commentDeleteMenuItemClick(object sender, RoutedEventArgs e)
         {
-            megjegyzes_struct items = (sender as MenuItem).DataContext as megjegyzes_struct;
+            ModelComment items = (sender as MenuItem).DataContext as ModelComment;
 
             comment.delete(items.id, session.UserData[0].id, pControl.ProjektID, aControl.ApplicantID);
             megjegyzes_listBox.ItemsSource = pControl.Data_CommentKapcs();

@@ -70,9 +70,9 @@ namespace HR_Portal.Control
             mySql.close();
         }
 
-        public List<kompetenciak> Data_Kompetencia() // javítva használja: newprojectpanel
+        public List<ModelKompetenciak> Data_Kompetencia() // javítva használja: newprojectpanel
         {
-            List<kompetenciak> list = mySql.Kompetenciak_MySql_listQuery("SELECT * FROM kompetenciak");
+            List<ModelKompetenciak> list = mySql.Kompetenciak_MySql_listQuery("SELECT * FROM kompetenciak");
             mySql.close();
             return list;
         }
