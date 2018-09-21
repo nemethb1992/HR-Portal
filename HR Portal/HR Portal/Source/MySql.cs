@@ -30,7 +30,15 @@ namespace HR_Portal.Source
         
         public static bool isConnected()
         {
-            if(conn.State == System.Data.ConnectionState.Open)
+            try
+            {
+                conn.Open();
+            }
+            catch
+            {
+                return false;
+            }
+                if (conn.State == System.Data.ConnectionState.Open)
             {
                 conn.Close();
                 return true;
