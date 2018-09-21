@@ -149,6 +149,8 @@
     <Compile Include="Source\SqLite.cs" />
     <Compile Include="Source\Test\ftpEntities.cs" />
     <Compile Include="Source\Test\ThreadTest.cs" />
+    <Compile Include="Source\ViewModel\VMApplicant.cs" />
+    <Compile Include="Source\ViewModel\VMApplicantList.cs" />
     <Compile Include="Source\ViewModel\VMSession.cs" />
     <Compile Include="View\Usercontrol\Login.xaml.cs">
       <DependentUpon>login.xaml</DependentUpon>

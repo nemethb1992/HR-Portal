@@ -89,7 +89,7 @@ namespace HR_Portal.Control
         //    }
         //}
 
-        public void sendMail(string to, string email_body)
+        public void send(string to, string email_body)
         {
             List<MailServer_m> li = SMTP_List();
             try
@@ -111,7 +111,7 @@ namespace HR_Portal.Control
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
+                MessageBox.Show("Üzenet elküldése sikertelen!");
             }
         }
     }

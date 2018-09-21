@@ -13,6 +13,7 @@ using System.Windows.Media;
 using HR_Portal.Control;
 using HR_Portal.Source;
 using HR_Portal.Source.Model;
+using HR_Portal.Source.ViewModel;
 using HR_Portal.Test;
 
 namespace HR_Portal.View.Usercontrol.Panels
@@ -108,7 +109,7 @@ namespace HR_Portal.View.Usercontrol.Panels
 
         public void applicantListLoader()
         {
-                List<JeloltListItems> list = aControl.applicantList(searchValues());
+                List<JeloltListItems> list = VMApplicantList.getApplicantList(searchValues());
                 applicant_listBox.ItemsSource = list;
                 talalat_tbl.Text = "Találatok:  " + list.Count.ToString();
             
@@ -161,7 +162,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             TextBox textbox = (TextBox)sender;
             int fisrtLength = textbox.Text.Length;
 
-            await Task.Delay(500);
+            await Task.Delay(300);
             if (fisrtLength == textbox.Text.Length)
                 applicantListLoader();
         }

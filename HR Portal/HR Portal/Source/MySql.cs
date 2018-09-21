@@ -4,6 +4,7 @@ using MySql.Data.MySqlClient;
 using static HR_Portal.Source.ModelEmail;
 using static HR_Portal.Source.ModelSzakmai;
 using HR_Portal.Source.Model;
+using System.Data;
 
 namespace HR_Portal.Source
 {
@@ -26,18 +27,9 @@ namespace HR_Portal.Source
                 conn = new MySqlConnection(CONNECTION_URL);
             }
         }
-
-        //Initialize values
+        
         public static bool isConnected()
         {
-            try
-            {
-                conn.Open();
-            }
-            catch
-            {
-                return false;
-            }
             if(conn.State == System.Data.ConnectionState.Open)
             {
                 conn.Close();
@@ -50,7 +42,11 @@ namespace HR_Portal.Source
         {
             try
             {
-                conn.Open();
+
+                if (conn.State == ConnectionState.Closed)
+                {
+                    conn.Open();
+                }
                 return true;
             }
             catch (Exception)
@@ -71,7 +67,6 @@ namespace HR_Portal.Source
                 return false;
             }
         }
-        //MySqlConnection conn = new MySqlConnection(dataSourceURL);
 
         // MySQL entites
 

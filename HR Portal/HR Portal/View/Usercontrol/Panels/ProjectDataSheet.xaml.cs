@@ -16,7 +16,6 @@ namespace HR_Portal.View.Usercontrol.Panels
         ControlProject pControl = new ControlProject();
         ControlApplicantProject paControl = new ControlApplicantProject();
         EmailTemplate emailTemplate = new EmailTemplate();
-        ControlEmail email = new ControlEmail();
         Comment comment = new Comment();
 
         private Grid grid;
@@ -205,8 +204,9 @@ namespace HR_Portal.View.Usercontrol.Panels
             listLoader();
         }
 
-        protected void jeloltContextMenuClick(object sender, RoutedEventArgs e)
+        protected void jeloltRightClick(object sender, RoutedEventArgs e)
         {
+            ControlEmail email = new ControlEmail();
             MenuItem mitem = sender as MenuItem;
             JeloltListItems items = mitem.DataContext as JeloltListItems;
 
@@ -217,7 +217,7 @@ namespace HR_Portal.View.Usercontrol.Panels
                 {
                     case MessageBoxResult.Yes:
                         pControl.jeloltKapcsDelete(items.id);
-                        email.sendMail(items.email, emailTemplate.Elutasito_Email(items.nev));
+                        email.send(items.email, emailTemplate.Elutasito_Email(items.nev));
                         break;
                     case MessageBoxResult.No:
                         pControl.jeloltKapcsDelete(items.id);

@@ -181,10 +181,10 @@
                             </Grid.RowDefinitions>
                             <Grid.ContextMenu>
                                 <ContextMenu>
-                                    <MenuItem Tag="1" Header="Telefonon szűrt" Click="jeloltContextMenuClick"/>
-                                    <MenuItem Tag="2" Header="Felvétel" Click="jeloltContextMenuClick"/>
-                                    <MenuItem Tag="3" Header="Elutasítás" Click="jeloltContextMenuClick"/>
-                                    <MenuItem Tag="delete" Header="Törlés a listából" Click="jeloltContextMenuClick"/>
+                                    <MenuItem Tag="1" Header="Telefonon szűrt" Click="jeloltRightClick"/>
+                                    <MenuItem Tag="2" Header="Felvétel" Click="jeloltRightClick"/>
+                                    <MenuItem Tag="3" Header="Elutasítás" Click="jeloltRightClick"/>
+                                    <MenuItem Tag="delete" Header="Törlés a listából" Click="jeloltRightClick"/>
                                 </ContextMenu>
 
                             </Grid.ContextMenu>

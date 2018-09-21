@@ -11,17 +11,12 @@ namespace HR_Portal.Source
 {
     class VMSession
     {
-        private static List<UserSessionData> Datas = new List<UserSessionData>();
-        
-        MySql mySql = new MySql();
-        Session session = new Session();
-
         public VMSession()
         {
-            Session.UserData = setUserSession(Session.ActiveDirectoryDomain);
+            Session.UserData = getUserSession(Session.ActiveDirectoryDomain);
         }
 
-        public static List<UserSessionData> setUserSession(string username)
+        public static List<UserSessionData> getUserSession(string username)
         {
             List<UserSessionData> list = new List<UserSessionData>();
             MySqlDataReader sdr;
