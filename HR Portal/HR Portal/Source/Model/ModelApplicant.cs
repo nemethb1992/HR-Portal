@@ -1,4 +1,6 @@
 ﻿using HR_Portal.Source;
+using HR_Portal.Source.Model.Applicant;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,68 +9,7 @@ using System.Threading.Tasks;
 
 namespace HR_Portal.Source
 {
-
-    public class JeloltListItems
-    {
-        public int id { get; set; }
-        public string nev { get; set; }
-        public string munkakor { get; set; }
-        public string munkakor2 { get; set; }
-        public string munkakor3 { get; set; }
-        public int szuldatum { get; set; }
-        public string email { get; set; }
-        public int interjuk_db { get; set; }
-        public int allapota { get; set; }
-        public string kolcsonzott { get; set; }
-        public string allapot_megnevezes { get; set; }
-        public string reg_datum { get; set; }
-        public bool Checked { get; set; }
-    }
-
-    public class JeloltListBox
-    {
-        public int id { get; set; }
-        public string nev { get; set; }
-        public int interjuk_db { get; set; }
-    }
-
-    public class SubJelolt
-    {
-        public int id { get; set; }
-        public string nev { get; set; }
-    }
-
-    public class JeloltExtendedList
-    {
-        public int id { get; set; }
-        public string nev { get; set; }
-        public string email { get; set; }
-        public string telefon { get; set; }
-        public string lakhely { get; set; }
-        public string ertesult { get; set; }
-        public int id_ertesult { get; set; }
-        public int szuldatum { get; set; }
-        public string neme { get; set; }
-        public int id_neme { get; set; }
-        public int tapasztalat_ev { get; set; }
-        public string munkakor { get; set; }
-        public string munkakor2 { get; set; }
-        public string munkakor3 { get; set; }
-        public int id_munkakor { get; set; }
-        public int id_munkakor2 { get; set; }
-        public int id_munkakor3 { get; set; }
-        public string vegz_terulet { get; set; }
-        public int id_vegz_terulet { get; set; }
-        public string nyelvtudas { get; set; }
-        public string nyelvtudas2 { get; set; }
-        public int id_nyelvtudas { get; set; }
-        public int id_nyelvtudas2 { get; set; }
-        public string reg_date { get; set; }
-        public string megjegyzes { get; set; }
-        public string folderUrl { get; set; }
-    }
-
-    public class JeloltSearchItems
+    public class ModelApplicantSearch
     {
         public string nev { get; set; }
         public string lakhely { get; set; }
@@ -82,4 +23,10 @@ namespace HR_Portal.Source
         public string vegztettseg { get; set; }
     }
 
+    public class ModelApplicantListbox
+    {
+        public int id { get; set; }
+        public string nev { get; set; }
+        public int interjuk_db { get; set; }
+    }
 }

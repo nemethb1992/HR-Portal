@@ -13,6 +13,7 @@ using System.Windows.Media;
 using HR_Portal.Control;
 using HR_Portal.Source;
 using HR_Portal.Source.Model;
+using HR_Portal.Source.Model.Applicant;
 using HR_Portal.Source.ViewModel;
 using HR_Portal.Test;
 
@@ -109,7 +110,7 @@ namespace HR_Portal.View.Usercontrol.Panels
 
         public void applicantListLoader()
         {
-                List<JeloltListItems> list = VMApplicantList.getApplicantList(searchValues());
+                List<ModelApplicantList> list = VMApplicant.getApplicantList(searchValues());
                 applicant_listBox.ItemsSource = list;
                 talalat_tbl.Text = "Találatok:  " + list.Count.ToString();
             
@@ -125,7 +126,7 @@ namespace HR_Portal.View.Usercontrol.Panels
         protected void applicantOpenClick(object sender, RoutedEventArgs e)
         {
             Button button = sender as Button;
-            JeloltListItems items = button.DataContext as JeloltListItems;
+            ModelApplicantList items = button.DataContext as ModelApplicantList;
             Session.ApplicantID = items.id;
             grid.Children.Clear();
             grid.Children.Add(applicantDataSheet = new ApplicantDataSheet(grid));
@@ -138,7 +139,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             {
                 case MessageBoxResult.Yes:
                     MenuItem menuItem = sender as MenuItem;
-                    JeloltListItems items = menuItem.DataContext as JeloltListItems;
+                    ModelApplicantList items = menuItem.DataContext as ModelApplicantList;
                     aControl.applicantFullDelete(items.id);
                     applicantListLoader();
                     break;
@@ -234,7 +235,7 @@ namespace HR_Portal.View.Usercontrol.Panels
         protected void modositasClick(object sender, RoutedEventArgs e)
         {
             MenuItem item = sender as MenuItem;
-            JeloltListItems itemSource = item.DataContext as JeloltListItems;
+            ModelApplicantList itemSource = item.DataContext as ModelApplicantList;
             Session.isUpdate = true;
             Session.ApplicantID = itemSource.id;
             grid.Children.Clear();

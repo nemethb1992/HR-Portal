@@ -1,6 +1,8 @@
 ﻿using HR_Portal.Control;
 using HR_Portal.Source;
 using HR_Portal.Source.Model;
+using HR_Portal.Source.Model.Applicant;
+using HR_Portal.Source.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -50,7 +52,7 @@ namespace HR_Portal.View.Usercontrol.Panels
 
         protected void modifyFormLoader()
         {
-            List<JeloltExtendedList> li = aControl.Data_JeloltFull();
+            List<ModelFullApplicant> li = VMApplicant.getFullApplicant();
             nev_tbx.Text = li[0].nev;
             email_tbx.Text = li[0].email;
             lakhely_tbx.Text = li[0].lakhely;
@@ -82,10 +84,10 @@ namespace HR_Portal.View.Usercontrol.Panels
             return i;
         }
 
-        protected List<JeloltExtendedList> getFormData()
+        protected List<ModelFullApplicant> getFormData()
         {
             DateTime localDate = DateTime.Now;
-            List<JeloltExtendedList> items = new List<JeloltExtendedList>();
+            List<ModelFullApplicant> items = new List<ModelFullApplicant>();
 
             ModelNem nemeComboBoxItem = (neme_cbx as ComboBox).SelectedItem as ModelNem;
             ModelNyelv nyelvComboBoxItem = (nyelv_cbx as ComboBox).SelectedItem as ModelNyelv;
@@ -96,7 +98,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             ModelMunkakor munkakor3ComboBoxItem = (munkakor3_cbx as ComboBox).SelectedItem as ModelMunkakor;
             ModelVegzettseg vegzettsegComboBoxItem = (vegzettseg_cbx as ComboBox).SelectedItem as ModelVegzettseg;
             
-            items.Add(new JeloltExtendedList
+            items.Add(new ModelFullApplicant
             {
                 id = 0,
                 nev = nev_tbx.Text,
@@ -139,20 +141,3 @@ namespace HR_Portal.View.Usercontrol.Panels
         }
     }
 }
-
-//combobox = neme_cbx as ComboBox;
-//            neme_struct nemeComboBoxItem = combobox.SelectedItem as neme_struct;
-//combobox = nyelv_cbx as ComboBox;
-//            nyelv_struct nyelvComboBoxItem = combobox.SelectedItem as nyelv_struct;
-//combobox = nyelv2_cbx as ComboBox;
-//            nyelv_struct nyelv2ComboBoxItem = combobox.SelectedItem as nyelv_struct;
-//combobox = ertesules_cbx as ComboBox;
-//            ertesulesek ertesulesComboBoxItem = combobox.SelectedItem as ertesulesek;
-//combobox = munkakor_cbx as ComboBox;
-//            munkakor_struct munkakorComboBoxItem = combobox.SelectedItem as munkakor_struct;
-//combobox = munkakor2_cbx as ComboBox;
-//            munkakor_struct munkakor2ComboBoxItem = combobox.SelectedItem as munkakor_struct;
-//combobox = munkakor3_cbx as ComboBox;
-//            munkakor_struct munkakor3ComboBoxItem = combobox.SelectedItem as munkakor_struct;
-//combobox = vegzettseg_cbx as ComboBox;
-//            vegzettseg_struct vegzettsegComboBoxItem = combobox.SelectedItem as vegzettseg_struct;

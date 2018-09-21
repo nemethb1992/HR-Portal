@@ -47,7 +47,7 @@
                     <Image Source="/Public/imgs/maximize.png" Margin="5" Height="20"/>
                 </Button>
 
-                <Label Content="HR Cloud" Grid.Column="1" Style="{StaticResource title_header_label}" HorizontalAlignment="Left" VerticalAlignment="Top" Height="60"  Width="110" FontSize="23"/>
+                <Label Content="HR Portal" Grid.Column="1" Style="{StaticResource title_header_label}" HorizontalAlignment="Left" VerticalAlignment="Top" Height="60"  Width="110" FontSize="23"/>
                 <Image Height="28" HorizontalAlignment="Right"  Source="/Public/imgs/pm_logo_mini.png"/>
                     <!--<TextBlock x:Name="testtbx" Text="proba" Style="{StaticResource Standard_Textblock}" VerticalAlignment="Center"  Grid.Column="2" />-->
                 <!--<Grid Grid.Column="2">

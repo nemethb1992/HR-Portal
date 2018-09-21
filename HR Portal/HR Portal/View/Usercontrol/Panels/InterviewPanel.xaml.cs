@@ -7,6 +7,8 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using HR_Portal.Source.Model;
+using HR_Portal.Source.Model.Project;
+using HR_Portal.Source.ViewModel;
 
 namespace HR_Portal.View.Usercontrol.Panels
 {
@@ -53,7 +55,7 @@ namespace HR_Portal.View.Usercontrol.Panels
         protected void interviewLoader()
         {
             List<interju_struct> list = paControl.Data_InterviewById();
-            List<ProjectExtendedListItems> li = pControl.Data_ProjectFull();
+            List<ModelFullProject> li = VMProject.getFullProject();
             List<ModelKompetenciak> li_k = paControl.Data_Kompetencia();
 
             foreach (var item in li_k)
@@ -92,7 +94,7 @@ namespace HR_Portal.View.Usercontrol.Panels
         {
             Button button = sender as Button;
             int type = Convert.ToInt32(button.Tag);
-            List<ProjectExtendedListItems> li = pControl.Data_ProjectFull();
+            List<ModelFullProject> li = VMProject.getFullProject();
             List<int> list = new List<int>();
 
             list.Add(li[0].kepesseg1);

@@ -7,6 +7,9 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using HR_Portal.Source.Model;
+using HR_Portal.Source.Model.Applicant;
+using HR_Portal.Source.ViewModel;
+using HR_Portal.Source.Model.Project;
 
 namespace HR_Portal.View.Usercontrol.Panels
 {
@@ -34,8 +37,8 @@ namespace HR_Portal.View.Usercontrol.Panels
 
         protected void projectFormLoader()
         {
-            List<JeloltExtendedList> a_li = aControl.Data_JeloltFull();
-            List<ProjectExtendedListItems> p_li = pControl.Data_ProjectFull();
+            List<ModelFullApplicant> a_li = VMApplicant.getFullApplicant();
+            List<ModelFullProject> p_li = VMProject.getFullProject();
             List<ModelKompetenciak> li_k = paControl.Data_Kompetencia();
             List<kompetencia_summary_struct> li_kvalue = paControl.Data_KompetenciaJeloltKapcs();
 

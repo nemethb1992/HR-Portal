@@ -9,6 +9,8 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using HR_Portal.Source.Model;
+using HR_Portal.Source.Model.Applicant;
+using HR_Portal.Source.ViewModel;
 
 namespace HR_Portal.View.Usercontrol.Panels.SzakmaiLayouts
 {
@@ -33,7 +35,7 @@ namespace HR_Portal.View.Usercontrol.Panels.SzakmaiLayouts
 
         protected void formLoader()
         {
-            List<JeloltExtendedList> list = aControl.Data_JeloltFull();
+            List<ModelFullApplicant> list = VMApplicant.getFullApplicant();
             applicant_profile_title.Text = list[0].nev;
             app_input_1.Text = list[0].email;
             app_input_2.Text = list[0].telefon.ToString();

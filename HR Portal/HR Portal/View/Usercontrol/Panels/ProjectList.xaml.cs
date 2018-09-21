@@ -8,6 +8,8 @@ using System.Windows.Media;
 using HR_Portal.Control;
 using HR_Portal.Source;
 using HR_Portal.Source.Model;
+using HR_Portal.Source.Model.Project;
+using HR_Portal.Source.ViewModel;
 
 namespace HR_Portal.View.Usercontrol.Panels
 {
@@ -102,7 +104,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             buttonColorChange();
 
             try{
-                List<ProjectListItems> lista = pControl.Data_ProjectFull(getSearchData());
+                List<ModelProjectList> lista = VMProject.getProjectList(getSearchData());
                 project_listBox.ItemsSource = lista;
                 talalat_tbl.Text = "Találatok:  " + lista.Count.ToString();
             }
@@ -135,7 +137,7 @@ namespace HR_Portal.View.Usercontrol.Panels
 
         protected void projectOpenClick(object sender, RoutedEventArgs e)
         {
-            ProjectListItems items = (sender as Button).DataContext as ProjectListItems;
+            ModelProjectList items = (sender as Button).DataContext as ModelProjectList;
             Session.ProjektID = items.id;
             grid.Children.Clear();
             grid.Children.Add(projectDataSheet = new ProjectDataSheet(grid));
@@ -153,7 +155,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             switch (result)
             {
                 case MessageBoxResult.Yes:
-                    ProjectListItems items = (sender as MenuItem).DataContext as ProjectListItems;
+                    ModelProjectList items = (sender as MenuItem).DataContext as ModelProjectList;
                     pControl.projectDelete(items.id);
                     projectListLoader();
                     break;
@@ -170,7 +172,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             switch (result)
             {
                 case MessageBoxResult.Yes:
-                    ProjectListItems items = (sender as MenuItem).DataContext as ProjectListItems;
+                    ModelProjectList items = (sender as MenuItem).DataContext as ModelProjectList;
                     pControl.projectArchiver(items.id, items.statusz);
                     projectListLoader();
                     break;
@@ -184,14 +186,14 @@ namespace HR_Portal.View.Usercontrol.Panels
         protected void projectPassivateClick(object sender, RoutedEventArgs e)
         {
             pControl.statusChange(0);
-            project_listBox.ItemsSource = pControl.Data_ProjectFull(getSearchData());
+            project_listBox.ItemsSource = VMProject.getProjectList(getSearchData());
             buttonColorChange();
         }
 
         protected void projectActivateClick(object sender, RoutedEventArgs e)
         {
             pControl.statusChange(1);
-            project_listBox.ItemsSource = pControl.Data_ProjectFull(getSearchData());
+            project_listBox.ItemsSource = VMProject.getProjectList(getSearchData());
             buttonColorChange();
         }
 
@@ -249,7 +251,7 @@ namespace HR_Portal.View.Usercontrol.Panels
         protected void modositasClick(object sender, RoutedEventArgs e)
         {
             Session.isUpdate = true;
-            ProjectListItems itemSource = (sender as MenuItem).DataContext as ProjectListItems;
+            ModelProjectList itemSource = (sender as MenuItem).DataContext as ModelProjectList;
 
             Session.ProjektID = itemSource.id;
             grid.Children.Clear();

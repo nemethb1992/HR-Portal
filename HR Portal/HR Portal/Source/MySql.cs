@@ -197,28 +197,7 @@ namespace HR_Portal.Source
 
 
 
-        public List<SmallProjectListItems> Small_Projekt_MySql_listQuery(string command)
-        {
-            List<SmallProjectListItems> items = new List<SmallProjectListItems>();
-            if (open() == true)
-            {
-                cmd = new MySqlCommand(command, conn);
-                sdr = cmd.ExecuteReader();
-                int j = 0;
-                while (sdr.Read())
-                {
-                    items.Add(new SmallProjectListItems
-                    {
-                        id = Convert.ToInt32(sdr["id"]),
-                        megnevezes_projekt = sdr["megnevezes_projekt"].ToString(),
-                        jeloltek_db = 0
-                    });
-                    j++;
-                }
-                sdr.Close();
-            }
-            return items;
-        }
+
 
         public List<SubProjekt> Sub_Projekt_MySql_listQuery(string query)
         {
@@ -242,42 +221,7 @@ namespace HR_Portal.Source
             return items;
         }
 
-        public List<ProjectListItems> Projekt_MySql_listQuery  (string query)
-        {
-        List<ProjectListItems> items = new List<ProjectListItems>();
-            if (open() == true)
-            {
-                cmd = new MySqlCommand(query, conn);
-                sdr = cmd.ExecuteReader();
-                while (sdr.Read())
-                {
-                    int jelolt;
-                    try
-                    {
-                        jelolt = Convert.ToInt32(sdr["jeloltek_db"]);
-                    }
-                    catch (Exception)
-                    {
-                        jelolt = 0;
-                    }
-                    items.Add(new ProjectListItems
-                    {
-                        id = Convert.ToInt32(sdr["id"]),
-                        megnevezes_projekt = sdr["megnevezes_projekt"].ToString(),
-                        megnevezes_munka = sdr["megnevezes_munka"].ToString(),
-                        interjuk_db = Convert.ToInt32(sdr["interjuk_db"]),
-                        statusz = Convert.ToInt32(sdr["statusz"]),
-                        jeloltek_db = jelolt,
-                        fel_datum = sdr["fel_datum"].ToString(),
-                        Completion = 100
-                    });
 
-
-                }
-                sdr.Close();
-            }
-            return items;
-        }
 
         public List<ModelErtesulesek> Ertesulesek_MySql_listQuery(string query)
         {
@@ -299,23 +243,21 @@ namespace HR_Portal.Source
             return items;
         }
 
-        public List<file_url> file_url_ROOT_MySql_listQuery(string query)
+        public string getRootUrl(string query)
         {
-            List<file_url> items = new List<file_url>();
+            string url = "";
             if (open() == true)
             {
                 cmd = new MySqlCommand(query, conn);
                 sdr = cmd.ExecuteReader();
                 while (sdr.Read())
                 {
-                    items.Add(new file_url
-                    {
-                        url = sdr["url"].ToString(),
-                    });
+                    url = sdr["url"].ToString();
+                    break;
                 }
                 sdr.Close();
             }
-            return items;
+            return url;
         }
 
         public List<ModelPc> getPc(string query)
@@ -378,73 +320,18 @@ namespace HR_Portal.Source
             return items;
         }
 
-        public List<ProjectExtendedListItems> Projekt_Extended_MySql_listQuery(string query)
+
+
+        public List<ModelApplicantListbox> Jelolt_Short_MySql_listQuery(string query)
         {
-            List<ProjectExtendedListItems> items = new List<ProjectExtendedListItems>();
+            List<ModelApplicantListbox> items = new List<ModelApplicantListbox>();
             if (open() == true)
             {
                 cmd = new MySqlCommand(query, conn);
                 sdr = cmd.ExecuteReader();
                 while (sdr.Read())
                 {
-                    int jelolt;
-                    try
-                    {
-                        jelolt = Convert.ToInt32(sdr["jeloltek_db"]);
-                    }
-                    catch (Exception)
-                    {
-                        jelolt = 0;
-                    }
-                    items.Add(new ProjectExtendedListItems
-                    {
-                        id = Convert.ToInt32(sdr["id"]),
-                        hr_id = Convert.ToInt32(sdr["hr_id"]),
-                        megnevezes_projekt = sdr["megnevezes_projekt"].ToString(),
-                        megnevezes_vegzettseg = sdr["megnevezes_vegzettseg"].ToString(),
-                        megnevezes_nyelv = sdr["megnevezes_nyelv"].ToString(),
-                        megnevezes_munka = sdr["megnevezes_munka"].ToString(),
-                        megnevezes_pc = sdr["megnevezes_pc"].ToString(),
-                        megnevezes_hr = sdr["name"].ToString(),
-                        fel_datum = sdr["fel_datum"].ToString(),
-                        le_datum = sdr["le_datum"].ToString(),
-                        pc = Convert.ToInt32(sdr["pc"]),
-                        vegzettseg = Convert.ToInt32(sdr["vegzettseg"]),
-                        tapasztalat_ev = Convert.ToInt32(sdr["tapasztalat_ev"]),
-                        statusz = sdr["allapot"].ToString(),
-                        publikalt = Convert.ToInt32(sdr["publikalt"]),
-                        nyelvtudas = Convert.ToInt32(sdr["nyelvtudas"]),
-                        munkakor = Convert.ToInt32(sdr["munkakor"]),
-                        szuldatum = Convert.ToInt32(sdr["szuldatum"]),
-                        ber = Convert.ToInt32(sdr["ber"]),
-                        jeloltek_db = jelolt,
-                        kepesseg1 = Convert.ToInt32(sdr["kepesseg1"]),
-                        kepesseg2 = Convert.ToInt32(sdr["kepesseg2"]),
-                        kepesseg3 = Convert.ToInt32(sdr["kepesseg3"]),
-                        kepesseg4 = Convert.ToInt32(sdr["kepesseg4"]),
-                        kepesseg5 = Convert.ToInt32(sdr["kepesseg5"]),
-                        feladatok = sdr["feladatok"].ToString(),
-                        elvarasok = sdr["elvarasok"].ToString(),
-                        kinalunk = sdr["kinalunk"].ToString(),
-                        elonyok = sdr["elonyok"].ToString(),
-                    });
-
-                }
-                sdr.Close();
-            }
-            return items;
-        }
-
-        public List<SubJelolt> Jelolt_Short_MySql_listQuery(string query)
-        {
-            List<SubJelolt> items = new List<SubJelolt>();
-            if (open() == true)
-            {
-                cmd = new MySqlCommand(query, conn);
-                sdr = cmd.ExecuteReader();
-                while (sdr.Read())
-                {
-                    items.Add(new SubJelolt
+                    items.Add(new ModelApplicantListbox
                     {
                         id = Convert.ToInt32(sdr["id"]),
                         nev = sdr["nev"].ToString()
@@ -455,67 +342,9 @@ namespace HR_Portal.Source
             return items;
         }
 
-        public List<JeloltListItems> getApplicantList(string query)
+        public List<ModelApplicantListbox> getApplicantShort(string query)
         {
-            List<JeloltListItems> items = new List<JeloltListItems>();
-            if (open() == true)
-            {
-                cmd = new MySqlCommand(query, conn);
-                sdr = cmd.ExecuteReader();
-                while (sdr.Read())
-                {
-                    string allapot_megnev = "Beérkezett", kolcsonzott = "";
-                    int allapot = 0;
-                    try
-                    {
-                        allapot = Convert.ToInt32(sdr["allapota"]);
-                    }
-                    catch (Exception)
-                    {
-                    }
-                    switch (allapot)
-                    {
-                        case 1:
-                            allapot_megnev = "Telefonon szűrt";
-                            break;
-                        case 2:
-                            allapot_megnev = "Felvett";
-                            break;
-                        case 3:
-                            allapot_megnev = "Elutasított";
-                            break;
-
-                        default:
-                            allapot_megnev = "Beérkezett";
-                            break;
-                    }
-
-                    if (Convert.ToInt32(sdr["kolcsonzott"]) == 1)
-                        kolcsonzott = "Kölcsönzött";
-                    items.Add(new JeloltListItems
-                    {
-                        id = Convert.ToInt32(sdr["id"]),
-                        nev = sdr["nev"].ToString(),
-                        munkakor = sdr["munkakor"].ToString(),
-                        munkakor2 = sdr["munkakor2"].ToString(),
-                        munkakor3 = sdr["munkakor3"].ToString(),
-                        email = sdr["email"].ToString(),
-                        szuldatum = Convert.ToInt32(sdr["szuldatum"]),
-                        interjuk_db = Convert.ToInt32(sdr["interjuk_db"]),
-                        allapota = allapot,
-                        kolcsonzott = kolcsonzott,
-                        allapot_megnevezes = allapot_megnev,
-                        reg_datum = sdr["reg_date"].ToString(),
-                    });
-                }
-                sdr.Close();
-            }
-            return items;
-        }
-
-        public List<SubJelolt> getApplicantShort(string query)
-        {
-            List<SubJelolt> items = new List<SubJelolt>();
+            List<ModelApplicantListbox> items = new List<ModelApplicantListbox>();
             if (open() == true)
             {
                 cmd = new MySqlCommand(query, conn);
@@ -523,7 +352,7 @@ namespace HR_Portal.Source
                 while (sdr.Read())
                 {
 
-                    items.Add(new SubJelolt
+                    items.Add(new ModelApplicantListbox
                     {
                         id = Convert.ToInt32(sdr["id"]),
                         nev = sdr["nev"].ToString(),
@@ -534,60 +363,17 @@ namespace HR_Portal.Source
             return items;
         }
 
-        public List<JeloltExtendedList> JeloltExtended_MySql_listQuery(string query)
-        {
-            List<JeloltExtendedList> items = new List<JeloltExtendedList>();
-            if (open() == true)
-            {
-                cmd = new MySqlCommand(query, conn);
-                sdr = cmd.ExecuteReader();
-                while (sdr.Read())
-                {
-                    items.Add(new JeloltExtendedList
-                    {
-                        id = Convert.ToInt32(sdr["id"]),
-                        nev = sdr["nev"].ToString(),
-                        email = sdr["email"].ToString(),
-                        telefon = sdr["telefon"].ToString(),
-                        lakhely = sdr["lakhely"].ToString(),
-                        ertesult = sdr["ertesules_megnevezes"].ToString(),
-                        id_ertesult = Convert.ToInt32(sdr["id_ertesult"]),
-                        szuldatum = Convert.ToInt32(sdr["szuldatum"]),
-                        neme = sdr["neme"].ToString(),
-                        id_neme = Convert.ToInt32(sdr["id_neme"]),
-                        tapasztalat_ev = Convert.ToInt32(sdr["tapasztalat_ev"]),
-                        munkakor = sdr["munkakor"].ToString(),
-                        munkakor2 = sdr["munkakor2"].ToString(),
-                        munkakor3 = sdr["munkakor3"].ToString(),
-                        id_munkakor = Convert.ToInt32(sdr["id_munkakor"]),
-                        id_munkakor2 = Convert.ToInt32(sdr["id_munkakor2"]),
-                        id_munkakor3 = Convert.ToInt32(sdr["id_munkakor3"]),
-                        vegz_terulet = sdr["vegz_terulet"].ToString(),
-                        id_vegz_terulet = Convert.ToInt32(sdr["id_vegz_terulet"]),
-                        nyelvtudas = sdr["nyelvtudas"].ToString(),
-                        nyelvtudas2 = sdr["nyelvtudas2"].ToString(),
-                        id_nyelvtudas = Convert.ToInt32(sdr["id_nyelvtudas"]),
-                        id_nyelvtudas2 = Convert.ToInt32(sdr["id_nyelvtudas2"]),
-                        reg_date = sdr["reg_date"].ToString(),
-                        megjegyzes = sdr["megjegyzes"].ToString(),
-                        folderUrl = sdr["folderUrl"].ToString(),
-                    });
-                }
-                sdr.Close();
-            }
-            return items;
-        }
 
-        public List<JeloltListBox> JeloltekDatasourceListbox_MySql_listQuery(string query)
+        public List<ModelApplicantListbox> JeloltekDatasourceListbox_MySql_listQuery(string query)
         {
-            List<JeloltListBox> items = new List<JeloltListBox>();
+            List<ModelApplicantListbox> items = new List<ModelApplicantListbox>();
             if (open() == true)
             {
                 cmd = new MySqlCommand(query, conn);
                 sdr = cmd.ExecuteReader();
                 while (sdr.Read())
                 {
-                    items.Add(new JeloltListBox
+                    items.Add(new ModelApplicantListbox
                     {
                         id = Convert.ToInt32(sdr["id"]),
                         nev = sdr["nev"].ToString(),
@@ -860,16 +646,16 @@ namespace HR_Portal.Source
             return items;
         }
 
-        public List<JeloltSearchItems> Jelolt_Search_MySql_listQuery(string query)
+        public List<ModelApplicantSearch> Jelolt_Search_MySql_listQuery(string query)
         {
-            List<JeloltSearchItems> items = new List<JeloltSearchItems>();
+            List<ModelApplicantSearch> items = new List<ModelApplicantSearch>();
             if (open() == true)
             {
                 cmd = new MySqlCommand(query, conn);
                 sdr = cmd.ExecuteReader();
                 while (sdr.Read())
                 {
-                    items.Add(new JeloltSearchItems
+                    items.Add(new ModelApplicantSearch
                     {
                         nev = sdr["nev"].ToString(),
                         lakhely = sdr["lakhely"].ToString(),

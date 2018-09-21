@@ -7,6 +7,8 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using HR_Portal.Source.Model;
+using HR_Portal.Source.Model.Project;
+using HR_Portal.Source.ViewModel;
 
 namespace HR_Portal.View.Usercontrol.Panels
 {
@@ -53,7 +55,7 @@ namespace HR_Portal.View.Usercontrol.Panels
 
         protected void modifyFormLoader()
         {
-            List<ProjectExtendedListItems> list = pControl.Data_ProjectFull();
+            List<ModelFullProject> list = VMProject.getFullProject();
             nev_tbx.Text = list[0].megnevezes_projekt;
             tapasztalat_tbx.Text = list[0].tapasztalat_ev.ToString();
             ber_tbx.Text = list[0].ber.ToString();
@@ -82,7 +84,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             return i;
         }
 
-        protected List<ProjectInsertListItems> getData()
+        protected List<ModelInsertProject> getData()
         {
             ModelVegzettseg vegzettsegComboBox = (vegzettseg_cbx as ComboBox).SelectedItem as ModelVegzettseg;
             ModelMunkakor munkakorComboBox = (munkakor_cbx as ComboBox).SelectedItem as ModelMunkakor;
@@ -94,9 +96,9 @@ namespace HR_Portal.View.Usercontrol.Panels
             ModelKompetenciak kepzettseg5ComboBox = (k5_cbx as ComboBox).SelectedItem as ModelKompetenciak;
             ModelPc pcComboBox = (pc_cbx as ComboBox).SelectedItem as ModelPc;
             DateTime localDate = DateTime.Now;
-            List<ProjectInsertListItems> items = new List<ProjectInsertListItems>();
+            List<ModelInsertProject> list = new List<ModelInsertProject>();
 
-            items.Add(new ProjectInsertListItems
+            list.Add(new ModelInsertProject
             {
                 id = 0,
                 hr_id = Session.UserData[0].id,
@@ -118,7 +120,7 @@ namespace HR_Portal.View.Usercontrol.Panels
                 kepesseg5 = Convert.ToInt32(kepzettseg5ComboBox.id)
 
             });
-            return items;
+            return list;
         }
 
         protected void projektInsertClick(object sender, RoutedEventArgs e)

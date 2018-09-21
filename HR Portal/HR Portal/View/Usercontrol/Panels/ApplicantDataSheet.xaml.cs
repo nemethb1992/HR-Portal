@@ -6,6 +6,9 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using HR_Portal.Source.Model;
+using HR_Portal.Source.Model.Applicant;
+using HR_Portal.Source.ViewModel;
+using HR_Portal.Source.Model.Project;
 
 namespace HR_Portal.View.Usercontrol.Panels
 {
@@ -29,7 +32,7 @@ namespace HR_Portal.View.Usercontrol.Panels
         }
         protected void formLoader()
         {
-            List<JeloltExtendedList> list = aControl.Data_JeloltFull();
+            List<ModelFullApplicant> list = VMApplicant.getFullApplicant();
 
             applicant_profile_title.Text = list[0].nev;
             app_input_1.Text = list[0].email;
@@ -55,7 +58,7 @@ namespace HR_Portal.View.Usercontrol.Panels
         protected void navigateToProjectDataSheet(object sender, RoutedEventArgs e)
         {
             Button button = sender as Button;
-            SmallProjectListItems items = button.DataContext as SmallProjectListItems;
+            ModelSmallProject items = button.DataContext as ModelSmallProject;
 
             Session.ProjektID = items.id;
             grid.Children.Clear();
@@ -65,7 +68,7 @@ namespace HR_Portal.View.Usercontrol.Panels
         protected void projectDelete(object sender, RoutedEventArgs e)
         {
             MenuItem delete = sender as MenuItem;
-            SmallProjectListItems items = delete.DataContext as SmallProjectListItems;
+            ModelSmallProject items = delete.DataContext as ModelSmallProject;
 
             aControl.applicalntProjectListDelete(items.id);
             kapcsolodo_projekt_list.ItemsSource = aControl.Data_ProjectList();
@@ -115,7 +118,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             ControlProject pControl = new ControlProject();
 
             ComboBox cbx = projekt_cbx as ComboBox;
-            SmallProjectListItems item = cbx.SelectedItem as SmallProjectListItems;
+            ModelSmallProject item = cbx.SelectedItem as ModelSmallProject;
 
             pControl.addJeloltInsert(Session.ApplicantID , item.id);
             kapcsolodo_projekt_list.ItemsSource = aControl.Data_ProjectList();

@@ -5,6 +5,9 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using HR_Portal.Source.Model;
+using HR_Portal.Source.Model.Applicant;
+using HR_Portal.Source.ViewModel;
+using HR_Portal.Source.Model.Project;
 
 namespace HR_Portal.View.Usercontrol.Panels.SzakmaiLayouts
 {
@@ -38,7 +41,7 @@ namespace HR_Portal.View.Usercontrol.Panels.SzakmaiLayouts
 
         protected void formLoader()
         {
-            List<ProjectExtendedListItems> list = pControl.Data_ProjectFull();
+            List <ModelFullProject> list = VMProject.getFullProject();
             projekt_profile_title.Text = list[0].megnevezes_projekt;
             projekt_input_1.Text = list[0].statusz.ToString();
             projekt_input_2.Text = list[0].megnevezes_munka;
@@ -113,7 +116,7 @@ namespace HR_Portal.View.Usercontrol.Panels.SzakmaiLayouts
         protected void openApplicant(object sender, RoutedEventArgs e)
         {
             Button button = sender as Button;
-            JeloltListItems items = button.DataContext as JeloltListItems;
+            ModelApplicantList items = button.DataContext as ModelApplicantList;
 
             Session.ApplicantID = items.id;
             grid.Children.Clear();

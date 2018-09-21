@@ -8,6 +8,9 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using HR_Portal.Source.Model;
+using HR_Portal.Source.Model.Applicant;
+using HR_Portal.Source.Model.Project;
+using HR_Portal.Source.ViewModel;
 
 namespace HR_Portal.View.Usercontrol.Panels
 {
@@ -40,7 +43,7 @@ namespace HR_Portal.View.Usercontrol.Panels
         protected void formLoader()
         {
 
-            List<ProjectExtendedListItems> li = pControl.Data_ProjectFull();
+            List<ModelFullProject> li = VMProject.getFullProject();
             projekt_profile_title.Text = li[0].megnevezes_projekt;
             projekt_input_1.Text = li[0].statusz.ToString();
             projekt_input_2.Text = li[0].megnevezes_munka;
@@ -93,7 +96,7 @@ namespace HR_Portal.View.Usercontrol.Panels
         protected void openApplicantClick(object sender, RoutedEventArgs e)
         {
             Button button = sender as Button;
-            JeloltListItems items = button.DataContext as JeloltListItems;
+            ModelApplicantList items = button.DataContext as ModelApplicantList;
 
             Session.ApplicantID = items.id;
 
@@ -170,7 +173,7 @@ namespace HR_Portal.View.Usercontrol.Panels
         protected void jeloltDeleteClick(object sender, MouseButtonEventArgs e)
         {
             Image delete = sender as Image;
-            JeloltListItems items = delete.DataContext as JeloltListItems;
+            ModelApplicantList items = delete.DataContext as ModelApplicantList;
 
             pControl.jeloltKapcsDelete(items.id);
             kapcs_jeloltek_listBox.ItemsSource = pControl.Data_JeloltKapcs();
@@ -208,7 +211,7 @@ namespace HR_Portal.View.Usercontrol.Panels
         {
             ControlEmail email = new ControlEmail();
             MenuItem mitem = sender as MenuItem;
-            JeloltListItems items = mitem.DataContext as JeloltListItems;
+            ModelApplicantList items = mitem.DataContext as ModelApplicantList;
 
             if (mitem.Tag.ToString() == "delete")
             {
@@ -317,7 +320,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             Button btn = sender as Button;
             if(selectedTabCode == 1)
             {
-                SubJelolt items = btn.DataContext as SubJelolt;
+                ModelApplicantListbox items = btn.DataContext as ModelApplicantListbox;
                 pControl.addJeloltInsert(items.id, Session.ProjektID);
                 projekt_kapcsolodo_list.ItemsSource = pControl.Data_JeloltForCheckbox(Ember_Search_tbx.Text);
                 kapcs_jeloltek_listBox.ItemsSource = pControl.Data_JeloltKapcs();
@@ -412,7 +415,7 @@ namespace HR_Portal.View.Usercontrol.Panels
         protected void gridMouseDown(object sender, MouseButtonEventArgs e)
         {
             Grid grid = sender as Grid;
-            JeloltListItems item = grid.DataContext as JeloltListItems;
+            ModelApplicantList item = grid.DataContext as ModelApplicantList;
 
             if (item.Checked == false)
             {

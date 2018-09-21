@@ -18,9 +18,9 @@ namespace HR_Portal.Source
             public string password { get; set; }
         }
 
-        public class file_url
-        {
-            public string url { get; set; }
-        }
+        //public class file_url
+        //{
+        //    public string url { get; set; }
+        //}
     }
 }
