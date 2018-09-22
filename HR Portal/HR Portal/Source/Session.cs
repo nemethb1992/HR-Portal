@@ -9,8 +9,8 @@ namespace HR_Portal.Source
         private static List<UserSessionData> UserDatas;
         public static List<UserSessionData> UserData { get { return UserDatas; } set { UserDatas = value; } }
 
-        private static List<Projekt_Search_Memory> ProjectSearchMemory;
-        public static List<Projekt_Search_Memory> projectSearchMemory { get { return ProjectSearchMemory; } set { ProjectSearchMemory = value; } }
+        private static int ProjectSearchMemorys;
+        public static int ProjectStatusz { get { return ProjectSearchMemorys; } set { ProjectSearchMemorys = value; } }
 
         private static string ActiveDirectoryDomains;
         public static string ActiveDirectoryDomain { get { return ActiveDirectoryDomains; } set { ActiveDirectoryDomains = value; } }

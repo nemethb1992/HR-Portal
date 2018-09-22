@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using MySql.Data.MySqlClient;
-using static HR_Portal.Source.ModelEmail;
 using static HR_Portal.Source.ModelSzakmai;
 using HR_Portal.Source.Model;
 using System.Data;
 using HR_Portal.Source.Model.Applicant;
+using HR_Portal.Source.Model.Other;
 
 namespace HR_Portal.Source
 {
@@ -171,30 +171,6 @@ namespace HR_Portal.Source
         //MySQL  Specific 
 
 
-
-
-
-        public List<SubProjekt> Sub_Projekt_MySql_listQuery(string query)
-        {
-            List<SubProjekt> items = new List<SubProjekt>();
-            if (open() == true)
-            {
-                cmd = new MySqlCommand(query, conn);
-                sdr = cmd.ExecuteReader();
-                int j = 0;
-                while (sdr.Read())
-                {
-                    items.Add(new SubProjekt
-                    {
-                        id = Convert.ToInt32(sdr["id"]),
-                        megnevezes_projekt = sdr["megnevezes_projekt"].ToString()
-                    });
-                    j++;
-                }
-                sdr.Close();
-            }
-            return items;
-        }
 
 
 
@@ -474,62 +450,6 @@ namespace HR_Portal.Source
             return items;
         }
 
-        public List<interju_struct> Interju_MySql_listQuery(string query)
-        {
-            List<interju_struct> items = new List<interju_struct>();
-            if (open() == true)
-            {
-                cmd = new MySqlCommand(query, conn);
-                sdr = cmd.ExecuteReader();
-                while (sdr.Read())
-                {
-                    items.Add(new interju_struct
-                    {
-                        id = Convert.ToInt32(sdr["id"]),
-                        projekt_megnevezes = sdr["megnevezes_projekt"].ToString(),
-                        jelolt_megnevezes = sdr["nev"].ToString(),
-                        jelolt_email = sdr["email"].ToString(),
-                        projekt_id = Convert.ToInt32(sdr["projekt_id"]),
-                        jelolt_id = Convert.ToInt32(sdr["jelolt_id"]),
-                        hr_id = Convert.ToInt32(sdr["hr_id"]),
-                        felvitel_datum = sdr["felvitel_datum"].ToString(),
-                        interju_datum = sdr["interju_datum"].ToString(),
-                        interju_cim = sdr["interju_cim"].ToString(),
-                        interju_leiras = sdr["interju_leiras"].ToString(),
-                        helyszin = sdr["helyszin"].ToString(),
-                        idopont = sdr["idopont"].ToString()
-                    });
-                }
-                sdr.Close();
-            }
-            return items;
-        }
-
-        public List<interju_struct> getSzakmaiInterview(string query)
-        {
-            List<interju_struct> items = new List<interju_struct>();
-            if (open() == true)
-            {
-                cmd = new MySqlCommand(query, conn);
-                sdr = cmd.ExecuteReader();
-                while (sdr.Read())
-                {
-                    items.Add(new interju_struct
-                    {
-                        id = Convert.ToInt32(sdr["id"]),
-                        projekt_megnevezes = sdr["megnevezes_projekt"].ToString(),
-                        jelolt_megnevezes = sdr["nev"].ToString(),
-                        projekt_id = Convert.ToInt32(sdr["projekt_id"]),
-                        jelolt_id = Convert.ToInt32(sdr["jelolt_id"]),
-                        interju_datum = sdr["interju_datum"].ToString(),
-                        interju_cim = sdr["interju_cim"].ToString(),
-                        helyszin = sdr["helyszin"].ToString()
-                    });
-                }
-                sdr.Close();
-            }
-            return items;
-        }
 
         public List<ModelApplicantSearch> Jelolt_Search_MySql_listQuery(string query)
         {
@@ -659,32 +579,6 @@ namespace HR_Portal.Source
             return items;
         }
 
-        public List<MailServer_m> ConnectionSMTP_DataSource(string query)
-        {
-            List<MailServer_m> items = new List<MailServer_m>();
-            if (open() == true)
-            {
-                cmd = new MySqlCommand(query, conn);
-                sdr = cmd.ExecuteReader();
-                while (sdr.Read())
-                {
-                    bool ssl = true;
-                    if (Convert.ToInt32(sdr["ssl"]) == 0)
-                    {
-                        ssl = false;
-                    }
-                    items.Add(new MailServer_m
-                    {
-                        type = sdr["type"].ToString(),
-                        mailserver = sdr["mailserver"].ToString(),
-                        port = Convert.ToInt32(sdr["port"]),
-                        ssl = ssl,
-                        login = sdr["login"].ToString()
-                    });
-                }
-                sdr.Close();
-            }
-            return items;
-        }
+
     }
 }

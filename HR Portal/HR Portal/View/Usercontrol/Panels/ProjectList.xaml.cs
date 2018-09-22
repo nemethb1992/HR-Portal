@@ -97,10 +97,7 @@ namespace HR_Portal.View.Usercontrol.Panels
 
         protected void projectListLoader()
         {
-            List<Projekt_Search_Memory> list = new List<Projekt_Search_Memory>();
-            
-            list.Add(new Projekt_Search_Memory() { statusz = 1 });
-            Session.projectSearchMemory = list;
+            Session.ProjectStatusz = 1;
             buttonColorChange();
 
             try{
@@ -117,7 +114,7 @@ namespace HR_Portal.View.Usercontrol.Panels
         protected void buttonColorChange()
         {
             var bc = new BrushConverter();
-            if (Session.projectSearchMemory[0].statusz == 1)
+            if (Session.ProjectStatusz == 1)
             {
                 projekt_aktiv_btn.Background = (Brush)bc.ConvertFrom("#bfbfbf");
                 projekt_aktiv_btn.BorderBrush = (Brush)bc.ConvertFrom("#bfbfbf");

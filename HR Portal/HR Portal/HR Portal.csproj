@@ -64,7 +64,7 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>icon</ApplicationIcon>
+    <ApplicationIcon>Public\icon</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="ActiveUp.Net.Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=6cceae6a4844c51b, processorArchitecture=MSIL">
@@ -146,11 +146,13 @@
     <Compile Include="Source\Model\Applicant\ModelApplicantListbox.cs" />
     <Compile Include="Source\Model\Applicant\ModelApplicantSearch.cs" />
     <Compile Include="Source\Model\Applicant\ModelFullApplicant.cs" />
-    <Compile Include="Source\Model\ListSources\ModelListSource.cs" />
+    <Compile Include="Source\Model\Other\ModelEmail.cs" />
+    <Compile Include="Source\Model\Other\ModelListSource.cs" />
     <Compile Include="Source\Model\ModelOther.cs" />
     <Compile Include="Source\Model\ModelUserData.cs" />
     <Compile Include="Source\Model\Project\ModelFullProject.cs" />
     <Compile Include="Source\Model\Project\ModelInsertProject.cs" />
+    <Compile Include="Source\Model\Project\ModelInterview.cs" />
     <Compile Include="Source\Model\Project\ModelProjectList.cs" />
     <Compile Include="Source\Model\Project\ModelSmallProject.cs" />
     <Compile Include="Source\MySql.cs" />
@@ -314,8 +316,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Source\Model\ModelEmail.cs" />
-    <Compile Include="Source\Model\ModelProject.cs" />
     <Compile Include="Source\Model\ModelProjectApplicant.cs" />
     <Compile Include="Source\Model\ModelSzakmai.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -336,7 +336,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="HR Portal_TemporaryKey.pfx" />
-    <None Include="icon" />
+    <None Include="Public\icon" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

@@ -54,7 +54,7 @@ namespace HR_Portal.View.Usercontrol.Panels
 
         protected void interviewLoader()
         {
-            List<interju_struct> list = paControl.Data_InterviewById();
+            List<ModelInterview> list = paControl.Data_InterviewById();
             List<ModelFullProject> li = VMProject.getFullProject();
             List<ModelKompetenciak> li_k = paControl.Data_Kompetencia();
 
@@ -163,7 +163,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             EmailTemplate et = new EmailTemplate();
             ControlEmail email = new ControlEmail();
             List<ModelErtesitendok> szemelyek = paControl.Data_InterjuErtesitendokKapcsolt();
-            List<interju_struct> interju = paControl.Data_InterviewById();
+            List<ModelInterview> interju = paControl.Data_InterviewById();
             List<String> resztvevok = new List<string>();
 
             foreach (var item in szemelyek)

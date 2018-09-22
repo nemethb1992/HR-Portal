@@ -9,20 +9,19 @@ namespace HR_Portal.Source.Model.Applicant
 {
     class ModelApplicantList
     {
-            public int id { get; set; }
-            public string nev { get; set; }
-            public string munkakor { get; set; }
-            public string munkakor2 { get; set; }
-            public string munkakor3 { get; set; }
-            public int szuldatum { get; set; }
-            public string email { get; set; }
-            public int interjuk_db { get; set; }
-            public int allapota { get; set; }
-            public string kolcsonzott { get; set; }
-            public string allapot_megnevezes { get; set; }
-            public string reg_datum { get; set; }
-            public bool Checked { get; set; }
-
+        public int id { get; set; }
+        public string nev { get; set; }
+        public string munkakor { get; set; }
+        public string munkakor2 { get; set; }
+        public string munkakor3 { get; set; }
+        public int szuldatum { get; set; }
+        public string email { get; set; }
+        public int interjuk_db { get; set; }
+        public int allapota { get; set; }
+        public string kolcsonzott { get; set; }
+        public string allapot_megnevezes { get; set; }
+        public string reg_datum { get; set; }
+        public bool Checked { get; set; }
 
         public static List<ModelApplicantList> getModelApplicantList(string command)
         {
@@ -32,6 +31,7 @@ namespace HR_Portal.Source.Model.Applicant
             {
                 MySql.cmd = new MySqlCommand(command, MySql.conn);
                 MySql.sdr = MySql.cmd.ExecuteReader();
+
                 while (MySql.sdr.Read())
                 {
                     string allapot_megnev = "Beérkezett", kolcsonzott = "";
@@ -62,6 +62,7 @@ namespace HR_Portal.Source.Model.Applicant
 
                     if (Convert.ToInt32(MySql.sdr["kolcsonzott"]) == 1)
                         kolcsonzott = "Kölcsönzött";
+
                     list.Add(new ModelApplicantList
                     {
                         id = Convert.ToInt32(MySql.sdr["id"]),

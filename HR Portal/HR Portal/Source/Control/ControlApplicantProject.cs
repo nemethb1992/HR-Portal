@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using HR_Portal.Source;
 using HR_Portal.Source.Model;
+using HR_Portal.Source.Model.Project;
 
 namespace HR_Portal.Control
 {
@@ -22,7 +23,7 @@ namespace HR_Portal.Control
             Source.MySql.close();
         }
         
-        public List<interju_struct> Data_Interview() //javított
+        public List<ModelInterview> Data_Interview() //javított
         {
             string command = "SELECT interjuk_kapcs.id,megnevezes_projekt,jeloltek.nev,interjuk_kapcs.projekt_id,interjuk_kapcs.jelolt_id,jeloltek.email,interjuk_kapcs.hr_id,felvitel_datum,interju_datum,interju_cim,interju_leiras,helyszin ,idopont FROM interjuk_kapcs" +
                 " INNER JOIN projektek ON interjuk_kapcs.projekt_id = projektek.id" +
@@ -30,19 +31,19 @@ namespace HR_Portal.Control
                 " WHERE jelolt_id = " + Session.ApplicantID+"" +
                 " AND projekt_id="+ Session.ProjektID+"" +
                 " ORDER BY felvitel_datum";
-            List<interju_struct> list = mySql.Interju_MySql_listQuery(command);
+            List<ModelInterview> list = ModelInterview.getModelInterview(command);
             Source.MySql.close();
             return list;
         }
 
-        public List<interju_struct> Data_InterviewById() //javított
+        public List<ModelInterview> Data_InterviewById() //javított
         {
             string command = "SELECT interjuk_kapcs.id,megnevezes_projekt,jeloltek.nev,interjuk_kapcs.projekt_id,interjuk_kapcs.jelolt_id,jeloltek.email,interjuk_kapcs.hr_id,felvitel_datum,interju_datum,interju_cim,interju_leiras,helyszin ,idopont FROM interjuk_kapcs" +
                 " INNER JOIN projektek ON interjuk_kapcs.projekt_id = projektek.id" +
                 " INNER JOIN jeloltek ON interjuk_kapcs.jelolt_id = jeloltek.id" +
                 " WHERE interjuk_kapcs.id = " + Session.InterViewID + "" +
                 " ORDER BY felvitel_datum";
-            List<interju_struct> list = mySql.Interju_MySql_listQuery(command);
+            List<ModelInterview> list = ModelInterview.getModelInterview(command);
             Source.MySql.close();
             return list;
         }

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using static HR_Portal.Source.ModelEmail;
 using HR_Portal.Source.Model;
 
 namespace HR_Portal.Control

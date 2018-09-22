@@ -1,5 +1,6 @@
 ﻿using HR_Portal.Control;
 using HR_Portal.Source;
+using HR_Portal.Source.Model.Project;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -44,7 +45,7 @@ namespace HR_Portal.View.Usercontrol.Panels.SzakmaiLayouts
         protected void Szakmai_interju_open_Click(object sender, RoutedEventArgs e)
         {
             Button button = sender as Button;
-            interju_struct items = button.DataContext as interju_struct;
+            ModelInterview items = button.DataContext as ModelInterview;
 
             Session.InterViewID = items.id;
             Session.ProjektID = items.projekt_id;

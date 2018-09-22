@@ -235,9 +235,9 @@ namespace HR_Portal.Control
 
         public void statusChange(int stat) // javított
         {
-            if(Session.projectSearchMemory != null)
-                Session.projectSearchMemory.Clear();
-            Session.projectSearchMemory.Add(new Projekt_Search_Memory() { statusz = stat });
+            if(Session.ProjectStatusz != null)
+                Session.ProjectStatusz = 0;
+            Session.ProjectStatusz = stat;
         }
 
         public void projectDescriptionUpdate(string type, string content) // javított

@@ -14,22 +14,6 @@ namespace HR_Portal.Source
         public string datum { get; set; }
     }
 
-    public class interju_struct
-    {
-        public int id { get; set; }
-        public string projekt_megnevezes { get; set; }
-        public string jelolt_megnevezes { get; set; }
-        public string jelolt_email { get; set; }
-        public int projekt_id { get; set; }
-        public int jelolt_id { get; set; }
-        public int hr_id { get; set; }
-        public string felvitel_datum { get; set; }
-        public string interju_datum { get; set; }
-        public string interju_cim { get; set; }
-        public string interju_leiras { get; set; }
-        public string helyszin { get; set; }
-        public string idopont { get; set; }
-    }
 
     public class kompetencia_jelolt_kapcs_struct
     {

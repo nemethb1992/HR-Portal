@@ -246,7 +246,7 @@ namespace HR_Portal.View.Usercontrol.Panels
         protected void navigateToInterviewPanel(object sender, RoutedEventArgs e)
         {
             Button btn = sender as Button;
-            interju_struct items = btn.DataContext as interju_struct;
+            ModelInterview items = btn.DataContext as ModelInterview;
 
             Session.InterViewID = items.id;
             grid.Children.Clear();
@@ -256,7 +256,7 @@ namespace HR_Portal.View.Usercontrol.Panels
         protected void deleteInterview(object sender, RoutedEventArgs e)
         {
             MenuItem menu = sender as MenuItem;
-            interju_struct items = menu.DataContext as interju_struct;
+            ModelInterview items = menu.DataContext as ModelInterview;
 
             paControl.interviewDelete(items.id);
             projectFormLoader();

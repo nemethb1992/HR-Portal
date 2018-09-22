@@ -15,7 +15,7 @@ namespace HR_Portal.Source.ViewModel
             List<ModelProjectList> list = new List<ModelProjectList>();
 
             string command = "SELECT coalesce((SELECT count(jelolt_id) FROM projekt_jelolt_kapcs WHERE projekt_id = projektek.id GROUP BY jeloltek.id),0) as jeloltek_db, coalesce((SELECT count(jelolt_id) FROM interjuk_kapcs WHERE projekt_id = projektek.id),0) as interjuk_db, projektek.id, projektek.publikalt, megnevezes_projekt, megnevezes_munka, fel_datum, statusz FROM projektek LEFT JOIN projekt_jelolt_kapcs ON projektek.id = projekt_jelolt_kapcs.projekt_id LEFT JOIN jeloltek ON jeloltek.id = projekt_jelolt_kapcs.jelolt_id LEFT JOIN munkakor ON munkakor.id = projektek.munkakor LEFT JOIN pc ON pc.id = projektek.pc LEFT JOIN megjegyzesek ON projektek.id = megjegyzesek.projekt_id " +
-            " WHERE projektek.statusz = " + Session.projectSearchMemory[0].statusz;
+            " WHERE projektek.statusz = " + Session.ProjectStatusz;
             if (searchValue[0] != "")
             {
                 command += " AND projektek.megnevezes_projekt LIKE '%" + searchValue[0] + "%' ";

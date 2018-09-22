@@ -1,4 +1,5 @@
 ﻿using HR_Portal.Source;
+using HR_Portal.Source.Model.Project;
 using System.Collections.Generic;
 using static HR_Portal.Source.ModelSzakmai;
 
@@ -16,13 +17,13 @@ namespace HR_Portal.Control
             return list;
         }
 
-        public List<interju_struct> Data_SzakmaiInterview()
+        public List<ModelInterview> Data_SzakmaiInterview()
         {
             string command = "SELECT interjuk_kapcs.id, megnevezes_projekt, interjuk_kapcs.projekt_id, interjuk_kapcs.jelolt_id, jeloltek.nev,interju_datum,interju_cim,helyszin FROM interju_resztvevo_kapcs INNER JOIN interjuk_kapcs ON interju_resztvevo_kapcs.interju_id = interjuk_kapcs.id " +
                 " INNER JOIN projektek ON interjuk_kapcs.projekt_id = projektek.id" +
                 " INNER JOIN jeloltek ON interjuk_kapcs.jelolt_id = jeloltek.id" +
                 " WHERE interju_resztvevo_kapcs.user_id = " + Session.UserData[0].id + " ORDER BY interju_datum";
-            List<interju_struct> list = mySql.getSzakmaiInterview(command);
+            List<ModelInterview> list = ModelInterview.getModelInterview(command);
             Source.MySql.close();
             return list;
         }
