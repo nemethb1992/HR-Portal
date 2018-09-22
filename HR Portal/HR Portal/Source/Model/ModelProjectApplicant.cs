@@ -31,15 +31,6 @@ namespace HR_Portal.Source
         public string idopont { get; set; }
     }
 
-    //public class tamogatas_struct
-    //{
-    //    public int id { get; set; }
-    //    public int hr_id { get; set; }
-    //    public int projekt_id { get; set; }
-    //    public int ertekeles { get; set; }
-    //    public int tamogatja { get; set; }
-    //}
-
     public class kompetencia_jelolt_kapcs_struct
     {
         public int id { get; set; }
@@ -62,14 +53,12 @@ namespace HR_Portal.Source
     
     public class kompetencia_summary_struct
     {
-        
         public int k1_val { get; set; }
         public int k2_val { get; set; }
         public int k3_val { get; set; }
         public int k4_val { get; set; }
         public int k5_val { get; set; }
         public int tamogatom { get; set; }
-
     }
 
     public class kompetencia_tamogatas

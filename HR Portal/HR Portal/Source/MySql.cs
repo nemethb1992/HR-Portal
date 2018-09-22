@@ -5,6 +5,7 @@ using static HR_Portal.Source.ModelEmail;
 using static HR_Portal.Source.ModelSzakmai;
 using HR_Portal.Source.Model;
 using System.Data;
+using HR_Portal.Source.Model.Applicant;
 
 namespace HR_Portal.Source
 {
@@ -50,7 +51,6 @@ namespace HR_Portal.Source
         {
             try
             {
-
                 if (conn.State == ConnectionState.Closed)
                 {
                     conn.Open();
@@ -75,8 +75,6 @@ namespace HR_Portal.Source
                 return false;
             }
         }
-
-        // MySQL entites
 
         public void update(string query)
         {
@@ -144,29 +142,6 @@ namespace HR_Portal.Source
             }
             return dataSource;
         }
-
-        //public object[,] MysqlReaderExecute(string command, string table, int b)
-        //{
-        //    int a = rowCount("SELECT count(id) FROM " + table + "");
-        //    object[,] dataSource = new object[a, b];
-        //    if (this.open() == true)
-        //    {
-
-        //        cmd = new MySqlCommand(command, conn);
-        //        sdr = cmd.ExecuteReader();
-        //        int i, j = 0;
-        //        while (sdr.Read())
-        //        {
-        //            for (i = 0; i < b; i++)
-        //            {
-        //                dataSource[j, i] = sdr[i];
-        //            }
-        //            j++;
-        //        }
-        //        sdr.Close();
-        //    }
-        //    return dataSource;
-        //}
 
         public bool bind(string query)
         {
@@ -320,72 +295,6 @@ namespace HR_Portal.Source
             return items;
         }
 
-
-
-        public List<ModelApplicantListbox> Jelolt_Short_MySql_listQuery(string query)
-        {
-            List<ModelApplicantListbox> items = new List<ModelApplicantListbox>();
-            if (open() == true)
-            {
-                cmd = new MySqlCommand(query, conn);
-                sdr = cmd.ExecuteReader();
-                while (sdr.Read())
-                {
-                    items.Add(new ModelApplicantListbox
-                    {
-                        id = Convert.ToInt32(sdr["id"]),
-                        nev = sdr["nev"].ToString()
-                    });
-                }
-                sdr.Close();
-            }
-            return items;
-        }
-
-        public List<ModelApplicantListbox> getApplicantShort(string query)
-        {
-            List<ModelApplicantListbox> items = new List<ModelApplicantListbox>();
-            if (open() == true)
-            {
-                cmd = new MySqlCommand(query, conn);
-                sdr = cmd.ExecuteReader();
-                while (sdr.Read())
-                {
-
-                    items.Add(new ModelApplicantListbox
-                    {
-                        id = Convert.ToInt32(sdr["id"]),
-                        nev = sdr["nev"].ToString(),
-                    });
-                }
-                sdr.Close();
-            }
-            return items;
-        }
-
-
-        public List<ModelApplicantListbox> JeloltekDatasourceListbox_MySql_listQuery(string query)
-        {
-            List<ModelApplicantListbox> items = new List<ModelApplicantListbox>();
-            if (open() == true)
-            {
-                cmd = new MySqlCommand(query, conn);
-                sdr = cmd.ExecuteReader();
-                while (sdr.Read())
-                {
-                    items.Add(new ModelApplicantListbox
-                    {
-                        id = Convert.ToInt32(sdr["id"]),
-                        nev = sdr["nev"].ToString(),
-                        interjuk_db = Convert.ToInt32(sdr["interjuk_db"]),
-
-                    });
-                }
-                sdr.Close();
-            }
-            return items;
-        }
-
         public List<ModelNyelv> getNyelv(string query)
         {
             List<ModelNyelv> items = new List<ModelNyelv>();
@@ -448,30 +357,6 @@ namespace HR_Portal.Source
             }
             return items;
         }
-
-        //public List<csatolmany_struct> Csatolmany_MySql_listQuery(string query)
-        //{
-        //    List<csatolmany_struct> items = new List<csatolmany_struct>();
-        //    if (this.dbOpen() == true)
-        //    {
-        //        cmd = new MySqlCommand(query, conn);
-        //        sdr = cmd.ExecuteReader();
-        //        while (sdr.Read())
-        //        {
-        //            items.Add(new csatolmany_struct
-        //            {
-        //                id = Convert.ToInt32(sdr["id"]),
-        //                kapcs_id = Convert.ToInt32(sdr["kapcs_id"]),
-        //                tipus = Convert.ToInt32(sdr["tipus"]),
-        //                fajlnev = sdr["fajlnev"].ToString().Split('.')[0],
-        //                kiterjesztes = sdr["fajlnev"].ToString().Split('.')[1],
-        //                kep = "/HRCloud;component/Public/imgs/" + sdr["kiterjesztes"].ToString() + ".png",
-        //            });
-        //        }
-        //        sdr.Close();
-        //    }
-        //    return items;
-        //}
 
         public List<ModelComment> Megjegyzesek_MySql_listQuery(string query)
         {
@@ -710,40 +595,6 @@ namespace HR_Portal.Source
                     {
                         id = Convert.ToInt32(sdr["id"]),
                         kompetencia_megnevezes = sdr["kompetencia_megnevezes"].ToString(),
-                    });
-                }
-                sdr.Close();
-            }
-            return items;
-        }
-
-        public List<kompetencia_jelolt_kapcs_struct> Kompetenciak_jelolt_kapcs_MySql_listQuery(string query)
-        {
-            List<kompetencia_jelolt_kapcs_struct> items = new List<kompetencia_jelolt_kapcs_struct>();
-            if (open() == true)
-            {
-                cmd = new MySqlCommand(query, conn);
-                sdr = cmd.ExecuteReader();
-                while (sdr.Read())
-                {
-                    items.Add(new kompetencia_jelolt_kapcs_struct
-                    {
-                        id = Convert.ToInt32(sdr["id"]),
-                        interju_id = Convert.ToInt32(sdr["interju_id"]),
-                        projekt_id = Convert.ToInt32(sdr["projekt_id"]),
-                        jelolt_id = Convert.ToInt32(sdr["jelolt_id"]),
-                        hr_id = Convert.ToInt32(sdr["hr_id"]),
-                        k1_id = Convert.ToInt32(sdr["k1_id"]),
-                        k1_val = Convert.ToInt32(sdr["k1_val"]),
-                        k2_id = Convert.ToInt32(sdr["k2_id"]),
-                        k2_val = Convert.ToInt32(sdr["k2_val"]),
-                        k3_id = Convert.ToInt32(sdr["k3_id"]),
-                        k3_val = Convert.ToInt32(sdr["k3_val"]),
-                        k4_id = Convert.ToInt32(sdr["k4_id"]),
-                        k4_val = Convert.ToInt32(sdr["k4_val"]),
-                        k5_id = Convert.ToInt32(sdr["k5_id"]),
-                        k5_val = Convert.ToInt32(sdr["k5_val"]),
-                        tamogatom = Convert.ToInt32(sdr["tamogatom"]),
                     });
                 }
                 sdr.Close();

@@ -92,7 +92,7 @@ namespace HR_Portal.Control
         public List<ModelApplicantListbox> Data_JeloltForCheckbox(string nevsrc)
         {
             string command = "SELECT jeloltek.id, nev FROM jeloltek LEFT JOIN projekt_jelolt_kapcs ON projekt_jelolt_kapcs.jelolt_id = jeloltek.id WHERE projekt_jelolt_kapcs.projekt_id != "+ Session.ProjektID +" OR projekt_jelolt_kapcs.projekt_id IS NULL GROUP BY jeloltek.id";
-            List<ModelApplicantListbox> list = mySql.getApplicantShort(command);
+            List<ModelApplicantListbox> list = ModelApplicantListbox.getModelApplicantListboxShort(command);
             Source.MySql.close();
             return list;
         }

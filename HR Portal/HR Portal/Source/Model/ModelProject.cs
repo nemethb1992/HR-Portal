@@ -18,7 +18,4 @@ namespace HR_Portal.Source
         public int id { get; set; }
         public string megnevezes_projekt { get; set; }
     }
-
-
-    
 }

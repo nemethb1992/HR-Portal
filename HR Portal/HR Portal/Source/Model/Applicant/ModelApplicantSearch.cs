@@ -1,13 +1,10 @@
-﻿using HR_Portal.Source;
-using HR_Portal.Source.Model.Applicant;
-using MySql.Data.MySqlClient;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HR_Portal.Source
+namespace HR_Portal.Source.Model.Applicant
 {
     public class ModelApplicantSearch
     {
@@ -21,12 +18,5 @@ namespace HR_Portal.Source
         public int neme { get; set; }
         public string munkakor { get; set; }
         public string vegztettseg { get; set; }
-    }
-
-    public class ModelApplicantListbox
-    {
-        public int id { get; set; }
-        public string nev { get; set; }
-        public int interjuk_db { get; set; }
     }
 }

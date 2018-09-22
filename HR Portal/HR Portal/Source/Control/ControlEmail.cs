@@ -109,7 +109,7 @@ namespace HR_Portal.Control
 
                 SmtpServer.SendMailAsync(mail);
             }
-            catch (Exception ex)
+            catch
             {
                 MessageBox.Show("Üzenet elküldése sikertelen!");
             }

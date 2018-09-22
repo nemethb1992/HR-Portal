@@ -143,7 +143,10 @@
     </Compile>
     <Compile Include="Public\templates\EmailTemplate.cs" />
     <Compile Include="Source\Model\Applicant\ModelApplicantList.cs" />
+    <Compile Include="Source\Model\Applicant\ModelApplicantListbox.cs" />
+    <Compile Include="Source\Model\Applicant\ModelApplicantSearch.cs" />
     <Compile Include="Source\Model\Applicant\ModelFullApplicant.cs" />
+    <Compile Include="Source\Model\ListSources\ModelListSource.cs" />
     <Compile Include="Source\Model\ModelOther.cs" />
     <Compile Include="Source\Model\ModelUserData.cs" />
     <Compile Include="Source\Model\Project\ModelFullProject.cs" />
@@ -311,7 +314,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Source\Model\ModelApplicant.cs" />
     <Compile Include="Source\Model\ModelEmail.cs" />
     <Compile Include="Source\Model\ModelProject.cs" />
     <Compile Include="Source\Model\ModelProjectApplicant.cs" />
@@ -356,9 +358,7 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Source\Model\Content\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="Public\imgs\add.png" />
     <Resource Include="Public\imgs\appointment.png" />
