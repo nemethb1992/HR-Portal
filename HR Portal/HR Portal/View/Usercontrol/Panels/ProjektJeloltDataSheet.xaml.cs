@@ -40,7 +40,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             List<ModelFullApplicant> a_li = VMApplicant.getFullApplicant();
             List<ModelFullProject> p_li = VMProject.getFullProject();
             List<ModelKompetenciak> li_k = paControl.Data_Kompetencia();
-            List<kompetencia_summary_struct> li_kvalue = paControl.Data_KompetenciaJeloltKapcs();
+            List<ModelKompetenciaSummary> li_kvalue = paControl.Data_KompetenciaJeloltKapcs();
 
             projekt_jelolt_title_tbl.Text = p_li[0].megnevezes_projekt + " - " + a_li[0].nev;
             jelolt_telefon.Text = "( " + a_li[0].telefon + " )";
@@ -270,7 +270,7 @@ namespace HR_Portal.View.Usercontrol.Panels
 
         protected void jeloltTamogatasa()
         {
-            List<kompetencia_tamogatas> list = new List<kompetencia_tamogatas>();
+            List<ModelTamogatas> list = new List<ModelTamogatas>();
 
             list = paControl.Data_KompetenciaTamogatas();
             int igen = 0, ossz = 0 ;

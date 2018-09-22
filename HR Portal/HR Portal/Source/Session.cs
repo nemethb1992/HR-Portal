@@ -6,8 +6,8 @@ namespace HR_Portal.Source
 {
     class Session
     {
-        private static List<UserSessionData> UserDatas;
-        public static List<UserSessionData> UserData { get { return UserDatas; } set { UserDatas = value; } }
+        private static List<ModelUserData> UserDatas;
+        public static List<ModelUserData> UserData { get { return UserDatas; } set { UserDatas = value; } }
 
         private static int ProjectSearchMemorys;
         public static int ProjectStatusz { get { return ProjectSearchMemorys; } set { ProjectSearchMemorys = value; } }

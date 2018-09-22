@@ -82,7 +82,7 @@ namespace HR_Portal.View.Usercontrol
                 if (lcontrol.mySqlUserValidation(Luser_tbx.Text))
                 {
                 Session.ActiveDirectoryDomain = Luser_tbx.Text;
-                    VMSession vMSession = new VMSession();
+                    Session.UserData = VMUserData.getUserSession();
                     Main mw = new Main();
                     var window = Window.GetWindow(this);
                     usernameRemember();

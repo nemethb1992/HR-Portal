@@ -6,14 +6,11 @@ using System.Threading.Tasks;
 
 namespace HR_Portal.Source
 {
-    public class ModelSzakmai
-    {
-        public class Projekt_Bevont_struct
+        public class ModelSzakmaiBevont
         {
             public int id { get; set; }
             public string megnevezes_projekt { get; set; }
             public string megnevezes_munka { get; set; }
             public int jeloltek_db { get; set; }
         }
-    }
 }

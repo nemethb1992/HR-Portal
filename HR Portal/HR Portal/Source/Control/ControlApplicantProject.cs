@@ -70,18 +70,18 @@ namespace HR_Portal.Control
             return list;
         }
 
-        public List<kompetencia_summary_struct> Data_KompetenciaJeloltKapcs() // javítva
+        public List<ModelKompetenciaSummary> Data_KompetenciaJeloltKapcs() // javítva
         {
             string command = "SELECT coalesce(AVG(k1_val),0) as k1_val,coalesce(AVG(k2_val),0) as k2_val,coalesce(AVG(k3_val),0) as k3_val,coalesce(AVG(k4_val),0) as k4_val,coalesce(AVG(k5_val),0) as k5_val, tamogatom FROM kompetencia_jelolt_kapcs WHERE jelolt_id = " + Session.ApplicantID +" AND projekt_id = "+ Session.ProjektID+"";
-            List < kompetencia_summary_struct > list = mySql.Kompetencia_summary_MySql_listQuery(command);
+            List < ModelKompetenciaSummary > list = ModelKompetenciaSummary.getModelKompetenciaSummary(command);
             Source.MySql.close();
             return list;
         }
         
-        public List<kompetencia_tamogatas> Data_KompetenciaTamogatas() // javítva
+        public List<ModelTamogatas> Data_KompetenciaTamogatas() // javítva
         {
             string command = "SELECT tamogatom FROM kompetencia_jelolt_kapcs WHERE jelolt_id = " + Session.ApplicantID + " AND projekt_id = " + Session.ProjektID + "";
-            List<kompetencia_tamogatas> list = mySql.Kompetencia_tamogatas_MySql_listQuery(command);
+            List<ModelTamogatas> list = ModelTamogatas.getModelTamogatas(command);
             Source.MySql.close();
             return list;
         }

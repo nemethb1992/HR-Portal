@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using MySql.Data.MySqlClient;
-using static HR_Portal.Source.ModelSzakmai;
 using HR_Portal.Source.Model;
 using System.Data;
 using HR_Portal.Source.Model.Applicant;
@@ -428,27 +427,7 @@ namespace HR_Portal.Source
             return items;
         }
 
-        public List<projekt_jelolt_kapcs> getPojectApplicantRelation(string query)
-        {
-            List<projekt_jelolt_kapcs> items = new List<projekt_jelolt_kapcs>();
-            if (open() == true)
-            {
-                cmd = new MySqlCommand(query, conn);
-                sdr = cmd.ExecuteReader();
-                while (sdr.Read())
-                {
-                    items.Add(new projekt_jelolt_kapcs
-                    {
-                        projekt_id = Convert.ToInt32(sdr["projekt_id"]),
-                        jelolt_id = Convert.ToInt32(sdr["jelolt_id"]),
-                        hr_id = Convert.ToInt32(sdr["hr_id"]),
-                        datum = sdr["datum"].ToString()
-                    });
-                }
-                sdr.Close();
-            }
-            return items;
-        }
+
 
 
         public List<ModelApplicantSearch> Jelolt_Search_MySql_listQuery(string query)
@@ -479,16 +458,16 @@ namespace HR_Portal.Source
             return items;
         }
 
-        public List<Projekt_Bevont_struct> getSzakmaiProject(string query)
+        public List<ModelSzakmaiBevont> getSzakmaiProject(string query)
         {
-            List<Projekt_Bevont_struct> items = new List<Projekt_Bevont_struct>();
+            List<ModelSzakmaiBevont> items = new List<ModelSzakmaiBevont>();
             if (open() == true)
             {
                 cmd = new MySqlCommand(query, conn);
                 sdr = cmd.ExecuteReader();
                 while (sdr.Read())
                 {
-                    items.Add(new Projekt_Bevont_struct
+                    items.Add(new ModelSzakmaiBevont
                     {
                         id = Convert.ToInt32(sdr["id"]),
                         megnevezes_projekt = sdr["megnevezes_projekt"].ToString(),
@@ -522,62 +501,8 @@ namespace HR_Portal.Source
             return items;
         }
 
-        public List<kompetencia_summary_struct> Kompetencia_summary_MySql_listQuery(string query)
-        {
-            List<kompetencia_summary_struct> items = new List<kompetencia_summary_struct>();
-            if (open() == true)
-            {
-                try
-                {
-                    cmd = new MySqlCommand(query, conn);
-                    sdr = cmd.ExecuteReader();
-                    while (sdr.Read())
-                    {
-                        items.Add(new kompetencia_summary_struct
-                        {
-                            k1_val = Convert.ToInt32(sdr["k1_val"]),
-                            k2_val = Convert.ToInt32(sdr["k2_val"]),
-                            k3_val = Convert.ToInt32(sdr["k3_val"]),
-                            k4_val = Convert.ToInt32(sdr["k4_val"]),
-                            k5_val = Convert.ToInt32(sdr["k5_val"]),
-                            tamogatom = Convert.ToInt32(sdr["tamogatom"]),
-                        });
-                    }
-                }
-                catch (Exception)
-                {
-                }
 
-                sdr.Close();
-            }
-            return items;
-        }
 
-        public List<kompetencia_tamogatas> Kompetencia_tamogatas_MySql_listQuery(string query)
-        {
-            List<kompetencia_tamogatas> items = new List<kompetencia_tamogatas>();
-            if (open() == true)
-            {
-                try
-                {
-                    cmd = new MySqlCommand(query, conn);
-                    sdr = cmd.ExecuteReader();
-                    while (sdr.Read())
-                    {
-                        items.Add(new kompetencia_tamogatas
-                        {
-                            tamogatom = Convert.ToInt32(sdr["tamogatom"]),
-                        });
-                    }
-                }
-                catch (Exception)
-                {
-                }
-
-                sdr.Close();
-            }
-            return items;
-        }
 
 
     }

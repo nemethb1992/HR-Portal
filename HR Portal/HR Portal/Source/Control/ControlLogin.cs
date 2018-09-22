@@ -96,17 +96,17 @@ namespace HR_Portal.Control
         }
 
         //UserSessionData   általános
-        public List<UserSessionData> Data_UserSession(string username)  //javítva használja: login
+        public List<ModelUserData> Data_UserSession(string username)  //javítva használja: login
         {
             MySqlDataReader sdr;
-            List<UserSessionData> list = new List<UserSessionData>();
+            List<ModelUserData> list = new List<ModelUserData>();
             if (Source.MySql.open() == true)
             {
                 Source.MySql.cmd = new MySqlCommand("SELECT * FROM users WHERE username='" + username + "'", Source.MySql.conn);
                 sdr = Source.MySql.cmd.ExecuteReader();
                 while (sdr.Read())
                 {
-                    list.Add(new UserSessionData
+                    list.Add(new ModelUserData
                     {
                         id = Convert.ToInt32(sdr["id"]),
                         username = sdr["username"].ToString(),

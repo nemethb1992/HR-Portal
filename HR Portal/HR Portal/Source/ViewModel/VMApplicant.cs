@@ -10,7 +10,7 @@ namespace HR_Portal.Source.ViewModel
 {
     class VMApplicant
     {
-        public static List<ModelApplicantList> getApplicantList(List<string> searchValue) //javított
+        public static List<ModelApplicantList> getApplicantList(List<string> searchValue = null)
         {
             string command = "SELECT " +
                 "coalesce((SELECT count(projekt_id) FROM interjuk_kapcs WHERE jelolt_id = jeloltek.id GROUP BY jelolt_id),0) as interjuk_db, " +
