@@ -36,7 +36,7 @@ namespace HR_Portal.Control
         public List<ModelNyelv> Data_Nyelv()
         {
             string command = "SELECT * FROM nyelv";
-            List<ModelNyelv> list = mySql.getNyelv(command);
+            List<ModelNyelv> list = ModelNyelv.getModelNyelv(command);
             Source.MySql.close();
             return list;
         }

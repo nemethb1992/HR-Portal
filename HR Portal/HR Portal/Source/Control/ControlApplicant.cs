@@ -48,7 +48,7 @@ namespace HR_Portal.Control
         public List<ModelNyelv> Data_Nyelv() //javított
         {
             string command = "SELECT * FROM nyelv";
-            List<ModelNyelv> list = mySql.getNyelv(command);
+            List<ModelNyelv> list = ModelNyelv.getModelNyelv(command);
             Source.MySql.close();
             return list;
         }
@@ -56,7 +56,7 @@ namespace HR_Portal.Control
         public List<ModelErtesulesek> Data_Ertesulesek() //javított
         {
             string command = "SELECT * FROM ertesulesek";
-            List<ModelErtesulesek> list = mySql.Ertesulesek_MySql_listQuery(command);
+            List<ModelErtesulesek> list = ModelErtesulesek.getModelErtesulesek(command);
             Source.MySql.close();
             return list;
         }

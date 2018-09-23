@@ -173,25 +173,7 @@ namespace HR_Portal.Source
 
 
 
-        public List<ModelErtesulesek> Ertesulesek_MySql_listQuery(string query)
-        {
-            List<ModelErtesulesek> items = new List<ModelErtesulesek>();
-            if (open() == true)
-            {
-                cmd = new MySqlCommand(query, conn);
-                sdr = cmd.ExecuteReader();
-                while (sdr.Read())
-                {
-                    items.Add(new ModelErtesulesek
-                    {
-                        id = Convert.ToInt32(sdr["id"]),
-                        ertesules_megnevezes = sdr["ertesules_megnevezes"].ToString(),
-                    });
-                }
-                sdr.Close();
-            }
-            return items;
-        }
+
 
         public string getRootUrl(string query)
         {
@@ -270,26 +252,7 @@ namespace HR_Portal.Source
             return items;
         }
 
-        public List<ModelNyelv> getNyelv(string query)
-        {
-            List<ModelNyelv> items = new List<ModelNyelv>();
-            if (open() == true)
-            {
-                cmd = new MySqlCommand(query, conn);
-                sdr = cmd.ExecuteReader();
-                while (sdr.Read())
-                {
-                    items.Add(new ModelNyelv
-                    {
-                        id = Convert.ToInt32(sdr["id"]),
-                        nyelv = sdr["megnevezes_nyelv"].ToString(),
 
-                    });
-                }
-                sdr.Close();
-            }
-            return items;
-        }
 
         public List<ModelMunkakor> getMunkakorok(string query)
         {

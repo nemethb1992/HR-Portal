@@ -1,17 +1,61 @@
 ﻿
+using MySql.Data.MySqlClient;
+using System;
+using System.Collections.Generic;
+
 namespace HR_Portal.Source.Model
 {
-
     public class ModelNyelv
     {
         public int id { get; set; }
         public string nyelv { get; set; }
+
+        public static List<ModelNyelv> getModelNyelv(string query)
+        {
+            List<ModelNyelv> items = new List<ModelNyelv>();
+            if (MySql.open() == true)
+            {
+                MySql.cmd = new MySqlCommand(query, MySql.conn);
+                MySql.sdr = MySql.cmd.ExecuteReader();
+                while (MySql.sdr.Read())
+                {
+                    items.Add(new ModelNyelv
+                    {
+                        id = Convert.ToInt32(MySql.sdr["id"]),
+                        nyelv = MySql.sdr["megnevezes_nyelv"].ToString(),
+
+                    });
+                }
+                MySql.sdr.Close();
+            }
+            return items;
+        }
     }
 
     public class ModelErtesulesek
     {
         public int id { get; set; }
         public string ertesules_megnevezes { get; set; }
+
+        public static List<ModelErtesulesek> getModelErtesulesek(string command)
+        {
+            List<ModelErtesulesek> list = new List<ModelErtesulesek>();
+            if (MySql.open() == true)
+            {
+                MySql.cmd = new MySqlCommand(command, MySql.conn);
+                MySql.sdr = MySql.cmd.ExecuteReader();
+                while (MySql.sdr.Read())
+                {
+                    list.Add(new ModelErtesulesek
+                    {
+                        id = Convert.ToInt32(MySql.sdr["id"]),
+                        ertesules_megnevezes = MySql.sdr["ertesules_megnevezes"].ToString(),
+                    });
+                }
+                MySql.sdr.Close();
+            }
+            return list;
+        }
     }
 
     public class ModelNem
