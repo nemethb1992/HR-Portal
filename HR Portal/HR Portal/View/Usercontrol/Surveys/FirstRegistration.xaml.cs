@@ -46,7 +46,7 @@ namespace HR_Portal.View.Usercontrol.Surveys
 
             if (teljesnev.Text.Length > 0 && email.Text.Length > 0 && tartomanyi.Text.Length > 0 && tartomanyi_pass.Password.Length > 0)
             {
-                if(l_control.ActiveDirectoryValidation(tartomanyi.Text,tartomanyi_pass.Password))
+                if(ActiveDirecotry.Bind(tartomanyi.Text,tartomanyi_pass.Password))
                 {
                     ComboBox katcbx = kategoria_cbx as ComboBox;
                     Kategoria_struct kategoria_items = katcbx.SelectedItem as Kategoria_struct;

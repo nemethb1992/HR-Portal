@@ -16,7 +16,7 @@ namespace HR_Portal.Control
         public List<ModelMunkakor> Data_Munkakor() //javított
         {
             string command = "SELECT * FROM munkakor";
-            List<ModelMunkakor> list = mySql.getMunkakorok(command);
+            List<ModelMunkakor> list = ModelMunkakor.getModelMunkakor(command);
             Source.MySql.close();
             return list;
         }
@@ -24,7 +24,7 @@ namespace HR_Portal.Control
         public List<ModelStatusz> Data_Statusz() //javított
         {
             string command = "SELECT * FROM statusz";
-            List<ModelStatusz> list = mySql.Statusz_MySql_listQuery(command);
+            List<ModelStatusz> list = ModelStatusz.getModelStatusz(command);
             Source.MySql.close();
             return list;
         }
@@ -32,7 +32,7 @@ namespace HR_Portal.Control
         public List<ModelPc> Data_Pc() //javított
         {
             string command = "SELECT * FROM pc";
-            List<ModelPc> list = mySql.getPc(command);
+            List<ModelPc> list = ModelPc.getModelPc(command);
             Source.MySql.close();
             return list;
         }
@@ -40,7 +40,7 @@ namespace HR_Portal.Control
         public List<ModelVegzettseg> Data_Vegzettseg() //javított
         {
             string command = "SELECT * FROM vegzettsegek";
-            List<ModelVegzettseg> list = mySql.Vegzettseg_MySql_listQuery(command);
+            List<ModelVegzettseg> list = ModelVegzettseg.getModelVegzettseg(command);
             Source.MySql.close();
             return list;
         }
@@ -64,7 +64,7 @@ namespace HR_Portal.Control
         public List<ModelNem> Data_Nemek() //javított
         {
             string command = "SELECT * FROM nemek";
-            List<ModelNem> list = mySql.Nem_MySql_listQuery(command);
+            List<ModelNem> list = ModelNem.getModelNem(command);
             Source.MySql.close();
             return list;
         }
@@ -72,7 +72,7 @@ namespace HR_Portal.Control
         public List<ModelComment> Data_Comment() //javított
         {
             string command = "SELECT id, jelolt_id, projekt_id, hr_id, hr_nev, megjegyzes, datum, ertekeles FROM megjegyzesek WHERE jelolt_id=" + Session.ApplicantID;
-            List<ModelComment> list = mySql.Megjegyzesek_MySql_listQuery(command);
+            List<ModelComment> list = ModelComment.getModelComment(command);
             Source.MySql.close();
             return list;
         }

@@ -83,7 +83,33 @@ namespace HR_Portal.View.Usercontrol.Panels
             }
             return i;
         }
-
+        protected bool isFulfilled()
+        {
+            if (
+                munkakor_cbx.SelectedItem == null ||
+                nyelv_cbx.SelectedItem == null ||
+                neme_cbx.SelectedItem == null ||
+                nyelv2_cbx.SelectedItem == null ||
+                ertesules_cbx.SelectedItem == null ||
+                munkakor_cbx.SelectedItem == null ||
+                munkakor2_cbx.SelectedItem == null ||
+                munkakor3_cbx.SelectedItem == null ||
+                vegzettseg_cbx.SelectedItem == null ||
+                nev_tbx.Text.Length == 0 ||
+                email_tbx.Text.Length == 0 ||
+                telefon_tbx.Text.Length == 0 ||
+                lakhely_tbx.Text.Length == 0 ||
+                eletkor_tbx.Text.Length == 0 ||
+                tapasztalat_tbx.Text.Length == 0
+                )
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
         protected List<ModelFullApplicant> getFormData()
         {
             DateTime localDate = DateTime.Now;
@@ -122,16 +148,31 @@ namespace HR_Portal.View.Usercontrol.Panels
 
         protected void applicantInsertClick(object sender, RoutedEventArgs e)
         {
-            aControl.applicantInsert(getFormData());
-            grid.Children.Clear();
-            grid.Children.Add(applicantDataSheet = new ApplicantDataSheet(grid));
+            if (isFulfilled())
+            {
+                aControl.applicantInsert(getFormData());
+                grid.Children.Clear();
+                grid.Children.Add(applicantDataSheet = new ApplicantDataSheet(grid));
+            }
+            else
+            {
+                showInfo.Text = "Nem lehet kitöltetlen mező!";
+            }
         }
 
         protected void applicantModifyClick(object sender, RoutedEventArgs e)
         {
-            aControl.applicantUpdate(getFormData());
-            grid.Children.Clear();
-            grid.Children.Add(applicantDataSheet = new ApplicantDataSheet(grid));
+            if (isFulfilled())
+            {
+                aControl.applicantUpdate(getFormData());
+                grid.Children.Clear();
+                grid.Children.Add(applicantDataSheet = new ApplicantDataSheet(grid));
+            }
+            else
+            {
+                showInfo.Text = "Nem lehet kitöltetlen mező!";
+            }
+
         }
 
         protected void numericTextBox(object sender, TextCompositionEventArgs e)

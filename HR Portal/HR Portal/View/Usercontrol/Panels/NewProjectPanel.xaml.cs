@@ -83,7 +83,29 @@ namespace HR_Portal.View.Usercontrol.Panels
             }
             return i;
         }
-
+        protected bool isFulfilled()
+        {
+            if (
+                vegzettseg_cbx.SelectedItem == null ||
+                munkakor_cbx.SelectedItem == null ||
+                nyelv_cbx.SelectedItem == null ||
+                k1_cbx.SelectedItem == null ||
+                k2_cbx.SelectedItem == null ||
+                k3_cbx.SelectedItem == null ||
+                k4_cbx.SelectedItem == null ||
+                k5_cbx.SelectedItem == null ||
+                pc_cbx.SelectedItem == null ||
+                nev_tbx.Text.Length == 0 ||
+                tapasztalat_tbx.Text.Length == 0 ||
+                ber_tbx.Text.Length == 0)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
         protected List<ModelInsertProject> getData()
         {
             ModelVegzettseg vegzettsegComboBox = (vegzettseg_cbx as ComboBox).SelectedItem as ModelVegzettseg;
@@ -125,25 +147,35 @@ namespace HR_Portal.View.Usercontrol.Panels
 
         protected void projektInsertClick(object sender, RoutedEventArgs e)
         {
+
             Session.isUpdate = false;
-            try
-            {
-                pControl.projectInsert(getData());
-                grid.Children.Clear();
-                grid.Children.Add(projectDataSheet = new ProjectDataSheet(grid));
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Nem lehet kitöltetlen mező!");
-            }
+
+                if(isFulfilled())
+                {
+                    pControl.projectInsert(getData());
+                    grid.Children.Clear();
+                    grid.Children.Add(projectDataSheet = new ProjectDataSheet(grid));
+                }
+                else
+                {
+                    showInfo.Text = "Nem lehet kitöltetlen mező!";
+                }
         }
 
         protected void projektUpdateClick(object sender, RoutedEventArgs e)
         {
             Session.isUpdate = false;
-            pControl.projectUpdate(getData());
-            grid.Children.Clear();
-            grid.Children.Add(projectDataSheet = new ProjectDataSheet(grid));
+
+            if (isFulfilled())
+            {
+                pControl.projectUpdate(getData());
+                grid.Children.Clear();
+                grid.Children.Add(projectDataSheet = new ProjectDataSheet(grid));
+            }
+            else
+            {
+                showInfo.Text = "Nem lehet kitöltetlen mező!";
+            }
         }
 
         protected void numericTextBox(object sender, TextCompositionEventArgs e)
@@ -151,5 +183,6 @@ namespace HR_Portal.View.Usercontrol.Panels
             Regex regex = new Regex("[^0-9-]+");
             e.Handled = regex.IsMatch(e.Text);
         }
+
     }
 }

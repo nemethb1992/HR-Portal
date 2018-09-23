@@ -65,7 +65,7 @@ namespace HR_Portal.Control
 
         public List<ModelKompetenciak> Data_Kompetencia() // javítva használja: newprojectpanel
         {
-            List<ModelKompetenciak> list = mySql.Kompetenciak_MySql_listQuery("SELECT * FROM kompetenciak");
+            List<ModelKompetenciak> list = ModelKompetenciak.getModelKompetenciak("SELECT * FROM kompetenciak");
             Source.MySql.close();
             return list;
         }
@@ -104,7 +104,7 @@ namespace HR_Portal.Control
         public List<ModelErtesitendok> Data_ProjektErtesitendokKapcsolt() // javítva használja: interviewpanel
         {
             string command = "SELECT users.id, name, email FROM users INNER JOIN projekt_ertesitendok_kapcs ON ertesitendok_id = users.id WHERE projekt_id = "+ Session.ProjektID+"";
-            List<ModelErtesitendok> list = mySql.getErtesitendok(command);
+            List<ModelErtesitendok> list = ModelErtesitendok.getModelErtesitendok(command);
             Source.MySql.close();
             return list;
         }
@@ -112,7 +112,7 @@ namespace HR_Portal.Control
         public List<ModelErtesitendok> Data_InterjuErtesitendokKapcsolt() // javítva használja: interviewpanel
         {
             string command = "SELECT users.id, name, email FROM interju_resztvevo_kapcs left JOIN users ON user_id = users.id WHERE interju_id = " + Session.InterViewID + " GROUP BY users.id";
-            List<ModelErtesitendok> list = mySql.getErtesitendok(command);
+            List<ModelErtesitendok> list = ModelErtesitendok.getModelErtesitendok(command);
             Source.MySql.close();
             return list;
         }
@@ -141,19 +141,6 @@ namespace HR_Portal.Control
         //{
         //    string command = "UPDATE projekt_jelolt_kapcs SET allapot = allapot - 1 WHERE projekt_id = " + pcontrol.ProjektID + " AND jelolt_id = " + acontrol.ApplicantID + "";
         //    mysql.update(command);
-        //}
-
-        //public void Telefon_Szures_Elutasit()
-        //{
-        //    string command1 = "UPDATE projekt_jelolt_kapcs SET telefonos_szures = 0  WHERE projekt_id = " + pcontrol.ProjektID + " AND jelolt_id = " + acontrol.ApplicantID + "";
-        //    string command2 = "DELETE FROM projekt_jelolt_kapcs WHERE projekt_id = " + pcontrol.ProjektID + " AND jelolt_id = " + acontrol.ApplicantID + "";
-        //    string command3 = "DELETE FROM megjegyzesek WHERE projekt_id = " + pcontrol.ProjektID + " AND jelolt_id = " + acontrol.ApplicantID + "";
-        //    string command4 = "DELETE FROM interjuk_kapcs WHERE projekt_id = " + pcontrol.ProjektID + " AND jelolt_id = " + acontrol.ApplicantID + "";
-
-        //    mysql.update(command1);
-        //    mysql.update(command2);
-        //    mysql.update(command3);
-        //    mysql.update(command4);
         //}
     }
 }

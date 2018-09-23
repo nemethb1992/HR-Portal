@@ -28,7 +28,7 @@ namespace HR_Portal.Control
         public List<ModelVegzettseg> Data_Vegzettseg()
         {
             string command = "SELECT * FROM vegzettsegek";
-            List<ModelVegzettseg> list = mySql.Vegzettseg_MySql_listQuery(command);
+            List<ModelVegzettseg> list = ModelVegzettseg.getModelVegzettseg(command);
             Source.MySql.close();
             return list;
         }
@@ -44,7 +44,7 @@ namespace HR_Portal.Control
         public List<ModelComment> Data_CommentProject()
         {
             string command = "SELECT id, jelolt_id, projekt_id, hr_id, hr_nev, megjegyzes, datum, ertekeles FROM megjegyzesek WHERE projekt_id=" + Session.ProjektID;
-            List<ModelComment> list = mySql.Megjegyzesek_MySql_listQuery(command);
+            List<ModelComment> list = ModelComment.getModelComment(command);
             Source.MySql.close();
             return list;
         }
@@ -52,7 +52,7 @@ namespace HR_Portal.Control
         public List<ModelComment> Data_CommentKapcs()
         {
             string command = "SELECT id, jelolt_id, projekt_id, hr_id, hr_nev, megjegyzes, datum, ertekeles FROM megjegyzesek WHERE projekt_id=" + Session.ProjektID +" AND jelolt_id="+ Session.ApplicantID +"";
-            List<ModelComment> list = mySql.Megjegyzesek_MySql_listQuery(command);
+            List<ModelComment> list = ModelComment.getModelComment(command);
             Source.MySql.close();
             return list;
         }
@@ -60,7 +60,7 @@ namespace HR_Portal.Control
         public List<ModelErtesitendok> Data_ErtesitendokCheckbox(string ertesitendok_src)
         {
             string command = "SELECT id, name ,email FROM users WHERE name LIKE '%"+ertesitendok_src+"%' AND kategoria = 0";
-            List<ModelErtesitendok> list = mySql.getErtesitendok(command);
+            List<ModelErtesitendok> list = ModelErtesitendok.getModelErtesitendok(command);
             Source.MySql.close();
             return list;
         }
@@ -68,7 +68,7 @@ namespace HR_Portal.Control
         public List<ModelHr> Data_HrCheckbox(string nev_src)
         {
             string command = "SELECT id, name, kategoria, jogosultsag, validitas FROM users WHERE name LIKE '%" + nev_src + "%' AND kategoria = 1 GROUP BY users.name";
-            List<ModelHr> list = mySql.getHrShort(command);
+            List<ModelHr> list = ModelHr.getModelHr(command);
             Source.MySql.close();
             return list;
         }
@@ -76,7 +76,7 @@ namespace HR_Portal.Control
         public List<ModelHr> Data_HrProject()
         {
             string command = "SELECT users.id, name, kategoria, jogosultsag, validitas FROM users INNER JOIN projekt_hr_kapcs ON users.id = projekt_hr_kapcs.hr_id INNER JOIN projektek ON projektek.id = projekt_hr_kapcs.projekt_id WHERE projektek.id = " + Session.ProjektID + " AND users.kategoria = 1 GROUP BY users.id";
-            List<ModelHr> list = mySql.getHrShort(command);
+            List<ModelHr> list = ModelHr.getModelHr(command);
             Source.MySql.close();
             return list;
         }
@@ -84,7 +84,7 @@ namespace HR_Portal.Control
         public List<ModelErtesitendok> Data_ErtesitendokKapcs() // javítva
         {
             string command = "SELECT users.id, name, email FROM users INNER JOIN projekt_ertesitendok_kapcs ON users.id = projekt_ertesitendok_kapcs.ertesitendok_id  WHERE projekt_ertesitendok_kapcs.projekt_id =" + Session.ProjektID + " AND kategoria = 0 GROUP BY users.id";
-            List<ModelErtesitendok> list = mySql.getErtesitendok(command);
+            List<ModelErtesitendok> list = ModelErtesitendok.getModelErtesitendok(command);
             Source.MySql.close();
             return list;
         }
@@ -267,7 +267,7 @@ namespace HR_Portal.Control
         public List<ModelKoltsegek> Data_ProjectCost()  // javított
         {
             string command = "SELECT * FROM projekt_koltsegek WHERE projekt_id = "+ Session.ProjektID +"";
-            List<ModelKoltsegek> list = mySql.Koltsegek_MySql_listQuery(command);
+            List<ModelKoltsegek> list = ModelKoltsegek.getModelKoltsegek(command);
             Source.MySql.close();
             return list;
         }

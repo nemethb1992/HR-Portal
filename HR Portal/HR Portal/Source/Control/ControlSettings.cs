@@ -10,7 +10,7 @@ namespace HR_Portal.Control
         public List<ModelErtesitendok> Data_Ertesitendok()
         {
             string command = "SELECT * FROM users WHERE kategoria = 0";
-            List <ModelErtesitendok> list = mySql.getErtesitendok(command);
+            List <ModelErtesitendok> list = ModelErtesitendok.getModelErtesitendok(command);
             Source.MySql.close();
             return list;
         }
@@ -26,7 +26,7 @@ namespace HR_Portal.Control
         public List<ModelMunkakor> Data_Munkakorok()
         {
             string command = "SELECT * FROM munkakor";
-            List <ModelMunkakor> list = mySql.getMunkakorok(command);
+            List <ModelMunkakor> list = ModelMunkakor.getModelMunkakor(command);
             Source.MySql.close();
             return list;
         }
@@ -34,7 +34,7 @@ namespace HR_Portal.Control
         public List<ModelPc> Data_Pc()
         {
             string command = "SELECT * FROM pc";
-            List <ModelPc> list = mySql.getPc(command);
+            List <ModelPc> list = ModelPc.getModelPc(command);
             Source.MySql.close();
             return list;
         }
@@ -42,7 +42,7 @@ namespace HR_Portal.Control
         public List<ModelVegzettseg> Data_Vegzettseg()
         {
             string query = "SELECT * FROM vegzettsegek";
-            List <ModelVegzettseg> list = mySql.Vegzettseg_MySql_listQuery(query);
+            List <ModelVegzettseg> list = ModelVegzettseg.getModelVegzettseg(query);
             Source.MySql.close();
             return list;
         }

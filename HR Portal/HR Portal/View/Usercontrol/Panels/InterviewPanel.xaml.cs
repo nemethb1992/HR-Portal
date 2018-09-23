@@ -31,7 +31,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             InitializeComponent();
 
             interviewLoader();
-            if (Session.UserData[0].kategoria == 0)
+            if (Session.UserData[0].kategoria != 1)
             {
                 addPerson.Visibility = Visibility.Hidden;
                 invitePerson.Visibility = Visibility.Hidden;
@@ -86,7 +86,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             {
                 Panel.SetZIndex(kompetencia_border, 1);
                 locked_title.Visibility = Visibility.Visible;
-                teszt_nyitas_btn.Visibility = Visibility.Visible;
+                //teszt_nyitas_btn.Visibility = Visibility.Visible;   //teszt megtekintéshez
             }
         }
 
@@ -112,7 +112,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             paControl.kompetenciaUpdate(list);
             Panel.SetZIndex(kompetencia_border,1);
             locked_title.Visibility = Visibility.Visible;
-            teszt_nyitas_btn.Visibility = Visibility.Visible;
+            //teszt_nyitas_btn.Visibility = Visibility.Visible;  //teszt megtekintéshez
 
 
         }
