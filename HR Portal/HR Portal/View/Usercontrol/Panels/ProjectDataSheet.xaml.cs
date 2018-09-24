@@ -1,5 +1,5 @@
 ﻿using HR_Portal.Control;
-using HR_Portal.Model;
+using HR_Portal.Source;
 using HR_Portal.Public.templates;
 using System;
 using System.Collections.Generic;
@@ -7,22 +7,19 @@ using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using HR_Portal.Source;
+using HR_Portal.Source.Model;
+using HR_Portal.Source.Model.Applicant;
+using HR_Portal.Source.Model.Project;
+using HR_Portal.Source.ViewModel;
 
 namespace HR_Portal.View.Usercontrol.Panels
 {
-    /// <summary>
-    /// Interaction logic for project_DataView.xaml
-    /// </summary>
     public partial class ProjectDataSheet : UserControl
     {
-        ControlApplicantProject paControl = new ControlApplicantProject();
         ControlProject pControl = new ControlProject();
-        ControlApplicant aControl = new ControlApplicant();
+        ControlApplicantProject paControl = new ControlApplicantProject();
         EmailTemplate emailTemplate = new EmailTemplate();
-        ControlEmail email = new ControlEmail();
         Comment comment = new Comment();
-        Session session = new Session();
 
         private Grid grid;
         private ProjektJeloltDataSheet projektJeloltDataSheet;
@@ -45,7 +42,8 @@ namespace HR_Portal.View.Usercontrol.Panels
 
         protected void formLoader()
         {
-            List<ProjectExtendedListItems> li = pControl.Data_ProjectFull();
+
+            List<ModelFullProject> li = VMProject.getFullProject();
             projekt_profile_title.Text = li[0].megnevezes_projekt;
             projekt_input_1.Text = li[0].statusz.ToString();
             projekt_input_2.Text = li[0].megnevezes_munka;
@@ -58,7 +56,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             projekt_input_9.Text = li[0].ber.ToString() + " Ft";
             projekt_input_10.Text = li[0].tapasztalat_ev.ToString();
 
-            List<kompetenciak> li_k = paControl.Data_Kompetencia();
+            List<ModelKompetenciak> li_k = paControl.Data_Kompetencia();
             foreach (var item in li_k)
             {
                 if(item.id == li[0].kepesseg1)
@@ -98,17 +96,17 @@ namespace HR_Portal.View.Usercontrol.Panels
         protected void openApplicantClick(object sender, RoutedEventArgs e)
         {
             Button button = sender as Button;
-            JeloltListItems items = button.DataContext as JeloltListItems;
+            ModelApplicantList items = button.DataContext as ModelApplicantList;
 
-            aControl.ApplicantID = items.id;
+            Session.ApplicantID = items.id;
 
             if(items.allapota >= 1)
             {
-                paControl.TelefonSzurt = 1;
+                Session.TelefonSzurt = 1;
             }
             else
             {
-                paControl.TelefonSzurt = 0;
+                Session.TelefonSzurt = 0;
             }
             grid.Children.Clear();
             grid.Children.Add(projektJeloltDataSheet = new ProjektJeloltDataSheet(grid));
@@ -175,7 +173,7 @@ namespace HR_Portal.View.Usercontrol.Panels
         protected void jeloltDeleteClick(object sender, MouseButtonEventArgs e)
         {
             Image delete = sender as Image;
-            JeloltListItems items = delete.DataContext as JeloltListItems;
+            ModelApplicantList items = delete.DataContext as ModelApplicantList;
 
             pControl.jeloltKapcsDelete(items.id);
             kapcs_jeloltek_listBox.ItemsSource = pControl.Data_JeloltKapcs();
@@ -184,7 +182,7 @@ namespace HR_Portal.View.Usercontrol.Panels
         protected void ertesitendoDeleteClick(object sender, RoutedEventArgs e)
         {
             Button delete = sender as Button;
-            ertesitendok_struct items = delete.DataContext as ertesitendok_struct;
+            ModelErtesitendok items = delete.DataContext as ModelErtesitendok;
 
             pControl.ertesitendokKapcsDelete(items.id);
             kapcs_ertesitendo_listBox.ItemsSource = pControl.Data_ErtesitendokKapcs();
@@ -193,7 +191,7 @@ namespace HR_Portal.View.Usercontrol.Panels
         protected void hrDeleteClick(object sender, RoutedEventArgs e)
         {
             Button delete = sender as Button;
-            hr_struct items = delete.DataContext as hr_struct;
+            ModelHr items = delete.DataContext as ModelHr;
 
             pControl.hrKapcsDelete(items.id);
             kapcs_hr_listBox.ItemsSource = pControl.Data_HrProject();
@@ -203,16 +201,17 @@ namespace HR_Portal.View.Usercontrol.Panels
         protected void commentDeleteClick(object sender, RoutedEventArgs e)
         {
             MenuItem delete = sender as MenuItem;
-            megjegyzes_struct items = delete.DataContext as megjegyzes_struct;
+            ModelComment items = delete.DataContext as ModelComment;
 
-            comment.delete(items.id, session.UserData[0].id, pControl.ProjektID, 0);
+            comment.delete(items.id, Session.UserData[0].id, Session.ProjektID, 0);
             listLoader();
         }
 
-        protected void jeloltContextMenuClick(object sender, RoutedEventArgs e)
+        protected void jeloltRightClick(object sender, RoutedEventArgs e)
         {
+            ControlEmail email = new ControlEmail();
             MenuItem mitem = sender as MenuItem;
-            JeloltListItems items = mitem.DataContext as JeloltListItems;
+            ModelApplicantList items = mitem.DataContext as ModelApplicantList;
 
             if (mitem.Tag.ToString() == "delete")
             {
@@ -221,7 +220,7 @@ namespace HR_Portal.View.Usercontrol.Panels
                 {
                     case MessageBoxResult.Yes:
                         pControl.jeloltKapcsDelete(items.id);
-                        email.sendMail(items.email, emailTemplate.Elutasito_Email(items.nev));
+                        email.send(items.email, emailTemplate.Elutasito_Email(items.nev));
                         break;
                     case MessageBoxResult.No:
                         pControl.jeloltKapcsDelete(items.id);
@@ -245,7 +244,7 @@ namespace HR_Portal.View.Usercontrol.Panels
 
             if (e.Key != System.Windows.Input.Key.Enter) return;
             e.Handled = true;
-            comment.add(comment_tartalom.Text, pControl.ProjektID, 0,0);
+            comment.add(comment_tartalom.Text, Session.ProjektID, 0,0);
             listLoader();
             tbx.Text = "";
         }
@@ -321,21 +320,21 @@ namespace HR_Portal.View.Usercontrol.Panels
             Button btn = sender as Button;
             if(selectedTabCode == 1)
             {
-                SubJelolt items = btn.DataContext as SubJelolt;
-                pControl.addJeloltInsert(items.id, pControl.ProjektID);
+                ModelApplicantListbox items = btn.DataContext as ModelApplicantListbox;
+                pControl.addJeloltInsert(items.id, Session.ProjektID);
                 projekt_kapcsolodo_list.ItemsSource = pControl.Data_JeloltForCheckbox(Ember_Search_tbx.Text);
                 kapcs_jeloltek_listBox.ItemsSource = pControl.Data_JeloltKapcs();
             }
             if (selectedTabCode == 2)
             {
-                ertesitendok_struct items = btn.DataContext as ertesitendok_struct;
+                ModelErtesitendok items = btn.DataContext as ModelErtesitendok;
                 pControl.addErtesitendokInsert(items.id);
                 projekt_kapcsolodo_list.ItemsSource = pControl.Data_ErtesitendokCheckbox(Ember_Search_tbx.Text);
                 kapcs_ertesitendo_listBox.ItemsSource = pControl.Data_ErtesitendokKapcs();
             }
             if (selectedTabCode == 3)
             {
-                hr_struct items = btn.DataContext as hr_struct;
+                ModelHr items = btn.DataContext as ModelHr;
                 pControl.addHrInsert(items.id);
                 projekt_kapcsolodo_list.ItemsSource = pControl.Data_HrCheckbox(Ember_Search_tbx.Text);
                 kapcs_hr_listBox.ItemsSource = pControl.Data_HrProject();
@@ -359,7 +358,7 @@ namespace HR_Portal.View.Usercontrol.Panels
         protected void projectCost()
         {
             int sum = 0;
-            List<koltsegek> list = pControl.Data_ProjectCost();
+            List<ModelKoltsegek> list = pControl.Data_ProjectCost();
 
             foreach (var item in list)
             {
@@ -397,7 +396,7 @@ namespace HR_Portal.View.Usercontrol.Panels
         protected void deleteCost(object sender, RoutedEventArgs e)
         {
             MenuItem menu = sender as MenuItem;
-            koltsegek item = menu.DataContext as koltsegek;
+            ModelKoltsegek item = menu.DataContext as ModelKoltsegek;
             pControl.projectCostDelete(item.id);
             koltseg_listBox.ItemsSource = pControl.Data_ProjectCost();
             projectCost();
@@ -416,7 +415,7 @@ namespace HR_Portal.View.Usercontrol.Panels
         protected void gridMouseDown(object sender, MouseButtonEventArgs e)
         {
             Grid grid = sender as Grid;
-            JeloltListItems item = grid.DataContext as JeloltListItems;
+            ModelApplicantList item = grid.DataContext as ModelApplicantList;
 
             if (item.Checked == false)
             {

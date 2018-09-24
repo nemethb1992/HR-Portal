@@ -1,25 +1,34 @@
-﻿using System.Collections.Generic;
+﻿using HR_Portal.Source;
+using HR_Portal.Source.Model;
+using System.Collections.Generic;
 
 namespace HR_Portal.Source
 {
-    public struct UserSessData
-    {
-        public int id;
-        public string username;
-        public string name;
-        public string email;
-        public int kategoria;
-        public int jogosultsag;
-        public int validitas;
-        public string belepve;
-        public string reg_datum;
-    }
     class Session
     {
-        private static List<UserSessData> UserDatas;
-        public List<UserSessData> UserData { get { return UserDatas; } set { UserDatas = value; } }
+        private static List<ModelUserData> UserDatas;
+        public static List<ModelUserData> UserData { get { return UserDatas; } set { UserDatas = value; } }
 
-        private static string Tartomanyi;
-        public string tartomanyi { get { return Tartomanyi; } set { Tartomanyi = value; } }
+        private static int ProjectSearchMemorys;
+        public static int ProjectStatusz { get { return ProjectSearchMemorys; } set { ProjectSearchMemorys = value; } }
+
+        private static string ActiveDirectoryDomains;
+        public static string ActiveDirectoryDomain { get { return ActiveDirectoryDomains; } set { ActiveDirectoryDomains = value; } }
+
+        private static int ApplicantIDs;
+        public static int ApplicantID { get { return ApplicantIDs; } set { ApplicantIDs = value; } }
+
+        private static int InterViewIDs;
+        public static int InterViewID { get { return InterViewIDs; } set { InterViewIDs = value; } }
+
+        private static int TelefonSzurts;
+        public static int TelefonSzurt { get { return TelefonSzurts; } set { TelefonSzurts = value; } }
+
+        private static int ProjektIDs;
+        public static int ProjektID { get { return ProjektIDs; } set { ProjektIDs = value; } }
+
+        private static bool isUpdates;
+        public static bool isUpdate { get { return isUpdates; } set { isUpdates = value; } }
     }
+
 }

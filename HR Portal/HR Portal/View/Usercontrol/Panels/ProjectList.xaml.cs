@@ -6,7 +6,10 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using HR_Portal.Control;
-using HR_Portal.Model;
+using HR_Portal.Source;
+using HR_Portal.Source.Model;
+using HR_Portal.Source.Model.Project;
+using HR_Portal.Source.ViewModel;
 
 namespace HR_Portal.View.Usercontrol.Panels
 {
@@ -43,15 +46,15 @@ namespace HR_Portal.View.Usercontrol.Panels
         protected List<string> getSearchData()
         {
             List<string> list = new List<string>();
-            nyelv_struct nyelvItem = null;
-            vegzettseg_struct vegzettsegItem = null;
+            ModelNyelv nyelvItem = null;
+            ModelVegzettseg vegzettsegItem = null;
             string nyelvkStr = "";
             string vegzettsegStr = "";
 
             try
             {
-                nyelvItem = (nyelv_srccbx as ComboBox).SelectedItem as nyelv_struct;
-                vegzettsegItem = (vegzettseg_srccbx as ComboBox).SelectedItem as vegzettseg_struct;
+                nyelvItem = (nyelv_srccbx as ComboBox).SelectedItem as ModelNyelv;
+                vegzettsegItem = (vegzettseg_srccbx as ComboBox).SelectedItem as ModelVegzettseg;
             }
             catch (Exception){
             }
@@ -94,14 +97,16 @@ namespace HR_Portal.View.Usercontrol.Panels
 
         protected void projectListLoader()
         {
-            List<Projekt_Search_Memory> list = new List<Projekt_Search_Memory>();
-            
-            list.Add(new Projekt_Search_Memory() { statusz = 1 });
-            pControl.projectSearchMemory = list;
+            Session.ProjectStatusz = 1;
             buttonColorChange();
 
             try{
+<<<<<<< HEAD
                 List<ProjectListItems> lista = pControl.Data_ProjectFull(getSearchData());
+=======
+                List<ModelProjectList> lista = VMProject.getProjectList(getSearchData());
+                project_listBox.ItemsSource = lista;
+>>>>>>> ViewModelRefactor
                 talalat_tbl.Text = "Találatok:  " + lista.Count.ToString();
             }
             catch (Exception e)
@@ -125,7 +130,7 @@ namespace HR_Portal.View.Usercontrol.Panels
         protected void buttonColorChange()
         {
             var bc = new BrushConverter();
-            if (pControl.projectSearchMemory[0].statusz == 1)
+            if (Session.ProjectStatusz == 1)
             {
                 projekt_aktiv_btn.Background = (Brush)bc.ConvertFrom("#bfbfbf");
                 projekt_aktiv_btn.BorderBrush = (Brush)bc.ConvertFrom("#bfbfbf");
@@ -145,8 +150,8 @@ namespace HR_Portal.View.Usercontrol.Panels
 
         protected void projectOpenClick(object sender, RoutedEventArgs e)
         {
-            ProjectListItems items = (sender as Button).DataContext as ProjectListItems;
-            pControl.ProjektID = items.id;
+            ModelProjectList items = (sender as Button).DataContext as ModelProjectList;
+            Session.ProjektID = items.id;
             grid.Children.Clear();
             grid.Children.Add(projectDataSheet = new ProjectDataSheet(grid));
         }
@@ -163,7 +168,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             switch (result)
             {
                 case MessageBoxResult.Yes:
-                    ProjectListItems items = (sender as MenuItem).DataContext as ProjectListItems;
+                    ModelProjectList items = (sender as MenuItem).DataContext as ModelProjectList;
                     pControl.projectDelete(items.id);
                     projectListLoader();
                     break;
@@ -180,7 +185,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             switch (result)
             {
                 case MessageBoxResult.Yes:
-                    ProjectListItems items = (sender as MenuItem).DataContext as ProjectListItems;
+                    ModelProjectList items = (sender as MenuItem).DataContext as ModelProjectList;
                     pControl.projectArchiver(items.id, items.statusz);
                     projectListLoader();
                     break;
@@ -194,14 +199,14 @@ namespace HR_Portal.View.Usercontrol.Panels
         protected void projectPassivateClick(object sender, RoutedEventArgs e)
         {
             pControl.statusChange(0);
-            project_listBox.ItemsSource = pControl.Data_ProjectFull(getSearchData());
+            project_listBox.ItemsSource = VMProject.getProjectList(getSearchData());
             buttonColorChange();
         }
 
         protected void projectActivateClick(object sender, RoutedEventArgs e)
         {
             pControl.statusChange(1);
-            project_listBox.ItemsSource = pControl.Data_ProjectFull(getSearchData());
+            project_listBox.ItemsSource = VMProject.getProjectList(getSearchData());
             buttonColorChange();
         }
 
@@ -258,10 +263,10 @@ namespace HR_Portal.View.Usercontrol.Panels
 
         protected void modositasClick(object sender, RoutedEventArgs e)
         {
-            pControl.Change = true;
-            ProjectListItems itemSource = (sender as MenuItem).DataContext as ProjectListItems;
+            Session.isUpdate = true;
+            ModelProjectList itemSource = (sender as MenuItem).DataContext as ModelProjectList;
 
-            pControl.ProjektID = itemSource.id;
+            Session.ProjektID = itemSource.id;
             grid.Children.Clear();
             grid.Children.Add(newProjectPanel = new NewProjectPanel(grid));
         }

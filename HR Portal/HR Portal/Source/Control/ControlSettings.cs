@@ -1,57 +1,57 @@
-﻿using HR_Portal.Model;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using HR_Portal.Source.Model;
 
 namespace HR_Portal.Control
 {
     class ControlSettings
     {
-        Model.MySql mySql = new Model.MySql();
+        Source.MySql mySql = new Source.MySql();
 
-        public List<ertesitendok_struct> Data_Ertesitendok()
+        public List<ModelErtesitendok> Data_Ertesitendok()
         {
             string command = "SELECT * FROM users WHERE kategoria = 0";
-            List <ertesitendok_struct> list = mySql.getErtesitendok(command);
-            mySql.close();
+            List <ModelErtesitendok> list = ModelErtesitendok.getModelErtesitendok(command);
+            Source.MySql.close();
             return list;
         }
 
-        public List<nyelv_struct> Data_Nyelv()
+        public List<ModelNyelv> Data_Nyelv()
         {
-            string query = "SELECT * FROM nyelv";
-            List <nyelv_struct> list = mySql.getNyelv(query);
-            mySql.close();
+            string command = "SELECT * FROM nyelv";
+            List <ModelNyelv> list = ModelNyelv.getModelNyelv(command);
+            Source.MySql.close();
             return list;
         }
 
-        public List<munkakor_struct> Data_Munkakorok()
+        public List<ModelMunkakor> Data_Munkakorok()
         {
             string command = "SELECT * FROM munkakor";
-            List <munkakor_struct> list = mySql.getMunkakorok(command);
-            mySql.close();
+            List <ModelMunkakor> list = ModelMunkakor.getModelMunkakor(command);
+            Source.MySql.close();
             return list;
         }
 
-        public List<pc_struct> Data_Pc()
+        public List<ModelPc> Data_Pc()
         {
             string command = "SELECT * FROM pc";
-            List <pc_struct> list = mySql.getPc(command);
-            mySql.close();
+            List <ModelPc> list = ModelPc.getModelPc(command);
+            Source.MySql.close();
             return list;
         }
 
-        public List<vegzettseg_struct> Data_Vegzettseg()
+        public List<ModelVegzettseg> Data_Vegzettseg()
         {
             string query = "SELECT * FROM vegzettsegek";
-            List <vegzettseg_struct> list = mySql.Vegzettseg_MySql_listQuery(query);
-            mySql.close();
+            List <ModelVegzettseg> list = ModelVegzettseg.getModelVegzettseg(query);
+            Source.MySql.close();
             return list;
         }
 
-        public List<ertesulesek> Data_Ertesulesek()
+        public List<ModelErtesulesek> Data_Ertesulesek()
         {
             string command = "SELECT * FROM ertesulesek";
-            List <ertesulesek> list = mySql.Ertesulesek_MySql_listQuery(command);
-            mySql.close();
+            List <ModelErtesulesek> list = ModelErtesulesek.getModelErtesulesek(command);
+            Source.MySql.close();
             return list;
         }
 
@@ -59,7 +59,7 @@ namespace HR_Portal.Control
         {
             string command = "DELETE FROM "+table+" WHERE id="+id+"";
             mySql.update(command);
-            mySql.close();
+            Source.MySql.close();
         }
 
         public void settingInsert(string content, string table)
@@ -91,7 +91,7 @@ namespace HR_Portal.Control
                     break;
             }
             mySql.update(command);
-            mySql.close();
+            Source.MySql.close();
         }
         //public void kompetenciaíró()
         //{

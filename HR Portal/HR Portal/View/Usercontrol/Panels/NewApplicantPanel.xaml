@@ -10,6 +10,7 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="50" />
             <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
             <ColumnDefinition Width="50" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
@@ -17,12 +18,13 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="50" />
         </Grid.RowDefinitions>
-        <TextBlock x:Name="uj_cim" Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2" Style="{StaticResource big_title_style}" Text="Új Jelölt Felvitele" ></TextBlock>
-        <TextBlock x:Name="modositas_cim" Visibility="Hidden" Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2" Style="{StaticResource big_title_style}" Text="Jelölt Adatainak Módosítása" ></TextBlock>
-        <Button x:Name="applicant_INSERT_btn" Style="{StaticResource StandardButton}" Grid.Column="1" Grid.Row="0" Width="200" HorizontalAlignment="Right" Content="Mentés" Click="applicantInsertClick" />
-        <Button x:Name="applicant_UPDATE_btn" Visibility="Hidden" Style="{StaticResource StandardButton}" Grid.Column="1" Grid.Row="0" Width="200" HorizontalAlignment="Right" Content="Módosítás" Click="applicantModifyClick" />
+        <TextBlock x:Name="uj_cim" Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="1" Style="{StaticResource big_title_style}" Text="Új Jelölt Felvitele" ></TextBlock>
+        <TextBlock x:Name="modositas_cim" Visibility="Hidden" Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="1" Style="{StaticResource big_title_style}" Text="Jelölt Adatainak Módosítása" ></TextBlock>
+        <TextBlock x:Name="showInfo" Grid.Column="2" Grid.Row="0" Grid.ColumnSpan="1" Style="{StaticResource Standard_Textblock}"  Text="" ></TextBlock>
+        <Button x:Name="applicant_INSERT_btn" Style="{StaticResource StandardButton}" Grid.Column="2" Grid.Row="0" Width="200" HorizontalAlignment="Right" Content="Mentés" Click="applicantInsertClick" />
+        <Button x:Name="applicant_UPDATE_btn" Visibility="Hidden" Style="{StaticResource StandardButton}" Grid.Column="2" Grid.Row="0" Width="200" HorizontalAlignment="Right" Content="Módosítás" Click="applicantModifyClick" />
 
-        <Grid x:Name="grid_1_1" Grid.Column="1" Grid.ColumnSpan="1" Grid.Row="1">
+        <Grid x:Name="grid_1_1" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="30" />

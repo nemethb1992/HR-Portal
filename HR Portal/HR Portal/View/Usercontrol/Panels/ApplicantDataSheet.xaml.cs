@@ -1,11 +1,14 @@
 ﻿using HR_Portal.Control;
-using HR_Portal.Model;
+using HR_Portal.Source;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using HR_Portal.Source;
+using HR_Portal.Source.Model;
+using HR_Portal.Source.Model.Applicant;
+using HR_Portal.Source.ViewModel;
+using HR_Portal.Source.Model.Project;
 
 namespace HR_Portal.View.Usercontrol.Panels
 {
@@ -16,9 +19,7 @@ namespace HR_Portal.View.Usercontrol.Panels
     {
         Comment comment = new Comment();
         ControlApplicant aControl = new ControlApplicant();
-        ControlProject pControl = new ControlProject();
         ControlFile fControl = new ControlFile();
-        Session session = new Session();
 
         private ProjectDataSheet projectDataSheet;
         private Grid grid;
@@ -31,7 +32,7 @@ namespace HR_Portal.View.Usercontrol.Panels
         }
         protected void formLoader()
         {
-            List<JeloltExtendedList> list = aControl.Data_JeloltFull();
+            List<ModelFullApplicant> list = VMApplicant.getFullApplicant();
 
             applicant_profile_title.Text = list[0].nev;
             app_input_1.Text = list[0].email;
@@ -43,7 +44,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             app_input_9.Text = list[0].ertesult.ToString();
             app_input_10.Text = list[0].szuldatum.ToString();
             projekt_cbx.ItemsSource = aControl.Data_PorjectListSmall();
-            csatolmany_listBox.ItemsSource = fControl.Applicant_FolderReadOut(aControl.ApplicantID);
+            csatolmany_listBox.ItemsSource = fControl.Applicant_FolderReadOut(Session.ApplicantID);
             commentLoader(megjegyzes_listBox);
             kapcsolodo_projekt_list.ItemsSource = aControl.Data_ProjectList();
         }
@@ -57,9 +58,9 @@ namespace HR_Portal.View.Usercontrol.Panels
         protected void navigateToProjectDataSheet(object sender, RoutedEventArgs e)
         {
             Button button = sender as Button;
-            SmallProjectListItems items = button.DataContext as SmallProjectListItems;
+            ModelSmallProject items = button.DataContext as ModelSmallProject;
 
-            pControl.ProjektID = items.id;
+            Session.ProjektID = items.id;
             grid.Children.Clear();
             grid.Children.Add(projectDataSheet = new ProjectDataSheet(grid));
         }
@@ -67,7 +68,7 @@ namespace HR_Portal.View.Usercontrol.Panels
         protected void projectDelete(object sender, RoutedEventArgs e)
         {
             MenuItem delete = sender as MenuItem;
-            SmallProjectListItems items = delete.DataContext as SmallProjectListItems;
+            ModelSmallProject items = delete.DataContext as ModelSmallProject;
 
             aControl.applicalntProjectListDelete(items.id);
             kapcsolodo_projekt_list.ItemsSource = aControl.Data_ProjectList();
@@ -76,9 +77,9 @@ namespace HR_Portal.View.Usercontrol.Panels
         protected void commentDelete(object sender, RoutedEventArgs e)
         {
             MenuItem item = sender as MenuItem;
-            megjegyzes_struct items = item.DataContext as megjegyzes_struct;
+            ModelComment items = item.DataContext as ModelComment;
 
-            comment.delete(items.id, session.UserData[0].id, 0, aControl.ApplicantID);
+            comment.delete(items.id, Session.UserData[0].id, 0, Session.ApplicantID);
             commentLoader(megjegyzes_listBox);
         }
 
@@ -88,7 +89,7 @@ namespace HR_Portal.View.Usercontrol.Panels
 
             if (e.Key != System.Windows.Input.Key.Enter) return;
             e.Handled = true;
-            comment.add(comment_tartalom.Text, 0,aControl.ApplicantID, 0);
+            comment.add(comment_tartalom.Text, 0, Session.ApplicantID, 0);
             commentLoader(megjegyzes_listBox);
             textbox.Text = "";
         }
@@ -114,17 +115,19 @@ namespace HR_Portal.View.Usercontrol.Panels
 
         protected void projektClick(object sender, RoutedEventArgs e)
         {
-            ComboBox cbx = projekt_cbx as ComboBox;
-            SmallProjectListItems item = cbx.SelectedItem as SmallProjectListItems;
+            ControlProject pControl = new ControlProject();
 
-            pControl.addJeloltInsert(aControl.ApplicantID , item.id);
+            ComboBox cbx = projekt_cbx as ComboBox;
+            ModelSmallProject item = cbx.SelectedItem as ModelSmallProject;
+
+            pControl.addJeloltInsert(Session.ApplicantID , item.id);
             kapcsolodo_projekt_list.ItemsSource = aControl.Data_ProjectList();
         }
 
         protected void attachmentOpenClick(object sender, RoutedEventArgs e)
         {
             Button btn = sender as Button;
-            Jelolt_File_Struct item = btn.DataContext as Jelolt_File_Struct;
+            ModelJeloltFile item = btn.DataContext as ModelJeloltFile;
             Process.Start(item.path);
         }
     }

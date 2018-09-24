@@ -1,12 +1,14 @@
 ﻿using HR_Portal.Control;
-using HR_Portal.Model;
+using HR_Portal.Source;
 using HR_Portal.Public.templates;
 using HR_Portal.View.Usercontrol.Panels.SzakmaiLayouts;
 using System;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
-using HR_Portal.Source;
+using HR_Portal.Source.Model;
+using HR_Portal.Source.Model.Project;
+using HR_Portal.Source.ViewModel;
 
 namespace HR_Portal.View.Usercontrol.Panels
 {
@@ -18,7 +20,6 @@ namespace HR_Portal.View.Usercontrol.Panels
         ControlApplicant aControl = new ControlApplicant();
         ControlProject pControl = new ControlProject();
         ControlApplicantProject paControl = new ControlApplicantProject();
-        Session session = new Session();
 
         private Grid grid;
         private ProjektJeloltDataSheet projektJeloltDataSheet;
@@ -30,7 +31,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             InitializeComponent();
 
             interviewLoader();
-            if (session.UserData[0].kategoria == 0)
+            if (Session.UserData[0].kategoria != 1)
             {
                 addPerson.Visibility = Visibility.Hidden;
                 invitePerson.Visibility = Visibility.Hidden;
@@ -39,7 +40,7 @@ namespace HR_Portal.View.Usercontrol.Panels
 
         protected void navigateBackFromInterview(object sender, RoutedEventArgs e)
         {
-            if(session.UserData[0].kategoria == 1)
+            if(Session.UserData[0].kategoria == 1)
             {
                 grid.Children.Clear();
                 grid.Children.Add(projektJeloltDataSheet = new ProjektJeloltDataSheet(grid));
@@ -53,9 +54,9 @@ namespace HR_Portal.View.Usercontrol.Panels
 
         protected void interviewLoader()
         {
-            List<interju_struct> list = paControl.Data_InterviewById();
-            List<ProjectExtendedListItems> li = pControl.Data_ProjectFull();
-            List<kompetenciak> li_k = paControl.Data_Kompetencia();
+            List<ModelInterview> list = paControl.Data_InterviewById();
+            List<ModelFullProject> li = VMProject.getFullProject();
+            List<ModelKompetenciak> li_k = paControl.Data_Kompetencia();
 
             foreach (var item in li_k)
             {
@@ -85,7 +86,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             {
                 Panel.SetZIndex(kompetencia_border, 1);
                 locked_title.Visibility = Visibility.Visible;
-                teszt_nyitas_btn.Visibility = Visibility.Visible;
+                //teszt_nyitas_btn.Visibility = Visibility.Visible;   //teszt megtekintéshez
             }
         }
 
@@ -93,7 +94,7 @@ namespace HR_Portal.View.Usercontrol.Panels
         {
             Button button = sender as Button;
             int type = Convert.ToInt32(button.Tag);
-            List<ProjectExtendedListItems> li = pControl.Data_ProjectFull();
+            List<ModelFullProject> li = VMProject.getFullProject();
             List<int> list = new List<int>();
 
             list.Add(li[0].kepesseg1);
@@ -111,7 +112,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             paControl.kompetenciaUpdate(list);
             Panel.SetZIndex(kompetencia_border,1);
             locked_title.Visibility = Visibility.Visible;
-            teszt_nyitas_btn.Visibility = Visibility.Visible;
+            //teszt_nyitas_btn.Visibility = Visibility.Visible;  //teszt megtekintéshez
 
 
         }
@@ -126,7 +127,7 @@ namespace HR_Portal.View.Usercontrol.Panels
         protected void addColleagueToInterview(object sender, RoutedEventArgs e)
         {
             Button btn = sender as Button;
-            ertesitendok_struct items = btn.DataContext as ertesitendok_struct;
+            ModelErtesitendok items = btn.DataContext as ModelErtesitendok;
 
             paControl.insertInterviewInvited(items.id);
             choose_editlist.ItemsSource = paControl.Data_ProjektErtesitendokKapcsolt();
@@ -135,10 +136,10 @@ namespace HR_Portal.View.Usercontrol.Panels
 
         protected void removeColleague(object sender, RoutedEventArgs e)
         {
-            if(session.UserData[0].kategoria == 1)
+            if(Session.UserData[0].kategoria == 1)
             {
                 MenuItem menu = sender as MenuItem;
-                ertesitendok_struct items = menu.DataContext as ertesitendok_struct;
+                ModelErtesitendok items = menu.DataContext as ModelErtesitendok;
 
                 paControl.deleteInterviewInvited(items.id);
                 choose_editlist.ItemsSource = paControl.Data_ProjektErtesitendokKapcsolt();
@@ -161,8 +162,8 @@ namespace HR_Portal.View.Usercontrol.Panels
         {
             EmailTemplate et = new EmailTemplate();
             ControlEmail email = new ControlEmail();
-            List<ertesitendok_struct> szemelyek = paControl.Data_InterjuErtesitendokKapcsolt();
-            List<interju_struct> interju = paControl.Data_InterviewById();
+            List<ModelErtesitendok> szemelyek = paControl.Data_InterjuErtesitendokKapcsolt();
+            List<ModelInterview> interju = paControl.Data_InterviewById();
             List<String> resztvevok = new List<string>();
 
             foreach (var item in szemelyek)
@@ -171,9 +172,9 @@ namespace HR_Portal.View.Usercontrol.Panels
             }
             foreach (var item in szemelyek)
             {
-                email.sendMail(item.email, et.Belsos_Meghivo_Email(item.name, interju[0].interju_cim, interju[0].interju_datum+" - " + interju[0].idopont, interju[0].helyszin, interju[0].jelolt_megnevezes));
+                email.send(item.email, et.Belsos_Meghivo_Email(item.name, interju[0].interju_cim, interju[0].interju_datum+" - " + interju[0].idopont, interju[0].helyszin, interju[0].jelolt_megnevezes));
             }
-            email.sendMail(interju[0].jelolt_email, et.Jelolt_Meghivo_Email(interju[0].jelolt_megnevezes, interju[0].projekt_megnevezes, interju[0].interju_datum + " - " + interju[0].idopont, resztvevok));
+            email.send(interju[0].jelolt_email, et.Jelolt_Meghivo_Email(interju[0].jelolt_megnevezes, interju[0].projekt_megnevezes, interju[0].interju_datum + " - " + interju[0].idopont, resztvevok));
       }
     }
 }

@@ -18,13 +18,12 @@ namespace HR_Portal.View.Windows
         private SzakmaiKezdolap szakmai_Kezdolap;
         private FavouritesPanel favourites_Panel;
         ControlFile f_control = new ControlFile();
-        Session session = new Session();
         //private applicant_DataView applicant_dv;
         //private project_DataView project_dv;
         public Main()
         {
             InitializeComponent();
-            if (session.UserData[0].kategoria == 1)
+            if (Session.UserData[0].kategoria== 1)
             {
                 sgrid.Children.Add(project_p = new ProjectList(sgrid));
                 HR_navigation_Grid.Visibility = Visibility.Visible;

@@ -7,16 +7,16 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using ActiveUp.Net.Mail;
-using HR_Portal.Model;
-using static HR_Portal.Model.ModelEmail;
+using HR_Portal.Source;
 using HR_Portal.Public.templates;
 using System.Security.Cryptography;
+using HR_Portal.Source.Model.Other;
 
 namespace HR_Portal.Control
 {
     class ControlEmail
     {
-        Model.MySql mySql = new Model.MySql();
+        Source.MySql mySql = new Source.MySql();
         EmailTemplate emailTemplate = new EmailTemplate();
 
         public class MailRepository
@@ -54,44 +54,24 @@ namespace HR_Portal.Control
                 return messages;
             }
         }
-        public List<MailServer_m> IMAP_List()
+        public List<ModelEmail> IMAP_List()
         {
             string command = "SELECT * FROM ConnectionSMTP WHERE type = 'imap'";
-            List<MailServer_m> list = mySql.ConnectionSMTP_DataSource(command);
-            mySql.close();
+            List<ModelEmail> list = ModelEmail.getModelEmail(command);
+            Source.MySql.close();
             return list;
         }
-        public List<MailServer_m> SMTP_List()
+        public List<ModelEmail> SMTP_List()
         {
             string command = "SELECT * FROM ConnectionSMTP WHERE type = 'smtp'";
-            List<MailServer_m> list = mySql.ConnectionSMTP_DataSource(command);
-            mySql.close();
+            List<ModelEmail> list = ModelEmail.getModelEmail(command);
+            Source.MySql.close();
             return list;
         }
-        //public void ReadImap()
-        //{
-        //    List<MailServer_m> li = SMTP_List();
-        //    var mailRepository = new MailRepository(
-        //                            li[0].mailserver,
-        //                            li[0].port,
-        //                            li[0].ssl,
-        //                            li[0].Login,
-        //                            "3hgb8wy3hgb8wy"
-        //                        );
-        //    var emailList = mailRepository.GetUnreadMails("inbox");
-        //    foreach (Message email in emailList)
-        //    {
-        //        if (email.From.Email.ToString() == "fzbalu92@gmail.com")
-        //        {
-        //            MessageBox.Show("siker");
-        //        }
 
-        //    }
-        //}
-
-        public void sendMail(string to, string email_body)
+        public void send(string to, string email_body)
         {
-            List<MailServer_m> li = SMTP_List();
+            List<ModelEmail> li = SMTP_List();
             try
             {
                 MailMessage mail = new MailMessage();
@@ -109,9 +89,9 @@ namespace HR_Portal.Control
 
                 SmtpServer.SendMailAsync(mail);
             }
-            catch (Exception ex)
+            catch
             {
-                MessageBox.Show(ex.ToString());
+                MessageBox.Show("Üzenet elküldése sikertelen!");
             }
         }
     }

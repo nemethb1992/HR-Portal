@@ -1,5 +1,5 @@
 ﻿using HR_Portal.Control;
-using HR_Portal.Model;
+using HR_Portal.Source;
 using HR_Portal.View.Usercontrol.Panels.SzakmaiLayouts;
 using System;
 using System.Collections.Generic;
@@ -15,7 +15,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using static HR_Portal.Model.ModelSzakmai;
 
 namespace HR_Portal.View.Usercontrol.Panels
 {
@@ -24,7 +23,6 @@ namespace HR_Portal.View.Usercontrol.Panels
     /// </summary>
     public partial class SzakmaiList : UserControl
     {
-        ControlProject pControl = new ControlProject();
         ControlSzakmai szControl = new ControlSzakmai();
 
         private SzakmaiProjektDataSheet szakmaiProjektDataSheet;
@@ -41,9 +39,9 @@ namespace HR_Portal.View.Usercontrol.Panels
         protected void openProject(object sender, RoutedEventArgs e)
         {
             Button button = sender as Button;
-            Projekt_Bevont_struct items = button.DataContext as Projekt_Bevont_struct;
+            ModelSzakmaiBevont items = button.DataContext as ModelSzakmaiBevont;
 
-            pControl.ProjektID = items.id;
+            Session.ProjektID = items.id;
             grid.Children.Clear();
             grid.Children.Add(szakmaiProjektDataSheet = new SzakmaiProjektDataSheet(grid));
         }

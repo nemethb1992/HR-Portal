@@ -1,10 +1,13 @@
 ﻿using HR_Portal.Control;
-using HR_Portal.Model;
+using HR_Portal.Source;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using HR_Portal.Source;
+using HR_Portal.Source.Model;
+using HR_Portal.Source.Model.Applicant;
+using HR_Portal.Source.ViewModel;
+using HR_Portal.Source.Model.Project;
 
 namespace HR_Portal.View.Usercontrol.Panels.SzakmaiLayouts
 {
@@ -15,9 +18,8 @@ namespace HR_Portal.View.Usercontrol.Panels.SzakmaiLayouts
     {
 
         ControlProject pControl = new ControlProject();
-        ControlApplicant aControl = new ControlApplicant();
+        //ControlApplicant aControl = new ControlApplicant();
         ControlApplicantProject paControl = new ControlApplicantProject();
-        Session session = new Session();
         Comment comment = new Comment();
 
         private SzakmaiApplicantDataView szakmaiApplicantDataView;
@@ -39,7 +41,7 @@ namespace HR_Portal.View.Usercontrol.Panels.SzakmaiLayouts
 
         protected void formLoader()
         {
-            List<ProjectExtendedListItems> list = pControl.Data_ProjectFull();
+            List <ModelFullProject> list = VMProject.getFullProject();
             projekt_profile_title.Text = list[0].megnevezes_projekt;
             projekt_input_1.Text = list[0].statusz.ToString();
             projekt_input_2.Text = list[0].megnevezes_munka;
@@ -52,7 +54,7 @@ namespace HR_Portal.View.Usercontrol.Panels.SzakmaiLayouts
             projekt_input_9.Text = list[0].ber.ToString() + " Ft";
             projekt_input_10.Text = list[0].tapasztalat_ev.ToString();
 
-            List<kompetenciak> listKompetencia = paControl.Data_Kompetencia();
+            List<ModelKompetenciak> listKompetencia = paControl.Data_Kompetencia();
             foreach (var item in listKompetencia)
             {
                 if (item.id == list[0].kepesseg1)
@@ -74,9 +76,9 @@ namespace HR_Portal.View.Usercontrol.Panels.SzakmaiLayouts
         protected void commentDelete(object sender, RoutedEventArgs e)
         {
             MenuItem menuItem = sender as MenuItem;
-            megjegyzes_struct items = menuItem.DataContext as megjegyzes_struct;
+            ModelComment items = menuItem.DataContext as ModelComment;
 
-            comment.delete(items.id, session.UserData[0].id, pControl.ProjektID, 0);
+            comment.delete(items.id, Session.UserData[0].id, Session.ProjektID, 0);
             megjegyzes_listBox.ItemsSource = pControl.Data_CommentProject();
         }
 
@@ -86,7 +88,7 @@ namespace HR_Portal.View.Usercontrol.Panels.SzakmaiLayouts
 
             if (e.Key != System.Windows.Input.Key.Enter) return;
             e.Handled = true;
-            comment.add(comment_tartalom.Text, pControl.ProjektID, 0, 0);
+            comment.add(comment_tartalom.Text, Session.ProjektID, 0, 0);
             megjegyzes_listBox.ItemsSource = pControl.Data_CommentProject();
             tbx.Text = "";
         }
@@ -114,9 +116,9 @@ namespace HR_Portal.View.Usercontrol.Panels.SzakmaiLayouts
         protected void openApplicant(object sender, RoutedEventArgs e)
         {
             Button button = sender as Button;
-            JeloltListItems items = button.DataContext as JeloltListItems;
+            ModelApplicantList items = button.DataContext as ModelApplicantList;
 
-            aControl.ApplicantID = items.id;
+            Session.ApplicantID = items.id;
             grid.Children.Clear();
             grid.Children.Add(szakmaiApplicantDataView = new SzakmaiApplicantDataView(grid));
         }

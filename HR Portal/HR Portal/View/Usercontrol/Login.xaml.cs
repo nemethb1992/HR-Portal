@@ -13,7 +13,6 @@ namespace HR_Portal.View.Usercontrol
     public partial class Login : UserControl
     {
         ControlLogin lcontrol = new ControlLogin();
-        Session session = new Session();
 
         private Grid grid;
 
@@ -28,9 +27,9 @@ namespace HR_Portal.View.Usercontrol
 
         private void dbConnectionOpener()
         {
-            Model.MySql mySql = new Model.MySql();
+            Source.MySql mySql = new Source.MySql();
 
-            if (!mySql.isConnected())
+            if (!Source.MySql.isConnected())
             {
                 LoginSign.Text = "Nincs adatkapcsolat!";
             }
@@ -43,14 +42,14 @@ namespace HR_Portal.View.Usercontrol
         
         private void usernameEnterKeyUp(object sender, KeyEventArgs e)
         {
-            if (e.Key != System.Windows.Input.Key.Enter) return;
+            if (e.Key != Key.Enter) return;
             e.Handled = true;
             enter();
         }
 
         private void passwordEnterKeyUp(object sender, KeyEventArgs e)
         {
-            if (e.Key != System.Windows.Input.Key.Enter) return;
+            if (e.Key != Key.Enter) return;
             e.Handled = true;
             enter();
         }
@@ -80,28 +79,27 @@ namespace HR_Portal.View.Usercontrol
         }
         private void enter()
         {
-            //if (lcontrol.ActiveDirectoryValidation(Luser_tbx.Text, Lpass_pwd.Password))
-            //{
+            if (ActiveDirecotry.Bind(Luser_tbx.Text, Lpass_pwd.Password))
+            {
                 if (lcontrol.mySqlUserValidation(Luser_tbx.Text))
                 {
-                    session.UserData = lcontrol.Data_UserSession(Luser_tbx.Text);
-                    session.tartomanyi = Luser_tbx.Text;
+                    Session.ActiveDirectoryDomain = Luser_tbx.Text;
+                    Session.UserData = VMUserData.getUserSession();
                     Main mw = new Main();
                     var window = Window.GetWindow(this);
                     usernameRemember();
                     mw.Show();
                     window.Close();
                 }
-
+                else
+                {
+                    LoginSign.Text = "Kérem regisztráljon!";
+                }
+            }
             else
             {
-                LoginSign.Text = "Kérem regisztráljon!";
+                LoginSign.Text = "Sikertelen hitelesítés!";
             }
-            //}
-            //else
-            //{
-            //    LoginSign.Text = "Sikertelen hitelesítés!";
-            //}
         }
         private void navigateToSurveyWindow(object sender, MouseButtonEventArgs e)
         {

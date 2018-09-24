@@ -1,5 +1,5 @@
 ﻿using HR_Portal.Control;
-using HR_Portal.Model;
+using HR_Portal.Source;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +8,9 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using HR_Portal.Source;
+using HR_Portal.Source.Model;
+using HR_Portal.Source.Model.Applicant;
+using HR_Portal.Source.ViewModel;
 
 namespace HR_Portal.View.Usercontrol.Panels.SzakmaiLayouts
 {
@@ -33,7 +35,7 @@ namespace HR_Portal.View.Usercontrol.Panels.SzakmaiLayouts
 
         protected void formLoader()
         {
-            List<JeloltExtendedList> list = aControl.Data_JeloltFull();
+            List<ModelFullApplicant> list = VMApplicant.getFullApplicant();
             applicant_profile_title.Text = list[0].nev;
             app_input_1.Text = list[0].email;
             app_input_2.Text = list[0].telefon.ToString();
@@ -53,9 +55,9 @@ namespace HR_Portal.View.Usercontrol.Panels.SzakmaiLayouts
         protected void commentDelete(object sender, RoutedEventArgs e)
         {
             MenuItem item = sender as MenuItem;
-            megjegyzes_struct items = item.DataContext as megjegyzes_struct;
+            ModelComment items = item.DataContext as ModelComment;
 
-            comment.delete(items.id, session.UserData[0].id, 0, aControl.ApplicantID);
+            comment.delete(items.id, Session.UserData[0].id, 0, Session.ApplicantID);
             commentLoader(megjegyzes_listBox);
         }
 
@@ -65,7 +67,7 @@ namespace HR_Portal.View.Usercontrol.Panels.SzakmaiLayouts
 
             if (e.Key != System.Windows.Input.Key.Enter) return;
             e.Handled = true;
-            comment.add(comment_tartalom.Text, 0, aControl.ApplicantID, 0);
+            comment.add(comment_tartalom.Text, 0, Session.ApplicantID, 0);
             commentLoader(megjegyzes_listBox);
             textbox.Text = "";
         }

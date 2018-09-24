@@ -1,12 +1,14 @@
 ﻿using HR_Portal.Control;
-using HR_Portal.Model;
+using HR_Portal.Source;
 using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using HR_Portal.Source;
+using HR_Portal.Source.Model;
+using HR_Portal.Source.Model.Project;
+using HR_Portal.Source.ViewModel;
 
 namespace HR_Portal.View.Usercontrol.Panels
 {
@@ -18,7 +20,6 @@ namespace HR_Portal.View.Usercontrol.Panels
         ControlProject pControl = new ControlProject();
         ControlApplicant aControl = new ControlApplicant();
         ControlApplicantProject paControl = new ControlApplicantProject();
-        Session session = new Session();
 
         private Grid grid;
         private ProjectDataSheet projectDataSheet;
@@ -42,7 +43,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             k4_cbx.ItemsSource = paControl.Data_Kompetencia();
             k5_cbx.ItemsSource = paControl.Data_Kompetencia();
 
-            if (pControl.Change == true)
+            if (Session.isUpdate == true)
             {
                 uj_cim.Visibility = Visibility.Hidden;
                 projekt_INSERT_btn.Visibility = Visibility.Hidden;
@@ -54,22 +55,22 @@ namespace HR_Portal.View.Usercontrol.Panels
 
         protected void modifyFormLoader()
         {
-            List<ProjectExtendedListItems> list = pControl.Data_ProjectFull();
+            List<ModelFullProject> list = VMProject.getFullProject();
             nev_tbx.Text = list[0].megnevezes_projekt;
             tapasztalat_tbx.Text = list[0].tapasztalat_ev.ToString();
             ber_tbx.Text = list[0].ber.ToString();
-            pc_cbx.SelectedIndex = checkboxCounter(aControl.Data_Pc().ConvertAll(x => new ComboBox_Seged_Struct { id = x.id, }), list.ConvertAll(x => new ComboBox_Seged_Struct { id = x.pc, }));
-            vegzettseg_cbx.SelectedIndex = checkboxCounter(aControl.Data_Vegzettseg().ConvertAll(x => new ComboBox_Seged_Struct { id = x.id, }), list.ConvertAll(x => new ComboBox_Seged_Struct { id = x.vegzettseg, }));
-            nyelv_cbx.SelectedIndex = checkboxCounter(aControl.Data_Nyelv().ConvertAll(x => new ComboBox_Seged_Struct { id = x.id, }), list.ConvertAll(x => new ComboBox_Seged_Struct { id = x.nyelvtudas, }));
-            munkakor_cbx.SelectedIndex = checkboxCounter(aControl.Data_Munkakor().ConvertAll(x => new ComboBox_Seged_Struct { id = x.id, }), list.ConvertAll(x => new ComboBox_Seged_Struct { id = x.munkakor, }));
-            k1_cbx.SelectedIndex = checkboxCounter(paControl.Data_Kompetencia().ConvertAll(x => new ComboBox_Seged_Struct { id = x.id, }), list.ConvertAll(x => new ComboBox_Seged_Struct { id = x.kepesseg1, }));
-            k2_cbx.SelectedIndex = checkboxCounter(paControl.Data_Kompetencia().ConvertAll(x => new ComboBox_Seged_Struct { id = x.id, }), list.ConvertAll(x => new ComboBox_Seged_Struct { id = x.kepesseg2, }));
-            k3_cbx.SelectedIndex = checkboxCounter(paControl.Data_Kompetencia().ConvertAll(x => new ComboBox_Seged_Struct { id = x.id, }), list.ConvertAll(x => new ComboBox_Seged_Struct { id = x.kepesseg3, }));
-            k4_cbx.SelectedIndex = checkboxCounter(paControl.Data_Kompetencia().ConvertAll(x => new ComboBox_Seged_Struct { id = x.id, }), list.ConvertAll(x => new ComboBox_Seged_Struct { id = x.kepesseg4, }));
-            k5_cbx.SelectedIndex = checkboxCounter(paControl.Data_Kompetencia().ConvertAll(x => new ComboBox_Seged_Struct { id = x.id, }), list.ConvertAll(x => new ComboBox_Seged_Struct { id = x.kepesseg5, }));
+            pc_cbx.SelectedIndex = checkboxCounter(aControl.Data_Pc().ConvertAll(x => new ModelId { id = x.id, }), list.ConvertAll(x => new ModelId { id = x.pc, }));
+            vegzettseg_cbx.SelectedIndex = checkboxCounter(aControl.Data_Vegzettseg().ConvertAll(x => new ModelId { id = x.id, }), list.ConvertAll(x => new ModelId { id = x.vegzettseg, }));
+            nyelv_cbx.SelectedIndex = checkboxCounter(aControl.Data_Nyelv().ConvertAll(x => new ModelId { id = x.id, }), list.ConvertAll(x => new ModelId { id = x.nyelvtudas, }));
+            munkakor_cbx.SelectedIndex = checkboxCounter(aControl.Data_Munkakor().ConvertAll(x => new ModelId { id = x.id, }), list.ConvertAll(x => new ModelId { id = x.munkakor, }));
+            k1_cbx.SelectedIndex = checkboxCounter(paControl.Data_Kompetencia().ConvertAll(x => new ModelId { id = x.id, }), list.ConvertAll(x => new ModelId { id = x.kepesseg1, }));
+            k2_cbx.SelectedIndex = checkboxCounter(paControl.Data_Kompetencia().ConvertAll(x => new ModelId { id = x.id, }), list.ConvertAll(x => new ModelId { id = x.kepesseg2, }));
+            k3_cbx.SelectedIndex = checkboxCounter(paControl.Data_Kompetencia().ConvertAll(x => new ModelId { id = x.id, }), list.ConvertAll(x => new ModelId { id = x.kepesseg3, }));
+            k4_cbx.SelectedIndex = checkboxCounter(paControl.Data_Kompetencia().ConvertAll(x => new ModelId { id = x.id, }), list.ConvertAll(x => new ModelId { id = x.kepesseg4, }));
+            k5_cbx.SelectedIndex = checkboxCounter(paControl.Data_Kompetencia().ConvertAll(x => new ModelId { id = x.id, }), list.ConvertAll(x => new ModelId { id = x.kepesseg5, }));
         }
 
-        protected int checkboxCounter(List<ComboBox_Seged_Struct> ossz_li, List<ComboBox_Seged_Struct> projekt_li)
+        protected int checkboxCounter(List<ModelId> ossz_li, List<ModelId> projekt_li)
         {
             int i = 0;
             foreach (var item in ossz_li)
@@ -82,25 +83,47 @@ namespace HR_Portal.View.Usercontrol.Panels
             }
             return i;
         }
-
-        protected List<ProjectInsertListItems> getData()
+        protected bool isFulfilled()
         {
-            vegzettseg_struct vegzettsegComboBox = (vegzettseg_cbx as ComboBox).SelectedItem as vegzettseg_struct;
-            munkakor_struct munkakorComboBox = (munkakor_cbx as ComboBox).SelectedItem as munkakor_struct;
-            nyelv_struct nyelvComboBox = (nyelv_cbx as ComboBox).SelectedItem as nyelv_struct;
-            kompetenciak kepzettseg1ComboBox = (k1_cbx as ComboBox).SelectedItem as kompetenciak;
-            kompetenciak kepzettseg2ComboBox = (k2_cbx as ComboBox).SelectedItem as kompetenciak;
-            kompetenciak kepzettseg3ComboBox = (k3_cbx as ComboBox).SelectedItem as kompetenciak;
-            kompetenciak kepzettseg4ComboBox = (k4_cbx as ComboBox).SelectedItem as kompetenciak;
-            kompetenciak kepzettseg5ComboBox = (k5_cbx as ComboBox).SelectedItem as kompetenciak;
-            pc_struct pcComboBox = (pc_cbx as ComboBox).SelectedItem as pc_struct;
+            if (
+                vegzettseg_cbx.SelectedItem == null ||
+                munkakor_cbx.SelectedItem == null ||
+                nyelv_cbx.SelectedItem == null ||
+                k1_cbx.SelectedItem == null ||
+                k2_cbx.SelectedItem == null ||
+                k3_cbx.SelectedItem == null ||
+                k4_cbx.SelectedItem == null ||
+                k5_cbx.SelectedItem == null ||
+                pc_cbx.SelectedItem == null ||
+                nev_tbx.Text.Length == 0 ||
+                tapasztalat_tbx.Text.Length == 0 ||
+                ber_tbx.Text.Length == 0)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+        protected List<ModelInsertProject> getData()
+        {
+            ModelVegzettseg vegzettsegComboBox = (vegzettseg_cbx as ComboBox).SelectedItem as ModelVegzettseg;
+            ModelMunkakor munkakorComboBox = (munkakor_cbx as ComboBox).SelectedItem as ModelMunkakor;
+            ModelNyelv nyelvComboBox = (nyelv_cbx as ComboBox).SelectedItem as ModelNyelv;
+            ModelKompetenciak kepzettseg1ComboBox = (k1_cbx as ComboBox).SelectedItem as ModelKompetenciak;
+            ModelKompetenciak kepzettseg2ComboBox = (k2_cbx as ComboBox).SelectedItem as ModelKompetenciak;
+            ModelKompetenciak kepzettseg3ComboBox = (k3_cbx as ComboBox).SelectedItem as ModelKompetenciak;
+            ModelKompetenciak kepzettseg4ComboBox = (k4_cbx as ComboBox).SelectedItem as ModelKompetenciak;
+            ModelKompetenciak kepzettseg5ComboBox = (k5_cbx as ComboBox).SelectedItem as ModelKompetenciak;
+            ModelPc pcComboBox = (pc_cbx as ComboBox).SelectedItem as ModelPc;
             DateTime localDate = DateTime.Now;
-            List<ProjectInsertListItems> items = new List<ProjectInsertListItems>();
+            List<ModelInsertProject> list = new List<ModelInsertProject>();
 
-            items.Add(new ProjectInsertListItems
+            list.Add(new ModelInsertProject
             {
                 id = 0,
-                hr_id = session.UserData[0].id,
+                hr_id = Session.UserData[0].id,
                 megnevezes_projekt = nev_tbx.Text,
                 pc = pcComboBox.id,
                 vegzettseg = vegzettsegComboBox.id,
@@ -119,30 +142,40 @@ namespace HR_Portal.View.Usercontrol.Panels
                 kepesseg5 = Convert.ToInt32(kepzettseg5ComboBox.id)
 
             });
-            return items;
+            return list;
         }
 
         protected void projektInsertClick(object sender, RoutedEventArgs e)
         {
-            pControl.Change = false;
-            try
-            {
-                pControl.projectInsert(getData());
-                grid.Children.Clear();
-                grid.Children.Add(projectDataSheet = new ProjectDataSheet(grid));
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Nem lehet kitöltetlen mező!");
-            }
+
+            Session.isUpdate = false;
+
+                if(isFulfilled())
+                {
+                    pControl.projectInsert(getData());
+                    grid.Children.Clear();
+                    grid.Children.Add(projectDataSheet = new ProjectDataSheet(grid));
+                }
+                else
+                {
+                    showInfo.Text = "Nem lehet kitöltetlen mező!";
+                }
         }
 
         protected void projektUpdateClick(object sender, RoutedEventArgs e)
         {
-            pControl.Change = false;
-            pControl.projectUpdate(getData());
-            grid.Children.Clear();
-            grid.Children.Add(projectDataSheet = new ProjectDataSheet(grid));
+            Session.isUpdate = false;
+
+            if (isFulfilled())
+            {
+                pControl.projectUpdate(getData());
+                grid.Children.Clear();
+                grid.Children.Add(projectDataSheet = new ProjectDataSheet(grid));
+            }
+            else
+            {
+                showInfo.Text = "Nem lehet kitöltetlen mező!";
+            }
         }
 
         protected void numericTextBox(object sender, TextCompositionEventArgs e)
@@ -150,5 +183,6 @@ namespace HR_Portal.View.Usercontrol.Panels
             Regex regex = new Regex("[^0-9-]+");
             e.Handled = regex.IsMatch(e.Text);
         }
+
     }
 }

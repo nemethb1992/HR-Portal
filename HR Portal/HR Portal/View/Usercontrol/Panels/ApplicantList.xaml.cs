@@ -11,7 +11,10 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using HR_Portal.Control;
-using HR_Portal.Model;
+using HR_Portal.Source;
+using HR_Portal.Source.Model;
+using HR_Portal.Source.Model.Applicant;
+using HR_Portal.Source.ViewModel;
 using HR_Portal.Test;
 
 namespace HR_Portal.View.Usercontrol.Panels
@@ -52,9 +55,9 @@ namespace HR_Portal.View.Usercontrol.Panels
         {
             List<string> list = new List<string>();
             
-            munkakor_struct munkakor_item = (munkakor_srccbx as ComboBox).SelectedItem as munkakor_struct;
-            vegzettseg_struct vegzettseg_item = (vegzettseg_srccbx as ComboBox).SelectedItem as vegzettseg_struct;
-            neme_struct nemek_item = (nemek_srccbx as ComboBox).SelectedItem as neme_struct;
+            ModelMunkakor munkakor_item = (munkakor_srccbx as ComboBox).SelectedItem as ModelMunkakor;
+            ModelVegzettseg vegzettseg_item = (vegzettseg_srccbx as ComboBox).SelectedItem as ModelVegzettseg;
+            ModelNem nemek_item = (nemek_srccbx as ComboBox).SelectedItem as ModelNem;
 
             string munkakorStr = "";
             string vegzettsegStr = "";
@@ -107,7 +110,7 @@ namespace HR_Portal.View.Usercontrol.Panels
 
         public void applicantListLoader()
         {
-                List<JeloltListItems> list = aControl.applicantList(searchValues());
+                List<ModelApplicantList> list = VMApplicant.getApplicantList(searchValues());
                 applicant_listBox.ItemsSource = list;
                 talalat_tbl.Text = "Találatok:  " + list.Count.ToString();
             
@@ -123,8 +126,8 @@ namespace HR_Portal.View.Usercontrol.Panels
         protected void applicantOpenClick(object sender, RoutedEventArgs e)
         {
             Button button = sender as Button;
-            JeloltListItems items = button.DataContext as JeloltListItems;
-            aControl.ApplicantID = items.id;
+            ModelApplicantList items = button.DataContext as ModelApplicantList;
+            Session.ApplicantID = items.id;
             grid.Children.Clear();
             grid.Children.Add(applicantDataSheet = new ApplicantDataSheet(grid));
         }
@@ -136,7 +139,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             {
                 case MessageBoxResult.Yes:
                     MenuItem menuItem = sender as MenuItem;
-                    JeloltListItems items = menuItem.DataContext as JeloltListItems;
+                    ModelApplicantList items = menuItem.DataContext as ModelApplicantList;
                     aControl.applicantFullDelete(items.id);
                     applicantListLoader();
                     break;
@@ -160,7 +163,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             TextBox textbox = (TextBox)sender;
             int fisrtLength = textbox.Text.Length;
 
-            await Task.Delay(500);
+            await Task.Delay(300);
             if (fisrtLength == textbox.Text.Length)
                 applicantListLoader();
         }
@@ -232,9 +235,9 @@ namespace HR_Portal.View.Usercontrol.Panels
         protected void modositasClick(object sender, RoutedEventArgs e)
         {
             MenuItem item = sender as MenuItem;
-            JeloltListItems itemSource = item.DataContext as JeloltListItems;
-            aControl.Change = true;
-            aControl.ApplicantID = itemSource.id;
+            ModelApplicantList itemSource = item.DataContext as ModelApplicantList;
+            Session.isUpdate = true;
+            Session.ApplicantID = itemSource.id;
             grid.Children.Clear();
             grid.Children.Add(newApplicantPanel = new NewApplicantPanel(grid));
         }

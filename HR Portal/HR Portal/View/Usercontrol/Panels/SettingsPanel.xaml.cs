@@ -1,5 +1,6 @@
 ﻿using HR_Portal.Control;
-using HR_Portal.Model;
+using HR_Portal.Source;
+using HR_Portal.Source.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -71,7 +72,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             {
                 case MessageBoxResult.Yes:
                     MenuItem menuItem = sender as MenuItem;
-                    vegzettseg_struct items = menuItem.DataContext as vegzettseg_struct;
+                    ModelVegzettseg items = menuItem.DataContext as ModelVegzettseg;
                     if (items.megnevezes_vegzettseg != "Összes")
                         sControl.settingDelete(items.id, "vegzettsegek");
                     listLoader();
@@ -90,7 +91,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             {
                 case MessageBoxResult.Yes:
                     MenuItem menuItem = sender as MenuItem;
-                    munkakor_struct items = menuItem.DataContext as munkakor_struct;
+                    ModelMunkakor items = menuItem.DataContext as ModelMunkakor;
                     if (items.munkakor != "Összes")
                         sControl.settingDelete(items.id, "munkakor");
                     listLoader();
@@ -109,7 +110,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             {
                 case MessageBoxResult.Yes:
                     MenuItem menuItem = sender as MenuItem;
-                    pc_struct items = menuItem.DataContext as pc_struct;
+                    ModelPc items = menuItem.DataContext as ModelPc;
                     if (items.megnevezes_pc != "Összes")
                         sControl.settingDelete(items.id, "pc");
                     listLoader();
@@ -128,7 +129,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             {
                 case MessageBoxResult.Yes:
                     MenuItem menuItem = sender as MenuItem;
-                    ertesulesek items = menuItem.DataContext as ertesulesek;
+                    ModelErtesulesek items = menuItem.DataContext as ModelErtesulesek;
                     if (items.ertesules_megnevezes != "Összes")
                         sControl.settingDelete(items.id, "ertesulesek");
                     listLoader();
@@ -147,7 +148,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             {
                 case MessageBoxResult.Yes:
                     MenuItem menuItem = sender as MenuItem;
-                    nyelv_struct items = menuItem.DataContext as nyelv_struct;
+                    ModelNyelv items = menuItem.DataContext as ModelNyelv;
                     if (items.nyelv != "Összes")
                         sControl.settingDelete(items.id, "nyelv");
                     listLoader();
@@ -166,7 +167,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             {
                 case MessageBoxResult.Yes:
                     MenuItem menuItem = sender as MenuItem;
-                    kompetenciak items = menuItem.DataContext as kompetenciak;
+                    ModelKompetenciak items = menuItem.DataContext as ModelKompetenciak;
                     if (items.kompetencia_megnevezes != "Összes")
                         sControl.settingDelete(items.id, "kompetenciak");
                     listLoader();

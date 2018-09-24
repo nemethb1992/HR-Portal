@@ -30,10 +30,12 @@
                 <ColumnDefinition Width="150" />
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="100" />
+                <ColumnDefinition Width="100" />
             </Grid.ColumnDefinitions>
             <Label x:Name="project_label_1" Content="Projekt" Grid.Column="0" Style="{StaticResource project_label_style}"/>
             <Label x:Name="project_label_2" Content="Jelölt" Grid.Column="1" Style="{StaticResource project_label_style}"/>
             <Label x:Name="project_label_3" Content="Helyszín" Grid.Column="2" Style="{StaticResource project_label_style}"/>
+            <Label x:Name="project_label_4" Content="Dátum" Grid.Column="3" Style="{StaticResource project_label_style}"/>
         </Grid>
         <ListBox x:Name="bevont_interjuk_listbox" Style="{StaticResource small_listBox_style}" Grid.Column="1" Padding="5" Grid.Row="2" HorizontalContentAlignment="Stretch" SelectionMode="Extended">
             <ListBox.Resources>

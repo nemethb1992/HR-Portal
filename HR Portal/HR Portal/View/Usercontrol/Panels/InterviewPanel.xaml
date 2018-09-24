@@ -77,7 +77,8 @@
             <Border x:Name="kompetencia_border" Panel.ZIndex="0" Grid.ColumnSpan="5" Grid.RowSpan="7"  CornerRadius="15" Background="{StaticResource LightGrayGridColor}"/>
             <TextBlock Panel.ZIndex="2" x:Name="Test_title" Grid.Column="1" Grid.Row="1" VerticalAlignment="Top" Style="{StaticResource big_title_style}" FontSize="24" Text="Kompetencia teszt" />
             <TextBlock Panel.ZIndex="2" x:Name="locked_title" Visibility="Hidden" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="5" Grid.RowSpan="5" VerticalAlignment="Center" TextAlignment="Center" Style="{StaticResource big_title_style}" FontSize="32" Text="Kitöltve" />
-            <Button x:Name="teszt_nyitas_btn" Visibility="Hidden" Panel.ZIndex="2" Grid.Column="2" Grid.Row="5" Style="{StaticResource StandardButton}" Background="White" Content="Megtekintés" />
+            <!--<Button x:Name="teszt_nyitas_btn" Visibility="hidden" Panel.ZIndex="2" Grid.Column="2" Grid.Row="5" Style="{StaticResource StandardButton}" Background="White" Content="Megtekintés" />-->
+            
             <TextBlock x:Name="kompetencia1" Grid.Column="1" Grid.Row="2" VerticalAlignment="Top" Style="{StaticResource Standard_Textblock}" Text="test" />
             <TextBlock x:Name="kompetencia2" Grid.Column="1" Grid.Row="4" VerticalAlignment="Top" Style="{StaticResource Standard_Textblock}" Text="test" />
             <TextBlock x:Name="kompetencia3" Grid.Column="2" Grid.Row="2" VerticalAlignment="Top" Style="{StaticResource Standard_Textblock}" Text="test" />
