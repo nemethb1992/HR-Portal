@@ -101,12 +101,8 @@ namespace HR_Portal.View.Usercontrol.Panels
             buttonColorChange();
 
             try{
-<<<<<<< HEAD
-                List<ProjectListItems> lista = pControl.Data_ProjectFull(getSearchData());
-=======
                 List<ModelProjectList> lista = VMProject.getProjectList(getSearchData());
                 project_listBox.ItemsSource = lista;
->>>>>>> ViewModelRefactor
                 talalat_tbl.Text = "Találatok:  " + lista.Count.ToString();
             }
             catch (Exception e)
