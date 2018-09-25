@@ -79,8 +79,8 @@ namespace HR_Portal.View.Usercontrol
         }
         private void enter()
         {
-            if (ActiveDirecotry.Bind(Luser_tbx.Text, Lpass_pwd.Password))
-            {
+            //if (ActiveDirecotry.Bind(Luser_tbx.Text, Lpass_pwd.Password))
+            //{
                 if (lcontrol.mySqlUserValidation(Luser_tbx.Text))
                 {
                     Session.ActiveDirectoryDomain = Luser_tbx.Text;
@@ -91,15 +91,15 @@ namespace HR_Portal.View.Usercontrol
                     mw.Show();
                     window.Close();
                 }
-                else
-                {
-                    LoginSign.Text = "Kérem regisztráljon!";
-                }
-            }
-            else
-            {
-                LoginSign.Text = "Sikertelen hitelesítés!";
-            }
+            //    else
+            //    {
+            //        LoginSign.Text = "Kérem regisztráljon!";
+            //    }
+            //}
+            //else
+            //{
+            //    LoginSign.Text = "Sikertelen hitelesítés!";
+            //}
         }
         private void navigateToSurveyWindow(object sender, MouseButtonEventArgs e)
         {
