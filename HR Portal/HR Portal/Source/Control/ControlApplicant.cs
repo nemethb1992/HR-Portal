@@ -99,20 +99,20 @@ namespace HR_Portal.Control
         public void applicalntProjectListDelete(int id)  //javított
         {
             string command = "DELETE FROM projekt_jelolt_kapcs WHERE projekt_id = " + id + " AND jelolt_id = " + Session.ApplicantID + ";";
-            mySql.update(command);
+            Source.MySql.update(command);
             Source.MySql.close();
         }
 
         public void applicantFullDelete(int id)   //javított használja: applicantlist
         {
             string command = "DELETE FROM jeloltek WHERE jeloltek.id = " + id + ";";
-            mySql.update(command);
+            Source.MySql.update(command);
             command = "DELETE FROM kepessegek WHERE kepessegek.jelolt_id = " + id + ";";
-            mySql.update(command);
+            Source.MySql.update(command);
             command = "DELETE FROM projekt_jelolt_kapcs WHERE projekt_jelolt_kapcs.jelolt_id = " + id + ";";
-            mySql.update(command);
+            Source.MySql.update(command);
             command = "DELETE FROM megjegyzesek WHERE megjegyzesek.jelolt_id = " + id + ";";
-            mySql.update(command);
+            Source.MySql.update(command);
             Source.MySql.close();
         }
 
@@ -120,7 +120,7 @@ namespace HR_Portal.Control
         {
             string command = "INSERT INTO jeloltek (`id`, `nev`, `email`, `telefon`, `lakhely`, `ertesult`, `szuldatum`, neme, `tapasztalat_ev`, `munkakor`, `munkakor2`, `munkakor3`, `vegz_terulet`, `nyelvtudas`,`nyelvtudas2`, `reg_date`) " +
                 "VALUES(NULL, '" + items[0].nev + "',  '" + items[0].email + "', '" + items[0].telefon + "', '" + items[0].lakhely + "', " + items[0].ertesult + ", " + items[0].szuldatum + ", " + items[0].neme + "," + items[0].tapasztalat_ev + "," + items[0].munkakor + "," + items[0].munkakor2 + "," + items[0].munkakor3 + "," + items[0].vegz_terulet + "," + items[0].nyelvtudas + "," + items[0].nyelvtudas2 + ",'" + items[0].reg_date +"');";
-            mySql.update(command);
+            Source.MySql.update(command);
             command = "SELECT jeloltek.id FROM jeloltek WHERE jeloltek.email = '" + items[0].email + "' AND jeloltek.nev = '" + items[0].nev + "'";
             Source.MySql.close();
             Session.ApplicantID = Convert.ToInt16(mySql.listQuery(command, "jeloltek", 1)[0]);
@@ -146,7 +146,7 @@ namespace HR_Portal.Control
                 ",`nyelvtudas2` = " + items[0].nyelvtudas2 + "" +
                 ", `reg_date`  = '" + items[0].reg_date + "'" +
                 "WHERE jeloltek.id = " + Session.ApplicantID +"";
-            mySql.update(query);
+            Source.MySql.update(query);
             int appID = Convert.ToInt16(mySql.listQuery("SELECT jeloltek.id FROM jeloltek WHERE jeloltek.email = '" + items[0].email + "' AND jeloltek.nev = '" + items[0].nev + "' AND jeloltek.lakhely = '" + items[0].lakhely + "'", "jeloltek", 1)[0]);
             Session.ApplicantID = appID;
             Source.MySql.close();

@@ -58,7 +58,7 @@ namespace HR_Portal.Control
         public void settingDelete(int id, string table)
         {
             string command = "DELETE FROM "+table+" WHERE id="+id+"";
-            mySql.update(command);
+            Source.MySql.update(command);
             Source.MySql.close();
         }
 
@@ -90,7 +90,7 @@ namespace HR_Portal.Control
                     command = "INSERT INTO `kompetenciak` (`id`, `kompetencia_megnevezes`) VALUES (NULL, '" + content + "');";
                     break;
             }
-            mySql.update(command);
+            Source.MySql.update(command);
             Source.MySql.close();
         }
         //public void kompetenciaíró()

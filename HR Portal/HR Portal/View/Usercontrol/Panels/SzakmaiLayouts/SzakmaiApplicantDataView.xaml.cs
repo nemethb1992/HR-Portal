@@ -19,7 +19,6 @@ namespace HR_Portal.View.Usercontrol.Panels.SzakmaiLayouts
     /// </summary>
     public partial class SzakmaiApplicantDataView : UserControl
     {
-        Comment comment = new Comment();
         Session session = new Session();
         ControlApplicant aControl = new ControlApplicant();
 
@@ -57,7 +56,7 @@ namespace HR_Portal.View.Usercontrol.Panels.SzakmaiLayouts
             MenuItem item = sender as MenuItem;
             ModelComment items = item.DataContext as ModelComment;
 
-            comment.delete(items.id, Session.UserData[0].id, 0, Session.ApplicantID);
+            VMComment.delete(items.id, Session.UserData[0].id, 0, Session.ApplicantID);
             commentLoader(megjegyzes_listBox);
         }
 
@@ -67,7 +66,7 @@ namespace HR_Portal.View.Usercontrol.Panels.SzakmaiLayouts
 
             if (e.Key != System.Windows.Input.Key.Enter) return;
             e.Handled = true;
-            comment.add(comment_tartalom.Text, 0, Session.ApplicantID, 0);
+            VMComment.add(comment_tartalom.Text, 0, Session.ApplicantID, 0);
             commentLoader(megjegyzes_listBox);
             textbox.Text = "";
         }

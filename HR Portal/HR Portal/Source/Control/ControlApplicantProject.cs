@@ -15,11 +15,11 @@ namespace HR_Portal.Control
         public void telephoneFilterInsert(int ismerte,int muszakok,string utazas) //javított
         {
             string command = "UPDATE projekt_jelolt_kapcs SET allapota = 1 WHERE projekt_id = " + Session.ProjektID + " AND jelolt_id = " + Session.ApplicantID + "";
-            mySql.update(command);
+            Source.MySql.update(command);
             command = "UPDATE jeloltek SET pmk_ismerte = "+ismerte+"  WHERE id = " + Session.ApplicantID + "";
-            mySql.update(command);
+            Source.MySql.update(command);
             command = "INSERT INTO jelolt_statisztika (id, jelolt_id, utazas, muszakok) VALUES(null, "+ Session.ApplicantID+", '"+utazas+"', "+muszakok+")";
-            mySql.update(command);
+            Source.MySql.update(command);
             Source.MySql.close();
         }
         
@@ -52,14 +52,14 @@ namespace HR_Portal.Control
         {
             DateTime dateTime = DateTime.Now;
             string command = "INSERT INTO `interjuk_kapcs` (`projekt_id`, `jelolt_id`, `hr_id`, `felvitel_datum`, `interju_datum`, `interju_cim`, `interju_leiras`, `helyszin`,  `idopont`) VALUES (" + Session.ProjektID + ", " + Session.ApplicantID + ", " + Session.UserData[0].id + ", '" + dateTime.ToString("yyyy.MM.dd.") + "', '" + interju_datum + "', '" + cim + "', '" + leiras + "', '" + helyszin + "', '" + idopont + "');";
-            mySql.update(command);
+            Source.MySql.update(command);
             Source.MySql.close();
         }
 
         public void interviewDelete(int id) // javítva
         {
-            mySql.update("DELETE FROM interjuk_kapcs WHERE interjuk_kapcs.id=" + id + " AND hr_id=" + Session.UserData[0].id + "");
-            mySql.update("DELETE FROM interju_resztvevo_kapcs WHERE interju_id=" + id + " ");
+            Source.MySql.update("DELETE FROM interjuk_kapcs WHERE interjuk_kapcs.id=" + id + " AND hr_id=" + Session.UserData[0].id + "");
+            Source.MySql.update("DELETE FROM interju_resztvevo_kapcs WHERE interju_id=" + id + " ");
             Source.MySql.close();
         }
 
@@ -89,7 +89,7 @@ namespace HR_Portal.Control
         public void kompetenciaUpdate(List<int> list) // javítva használja: interviewpanel
         {
             string command = "INSERT INTO `kompetencia_jelolt_kapcs` (`id`, `interju_id`, `projekt_id`, `jelolt_id`, `hr_id`, `k1_id`, `k1_val`, `k2_id`, `k2_val`, `k3_id`, `k3_val`, `k4_id`, `k4_val`, `k5_id`, `k5_val`, tamogatom) VALUES (null, " + Session.InterViewID + ", " + Session.ProjektID + ", " + Session.ApplicantID + ", " + Session.UserData[0].id + ", "+list[0]+ ", " + list[1] + ", " + list[2] + ", " + list[3] + ", " + list[4] + ", " + list[5] + ", " + list[6] + ", " + list[7] + ", " + list[8] + ", " + list[9] + ", " + list[10] + ");";
-            mySql.update(command);
+            Source.MySql.update(command);
             Source.MySql.close();
         }
 
@@ -120,14 +120,14 @@ namespace HR_Portal.Control
         public void insertInterviewInvited(int id) // javítva
         {
             string command = "INSERT INTO `interju_resztvevo_kapcs` (`id`, `interju_id`, `user_id`) VALUES (NULL, "+ Session.InterViewID +", "+id+");";
-            mySql.update(command);
+            Source.MySql.update(command);
             Source.MySql.close();
         }
 
         public void deleteInterviewInvited(int id) // javítva
         {
             string command = "DELETE FROM `interju_resztvevo_kapcs` WHERE user_id = " + id + "";
-            mySql.update(command);
+            Source.MySql.update(command);
             Source.MySql.close();
         }
         

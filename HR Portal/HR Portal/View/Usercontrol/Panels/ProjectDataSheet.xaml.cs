@@ -19,7 +19,6 @@ namespace HR_Portal.View.Usercontrol.Panels
         ControlProject pControl = new ControlProject();
         ControlApplicantProject paControl = new ControlApplicantProject();
         EmailTemplate emailTemplate = new EmailTemplate();
-        Comment comment = new Comment();
 
         private Grid grid;
         private ProjektJeloltDataSheet projektJeloltDataSheet;
@@ -203,7 +202,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             MenuItem delete = sender as MenuItem;
             ModelComment items = delete.DataContext as ModelComment;
 
-            comment.delete(items.id, Session.UserData[0].id, Session.ProjektID, 0);
+            VMComment.delete(items.id, Session.UserData[0].id, Session.ProjektID, 0);
             listLoader();
         }
 
@@ -244,7 +243,7 @@ namespace HR_Portal.View.Usercontrol.Panels
 
             if (e.Key != System.Windows.Input.Key.Enter) return;
             e.Handled = true;
-            comment.add(comment_tartalom.Text, Session.ProjektID, 0,0);
+            VMComment.add(comment_tartalom.Text, Session.ProjektID, 0,0);
             listLoader();
             tbx.Text = "";
         }

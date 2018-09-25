@@ -20,7 +20,6 @@ namespace HR_Portal.View.Usercontrol.Panels.SzakmaiLayouts
         ControlProject pControl = new ControlProject();
         //ControlApplicant aControl = new ControlApplicant();
         ControlApplicantProject paControl = new ControlApplicantProject();
-        Comment comment = new Comment();
 
         private SzakmaiApplicantDataView szakmaiApplicantDataView;
         private SzakmaiList szakmaiList;
@@ -78,7 +77,7 @@ namespace HR_Portal.View.Usercontrol.Panels.SzakmaiLayouts
             MenuItem menuItem = sender as MenuItem;
             ModelComment items = menuItem.DataContext as ModelComment;
 
-            comment.delete(items.id, Session.UserData[0].id, Session.ProjektID, 0);
+            VMComment.delete(items.id, Session.UserData[0].id, Session.ProjektID, 0);
             megjegyzes_listBox.ItemsSource = pControl.Data_CommentProject();
         }
 
@@ -88,7 +87,7 @@ namespace HR_Portal.View.Usercontrol.Panels.SzakmaiLayouts
 
             if (e.Key != System.Windows.Input.Key.Enter) return;
             e.Handled = true;
-            comment.add(comment_tartalom.Text, Session.ProjektID, 0, 0);
+            VMComment.add(comment_tartalom.Text, Session.ProjektID, 0, 0);
             megjegyzes_listBox.ItemsSource = pControl.Data_CommentProject();
             tbx.Text = "";
         }

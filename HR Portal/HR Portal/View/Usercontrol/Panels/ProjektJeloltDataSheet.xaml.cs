@@ -22,7 +22,6 @@ namespace HR_Portal.View.Usercontrol.Panels
         ControlApplicant aControl = new ControlApplicant();
         ControlProject pControl = new ControlProject();
         ControlApplicantProject paControl = new ControlApplicantProject();
-        Comment comment = new Comment();
 
         private ProjectDataSheet projectDataSheet;
         private InterviewPanel interviewPanel;
@@ -102,7 +101,7 @@ namespace HR_Portal.View.Usercontrol.Panels
 
             if (e.Key != System.Windows.Input.Key.Enter) return;
             e.Handled = true;
-            comment.add(comment_tartalom.Text, Session.ProjektID, Session.ApplicantID, 0);
+            VMComment.add(comment_tartalom.Text, Session.ProjektID, Session.ApplicantID, 0);
             megjegyzes_listBox.ItemsSource = pControl.Data_CommentKapcs();
             tbx.Text = "";
         }
@@ -131,7 +130,7 @@ namespace HR_Portal.View.Usercontrol.Panels
         {
             ModelComment items = (sender as MenuItem).DataContext as ModelComment;
 
-            comment.delete(items.id, Session.UserData[0].id, Session.ProjektID, Session.ApplicantID);
+            VMComment.delete(items.id, Session.UserData[0].id, Session.ProjektID, Session.ApplicantID);
             megjegyzes_listBox.ItemsSource = pControl.Data_CommentKapcs();
         }
 
