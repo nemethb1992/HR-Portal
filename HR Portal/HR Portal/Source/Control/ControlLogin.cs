@@ -56,7 +56,7 @@ namespace HR_Portal.Control
         }
         public bool mySqlUserValidation(string user) //javítva használja: login
         {
-            bool respond = mySql.bind("SELECT count(id) FROM users WHERE username='" + user + "'");
+            bool respond = Source.MySql.bind("SELECT count(id) FROM users WHERE username='" + user + "'");
             Source.MySql.close();
             return respond;
         }

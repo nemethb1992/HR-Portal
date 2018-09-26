@@ -36,13 +36,13 @@ namespace HR_Portal.View.Usercontrol.Panels
 
         protected void projectFormLoader()
         {
-            List<ModelFullApplicant> a_li = VMApplicant.getFullApplicant();
-            List<ModelFullProject> p_li = VMProject.getFullProject();
-            List<ModelKompetenciak> li_k = paControl.Data_Kompetencia();
-            List<ModelKompetenciaSummary> li_kvalue = paControl.Data_KompetenciaJeloltKapcs();
+            List<ModelFullApplicant> applicantList = VMApplicant.getFullApplicant();
+            List<ModelFullProject> projectList = VMProject.getFullProject();
+            List<ModelKompetenciak> kompetenciaList = VMInterview.Data_Kompetencia();
+            List<ModelKompetenciaSummary> summaryList = paControl.Data_KompetenciaJeloltKapcs();
 
-            projekt_jelolt_title_tbl.Text = p_li[0].megnevezes_projekt + " - " + a_li[0].nev;
-            jelolt_telefon.Text = "( " + a_li[0].telefon + " )";
+            projekt_jelolt_title_tbl.Text = projectList[0].megnevezes_projekt + " - " + applicantList[0].nev;
+            jelolt_telefon.Text = "( " + applicantList[0].telefon + " )";
             megjegyzes_listBox.ItemsSource = pControl.Data_CommentKapcs();
             kapcs_jeloltek_listBox.ItemsSource = paControl.Data_Interview();
             inter_cim.Items.Add("HR interjú");
@@ -55,26 +55,26 @@ namespace HR_Portal.View.Usercontrol.Panels
             jeloltTamogatasa();
             try
             {
-                k_1.Value = li_kvalue[0].k1_val;
-                k_2.Value = li_kvalue[0].k2_val;
-                k_3.Value = li_kvalue[0].k3_val;
-                k_4.Value = li_kvalue[0].k4_val;
-                k_5.Value = li_kvalue[0].k5_val;
+                k_1.Value = summaryList[0].k1_val;
+                k_2.Value = summaryList[0].k2_val;
+                k_3.Value = summaryList[0].k3_val;
+                k_4.Value = summaryList[0].k4_val;
+                k_5.Value = summaryList[0].k5_val;
             }
             catch (Exception)
             {
             }
-            foreach (var item in li_k)
+            foreach (var item in kompetenciaList)
             {
-                if (item.id == p_li[0].kepesseg1)
+                if (item.id == projectList[0].kepesseg1)
                 { kompetencia_1.Text = item.kompetencia_megnevezes; }
-                if (item.id == p_li[0].kepesseg2)
+                if (item.id == projectList[0].kepesseg2)
                 { kompetencia_2.Text = item.kompetencia_megnevezes; }
-                if (item.id == p_li[0].kepesseg3)
+                if (item.id == projectList[0].kepesseg3)
                 { kompetencia_3.Text = item.kompetencia_megnevezes; }
-                if (item.id == p_li[0].kepesseg4)
+                if (item.id == projectList[0].kepesseg4)
                 { kompetencia_4.Text = item.kompetencia_megnevezes; }
-                if (item.id == p_li[0].kepesseg5)
+                if (item.id == projectList[0].kepesseg5)
                 { kompetencia_5.Text = item.kompetencia_megnevezes; }
             }
             telephoneInspectedLayout();
@@ -99,7 +99,7 @@ namespace HR_Portal.View.Usercontrol.Panels
         {
             TextBox tbx = sender as TextBox;
 
-            if (e.Key != System.Windows.Input.Key.Enter) return;
+            if (e.Key != Key.Enter) return;
             e.Handled = true;
             VMComment.add(comment_tartalom.Text, Session.ProjektID, Session.ApplicantID, 0);
             megjegyzes_listBox.ItemsSource = pControl.Data_CommentKapcs();

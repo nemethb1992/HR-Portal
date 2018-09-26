@@ -55,7 +55,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             projekt_input_9.Text = li[0].ber.ToString() + " Ft";
             projekt_input_10.Text = li[0].tapasztalat_ev.ToString();
 
-            List<ModelKompetenciak> li_k = paControl.Data_Kompetencia();
+            List<ModelKompetenciak> li_k = VMInterview.Data_Kompetencia();
             foreach (var item in li_k)
             {
                 if(item.id == li[0].kepesseg1)

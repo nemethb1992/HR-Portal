@@ -1,6 +1,7 @@
 ﻿using HR_Portal.Control;
 using HR_Portal.Source;
 using HR_Portal.Source.Model;
+using HR_Portal.Source.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -42,7 +43,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             pc_editlist.ItemsSource = sControl.Data_Pc();
             ertesules_editlist.ItemsSource = sControl.Data_Ertesulesek();
             nyelv_editlist.ItemsSource = sControl.Data_Nyelv();
-            kompetencia_editlist.ItemsSource = paControl.Data_Kompetencia();
+            kompetencia_editlist.ItemsSource = VMInterview.Data_Kompetencia();
         }
 
         protected void settingsInputGotFocus(object sender, RoutedEventArgs e)

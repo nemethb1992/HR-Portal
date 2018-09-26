@@ -37,11 +37,11 @@ namespace HR_Portal.View.Usercontrol.Panels
             vegzettseg_cbx.ItemsSource = aControl.Data_Vegzettseg();
             nyelv_cbx.ItemsSource = aControl.Data_Nyelv();
             munkakor_cbx.ItemsSource = aControl.Data_Munkakor();
-            k1_cbx.ItemsSource = paControl.Data_Kompetencia();
-            k2_cbx.ItemsSource = paControl.Data_Kompetencia();
-            k3_cbx.ItemsSource = paControl.Data_Kompetencia();
-            k4_cbx.ItemsSource = paControl.Data_Kompetencia();
-            k5_cbx.ItemsSource = paControl.Data_Kompetencia();
+            k1_cbx.ItemsSource = VMInterview.Data_Kompetencia();
+            k2_cbx.ItemsSource = VMInterview.Data_Kompetencia();
+            k3_cbx.ItemsSource = VMInterview.Data_Kompetencia();
+            k4_cbx.ItemsSource = VMInterview.Data_Kompetencia();
+            k5_cbx.ItemsSource = VMInterview.Data_Kompetencia();
 
             if (Session.isUpdate == true)
             {
@@ -63,11 +63,11 @@ namespace HR_Portal.View.Usercontrol.Panels
             vegzettseg_cbx.SelectedIndex = checkboxCounter(aControl.Data_Vegzettseg().ConvertAll(x => new ModelId { id = x.id, }), list.ConvertAll(x => new ModelId { id = x.vegzettseg, }));
             nyelv_cbx.SelectedIndex = checkboxCounter(aControl.Data_Nyelv().ConvertAll(x => new ModelId { id = x.id, }), list.ConvertAll(x => new ModelId { id = x.nyelvtudas, }));
             munkakor_cbx.SelectedIndex = checkboxCounter(aControl.Data_Munkakor().ConvertAll(x => new ModelId { id = x.id, }), list.ConvertAll(x => new ModelId { id = x.munkakor, }));
-            k1_cbx.SelectedIndex = checkboxCounter(paControl.Data_Kompetencia().ConvertAll(x => new ModelId { id = x.id, }), list.ConvertAll(x => new ModelId { id = x.kepesseg1, }));
-            k2_cbx.SelectedIndex = checkboxCounter(paControl.Data_Kompetencia().ConvertAll(x => new ModelId { id = x.id, }), list.ConvertAll(x => new ModelId { id = x.kepesseg2, }));
-            k3_cbx.SelectedIndex = checkboxCounter(paControl.Data_Kompetencia().ConvertAll(x => new ModelId { id = x.id, }), list.ConvertAll(x => new ModelId { id = x.kepesseg3, }));
-            k4_cbx.SelectedIndex = checkboxCounter(paControl.Data_Kompetencia().ConvertAll(x => new ModelId { id = x.id, }), list.ConvertAll(x => new ModelId { id = x.kepesseg4, }));
-            k5_cbx.SelectedIndex = checkboxCounter(paControl.Data_Kompetencia().ConvertAll(x => new ModelId { id = x.id, }), list.ConvertAll(x => new ModelId { id = x.kepesseg5, }));
+            k1_cbx.SelectedIndex = checkboxCounter(VMInterview.Data_Kompetencia().ConvertAll(x => new ModelId { id = x.id, }), list.ConvertAll(x => new ModelId { id = x.kepesseg1, }));
+            k2_cbx.SelectedIndex = checkboxCounter(VMInterview.Data_Kompetencia().ConvertAll(x => new ModelId { id = x.id, }), list.ConvertAll(x => new ModelId { id = x.kepesseg2, }));
+            k3_cbx.SelectedIndex = checkboxCounter(VMInterview.Data_Kompetencia().ConvertAll(x => new ModelId { id = x.id, }), list.ConvertAll(x => new ModelId { id = x.kepesseg3, }));
+            k4_cbx.SelectedIndex = checkboxCounter(VMInterview.Data_Kompetencia().ConvertAll(x => new ModelId { id = x.id, }), list.ConvertAll(x => new ModelId { id = x.kepesseg4, }));
+            k5_cbx.SelectedIndex = checkboxCounter(VMInterview.Data_Kompetencia().ConvertAll(x => new ModelId { id = x.id, }), list.ConvertAll(x => new ModelId { id = x.kepesseg5, }));
         }
 
         protected int checkboxCounter(List<ModelId> ossz_li, List<ModelId> projekt_li)
