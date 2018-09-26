@@ -31,7 +31,7 @@ namespace HR_Portal.Control
         }
         public string ROOTurl()
         {
-            return mySql.getRootUrl("SELECT * FROM ROOTurl");
+            return Source.MySql.getRootUrl("SELECT * FROM ROOTurl");
         }
     }
 }

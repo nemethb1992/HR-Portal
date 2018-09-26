@@ -212,27 +212,35 @@ namespace HR_Portal.View.Usercontrol.Panels
             MenuItem mitem = sender as MenuItem;
             ModelApplicantList items = mitem.DataContext as ModelApplicantList;
 
-            if (mitem.Tag.ToString() == "delete")
+            switch (mitem.Tag.ToString())
             {
-                MessageBoxResult result = MessageBox.Show("Elutasító E-Mail kiküldésre kerüljön?", "My App", MessageBoxButton.YesNoCancel);
-                switch (result)
-                {
-                    case MessageBoxResult.Yes:
-                        pControl.jeloltKapcsDelete(items.id);
-                        email.send(items.email, emailTemplate.Elutasito_Email(items.nev));
+                case "delete":
+                    {
+                        MessageBoxResult result = MessageBox.Show("Elutasító E-Mail kiküldésre kerüljön?", "My App", MessageBoxButton.YesNoCancel);
+                        switch (result)
+                        {
+                            case MessageBoxResult.Yes:
+                                pControl.jeloltKapcsDelete(items.id);
+                                email.send(items.email, emailTemplate.Elutasito_Email(items.nev));
+                                break;
+                            case MessageBoxResult.No:
+                                pControl.jeloltKapcsDelete(items.id);
+                                break;
+                            case MessageBoxResult.Cancel:
+                                break;
+                        }
                         break;
-                    case MessageBoxResult.No:
-                        pControl.jeloltKapcsDelete(items.id);
-                        break;
-                    case MessageBoxResult.Cancel:
-                        break;
-                }
+                    }
+                case "1":
+                    pControl.jeloltKapcsUpdate(items.id, Convert.ToInt32(mitem.Tag));
+                    break;
+                case "2":
+                    pControl.jeloltKapcsDelete(items.id);
+                    break;
+                case "3":
+                    pControl.jeloltKapcsDelete(items.id);
+                    break;
             }
-            else
-            {
-                pControl.jeloltKapcsUpdate(items.id, Convert.ToInt32(mitem.Tag));
-            }
-
             listLoader();
             formLoader();
         }
