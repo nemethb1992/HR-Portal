@@ -17,9 +17,6 @@ namespace HR_Portal.View.Usercontrol.Panels
     /// </summary>
     public partial class InterviewPanel : UserControl
     {
-        ControlApplicant aControl = new ControlApplicant();
-        ControlProject pControl = new ControlProject();
-        ControlApplicantProject paControl = new ControlApplicantProject();
 
         private Grid grid;
         private ProjektJeloltDataSheet projektJeloltDataSheet;
@@ -54,9 +51,9 @@ namespace HR_Portal.View.Usercontrol.Panels
 
         protected void interviewLoader()
         {
-            List<ModelInterview> list = paControl.Data_InterviewById();
+            List<ModelInterview> list = VMInterview.Data_InterviewById();
             List<ModelFullProject> li = VMProject.getFullProject();
-            List<ModelKompetenciak> li_k = paControl.Data_Kompetencia();
+            List<ModelKompetenciak> li_k = VMInterview.Data_Kompetencia();
 
             foreach (var item in li_k)
             {
@@ -79,10 +76,10 @@ namespace HR_Portal.View.Usercontrol.Panels
             interju_idopont_tbl.Text = list[0].interju_datum +" - "+ list[0].idopont;
             interju_liras_tbl.Text = list[0].interju_leiras;
 
-            choose_editlist.ItemsSource = paControl.Data_ProjektErtesitendokKapcsolt();
-            ertesitendok_editlist.ItemsSource = paControl.Data_InterjuErtesitendokKapcsolt();
+            choose_editlist.ItemsSource = VMInterview.Data_ProjektErtesitendokKapcsolt();
+            ertesitendok_editlist.ItemsSource = VMInterview.Data_InterjuErtesitendokKapcsolt();
 
-            if (paControl.hasKompetencia())
+            if (VMInterview.hasKompetencia())
             {
                 Panel.SetZIndex(kompetencia_border, 1);
                 locked_title.Visibility = Visibility.Visible;
@@ -109,7 +106,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             list.Add(Convert.ToInt32(k5_slider.Value));
             list.Add(type);
 
-            paControl.kompetenciaUpdate(list);
+            VMInterview.kompetenciaUpdate(list);
             Panel.SetZIndex(kompetencia_border,1);
             locked_title.Visibility = Visibility.Visible;
             //teszt_nyitas_btn.Visibility = Visibility.Visible;  //teszt megtekintéshez
@@ -121,7 +118,7 @@ namespace HR_Portal.View.Usercontrol.Panels
         {
             resztvevo_felvetel_list.Visibility = Visibility.Visible;
             Blur_Grid.Visibility = Visibility.Visible;
-            choose_editlist.ItemsSource = paControl.Data_ProjektErtesitendokKapcsolt();
+            choose_editlist.ItemsSource = VMInterview.Data_ProjektErtesitendokKapcsolt();
         }
         
         protected void addColleagueToInterview(object sender, RoutedEventArgs e)
@@ -129,9 +126,9 @@ namespace HR_Portal.View.Usercontrol.Panels
             Button btn = sender as Button;
             ModelErtesitendok items = btn.DataContext as ModelErtesitendok;
 
-            paControl.insertInterviewInvited(items.id);
-            choose_editlist.ItemsSource = paControl.Data_ProjektErtesitendokKapcsolt();
-            ertesitendok_editlist.ItemsSource = paControl.Data_InterjuErtesitendokKapcsolt();
+            VMInterview.insertInterviewInvited(items.id);
+            choose_editlist.ItemsSource = VMInterview.Data_ProjektErtesitendokKapcsolt();
+            ertesitendok_editlist.ItemsSource = VMInterview.Data_InterjuErtesitendokKapcsolt();
         }
 
         protected void removeColleague(object sender, RoutedEventArgs e)
@@ -141,9 +138,9 @@ namespace HR_Portal.View.Usercontrol.Panels
                 MenuItem menu = sender as MenuItem;
                 ModelErtesitendok items = menu.DataContext as ModelErtesitendok;
 
-                paControl.deleteInterviewInvited(items.id);
-                choose_editlist.ItemsSource = paControl.Data_ProjektErtesitendokKapcsolt();
-                ertesitendok_editlist.ItemsSource = paControl.Data_InterjuErtesitendokKapcsolt();
+                VMInterview.deleteInterviewInvited(items.id);
+                choose_editlist.ItemsSource = VMInterview.Data_ProjektErtesitendokKapcsolt();
+                ertesitendok_editlist.ItemsSource = VMInterview.Data_InterjuErtesitendokKapcsolt();
             }
         }
 
@@ -155,15 +152,15 @@ namespace HR_Portal.View.Usercontrol.Panels
 
         protected void resztvevoSaveClick(object sender, RoutedEventArgs e)
         {
-            ertesitendok_editlist.ItemsSource = paControl.Data_InterjuErtesitendokKapcsolt();
+            ertesitendok_editlist.ItemsSource = VMInterview.Data_InterjuErtesitendokKapcsolt();
         }
 
         protected void addColleague(object sender, RoutedEventArgs e)
         {
             EmailTemplate et = new EmailTemplate();
             ControlEmail email = new ControlEmail();
-            List<ModelErtesitendok> szemelyek = paControl.Data_InterjuErtesitendokKapcsolt();
-            List<ModelInterview> interju = paControl.Data_InterviewById();
+            List<ModelErtesitendok> szemelyek = VMInterview.Data_InterjuErtesitendokKapcsolt();
+            List<ModelInterview> interju = VMInterview.Data_InterviewById();
             List<String> resztvevok = new List<string>();
 
             foreach (var item in szemelyek)
