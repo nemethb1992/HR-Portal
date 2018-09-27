@@ -22,17 +22,13 @@ namespace HR_Portal.View.Usercontrol
             InitializeComponent();
 
             setartUp();
-            dbConnectionOpener();
         }
 
-        private void dbConnectionOpener()
+        private bool dbConnectionOpener()
         {
             Source.MySql mySql = new Source.MySql();
-
-            if (!Source.MySql.isConnected())
-            {
-                LoginSign.Text = "Nincs adatkapcsolat!";
-            }
+            bool conn = Source.MySql.isConnected();
+            return conn;
         }
 
         private void loginEnterClick(object sender, RoutedEventArgs e)
@@ -53,6 +49,7 @@ namespace HR_Portal.View.Usercontrol
             e.Handled = true;
             enter();
         }
+
         private void setartUp()
         {
             string user = lcontrol.getRememberedUser();
@@ -66,6 +63,7 @@ namespace HR_Portal.View.Usercontrol
                 login_cbx.IsChecked = false;
             }
         }
+
         private void usernameRemember()
         {
             if (login_cbx.IsChecked == true)
@@ -77,10 +75,13 @@ namespace HR_Portal.View.Usercontrol
                 lcontrol.deleteRememberedUser();
             }
         }
+
         private void enter()
         {
-            //if (ActiveDirecotry.Bind(Luser_tbx.Text, Lpass_pwd.Password))
-            //{
+            if (dbConnectionOpener())
+            {
+                //if (ActiveDirecotry.Bind(Luser_tbx.Text, Lpass_pwd.Password))
+                //{
                 if (lcontrol.mySqlUserValidation(Luser_tbx.Text))
                 {
                     Session.ActiveDirectoryDomain = Luser_tbx.Text;
@@ -91,16 +92,22 @@ namespace HR_Portal.View.Usercontrol
                     mw.Show();
                     window.Close();
                 }
-        //    else
-        //    {
-        //        LoginSign.Text = "Kérem regisztráljon!";
-        //    }
-        //}
-        //    else
-        //    {
-        //        LoginSign.Text = "Sikertelen hitelesítés!";
-        //    }
-}
+                //    else
+                //    {
+                //        LoginSign.Text = "Kérem regisztráljon!";
+                //    }
+                //}
+                //    else
+                //    {
+                //        LoginSign.Text = "Sikertelen hitelesítés!";
+                //    }
+            }
+            else
+            {
+                LoginSign.Text = "Nincs adatkapcsolat!";
+            }
+        }
+
         private void navigateToSurveyWindow(object sender, MouseButtonEventArgs e)
         {
             SurveyWindow popup = new SurveyWindow();

@@ -17,7 +17,6 @@ namespace HR_Portal.View.Windows
         private SettingsPanel settings_p;
         private SzakmaiKezdolap szakmai_Kezdolap;
         private FavouritesPanel favourites_Panel;
-        ControlFile f_control = new ControlFile();
         //private applicant_DataView applicant_dv;
         //private project_DataView project_dv;
         public Main()
