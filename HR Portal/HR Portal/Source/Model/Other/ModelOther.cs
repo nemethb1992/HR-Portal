@@ -10,10 +10,10 @@ namespace HR_Portal.Source.Model
         public int id { get; set; }
         public string nyelv { get; set; }
 
-        public static List<ModelNyelv> getModelNyelv(string query)
+        public static List<ModelNyelv> GetModelNyelv(string query)
         {
             List<ModelNyelv> items = new List<ModelNyelv>();
-            if (MySql.open() == true)
+            if (MySql.Open() == true)
             {
                 MySql.cmd = new MySqlCommand(query, MySql.conn);
                 MySql.sdr = MySql.cmd.ExecuteReader();
@@ -37,10 +37,10 @@ namespace HR_Portal.Source.Model
         public int id { get; set; }
         public string ertesules_megnevezes { get; set; }
 
-        public static List<ModelErtesulesek> getModelErtesulesek(string command)
+        public static List<ModelErtesulesek> GetModelErtesulesek(string command)
         {
             List<ModelErtesulesek> list = new List<ModelErtesulesek>();
-            if (MySql.open() == true)
+            if (MySql.Open() == true)
             {
                 MySql.cmd = new MySqlCommand(command, MySql.conn);
                 MySql.sdr = MySql.cmd.ExecuteReader();
@@ -63,10 +63,10 @@ namespace HR_Portal.Source.Model
         public int id { get; set; }
         public string nem { get; set; }
 
-        public static List<ModelNem> getModelNem(string command)
+        public static List<ModelNem> GetModelNem(string command)
         {
             List<ModelNem> list = new List<ModelNem>();
-            if (MySql.open() == true)
+            if (MySql.Open() == true)
             {
                 MySql.cmd = new MySqlCommand(command, MySql.conn);
                 MySql.sdr = MySql.cmd.ExecuteReader();
@@ -90,10 +90,10 @@ namespace HR_Portal.Source.Model
         public int id { get; set; }
         public string munkakor { get; set; }
 
-        public static List<ModelMunkakor> getModelMunkakor(string comannd)
+        public static List<ModelMunkakor> GetModelMunkakor(string comannd)
         {
             List<ModelMunkakor> list = new List<ModelMunkakor>();
-            if (MySql.open() == true)
+            if (MySql.Open() == true)
             {
                 MySql.cmd = new MySqlCommand(comannd, MySql.conn);
                 MySql.sdr = MySql.cmd.ExecuteReader();
@@ -117,10 +117,10 @@ namespace HR_Portal.Source.Model
         public int id { get; set; }
         public string allapot { get; set; }
 
-        public static List<ModelStatusz> getModelStatusz(string command)
+        public static List<ModelStatusz> GetModelStatusz(string command)
         {
             List<ModelStatusz> list = new List<ModelStatusz>();
-            if (MySql.open() == true)
+            if (MySql.Open() == true)
             {
                 MySql.cmd = new MySqlCommand(command, MySql.conn);
                 MySql.sdr = MySql.cmd.ExecuteReader();
@@ -143,10 +143,10 @@ namespace HR_Portal.Source.Model
         public int id { get; set; }
         public string megnevezes_pc { get; set; }
 
-        public static List<ModelPc> getModelPc(string command)
+        public static List<ModelPc> GetModelPc(string command)
         {
             List<ModelPc> list = new List<ModelPc>();
-            if (MySql.open() == true)
+            if (MySql.Open() == true)
             {
                 MySql.cmd = new MySqlCommand(command, MySql.conn);
                 MySql.sdr = MySql.cmd.ExecuteReader();
@@ -169,10 +169,10 @@ namespace HR_Portal.Source.Model
         public int id { get; set; }
         public string megnevezes_vegzettseg { get; set; }
 
-        public static List<ModelVegzettseg> getModelVegzettseg(string command)
+        public static List<ModelVegzettseg> GetModelVegzettseg(string command)
         {
             List<ModelVegzettseg> list = new List<ModelVegzettseg>();
-            if (MySql.open() == true)
+            if (MySql.Open() == true)
             {
                 MySql.cmd = new MySqlCommand(command, MySql.conn);
                 MySql.sdr = MySql.cmd.ExecuteReader();
@@ -196,10 +196,10 @@ namespace HR_Portal.Source.Model
         public string name { get; set; }
         public string email { get; set; }
 
-        public static List<ModelErtesitendok> getModelErtesitendok(string command)
+        public static List<ModelErtesitendok> GetModelErtesitendok(string command)
         {
             List<ModelErtesitendok> list = new List<ModelErtesitendok>();
-            if (MySql.open() == true)
+            if (MySql.Open() == true)
             {
                 MySql.cmd = new MySqlCommand(command, MySql.conn);
                 MySql.sdr = MySql.cmd.ExecuteReader();
@@ -227,10 +227,10 @@ namespace HR_Portal.Source.Model
         public int jogosultsag { get; set; }
         public int validitas { get; set; }
 
-        public static List<ModelHr> getModelHr(string command)
+        public static List<ModelHr> GetModelHr(string command)
         {
             List<ModelHr> list = new List<ModelHr>();
-            if (MySql.open() == true)
+            if (MySql.Open() == true)
             {
                 MySql.cmd = new MySqlCommand(command, MySql.conn);
                 MySql.sdr = MySql.cmd.ExecuteReader();
@@ -262,10 +262,10 @@ namespace HR_Portal.Source.Model
         public string datum { get; set; }
         public int ertekeles { get; set; }
 
-        public static List<ModelComment> getModelComment(string command)
+        public static List<ModelComment> GetModelComment(string command)
         {
             List<ModelComment> list = new List<ModelComment>();
-            if (MySql.open() == true)
+            if (MySql.Open() == true)
             {
                 MySql.cmd = new MySqlCommand(command, MySql.conn);
                 MySql.sdr = MySql.cmd.ExecuteReader();
@@ -301,10 +301,10 @@ namespace HR_Portal.Source.Model
         public int id { get; set; }
         public string kompetencia_megnevezes { get; set; }
 
-        public static List<ModelKompetenciak> getModelKompetenciak(string command)
+        public static List<ModelKompetenciak> GetModelKompetenciak(string command)
         {
             List<ModelKompetenciak> list = new List<ModelKompetenciak>();
-            if (MySql.open() == true)
+            if (MySql.Open() == true)
             {
                 MySql.cmd = new MySqlCommand(command, MySql.conn);
                 MySql.sdr = MySql.cmd.ExecuteReader();
@@ -328,10 +328,10 @@ namespace HR_Portal.Source.Model
         public int osszeg { get; set; }
         public string koltseg_megnevezes { get; set; }
 
-        public static List<ModelKoltsegek> getModelKoltsegek(string command)
+        public static List<ModelKoltsegek> GetModelKoltsegek(string command)
         {
             List<ModelKoltsegek> list = new List<ModelKoltsegek>();
-            if (MySql.open() == true)
+            if (MySql.Open() == true)
             {
                 MySql.cmd = new MySqlCommand(command, MySql.conn);
                 MySql.sdr = MySql.cmd.ExecuteReader();

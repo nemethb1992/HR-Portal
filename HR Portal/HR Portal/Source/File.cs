@@ -3,13 +3,11 @@ using System.Collections.Generic;
 using System.IO;
 using HR_Portal.Source.Model;
 
-namespace HR_Portal.Control
+namespace HR_Portal.Source
 {
-    class ControlFile
+    class File
     {
-        Source.MySql mySql = new Source.MySql();
-
-        public List<ModelJeloltFile> Applicant_FolderReadOut(int ApplicantID)
+        public List<ModelJeloltFile> Read(int ApplicantID)
         {
             DirectoryInfo directory;
             List<ModelJeloltFile> list = new List<ModelJeloltFile>();
@@ -31,7 +29,7 @@ namespace HR_Portal.Control
         }
         public string ROOTurl()
         {
-            return Source.MySql.getRootUrl("SELECT * FROM ROOTurl");
+            return MySql.GetRootUrl("SELECT * FROM ROOTurl");
         }
     }
 }

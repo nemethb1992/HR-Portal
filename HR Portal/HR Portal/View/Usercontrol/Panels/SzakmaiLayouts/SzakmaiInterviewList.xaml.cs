@@ -1,6 +1,6 @@
-﻿using HR_Portal.Control;
-using HR_Portal.Source;
+﻿using HR_Portal.Source;
 using HR_Portal.Source.Model.Project;
+using HR_Portal.Source.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,7 +23,6 @@ namespace HR_Portal.View.Usercontrol.Panels.SzakmaiLayouts
     /// </summary>
     public partial class SzakmaiInterviewList : UserControl
     {
-        ControlSzakmai szControl = new ControlSzakmai();
 
         private Grid grid;
         private SzakmaiKezdolap szakmaiKezdolap;
@@ -33,7 +32,7 @@ namespace HR_Portal.View.Usercontrol.Panels.SzakmaiLayouts
         {
             InitializeComponent();
             this.grid = grid;
-            bevont_interjuk_listbox.ItemsSource = szControl.Data_SzakmaiInterview();
+            bevont_interjuk_listbox.ItemsSource = VMSzakmai.Data_SzakmaiInterview();
         }
 
         protected void szakmai_mainpage_btn_Click(object sender, RoutedEventArgs e)

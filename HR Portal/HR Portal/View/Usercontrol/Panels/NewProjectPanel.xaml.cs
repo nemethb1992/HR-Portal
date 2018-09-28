@@ -1,5 +1,4 @@
-﻿using HR_Portal.Control;
-using HR_Portal.Source;
+﻿using HR_Portal.Source;
 using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -55,7 +54,7 @@ namespace HR_Portal.View.Usercontrol.Panels
 
         protected void modifyFormLoader()
         {
-            List<ModelFullProject> list = VMProject.getFullProject();
+            List<ModelFullProject> list = VMProject.GetFullProject();
             nev_tbx.Text = list[0].megnevezes_projekt;
             tapasztalat_tbx.Text = list[0].tapasztalat_ev.ToString();
             ber_tbx.Text = list[0].ber.ToString();
@@ -152,7 +151,7 @@ namespace HR_Portal.View.Usercontrol.Panels
 
                 if(isFulfilled())
                 {
-                    pControl.projectInsert(getData());
+                    VMProject.Insert(getData());
                     grid.Children.Clear();
                     grid.Children.Add(projectDataSheet = new ProjectDataSheet(grid));
                 }
@@ -168,7 +167,7 @@ namespace HR_Portal.View.Usercontrol.Panels
 
             if (isFulfilled())
             {
-                pControl.projectUpdate(getData());
+                VMProject.Update(getData());
                 grid.Children.Clear();
                 grid.Children.Add(projectDataSheet = new ProjectDataSheet(grid));
             }

@@ -1,8 +1,8 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using HR_Portal.Control;
 using HR_Portal.Source;
+using HR_Portal.Source.ViewModel;
 using HR_Portal.View.Windows;
 
 namespace HR_Portal.View.Usercontrol
@@ -12,7 +12,6 @@ namespace HR_Portal.View.Usercontrol
     /// </summary>
     public partial class Login : UserControl
     {
-        ControlLogin lcontrol = new ControlLogin();
 
         private Grid grid;
 
@@ -26,8 +25,7 @@ namespace HR_Portal.View.Usercontrol
 
         private bool dbConnectionOpener()
         {
-            Source.MySql mySql = new Source.MySql();
-            bool conn = Source.MySql.isConnected();
+            bool conn = Source.MySql.IsConnected();
             return conn;
         }
 
@@ -52,7 +50,7 @@ namespace HR_Portal.View.Usercontrol
 
         private void setartUp()
         {
-            string user = lcontrol.getRememberedUser();
+            string user = VMLogin.GetSavedUser();
             if (user != "")
             {
                 Luser_tbx.Text = user;
@@ -68,11 +66,11 @@ namespace HR_Portal.View.Usercontrol
         {
             if (login_cbx.IsChecked == true)
             {
-                lcontrol.writeRememberedUser(Luser_tbx.Text);
+                VMLogin.SaveUser(Luser_tbx.Text);
             }
             else
             {
-                lcontrol.deleteRememberedUser();
+                VMLogin.DeleteSavedUser();
             }
         }
 
@@ -82,10 +80,10 @@ namespace HR_Portal.View.Usercontrol
             {
                 //if (ActiveDirecotry.Bind(Luser_tbx.Text, Lpass_pwd.Password))
                 //{
-                if (lcontrol.mySqlUserValidation(Luser_tbx.Text))
+                if (VMLogin.Authentication(Luser_tbx.Text))
                 {
                     Session.ActiveDirectoryDomain = Luser_tbx.Text;
-                    Session.UserData = VMUserData.getUserSession();
+                    Session.UserData = VMUserData.Get();
                     Main mw = new Main();
                     var window = Window.GetWindow(this);
                     usernameRemember();

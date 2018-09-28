@@ -1,4 +1,4 @@
-﻿using HR_Portal.Control;
+﻿using HR_Portal.Source;
 using HR_Portal.View.Usercontrol.Panels;
 using System;
 using System.Collections.Generic;

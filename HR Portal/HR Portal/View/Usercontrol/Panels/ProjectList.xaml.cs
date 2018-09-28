@@ -5,7 +5,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
-using HR_Portal.Control;
 using HR_Portal.Source;
 using HR_Portal.Source.Model;
 using HR_Portal.Source.Model.Project;
@@ -101,7 +100,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             buttonColorChange();
 
             try{
-                List<ModelProjectList> lista = VMProject.getProjectList(getSearchData());
+                List<ModelProjectList> lista = VMProject.GetProjectList(getSearchData());
                 project_listBox.ItemsSource = lista;
                 talalat_tbl.Text = "Találatok:  " + lista.Count.ToString();
             }
@@ -165,7 +164,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             {
                 case MessageBoxResult.Yes:
                     ModelProjectList items = (sender as MenuItem).DataContext as ModelProjectList;
-                    pControl.projectDelete(items.id);
+                    VMProject.Delete(items.id);
                     projectListLoader();
                     break;
                 case MessageBoxResult.No:
@@ -195,14 +194,14 @@ namespace HR_Portal.View.Usercontrol.Panels
         protected void projectPassivateClick(object sender, RoutedEventArgs e)
         {
             pControl.statusChange(0);
-            project_listBox.ItemsSource = VMProject.getProjectList(getSearchData());
+            project_listBox.ItemsSource = VMProject.GetProjectList(getSearchData());
             buttonColorChange();
         }
 
         protected void projectActivateClick(object sender, RoutedEventArgs e)
         {
             pControl.statusChange(1);
-            project_listBox.ItemsSource = VMProject.getProjectList(getSearchData());
+            project_listBox.ItemsSource = VMProject.GetProjectList(getSearchData());
             buttonColorChange();
         }
 

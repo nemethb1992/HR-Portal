@@ -1,5 +1,4 @@
-﻿using HR_Portal.Control;
-using HR_Portal.Source;
+﻿using HR_Portal.Source;
 using HR_Portal.Public.templates;
 using System;
 using System.Collections.Generic;
@@ -42,7 +41,7 @@ namespace HR_Portal.View.Usercontrol.Panels
         protected void formLoader()
         {
 
-            List<ModelFullProject> li = VMProject.getFullProject();
+            List<ModelFullProject> li = VMProject.GetFullProject();
             projekt_profile_title.Text = li[0].megnevezes_projekt;
             projekt_input_1.Text = li[0].statusz.ToString();
             projekt_input_2.Text = li[0].megnevezes_munka;
@@ -202,13 +201,13 @@ namespace HR_Portal.View.Usercontrol.Panels
             MenuItem delete = sender as MenuItem;
             ModelComment items = delete.DataContext as ModelComment;
 
-            VMComment.delete(items.id, Session.UserData[0].id, Session.ProjektID, 0);
+            VMComment.Delete(items.id, Session.UserData[0].id, Session.ProjektID, 0);
             listLoader();
         }
 
         protected void jeloltRightClick(object sender, RoutedEventArgs e)
         {
-            ControlEmail email = new ControlEmail();
+            Email email = new Email();
             MenuItem mitem = sender as MenuItem;
             ModelApplicantList items = mitem.DataContext as ModelApplicantList;
 
@@ -221,7 +220,7 @@ namespace HR_Portal.View.Usercontrol.Panels
                         {
                             case MessageBoxResult.Yes:
                                 pControl.jeloltKapcsDelete(items.id);
-                                email.send(items.email, emailTemplate.Elutasito_Email(items.nev));
+                                email.Send(items.email, emailTemplate.Elutasito_Email(items.nev));
                                 break;
                             case MessageBoxResult.No:
                                 pControl.jeloltKapcsDelete(items.id);
@@ -251,7 +250,7 @@ namespace HR_Portal.View.Usercontrol.Panels
 
             if (e.Key != System.Windows.Input.Key.Enter) return;
             e.Handled = true;
-            VMComment.add(comment_tartalom.Text, Session.ProjektID, 0,0);
+            VMComment.Add(comment_tartalom.Text, Session.ProjektID, 0,0);
             listLoader();
             tbx.Text = "";
         }
@@ -328,7 +327,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             if(selectedTabCode == 1)
             {
                 ModelApplicantListbox items = btn.DataContext as ModelApplicantListbox;
-                pControl.addJeloltInsert(items.id, Session.ProjektID);
+                VMApplicant.AddProject(items.id, Session.ProjektID);
                 projekt_kapcsolodo_list.ItemsSource = pControl.Data_JeloltForCheckbox(Ember_Search_tbx.Text);
                 kapcs_jeloltek_listBox.ItemsSource = pControl.Data_JeloltKapcs();
             }

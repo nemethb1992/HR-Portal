@@ -1,5 +1,4 @@
-﻿using HR_Portal.Control;
-using HR_Portal.Source;
+﻿using HR_Portal.Source;
 using HR_Portal.Source.Model;
 using HR_Portal.Source.ViewModel;
 using System;

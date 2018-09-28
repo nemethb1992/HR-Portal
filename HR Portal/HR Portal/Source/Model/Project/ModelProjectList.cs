@@ -18,11 +18,11 @@ namespace HR_Portal.Source.Model.Project
         public string fel_datum { get; set; }
         public int Completion { get; set; }
 
-        public static List<ModelProjectList> getModelProjectList(string command)
+        public static List<ModelProjectList> GetModelProjectList(string command)
         {
             List<ModelProjectList> list = new List<ModelProjectList>();
 
-            if (MySql.open() == true)
+            if (MySql.Open() == true)
             {
                 MySql.cmd = new MySqlCommand(command, MySql.conn);
                 MySql.sdr = MySql.cmd.ExecuteReader();
@@ -51,7 +51,7 @@ namespace HR_Portal.Source.Model.Project
                 }
                 MySql.sdr.Close();
             }
-            MySql.close();
+            MySql.Close();
             return list;
         }
     }

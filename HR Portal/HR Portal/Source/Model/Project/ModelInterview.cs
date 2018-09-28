@@ -23,11 +23,11 @@ namespace HR_Portal.Source.Model.Project
         public string helyszin { get; set; }
         public string idopont { get; set; }
 
-        public static List<ModelInterview> getModelInterview(string command)
+        public static List<ModelInterview> GetModelInterview(string command)
         {
             List<ModelInterview> list = new List<ModelInterview>();
 
-            if (MySql.open() == true)
+            if (MySql.Open() == true)
             {
                 MySql.cmd = new MySqlCommand(command, MySql.conn);
                 MySql.sdr = MySql.cmd.ExecuteReader();
@@ -55,11 +55,11 @@ namespace HR_Portal.Source.Model.Project
             return list;
         }
 
-        public static List<ModelInterview> getSzakmaiInterview(string command)
+        public static List<ModelInterview> GetSzakmaiInterview(string command)
         {
             List<ModelInterview> list = new List<ModelInterview>();
 
-            if (MySql.open() == true)
+            if (MySql.Open() == true)
             {
                 MySql.cmd = new MySqlCommand(command, MySql.conn);
                 MySql.sdr = MySql.cmd.ExecuteReader();

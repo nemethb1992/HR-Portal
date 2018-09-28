@@ -1,4 +1,5 @@
-﻿using HR_Portal.Control;
+﻿using HR_Portal.Source;
+using HR_Portal.Source.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,7 +23,6 @@ namespace HR_Portal.View.Usercontrol.Panels.SzakmaiLayouts
     public partial class SzakmaiKezdolap : UserControl
     {
         ControlProject pControl = new ControlProject();
-        ControlSzakmai szControl = new ControlSzakmai();
 
         private SzakmaiInterviewList szakmaiInterviewList;
         private SzakmaiList szakmaiList;
@@ -36,8 +36,8 @@ namespace HR_Portal.View.Usercontrol.Panels.SzakmaiLayouts
         }
         protected void StartUp()
         {
-            interju_no.Text = szControl.Data_SzakmaiInterview().Count.ToString() + " db";
-            projekt_no.Text = szControl.Data_SzakmaiProject().Count.ToString() + " db";
+            interju_no.Text = VMSzakmai.Data_SzakmaiInterview().Count.ToString() + " db";
+            projekt_no.Text = VMSzakmai.Data_SzakmaiProject().Count.ToString() + " db";
         }
 
         protected void navigateToSzakmaiList(object sender, RoutedEventArgs e)

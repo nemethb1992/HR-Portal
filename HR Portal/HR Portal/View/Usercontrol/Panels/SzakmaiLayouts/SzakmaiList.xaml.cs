@@ -1,5 +1,5 @@
-﻿using HR_Portal.Control;
-using HR_Portal.Source;
+﻿using HR_Portal.Source;
+using HR_Portal.Source.ViewModel;
 using HR_Portal.View.Usercontrol.Panels.SzakmaiLayouts;
 using System;
 using System.Collections.Generic;
@@ -23,7 +23,6 @@ namespace HR_Portal.View.Usercontrol.Panels
     /// </summary>
     public partial class SzakmaiList : UserControl
     {
-        ControlSzakmai szControl = new ControlSzakmai();
 
         private SzakmaiProjektDataSheet szakmaiProjektDataSheet;
         private SzakmaiKezdolap szakmaiKezdolap;
@@ -48,7 +47,7 @@ namespace HR_Portal.View.Usercontrol.Panels
 
         protected void settingUp()
         {
-            bevont_projekt_lista.ItemsSource = szControl.Data_SzakmaiProject();
+            bevont_projekt_lista.ItemsSource = VMSzakmai.Data_SzakmaiProject();
         }
 
         protected void navigateToSzakmaiKezdolap(object sender, RoutedEventArgs e)

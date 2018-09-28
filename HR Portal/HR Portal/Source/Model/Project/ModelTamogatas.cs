@@ -11,11 +11,11 @@ namespace HR_Portal.Source.Model.Project
     {
         public int tamogatom { get; set; }
 
-        public static List<ModelTamogatas> getModelTamogatas(string command)
+        public static List<ModelTamogatas> GetModelTamogatas(string command)
         {
             List<ModelTamogatas> list = new List<ModelTamogatas>();
 
-            if (MySql.open() == true)
+            if (MySql.Open() == true)
             {
                 try
                 {

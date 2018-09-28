@@ -36,11 +36,11 @@ namespace HR_Portal.Source.Model.Applicant
         public string megjegyzes { get; set; }
         public string folderUrl { get; set; }
 
-        public static List<ModelFullApplicant> getModelFullApplicant(string command)
+        public static List<ModelFullApplicant> GetModelFullApplicant(string command)
         {
             List<ModelFullApplicant> list = new List<ModelFullApplicant>();
 
-            if (MySql.open() == true)
+            if (MySql.Open() == true)
             {
                 MySql.cmd = new MySqlCommand(command, MySql.conn);
                 MySql.sdr = MySql.cmd.ExecuteReader();

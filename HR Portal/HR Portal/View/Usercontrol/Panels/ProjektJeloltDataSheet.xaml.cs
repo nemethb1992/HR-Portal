@@ -1,5 +1,4 @@
-﻿using HR_Portal.Control;
-using HR_Portal.Source;
+﻿using HR_Portal.Source;
 using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -36,8 +35,8 @@ namespace HR_Portal.View.Usercontrol.Panels
 
         protected void projectFormLoader()
         {
-            List<ModelFullApplicant> applicantList = VMApplicant.getFullApplicant();
-            List<ModelFullProject> projectList = VMProject.getFullProject();
+            List<ModelFullApplicant> applicantList = VMApplicant.GetFullApplicant();
+            List<ModelFullProject> projectList = VMProject.GetFullProject();
             List<ModelKompetenciak> kompetenciaList = VMInterview.Data_Kompetencia();
             List<ModelKompetenciaSummary> summaryList = paControl.Data_KompetenciaJeloltKapcs();
 
@@ -101,7 +100,7 @@ namespace HR_Portal.View.Usercontrol.Panels
 
             if (e.Key != Key.Enter) return;
             e.Handled = true;
-            VMComment.add(comment_tartalom.Text, Session.ProjektID, Session.ApplicantID, 0);
+            VMComment.Add(comment_tartalom.Text, Session.ProjektID, Session.ApplicantID, 0);
             megjegyzes_listBox.ItemsSource = pControl.Data_CommentKapcs();
             tbx.Text = "";
         }
@@ -130,7 +129,7 @@ namespace HR_Portal.View.Usercontrol.Panels
         {
             ModelComment items = (sender as MenuItem).DataContext as ModelComment;
 
-            VMComment.delete(items.id, Session.UserData[0].id, Session.ProjektID, Session.ApplicantID);
+            VMComment.Delete(items.id, Session.UserData[0].id, Session.ProjektID, Session.ApplicantID);
             megjegyzes_listBox.ItemsSource = pControl.Data_CommentKapcs();
         }
 

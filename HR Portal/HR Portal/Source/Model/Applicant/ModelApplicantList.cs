@@ -23,11 +23,11 @@ namespace HR_Portal.Source.Model.Applicant
         public string reg_datum { get; set; }
         public bool Checked { get; set; }
 
-        public static List<ModelApplicantList> getModelApplicantList(string command)
+        public static List<ModelApplicantList> GetModelApplicantList(string command)
         {
             List<ModelApplicantList> list = new List<ModelApplicantList>();
 
-            if (MySql.open() == true)
+            if (MySql.Open() == true)
             {
                 MySql.cmd = new MySqlCommand(command, MySql.conn);
                 MySql.sdr = MySql.cmd.ExecuteReader();
@@ -81,7 +81,7 @@ namespace HR_Portal.Source.Model.Applicant
                 }
                 MySql.sdr.Close();
             }
-            MySql.close();
+            MySql.Close();
             return list;
         }
 

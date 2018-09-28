@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
-using HR_Portal.Control;
 using HR_Portal.Source;
+using HR_Portal.Source.ViewModel;
 
 namespace HR_Portal.View.Usercontrol.Surveys
 {
@@ -12,8 +12,7 @@ namespace HR_Portal.View.Usercontrol.Surveys
     public partial class FirstRegistration : UserControl
     {
         private Grid grid;
-        ControlLogin l_control = new ControlLogin();
-        Session session = new Session();
+        //Session session = new Session();
         public FirstRegistration(Grid grid)
         {
             InitializeComponent();
@@ -50,7 +49,7 @@ namespace HR_Portal.View.Usercontrol.Surveys
                 {
                     ComboBox katcbx = kategoria_cbx as ComboBox;
                     Kategoria_struct kategoria_items = katcbx.SelectedItem as Kategoria_struct;
-                    l_control.userRegistration(tartomanyi.Text, teljesnev.Text, email.Text, kategoria_items.id);
+                    VMLogin.Registration(tartomanyi.Text, teljesnev.Text, email.Text, kategoria_items.id);
                     MainWindow login = new MainWindow();
                     var window = Window.GetWindow(this);
                     window.Close();

@@ -13,11 +13,11 @@ namespace HR_Portal.Source.Model.Project
         public string megnevezes_projekt { get; set; }
         public int jeloltek_db { get; set; }
 
-        public static List<ModelSmallProject> getModelSmallProject(string command)
+        public static List<ModelSmallProject> GetModelSmallProject(string command)
         {
             List<ModelSmallProject> list = new List<ModelSmallProject>();
 
-            if (MySql.open() == true)
+            if (MySql.Open() == true)
             {
                 MySql.cmd = new MySqlCommand(command, MySql.conn);
                 MySql.sdr = MySql.cmd.ExecuteReader();

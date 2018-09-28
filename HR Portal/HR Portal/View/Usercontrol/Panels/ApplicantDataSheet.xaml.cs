@@ -1,5 +1,4 @@
-﻿using HR_Portal.Control;
-using HR_Portal.Source;
+﻿using HR_Portal.Source;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Windows;
@@ -18,7 +17,7 @@ namespace HR_Portal.View.Usercontrol.Panels
     public partial class ApplicantDataSheet : UserControl
     {
         ControlApplicant aControl = new ControlApplicant();
-        ControlFile fControl = new ControlFile();
+        File fControl = new File();
 
         private ProjectDataSheet projectDataSheet;
         private Grid grid;
@@ -31,7 +30,7 @@ namespace HR_Portal.View.Usercontrol.Panels
         }
         protected void formLoader()
         {
-            List<ModelFullApplicant> list = VMApplicant.getFullApplicant();
+            List<ModelFullApplicant> list = VMApplicant.GetFullApplicant();
 
             applicant_profile_title.Text = list[0].nev;
             app_input_1.Text = list[0].email;
@@ -42,10 +41,10 @@ namespace HR_Portal.View.Usercontrol.Panels
             app_input_8.Text = list[0].munkakor;
             app_input_9.Text = list[0].ertesult.ToString();
             app_input_10.Text = list[0].szuldatum.ToString();
-            projekt_cbx.ItemsSource = aControl.Data_PorjectListSmall();
-            csatolmany_listBox.ItemsSource = fControl.Applicant_FolderReadOut(Session.ApplicantID);
+            projekt_cbx.ItemsSource = VMApplicant.Data_PorjectListSmall();
+            csatolmany_listBox.ItemsSource = fControl.Read(Session.ApplicantID);
             commentLoader(megjegyzes_listBox);
-            kapcsolodo_projekt_list.ItemsSource = aControl.Data_ProjectList();
+            kapcsolodo_projekt_list.ItemsSource = VMApplicant.Data_ProjectList();
         }
 
 
@@ -69,8 +68,8 @@ namespace HR_Portal.View.Usercontrol.Panels
             MenuItem delete = sender as MenuItem;
             ModelSmallProject items = delete.DataContext as ModelSmallProject;
 
-            aControl.applicalntProjectListDelete(items.id);
-            kapcsolodo_projekt_list.ItemsSource = aControl.Data_ProjectList();
+            VMApplicant.DeleteProject(items.id);
+            kapcsolodo_projekt_list.ItemsSource = VMApplicant.Data_ProjectList();
         }
 
         protected void commentDelete(object sender, RoutedEventArgs e)
@@ -78,7 +77,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             MenuItem item = sender as MenuItem;
             ModelComment items = item.DataContext as ModelComment;
 
-            VMComment.delete(items.id, Session.UserData[0].id, 0, Session.ApplicantID);
+            VMComment.Delete(items.id, Session.UserData[0].id, 0, Session.ApplicantID);
             commentLoader(megjegyzes_listBox);
         }
 
@@ -88,7 +87,7 @@ namespace HR_Portal.View.Usercontrol.Panels
 
             if (e.Key != System.Windows.Input.Key.Enter) return;
             e.Handled = true;
-            VMComment.add(comment_tartalom.Text, 0, Session.ApplicantID, 0);
+            VMComment.Add(comment_tartalom.Text, 0, Session.ApplicantID, 0);
             commentLoader(megjegyzes_listBox);
             textbox.Text = "";
         }
@@ -119,8 +118,8 @@ namespace HR_Portal.View.Usercontrol.Panels
             ComboBox cbx = projekt_cbx as ComboBox;
             ModelSmallProject item = cbx.SelectedItem as ModelSmallProject;
 
-            pControl.addJeloltInsert(Session.ApplicantID , item.id);
-            kapcsolodo_projekt_list.ItemsSource = aControl.Data_ProjectList();
+            VMApplicant.AddProject(Session.ApplicantID , item.id);
+            kapcsolodo_projekt_list.ItemsSource = VMApplicant.Data_ProjectList();
         }
 
         protected void attachmentOpenClick(object sender, RoutedEventArgs e)
@@ -129,5 +128,9 @@ namespace HR_Portal.View.Usercontrol.Panels
             ModelJeloltFile item = btn.DataContext as ModelJeloltFile;
             Process.Start(item.path);
         }
+
+
+
+
     }
 }

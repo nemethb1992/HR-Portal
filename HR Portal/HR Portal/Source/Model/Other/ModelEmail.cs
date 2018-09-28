@@ -16,11 +16,11 @@ namespace HR_Portal.Source.Model.Other
         public string login { get; set; }
         public string password { get; set; }
 
-        public static List<ModelEmail> getModelEmail(string command)
+        public static List<ModelEmail> GetModelEmail(string command)
         {
             List<ModelEmail> items = new List<ModelEmail>();
 
-            if (MySql.open() == true)
+            if (MySql.Open() == true)
             {
                 MySql.cmd = new MySqlCommand(command, MySql.conn);
                 MySql.sdr = MySql.cmd.ExecuteReader();

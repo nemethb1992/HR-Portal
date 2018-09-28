@@ -1,5 +1,4 @@
-﻿using HR_Portal.Control;
-using HR_Portal.Source;
+﻿using HR_Portal.Source;
 using HR_Portal.Public.templates;
 using HR_Portal.View.Usercontrol.Panels.SzakmaiLayouts;
 using System;
@@ -52,7 +51,7 @@ namespace HR_Portal.View.Usercontrol.Panels
         protected void interviewLoader()
         {
             List<ModelInterview> list = VMInterview.Data_InterviewById();
-            List<ModelFullProject> li = VMProject.getFullProject();
+            List<ModelFullProject> li = VMProject.GetFullProject();
             List<ModelKompetenciak> li_k = VMInterview.Data_Kompetencia();
 
             foreach (var item in li_k)
@@ -79,7 +78,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             choose_editlist.ItemsSource = VMInterview.Data_ProjektErtesitendokKapcsolt();
             ertesitendok_editlist.ItemsSource = VMInterview.Data_InterjuErtesitendokKapcsolt();
 
-            if (VMInterview.hasKompetencia())
+            if (VMInterview.HasTest())
             {
                 Panel.SetZIndex(kompetencia_border, 1);
                 locked_title.Visibility = Visibility.Visible;
@@ -91,7 +90,7 @@ namespace HR_Portal.View.Usercontrol.Panels
         {
             Button button = sender as Button;
             int type = Convert.ToInt32(button.Tag);
-            List<ModelFullProject> li = VMProject.getFullProject();
+            List<ModelFullProject> li = VMProject.GetFullProject();
             List<int> list = new List<int>();
 
             list.Add(li[0].kepesseg1);
@@ -106,7 +105,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             list.Add(Convert.ToInt32(k5_slider.Value));
             list.Add(type);
 
-            VMInterview.kompetenciaUpdate(list);
+            VMInterview.UpdateTest(list);
             Panel.SetZIndex(kompetencia_border,1);
             locked_title.Visibility = Visibility.Visible;
             //teszt_nyitas_btn.Visibility = Visibility.Visible;  //teszt megtekintéshez
@@ -126,7 +125,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             Button btn = sender as Button;
             ModelErtesitendok items = btn.DataContext as ModelErtesitendok;
 
-            VMInterview.insertInterviewInvited(items.id);
+            VMInterview.Insert(items.id);
             choose_editlist.ItemsSource = VMInterview.Data_ProjektErtesitendokKapcsolt();
             ertesitendok_editlist.ItemsSource = VMInterview.Data_InterjuErtesitendokKapcsolt();
         }
@@ -138,7 +137,7 @@ namespace HR_Portal.View.Usercontrol.Panels
                 MenuItem menu = sender as MenuItem;
                 ModelErtesitendok items = menu.DataContext as ModelErtesitendok;
 
-                VMInterview.deleteInterviewInvited(items.id);
+                VMInterview.DeleteInvited(items.id);
                 choose_editlist.ItemsSource = VMInterview.Data_ProjektErtesitendokKapcsolt();
                 ertesitendok_editlist.ItemsSource = VMInterview.Data_InterjuErtesitendokKapcsolt();
             }
@@ -158,7 +157,7 @@ namespace HR_Portal.View.Usercontrol.Panels
         protected void addColleague(object sender, RoutedEventArgs e)
         {
             EmailTemplate et = new EmailTemplate();
-            ControlEmail email = new ControlEmail();
+            Email email = new Email();
             List<ModelErtesitendok> szemelyek = VMInterview.Data_InterjuErtesitendokKapcsolt();
             List<ModelInterview> interju = VMInterview.Data_InterviewById();
             List<String> resztvevok = new List<string>();
@@ -169,9 +168,9 @@ namespace HR_Portal.View.Usercontrol.Panels
             }
             foreach (var item in szemelyek)
             {
-                email.send(item.email, et.Belsos_Meghivo_Email(item.name, interju[0].interju_cim, interju[0].interju_datum+" - " + interju[0].idopont, interju[0].helyszin, interju[0].jelolt_megnevezes));
+                email.Send(item.email, et.Belsos_Meghivo_Email(item.name, interju[0].interju_cim, interju[0].interju_datum+" - " + interju[0].idopont, interju[0].helyszin, interju[0].jelolt_megnevezes));
             }
-            email.send(interju[0].jelolt_email, et.Jelolt_Meghivo_Email(interju[0].jelolt_megnevezes, interju[0].projekt_megnevezes, interju[0].interju_datum + " - " + interju[0].idopont, resztvevok));
+            email.Send(interju[0].jelolt_email, et.Jelolt_Meghivo_Email(interju[0].jelolt_megnevezes, interju[0].projekt_megnevezes, interju[0].interju_datum + " - " + interju[0].idopont, resztvevok));
       }
     }
 }

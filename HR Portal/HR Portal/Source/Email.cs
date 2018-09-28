@@ -1,22 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Net.Mail;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using ActiveUp.Net.Mail;
-using HR_Portal.Source;
 using HR_Portal.Public.templates;
-using System.Security.Cryptography;
 using HR_Portal.Source.Model.Other;
 
-namespace HR_Portal.Control
+namespace HR_Portal.Source
 {
-    class ControlEmail
+    class Email
     {
-        Source.MySql mySql = new Source.MySql();
         EmailTemplate emailTemplate = new EmailTemplate();
 
         public class MailRepository
@@ -57,19 +51,19 @@ namespace HR_Portal.Control
         public List<ModelEmail> IMAP_List()
         {
             string command = "SELECT * FROM ConnectionSMTP WHERE type = 'imap'";
-            List<ModelEmail> list = ModelEmail.getModelEmail(command);
-            Source.MySql.close();
+            List<ModelEmail> list = ModelEmail.GetModelEmail(command);
+            MySql.Close();
             return list;
         }
         public List<ModelEmail> SMTP_List()
         {
             string command = "SELECT * FROM ConnectionSMTP WHERE type = 'smtp'";
-            List<ModelEmail> list = ModelEmail.getModelEmail(command);
-            Source.MySql.close();
+            List<ModelEmail> list = ModelEmail.GetModelEmail(command);
+            MySql.Close();
             return list;
         }
 
-        public void send(string to, string email_body)
+        public void Send(string to, string email_body)
         {
             List<ModelEmail> li = SMTP_List();
             try
@@ -78,7 +72,7 @@ namespace HR_Portal.Control
 
                 System.Net.Mail.SmtpClient SmtpServer = new System.Net.Mail.SmtpClient(li[0].mailserver);
                 SmtpServer.Port = li[0].port;
-                SmtpServer.Credentials = new System.Net.NetworkCredential(li[0].login, "pmhr2018");
+                SmtpServer.Credentials = new NetworkCredential(li[0].login, "pmhr2018");
                 SmtpServer.EnableSsl = true;
 
                 mail.From = new MailAddress(li[0].login);

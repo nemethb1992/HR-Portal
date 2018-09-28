@@ -12,11 +12,11 @@ namespace HR_Portal.Source.Model.Applicant
         public int id { get; set; }
         public string nev { get; set; }
 
-        public static List<ModelApplicantListbox> getModelApplicantListboxShort(string command)
+        public static List<ModelApplicantListbox> GetModelApplicantListboxShort(string command)
         {
             List<ModelApplicantListbox> list = new List<ModelApplicantListbox>();
 
-            if (MySql.open() == true)
+            if (MySql.Open() == true)
             {
                 MySql.cmd = new MySqlCommand(command, MySql.conn);
                 MySql.sdr = MySql.cmd.ExecuteReader();

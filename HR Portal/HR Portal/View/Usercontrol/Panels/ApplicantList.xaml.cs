@@ -10,7 +10,6 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using HR_Portal.Control;
 using HR_Portal.Source;
 using HR_Portal.Source.Model;
 using HR_Portal.Source.Model.Applicant;
@@ -110,7 +109,7 @@ namespace HR_Portal.View.Usercontrol.Panels
 
         public void applicantListLoader()
         {
-                List<ModelApplicantList> list = VMApplicant.getApplicantList(searchValues());
+                List<ModelApplicantList> list = VMApplicant.GetApplicantList(searchValues());
                 applicant_listBox.ItemsSource = list;
                 talalat_tbl.Text = "Találatok:  " + list.Count.ToString();
             
@@ -140,7 +139,7 @@ namespace HR_Portal.View.Usercontrol.Panels
                 case MessageBoxResult.Yes:
                     MenuItem menuItem = sender as MenuItem;
                     ModelApplicantList items = menuItem.DataContext as ModelApplicantList;
-                    aControl.applicantFullDelete(items.id);
+                    VMApplicant.Delete(items.id);
                     applicantListLoader();
                     break;
                 case MessageBoxResult.No:
@@ -163,7 +162,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             TextBox textbox = (TextBox)sender;
             int fisrtLength = textbox.Text.Length;
 
-            await Task.Delay(300);
+            await Task.Delay(250);
             if (fisrtLength == textbox.Text.Length)
                 applicantListLoader();
         }

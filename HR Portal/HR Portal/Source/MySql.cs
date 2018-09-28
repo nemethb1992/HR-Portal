@@ -8,28 +8,26 @@ using HR_Portal.Source.Model.Other;
 
 namespace HR_Portal.Source
 {
-    public class MySql
+    public static class MySql
     {
-        //string connectionString = "Data Source = s7.nethely.hu; Initial Catalog = pmkcvtest; User ID=pmkcvtest; Password=pmkcvtest2018";
-        //string connectionString = "Data Source = 192.168.144.189; Port=3306; Initial Catalog = pmkcvtest; User ID=hr-admin; Password=pmhr2018";
-        //string connectionString = "Data Source = 192.168.144.189; Port=3306; Initial Catalog = pmhrdemo; User ID=hr-admin; Password=pmhr2018";
-        //string connectionString = "Data Source = vpn.phoenix-mecano.hu; Port=29920; Initial Catalog = pmkcvtest; User ID=hr-admin; Password=pmhr2018";
-
-        private const string CONNECTION_URL = "Data Source = s7.nethely.hu; Initial Catalog = pmkcvtest; User ID=pmkcvtest; Password=pmkcvtest2018";
+        private const string CONNECTION_URL_1 = "Data Source = 192.168.144.189; Port=3306; Initial Catalog = pmkcvtest; User ID=hr-admin; Password=pmhr2018";
+        private const string CONNECTION_URL_2 = "Data Source = 192.168.144.189; Port=3306; Initial Catalog = pmhrdemo; User ID=hr-admin; Password=pmhr2018";
+        private const string CONNECTION_URL_3 = "Data Source = s7.nethely.hu; Initial Catalog = pmkcvtest; User ID=pmkcvtest; Password=pmkcvtest2018";
+        private const string CONNECTION_URL_4 = "Data Source = vpn.phoenix-mecano.hu; Port=29920; Initial Catalog = pmkcvtest; User ID=hr-admin; Password=pmhr2018";
 
         public static MySqlConnection conn;
         public static MySqlCommand cmd;
         public static MySqlDataReader sdr;
 
-        public MySql()
+        static MySql()
         {
             if (conn == null)
             {
-                conn = new MySqlConnection(CONNECTION_URL);
+                conn = new MySqlConnection(CONNECTION_URL_3);
             }
         }
         
-        public static bool isConnected()
+        public static bool IsConnected()
         {
             try
             {
@@ -47,7 +45,7 @@ namespace HR_Portal.Source
             return false;
         }
 
-        public static bool open()
+        public static bool Open()
         {
             try
             {
@@ -63,7 +61,7 @@ namespace HR_Portal.Source
             }
         }
 
-        public static bool close()
+        public static bool Close()
         {
             try
             {
@@ -76,19 +74,19 @@ namespace HR_Portal.Source
             }
         }
 
-        public static void update(string query)
+        public static void Update(string query)
         {
-            if (open() == true)
+            if (Open() == true)
             {
                 cmd = new MySqlCommand(query, conn);
                 cmd.ExecuteNonQuery();
             }
         }
 
-        public int rowCount(string command)
+        public static int Count(string command)
         {
             int[] rows = new int[1];
-            if (open() == true)
+            if (Open() == true)
             {
                 cmd = new MySqlCommand(command, conn);
                 sdr = cmd.ExecuteReader();
@@ -101,10 +99,10 @@ namespace HR_Portal.Source
             
             return rows[0];
         }
-        public static bool isExists(string command)
+        public static bool IsExists(string command)
         {
             int[] rows = new int[1];
-            if (open() == true)
+            if (Open() == true)
             {
                 cmd = new MySqlCommand(command, conn);
                 sdr = cmd.ExecuteReader();
@@ -123,10 +121,10 @@ namespace HR_Portal.Source
             return false;
         }
 
-        public List<string> listQuery(string command, string table, int b)
+        public static List<string> UniqueList(string command, string table, int b)
         {
             List<string> dataSource = new List<string>();
-            if (open() == true)
+            if (Open() == true)
             {
                 cmd = new MySqlCommand(command, conn);
                 sdr = cmd.ExecuteReader();
@@ -143,10 +141,10 @@ namespace HR_Portal.Source
             return dataSource;
         }
 
-        public static bool bind(string query)
+        public static bool Bind(string query)
         {
             bool valid = false;
-            if (open() == true)
+            if (Open() == true)
             {
                 int seged = 0;
                 cmd = new MySqlCommand(query, conn);
@@ -168,10 +166,10 @@ namespace HR_Portal.Source
             return valid;
         }
 
-        public static string getRootUrl(string query)
+        public static string GetRootUrl(string query)
         {
             string url = "";
-            if (open() == true)
+            if (Open() == true)
             {
                 cmd = new MySqlCommand(query, conn);
                 sdr = cmd.ExecuteReader();

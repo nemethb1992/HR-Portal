@@ -1,5 +1,4 @@
-﻿using HR_Portal.Control;
-using HR_Portal.Source;
+﻿using HR_Portal.Source;
 using HR_Portal.Source.Model;
 using HR_Portal.Source.Model.Applicant;
 using HR_Portal.Source.ViewModel;
@@ -52,7 +51,7 @@ namespace HR_Portal.View.Usercontrol.Panels
 
         protected void modifyFormLoader()
         {
-            List<ModelFullApplicant> li = VMApplicant.getFullApplicant();
+            List<ModelFullApplicant> li = VMApplicant.GetFullApplicant();
             nev_tbx.Text = li[0].nev;
             email_tbx.Text = li[0].email;
             lakhely_tbx.Text = li[0].lakhely;
@@ -150,7 +149,7 @@ namespace HR_Portal.View.Usercontrol.Panels
         {
             if (isFulfilled())
             {
-                aControl.applicantInsert(getFormData());
+                VMApplicant.Insert(getFormData());
                 grid.Children.Clear();
                 grid.Children.Add(applicantDataSheet = new ApplicantDataSheet(grid));
             }
@@ -164,7 +163,7 @@ namespace HR_Portal.View.Usercontrol.Panels
         {
             if (isFulfilled())
             {
-                aControl.applicantUpdate(getFormData());
+                VMApplicant.Update(getFormData());
                 grid.Children.Clear();
                 grid.Children.Add(applicantDataSheet = new ApplicantDataSheet(grid));
             }

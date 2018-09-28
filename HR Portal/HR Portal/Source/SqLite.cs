@@ -11,14 +11,14 @@ namespace HR_Portal.Source
     {
         private const string CONNECTION_URL = "Data Source = innerDatabase.db";
 
-        protected SQLiteConnection conn;
+        protected static SQLiteConnection conn;
 
-        public SqLite()
+        static SqLite()
         {
             conn = new SQLiteConnection(CONNECTION_URL);
         }
 
-        protected void connectionOpen()
+        protected static void Open()
         {
             if(conn.State == System.Data.ConnectionState.Closed)
             {
@@ -26,7 +26,7 @@ namespace HR_Portal.Source
             }
         }
 
-        protected void connectionClose()
+        protected static void Close()
         {
             if (conn.State == System.Data.ConnectionState.Open)
             {
@@ -34,18 +34,18 @@ namespace HR_Portal.Source
             }
         }
 
-        public void update(string query)
+        public static void Update(string query)
         {
             var command = conn.CreateCommand();
-            connectionOpen();
+            Open();
             command.CommandText = query;
             command.ExecuteNonQuery();
-            connectionClose();
+            Close();
         }
 
-        public string query(string query)
+        public static string Query(string query)
         {
-            connectionOpen();
+            Open();
             var command = conn.CreateCommand();
             command.CommandText = query;
             SQLiteDataReader sdr = command.ExecuteReader();
@@ -55,7 +55,7 @@ namespace HR_Portal.Source
                 data = sdr.GetValue(0).ToString();
             }
             sdr.Close();
-            connectionClose();
+            Close();
             return data;
         }
     }

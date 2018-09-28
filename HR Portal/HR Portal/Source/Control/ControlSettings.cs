@@ -1,65 +1,64 @@
 ﻿using System.Collections.Generic;
 using HR_Portal.Source.Model;
 
-namespace HR_Portal.Control
+namespace HR_Portal.Source
 {
     class ControlSettings
     {
-        Source.MySql mySql = new Source.MySql();
 
         public List<ModelErtesitendok> Data_Ertesitendok()
         {
             string command = "SELECT * FROM users WHERE kategoria = 0";
-            List <ModelErtesitendok> list = ModelErtesitendok.getModelErtesitendok(command);
-            Source.MySql.close();
+            List <ModelErtesitendok> list = ModelErtesitendok.GetModelErtesitendok(command);
+            MySql.Close();
             return list;
         }
 
         public List<ModelNyelv> Data_Nyelv()
         {
             string command = "SELECT * FROM nyelv";
-            List <ModelNyelv> list = ModelNyelv.getModelNyelv(command);
-            Source.MySql.close();
+            List <ModelNyelv> list = ModelNyelv.GetModelNyelv(command);
+            MySql.Close();
             return list;
         }
 
         public List<ModelMunkakor> Data_Munkakorok()
         {
             string command = "SELECT * FROM munkakor";
-            List <ModelMunkakor> list = ModelMunkakor.getModelMunkakor(command);
-            Source.MySql.close();
+            List <ModelMunkakor> list = ModelMunkakor.GetModelMunkakor(command);
+            MySql.Close();
             return list;
         }
 
         public List<ModelPc> Data_Pc()
         {
             string command = "SELECT * FROM pc";
-            List <ModelPc> list = ModelPc.getModelPc(command);
-            Source.MySql.close();
+            List <ModelPc> list = ModelPc.GetModelPc(command);
+            MySql.Close();
             return list;
         }
 
         public List<ModelVegzettseg> Data_Vegzettseg()
         {
             string query = "SELECT * FROM vegzettsegek";
-            List <ModelVegzettseg> list = ModelVegzettseg.getModelVegzettseg(query);
-            Source.MySql.close();
+            List <ModelVegzettseg> list = ModelVegzettseg.GetModelVegzettseg(query);
+            MySql.Close();
             return list;
         }
 
         public List<ModelErtesulesek> Data_Ertesulesek()
         {
             string command = "SELECT * FROM ertesulesek";
-            List <ModelErtesulesek> list = ModelErtesulesek.getModelErtesulesek(command);
-            Source.MySql.close();
+            List <ModelErtesulesek> list = ModelErtesulesek.GetModelErtesulesek(command);
+            MySql.Close();
             return list;
         }
 
         public void settingDelete(int id, string table)
         {
             string command = "DELETE FROM "+table+" WHERE id="+id+"";
-            Source.MySql.update(command);
-            Source.MySql.close();
+            MySql.Update(command);
+            MySql.Close();
         }
 
         public void settingInsert(string content, string table)
@@ -90,8 +89,8 @@ namespace HR_Portal.Control
                     command = "INSERT INTO `kompetenciak` (`id`, `kompetencia_megnevezes`) VALUES (NULL, '" + content + "');";
                     break;
             }
-            Source.MySql.update(command);
-            Source.MySql.close();
+            MySql.Update(command);
+            MySql.Close();
         }
         //public void kompetenciaíró()
         //{

@@ -1,5 +1,4 @@
-﻿using HR_Portal.Control;
-using HR_Portal.Source;
+﻿using HR_Portal.Source;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,7 +33,7 @@ namespace HR_Portal.View.Usercontrol.Panels.SzakmaiLayouts
 
         protected void formLoader()
         {
-            List<ModelFullApplicant> list = VMApplicant.getFullApplicant();
+            List<ModelFullApplicant> list = VMApplicant.GetFullApplicant();
             applicant_profile_title.Text = list[0].nev;
             app_input_1.Text = list[0].email;
             app_input_2.Text = list[0].telefon.ToString();
@@ -56,7 +55,7 @@ namespace HR_Portal.View.Usercontrol.Panels.SzakmaiLayouts
             MenuItem item = sender as MenuItem;
             ModelComment items = item.DataContext as ModelComment;
 
-            VMComment.delete(items.id, Session.UserData[0].id, 0, Session.ApplicantID);
+            VMComment.Delete(items.id, Session.UserData[0].id, 0, Session.ApplicantID);
             commentLoader(megjegyzes_listBox);
         }
 
@@ -66,7 +65,7 @@ namespace HR_Portal.View.Usercontrol.Panels.SzakmaiLayouts
 
             if (e.Key != System.Windows.Input.Key.Enter) return;
             e.Handled = true;
-            VMComment.add(comment_tartalom.Text, 0, Session.ApplicantID, 0);
+            VMComment.Add(comment_tartalom.Text, 0, Session.ApplicantID, 0);
             commentLoader(megjegyzes_listBox);
             textbox.Text = "";
         }

@@ -19,11 +19,11 @@ namespace HR_Portal.Source.Model
         public string belepve { get; set; }
         public string reg_datum { get; set; }
 
-        public static List<ModelUserData> getUserSession(string command)
+        public static List<ModelUserData> GetUserSession(string command)
         {
             List<ModelUserData> list = new List<ModelUserData>();
 
-            if (MySql.open() == true)
+            if (MySql.Open() == true)
             {
                 MySql.cmd = new MySqlCommand(command, MySql.conn);
                 MySql.sdr = MySql.cmd.ExecuteReader();
@@ -44,7 +44,7 @@ namespace HR_Portal.Source.Model
                 }
                 MySql.sdr.Close();
             }
-            MySql.close();
+            MySql.Close();
 
             return list;
         }

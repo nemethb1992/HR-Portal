@@ -1,9 +1,8 @@
-﻿using HR_Portal.Control;
+﻿using HR_Portal.Source;
 using HR_Portal.View.Usercontrol.Panels;
 using System.Windows;
 using System.Windows.Input;
 using HR_Portal.View.Usercontrol.Panels.SzakmaiLayouts;
-using HR_Portal.Source;
 
 namespace HR_Portal.View.Windows
 {

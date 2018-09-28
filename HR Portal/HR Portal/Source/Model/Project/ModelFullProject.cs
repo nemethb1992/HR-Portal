@@ -39,10 +39,10 @@ namespace HR_Portal.Source.Model.Project
         public string kinalunk { get; set; }
         public string elonyok { get; set; }
 
-        public static List<ModelFullProject> getModelFullProject(string command)
+        public static List<ModelFullProject> GetModelFullProject(string command)
         {
             List<ModelFullProject> list = new List<ModelFullProject>();
-            if (MySql.open() == true)
+            if (MySql.Open() == true)
             {
                 MySql.cmd = new MySqlCommand(command, MySql.conn);
                 MySql.sdr = MySql.cmd.ExecuteReader();

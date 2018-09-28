@@ -11,13 +11,13 @@ namespace HR_Portal.Source
 {
     public class VMUserData
     {
-        public static List<ModelUserData> getUserSession()
+        public static List<ModelUserData> Get()
         {
             List<ModelUserData> list = new List<ModelUserData>();
             string username = Session.ActiveDirectoryDomain;
             if (username.Length>0)
             {
-                list = ModelUserData.getUserSession("SELECT* FROM users WHERE username = '" + username + "'");
+                list = ModelUserData.GetUserSession("SELECT* FROM users WHERE username = '" + username + "'");
             }
             return list;
         }

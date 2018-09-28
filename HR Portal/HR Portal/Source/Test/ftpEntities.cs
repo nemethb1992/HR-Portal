@@ -8,7 +8,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HR_Portal.Control
+namespace HR_Portal.Source
 {
     class ftpEntities
     {

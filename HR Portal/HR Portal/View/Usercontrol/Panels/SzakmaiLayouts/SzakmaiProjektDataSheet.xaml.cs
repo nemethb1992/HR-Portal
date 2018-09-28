@@ -1,5 +1,4 @@
-﻿using HR_Portal.Control;
-using HR_Portal.Source;
+﻿using HR_Portal.Source;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
@@ -40,7 +39,7 @@ namespace HR_Portal.View.Usercontrol.Panels.SzakmaiLayouts
 
         protected void formLoader()
         {
-            List <ModelFullProject> list = VMProject.getFullProject();
+            List <ModelFullProject> list = VMProject.GetFullProject();
             projekt_profile_title.Text = list[0].megnevezes_projekt;
             projekt_input_1.Text = list[0].statusz.ToString();
             projekt_input_2.Text = list[0].megnevezes_munka;
@@ -77,7 +76,7 @@ namespace HR_Portal.View.Usercontrol.Panels.SzakmaiLayouts
             MenuItem menuItem = sender as MenuItem;
             ModelComment items = menuItem.DataContext as ModelComment;
 
-            VMComment.delete(items.id, Session.UserData[0].id, Session.ProjektID, 0);
+            VMComment.Delete(items.id, Session.UserData[0].id, Session.ProjektID, 0);
             megjegyzes_listBox.ItemsSource = pControl.Data_CommentProject();
         }
 
@@ -87,7 +86,7 @@ namespace HR_Portal.View.Usercontrol.Panels.SzakmaiLayouts
 
             if (e.Key != System.Windows.Input.Key.Enter) return;
             e.Handled = true;
-            VMComment.add(comment_tartalom.Text, Session.ProjektID, 0, 0);
+            VMComment.Add(comment_tartalom.Text, Session.ProjektID, 0, 0);
             megjegyzes_listBox.ItemsSource = pControl.Data_CommentProject();
             tbx.Text = "";
         }

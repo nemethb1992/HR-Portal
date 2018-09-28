@@ -14,10 +14,10 @@ namespace HR_Portal.Source
         public string megnevezes_munka { get; set; }
         public int jeloltek_db { get; set; }
     
-        public static List<ModelSzakmaiBevont> getModelSzakmaiBevont(string command)
+        public static List<ModelSzakmaiBevont> GetModelSzakmaiBevont(string command)
         {
             List<ModelSzakmaiBevont> list = new List<ModelSzakmaiBevont>();
-            if (MySql.open() == true)
+            if (MySql.Open() == true)
             {
                 MySql.cmd = new MySqlCommand(command, MySql.conn);
                 MySql.sdr = MySql.cmd.ExecuteReader();

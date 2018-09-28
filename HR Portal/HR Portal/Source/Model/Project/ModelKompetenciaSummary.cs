@@ -16,11 +16,11 @@ namespace HR_Portal.Source.Model.Project
         public int k5_val { get; set; }
         public int tamogatom { get; set; }
 
-        public static List<ModelKompetenciaSummary> getModelKompetenciaSummary(string command)
+        public static List<ModelKompetenciaSummary> GetModelKompetenciaSummary(string command)
         {
             List<ModelKompetenciaSummary> list = new List<ModelKompetenciaSummary>();
 
-            if (MySql.open() == true)
+            if (MySql.Open() == true)
             {
                 try
                 {

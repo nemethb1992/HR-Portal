@@ -180,7 +180,9 @@
     <Compile Include="Source\ViewModel\VMComment.cs" />
     <Compile Include="Source\ViewModel\VMInterview.cs" />
     <Compile Include="Source\ViewModel\VMListSource.cs" />
+    <Compile Include="Source\ViewModel\VMLogin.cs" />
     <Compile Include="Source\ViewModel\VMProject.cs" />
+    <Compile Include="Source\ViewModel\VMSzakmai.cs" />
     <Compile Include="Source\ViewModel\VMUserData.cs" />
     <Compile Include="View\Usercontrol\Login.xaml.cs">
       <DependentUpon>login.xaml</DependentUpon>
@@ -243,16 +245,12 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Source\Control\Comment.cs" />
     <Compile Include="Source\Control\ControlApplicant.cs" />
     <Compile Include="Source\Control\ControlApplicantProject.cs" />
-    <Compile Include="Source\Control\ControlEmail.cs" />
-    <Compile Include="Source\Control\ControlFile.cs" />
-    <Compile Include="Source\Control\ControlLogin.cs" />
-    <Compile Include="Source\Control\ControlPage.cs" />
+    <Compile Include="Source\Email.cs" />
+    <Compile Include="Source\File.cs" />
     <Compile Include="Source\Control\ControlProject.cs" />
     <Compile Include="Source\Control\ControlSettings.cs" />
-    <Compile Include="Source\Control\ControlSzakmai.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

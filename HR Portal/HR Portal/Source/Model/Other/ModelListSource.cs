@@ -16,11 +16,11 @@ namespace HR_Portal.Source.Model.Other
         public int id { get; set; }
         public string megnevezes_projekt { get; set; }
 
-        public List<ModelProjectSmallList> getModelProjectSmallList(string command)
+        public List<ModelProjectSmallList> GetModelProjectSmallList(string command)
         {
             List<ModelProjectSmallList> list = new List<ModelProjectSmallList>();
 
-            if (MySql.open() == true)
+            if (MySql.Open() == true)
             {
                 MySql.cmd = new MySqlCommand(command, MySql.conn);
                 MySql.sdr = MySql.cmd.ExecuteReader();
