@@ -43,6 +43,7 @@ namespace HR_Portal.View.Usercontrol.Panels.SzakmaiLayouts
             app_input_9.Text = list[0].ertesult.ToString();
             app_input_10.Text = list[0].szuldatum.ToString();
             commentLoader(megjegyzes_listBox);
+            csatolmany_listBox.ItemsSource = File.Read(Session.ApplicantID);
         }
 
         protected void commentLoader(ListBox lb)

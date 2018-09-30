@@ -80,7 +80,7 @@ namespace HR_Portal.View.Usercontrol
             {
                 //if (ActiveDirecotry.Bind(Luser_tbx.Text, Lpass_pwd.Password))
                 //{
-                if (VMLogin.Authentication(Luser_tbx.Text))
+                    if (VMLogin.Authentication(Luser_tbx.Text))
                 {
                     Session.ActiveDirectoryDomain = Luser_tbx.Text;
                     Session.UserData = VMUserData.Get();
@@ -90,15 +90,15 @@ namespace HR_Portal.View.Usercontrol
                     mw.Show();
                     window.Close();
                 }
-                //    else
-                //    {
-                //        LoginSign.Text = "Kérem regisztráljon!";
-                //    }
+                    else
+                    {
+                        LoginSign.Text = "Kérem regisztráljon!";
+                    }
                 //}
-                //    else
-                //    {
-                //        LoginSign.Text = "Sikertelen hitelesítés!";
-                //    }
+                //else
+                //{
+                //    LoginSign.Text = "Sikertelen hitelesítés!";
+                //}
             }
             else
             {

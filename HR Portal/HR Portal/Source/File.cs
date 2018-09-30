@@ -7,7 +7,7 @@ namespace HR_Portal.Source
 {
     class File
     {
-        public List<ModelJeloltFile> Read(int ApplicantID)
+        public static List<ModelJeloltFile> Read(int ApplicantID)
         {
             DirectoryInfo directory;
             List<ModelJeloltFile> list = new List<ModelJeloltFile>();
@@ -27,7 +27,7 @@ namespace HR_Portal.Source
             }
             return list;
         }
-        public string ROOTurl()
+        public static string ROOTurl()
         {
             return MySql.GetRootUrl("SELECT * FROM ROOTurl");
         }

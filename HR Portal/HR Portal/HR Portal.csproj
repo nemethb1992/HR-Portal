@@ -155,7 +155,6 @@
     </Compile>
     <Compile Include="Public\templates\EmailTemplate.cs" />
     <Compile Include="Source\ActiveDirecotry.cs" />
-    <Compile Include="Source\Interface\Applicant.cs" />
     <Compile Include="Source\Model\Applicant\ModelApplicantList.cs" />
     <Compile Include="Source\Model\Applicant\ModelApplicantListbox.cs" />
     <Compile Include="Source\Model\Applicant\ModelApplicantSearch.cs" />

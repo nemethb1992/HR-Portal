@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Windows;
+using System;
 using System.Windows.Controls;
 using HR_Portal.Source;
 using HR_Portal.Source.ViewModel;
@@ -42,28 +43,35 @@ namespace HR_Portal.View.Usercontrol.Surveys
         }
         private void Registration_Click_btn(object sender, RoutedEventArgs e)
         {
-
-            if (teljesnev.Text.Length > 0 && email.Text.Length > 0 && tartomanyi.Text.Length > 0 && tartomanyi_pass.Password.Length > 0)
+            try
             {
-                if(ActiveDirecotry.Bind(tartomanyi.Text,tartomanyi_pass.Password))
+                if (teljesnev.Text.Length > 0 && email.Text.Length > 0 && tartomanyi.Text.Length > 0 && tartomanyi_pass.Password.Length > 0)
                 {
-                    ComboBox katcbx = kategoria_cbx as ComboBox;
-                    Kategoria_struct kategoria_items = katcbx.SelectedItem as Kategoria_struct;
-                    VMLogin.Registration(tartomanyi.Text, teljesnev.Text, email.Text, kategoria_items.id);
-                    MainWindow login = new MainWindow();
-                    var window = Window.GetWindow(this);
-                    window.Close();
-                    login.Show();
+                    if (ActiveDirecotry.Bind(tartomanyi.Text, tartomanyi_pass.Password))
+                    {
+                        ComboBox katcbx = kategoria_cbx as ComboBox;
+                        Kategoria_struct kategoria_items = katcbx.SelectedItem as Kategoria_struct;
+                        VMLogin.Registration(tartomanyi.Text, teljesnev.Text, email.Text, kategoria_items.id);
+                        MainWindow login = new MainWindow();
+                        var window = Window.GetWindow(this);
+                        window.Close();
+                        login.Show();
+                    }
+                    else
+                    {
+                        InfoBlock.Text = "Tartományi azonosítás sikertelen!";
+                    }
                 }
                 else
                 {
-                    InfoBlock.Text = "Hibás hitelesítés!";
+                    InfoBlock.Text = "Kitöltetlen mező!";
                 }
             }
-            else
+            catch (Exception ex)
             {
-                InfoBlock.Text = "Kitöltetlen mező!";
+                MessageBox.Show(ex.ToString());
             }
+
         }
 
         private void Registration_input_TextChanged(object sender, TextChangedEventArgs e)

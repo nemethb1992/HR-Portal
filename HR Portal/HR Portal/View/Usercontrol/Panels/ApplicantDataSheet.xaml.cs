@@ -42,7 +42,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             app_input_9.Text = list[0].ertesult.ToString();
             app_input_10.Text = list[0].szuldatum.ToString();
             projekt_cbx.ItemsSource = VMApplicant.Data_PorjectListSmall();
-            csatolmany_listBox.ItemsSource = fControl.Read(Session.ApplicantID);
+            csatolmany_listBox.ItemsSource = File.Read(Session.ApplicantID);
             commentLoader(megjegyzes_listBox);
             kapcsolodo_projekt_list.ItemsSource = VMApplicant.Data_ProjectList();
         }
