@@ -195,6 +195,9 @@ namespace HR_Portal.Source.Model
         public int id { get; set; }
         public string name { get; set; }
         public string email { get; set; }
+        public int kategoria { get; set; }
+        public int jogosultsag { get; set; }
+        public int validitas { get; set; }
 
         public static List<ModelErtesitendok> GetModelErtesitendok(string command)
         {
@@ -210,39 +213,10 @@ namespace HR_Portal.Source.Model
                         id = Convert.ToInt32(MySql.sdr["id"]),
                         name = MySql.sdr["name"].ToString(),
                         email = MySql.sdr["email"].ToString(),
-
-                    });
-                }
-                MySql.sdr.Close();
-            }
-            return list;
-        }
-    }
-
-    public class ModelHr
-    {
-        public int id { get; set; }
-        public string name { get; set; }
-        public int kategoria { get; set; }
-        public int jogosultsag { get; set; }
-        public int validitas { get; set; }
-
-        public static List<ModelHr> GetModelHr(string command)
-        {
-            List<ModelHr> list = new List<ModelHr>();
-            if (MySql.Open() == true)
-            {
-                MySql.cmd = new MySqlCommand(command, MySql.conn);
-                MySql.sdr = MySql.cmd.ExecuteReader();
-                while (MySql.sdr.Read())
-                {
-                    list.Add(new ModelHr
-                    {
-                        id = Convert.ToInt32(MySql.sdr["id"]),
-                        name = MySql.sdr["name"].ToString(),
                         kategoria = Convert.ToInt32(MySql.sdr["kategoria"]),
                         jogosultsag = Convert.ToInt32(MySql.sdr["jogosultsag"]),
                         validitas = Convert.ToInt32(MySql.sdr["validitas"]),
+
                     });
                 }
                 MySql.sdr.Close();
@@ -250,6 +224,38 @@ namespace HR_Portal.Source.Model
             return list;
         }
     }
+
+    //public class ModelHr
+    //{
+    //    public int id { get; set; }
+    //    public string name { get; set; }
+    //    public int kategoria { get; set; }
+    //    public int jogosultsag { get; set; }
+    //    public int validitas { get; set; }
+
+    //    public static List<ModelHr> GetModelHr(string command)
+    //    {
+    //        List<ModelHr> list = new List<ModelHr>();
+    //        if (MySql.Open() == true)
+    //        {
+    //            MySql.cmd = new MySqlCommand(command, MySql.conn);
+    //            MySql.sdr = MySql.cmd.ExecuteReader();
+    //            while (MySql.sdr.Read())
+    //            {
+    //                list.Add(new ModelHr
+    //                {
+    //                    id = Convert.ToInt32(MySql.sdr["id"]),
+    //                    name = MySql.sdr["name"].ToString(),
+    //                    kategoria = Convert.ToInt32(MySql.sdr["kategoria"]),
+    //                    jogosultsag = Convert.ToInt32(MySql.sdr["jogosultsag"]),
+    //                    validitas = Convert.ToInt32(MySql.sdr["validitas"]),
+    //                });
+    //            }
+    //            MySql.sdr.Close();
+    //        }
+    //        return list;
+    //    }
+    //}
 
     public class ModelComment
     {

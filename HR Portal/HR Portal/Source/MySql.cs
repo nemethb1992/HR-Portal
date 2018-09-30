@@ -23,7 +23,7 @@ namespace HR_Portal.Source
         {
             if (conn == null)
             {
-                conn = new MySqlConnection(CONNECTION_URL_2);
+                conn = new MySqlConnection(CONNECTION_URL_1);
             }
         }
         

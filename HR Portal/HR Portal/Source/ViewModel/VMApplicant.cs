@@ -213,7 +213,7 @@ namespace HR_Portal.Source.ViewModel
         
         public static void AddProject(int jelolt_index, int projekt_index)
         {
-            string command = "SELECT * FROM projekt_jelolt_kapcs WHERE jelolt_id = " + jelolt_index + "";
+            string command = "SELECT * FROM projekt_jelolt_kapcs WHERE jelolt_id = " + jelolt_index + " AND projekt_id = "+projekt_index+"";
             if (!MySql.IsExists(command))
             {
                 MySql.Close();

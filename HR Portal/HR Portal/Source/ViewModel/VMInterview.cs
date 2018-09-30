@@ -31,7 +31,7 @@ namespace HR_Portal.Source.ViewModel
 
         public static List<ModelErtesitendok> Data_ProjektErtesitendokKapcsolt() // javítva használja: interviewpanel
         {
-            string command = "SELECT users.id, name, email FROM users INNER JOIN projekt_ertesitendok_kapcs ON ertesitendok_id = users.id WHERE projekt_id = " + Session.ProjektID + "";
+            string command = "SELECT users.id, name, email, kategoria, jogosultsag, validitas FROM users INNER JOIN projekt_ertesitendok_kapcs ON ertesitendok_id = users.id WHERE projekt_id = " + Session.ProjektID + "";
             List<ModelErtesitendok> list = ModelErtesitendok.GetModelErtesitendok(command);
             MySql.Close();
             return list;
@@ -39,7 +39,7 @@ namespace HR_Portal.Source.ViewModel
 
         public static List<ModelErtesitendok> Data_InterjuErtesitendokKapcsolt() // javítva használja: interviewpanel
         {
-            string command = "SELECT users.id, name, email FROM interju_resztvevo_kapcs left JOIN users ON user_id = users.id WHERE interju_id = " + Session.InterViewID + " GROUP BY users.id";
+            string command = "SELECT users.id, name, email, kategoria, jogosultsag, validitas FROM interju_resztvevo_kapcs left JOIN users ON user_id = users.id WHERE interju_id = " + Session.InterViewID + " GROUP BY users.id";
             List<ModelErtesitendok> list = ModelErtesitendok.GetModelErtesitendok(command);
             MySql.Close();
             return list;

@@ -117,9 +117,11 @@ namespace HR_Portal.View.Usercontrol.Panels
 
             ComboBox cbx = projekt_cbx as ComboBox;
             ModelSmallProject item = cbx.SelectedItem as ModelSmallProject;
-
-            VMApplicant.AddProject(Session.ApplicantID , item.id);
-            kapcsolodo_projekt_list.ItemsSource = VMApplicant.Data_ProjectList();
+            if(item != null)
+            {
+                VMApplicant.AddProject(Session.ApplicantID, item.id);
+                kapcsolodo_projekt_list.ItemsSource = VMApplicant.Data_ProjectList();
+            }
         }
 
         protected void attachmentOpenClick(object sender, RoutedEventArgs e)

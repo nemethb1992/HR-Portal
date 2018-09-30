@@ -55,7 +55,7 @@ namespace HR_Portal.Source
             MySql.Close();
             return list;
         }
-        public List<ModelEmail> SMTP_List()
+        public static List<ModelEmail> SMTP_List()
         {
             string command = "SELECT * FROM ConnectionSMTP WHERE type = 'smtp'";
             List<ModelEmail> list = ModelEmail.GetModelEmail(command);
@@ -63,7 +63,7 @@ namespace HR_Portal.Source
             return list;
         }
 
-        public void Send(string to, string email_body)
+        public static void Send(string to, string email_body)
         {
             List<ModelEmail> li = SMTP_List();
             try

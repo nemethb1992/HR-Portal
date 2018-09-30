@@ -160,7 +160,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             Email email = new Email();
             List<ModelErtesitendok> szemelyek = VMInterview.Data_InterjuErtesitendokKapcsolt();
             List<ModelInterview> interju = VMInterview.Data_InterviewById();
-            List<String> resztvevok = new List<string>();
+            List<string> resztvevok = new List<string>();
 
             foreach (var item in szemelyek)
             {
@@ -168,9 +168,9 @@ namespace HR_Portal.View.Usercontrol.Panels
             }
             foreach (var item in szemelyek)
             {
-                email.Send(item.email, et.Belsos_Meghivo_Email(item.name, interju[0].interju_cim, interju[0].interju_datum+" - " + interju[0].idopont, interju[0].helyszin, interju[0].jelolt_megnevezes));
+                Email.Send(item.email, et.Belsos_Meghivo_Email(item.name, interju[0].interju_cim, interju[0].interju_datum+" - " + interju[0].idopont, interju[0].helyszin, interju[0].jelolt_megnevezes));
             }
-            email.Send(interju[0].jelolt_email, et.Jelolt_Meghivo_Email(interju[0].jelolt_megnevezes, interju[0].projekt_megnevezes, interju[0].interju_datum + " - " + interju[0].idopont, resztvevok));
+            Email.Send(interju[0].jelolt_email, et.Jelolt_Meghivo_Email(interju[0].jelolt_megnevezes, interju[0].projekt_megnevezes, interju[0].interju_datum + " - " + interju[0].idopont, resztvevok));
       }
     }
 }
