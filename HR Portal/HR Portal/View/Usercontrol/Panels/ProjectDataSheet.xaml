@@ -545,8 +545,20 @@
                 <CheckBox x:Name="check_5" Grid.Column="0" Grid.Row="2" Margin="8,0" Background="White" Content="keol.hu" Style="{StaticResource login_check}" VerticalAlignment="Center"/>
                 <CheckBox x:Name="check_6" Grid.Column="1" Grid.Row="2" Margin="8,0" Background="White" Content="hiros.hu" Style="{StaticResource login_check}" VerticalAlignment="Center"/>
                 <CheckBox x:Name="check_7" Grid.Column="0" Grid.Row="3" Margin="8,0" Background="White" Content="Kecskeméti Lapok" Style="{StaticResource login_check}" VerticalAlignment="Center"/>
-                <CheckBox x:Name="check_8" Grid.Column="1" Grid.Row="3" Margin="8,0" Background="White" Content="Egyéb" Style="{StaticResource login_check}" VerticalAlignment="Center"/>
-                <Button  x:Name="check" Grid.Column="0" Grid.Row="4" Margin="8"  Style="{StaticResource StandardButton}" Content="Kiküldés Betapress számára" Click="projektSendInEmail" />
+                <!--<CheckBox x:Name="check_8" Grid.Column="1" Grid.Row="3" Margin="8,0" Background="White" Content="Egyéb" Style="{StaticResource login_check}" VerticalAlignment="Center"/>-->
+                <Button  x:Name="check" Grid.Column="1" Grid.Row="3" Margin="8"  Style="{StaticResource StandardButton}" Content="Küldés" Click="projektSendInEmail" />
+                <TextBox x:Name="email_tbx" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" BorderBrush="{StaticResource racs_light}" Margin="8" Background="White" Padding="10" Text="E-mail cím" Style="{StaticResource Standard_Textbox}" GotFocus="emailGotFocus" LostFocus="emailLostFocus">
+                    <TextBox.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="5"/>
+                            <Setter Property = "BitmapEffect" >
+                                <Setter.Value>
+                                    <DropShadowBitmapEffect Color="Gray" Direction="90" ShadowDepth="2" Softness="0.3" Opacity="0.2"/>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </TextBox.Resources>
+                </TextBox>
                 <Border Background="{StaticResource Listbox_light}" Grid.ColumnSpan="2" Grid.RowSpan="5" Panel.ZIndex="-1" CornerRadius="10"/>
 
             </Grid>

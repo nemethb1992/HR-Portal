@@ -65,6 +65,50 @@ namespace HR_Portal.Public.templates
                                             <p>Személyügyi Osztály</p>";
             return front + content + bottom;
         }
+
+        public string ProjektPublikalo(string name, List<string> hirdetes, List<string> szoveg)
+        {
+            string hirdetesSeged = "";
+            string szovegSeged = "";
+            if(szoveg != null)
+            {
+                try
+                {
+                    szovegSeged = @"<b>Hirdetési szövegek:</b><br><br>
+                                  Mivel bíznánk meg?<br>
+                                  " + szoveg[0] + @" <br><br>
+                                  Mit kínálunk ?<br>
+                                  " + szoveg[1] + @" <br><br>
+                                  Rád gondoltunk, ha:<br>
+                                  " + szoveg[2] + @" <br><br>
+                                  Előnyt élvezel, ha:<br>
+                                  " + szoveg[3] + @" <br><br>";
+                }
+                catch (Exception)
+                {
+                    
+                }
+
+            }
+            foreach (var item in hirdetes)
+            {
+                hirdetesSeged += item + "<br>";
+            }
+            string content = @"
+                                            <h2>Tisztelt Betapress</h2>
+                                            <p Style='margin-bottom: 30px;' class=''>
+                                                <b>Hirdetendő projekt adatai:</b> <br>
+                                                " + name + @"<br><br>
+                                                <b>Hirdetési felületek:</b><br>
+                                                " + hirdetesSeged + @"<br>
+                                                " + szovegSeged + @"<br>
+
+                                            </p>
+                                            <p>Üdvözlettel,</p>
+                                            <p>Phoenix Mecano Kecskemét Kft.</p>
+                                            <p>Személyügyi Osztály</p>";
+            return front + content + bottom;
+        }
         public string Jelolt_Meghivo_Email(string name, string projekt_name, string date, List<string> resztvevok)
         {
             string resztvevok_layout = "";

@@ -271,6 +271,25 @@ namespace HR_Portal.View.Usercontrol.Panels
             }
         }
 
+        protected void emailGotFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox textbox = sender as TextBox;
+
+            if (textbox.Text == "E-mail cím")
+            {
+                textbox.Text = "";
+            }
+        }
+
+        protected void emailLostFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox textbox = sender as TextBox;
+
+            if (textbox.Text == "")
+            {
+                textbox.Text = "E-mail cím";
+            }
+        }
         protected void addPanelClose(object sender, RoutedEventArgs e)
         {
             Ember_hozzaadas_Grid.Visibility = System.Windows.Visibility.Hidden;
@@ -432,7 +451,51 @@ namespace HR_Portal.View.Usercontrol.Panels
 
         private void projektSendInEmail(object sender, RoutedEventArgs e)
         {
+            try
+            {
+                Email.Send(email_tbx.Text, emailTemplate.ProjektPublikalo(projekt_profile_title.Text, hirdetes(), szoveg()));
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Sikertelen e-mail küldés!");
+            }
+        }
+        protected List<string> hirdetes()
+        {
+            List<string> list = new List<string>(); 
 
+            if (check_1.IsChecked == true)
+                list.Add("Céges Honlap");
+            if (check_2.IsChecked == true)
+                list.Add("Facebook");
+            if (check_3.IsChecked == true)
+                list.Add("Profession");
+            if (check_4.IsChecked == true)
+                list.Add("allasstart.hu");
+            if (check_5.IsChecked == true)
+                list.Add("keol.hu");
+            if (check_6.IsChecked == true)
+                list.Add("hiros.hu");
+            if (check_7.IsChecked == true)
+                list.Add("Kecskeméti Lapok");
+            
+            
+            
+            
+            
+            
+
+            return list;
+        }
+        protected List<string> szoveg()
+        {
+            List<string> list = new List<string>();
+            list.Add(feladatok_tbx.Text);
+            list.Add(elvarasok_tbx.Text);
+            list.Add(kinalunk_tbx.Text);
+            list.Add(elonyok_tbx.Text);
+
+            return list;
         }
     }
 }

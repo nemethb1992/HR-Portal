@@ -184,16 +184,16 @@ namespace HR_Portal.Source
             switch (type)
             {
                 case "feladatok":
-                    command = "UPDATE projektek SET feladatok='" + content + "' WHERE projektek.id = " + Session.ProjektID + " AND hr_id = "+ Session.UserData[0].id+"";
+                    command = "UPDATE projektek SET feladatok='" + content + "' WHERE projektek.id = " + Session.ProjektID + "";
                     break;
                 case "elvarasok":
-                    command = "UPDATE projektek SET elvarasok='" + content + "' WHERE projektek.id = " + Session.ProjektID + " AND hr_id = " + Session.UserData[0].id + "";
+                    command = "UPDATE projektek SET elvarasok='" + content + "' WHERE projektek.id = " + Session.ProjektID + "";
                     break;
                 case "kinalunk":
-                    command = "UPDATE projektek SET kinalunk='" + content + "' WHERE projektek.id = " + Session.ProjektID + " AND hr_id = " + Session.UserData[0].id + "";
+                    command = "UPDATE projektek SET kinalunk='" + content + "' WHERE projektek.id = " + Session.ProjektID + "";
                     break;
                 case "elonyok":
-                    command = "UPDATE projektek SET elonyok='" + content + "' WHERE projektek.id = " + Session.ProjektID + " AND hr_id = " + Session.UserData[0].id + "";
+                    command = "UPDATE projektek SET elonyok='" + content + "' WHERE projektek.id = " + Session.ProjektID + "" ;
                     break;
                 default:
                     break;
