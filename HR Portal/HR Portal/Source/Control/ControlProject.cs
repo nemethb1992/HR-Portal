@@ -173,7 +173,6 @@ namespace HR_Portal.Source
 
         public void statusChange(int stat) // javított
         {
-            if(Session.ProjectStatusz != null)
                 Session.ProjectStatusz = 0;
             Session.ProjectStatusz = stat;
         }
