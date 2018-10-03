@@ -164,13 +164,7 @@ namespace HR_Portal.Source
             MySql.Update(command);
             MySql.Close();
         }
-
-
-
-
-
-
-
+        
         public void statusChange(int stat) // javított
         {
                 Session.ProjectStatusz = 0;
