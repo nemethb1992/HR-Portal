@@ -26,7 +26,8 @@ namespace HR_Portal.View.Usercontrol.Panels
         private static string HeaderSelecteds;
         public string HeaderSelected { get { return HeaderSelecteds; } set { HeaderSelecteds = value; } }
         
-        ControlApplicant aControl = new ControlApplicant();
+        CommonUtility Utility = new CommonUtility();
+        Applicant Applicant = new Applicant();
 
         private ApplicantDataSheet applicantDataSheet;
         private NewApplicantPanel newApplicantPanel;
@@ -41,7 +42,6 @@ namespace HR_Portal.View.Usercontrol.Panels
 
         public ApplicantList()
         {
-
         }
 
         protected void startMethods()
@@ -109,17 +109,16 @@ namespace HR_Portal.View.Usercontrol.Panels
 
         public void applicantListLoader()
         {
-                List<ModelApplicantList> list = VMApplicant.GetApplicantList(searchValues());
+            List<ModelApplicantList> list = Applicant.GetApplicantList(searchValues());
                 applicant_listBox.ItemsSource = list;
                 talalat_tbl.Text = "Találatok:  " + list.Count.ToString();
-            
         }
 
         protected void checkBoxLoader()
         {
-            vegzettseg_srccbx.ItemsSource = aControl.Data_Vegzettseg();
-            munkakor_srccbx.ItemsSource = aControl.Data_Munkakor();
-            nemek_srccbx.ItemsSource = aControl.Data_Nemek();
+            vegzettseg_srccbx.ItemsSource = Utility.Data_Vegzettseg();
+            munkakor_srccbx.ItemsSource = Utility.Data_Munkakor();
+            nemek_srccbx.ItemsSource = Utility.Data_Nemek();
         }
 
         protected void applicantOpenClick(object sender, RoutedEventArgs e)
@@ -139,7 +138,7 @@ namespace HR_Portal.View.Usercontrol.Panels
                 case MessageBoxResult.Yes:
                     MenuItem menuItem = sender as MenuItem;
                     ModelApplicantList items = menuItem.DataContext as ModelApplicantList;
-                    VMApplicant.Delete(items.id);
+                    Applicant.Delete(items.id);
                     applicantListLoader();
                     break;
                 case MessageBoxResult.No:
@@ -147,14 +146,12 @@ namespace HR_Portal.View.Usercontrol.Panels
                 case MessageBoxResult.Cancel:
                     break;
             }
-
         }
 
         protected void navigateToNewApplicantPanel(object sender, RoutedEventArgs e)
         {
             grid.Children.Clear();
             grid.Children.Add(newApplicantPanel = new NewApplicantPanel(grid));
-
         }
 
         protected async void searchInputTextChanged(object sender, TextChangedEventArgs e)
@@ -206,12 +203,12 @@ namespace HR_Portal.View.Usercontrol.Panels
             }
         }
 
-        protected void searchBarRefresh(object sender, RoutedEventArgs e)
+        protected void ClearSearchbar(object sender, RoutedEventArgs e)
         {
-            TextBox nev_tbx = nev_srcinp as TextBox;  // TODO: <- ez kell?
-            munkakor_srccbx.SelectedIndex = 0;
-            vegzettseg_srccbx.SelectedIndex = 0;
-            nemek_srccbx.SelectedIndex = 0;
+            munkakor_srccbx.SelectedIndex = -1;
+            vegzettseg_srccbx.SelectedIndex = -1;
+            nemek_srccbx.SelectedIndex = -1;
+            szabad_check.IsChecked = false;
             nev_srcinp.Text = "";
             lakhely_srcinp.Text = "";
             email_srcinp.Text = "";
@@ -219,6 +216,8 @@ namespace HR_Portal.View.Usercontrol.Panels
             tapsztalat_srcinp.Text = "";
             regdate_srcinp.Text = "";
             interju_srcinp.Text = "";
+            cimke_srcinp.Text = "";
+            applicantListLoader();
         }
 
         protected void szabadChecked(object sender, RoutedEventArgs e)

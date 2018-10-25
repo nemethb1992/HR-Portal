@@ -16,9 +16,7 @@ namespace HR_Portal.View.Usercontrol.Panels
     /// </summary>
     public partial class NewProjectPanel : UserControl
     {
-        ControlProject pControl = new ControlProject();
-        ControlApplicant aControl = new ControlApplicant();
-        ControlApplicantProject paControl = new ControlApplicantProject();
+        CommonUtility Utility = new CommonUtility();
 
         private Grid grid;
         private ProjectDataSheet projectDataSheet;
@@ -32,15 +30,15 @@ namespace HR_Portal.View.Usercontrol.Panels
 
         protected void checkboxLoader()
         {
-            pc_cbx.ItemsSource = aControl.Data_Pc();
-            vegzettseg_cbx.ItemsSource = aControl.Data_Vegzettseg();
-            nyelv_cbx.ItemsSource = aControl.Data_Nyelv();
-            munkakor_cbx.ItemsSource = aControl.Data_Munkakor();
-            k1_cbx.ItemsSource = VMInterview.Data_Kompetencia();
-            k2_cbx.ItemsSource = VMInterview.Data_Kompetencia();
-            k3_cbx.ItemsSource = VMInterview.Data_Kompetencia();
-            k4_cbx.ItemsSource = VMInterview.Data_Kompetencia();
-            k5_cbx.ItemsSource = VMInterview.Data_Kompetencia();
+            pc_cbx.ItemsSource = Utility.Data_Pc();
+            vegzettseg_cbx.ItemsSource = Utility.Data_Vegzettseg();
+            nyelv_cbx.ItemsSource = Utility.Data_Nyelv();
+            munkakor_cbx.ItemsSource = Utility.Data_Munkakor();
+            k1_cbx.ItemsSource = Interview.Data_Kompetencia();
+            k2_cbx.ItemsSource = Interview.Data_Kompetencia();
+            k3_cbx.ItemsSource = Interview.Data_Kompetencia();
+            k4_cbx.ItemsSource = Interview.Data_Kompetencia();
+            k5_cbx.ItemsSource = Interview.Data_Kompetencia();
 
             if (Session.isUpdate == true)
             {
@@ -54,19 +52,19 @@ namespace HR_Portal.View.Usercontrol.Panels
 
         protected void modifyFormLoader()
         {
-            List<ModelFullProject> list = VMProject.GetFullProject();
+            List<ModelFullProject> list = Project.GetFullProject();
             nev_tbx.Text = list[0].megnevezes_projekt;
             tapasztalat_tbx.Text = list[0].tapasztalat_ev.ToString();
             ber_tbx.Text = list[0].ber.ToString();
-            pc_cbx.SelectedIndex = checkboxCounter(aControl.Data_Pc().ConvertAll(x => new ModelId { id = x.id, }), list.ConvertAll(x => new ModelId { id = x.pc, }));
-            vegzettseg_cbx.SelectedIndex = checkboxCounter(aControl.Data_Vegzettseg().ConvertAll(x => new ModelId { id = x.id, }), list.ConvertAll(x => new ModelId { id = x.vegzettseg, }));
-            nyelv_cbx.SelectedIndex = checkboxCounter(aControl.Data_Nyelv().ConvertAll(x => new ModelId { id = x.id, }), list.ConvertAll(x => new ModelId { id = x.nyelvtudas, }));
-            munkakor_cbx.SelectedIndex = checkboxCounter(aControl.Data_Munkakor().ConvertAll(x => new ModelId { id = x.id, }), list.ConvertAll(x => new ModelId { id = x.munkakor, }));
-            k1_cbx.SelectedIndex = checkboxCounter(VMInterview.Data_Kompetencia().ConvertAll(x => new ModelId { id = x.id, }), list.ConvertAll(x => new ModelId { id = x.kepesseg1, }));
-            k2_cbx.SelectedIndex = checkboxCounter(VMInterview.Data_Kompetencia().ConvertAll(x => new ModelId { id = x.id, }), list.ConvertAll(x => new ModelId { id = x.kepesseg2, }));
-            k3_cbx.SelectedIndex = checkboxCounter(VMInterview.Data_Kompetencia().ConvertAll(x => new ModelId { id = x.id, }), list.ConvertAll(x => new ModelId { id = x.kepesseg3, }));
-            k4_cbx.SelectedIndex = checkboxCounter(VMInterview.Data_Kompetencia().ConvertAll(x => new ModelId { id = x.id, }), list.ConvertAll(x => new ModelId { id = x.kepesseg4, }));
-            k5_cbx.SelectedIndex = checkboxCounter(VMInterview.Data_Kompetencia().ConvertAll(x => new ModelId { id = x.id, }), list.ConvertAll(x => new ModelId { id = x.kepesseg5, }));
+            pc_cbx.SelectedIndex = checkboxCounter(Utility.Data_Pc().ConvertAll(x => new ModelId { id = x.id, }), list.ConvertAll(x => new ModelId { id = x.pc, }));
+            vegzettseg_cbx.SelectedIndex = checkboxCounter(Utility.Data_Vegzettseg().ConvertAll(x => new ModelId { id = x.id, }), list.ConvertAll(x => new ModelId { id = x.vegzettseg, }));
+            nyelv_cbx.SelectedIndex = checkboxCounter(Utility.Data_Nyelv().ConvertAll(x => new ModelId { id = x.id, }), list.ConvertAll(x => new ModelId { id = x.nyelvtudas, }));
+            munkakor_cbx.SelectedIndex = checkboxCounter(Utility.Data_Munkakor().ConvertAll(x => new ModelId { id = x.id, }), list.ConvertAll(x => new ModelId { id = x.munkakor, }));
+            k1_cbx.SelectedIndex = checkboxCounter(Interview.Data_Kompetencia().ConvertAll(x => new ModelId { id = x.id, }), list.ConvertAll(x => new ModelId { id = x.kepesseg1, }));
+            k2_cbx.SelectedIndex = checkboxCounter(Interview.Data_Kompetencia().ConvertAll(x => new ModelId { id = x.id, }), list.ConvertAll(x => new ModelId { id = x.kepesseg2, }));
+            k3_cbx.SelectedIndex = checkboxCounter(Interview.Data_Kompetencia().ConvertAll(x => new ModelId { id = x.id, }), list.ConvertAll(x => new ModelId { id = x.kepesseg3, }));
+            k4_cbx.SelectedIndex = checkboxCounter(Interview.Data_Kompetencia().ConvertAll(x => new ModelId { id = x.id, }), list.ConvertAll(x => new ModelId { id = x.kepesseg4, }));
+            k5_cbx.SelectedIndex = checkboxCounter(Interview.Data_Kompetencia().ConvertAll(x => new ModelId { id = x.id, }), list.ConvertAll(x => new ModelId { id = x.kepesseg5, }));
         }
 
         protected int checkboxCounter(List<ModelId> ossz_li, List<ModelId> projekt_li)
@@ -151,7 +149,7 @@ namespace HR_Portal.View.Usercontrol.Panels
 
                 if(isFulfilled())
                 {
-                    VMProject.Insert(getData());
+                    Project.Insert(getData());
                     grid.Children.Clear();
                     grid.Children.Add(projectDataSheet = new ProjectDataSheet(grid));
                 }
@@ -167,7 +165,7 @@ namespace HR_Portal.View.Usercontrol.Panels
 
             if (isFulfilled())
             {
-                VMProject.Update(getData());
+                Project.Update(getData());
                 grid.Children.Clear();
                 grid.Children.Add(projectDataSheet = new ProjectDataSheet(grid));
             }

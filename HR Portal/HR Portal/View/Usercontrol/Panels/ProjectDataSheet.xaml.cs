@@ -15,8 +15,8 @@ namespace HR_Portal.View.Usercontrol.Panels
 {
     public partial class ProjectDataSheet : UserControl
     {
-        ControlProject pControl = new ControlProject();
-        ControlApplicantProject paControl = new ControlApplicantProject();
+        CommonUtility Utility = new CommonUtility();
+        Applicant Applicant = new Applicant();
         EmailTemplate emailTemplate = new EmailTemplate();
 
         private Grid grid;
@@ -42,7 +42,7 @@ namespace HR_Portal.View.Usercontrol.Panels
         {
 
             listLoader();
-            List<ModelFullProject> li = VMProject.GetFullProject();
+            List<ModelFullProject> li = Project.GetFullProject();
             projekt_profile_title.Text = li[0].megnevezes_projekt;
             projekt_input_1.Text = li[0].statusz.ToString();
             projekt_input_2.Text = li[0].megnevezes_munka;
@@ -55,7 +55,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             projekt_input_9.Text = li[0].ber.ToString() + " Ft";
             projekt_input_10.Text = li[0].tapasztalat_ev.ToString();
 
-            List<ModelKompetenciak> li_k = VMInterview.Data_Kompetencia();
+            List<ModelKompetenciak> li_k = Interview.Data_Kompetencia();
             foreach (var item in li_k)
             {
                 if(item.id == li[0].kepesseg1)
@@ -79,11 +79,10 @@ namespace HR_Portal.View.Usercontrol.Panels
 
         protected void listLoader()
         {
-            megjegyzes_listBox.ItemsSource = pControl.Data_CommentProject();
-            kapcs_jeloltek_listBox.ItemsSource = pControl.Data_JeloltKapcs();
-            kapcs_ertesitendo_listBox.ItemsSource = pControl.Data_ErtesitendokKapcs();
-            //kapcs_hr_listBox.ItemsSource = pControl.Data_HrProject();
-            koltseg_listBox.ItemsSource = pControl.Data_ProjectCost();
+            megjegyzes_listBox.ItemsSource = Utility.Data_CommentProject();
+            kapcs_jeloltek_listBox.ItemsSource = Utility.Data_JeloltKapcs();
+            kapcs_ertesitendo_listBox.ItemsSource = Utility.Data_ErtesitendokKapcs();
+            koltseg_listBox.ItemsSource = Project.Data_ProjectCost();
         }
 
         protected void openApplicantClick(object sender, RoutedEventArgs e)
@@ -109,67 +108,27 @@ namespace HR_Portal.View.Usercontrol.Panels
         {
             kapcs_jeloltek_listBox.Visibility = System.Windows.Visibility.Visible;
             kapcs_ertesitendo_listBox.Visibility = System.Windows.Visibility.Hidden;
-            //kapcs_hr_listBox.Visibility = System.Windows.Visibility.Hidden;
 
             jeloltek_addbtn.Visibility = System.Windows.Visibility.Visible;
             ertesitendok_addbtn.Visibility = System.Windows.Visibility.Hidden;
-            //hr_addbtn.Visibility = System.Windows.Visibility.Hidden;
         }
 
         protected void ertesitendokTabClick(object sender, RoutedEventArgs e)
         {
             kapcs_jeloltek_listBox.Visibility = System.Windows.Visibility.Hidden;
             kapcs_ertesitendo_listBox.Visibility = System.Windows.Visibility.Visible;
-            //kapcs_hr_listBox.Visibility = System.Windows.Visibility.Hidden;
 
             ertesitendok_addbtn.Visibility = System.Windows.Visibility.Visible;
             jeloltek_addbtn.Visibility = System.Windows.Visibility.Hidden;
-            //hr_addbtn.Visibility = System.Windows.Visibility.Hidden;
         }
-
-        //protected void hrTabClick(object sender, RoutedEventArgs e)
-        //{
-        //    kapcs_jeloltek_listBox.Visibility = System.Windows.Visibility.Hidden;
-        //    kapcs_ertesitendo_listBox.Visibility = System.Windows.Visibility.Hidden;
-        //    kapcs_hr_listBox.Visibility = System.Windows.Visibility.Visible;
-
-        //    hr_addbtn.Visibility = System.Windows.Visibility.Visible;
-        //    ertesitendok_addbtn.Visibility = System.Windows.Visibility.Hidden;
-        //    jeloltek_addbtn.Visibility = System.Windows.Visibility.Hidden;
-            
-        //}
-
-        //private void add_applicant_btn_Click(object sender, RoutedEventArgs e)
-        //{
-        //    ComboBox cbx = applicant_cbx as ComboBox;
-        //    JeloltListItems jelolt = cbx.SelectedItem as JeloltListItems;
-        //    pcontrol.Jelolt_write_to_project(jelolt.id);
-        //    FormLoader();
-        //}
-
-        //private void add_hr_btn_Click(object sender, RoutedEventArgs e)
-        //{
-        //    ComboBox cbx = hr_cbx as ComboBox;
-        //    hr_struct items = cbx.SelectedItem as hr_struct;
-        //    pcontrol.HR_write_to_project(items.id);
-        //    KisListaTolto(megjegyzes_listBox);
-        //}
-
-        //private void add_felelos_btn_Click(object sender, RoutedEventArgs e)
-        //{
-        //    ComboBox cbx = felelos_cbx as ComboBox;
-        //    ertesitendok_struct items = cbx.SelectedItem as ertesitendok_struct;
-        //    pcontrol.Ertesitendok_write_to_project(items.id);
-        //    KisListaTolto(megjegyzes_listBox);
-        //}
 
         protected void jeloltDeleteClick(object sender, MouseButtonEventArgs e)
         {
             Image delete = sender as Image;
             ModelApplicantList items = delete.DataContext as ModelApplicantList;
 
-            pControl.jeloltKapcsDelete(items.id);
-            kapcs_jeloltek_listBox.ItemsSource = pControl.Data_JeloltKapcs();
+            Utility.jeloltKapcsDelete(items.id);
+            kapcs_jeloltek_listBox.ItemsSource = Utility.Data_JeloltKapcs();
         }
 
         protected void ertesitendoDeleteClick(object sender, RoutedEventArgs e)
@@ -177,26 +136,16 @@ namespace HR_Portal.View.Usercontrol.Panels
             Button delete = sender as Button;
             ModelErtesitendok items = delete.DataContext as ModelErtesitendok;
 
-            pControl.ertesitendokKapcsDelete(items.id);
-            kapcs_ertesitendo_listBox.ItemsSource = pControl.Data_ErtesitendokKapcs();
+            Utility.ertesitendokKapcsDelete(items.id);
+            kapcs_ertesitendo_listBox.ItemsSource = Utility.Data_ErtesitendokKapcs();
         }
-
-        //protected void hrDeleteClick(object sender, RoutedEventArgs e)
-        //{
-        //    Button delete = sender as Button;
-        //    ModelHr items = delete.DataContext as ModelHr;
-
-        //    pControl.hrKapcsDelete(items.id);
-        //    kapcs_hr_listBox.ItemsSource = pControl.Data_HrProject();
-        //}
-
-
+        
         protected void commentDeleteClick(object sender, RoutedEventArgs e)
         {
             MenuItem delete = sender as MenuItem;
             ModelComment items = delete.DataContext as ModelComment;
 
-            VMComment.Delete(items.id, Session.UserData[0].id, Session.ProjektID, 0);
+            Comment.Delete(items.id, Session.UserData[0].id, Session.ProjektID, 0);
             listLoader();
         }
 
@@ -214,11 +163,11 @@ namespace HR_Portal.View.Usercontrol.Panels
                         switch (result)
                         {
                             case MessageBoxResult.Yes:
-                                pControl.jeloltKapcsDelete(items.id);
+                                Utility.jeloltKapcsDelete(items.id);
                                 Email.Send(items.email, emailTemplate.Elutasito_Email(items.nev));
                                 break;
                             case MessageBoxResult.No:
-                                pControl.jeloltKapcsDelete(items.id);
+                                Utility.jeloltKapcsDelete(items.id);
                                 break;
                             case MessageBoxResult.Cancel:
                                 break;
@@ -226,13 +175,13 @@ namespace HR_Portal.View.Usercontrol.Panels
                         break;
                     }
                 case "1":
-                    pControl.jeloltKapcsUpdate(items.id, Convert.ToInt32(mitem.Tag));
+                    Utility.jeloltKapcsUpdate(items.id, Convert.ToInt32(mitem.Tag));
                     break;
                 case "2":
-                    pControl.jeloltKapcsUpdate(items.id, Convert.ToInt32(mitem.Tag));
+                    Utility.jeloltKapcsUpdate(items.id, Convert.ToInt32(mitem.Tag));
                     break;
                 case "3":
-                    pControl.jeloltKapcsUpdate(items.id, Convert.ToInt32(mitem.Tag));
+                    Utility.jeloltKapcsUpdate(items.id, Convert.ToInt32(mitem.Tag));
                     Email.Send(items.email, emailTemplate.Elutasito_Email(items.nev));
                     break;
             }
@@ -246,7 +195,7 @@ namespace HR_Portal.View.Usercontrol.Panels
 
             if (e.Key != System.Windows.Input.Key.Enter) return;
             e.Handled = true;
-            VMComment.Add(comment_tartalom.Text, Session.ProjektID, 0,0);
+            Comment.Add(comment_tartalom.Text, Session.ProjektID, 0,0);
             listLoader();
             tbx.Text = "";
         }
@@ -309,21 +258,15 @@ namespace HR_Portal.View.Usercontrol.Panels
                 case "jelolt":
                     {
                         selectedTabCode = 1;
-                        projekt_kapcsolodo_list.ItemsSource = pControl.Data_JeloltForCheckbox(Ember_Search_tbx.Text);
+                        projekt_kapcsolodo_list.ItemsSource = Utility.Data_JeloltForCheckbox(Ember_Search_tbx.Text);
                         break;
                     }
                 case "ertesitendo":
                     {
                         selectedTabCode = 2;
-                        projekt_kapcsolodo_list.ItemsSource = pControl.Data_ErtesitendokCheckbox(Ember_Search_tbx.Text);
+                        projekt_kapcsolodo_list.ItemsSource = Utility.Data_ErtesitendokCheckbox(Ember_Search_tbx.Text);
                         break;
                     }
-                //case "hr":
-                //    {
-                //        selectedTabCode = 3;
-                //        projekt_kapcsolodo_list.ItemsSource = pControl.Data_HrCheckbox(Ember_Search_tbx.Text);
-                //        break;
-                //    }
                 default:
                     break;
             }
@@ -342,29 +285,22 @@ namespace HR_Portal.View.Usercontrol.Panels
             if(selectedTabCode == 1)
             {
                 ModelApplicantListbox items = btn.DataContext as ModelApplicantListbox;
-                VMApplicant.AddProject(items.id, Session.ProjektID);
-                projekt_kapcsolodo_list.ItemsSource = pControl.Data_JeloltForCheckbox(Ember_Search_tbx.Text);
-                kapcs_jeloltek_listBox.ItemsSource = pControl.Data_JeloltKapcs();
+                Applicant.AddToProject(items.id, Session.ProjektID);
+                projekt_kapcsolodo_list.ItemsSource = Utility.Data_JeloltForCheckbox(Ember_Search_tbx.Text);
+                kapcs_jeloltek_listBox.ItemsSource = Utility.Data_JeloltKapcs();
             }
             if (selectedTabCode == 2)
             {
                 ModelErtesitendok items = btn.DataContext as ModelErtesitendok;
-                pControl.addErtesitendokInsert(items.id);
-                projekt_kapcsolodo_list.ItemsSource = pControl.Data_ErtesitendokCheckbox(Ember_Search_tbx.Text);
-                kapcs_ertesitendo_listBox.ItemsSource = pControl.Data_ErtesitendokKapcs();
+                Utility.addErtesitendokInsert(items.id);
+                projekt_kapcsolodo_list.ItemsSource = Utility.Data_ErtesitendokCheckbox(Ember_Search_tbx.Text);
+                kapcs_ertesitendo_listBox.ItemsSource = Utility.Data_ErtesitendokKapcs();
             }
-            //if (selectedTabCode == 3)
-            //{
-            //    ModelHr items = btn.DataContext as ModelHr;
-            //    pControl.addHrInsert(items.id);
-            //    projekt_kapcsolodo_list.ItemsSource = pControl.Data_HrCheckbox(Ember_Search_tbx.Text);
-            //    kapcs_hr_listBox.ItemsSource = pControl.Data_HrProject();
-            //}
         }
 
         protected void personSearchTextChanged(object sender, TextChangedEventArgs e)
         {
-            Ember_Search_Listbox.ItemsSource = pControl.Data_JeloltForCheckbox(Ember_Search_tbx.Text);
+            Ember_Search_Listbox.ItemsSource = Utility.Data_JeloltForCheckbox(Ember_Search_tbx.Text);
         }
 
         protected void descriptionLostFocus(object sender, RoutedEventArgs e)
@@ -372,14 +308,14 @@ namespace HR_Portal.View.Usercontrol.Panels
             TextBox textbox = sender as TextBox;
 
             string type = textbox.Tag.ToString();
-            pControl.projectDescriptionUpdate(type, textbox.Text);
+            Utility.projectDescriptionUpdate(type, textbox.Text);
             formLoader();
         }
 
         protected void projectCost()
         {
             int sum = 0;
-            List<ModelKoltsegek> list = pControl.Data_ProjectCost();
+            List<ModelKoltsegek> list = Project.Data_ProjectCost();
 
             foreach (var item in list)
             {
@@ -390,8 +326,8 @@ namespace HR_Portal.View.Usercontrol.Panels
 
         protected void addCost(object sender, RoutedEventArgs e)
         {
-            pControl.projectCostInsert(k_megnevezes_tbx.Text, k_osszeg_tbx.Text);
-            koltseg_listBox.ItemsSource = pControl.Data_ProjectCost();
+            Utility.projectCostInsert(k_megnevezes_tbx.Text, k_osszeg_tbx.Text);
+            koltseg_listBox.ItemsSource = Project.Data_ProjectCost();
             projectCost();
             Koltseg_insert_grid.Visibility = Visibility.Hidden;
         }
@@ -418,19 +354,19 @@ namespace HR_Portal.View.Usercontrol.Panels
         {
             MenuItem menu = sender as MenuItem;
             ModelKoltsegek item = menu.DataContext as ModelKoltsegek;
-            pControl.projectCostDelete(item.id);
-            koltseg_listBox.ItemsSource = pControl.Data_ProjectCost();
+            Utility.projectCostDelete(item.id);
+            koltseg_listBox.ItemsSource = Project.Data_ProjectCost();
             projectCost();
         }
 
         protected void publishChecked(object sender, RoutedEventArgs e)
         {
-            pControl.publishProject(1);
+            Utility.publishProject(1);
         }
 
         protected void publishUnchecked(object sender, RoutedEventArgs e)
         {
-            pControl.publishProject(0);
+            Utility.publishProject(0);
         }
 
         protected void gridMouseDown(object sender, MouseButtonEventArgs e)
@@ -479,12 +415,6 @@ namespace HR_Portal.View.Usercontrol.Panels
             if (check_7.IsChecked == true)
                 list.Add("Kecskeméti Lapok");
             
-            
-            
-            
-            
-            
-
             return list;
         }
         protected List<string> szoveg()

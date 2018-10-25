@@ -1,17 +1,13 @@
 ﻿using HR_Portal.Source.Model.Applicant;
 using HR_Portal.Source.Model.Project;
-using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HR_Portal.Source.ViewModel
 {
-    class VMApplicant
+    class Applicant
     {
-        public static List<ModelApplicantList> GetApplicantList(List<string> searchValue = null)
+        public List<ModelApplicantList> GetApplicantList(List<string> searchValue = null)
         {
             string command = "SELECT " +
                 "coalesce((SELECT count(projekt_id) FROM interjuk_kapcs WHERE jelolt_id = jeloltek.id GROUP BY jelolt_id),0) as interjuk_db, " +
@@ -107,7 +103,7 @@ namespace HR_Portal.Source.ViewModel
             return list;
         }
 
-        public static List<ModelFullApplicant> GetFullApplicant()
+        public List<ModelFullApplicant> GetFullApplicant()
         {
             string command = "SELECT jeloltek.id,nev,email,telefon,lakhely,pmk_ismerte,szuldatum,neme,tapasztalat_ev, reg_date,felvett,jeloltek.megjegyzes,folderUrl,hirlevel," +
                 "coalesce((SELECT nem FROM nemek WHERE nemek.id = jeloltek.neme),'') AS neme," +
@@ -135,7 +131,7 @@ namespace HR_Portal.Source.ViewModel
             return list;
         }
 
-        public static void Delete(int id)   //javított használja: applicantlist
+        public void Delete(int id)   //javított használja: applicantlist
         {
             string command = "DELETE FROM jeloltek WHERE jeloltek.id = " + id + ";";
             MySql.Update(command);
@@ -148,7 +144,7 @@ namespace HR_Portal.Source.ViewModel
             MySql.Close();
         }
 
-        public static void Insert(List<ModelFullApplicant> items)  //javított
+        public void Insert(List<ModelFullApplicant> items)  //javított
         {
             string command = "INSERT INTO jeloltek (`id`, `nev`, `email`, `telefon`, `lakhely`, `ertesult`, `szuldatum`, neme, `tapasztalat_ev`, `munkakor`, `munkakor2`, `munkakor3`, `vegz_terulet`, `nyelvtudas`,`nyelvtudas2`, `reg_date`) " +
                 "VALUES(NULL, '" + items[0].nev + "',  '" + items[0].email + "', '" + items[0].telefon + "', '" + items[0].lakhely + "', " + items[0].ertesult + ", " + items[0].szuldatum + ", " + items[0].neme + "," + items[0].tapasztalat_ev + "," + items[0].munkakor + "," + items[0].munkakor2 + "," + items[0].munkakor3 + "," + items[0].vegz_terulet + "," + items[0].nyelvtudas + "," + items[0].nyelvtudas2 + ",'" + items[0].reg_date + "');";
@@ -159,7 +155,7 @@ namespace HR_Portal.Source.ViewModel
             MySql.Close();
         }
 
-        public static void Update(List<ModelFullApplicant> items)  //javított
+        public void Update(List<ModelFullApplicant> items)  //javított
         {
             string query = "UPDATE jeloltek SET " +
                 " `nev` = '" + items[0].nev + "'" +
@@ -184,7 +180,7 @@ namespace HR_Portal.Source.ViewModel
             MySql.Close();
         }
 
-        public static List<ModelSmallProject> Data_ProjectList() //javított
+        public List<ModelSmallProject> Data_ProjectList() //javított
         {
             string command = "SELECT projektek.id, megnevezes_projekt FROM projektek " +
                 "INNER JOIN projekt_jelolt_kapcs ON projektek.id = projekt_jelolt_kapcs.projekt_id " +
@@ -196,7 +192,7 @@ namespace HR_Portal.Source.ViewModel
             return list;
         }
 
-        public static List<ModelSmallProject> Data_PorjectListSmall()  //javított
+        public List<ModelSmallProject> Data_PorjectListSmall()  //javított
         {
             string command = "SELECT projektek.id, megnevezes_projekt FROM projektek WHERE statusz = 1";
             List<ModelSmallProject> list = ModelSmallProject.GetModelSmallProject(command);
@@ -204,14 +200,14 @@ namespace HR_Portal.Source.ViewModel
             return list;
         }
 
-        public static void DeleteProject(int id)  //javított
+        public void DeleteProject(int id)  //javított
         {
             string command = "DELETE FROM projekt_jelolt_kapcs WHERE projekt_id = " + id + " AND jelolt_id = " + Session.ApplicantID + ";";
             MySql.Update(command);
             MySql.Close();
         }
         
-        public static void AddProject(int jelolt_index, int projekt_index)
+        public void AddToProject(int jelolt_index, int projekt_index)
         {
             string command = "SELECT * FROM projekt_jelolt_kapcs WHERE jelolt_id = " + jelolt_index + " AND projekt_id = "+projekt_index+"";
             if (!MySql.IsExists(command))

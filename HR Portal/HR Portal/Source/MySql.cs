@@ -182,5 +182,26 @@ namespace HR_Portal.Source
             }
             return url;
         }
+
+        public static List<Dictionary<string, string>> GetData(string command, string firstField, params string[] moreFields)
+        {
+            List<Dictionary<string, string>> li = new List<Dictionary<string, string>>();
+            if (Open() == true)
+            {
+                cmd = new MySqlCommand(command, conn);
+                sdr = cmd.ExecuteReader();
+                while (sdr.Read())
+                {
+                    Dictionary<string, string> row = new Dictionary<string, string>();
+                    row.Add(firstField, sdr[firstField].ToString());
+                    foreach (var field in moreFields)
+                    {
+                        row.Add(field, sdr[field].ToString());
+                    }
+                    li.Add(row);
+                }
+    		}
+    		return li;
+        }
     }
 }

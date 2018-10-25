@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace HR_Portal.Source.ViewModel
 {
-    class VMSzakmai
+    class Szakmai
     {
         public static List<ModelSzakmaiBevont> Data_SzakmaiProject()
         {

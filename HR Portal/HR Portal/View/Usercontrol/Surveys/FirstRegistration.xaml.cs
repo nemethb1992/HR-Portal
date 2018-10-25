@@ -51,7 +51,7 @@ namespace HR_Portal.View.Usercontrol.Surveys
                     {
                         ComboBox katcbx = kategoria_cbx as ComboBox;
                         Kategoria_struct kategoria_items = katcbx.SelectedItem as Kategoria_struct;
-                        VMLogin.Registration(tartomanyi.Text, teljesnev.Text, email.Text, kategoria_items.id);
+                        Source.ViewModel.Login.Registration(tartomanyi.Text, teljesnev.Text, email.Text, kategoria_items.id);
                         MainWindow login = new MainWindow();
                         var window = Window.GetWindow(this);
                         window.Close();

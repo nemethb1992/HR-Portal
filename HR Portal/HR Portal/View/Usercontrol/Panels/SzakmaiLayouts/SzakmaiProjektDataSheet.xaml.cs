@@ -15,10 +15,9 @@ namespace HR_Portal.View.Usercontrol.Panels.SzakmaiLayouts
     /// </summary>
     public partial class SzakmaiProjektDataSheet : UserControl
     {
-
-        ControlProject pControl = new ControlProject();
+        
         //ControlApplicant aControl = new ControlApplicant();
-        ControlApplicantProject paControl = new ControlApplicantProject();
+        CommonUtility Utility = new CommonUtility();
 
         private SzakmaiApplicantDataView szakmaiApplicantDataView;
         private SzakmaiList szakmaiList;
@@ -39,7 +38,7 @@ namespace HR_Portal.View.Usercontrol.Panels.SzakmaiLayouts
 
         protected void formLoader()
         {
-            List <ModelFullProject> list = VMProject.GetFullProject();
+            List <ModelFullProject> list = Project.GetFullProject();
             projekt_profile_title.Text = list[0].megnevezes_projekt;
             projekt_input_1.Text = list[0].statusz.ToString();
             projekt_input_2.Text = list[0].megnevezes_munka;
@@ -52,7 +51,7 @@ namespace HR_Portal.View.Usercontrol.Panels.SzakmaiLayouts
             projekt_input_9.Text = list[0].ber.ToString() + " Ft";
             projekt_input_10.Text = list[0].tapasztalat_ev.ToString();
 
-            List<ModelKompetenciak> listKompetencia = VMInterview.Data_Kompetencia();
+            List<ModelKompetenciak> listKompetencia = Interview.Data_Kompetencia();
             foreach (var item in listKompetencia)
             {
                 if (item.id == list[0].kepesseg1)
@@ -67,8 +66,8 @@ namespace HR_Portal.View.Usercontrol.Panels.SzakmaiLayouts
                 { kompetencia5.Text = item.kompetencia_megnevezes; }
             }
 
-            megjegyzes_listBox.ItemsSource = pControl.Data_CommentProject();
-            kapcs_jeloltek_listBox.ItemsSource = pControl.Data_JeloltKapcs();
+            megjegyzes_listBox.ItemsSource = Utility.Data_CommentProject();
+            kapcs_jeloltek_listBox.ItemsSource = Utility.Data_JeloltKapcs();
         }
 
         protected void commentDelete(object sender, RoutedEventArgs e)
@@ -76,8 +75,8 @@ namespace HR_Portal.View.Usercontrol.Panels.SzakmaiLayouts
             MenuItem menuItem = sender as MenuItem;
             ModelComment items = menuItem.DataContext as ModelComment;
 
-            VMComment.Delete(items.id, Session.UserData[0].id, Session.ProjektID, 0);
-            megjegyzes_listBox.ItemsSource = pControl.Data_CommentProject();
+            Comment.Delete(items.id, Session.UserData[0].id, Session.ProjektID, 0);
+            megjegyzes_listBox.ItemsSource = Utility.Data_CommentProject();
         }
 
         protected void addComment(object sender, KeyEventArgs e)
@@ -86,8 +85,8 @@ namespace HR_Portal.View.Usercontrol.Panels.SzakmaiLayouts
 
             if (e.Key != System.Windows.Input.Key.Enter) return;
             e.Handled = true;
-            VMComment.Add(comment_tartalom.Text, Session.ProjektID, 0, 0);
-            megjegyzes_listBox.ItemsSource = pControl.Data_CommentProject();
+            Comment.Add(comment_tartalom.Text, Session.ProjektID, 0, 0);
+            megjegyzes_listBox.ItemsSource = Utility.Data_CommentProject();
             tbx.Text = "";
         }
 

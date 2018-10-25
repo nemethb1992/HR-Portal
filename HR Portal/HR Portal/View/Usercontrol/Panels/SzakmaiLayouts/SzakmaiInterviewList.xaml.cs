@@ -32,7 +32,7 @@ namespace HR_Portal.View.Usercontrol.Panels.SzakmaiLayouts
         {
             InitializeComponent();
             this.grid = grid;
-            bevont_interjuk_listbox.ItemsSource = VMSzakmai.Data_SzakmaiInterview();
+            bevont_interjuk_listbox.ItemsSource = Szakmai.Data_SzakmaiInterview();
         }
 
         protected void szakmai_mainpage_btn_Click(object sender, RoutedEventArgs e)

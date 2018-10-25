@@ -18,9 +18,9 @@ namespace HR_Portal.View.Usercontrol.Panels
     /// 
     public partial class ProjektJeloltDataSheet : UserControl
     {
-        ControlApplicant aControl = new ControlApplicant();
-        ControlProject pControl = new ControlProject();
-        ControlApplicantProject paControl = new ControlApplicantProject();
+
+        Applicant Applicant = new Applicant();
+        CommonUtility Utility = new CommonUtility();
 
         private ProjectDataSheet projectDataSheet;
         private InterviewPanel interviewPanel;
@@ -35,15 +35,15 @@ namespace HR_Portal.View.Usercontrol.Panels
 
         protected void projectFormLoader()
         {
-            List<ModelFullApplicant> applicantList = VMApplicant.GetFullApplicant();
-            List<ModelFullProject> projectList = VMProject.GetFullProject();
-            List<ModelKompetenciak> kompetenciaList = VMInterview.Data_Kompetencia();
-            List<ModelKompetenciaSummary> summaryList = paControl.Data_KompetenciaJeloltKapcs();
+            List<ModelFullApplicant> applicantList = Applicant.GetFullApplicant();
+            List<ModelFullProject> projectList = Project.GetFullProject();
+            List<ModelKompetenciak> kompetenciaList = Interview.Data_Kompetencia();
+            List<ModelKompetenciaSummary> summaryList = Utility.Data_KompetenciaJeloltKapcs();
 
             projekt_jelolt_title_tbl.Text = projectList[0].megnevezes_projekt + " - " + applicantList[0].nev;
             jelolt_telefon.Text = "( " + applicantList[0].telefon + " )";
-            megjegyzes_listBox.ItemsSource = pControl.Data_CommentKapcs();
-            kapcs_jeloltek_listBox.ItemsSource = paControl.Data_Interview();
+            megjegyzes_listBox.ItemsSource = Utility.Data_CommentKapcs();
+            kapcs_jeloltek_listBox.ItemsSource = Interview.Data_InterviewById();
             inter_cim.Items.Add("HR interjú");
             inter_cim.Items.Add("Szakmai + HR");
             inter_cim.Items.Add("Szakmai Interjú 1.");
@@ -100,8 +100,8 @@ namespace HR_Portal.View.Usercontrol.Panels
 
             if (e.Key != Key.Enter) return;
             e.Handled = true;
-            VMComment.Add(comment_tartalom.Text, Session.ProjektID, Session.ApplicantID, 0);
-            megjegyzes_listBox.ItemsSource = pControl.Data_CommentKapcs();
+            Comment.Add(comment_tartalom.Text, Session.ProjektID, Session.ApplicantID, 0);
+            megjegyzes_listBox.ItemsSource = Utility.Data_CommentKapcs();
             tbx.Text = "";
         }
 
@@ -129,8 +129,8 @@ namespace HR_Portal.View.Usercontrol.Panels
         {
             ModelComment items = (sender as MenuItem).DataContext as ModelComment;
 
-            VMComment.Delete(items.id, Session.UserData[0].id, Session.ProjektID, Session.ApplicantID);
-            megjegyzes_listBox.ItemsSource = pControl.Data_CommentKapcs();
+            Comment.Delete(items.id, Session.UserData[0].id, Session.ProjektID, Session.ApplicantID);
+            megjegyzes_listBox.ItemsSource = Utility.Data_CommentKapcs();
         }
 
         protected void telephonePanelOpenClick(object sender, RoutedEventArgs e)
@@ -161,7 +161,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             {
                 ismerte = 1;
             }
-            paControl.telephoneFilterInsert(ismerte,Convert.ToInt32(muszakok_tbx.Text),utazas_tbx.Text);
+            Interview.telephoneFilterInsert(ismerte,Convert.ToInt32(muszakok_tbx.Text),utazas_tbx.Text);
             Session.TelefonSzurt = 1;
             grid_telefonosszuro.Height = 100;
             telefonos_igen_btn.IsEnabled = true;
@@ -176,7 +176,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             switch (result)
             {
                 case MessageBoxResult.Yes:
-                    pControl.jeloltKapcsUpdate(Session.ApplicantID, 3);
+                    Utility.jeloltKapcsUpdate(Session.ApplicantID, 3);
                     grid.Children.Clear();
                     grid.Children.Add(projectDataSheet = new ProjectDataSheet(grid));
                     break;
@@ -231,7 +231,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             catch{ }
             try
             {
-                paControl.addInterview(datum, inter_cim.SelectedItem.ToString(), inter_leiras.Text, inter_helyszin.Text, inter_idopont.Text);
+                Utility.addInterview(datum, inter_cim.SelectedItem.ToString(), inter_leiras.Text, inter_helyszin.Text, inter_idopont.Text);
                 projectFormLoader();
                 interviewPanelClose();
             }
@@ -256,7 +256,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             MenuItem menu = sender as MenuItem;
             ModelInterview items = menu.DataContext as ModelInterview;
 
-            paControl.interviewDelete(items.id);
+            Utility.interviewDelete(items.id);
             projectFormLoader();
         }
 
@@ -270,7 +270,7 @@ namespace HR_Portal.View.Usercontrol.Panels
         {
             List<ModelTamogatas> list = new List<ModelTamogatas>();
 
-            list = paControl.Data_KompetenciaTamogatas();
+            list = Utility.Data_KompetenciaTamogatas();
             int igen = 0, ossz = 0 ;
             foreach (var item in list)
             {

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace HR_Portal.Source.ViewModel
 {
-    public class VMInterview
+    public class Interview
     {
         public static List<ModelKompetenciak> Data_Kompetencia() // javítva használja: newprojectpanel
         {
@@ -43,6 +43,17 @@ namespace HR_Portal.Source.ViewModel
             List<ModelErtesitendok> list = ModelErtesitendok.GetModelErtesitendok(command);
             MySql.Close();
             return list;
+        }
+
+        public static void telephoneFilterInsert(int ismerte, int muszakok, string utazas) //javított
+        {
+            string command = "UPDATE projekt_jelolt_kapcs SET allapota = 1 WHERE projekt_id = " + Session.ProjektID + " AND jelolt_id = " + Session.ApplicantID + "";
+            MySql.Update(command);
+            command = "UPDATE jeloltek SET pmk_ismerte = " + ismerte + "  WHERE id = " + Session.ApplicantID + "";
+            MySql.Update(command);
+            command = "INSERT INTO jelolt_statisztika (id, jelolt_id, utazas, muszakok) VALUES(null, " + Session.ApplicantID + ", '" + utazas + "', " + muszakok + ")";
+            MySql.Update(command);
+            MySql.Close();
         }
 
         public static bool HasTest() // javítva

@@ -16,7 +16,8 @@ namespace HR_Portal.View.Usercontrol.Panels
     /// </summary>
     public partial class NewApplicantPanel : UserControl
     {
-        ControlApplicant aControl = new ControlApplicant();
+        CommonUtility Utility = new CommonUtility();
+        Applicant Applicant = new Applicant();
 
         private Grid grid;
         private ApplicantDataSheet applicantDataSheet;
@@ -30,14 +31,14 @@ namespace HR_Portal.View.Usercontrol.Panels
 
         protected void checkboxLoader()
         {
-            munkakor_cbx.ItemsSource = aControl.Data_Munkakor();
-            munkakor2_cbx.ItemsSource = aControl.Data_Munkakor();
-            munkakor3_cbx.ItemsSource = aControl.Data_Munkakor();
-            vegzettseg_cbx.ItemsSource = aControl.Data_Vegzettseg();
-            nyelv_cbx.ItemsSource = aControl.Data_Nyelv();
-            nyelv2_cbx.ItemsSource = aControl.Data_Nyelv();
-            ertesules_cbx.ItemsSource = aControl.Data_Ertesulesek();
-            neme_cbx.ItemsSource = aControl.Data_Nemek();
+            munkakor_cbx.ItemsSource = Utility.Data_Munkakor();
+            munkakor2_cbx.ItemsSource = Utility.Data_Munkakor();
+            munkakor3_cbx.ItemsSource = Utility.Data_Munkakor();
+            vegzettseg_cbx.ItemsSource = Utility.Data_Vegzettseg();
+            nyelv_cbx.ItemsSource = Utility.Data_Nyelv();
+            nyelv2_cbx.ItemsSource = Utility.Data_Nyelv();
+            ertesules_cbx.ItemsSource = Utility.Data_Ertesulesek();
+            neme_cbx.ItemsSource = Utility.Data_Nemek();
 
             if (Session.isUpdate == true)
             {
@@ -51,7 +52,7 @@ namespace HR_Portal.View.Usercontrol.Panels
 
         protected void modifyFormLoader()
         {
-            List<ModelFullApplicant> li = VMApplicant.GetFullApplicant();
+            List<ModelFullApplicant> li = Applicant.GetFullApplicant();
             nev_tbx.Text = li[0].nev;
             email_tbx.Text = li[0].email;
             lakhely_tbx.Text = li[0].lakhely;
@@ -59,14 +60,14 @@ namespace HR_Portal.View.Usercontrol.Panels
             eletkor_tbx.Text = li[0].szuldatum.ToString();
             tapasztalat_tbx.Text = li[0].tapasztalat_ev.ToString();
 
-            munkakor_cbx.SelectedIndex = checkboxCounter(aControl.Data_Munkakor().ConvertAll(x => new ModelId { id = x.id, }), li.ConvertAll(x => new ModelId { id = x.id_munkakor, }));
-            munkakor2_cbx.SelectedIndex = checkboxCounter(aControl.Data_Munkakor().ConvertAll(x => new ModelId { id = x.id, }), li.ConvertAll(x => new ModelId { id = x.id_munkakor2, }));
-            munkakor3_cbx.SelectedIndex = checkboxCounter(aControl.Data_Munkakor().ConvertAll(x => new ModelId { id = x.id, }), li.ConvertAll(x => new ModelId { id = x.id_munkakor3, }));
-            nyelv_cbx.SelectedIndex = checkboxCounter(aControl.Data_Nyelv().ConvertAll(x => new ModelId { id = x.id, }), li.ConvertAll(x => new ModelId { id = x.id_nyelvtudas, }));
-            nyelv2_cbx.SelectedIndex = checkboxCounter(aControl.Data_Nyelv().ConvertAll(x => new ModelId { id = x.id, }), li.ConvertAll(x => new ModelId { id = x.id_nyelvtudas2, }));
-            ertesules_cbx.SelectedIndex = checkboxCounter(aControl.Data_Ertesulesek().ConvertAll(x => new ModelId { id = x.id, }), li.ConvertAll(x => new ModelId { id = x.id_ertesult, }));
-            vegzettseg_cbx.SelectedIndex = checkboxCounter(aControl.Data_Vegzettseg().ConvertAll(x => new ModelId { id = x.id, }), li.ConvertAll(x => new ModelId { id = x.id_vegz_terulet, }));
-            neme_cbx.SelectedIndex = checkboxCounter(aControl.Data_Nemek().ConvertAll(x => new ModelId { id = x.id, }), li.ConvertAll(x => new ModelId { id = x.id_neme, }));
+            munkakor_cbx.SelectedIndex = checkboxCounter(Utility.Data_Munkakor().ConvertAll(x => new ModelId { id = x.id, }), li.ConvertAll(x => new ModelId { id = x.id_munkakor, }));
+            munkakor2_cbx.SelectedIndex = checkboxCounter(Utility.Data_Munkakor().ConvertAll(x => new ModelId { id = x.id, }), li.ConvertAll(x => new ModelId { id = x.id_munkakor2, }));
+            munkakor3_cbx.SelectedIndex = checkboxCounter(Utility.Data_Munkakor().ConvertAll(x => new ModelId { id = x.id, }), li.ConvertAll(x => new ModelId { id = x.id_munkakor3, }));
+            nyelv_cbx.SelectedIndex = checkboxCounter(Utility.Data_Nyelv().ConvertAll(x => new ModelId { id = x.id, }), li.ConvertAll(x => new ModelId { id = x.id_nyelvtudas, }));
+            nyelv2_cbx.SelectedIndex = checkboxCounter(Utility.Data_Nyelv().ConvertAll(x => new ModelId { id = x.id, }), li.ConvertAll(x => new ModelId { id = x.id_nyelvtudas2, }));
+            ertesules_cbx.SelectedIndex = checkboxCounter(Utility.Data_Ertesulesek().ConvertAll(x => new ModelId { id = x.id, }), li.ConvertAll(x => new ModelId { id = x.id_ertesult, }));
+            vegzettseg_cbx.SelectedIndex = checkboxCounter(Utility.Data_Vegzettseg().ConvertAll(x => new ModelId { id = x.id, }), li.ConvertAll(x => new ModelId { id = x.id_vegz_terulet, }));
+            neme_cbx.SelectedIndex = checkboxCounter(Utility.Data_Nemek().ConvertAll(x => new ModelId { id = x.id, }), li.ConvertAll(x => new ModelId { id = x.id_neme, }));
         }
 
         protected int checkboxCounter(List<ModelId> ossz_li, List<ModelId> projekt_li)
@@ -149,7 +150,7 @@ namespace HR_Portal.View.Usercontrol.Panels
         {
             if (isFulfilled())
             {
-                VMApplicant.Insert(getFormData());
+                Applicant.Insert(getFormData());
                 grid.Children.Clear();
                 grid.Children.Add(applicantDataSheet = new ApplicantDataSheet(grid));
             }
@@ -163,7 +164,7 @@ namespace HR_Portal.View.Usercontrol.Panels
         {
             if (isFulfilled())
             {
-                VMApplicant.Update(getFormData());
+                Applicant.Update(getFormData());
                 grid.Children.Clear();
                 grid.Children.Add(applicantDataSheet = new ApplicantDataSheet(grid));
             }

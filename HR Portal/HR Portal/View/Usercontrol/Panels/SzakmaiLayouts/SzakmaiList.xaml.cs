@@ -47,7 +47,7 @@ namespace HR_Portal.View.Usercontrol.Panels
 
         protected void settingUp()
         {
-            bevont_projekt_lista.ItemsSource = VMSzakmai.Data_SzakmaiProject();
+            bevont_projekt_lista.ItemsSource = Szakmai.Data_SzakmaiProject();
         }
 
         protected void navigateToSzakmaiKezdolap(object sender, RoutedEventArgs e)

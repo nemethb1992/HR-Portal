@@ -1,14 +1,11 @@
-﻿using HR_Portal.Source.Model.Project;
-using MySql.Data.MySqlClient;
+﻿using HR_Portal.Source.Model;
+using HR_Portal.Source.Model.Project;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HR_Portal.Source.ViewModel
 {
-    class VMProject
+    class Project
     {
         public static List<ModelProjectList> GetProjectList(List<string> searchValue)
         {
@@ -156,6 +153,14 @@ namespace HR_Portal.Source.ViewModel
             int proID = Convert.ToInt16(MySql.UniqueList("SELECT projektek.id FROM projektek WHERE projektek.megnevezes_projekt = '" + items[0].megnevezes_projekt + "' AND projektek.pc = " + items[0].pc + " AND projektek.munkakor = '" + items[0].munkakor + "'", "projektek", 1)[0]);
             Session.ProjektID = proID;
             MySql.Close();
+        }
+
+        public static List<ModelKoltsegek> Data_ProjectCost()  // javított
+        {
+            string command = "SELECT * FROM projekt_koltsegek WHERE projekt_id = " + Session.ProjektID + "";
+            List<ModelKoltsegek> list = ModelKoltsegek.GetModelKoltsegek(command);
+            MySql.Close();
+            return list;
         }
     }
 }

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace HR_Portal.Source.ViewModel
 {
-    class VMLogin
+    class Login
     {
         public static bool Authentication(string username)
         {

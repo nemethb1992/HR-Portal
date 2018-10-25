@@ -20,7 +20,7 @@ namespace HR_Portal.View.Usercontrol.Panels
         private static string HeaderSelecteds;
         protected string HeaderSelected { get { return HeaderSelecteds; } set { HeaderSelecteds = value; } }
 
-        ControlProject pControl = new ControlProject();
+        CommonUtility Utility = new CommonUtility();
 
         private ProjectDataSheet projectDataSheet;
         private NewProjectPanel newProjectPanel;
@@ -36,10 +36,26 @@ namespace HR_Portal.View.Usercontrol.Panels
             projectListLoader();
         }
 
+        protected void ClearSearchbar(object sender, RoutedEventArgs e)
+        {
+            projektnev_srcinp.Text = "";
+            jeloltszam_srcinp.Text = "";
+            jeloltnev_srcinp.Text = "";
+            pc_srcinp.Text = "";
+            interju_srcinp.Text = "";
+            publikalva_srcinp.Text = "";
+            cimke_srcinp.Text = "";
+            publikalt_check.IsChecked = false;
+            nyelv_srccbx.SelectedIndex = -1;
+            vegzettseg_srccbx.SelectedIndex = -1;
+
+            projectListLoader();
+        }
+
         protected void checkBoxLoader()
         {
-            nyelv_srccbx.ItemsSource = pControl.Data_Nyelv();
-            vegzettseg_srccbx.ItemsSource = pControl.Data_Vegzettseg();
+            nyelv_srccbx.ItemsSource = Utility.Data_Nyelv();
+            vegzettseg_srccbx.ItemsSource = Utility.Data_Vegzettseg();
         }
 
         protected List<string> getSearchData()
@@ -100,7 +116,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             buttonColorChange();
 
             try{
-                List<ModelProjectList> lista = VMProject.GetProjectList(getSearchData());
+                List<ModelProjectList> lista = Project.GetProjectList(getSearchData());
                 project_listBox.ItemsSource = lista;
                 talalat_tbl.Text = "Találatok:  " + lista.Count.ToString();
             }
@@ -164,7 +180,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             {
                 case MessageBoxResult.Yes:
                     ModelProjectList items = (sender as MenuItem).DataContext as ModelProjectList;
-                    VMProject.Delete(items.id);
+                    Project.Delete(items.id);
                     projectListLoader();
                     break;
                 case MessageBoxResult.No:
@@ -181,7 +197,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             {
                 case MessageBoxResult.Yes:
                     ModelProjectList items = (sender as MenuItem).DataContext as ModelProjectList;
-                    pControl.projectArchiver(items.id, items.statusz);
+                    Utility.projectArchiver(items.id, items.statusz);
                     projectListLoader();
                     break;
                 case MessageBoxResult.No:
@@ -193,15 +209,15 @@ namespace HR_Portal.View.Usercontrol.Panels
 
         protected void projectPassivateClick(object sender, RoutedEventArgs e)
         {
-            pControl.statusChange(0);
-            project_listBox.ItemsSource = VMProject.GetProjectList(getSearchData());
+            Utility.statusChange(0);
+            project_listBox.ItemsSource = Project.GetProjectList(getSearchData());
             buttonColorChange();
         }
 
         protected void projectActivateClick(object sender, RoutedEventArgs e)
         {
-            pControl.statusChange(1);
-            project_listBox.ItemsSource = VMProject.GetProjectList(getSearchData());
+            Utility.statusChange(1);
+            project_listBox.ItemsSource = Project.GetProjectList(getSearchData());
             buttonColorChange();
         }
 

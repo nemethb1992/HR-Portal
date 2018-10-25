@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HR_Portal.Source.ViewModel
 {
-    class VMComment
+    class Comment
     {
         public static void Add(string comment, int project_id, int applicant_id, int teljesites)
         {

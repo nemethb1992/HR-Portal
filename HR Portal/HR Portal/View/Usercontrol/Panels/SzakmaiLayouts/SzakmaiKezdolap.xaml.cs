@@ -22,7 +22,6 @@ namespace HR_Portal.View.Usercontrol.Panels.SzakmaiLayouts
     /// </summary>
     public partial class SzakmaiKezdolap : UserControl
     {
-        ControlProject pControl = new ControlProject();
 
         private SzakmaiInterviewList szakmaiInterviewList;
         private SzakmaiList szakmaiList;
@@ -36,8 +35,8 @@ namespace HR_Portal.View.Usercontrol.Panels.SzakmaiLayouts
         }
         protected void StartUp()
         {
-            interju_no.Text = VMSzakmai.Data_SzakmaiInterview().Count.ToString() + " db";
-            projekt_no.Text = VMSzakmai.Data_SzakmaiProject().Count.ToString() + " db";
+            interju_no.Text = Szakmai.Data_SzakmaiInterview().Count.ToString() + " db";
+            projekt_no.Text = Szakmai.Data_SzakmaiProject().Count.ToString() + " db";
         }
 
         protected void navigateToSzakmaiList(object sender, RoutedEventArgs e)

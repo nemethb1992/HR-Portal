@@ -50,7 +50,7 @@ namespace HR_Portal.View.Usercontrol
 
         private void setartUp()
         {
-            string user = VMLogin.GetSavedUser();
+            string user = Source.ViewModel.Login.GetSavedUser();
             if (user != "")
             {
                 Luser_tbx.Text = user;
@@ -66,11 +66,11 @@ namespace HR_Portal.View.Usercontrol
         {
             if (login_cbx.IsChecked == true)
             {
-                VMLogin.SaveUser(Luser_tbx.Text);
+                Source.ViewModel.Login.SaveUser(Luser_tbx.Text);
             }
             else
             {
-                VMLogin.DeleteSavedUser();
+                Source.ViewModel.Login.DeleteSavedUser();
             }
         }
 
@@ -80,16 +80,16 @@ namespace HR_Portal.View.Usercontrol
             {
                 if (ActiveDirecotry.Bind(Luser_tbx.Text, Lpass_pwd.Password))
                 {
-                    if (VMLogin.Authentication(Luser_tbx.Text))
-                {
-                    Session.ActiveDirectoryDomain = Luser_tbx.Text;
-                    Session.UserData = VMUserData.Get();
-                    Main mw = new Main();
+                    if (Source.ViewModel.Login.Authentication(Luser_tbx.Text))
+                    {
+                        Session.ActiveDirectoryDomain = Luser_tbx.Text;
+                        Session.UserData = VMUserData.Get();
+                        Main mw = new Main();
                     var window = Window.GetWindow(this);
-                    usernameRemember();
+                        usernameRemember();
                     mw.Show();
                     window.Close();
-                }
+                    }
                     else
                     {
                         LoginSign.Text = "Kérem regisztráljon!";
