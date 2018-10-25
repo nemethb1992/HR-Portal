@@ -239,7 +239,7 @@
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
-            <!--<Button x:Name="projekt_open_btn" Background="White" Grid.Row="5" Grid.RowSpan="3" Style="{StaticResource StandardButton}" Content="Új"/>-->
+            <Button x:Name="projekt_open_btn" Background="White" Grid.Row="5" Grid.RowSpan="3" Style="{StaticResource StandardButton}" Content="Új feltöltés" Click="UploadClick"/>
         </Grid>
     </Grid>
 

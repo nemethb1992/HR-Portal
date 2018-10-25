@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Windows.Forms;
 using HR_Portal.Source.Model;
 
 namespace HR_Portal.Source
@@ -31,5 +32,18 @@ namespace HR_Portal.Source
         {
             return MySql.GetRootUrl("SELECT * FROM ROOTurl");
         }
+        //public static string upload()
+        //{
+        //    byte[] array;
+        //    string filename;
+
+        //    using (OpenFileDialog openFileDialog1 = new OpenFileDialog())
+        //    {
+        //        if (openFileDialog1.ShowDialog() != DialogResult.OK)
+        //            return;
+        //        filename = openFileDialog1.FileName;
+        //        array = File.ReadAllBytes(filename);
+        //    }
+        //}
     }
 }

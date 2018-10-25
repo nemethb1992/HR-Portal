@@ -130,8 +130,21 @@ namespace HR_Portal.View.Usercontrol.Panels
             Process.Start(item.path);
         }
 
+        private void UploadClick(object sender, RoutedEventArgs e)
+        {
+            Microsoft.Win32.OpenFileDialog ofd = new Microsoft.Win32.OpenFileDialog();
 
+            ofd.Multiselect = true;
+            ofd.ShowDialog();
+                string[] File = ofd.SafeFileNames;
 
-
+            string title = "";
+            foreach (var item in File)
+            {
+                title += item;
+            }
+            MessageBox.Show(title);
+            
+        }
     }
 }
