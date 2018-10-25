@@ -18,7 +18,7 @@ namespace HR_Portal.View.Usercontrol.Panels
     {
         Applicant Applicant = new Applicant();
         CommonUtility Utility = new CommonUtility();
-        File fControl = new File();
+        Files fControl = new Files();
 
         private ProjectDataSheet projectDataSheet;
         private Grid grid;
@@ -29,6 +29,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             InitializeComponent();
             formLoader();
         }
+
         protected void formLoader()
         {
             List<ModelFullApplicant> list = Applicant.GetFullApplicant();
@@ -43,11 +44,10 @@ namespace HR_Portal.View.Usercontrol.Panels
             app_input_9.Text = list[0].ertesult.ToString();
             app_input_10.Text = list[0].szuldatum.ToString();
             projekt_cbx.ItemsSource = Applicant.Data_PorjectListSmall();
-            csatolmany_listBox.ItemsSource = File.Read(Session.ApplicantID);
+            csatolmany_listBox.ItemsSource = Files.Read(Session.ApplicantID);
             commentLoader(megjegyzes_listBox);
             kapcsolodo_projekt_list.ItemsSource = Applicant.Data_ProjectList();
         }
-
 
         protected void commentLoader(ListBox lb)
         {
@@ -102,6 +102,7 @@ namespace HR_Portal.View.Usercontrol.Panels
                 tbx.Text = "";
             }
         }
+
         protected void commentLostFocus(object sender, RoutedEventArgs e)
         {
             TextBox tbx = sender as TextBox;
@@ -132,19 +133,8 @@ namespace HR_Portal.View.Usercontrol.Panels
 
         private void UploadClick(object sender, RoutedEventArgs e)
         {
-            Microsoft.Win32.OpenFileDialog ofd = new Microsoft.Win32.OpenFileDialog();
-
-            ofd.Multiselect = true;
-            ofd.ShowDialog();
-                string[] File = ofd.SafeFileNames;
-
-            string title = "";
-            foreach (var item in File)
-            {
-                title += item;
-            }
-            MessageBox.Show(title);
-            
+            Files.Upload(Session.ApplicantID);
+            csatolmany_listBox.ItemsSource = Files.Read(Session.ApplicantID);
         }
     }
 }

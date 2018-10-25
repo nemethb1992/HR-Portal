@@ -99,6 +99,7 @@ namespace HR_Portal.Source
             
             return rows[0];
         }
+
         public static bool IsExists(string command)
         {
             int[] rows = new int[1];

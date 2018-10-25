@@ -265,7 +265,7 @@
     </Compile>
     <Compile Include="Source\Utility\CommonUtility.cs" />
     <Compile Include="Source\Email.cs" />
-    <Compile Include="Source\File.cs" />
+    <Compile Include="Source\Files.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
