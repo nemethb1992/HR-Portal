@@ -16,7 +16,7 @@ namespace HR_Portal.View.Usercontrol.Panels
     public partial class ProjectDataSheet : UserControl
     {
         CommonUtility Utility = new CommonUtility();
-        Applicant Applicant = new Applicant();
+        ApplicantImplementation Applicant = new ApplicantImplementation();
         EmailTemplate emailTemplate = new EmailTemplate();
 
         private Grid grid;

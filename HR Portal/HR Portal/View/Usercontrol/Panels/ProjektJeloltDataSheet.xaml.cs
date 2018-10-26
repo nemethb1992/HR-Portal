@@ -19,7 +19,7 @@ namespace HR_Portal.View.Usercontrol.Panels
     public partial class ProjektJeloltDataSheet : UserControl
     {
 
-        Applicant Applicant = new Applicant();
+        ApplicantImplementation Applicant = new ApplicantImplementation();
         CommonUtility Utility = new CommonUtility();
 
         private ProjectDataSheet projectDataSheet;

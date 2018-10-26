@@ -27,7 +27,7 @@ namespace HR_Portal.View.Usercontrol.Panels
         public string HeaderSelected { get { return HeaderSelecteds; } set { HeaderSelecteds = value; } }
         
         CommonUtility Utility = new CommonUtility();
-        Applicant Applicant = new Applicant();
+        ApplicantImplementation Applicant = new ApplicantImplementation();
 
         private ApplicantDataSheet applicantDataSheet;
         private NewApplicantPanel newApplicantPanel;
@@ -138,7 +138,7 @@ namespace HR_Portal.View.Usercontrol.Panels
                 case MessageBoxResult.Yes:
                     MenuItem menuItem = sender as MenuItem;
                     ModelApplicantList items = menuItem.DataContext as ModelApplicantList;
-                    Applicant.Delete(items.id);
+                    Applicant.DeleteApplicant(items.id);
                     applicantListLoader();
                     break;
                 case MessageBoxResult.No:

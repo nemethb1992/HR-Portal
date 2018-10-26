@@ -19,7 +19,7 @@ namespace HR_Portal.View.Usercontrol.Panels.SzakmaiLayouts
     public partial class SzakmaiApplicantDataView : UserControl
     {
         Session session = new Session();
-        Applicant Applicant = new Applicant();
+        ApplicantImplementation Applicant = new ApplicantImplementation();
         CommonUtility Utility = new CommonUtility();
 
         private SzakmaiProjektDataSheet szakmaiProjektDataSheet;

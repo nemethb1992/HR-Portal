@@ -17,7 +17,7 @@ namespace HR_Portal.View.Usercontrol.Panels
     public partial class NewApplicantPanel : UserControl
     {
         CommonUtility Utility = new CommonUtility();
-        Applicant Applicant = new Applicant();
+        ApplicantImplementation Applicant = new ApplicantImplementation();
 
         private Grid grid;
         private ApplicantDataSheet applicantDataSheet;

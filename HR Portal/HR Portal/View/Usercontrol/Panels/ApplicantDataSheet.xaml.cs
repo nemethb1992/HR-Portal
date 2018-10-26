@@ -16,7 +16,7 @@ namespace HR_Portal.View.Usercontrol.Panels
     /// </summary>
     public partial class ApplicantDataSheet : UserControl
     {
-        Applicant Applicant = new Applicant();
+        ApplicantImplementation Applicant = new ApplicantImplementation();
         CommonUtility Utility = new CommonUtility();
         Files fControl = new Files();
 

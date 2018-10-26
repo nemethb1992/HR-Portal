@@ -5,7 +5,27 @@ using System.Collections.Generic;
 
 namespace HR_Portal.Source.ViewModel
 {
-    class Applicant
+    interface Applicant
+    {
+        List<ModelApplicantList> GetApplicantList(List<string> searchValue = null);
+
+        List<ModelFullApplicant> GetFullApplicant();
+
+        List<ModelSmallProject> Data_ProjectList();
+
+        List<ModelSmallProject> Data_PorjectListSmall();
+
+        void Insert(List<ModelFullApplicant> items);
+
+        void Update(List<ModelFullApplicant> items);
+
+        void DeleteApplicant(int id);
+
+        void DeleteProject(int id);
+
+        void AddToProject(int jelolt_index, int projekt_index);
+    }
+    class ApplicantImplementation : Applicant
     {
         public List<ModelApplicantList> GetApplicantList(List<string> searchValue = null)
         {
@@ -131,7 +151,7 @@ namespace HR_Portal.Source.ViewModel
             return list;
         }
 
-        public void Delete(int id)   //javított használja: applicantlist
+        public void DeleteApplicant(int id)   //javított használja: applicantlist
         {
             string command = "DELETE FROM jeloltek WHERE jeloltek.id = " + id + ";";
             MySql.Update(command);
