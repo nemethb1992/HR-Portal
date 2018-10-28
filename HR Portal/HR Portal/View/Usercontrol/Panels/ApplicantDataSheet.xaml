@@ -24,6 +24,9 @@
                    Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2" 
                    Style="{StaticResource big_title_style}"
                    Text=""/>
+        <Button x:Name="back_button" Grid.Column="3" Grid.Row="0" Style="{StaticResource StandardButton}" Width="120" HorizontalAlignment="Right" Margin="0,0,0,0" Click="BackButtonClick">
+            <Image Source="/Public/imgs/previous.png" Margin="5" Height="32"/>
+        </Button>
         <Grid x:Name="grid_1_1" Grid.Column="1" Grid.Row="1" Margin="0,10,0,15">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*" />

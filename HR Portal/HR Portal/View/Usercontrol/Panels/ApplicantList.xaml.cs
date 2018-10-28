@@ -28,6 +28,7 @@ namespace HR_Portal.View.Usercontrol.Panels
         
         CommonUtility Utility = new CommonUtility();
         ApplicantImplementation Applicant = new ApplicantImplementation();
+        
 
         private ApplicantDataSheet applicantDataSheet;
         private NewApplicantPanel newApplicantPanel;
