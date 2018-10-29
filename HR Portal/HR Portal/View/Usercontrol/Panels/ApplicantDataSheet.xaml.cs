@@ -138,11 +138,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             csatolmany_listBox.ItemsSource = Files.Read(Session.ApplicantID);
         }
 
-<<<<<<< HEAD
-        private void BackButtonClick(object sender, RoutedEventArgs e)
-=======
         private void BackButton(object sender, RoutedEventArgs e)
->>>>>>> 6c4db4b2704c8295d241dbfcba0e7aed9a6ac15c
         {
             grid.Children.Clear();
             grid.Children.Add(applicantList = new ApplicantList(grid));

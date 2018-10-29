@@ -10,6 +10,7 @@ using System.Windows.Input;
 using HR_Portal.Source.Model;
 using HR_Portal.Source.Model.Applicant;
 using HR_Portal.Source.ViewModel;
+using System.Diagnostics;
 
 namespace HR_Portal.View.Usercontrol.Panels.SzakmaiLayouts
 {
@@ -96,6 +97,13 @@ namespace HR_Portal.View.Usercontrol.Panels.SzakmaiLayouts
         {
             grid.Children.Clear();
             grid.Children.Add(szakmaiProjektDataSheet = new SzakmaiProjektDataSheet(grid));
+        }
+
+        protected void attachmentOpenClick(object sender, RoutedEventArgs e)
+        {
+            Button btn = sender as Button;
+            ModelJeloltFile item = btn.DataContext as ModelJeloltFile;
+            Process.Start(item.path);
         }
     }
 }
