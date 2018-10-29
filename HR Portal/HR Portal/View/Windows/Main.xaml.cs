@@ -23,12 +23,12 @@ namespace HR_Portal.View.Windows
             InitializeComponent();
             if (Session.UserData[0].kategoria== 1)
             {
-                sgrid.Children.Add(project_p = new ProjectList(sgrid));
+                grid.Children.Add(project_p = new ProjectList(grid));
                 HR_navigation_Grid.Visibility = Visibility.Visible;
             }
             else
             {
-                sgrid.Children.Add(szakmai_Kezdolap = new SzakmaiKezdolap(sgrid));
+                grid.Children.Add(szakmai_Kezdolap = new SzakmaiKezdolap(grid));
                 Szakmai_navigation_Grid.Visibility = Visibility.Visible;
                 HR_navigation_Grid.Visibility = Visibility.Hidden;
             }
@@ -49,29 +49,29 @@ namespace HR_Portal.View.Windows
         }
         private void mw_btn1_Click(object sender, RoutedEventArgs e)
         {
-            sgrid.Children.Clear();
-            sgrid.Children.Add(project_p = new ProjectList(sgrid));
+            grid.Children.Clear();
+            grid.Children.Add(project_p = new ProjectList(grid));
         }
         private void mw_btn2_Click(object sender, RoutedEventArgs e)
         {
-            sgrid.Children.Clear();
-            sgrid.Children.Add(applicant_p = new ApplicantList(sgrid));
+            grid.Children.Clear();
+            grid.Children.Add(applicant_p = new ApplicantList(grid));
         }
         private void mw_btn3_Click(object sender, RoutedEventArgs e)
         {
-            sgrid.Children.Clear();
-            sgrid.Children.Add(settings_p = new SettingsPanel(sgrid));
+            grid.Children.Clear();
+            grid.Children.Add(settings_p = new SettingsPanel(grid));
         }
         private void szakmai_mainpage_btn_Click(object sender, RoutedEventArgs e)
         {
-            sgrid.Children.Clear();
-            sgrid.Children.Add(szakmai_Kezdolap = new SzakmaiKezdolap(sgrid));
+            grid.Children.Clear();
+            grid.Children.Add(szakmai_Kezdolap = new SzakmaiKezdolap(grid));
         }
 
         private void mw_btn4_Click(object sender, RoutedEventArgs e)
         {
-            sgrid.Children.Clear();
-            sgrid.Children.Add(favourites_Panel = new FavouritesPanel(sgrid));
+            grid.Children.Clear();
+            grid.Children.Add(favourites_Panel = new FavouritesPanel(grid));
         }
 
         //private void profil_notiBtn_MouseEnter(object sender, MouseEventArgs e)

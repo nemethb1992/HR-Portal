@@ -81,30 +81,32 @@ namespace HR_Portal.View.Usercontrol
                 if (ActiveDirecotry.Bind(Luser_tbx.Text, Lpass_pwd.Password))
                 {
                     if (Source.ViewModel.Login.Authentication(Luser_tbx.Text))
-                    {
-                        Session.ActiveDirectoryDomain = Luser_tbx.Text;
-                        Session.UserData = VMUserData.Get();
-                        Main mw = new Main();
+                {
+                    Session.ActiveDirectoryDomain = Luser_tbx.Text;
+                    Session.UserData = VMUserData.Get();
+                    Main mw = new Main();
                     var window = Window.GetWindow(this);
-                        usernameRemember();
+                    usernameRemember();
                     mw.Show();
                     window.Close();
-                    }
-                    else
-                    {
-                        LoginSign.Text = "Kérem regisztráljon!";
-                    }
                 }
                 else
                 {
-                    LoginSign.Text = "Sikertelen hitelesítés!";
+                    LoginSign.Text = "Kérem regisztráljon!";
                 }
             }
+            else
+            {
+                LoginSign.Text = "Sikertelen hitelesítés!";
+            }
+        }
             else
             {
                 LoginSign.Text = "Nincs adatkapcsolat!";
             }
         }
+
+
 
         private void navigateToSurveyWindow(object sender, MouseButtonEventArgs e)
         {

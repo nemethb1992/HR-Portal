@@ -30,7 +30,7 @@ namespace HR_Portal.View.Usercontrol.Panels
         {
                 this.grid = grid;
                 InitializeComponent();
-                projectFormLoader();
+            projectFormLoader();
         }
 
         protected void projectFormLoader()
@@ -43,7 +43,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             projekt_jelolt_title_tbl.Text = projectList[0].megnevezes_projekt + " - " + applicantList[0].nev;
             jelolt_telefon.Text = "( " + applicantList[0].telefon + " )";
             megjegyzes_listBox.ItemsSource = Utility.Data_CommentKapcs();
-            kapcs_jeloltek_listBox.ItemsSource = Interview.Data_InterviewById();
+            kapcs_jeloltek_listBox.ItemsSource = Interview.Data_Interview();
             inter_cim.Items.Add("HR interjú");
             inter_cim.Items.Add("Szakmai + HR");
             inter_cim.Items.Add("Szakmai Interjú 1.");
