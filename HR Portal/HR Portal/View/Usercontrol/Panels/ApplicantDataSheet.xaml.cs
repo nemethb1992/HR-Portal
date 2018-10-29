@@ -21,6 +21,7 @@ namespace HR_Portal.View.Usercontrol.Panels
         Files fControl = new Files();
 
         private ProjectDataSheet projectDataSheet;
+        private ApplicantList applicantList;
         private Grid grid;
 
         public ApplicantDataSheet(Grid grid)
@@ -135,6 +136,12 @@ namespace HR_Portal.View.Usercontrol.Panels
         {
             Files.Upload(Session.ApplicantID);
             csatolmany_listBox.ItemsSource = Files.Read(Session.ApplicantID);
+        }
+
+        private void BackButton(object sender, RoutedEventArgs e)
+        {
+            grid.Children.Clear();
+            grid.Children.Add(applicantList = new ApplicantList(grid));
         }
     }
 }

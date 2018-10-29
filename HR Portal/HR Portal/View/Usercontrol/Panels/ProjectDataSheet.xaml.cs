@@ -427,5 +427,10 @@ namespace HR_Portal.View.Usercontrol.Panels
 
             return list;
         }
+        private void BackButton(object sender, RoutedEventArgs e)
+        {
+            grid.Children.Clear();
+            grid.Children.Add(projectList = new ProjectList(grid));
+        }
     }
 }

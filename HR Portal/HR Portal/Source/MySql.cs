@@ -12,7 +12,7 @@ namespace HR_Portal.Source
     {
         private const string CONNECTION_URL_1 = "Data Source = 192.168.144.189; Port=3306; Initial Catalog = pmkcvtest; User ID=hr-admin; Password=pmhr2018";
         private const string CONNECTION_URL_2 = "Data Source = 192.168.144.189; Port=3306; Initial Catalog = pmhrdemo; User ID=hr-admin; Password=pmhr2018";
-        private const string CONNECTION_URL_3 = "Data Source = s7.nethely.hu; Initial Catalog = pmkcvtest; User ID=pmkcvtest; Password=pmkcvtest2018";
+        private const string CONNECTION_URL_3 = "Data Source = mysql.nethely.hu; Port=3306; Initial Catalog = hrcloudtest; User ID=hrcloudtest; Password=hrcloudtest2018";
         private const string CONNECTION_URL_4 = "Data Source = vpn.phoenix-mecano.hu; Port=29920; Initial Catalog = pmkcvtest; User ID=hr-admin; Password=pmhr2018";
 
         public static MySqlConnection conn;
