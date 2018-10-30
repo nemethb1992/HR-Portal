@@ -20,7 +20,7 @@ namespace HR_Portal.View.Usercontrol
             this.grid = sgrid;
             InitializeComponent();
 
-            setartUp();
+            //setartUp();
         }
 
         private bool dbConnectionOpener()

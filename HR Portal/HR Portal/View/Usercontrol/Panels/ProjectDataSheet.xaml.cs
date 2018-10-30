@@ -104,23 +104,23 @@ namespace HR_Portal.View.Usercontrol.Panels
             grid.Children.Add(projektJeloltDataSheet = new ProjektJeloltDataSheet(grid));
         }
 
-        protected void jeloltTabClick(object sender, RoutedEventArgs e)
-        {
-            kapcs_jeloltek_listBox.Visibility = System.Windows.Visibility.Visible;
-            kapcs_ertesitendo_listBox.Visibility = System.Windows.Visibility.Hidden;
+        //protected void jeloltTabClick(object sender, RoutedEventArgs e)
+        //{
+        //    kapcs_jeloltek_listBox.Visibility = System.Windows.Visibility.Visible;
+        //    kapcs_ertesitendo_listBox.Visibility = System.Windows.Visibility.Hidden;
 
-            jeloltek_addbtn.Visibility = System.Windows.Visibility.Visible;
-            ertesitendok_addbtn.Visibility = System.Windows.Visibility.Hidden;
-        }
+        //    jeloltek_addbtn.Visibility = System.Windows.Visibility.Visible;
+        //    ertesitendok_addbtn.Visibility = System.Windows.Visibility.Hidden;
+        //}
 
-        protected void ertesitendokTabClick(object sender, RoutedEventArgs e)
-        {
-            kapcs_jeloltek_listBox.Visibility = System.Windows.Visibility.Hidden;
-            kapcs_ertesitendo_listBox.Visibility = System.Windows.Visibility.Visible;
+        //protected void ertesitendokTabClick(object sender, RoutedEventArgs e)
+        //{
+        //    kapcs_jeloltek_listBox.Visibility = System.Windows.Visibility.Hidden;
+        //    kapcs_ertesitendo_listBox.Visibility = System.Windows.Visibility.Visible;
 
-            ertesitendok_addbtn.Visibility = System.Windows.Visibility.Visible;
-            jeloltek_addbtn.Visibility = System.Windows.Visibility.Hidden;
-        }
+        //    ertesitendok_addbtn.Visibility = System.Windows.Visibility.Visible;
+        //    jeloltek_addbtn.Visibility = System.Windows.Visibility.Hidden;
+        //}
 
         protected void jeloltDeleteClick(object sender, MouseButtonEventArgs e)
         {
@@ -248,28 +248,21 @@ namespace HR_Portal.View.Usercontrol.Panels
         private static int SelectedTabCode;
         public int selectedTabCode { get { return SelectedTabCode; } set { SelectedTabCode = value; } }
 
-        protected void addPersonPanelOpenClick(object sender, RoutedEventArgs e)
+        protected void addJeloltToProject(object sender, RoutedEventArgs e)
         {
-            Button btn = sender as Button;
             Blur_Grid.Visibility = System.Windows.Visibility.Visible;
             projekt_kapcsolodo_grid.Visibility = System.Windows.Visibility.Visible;
-            switch (btn.Tag)
-            {
-                case "jelolt":
-                    {
-                        selectedTabCode = 1;
-                        projekt_kapcsolodo_list.ItemsSource = Utility.Data_JeloltForCheckbox(Ember_Search_tbx.Text);
-                        break;
-                    }
-                case "ertesitendo":
-                    {
-                        selectedTabCode = 2;
-                        projekt_kapcsolodo_list.ItemsSource = Utility.Data_ErtesitendokCheckbox(Ember_Search_tbx.Text);
-                        break;
-                    }
-                default:
-                    break;
-            }
+            selectedTabCode = 1;
+            projekt_kapcsolodo_list.ItemsSource = Utility.Data_JeloltForCheckbox(Ember_Search_tbx.Text);
+            formLoader();
+        }
+
+        protected void addUserToProject(object sender, RoutedEventArgs e)
+        {
+            Blur_Grid.Visibility = System.Windows.Visibility.Visible;
+            projekt_kapcsolodo_grid.Visibility = System.Windows.Visibility.Visible;
+            selectedTabCode = 2;
+            projekt_kapcsolodo_list.ItemsSource = Utility.Data_ErtesitendokCheckbox(Ember_Search_tbx.Text);
             formLoader();
         }
 

@@ -34,7 +34,15 @@
                 <RowDefinition Height="30" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            <TextBlock Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="4" Style="{StaticResource big_title_style}" Text="Jelöltek" TextAlignment="Left"></TextBlock>
+            <Grid Grid.Column="1" Grid.ColumnSpan="5" Grid.Row="0" Width="200" HorizontalAlignment="Right" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="1*" />
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="0" x:Name="applicant_aktiv_btn" Width="90" Height="30" Style="{StaticResource Switch_Button}" Click="projectActivateClick">Aktív</Button>
+                <Button Grid.Column="1" x:Name="applicant_passziv_btn"  Width="90" Height="30" Style="{StaticResource Switch_Button}" Click="projectPassivateClick" >Archív</Button>
+            </Grid>
+            <TextBlock Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="1" Style="{StaticResource big_title_style}" Text="Jelöltek" TextAlignment="Left"></TextBlock>
             <TextBlock Grid.Column="0" Grid.Row="1" Style="{StaticResource minor_title_style}" VerticalAlignment="Top" Text="Kereső:" TextAlignment="Left" ></TextBlock>
             <Button x:Name="refresh_btn" Grid.Column="3" Grid.Row="2" Style="{StaticResource StandardButton}" Width="70" Margin="0,0,0,0" Click="ClearSearchbar">
                 <Image Source="/Public/imgs/reload.png" Margin="5" Height="32"/>
@@ -150,6 +158,7 @@
                             <Grid.ContextMenu>
                                 <ContextMenu>
                                     <MenuItem x:Name="modositas" Header="Módosítás" Click="modositasClick"/>
+                                    <MenuItem x:Name="archivalas" Header="Archiválás / Aktiválás" Click="applicantArchivateClick"/>
                                     <MenuItem x:Name="asd" Header="Törlés" Click="applicantDeleteClick"/>
                                 </ContextMenu>
                             </Grid.ContextMenu>

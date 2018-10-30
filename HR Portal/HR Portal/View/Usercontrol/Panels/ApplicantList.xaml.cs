@@ -110,9 +110,70 @@ namespace HR_Portal.View.Usercontrol.Panels
 
         public void applicantListLoader()
         {
-            List<ModelApplicantList> list = Applicant.GetApplicantList(searchValues());
+            Session.ApplicantStatusz = 1;
+            buttonColorChange();
+            try
+            {
+                List<ModelApplicantList> list = Applicant.GetApplicantList(searchValues());
                 applicant_listBox.ItemsSource = list;
                 talalat_tbl.Text = "Találatok:  " + list.Count.ToString();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.ToString());
+            }
+        }
+
+        protected void projectPassivateClick(object sender, RoutedEventArgs e)
+        {
+            Utility.ApplicantStatusChange(0);
+            applicant_listBox.ItemsSource = Applicant.GetApplicantList(searchValues());
+            buttonColorChange();
+        }
+
+        protected void applicantArchivateClick(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult result = MessageBox.Show("Biztosan megváltoztatod? \n\n", "HR Cloud", MessageBoxButton.YesNoCancel);
+            switch (result)
+            {
+                case MessageBoxResult.Yes:
+                    ModelApplicantList items = (sender as MenuItem).DataContext as ModelApplicantList;
+                    Utility.applicantArchiver(items.id, items.statusz);
+                    applicantListLoader();
+                    break;
+                case MessageBoxResult.No:
+                    break;
+                case MessageBoxResult.Cancel:
+                    break;
+            }
+        }
+
+        protected void projectActivateClick(object sender, RoutedEventArgs e)
+        {
+            Utility.ApplicantStatusChange(1);
+            applicant_listBox.ItemsSource = Applicant.GetApplicantList(searchValues());
+            buttonColorChange();
+        }
+
+        protected void buttonColorChange()
+        {
+            var bc = new BrushConverter();
+            if (Session.ApplicantStatusz == 1)
+            {
+                applicant_aktiv_btn.Background = (Brush)bc.ConvertFrom("#bfbfbf");
+                applicant_aktiv_btn.BorderBrush = (Brush)bc.ConvertFrom("#bfbfbf");
+                applicant_aktiv_btn.Foreground = (Brush)bc.ConvertFrom("#ffffff");
+                applicant_passziv_btn.Background = (Brush)bc.ConvertFrom("#ffffff");
+                applicant_passziv_btn.Foreground = (Brush)bc.ConvertFrom("#404040");
+            }
+            else
+            {
+                applicant_aktiv_btn.Background = (Brush)bc.ConvertFrom("#ffffff");
+                applicant_aktiv_btn.Foreground = (Brush)bc.ConvertFrom("#404040");
+                applicant_passziv_btn.Background = (Brush)bc.ConvertFrom("#bfbfbf");
+                applicant_passziv_btn.BorderBrush = (Brush)bc.ConvertFrom("#bfbfbf");
+                applicant_passziv_btn.Foreground = (Brush)bc.ConvertFrom("#ffffff");
+            }
         }
 
         protected void checkBoxLoader()

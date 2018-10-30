@@ -227,10 +227,31 @@ namespace HR_Portal.Source
             MySql.Close();
         }
 
-        public void statusChange(int stat) // javított
+        public void applicantArchiver(int id, int statusz) // javított
+        {
+            if (statusz == 0)
+            {
+                statusz = 1;
+            }
+            else
+            {
+                statusz = 0;
+            }
+            string command = "UPDATE jeloltek SET statusz=" + statusz + " WHERE jeloltek.id = " + id + ";";
+            MySql.Update(command);
+            MySql.Close();
+        }
+
+        public void ProjectStatusChange(int stat) // javított
         {
             Session.ProjectStatusz = 0;
             Session.ProjectStatusz = stat;
+        }
+
+        public void ApplicantStatusChange(int stat) // javított
+        {
+            Session.ApplicantStatusz = 0;
+            Session.ApplicantStatusz = stat;
         }
 
         public void projectDescriptionUpdate(string type, string content) // javított

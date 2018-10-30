@@ -22,6 +22,7 @@ namespace HR_Portal.Source.Model.Applicant
         public string allapot_megnevezes { get; set; }
         public string reg_datum { get; set; }
         public bool Checked { get; set; }
+        public int statusz { get; set; }
 
         public static List<ModelApplicantList> GetModelApplicantList(string command)
         {
@@ -72,6 +73,7 @@ namespace HR_Portal.Source.Model.Applicant
                         munkakor3 = MySql.sdr["munkakor3"].ToString(),
                         email = MySql.sdr["email"].ToString(),
                         szuldatum = Convert.ToInt32(MySql.sdr["szuldatum"]),
+                        statusz = Convert.ToInt32(MySql.sdr["statusz"]),
                         interjuk_db = Convert.ToInt32(MySql.sdr["interjuk_db"]),
                         allapota = allapot,
                         kolcsonzott = kolcsonzott,

@@ -94,11 +94,11 @@
                 <ColumnDefinition Width="2*" />
                     <ColumnDefinition Width="2*" />
                 </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="45" />
-                <RowDefinition Height="45" />
-                <RowDefinition Height="1*" />
-                <RowDefinition Height="1*" />
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40" />
+                <RowDefinition Height="2*" />
+                <RowDefinition Height="2*" />
+                <RowDefinition Height="40" />
                 <RowDefinition Height="1*" />
                 <RowDefinition Height="1*" />
             </Grid.RowDefinitions>
@@ -149,17 +149,21 @@
 
 
 
-                <Button x:Name="jeloltek_addbtn" Tag="jelolt" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Visibility="Visible" Margin="0,0,0,5" Style="{StaticResource StandardButton}" Content="Jelöltek hozzáadása" Click="addPersonPanelOpenClick"/>
-                <Button x:Name="ertesitendok_addbtn" Tag="ertesitendo" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Visibility="Hidden" Margin="0,0,0,5" Style="{StaticResource StandardButton}" Content="Értesítendők hozzáadása" Click="addPersonPanelOpenClick"/>
+                <!--<Button x:Name="jeloltek_addbtn" Tag="jelolt" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Visibility="Visible" Margin="0,0,0,5" Style="{StaticResource StandardButton}" Content="Jelöltek hozzáadása" Click="addPersonPanelOpenClick"/>
+                <Button x:Name="ertesitendok_addbtn" Tag="ertesitendo" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Visibility="Hidden" Margin="0,0,0,5" Style="{StaticResource StandardButton}" Content="Értesítendők hozzáadása" Click="addPersonPanelOpenClick"/>-->
                 <!--<Button x:Name="hr_addbtn" Tag="hr" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Visibility="Hidden" Margin="0,0,0,5" Style="{StaticResource StandardButton}" Content="HR hozzáadása" Click="addPersonPanelOpenClick"/>-->
-            <Border Grid.ColumnSpan="3" Grid.Row="1" Background="{StaticResource SD_Element_Background}" CornerRadius="15,15,0,0"/>
-            <Button x:Name="jeloltek_tabbtn" Grid.Column="0" Grid.Row="1" Panel.ZIndex="4" Style="{StaticResource TabButton}" Content="Jelöltek" Click="jeloltTabClick"/>
-                <Button x:Name="ertesitendok_tabbtn" Grid.Column="1" Grid.Row="1"  Panel.ZIndex="4" Style="{StaticResource TabButton}" Content="Értesítendők" Click="ertesitendokTabClick"/>
+            <!--<Border Grid.ColumnSpan="3" Grid.Row="1" Background="{StaticResource SD_Element_Background}" CornerRadius="15,15,0,0"/>-->
+                <!--<Button x:Name="jeloltek_tabbtn" Grid.Column="0" Grid.Row="1" Panel.ZIndex="4" Style="{StaticResource TabButton}" Content="Jelöltek" Click="jeloltTabClick"/>-->
+                <!--<Button x:Name="ertesitendok_tabbtn"  Grid.Row="4"  Panel.ZIndex="4" Style="{StaticResource TabButton}" Content="Értesítendők" Click="ertesitendokTabClick"/>-->
                 <!--<Button x:Name="hr_tabbtn" Grid.Column="2" Grid.Row="1"  Panel.ZIndex="4" Style="{StaticResource TabButton}" Content="HR" Click="hrTabClick"/>-->
-                <ListBox x:Name="kapcs_jeloltek_listBox" Grid.Column="0" Background="{StaticResource Listbox_light}" Panel.ZIndex="1" Grid.ColumnSpan="3" Grid.Row="2" Grid.RowSpan="5" Visibility="Visible"  Style="{StaticResource small_listBox_style}"   HorizontalContentAlignment="Stretch" SelectionMode="Extended">
+                <TextBlock x:Name="jeloltek_tbl" Grid.Column="0" Grid.Row="0" Margin="0,10,0,0" Panel.ZIndex="4" Style="{StaticResource Standard_Textblock}" Text="Jelöltek:" />
+                <TextBlock x:Name="ertesitendok_tbl" Grid.Column="0" Grid.Row="3" Margin="0,10,0,0" Panel.ZIndex="4" Style="{StaticResource Standard_Textblock}" Text="Értesítendők:" />
+                <Button x:Name="jeloltek_addbtn" Tag="jelolt" Grid.Column="1" Margin="0,10,0,0" Grid.Row="0" Style="{StaticResource StandardButton}" Content="Jelöltek hozzáadása" Click="addJeloltToProject"/>
+                <Button x:Name="ertesitendok_addbtn" Tag="ertesitendo" Grid.Column="1" Margin="0,10,0,0" Grid.Row="3" Style="{StaticResource StandardButton}" Content="Értesítendők hozzáadása" Click="addUserToProject"/>
+                <ListBox x:Name="kapcs_jeloltek_listBox" Grid.Column="0" Background="{StaticResource Listbox_light}" Panel.ZIndex="1" Grid.ColumnSpan="3" Grid.Row="1" Grid.RowSpan="2" Visibility="Visible"  Style="{StaticResource small_listBox_style}"   HorizontalContentAlignment="Stretch" SelectionMode="Extended">
                 <ListBox.Resources>
                     <Style TargetType="{x:Type Border}" BasedOn="{StaticResource listCorner}">
-                        <Setter Property="CornerRadius" Value="0,0,10,10"/>
+                        <Setter Property="CornerRadius" Value="10,0,10,10"/>
                     </Style>
                     <Style TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource listBoxItem_style}"/>
                 </ListBox.Resources>
@@ -201,22 +205,24 @@
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
-            <ListBox x:Name="kapcs_ertesitendo_listBox" Grid.Column="0" Grid.ColumnSpan="3"  Grid.Row="2" Grid.RowSpan="5" Visibility="Hidden"  Style="{StaticResource small_listBox_style}"   HorizontalContentAlignment="Stretch" SelectionMode="Extended">
+            <ListBox x:Name="kapcs_ertesitendo_listBox" Grid.Column="0" Grid.ColumnSpan="3"  Grid.Row="4" Grid.RowSpan="2" Visibility="Visible"  Style="{StaticResource small_listBox_style}"   HorizontalContentAlignment="Stretch" SelectionMode="Extended">
                 <ListBox.Resources>
-                    <!--<Style TargetType="{x:Type Border}" BasedOn="{StaticResource listCorner}"/>-->
-                    <Style TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource listBoxItem_style}"/>
-                </ListBox.Resources>
+                        <Style TargetType="{x:Type Border}" BasedOn="{StaticResource listCorner}">
+                            <Setter Property="CornerRadius" Value="10,0,10,10"/>
+                        </Style>
+                        <Style TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource listBoxItem_style}"/>
+                    </ListBox.Resources>
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <Grid Height="50" Margin="0,2" >
+                        <Grid Height="25" Margin="0,3" >
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="1*" />
-                                <ColumnDefinition Width="50" />
+                                <ColumnDefinition Width="35" />
                             </Grid.ColumnDefinitions>
                             <Button x:Name="ertesitendo_del" Grid.Column="1" Style="{StaticResource next_panelBtn_style}" Click="ertesitendoDeleteClick">
                                     <Image Source="/Public/imgs/x_mark_2.png" Height="24" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                             </Button>
-                            <TextBlock Grid.Column="0" Margin="15,15,0,0" Style="{StaticResource panelTbl_style}" Text="{Binding name}"/>
+                            <TextBlock Grid.Column="0" Margin="5,0,0,0" Style="{StaticResource panelTbl_style}" Text="{Binding name}"/>
                             <!--<Image x:Name="ertesitendo_delete" Grid.Column="2" Source="/HRCloud;component/Public/imgs/bin.png" HorizontalAlignment="Right" Height="20" MouseDown="ertesitendo_delete_MouseDown"/>-->
                         </Grid>
                     </DataTemplate>

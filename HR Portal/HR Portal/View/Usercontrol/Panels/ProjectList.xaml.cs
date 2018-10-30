@@ -209,14 +209,14 @@ namespace HR_Portal.View.Usercontrol.Panels
 
         protected void projectPassivateClick(object sender, RoutedEventArgs e)
         {
-            Utility.statusChange(0);
+            Utility.ProjectStatusChange(0);
             project_listBox.ItemsSource = Project.GetProjectList(getSearchData());
             buttonColorChange();
         }
 
         protected void projectActivateClick(object sender, RoutedEventArgs e)
         {
-            Utility.statusChange(1);
+            Utility.ProjectStatusChange(1);
             project_listBox.ItemsSource = Project.GetProjectList(getSearchData());
             buttonColorChange();
         }

@@ -9,8 +9,11 @@ namespace HR_Portal.Source
         private static List<ModelUserData> UserDatas;
         public static List<ModelUserData> UserData { get { return UserDatas; } set { UserDatas = value; } }
 
-        private static int ProjectSearchMemorys;
-        public static int ProjectStatusz { get { return ProjectSearchMemorys; } set { ProjectSearchMemorys = value; } }
+        private static int ProjectStatus;
+        public static int ProjectStatusz { get { return ProjectStatus; } set { ProjectStatus = value; } }
+
+        private static int ApplicantStatus;
+        public static int ApplicantStatusz { get { return ApplicantStatus; } set { ApplicantStatus = value; } }
 
         private static string ActiveDirectoryDomains;
         public static string ActiveDirectoryDomain { get { return ActiveDirectoryDomains; } set { ActiveDirectoryDomains = value; } }
