@@ -15,7 +15,7 @@ namespace HR_Portal.Source
 
         static SqLite()
         {
-            //conn = new SQLiteConnection(CONNECTION_URL);
+            conn = new SQLiteConnection(CONNECTION_URL);
         }
 
         protected static void Open()
