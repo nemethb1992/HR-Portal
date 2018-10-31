@@ -16,6 +16,7 @@ namespace HR_Portal.Source.Model
             if (MySql.Open() == true)
             {
                 MySql.cmd = new MySqlCommand(query, MySql.conn);
+                MySql.sdr.Close();
                 MySql.sdr = MySql.cmd.ExecuteReader();
                 while (MySql.sdr.Read())
                 {

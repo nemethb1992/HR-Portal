@@ -35,6 +35,7 @@ namespace HR_Portal.Source.Model.Applicant
         public string reg_date { get; set; }
         public string megjegyzes { get; set; }
         public string folderUrl { get; set; }
+        public int statusz { get; set; }
 
         public static List<ModelFullApplicant> GetModelFullApplicant(string command)
         {
