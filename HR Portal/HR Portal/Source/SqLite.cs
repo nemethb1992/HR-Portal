@@ -15,7 +15,16 @@ namespace HR_Portal.Source
 
         static SqLite()
         {
-            conn = new SQLiteConnection(CONNECTION_URL);
+            try
+            {
+                SQLiteConnection.CreateFile("innerDatabase.db");
+                conn = new SQLiteConnection(CONNECTION_URL);
+                Update("CREATE TABLE 'app'('username' TEXT)");
+            }
+            catch (Exception)
+            {
+                
+            }
         }
 
         protected static void Open()

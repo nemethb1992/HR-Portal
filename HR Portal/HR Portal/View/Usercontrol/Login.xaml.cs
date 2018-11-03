@@ -78,15 +78,15 @@ namespace HR_Portal.View.Usercontrol
         {
             if (dbConnectionOpener())
             {
-                //if (ActiveDirecotry.Bind(Luser_tbx.Text, Lpass_pwd.Password))
-                //{
+                if (ActiveDirecotry.Bind(Luser_tbx.Text, Lpass_pwd.Password))
+                {
                     if (Source.ViewModel.Login.Authentication(Luser_tbx.Text))
                 {
                     Session.ActiveDirectoryDomain = Luser_tbx.Text;
                     Session.UserData = VMUserData.Get();
                     Main mw = new Main();
                     var window = Window.GetWindow(this);
-                    usernameRemember();
+                    //usernameRemember();
                     mw.Show();
                     window.Close();
                 }
@@ -99,11 +99,11 @@ namespace HR_Portal.View.Usercontrol
                 {
                     LoginSign.Text = "Sikertelen hitelesítés!";
                 }
-            //}
-            //else
-            //{
-            //    LoginSign.Text = "Nincs adatkapcsolat!";
-            //}
+            }
+            else
+            {
+                LoginSign.Text = "Nincs adatkapcsolat!";
+            }
         }
 
 

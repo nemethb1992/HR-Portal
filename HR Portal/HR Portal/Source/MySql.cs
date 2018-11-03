@@ -23,7 +23,16 @@ namespace HR_Portal.Source
         {
             if (conn == null)
             {
-                conn = new MySqlConnection(CONNECTION_URL_3);
+                try
+                {
+                    conn = new MySqlConnection(CONNECTION_URL_1);
+                }
+                catch (MySqlException mysqlex)
+                {
+
+                    System.Windows.MessageBox.Show(mysqlex.ToString());
+                    throw;
+                }
             }
         }
         
@@ -33,8 +42,10 @@ namespace HR_Portal.Source
             {
                 conn.Open();
             }
-            catch
+            catch(MySqlException ex)
             {
+
+                System.Windows.MessageBox.Show(ex.ToString());
                 return false;
             }
                 if (conn.State == ConnectionState.Open)

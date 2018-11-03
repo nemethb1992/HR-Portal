@@ -114,7 +114,7 @@ namespace HR_Portal.Source.ViewModel
                     command += " ORDER BY jeloltek.reg_date DESC";
                     break;
             }
-            command += " LIMIT 25";
+            command += " LIMIT 50";
 
             List<ModelApplicantList> list = ModelApplicantList.GetModelApplicantList(command);
 
