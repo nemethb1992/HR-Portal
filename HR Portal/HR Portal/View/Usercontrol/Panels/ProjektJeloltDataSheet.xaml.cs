@@ -42,7 +42,7 @@ namespace HR_Portal.View.Usercontrol.Panels
 
             projekt_jelolt_title_tbl.Text = projectList[0].megnevezes_projekt + " - " + applicantList[0].nev;
             jelolt_telefon.Text = "( " + applicantList[0].telefon + " )";
-            megjegyzes_listBox.ItemsSource = Utility.Data_CommentKapcs();
+            megjegyzes_listBox.ItemsSource = Utility.Data_CommentApplicant();
             kapcs_jeloltek_listBox.ItemsSource = Interview.Data_Interview();
             inter_cim.Items.Add("HR interjú");
             inter_cim.Items.Add("Szakmai + HR");
@@ -94,14 +94,14 @@ namespace HR_Portal.View.Usercontrol.Panels
             grid.Children.Add(projectDataSheet = new ProjectDataSheet(grid));
         }
 
-        protected void TextBox_KeyUp(object sender, KeyEventArgs e)
+        protected void enterComment(object sender, KeyEventArgs e)
         {
             TextBox tbx = sender as TextBox;
 
             if (e.Key != Key.Enter) return;
             e.Handled = true;
-            Comment.Add(comment_tartalom.Text, Session.ProjektID, Session.ApplicantID, 0);
-            megjegyzes_listBox.ItemsSource = Utility.Data_CommentKapcs();
+            Comment.Add(comment_tartalom.Text, 0, Session.ApplicantID);
+            megjegyzes_listBox.ItemsSource = Utility.Data_CommentApplicant();
             tbx.Text = "";
         }
 
@@ -125,12 +125,12 @@ namespace HR_Portal.View.Usercontrol.Panels
             }
         }
 
-        protected void commentDeleteMenuItemClick(object sender, RoutedEventArgs e)
+        protected void commentDeleteClick(object sender, RoutedEventArgs e)
         {
             ModelComment items = (sender as MenuItem).DataContext as ModelComment;
 
-            Comment.Delete(items.id, Session.UserData[0].id, Session.ProjektID, Session.ApplicantID);
-            megjegyzes_listBox.ItemsSource = Utility.Data_CommentKapcs();
+            Comment.Delete(items.id);
+            megjegyzes_listBox.ItemsSource = Utility.Data_CommentApplicant();
         }
 
         protected void telephonePanelOpenClick(object sender, RoutedEventArgs e)

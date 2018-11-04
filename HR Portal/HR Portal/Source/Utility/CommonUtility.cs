@@ -112,20 +112,14 @@ namespace HR_Portal.Source
             return list;
         }
 
-        public List<ModelComment> Data_Comment() //javított
-        {
-            string command = "SELECT id, jelolt_id, projekt_id, hr_id, hr_nev, megjegyzes, datum, ertekeles FROM megjegyzesek WHERE jelolt_id=" + Session.ApplicantID;
-            List<ModelComment> list = ModelComment.GetModelComment(command);
-            MySql.Close();
-            return list;
-        }
+
 
         public List<ModelApplicantList> Data_JeloltKapcs()
         {
             string command = "SELECT coalesce((SELECT count(projekt_id) FROM interjuk_kapcs " +
                 "WHERE jelolt_id = jeloltek.id AND projekt_id = " + Session.ProjektID + " Group by projekt_id),0) as interjuk_db, " +
                 "jeloltek.id,nev,jeloltek.szuldatum,megnevezes_munka,email,reg_date,kepesseg1,kepesseg2,kepesseg3,kepesseg4,kepesseg5, " +
-                "jeloltek.munkakor, jeloltek.munkakor2, jeloltek.munkakor3, allapota, kolcsonzott,jeloltek.statusz " +
+                "jeloltek.munkakor, jeloltek.munkakor2, jeloltek.munkakor3, allapota, kolcsonzott,jeloltek.statusz, jeloltek.friss " +
                 "FROM jeloltek INNER JOIN projekt_jelolt_kapcs ON jeloltek.id = projekt_jelolt_kapcs.jelolt_id " +
                 "LEFT JOIN projektek ON projektek.id = projekt_jelolt_kapcs.projekt_id " +
                 "LEFT JOIN munkakor ON jeloltek.munkakor = munkakor.id WHERE projektek.id =" + Session.ProjektID + " GROUP BY jeloltek.id ";
@@ -136,15 +130,15 @@ namespace HR_Portal.Source
         
         public List<ModelComment> Data_CommentProject()
         {
-            string command = "SELECT id, jelolt_id, projekt_id, hr_id, hr_nev, megjegyzes, datum, ertekeles FROM megjegyzesek WHERE projekt_id=" + Session.ProjektID;
+            string command = "SELECT id, jelolt_id, projekt_id, hr_id, hr_nev, megjegyzes, datum FROM megjegyzesek WHERE projekt_id=" + Session.ProjektID;
             List<ModelComment> list = ModelComment.GetModelComment(command);
             MySql.Close();
             return list;
         }
 
-        public List<ModelComment> Data_CommentKapcs()
+        public List<ModelComment> Data_CommentApplicant()
         {
-            string command = "SELECT id, jelolt_id, projekt_id, hr_id, hr_nev, megjegyzes, datum, ertekeles FROM megjegyzesek WHERE projekt_id=" + Session.ProjektID + " AND jelolt_id=" + Session.ApplicantID + "";
+            string command = "SELECT id, jelolt_id, projekt_id, hr_id, hr_nev, megjegyzes, datum FROM megjegyzesek WHERE jelolt_id=" + Session.ApplicantID;
             List<ModelComment> list = ModelComment.GetModelComment(command);
             MySql.Close();
             return list;

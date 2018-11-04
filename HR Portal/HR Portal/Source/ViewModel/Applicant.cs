@@ -24,6 +24,8 @@ namespace HR_Portal.Source.ViewModel
         void DeleteProject(int id);
 
         void AddToProject(int jelolt_index, int projekt_index);
+
+        void ChangeFirstOpen();
     }
     class ApplicantImplementation : Applicant
     {
@@ -34,7 +36,7 @@ namespace HR_Portal.Source.ViewModel
                 "(SELECT megnevezes_munka FROM munkakor WHERE munkakor.id = jeloltek.munkakor) as munkakor, " +
                 "(SELECT megnevezes_munka FROM munkakor WHERE munkakor.id = jeloltek.munkakor2) as munkakor2, " +
                 "(SELECT megnevezes_munka FROM munkakor WHERE munkakor.id = jeloltek.munkakor3) as munkakor3, " +
-                "jeloltek.id,jeloltek.nev,szuldatum,reg_date,allapota,kolcsonzott,jeloltek.statusz,email " +
+                "jeloltek.id,jeloltek.nev,szuldatum,reg_date,allapota,kolcsonzott,jeloltek.statusz,email,friss " +
                 "FROM jeloltek " +
                 "LEFT JOIN megjegyzesek ON jeloltek.id = megjegyzesek.jelolt_id " +
                 "LEFT JOIN munkakor on jeloltek.munkakor = munkakor.id " +
@@ -212,7 +214,7 @@ namespace HR_Portal.Source.ViewModel
             return list;
         }
 
-        public List<ModelSmallProject> Data_PorjectListSmall()  //javított
+        public List<ModelSmallProject> Data_PorjectListSmall()  
         {
             string command = "SELECT projektek.id, megnevezes_projekt FROM projektek WHERE statusz = 1";
             List<ModelSmallProject> list = ModelSmallProject.GetModelSmallProject(command);
@@ -220,7 +222,14 @@ namespace HR_Portal.Source.ViewModel
             return list;
         }
 
-        public void DeleteProject(int id)  //javított
+        public void ChangeFirstOpen()  
+        {
+            string command = "UPDATE jeloltek SET friss = false WHERE id = " + Session.ApplicantID + ";";
+            MySql.Update(command);
+            MySql.Close();
+        }
+
+        public void DeleteProject(int id)  
         {
             string command = "DELETE FROM projekt_jelolt_kapcs WHERE projekt_id = " + id + " AND jelolt_id = " + Session.ApplicantID + ";";
             MySql.Update(command);

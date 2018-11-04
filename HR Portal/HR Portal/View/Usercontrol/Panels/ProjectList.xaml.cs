@@ -167,11 +167,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             grid.Children.Add(projectDataSheet = new ProjectDataSheet(grid));
         }
 
-        protected void New_projekt_btn_Click(object sender, RoutedEventArgs e)
-        {
-            grid.Children.Clear();
-            grid.Children.Add(newProjectPanel = new NewProjectPanel(grid));
-        }
+
 
         protected void projectDeleteClick(object sender, RoutedEventArgs e)
         {
@@ -270,6 +266,13 @@ namespace HR_Portal.View.Usercontrol.Panels
         protected void publikaltUnchecked(object sender, RoutedEventArgs e)
         {
             projectListLoader();
+        }
+
+        protected void New_projekt_btn_Click(object sender, RoutedEventArgs e)
+        {
+            Session.isUpdate = false;
+            grid.Children.Clear();
+            grid.Children.Add(newProjectPanel = new NewProjectPanel(grid));
         }
 
         protected void modositasClick(object sender, RoutedEventArgs e)

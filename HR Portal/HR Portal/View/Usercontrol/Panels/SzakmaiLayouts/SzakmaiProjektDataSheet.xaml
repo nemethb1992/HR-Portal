@@ -116,14 +116,16 @@
             <ListBox x:Name="megjegyzes_listBox" Grid.Row="1" Grid.RowSpan="5" Style="{StaticResource small_listBox_style}"  HorizontalContentAlignment="Stretch" SelectionMode="Extended" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden">
                 <ListBox.Resources>
                     <Style TargetType="{x:Type Border}" BasedOn="{StaticResource listCorner}">
+                        <Setter Property="CornerRadius" Value="10,10,0,0"/>
                     </Style>
                     <Style TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource listBoxItem_style}"/>
                 </ListBox.Resources>
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <Grid Margin="0.2" Width="400">
+                        <Grid Margin="0.2">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="1.5*" />
+                                <ColumnDefinition Width="100" />
                             </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="1*" />
@@ -131,17 +133,17 @@
                             </Grid.RowDefinitions>
                             <Grid.ContextMenu>
                                 <ContextMenu>
-                                    <MenuItem Header="Törlés" Click="commentDelete" />
+                                    <MenuItem Header="Törlés" Click="commentDeleteClick" />
                                 </ContextMenu>
                             </Grid.ContextMenu>
-                            <TextBlock Grid.Column="0" Grid.Row="0" Style="{StaticResource Standard_Textblock}" Text="{Binding hr_nev}"/>
-                            <TextBlock Grid.Column="1" Grid.Row="0" Style="{StaticResource Standard_Textblock}" TextAlignment="Right" Margin="10,5,0,0" FontSize="12" Text="{Binding datum}"/>
-                            <TextBlock Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" Cursor="Arrow" TextWrapping="Wrap" Width="400" Margin="0,0,0,10" Foreground="{StaticResource FontColor_Light}"  Style="{StaticResource Standard_Textblock}" Text="{Binding megjegyzes}"/>
+                            <TextBlock Grid.Column="0" Grid.Row="0" Style="{StaticResource Standard_Textblock}" Margin="10,5,0,0" Text="{Binding hr_nev}"/>
+                            <TextBlock Grid.Column="1" Grid.Row="0" Style="{StaticResource Standard_Textblock}" TextAlignment="Right" FontSize="12" Margin="10,0" Text="{Binding datum}"/>
+                            <TextBox Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" TextWrapping="Wrap" Cursor="Arrow" HorizontalAlignment="Left" MaxWidth="445"  IsReadOnly="True" Style="{StaticResource formTbx_label_style}" Text="{Binding megjegyzes}"/>
                         </Grid>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
-            <TextBox x:Name="comment_tartalom" Grid.Row="4" BorderBrush="{StaticResource racs_light}" Background="White" Padding="5,7" KeyUp="addComment" Text="Új megjegyzés" Style="{StaticResource Standard_Textbox}" GotFocus="commentGotFocus" LostFocus="commentLostFocus">
+            <TextBox x:Name="comment_tartalom" Grid.Row="4" BorderBrush="{StaticResource racs_light}" Background="White" Padding="5,7" KeyUp="enterComment" Text="Új megjegyzés" Style="{StaticResource Standard_Textbox}" GotFocus="commentGotFocus" LostFocus="commentLostFocus">
                 <TextBox.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="0,0,5,5"/>

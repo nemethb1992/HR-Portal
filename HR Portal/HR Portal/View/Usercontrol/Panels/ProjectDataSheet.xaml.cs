@@ -145,7 +145,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             MenuItem delete = sender as MenuItem;
             ModelComment items = delete.DataContext as ModelComment;
 
-            Comment.Delete(items.id, Session.UserData[0].id, Session.ProjektID, 0);
+            Comment.Delete(items.id);
             listLoader();
         }
 
@@ -189,13 +189,13 @@ namespace HR_Portal.View.Usercontrol.Panels
             formLoader();
         }
 
-        protected void textBoxKeyUp(object sender, KeyEventArgs e)
+        protected void enterComment(object sender, KeyEventArgs e)
         {
             TextBox tbx = sender as TextBox;
 
             if (e.Key != System.Windows.Input.Key.Enter) return;
             e.Handled = true;
-            Comment.Add(comment_tartalom.Text, Session.ProjektID, 0,0);
+            Comment.Add(comment_tartalom.Text, Session.ProjektID, 0);
             listLoader();
             tbx.Text = "";
         }
@@ -367,13 +367,13 @@ namespace HR_Portal.View.Usercontrol.Panels
             Grid grid = sender as Grid;
             ModelApplicantList item = grid.DataContext as ModelApplicantList;
 
-            if (item.Checked == false)
+            if (item.checkbox == false)
             {
-                item.Checked = true;
+                item.checkbox = true;
             }
             else
             {
-                item.Checked = false;
+                item.checkbox = false;
             }
             kapcs_jeloltek_listBox.Items.Refresh();
         }

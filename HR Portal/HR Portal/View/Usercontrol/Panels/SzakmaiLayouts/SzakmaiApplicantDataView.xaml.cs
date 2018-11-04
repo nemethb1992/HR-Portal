@@ -50,25 +50,25 @@ namespace HR_Portal.View.Usercontrol.Panels.SzakmaiLayouts
 
         protected void commentLoader(ListBox lb)
         {
-            lb.ItemsSource = Utility.Data_Comment();
+            lb.ItemsSource = Utility.Data_CommentApplicant();
         }
 
-        protected void commentDelete(object sender, RoutedEventArgs e)
+        protected void commentDeleteClick(object sender, RoutedEventArgs e)
         {
             MenuItem item = sender as MenuItem;
             ModelComment items = item.DataContext as ModelComment;
 
-            Comment.Delete(items.id, Session.UserData[0].id, 0, Session.ApplicantID);
+            Comment.Delete(items.id);
             commentLoader(megjegyzes_listBox);
         }
 
-        protected void addComment(object sender, KeyEventArgs e)
+        protected void enterComment(object sender, KeyEventArgs e)
         {
             TextBox textbox = sender as TextBox;
 
             if (e.Key != System.Windows.Input.Key.Enter) return;
             e.Handled = true;
-            Comment.Add(comment_tartalom.Text, 0, Session.ApplicantID, 0);
+            Comment.Add(comment_tartalom.Text, 0, Session.ApplicantID);
             commentLoader(megjegyzes_listBox);
             textbox.Text = "";
         }

@@ -21,7 +21,10 @@ namespace HR_Portal.Source.Model.Applicant
         public string kolcsonzott { get; set; }
         public string allapot_megnevezes { get; set; }
         public string reg_datum { get; set; }
-        public bool Checked { get; set; }
+        public bool checkbox { get; set; }
+        public bool frissValue { get; set; }
+        public string friss { get; set; }
+        public bool szabad { get; set; }
         public int statusz { get; set; }
 
         public static List<ModelApplicantList> GetModelApplicantList(string command)
@@ -35,7 +38,7 @@ namespace HR_Portal.Source.Model.Applicant
 
                 while (MySql.sdr.Read())
                 {
-                    string allapot_megnev = "Beérkezett", kolcsonzott = "";
+                    string allapot_megnev = "Beérkezett", kolcsonzott = "", frissSeged = "Hidden";
                     int allapot = 0;
                     try
                     {
@@ -60,6 +63,8 @@ namespace HR_Portal.Source.Model.Applicant
                             allapot_megnev = "Beérkezett";
                             break;
                     }
+                    if(Convert.ToBoolean(MySql.sdr["friss"]))
+                       frissSeged = "Visible";
 
                     if (Convert.ToInt32(MySql.sdr["kolcsonzott"]) == 1)
                         kolcsonzott = "Kölcsönzött";
@@ -75,6 +80,8 @@ namespace HR_Portal.Source.Model.Applicant
                         szuldatum = Convert.ToInt32(MySql.sdr["szuldatum"]),
                         statusz = Convert.ToInt32(MySql.sdr["statusz"]),
                         interjuk_db = Convert.ToInt32(MySql.sdr["interjuk_db"]),
+                        friss = frissSeged,
+                        frissValue = Convert.ToBoolean(MySql.sdr["friss"]),
                         allapota = allapot,
                         kolcsonzott = kolcsonzott,
                         allapot_megnevezes = allapot_megnev,

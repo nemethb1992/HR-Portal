@@ -46,13 +46,8 @@ namespace HR_Portal.View.Usercontrol.Panels
             app_input_10.Text = list[0].szuldatum.ToString();
             projekt_cbx.ItemsSource = Applicant.Data_PorjectListSmall();
             csatolmany_listBox.ItemsSource = Files.Read(Session.ApplicantID);
-            commentLoader(megjegyzes_listBox);
+            megjegyzes_listBox.ItemsSource = Utility.Data_CommentApplicant();
             kapcsolodo_projekt_list.ItemsSource = Applicant.Data_ProjectList();
-        }
-
-        protected void commentLoader(ListBox lb)
-        {
-            lb.ItemsSource = Utility.Data_Comment();
         }
 
         protected void navigateToProjectDataSheet(object sender, RoutedEventArgs e)
@@ -74,23 +69,23 @@ namespace HR_Portal.View.Usercontrol.Panels
             kapcsolodo_projekt_list.ItemsSource = Applicant.Data_ProjectList();
         }
 
-        protected void commentDelete(object sender, RoutedEventArgs e)
+        protected void commentDeleteClick(object sender, RoutedEventArgs e)
         {
             MenuItem item = sender as MenuItem;
             ModelComment items = item.DataContext as ModelComment;
 
-            Comment.Delete(items.id, Session.UserData[0].id, 0, Session.ApplicantID);
-            commentLoader(megjegyzes_listBox);
+            Comment.Delete(items.id);
+            megjegyzes_listBox.ItemsSource = Utility.Data_CommentApplicant();
         }
 
-        protected void textBoxKeyUp(object sender, KeyEventArgs e)
+        protected void enterComment(object sender, KeyEventArgs e)
         {
             TextBox textbox = sender as TextBox;
 
             if (e.Key != System.Windows.Input.Key.Enter) return;
             e.Handled = true;
-            Comment.Add(comment_tartalom.Text, 0, Session.ApplicantID, 0);
-            commentLoader(megjegyzes_listBox);
+            Comment.Add(comment_tartalom.Text, 0, Session.ApplicantID);
+            megjegyzes_listBox.ItemsSource = Utility.Data_CommentApplicant();
             textbox.Text = "";
         }
 
@@ -142,6 +137,11 @@ namespace HR_Portal.View.Usercontrol.Panels
         {
             grid.Children.Clear();
             grid.Children.Add(applicantList = new ApplicantList(grid));
+        }
+
+        private void megjegyzes_listBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }

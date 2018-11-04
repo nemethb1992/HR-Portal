@@ -70,22 +70,22 @@ namespace HR_Portal.View.Usercontrol.Panels.SzakmaiLayouts
             kapcs_jeloltek_listBox.ItemsSource = Utility.Data_JeloltKapcs();
         }
 
-        protected void commentDelete(object sender, RoutedEventArgs e)
+        protected void commentDeleteClick(object sender, RoutedEventArgs e)
         {
             MenuItem menuItem = sender as MenuItem;
             ModelComment items = menuItem.DataContext as ModelComment;
 
-            Comment.Delete(items.id, Session.UserData[0].id, Session.ProjektID, 0);
+            Comment.Delete(items.id);
             megjegyzes_listBox.ItemsSource = Utility.Data_CommentProject();
         }
 
-        protected void addComment(object sender, KeyEventArgs e)
+        protected void enterComment(object sender, KeyEventArgs e)
         {
             TextBox tbx = sender as TextBox;
 
             if (e.Key != System.Windows.Input.Key.Enter) return;
             e.Handled = true;
-            Comment.Add(comment_tartalom.Text, Session.ProjektID, 0, 0);
+            Comment.Add(comment_tartalom.Text, Session.ProjektID, 0);
             megjegyzes_listBox.ItemsSource = Utility.Data_CommentProject();
             tbx.Text = "";
         }

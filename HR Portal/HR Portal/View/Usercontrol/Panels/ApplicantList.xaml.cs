@@ -188,6 +188,10 @@ namespace HR_Portal.View.Usercontrol.Panels
             Button button = sender as Button;
             ModelApplicantList items = button.DataContext as ModelApplicantList;
             Session.ApplicantID = items.id;
+            if (items.frissValue)
+            {
+                Applicant.ChangeFirstOpen();
+            }
             grid.Children.Clear();
             grid.Children.Add(applicantDataSheet = new ApplicantDataSheet(grid));
         }
@@ -210,11 +214,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             }
         }
 
-        protected void navigateToNewApplicantPanel(object sender, RoutedEventArgs e)
-        {
-            grid.Children.Clear();
-            grid.Children.Add(newApplicantPanel = new NewApplicantPanel(grid));
-        }
+
 
         protected async void searchInputTextChanged(object sender, TextChangedEventArgs e)
         {
@@ -290,6 +290,14 @@ namespace HR_Portal.View.Usercontrol.Panels
         protected void szabadUnchecked(object sender, RoutedEventArgs e)
         {
             applicantListLoader();
+        }
+
+        protected void navigateToNewApplicantPanel(object sender, RoutedEventArgs e)
+        {
+
+            Session.isUpdate = false;
+            grid.Children.Clear();
+            grid.Children.Add(newApplicantPanel = new NewApplicantPanel(grid));
         }
 
         protected void modositasClick(object sender, RoutedEventArgs e)

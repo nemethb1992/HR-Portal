@@ -267,7 +267,6 @@ namespace HR_Portal.Source.Model
         public string hr_nev { get; set; }
         public string megjegyzes { get; set; }
         public string datum { get; set; }
-        public int ertekeles { get; set; }
 
         public static List<ModelComment> GetModelComment(string command)
         {
@@ -287,7 +286,6 @@ namespace HR_Portal.Source.Model
                         hr_nev = MySql.sdr["hr_nev"].ToString(),
                         megjegyzes = MySql.sdr["megjegyzes"].ToString(),
                         datum = MySql.sdr["datum"].ToString(),
-                        ertekeles = Convert.ToInt32(MySql.sdr["ertekeles"]),
 
                     });
                 }
