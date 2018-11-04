@@ -16,9 +16,9 @@
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
     <TargetFrameworkProfile />
-    <PublishUrl>ftp://pmknas001.pmhu.local/verwaltung/HRCloud/updates/</PublishUrl>
+    <PublishUrl>\\pmknas001.pmhu.local\verwaltung\HRportal\HRCloud\updates\</PublishUrl>
     <Install>true</Install>
-    <InstallFrom>Disk</InstallFrom>
+    <InstallFrom>Unc</InstallFrom>
     <UpdateEnabled>true</UpdateEnabled>
     <UpdateMode>Foreground</UpdateMode>
     <UpdateInterval>7</UpdateInterval>
@@ -26,13 +26,14 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <UpdateUrl>\\pmknas001.pmhu.local\verwaltung\HRCloud\updates\</UpdateUrl>
+    <UpdateUrl>\\pmknas001.pmhu.local\verwaltung\HRportal\HRCloud\updates\</UpdateUrl>
     <TargetCulture>hu-HU</TargetCulture>
     <ProductName>HR Portal</ProductName>
     <PublisherName>Phoenix Mecano Kecskemét Kft.</PublisherName>
+    <SuiteName>Phoenix Mecano Kecskemét Kft.</SuiteName>
     <WebPage>publish.htm</WebPage>
     <AutorunEnabled>true</AutorunEnabled>
-    <ApplicationRevision>6</ApplicationRevision>
+    <ApplicationRevision>12</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>

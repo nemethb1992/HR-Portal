@@ -30,7 +30,7 @@
         <Image Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" Height="25" Width="25" Source="/Public/imgs/key.png" />
         <PasswordBox Grid.Row="2" Grid.Column="2" x:Name="Lpass_pwd" Password="" Style="{StaticResource Login_Pass_pwd}" KeyUp="passwordEnterKeyUp"/>
 
-        <CheckBox Grid.Row="3" Grid.Column="2" x:Name="login_cbx" Content="Megjegyez" Style="{StaticResource login_check}" HorizontalAlignment="Left"/>
+        <CheckBox Grid.Row="3" Grid.Column="2" x:Name="login_cbx" Content="Megjegyez" Style="{StaticResource login_check}" Visibility="Hidden" HorizontalAlignment="Left"/>
 
         <Button Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" x:Name="btn_login" VerticalAlignment="Bottom" Content="Belépés" Style="{StaticResource StandardButton}" Height="50" Click="loginEnterClick" />
 
