@@ -126,8 +126,6 @@ namespace HR_Portal.Source.ViewModel
             return list;
         }
 
-        
-
         public List<ModelFullApplicant> GetFullApplicant()
         {
             string command = "SELECT jeloltek.id,nev,email,telefon,lakhely,pmk_ismerte,szuldatum,neme,tapasztalat_ev, reg_date,felvett,jeloltek.megjegyzes,jeloltek.statusz,folderUrl,hirlevel," +
