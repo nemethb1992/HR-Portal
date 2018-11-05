@@ -187,7 +187,6 @@
     <Compile Include="Source\ActiveDirecotry.cs" />
     <Compile Include="Source\Model\Applicant\ModelApplicantList.cs" />
     <Compile Include="Source\Model\Applicant\ModelApplicantListbox.cs" />
-    <Compile Include="Source\Model\Applicant\ModelApplicantSearch.cs" />
     <Compile Include="Source\Model\Applicant\ModelApplicantSearchBar.cs" />
     <Compile Include="Source\Model\Applicant\ModelFullApplicant.cs" />
     <Compile Include="Source\Model\Other\ModelEmail.cs" />
@@ -199,6 +198,7 @@
     <Compile Include="Source\Model\Project\ModelInterview.cs" />
     <Compile Include="Source\Model\Project\ModelKompetenciaSummary.cs" />
     <Compile Include="Source\Model\Project\ModelProjectList.cs" />
+    <Compile Include="Source\Model\Project\ModelProjectSearchBar.cs" />
     <Compile Include="Source\Model\Project\ModelSmallProject.cs" />
     <Compile Include="Source\Model\Project\ModelTamogatas.cs" />
     <Compile Include="Source\MySql.cs" />

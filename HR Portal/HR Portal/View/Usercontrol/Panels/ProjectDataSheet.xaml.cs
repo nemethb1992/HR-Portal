@@ -32,8 +32,9 @@ namespace HR_Portal.View.Usercontrol.Panels
             {
                 formLoader();
             }
-            catch (Exception)
+            catch (Exception ext)
             {
+                MessageBox.Show(ext.ToString());
                 grid.Children.Clear();
                 grid.Children.Add(projectList = new ProjectList(grid));
             }
@@ -41,7 +42,6 @@ namespace HR_Portal.View.Usercontrol.Panels
 
         protected void formLoader()
         {
-
             listLoader();
             List<ModelFullProject> li = Project.GetFullProject();
             projekt_profile_title.Text = li[0].megnevezes_projekt;

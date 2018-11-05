@@ -25,10 +25,10 @@ namespace HR_Portal.View.Usercontrol.Panels
     {
         private static string HeaderSelecteds;
         public string HeaderSelected { get { return HeaderSelecteds; } set { HeaderSelecteds = value; } }
-        
+
         CommonUtility Utility = new CommonUtility();
         ApplicantImplementation Applicant = new ApplicantImplementation();
-        
+
 
         private ApplicantDataSheet applicantDataSheet;
         private NewApplicantPanel newApplicantPanel;
@@ -41,23 +41,21 @@ namespace HR_Portal.View.Usercontrol.Panels
             startMethods();
         }
 
-        public ApplicantList()
-        {
-        }
-
         protected void startMethods()
         {
             checkBoxLoader();
             applicantListLoader();
+            if (Session.ApplicantSearchValue != null)
+                SetSearchValues();
         }
 
-        protected List<ModelApplicantSearchBar> searchValues()
+        protected List<ModelApplicantSearchBar> GetSearchValues()
         {
             List<ModelApplicantSearchBar> list = new List<ModelApplicantSearchBar>();
-            
+
+            ModelNem nemek_item = (nemek_srccbx as ComboBox).SelectedItem as ModelNem;
             ModelMunkakor munkakor_item = (munkakor_srccbx as ComboBox).SelectedItem as ModelMunkakor;
             ModelVegzettseg vegzettseg_item = (vegzettseg_srccbx as ComboBox).SelectedItem as ModelVegzettseg;
-            ModelNem nemek_item = (nemek_srccbx as ComboBox).SelectedItem as ModelNem;
 
             string munkakorStr = "";
             string vegzettsegStr = "";
@@ -90,7 +88,7 @@ namespace HR_Portal.View.Usercontrol.Panels
 
             string sorrend = " ASC";
 
-            
+
             list.Add(new ModelApplicantSearchBar
             {
                 nev = nev_srcinp.Text,
@@ -101,17 +99,54 @@ namespace HR_Portal.View.Usercontrol.Panels
                 regdate = regdate_srcinp.Text,
                 interjuk = interjuk,
                 nemekStr = nemekStr,
+                nemekIndex = nemek_srccbx.SelectedIndex,
                 munkakorStr = munkakorStr,
+                munkakorIndex = munkakor_srccbx.SelectedIndex,
                 vegzettsegStr = vegzettsegStr,
+                vegzettsegIndex = nemek_srccbx.SelectedIndex,
                 cimke = cimke_srcinp.Text,
                 szabad = szabad,
+                szabadBool = szabad_check.IsChecked.Value,
                 HeaderSelected = HeaderSelected,
                 sorrend = sorrend
             });
-
-
-
             return list;
+        }
+
+        protected void SetSearchValues()
+        {
+            if (Session.ApplicantSearchValue == null)
+                return;
+            List<ModelApplicantSearchBar> values = Session.ApplicantSearchValue;
+            munkakor_srccbx.SelectedIndex = values[0].munkakorIndex;
+            vegzettseg_srccbx.SelectedIndex = values[0].vegzettsegIndex;
+            nemek_srccbx.SelectedIndex = values[0].nemekIndex;
+            szabad_check.IsChecked = values[0].szabadBool;
+            nev_srcinp.Text = values[0].nev;
+            lakhely_srcinp.Text = values[0].lakhely;
+            email_srcinp.Text = values[0].email;
+            eletkor_srcinp.Text = values[0].eletkor;
+            tapsztalat_srcinp.Text = values[0].tapasztalat;
+            regdate_srcinp.Text = values[0].regdate;
+            interju_srcinp.Text = values[0].interjuk;
+            cimke_srcinp.Text = values[0].cimke;
+            
+            if(values[0].nev.Length > 0)
+                nev_label.Text = "";
+            if (values[0].lakhely.Length > 0)
+                lakhely_label.Text = "";
+            if (values[0].email.Length > 0)
+                email_label.Text = "";
+            if (values[0].eletkor.Length > 0)
+                eletkor_label.Text = "";
+            if (values[0].tapasztalat.Length > 0)
+                tapsztalat_label.Text = "";
+            if (values[0].regdate.Length > 0)
+                regdate_label.Text = "";
+            if (values[0].interjuk.Length > 0)
+                interju_label.Text = "";
+            if (values[0].cimke.Length > 0)
+                cimke_label.Text = "";
         }
 
         public void applicantListLoader()
@@ -120,7 +155,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             buttonColorChange();
             try
             {
-                List<ModelApplicantList> list = Applicant.GetApplicantList(searchValues());
+                List<ModelApplicantList> list = Applicant.GetApplicantList(GetSearchValues());
                 applicant_listBox.ItemsSource = list;
                 talalat_tbl.Text = "Találatok:  " + list.Count.ToString();
             }
@@ -133,7 +168,7 @@ namespace HR_Portal.View.Usercontrol.Panels
         protected void projectPassivateClick(object sender, RoutedEventArgs e)
         {
             Utility.ApplicantStatusChange(0);
-            applicant_listBox.ItemsSource = Applicant.GetApplicantList(searchValues());
+            applicant_listBox.ItemsSource = Applicant.GetApplicantList(GetSearchValues());
             buttonColorChange();
         }
 
@@ -157,7 +192,7 @@ namespace HR_Portal.View.Usercontrol.Panels
         protected void projectActivateClick(object sender, RoutedEventArgs e)
         {
             Utility.ApplicantStatusChange(1);
-            applicant_listBox.ItemsSource = Applicant.GetApplicantList(searchValues());
+            applicant_listBox.ItemsSource = Applicant.GetApplicantList(GetSearchValues());
             buttonColorChange();
         }
 
@@ -199,6 +234,7 @@ namespace HR_Portal.View.Usercontrol.Panels
                 Applicant.ChangeFirstOpen();
             }
             CommonUtility.SetReturnPage(CommonUtility.Views.ApplicantList);
+            Session.ApplicantSearchValue = GetSearchValues();
             grid.Children.Clear();
             grid.Children.Add(applicantDataSheet = new ApplicantDataSheet(grid));
         }
@@ -286,7 +322,9 @@ namespace HR_Portal.View.Usercontrol.Panels
             regdate_srcinp.Text = "";
             interju_srcinp.Text = "";
             cimke_srcinp.Text = "";
+            Session.ApplicantSearchValue = null;
             applicantListLoader();
+
         }
 
         protected void szabadChecked(object sender, RoutedEventArgs e)
@@ -303,6 +341,7 @@ namespace HR_Portal.View.Usercontrol.Panels
         {
             CommonUtility.SetReturnPage(CommonUtility.Views.ApplicantList);
             Session.isUpdate = false;
+            Session.ApplicantSearchValue = GetSearchValues();
             grid.Children.Clear();
             grid.Children.Add(newApplicantPanel = new NewApplicantPanel(grid));
         }
@@ -313,6 +352,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             ModelApplicantList itemSource = item.DataContext as ModelApplicantList;
             Session.isUpdate = true;
             Session.ApplicantID = itemSource.id;
+            Session.ApplicantSearchValue = GetSearchValues();
             grid.Children.Clear();
             grid.Children.Add(newApplicantPanel = new NewApplicantPanel(grid));
         }

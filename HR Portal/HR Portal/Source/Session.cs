@@ -1,5 +1,6 @@
 ﻿using HR_Portal.Source;
 using HR_Portal.Source.Model;
+using HR_Portal.Source.Model.Applicant;
 using System.Collections.Generic;
 
 namespace HR_Portal.Source
@@ -8,6 +9,9 @@ namespace HR_Portal.Source
     {
         private static List<ModelUserData> UserDatas;
         public static List<ModelUserData> UserData { get { return UserDatas; } set { UserDatas = value; } }
+
+        private static List<ModelApplicantSearchBar> ApplicantSearchValues;
+        public static List<ModelApplicantSearchBar> ApplicantSearchValue { get { return ApplicantSearchValues; } set { ApplicantSearchValues = value; } }
 
         private static int ProjectStatus;
         public static int ProjectStatusz { get { return ProjectStatus; } set { ProjectStatus = value; } }

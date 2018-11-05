@@ -195,7 +195,7 @@
                                     <MenuItem Header="Törlés" Click="commentDeleteClick" />
                                 </ContextMenu>
                             </Grid.ContextMenu>
-                            <TextBlock Grid.Column="0" Grid.Row="0" Style="{StaticResource Standard_Textblock}" Margin="10,5,0,0" Text="{Binding hr_nev}"/>
+                            <TextBlock Grid.Column="0" Grid.Row="0" Style="{StaticResource Standard_Textblock}" FontSize="13" Margin="7,2,0,0" Text="{Binding hr_nev}"/>
                             <TextBlock Grid.Column="1" Grid.Row="0" Style="{StaticResource Standard_Textblock}" TextAlignment="Right" FontSize="12" Margin="10,0" Text="{Binding datum}"/>
                             <TextBox Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" TextWrapping="Wrap" Cursor="Arrow" HorizontalAlignment="Left" MaxWidth="445"  IsReadOnly="True" Style="{StaticResource formTbx_label_style}" Text="{Binding megjegyzes}"/>
                         </Grid>
