@@ -163,6 +163,7 @@ namespace HR_Portal.View.Usercontrol.Panels
         {
             ModelProjectList items = (sender as Button).DataContext as ModelProjectList;
             Session.ProjektID = items.id;
+            CommonUtility.SetReturnPage(CommonUtility.Views.ProjectList);
             grid.Children.Clear();
             grid.Children.Add(projectDataSheet = new ProjectDataSheet(grid));
         }
@@ -250,7 +251,9 @@ namespace HR_Portal.View.Usercontrol.Panels
 
             await Task.Delay(500);
             if (fisrtLength == textbox.Text.Length)
+            {
                 projectListLoader();
+            }
         }
 
         protected void comboboxSelection(object sender, SelectionChangedEventArgs e)
@@ -271,6 +274,7 @@ namespace HR_Portal.View.Usercontrol.Panels
         protected void New_projekt_btn_Click(object sender, RoutedEventArgs e)
         {
             Session.isUpdate = false;
+            CommonUtility.SetReturnPage(CommonUtility.Views.ProjectList);
             grid.Children.Clear();
             grid.Children.Add(newProjectPanel = new NewProjectPanel(grid));
         }

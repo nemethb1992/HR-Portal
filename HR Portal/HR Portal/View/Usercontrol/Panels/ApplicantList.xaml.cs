@@ -192,6 +192,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             {
                 Applicant.ChangeFirstOpen();
             }
+            CommonUtility.SetReturnPage(CommonUtility.Views.ApplicantList);
             grid.Children.Clear();
             grid.Children.Add(applicantDataSheet = new ApplicantDataSheet(grid));
         }
@@ -294,7 +295,7 @@ namespace HR_Portal.View.Usercontrol.Panels
 
         protected void navigateToNewApplicantPanel(object sender, RoutedEventArgs e)
         {
-
+            CommonUtility.SetReturnPage(CommonUtility.Views.ApplicantList);
             Session.isUpdate = false;
             grid.Children.Clear();
             grid.Children.Add(newApplicantPanel = new NewApplicantPanel(grid));

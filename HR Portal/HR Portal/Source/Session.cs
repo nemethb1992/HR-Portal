@@ -32,6 +32,10 @@ namespace HR_Portal.Source
 
         private static bool isUpdates;
         public static bool isUpdate { get { return isUpdates; } set { isUpdates = value; } }
+
+        private static CommonUtility.Views lastPages;
+        public static CommonUtility.Views lastPage { get { return lastPages; } set { lastPages = value; } }
+
     }
 
 }

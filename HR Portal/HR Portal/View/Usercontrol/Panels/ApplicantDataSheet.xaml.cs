@@ -21,6 +21,7 @@ namespace HR_Portal.View.Usercontrol.Panels
         Files fControl = new Files();
 
         private ProjectDataSheet projectDataSheet;
+        private ProjektJeloltDataSheet projektJeloltDataSheet;
         private ApplicantList applicantList;
         private Grid grid;
 
@@ -56,6 +57,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             ModelSmallProject items = button.DataContext as ModelSmallProject;
 
             Session.ProjektID = items.id;
+            CommonUtility.SetReturnPage(CommonUtility.Views.ApplicantDataSheet);
             grid.Children.Clear();
             grid.Children.Add(projectDataSheet = new ProjectDataSheet(grid));
         }
@@ -136,7 +138,14 @@ namespace HR_Portal.View.Usercontrol.Panels
         private void BackButton(object sender, RoutedEventArgs e)
         {
             grid.Children.Clear();
-            grid.Children.Add(applicantList = new ApplicantList(grid));
+            if (Session.lastPage == CommonUtility.Views.ProjectJeloltDataSheet)
+            {
+                grid.Children.Add(projektJeloltDataSheet = new ProjektJeloltDataSheet(grid));
+            }
+            else
+            {
+                grid.Children.Add(applicantList = new ApplicantList(grid));
+            }
         }
 
         private void megjegyzes_listBox_SelectionChanged(object sender, SelectionChangedEventArgs e)

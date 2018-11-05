@@ -9,6 +9,7 @@ using HR_Portal.Source.Model;
 using HR_Portal.Source.Model.Applicant;
 using HR_Portal.Source.ViewModel;
 using HR_Portal.Source.Model.Project;
+using HR_Portal.Public.templates;
 
 namespace HR_Portal.View.Usercontrol.Panels
 {
@@ -23,8 +24,11 @@ namespace HR_Portal.View.Usercontrol.Panels
         CommonUtility Utility = new CommonUtility();
 
         private ProjectDataSheet projectDataSheet;
+        private ApplicantDataSheet applicantDataSheet;
         private InterviewPanel interviewPanel;
         private Grid grid;
+
+        List<ModelFullApplicant> applicantData;
 
         public ProjektJeloltDataSheet(Grid grid)
         {
@@ -35,13 +39,13 @@ namespace HR_Portal.View.Usercontrol.Panels
 
         protected void projectFormLoader()
         {
-            List<ModelFullApplicant> applicantList = Applicant.GetFullApplicant();
+            applicantData = Applicant.GetFullApplicant();
             List<ModelFullProject> projectList = Project.GetFullProject();
             List<ModelKompetenciak> kompetenciaList = Interview.Data_Kompetencia();
             List<ModelKompetenciaSummary> summaryList = Utility.Data_KompetenciaJeloltKapcs();
 
-            projekt_jelolt_title_tbl.Text = projectList[0].megnevezes_projekt + " - " + applicantList[0].nev;
-            jelolt_telefon.Text = "( " + applicantList[0].telefon + " )";
+            projekt_jelolt_title_tbl.Text = projectList[0].megnevezes_projekt + " - " + applicantData[0].nev;
+            jelolt_telefon.Text = "( " + applicantData[0].telefon + " )";
             megjegyzes_listBox.ItemsSource = Utility.Data_CommentApplicant();
             kapcs_jeloltek_listBox.ItemsSource = Interview.Data_Interview();
             inter_cim.Items.Add("HR interjú");
@@ -179,6 +183,8 @@ namespace HR_Portal.View.Usercontrol.Panels
                     Utility.jeloltKapcsUpdate(Session.ApplicantID, 3);
                     grid.Children.Clear();
                     grid.Children.Add(projectDataSheet = new ProjectDataSheet(grid));
+                    EmailTemplate email = new EmailTemplate();
+                    Email.Send(applicantData[0].email, email.Elutasito_Email(applicantData[0].nev));
                     break;
                 case MessageBoxResult.No:
                     break;
@@ -282,6 +288,13 @@ namespace HR_Portal.View.Usercontrol.Panels
 
             }
             tamogatasok_input_tbx.Text = igen.ToString() + "/" + ossz.ToString();
+        }
+
+        private void ApplicantDataSheetNavigation(object sender, RoutedEventArgs e)
+        {
+            CommonUtility.SetReturnPage(CommonUtility.Views.ProjectJeloltDataSheet);
+            grid.Children.Clear();
+            grid.Children.Add(applicantDataSheet = new ApplicantDataSheet(grid));
         }
     }
 

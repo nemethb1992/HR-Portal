@@ -57,13 +57,13 @@
                     <ColumnDefinition Width="1*" />
                     <ColumnDefinition Width="1*" />
                     <ColumnDefinition Width="0.7*" />
-                        <ColumnDefinition Width="1*" />
-                    </Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*" />
+                </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
-                        <RowDefinition Height="*" />
-                        <RowDefinition Height="*" />
-                    </Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
                 <TextBox x:Name="nev_srcinp" Tag="nev_label" Grid.Column="0" Grid.Row="0" Panel.ZIndex="2"  Style="{StaticResource panelTbx_style}" TextChanged="searchInputTextChanged" GotFocus="textBoxPlaceHolderGotFocus" LostFocus="textBoxPlaceHolderLostFocus" Text=""/>
                 <TextBox x:Name="nev_label" Grid.Column="0" Grid.Row="0" Panel.ZIndex="1"  Style="{StaticResource panelTbx_style}" Text="Név"/>
                     <TextBox x:Name="lakhely_srcinp" Tag="lakhely_label" Grid.Column="1" Grid.Row="0" Panel.ZIndex="2"  Style="{StaticResource panelTbx_style}" TextChanged="searchInputTextChanged" GotFocus="textBoxPlaceHolderGotFocus" LostFocus="textBoxPlaceHolderLostFocus" Text="" />
@@ -178,7 +178,33 @@
                 </ListBox.ItemTemplate>
             </ListBox>
             </ScrollViewer>
+        <Grid x:Name="FolderGrid" Grid.Column="1" Grid.Row="3" Visibility="Hidden">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="9*" />
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="1.2*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="1.2*" />
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="9*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Button x:Name="previousPageButton" Grid.Column="1" Style="{StaticResource next_panelBtn_style}">
+                <Image Source="/Public/imgs/leftArrow.png" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            </Button>
 
+            <TextBlock x:Name="actualPageTbl" Grid.Column="2" Text="1" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource minor_title_style}"/>
+            <Image Source="/Public/imgs/dots.png" Grid.Column="3" Height="16" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <TextBlock x:Name="allPageTbl" Grid.Column="4" Text="82" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource minor_title_style}"/>
+            
+            <Button x:Name="nextPageButton" Grid.Column="5" Style="{StaticResource next_panelBtn_style}">
+                <Image Source="/Public/imgs/rightArrow.png" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            </Button>
+
+        
+        </Grid>
 
     </Grid>
 </UserControl>

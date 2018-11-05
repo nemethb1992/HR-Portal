@@ -9,7 +9,12 @@ namespace HR_Portal.Source
     class CommonUtility
     {
 
+        public enum Views { ApplicantList, ApplicantDataSheet, ProjectList, ProjectDataSheet, InterviewPanel, ProjectJeloltDataSheet };
 
+        public static void SetReturnPage(Views view)
+        {
+            Session.lastPage = view;
+        }
         
         //public List<ModelInterview> Data_Interview() //javított
         //{

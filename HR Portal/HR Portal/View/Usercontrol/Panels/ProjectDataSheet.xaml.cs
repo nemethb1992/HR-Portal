@@ -21,6 +21,7 @@ namespace HR_Portal.View.Usercontrol.Panels
 
         private Grid grid;
         private ProjektJeloltDataSheet projektJeloltDataSheet;
+        private ApplicantDataSheet applicantDataSheet;
         private ProjectList projectList;
 
         public ProjectDataSheet(Grid grid)
@@ -423,7 +424,14 @@ namespace HR_Portal.View.Usercontrol.Panels
         private void BackButton(object sender, RoutedEventArgs e)
         {
             grid.Children.Clear();
-            grid.Children.Add(projectList = new ProjectList(grid));
+            if (Session.lastPage == CommonUtility.Views.ApplicantDataSheet)
+            {
+                grid.Children.Add(applicantDataSheet = new ApplicantDataSheet(grid));
+            }
+            else
+            {
+                grid.Children.Add(projectList = new ProjectList(grid));
+            }
         }
     }
 }

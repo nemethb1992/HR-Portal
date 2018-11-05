@@ -123,8 +123,9 @@
             <TextBlock Grid.Column="0" Grid.Row="0" Style="{StaticResource Standard_Textblock}" Text="Résztvevők:" />
             <ListBox x:Name="ertesitendok_editlist" Grid.Row="1"  Style="{StaticResource small_listBox_style}" HorizontalContentAlignment="Stretch" SelectionMode="Extended" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden" >
                 <ListBox.Resources>
-                    <Style TargetType="{x:Type Border}" BasedOn="{StaticResource listCorner}"/>
-                    <Style TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource thin_listBoxItem_style}"/>
+                    <Style TargetType="{x:Type Border}" BasedOn="{StaticResource listCorner}">
+                        <Setter Property="CornerRadius" Value="10,10,0,0"/>
+                    </Style>
                 </ListBox.Resources>
                 <ListBox.ItemTemplate>
                     <DataTemplate>
