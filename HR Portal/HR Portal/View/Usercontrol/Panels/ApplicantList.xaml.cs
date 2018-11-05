@@ -130,23 +130,24 @@ namespace HR_Portal.View.Usercontrol.Panels
             regdate_srcinp.Text = values[0].regdate;
             interju_srcinp.Text = values[0].interjuk;
             cimke_srcinp.Text = values[0].cimke;
-            
-            if(values[0].nev.Length > 0)
-                nev_label.Text = "";
+
+            if (values[0].nev.Length > 0)
+                nev_label.Visibility = Visibility.Hidden;
             if (values[0].lakhely.Length > 0)
-                lakhely_label.Text = "";
+                lakhely_label.Visibility = Visibility.Hidden;
             if (values[0].email.Length > 0)
-                email_label.Text = "";
+                email_label.Visibility = Visibility.Hidden;
             if (values[0].eletkor.Length > 0)
-                eletkor_label.Text = "";
+                eletkor_label.Visibility = Visibility.Hidden;
             if (values[0].tapasztalat.Length > 0)
-                tapsztalat_label.Text = "";
+                tapsztalat_label.Visibility = Visibility.Hidden;
             if (values[0].regdate.Length > 0)
-                regdate_label.Text = "";
+                regdate_label.Visibility = Visibility.Hidden;
             if (values[0].interjuk.Length > 0)
-                interju_label.Text = "";
+                interju_label.Visibility = Visibility.Hidden;
             if (values[0].cimke.Length > 0)
-                cimke_label.Text = "";
+                cimke_label.Visibility = Visibility.Hidden;
+
         }
 
         public void applicantListLoader()
@@ -322,6 +323,16 @@ namespace HR_Portal.View.Usercontrol.Panels
             regdate_srcinp.Text = "";
             interju_srcinp.Text = "";
             cimke_srcinp.Text = "";
+            
+            nev_label.Visibility = Visibility.Visible;
+            lakhely_label.Visibility = Visibility.Visible;
+            email_label.Visibility = Visibility.Visible;
+            eletkor_label.Visibility = Visibility.Visible;
+            tapsztalat_label.Visibility = Visibility.Visible;
+            regdate_label.Visibility = Visibility.Visible;
+            interju_label.Visibility = Visibility.Visible;
+            cimke_label.Visibility = Visibility.Visible;
+
             Session.ApplicantSearchValue = null;
             applicantListLoader();
 
