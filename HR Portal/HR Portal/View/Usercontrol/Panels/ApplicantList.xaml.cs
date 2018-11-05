@@ -51,9 +51,9 @@ namespace HR_Portal.View.Usercontrol.Panels
             applicantListLoader();
         }
 
-        protected List<string> searchValues()
+        protected List<ModelApplicantSearchBar> searchValues()
         {
-            List<string> list = new List<string>();
+            List<ModelApplicantSearchBar> list = new List<ModelApplicantSearchBar>();
             
             ModelMunkakor munkakor_item = (munkakor_srccbx as ComboBox).SelectedItem as ModelMunkakor;
             ModelVegzettseg vegzettseg_item = (vegzettseg_srccbx as ComboBox).SelectedItem as ModelVegzettseg;
@@ -90,20 +90,26 @@ namespace HR_Portal.View.Usercontrol.Panels
 
             string sorrend = " ASC";
 
-            list.Add(nev_srcinp.Text);
-            list.Add(lakhely_srcinp.Text);
-            list.Add(email_srcinp.Text);
-            list.Add(eletkor_srcinp.Text);
-            list.Add(tapasztalat);
-            list.Add(regdate_srcinp.Text);
-            list.Add(interjuk);
-            list.Add(nemekStr);
-            list.Add(munkakorStr);
-            list.Add(vegzettsegStr);
-            list.Add(cimke_srcinp.Text);
-            list.Add(szabad);
-            list.Add(HeaderSelected);
-            list.Add(sorrend);
+            
+            list.Add(new ModelApplicantSearchBar
+            {
+                nev = nev_srcinp.Text,
+                lakhely = lakhely_srcinp.Text,
+                email = email_srcinp.Text,
+                eletkor = eletkor_srcinp.Text,
+                tapasztalat = tapasztalat,
+                regdate = regdate_srcinp.Text,
+                interjuk = interjuk,
+                nemekStr = nemekStr,
+                munkakorStr = munkakorStr,
+                vegzettsegStr = vegzettsegStr,
+                cimke = cimke_srcinp.Text,
+                szabad = szabad,
+                HeaderSelected = HeaderSelected,
+                sorrend = sorrend
+            });
+
+
 
             return list;
         }

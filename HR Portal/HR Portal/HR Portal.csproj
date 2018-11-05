@@ -188,6 +188,7 @@
     <Compile Include="Source\Model\Applicant\ModelApplicantList.cs" />
     <Compile Include="Source\Model\Applicant\ModelApplicantListbox.cs" />
     <Compile Include="Source\Model\Applicant\ModelApplicantSearch.cs" />
+    <Compile Include="Source\Model\Applicant\ModelApplicantSearchBar.cs" />
     <Compile Include="Source\Model\Applicant\ModelFullApplicant.cs" />
     <Compile Include="Source\Model\Other\ModelEmail.cs" />
     <Compile Include="Source\Model\Other\ModelListSource.cs" />
