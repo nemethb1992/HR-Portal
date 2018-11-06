@@ -6,6 +6,7 @@ using System.Windows;
 using ActiveUp.Net.Mail;
 using HR_Portal.Public.templates;
 using HR_Portal.Source.Model.Other;
+using System;
 
 namespace HR_Portal.Source
 {
@@ -71,8 +72,8 @@ namespace HR_Portal.Source
                 MailMessage mail = new MailMessage();
                 System.Net.Mail.SmtpClient SmtpServer = new System.Net.Mail.SmtpClient(li[0].mailserver);
                 SmtpServer.Port = li[0].port;
-                SmtpServer.Credentials = new NetworkCredential(li[0].login, "pmhr2018");
-                SmtpServer.EnableSsl = true;
+                //SmtpServer.Credentials = new NetworkCredential(li[0].login, "pmhr2018");
+                SmtpServer.EnableSsl = false;
 
                 mail.From = new MailAddress(li[0].login);
                 mail.To.Add(to);
@@ -81,11 +82,11 @@ namespace HR_Portal.Source
                 mail.IsBodyHtml = true;
 
                 //SmtpServer.Send(mail);
-                SmtpServer.SendMailAsync(mail);
+                SmtpServer.Send(mail);
             }
-            catch
+            catch (Exception ex)
             {
-                MessageBox.Show("Üzenet elküldése sikertelen!");
+                MessageBox.Show("Üzenet elküldése sikertelen!" + ex);
             }
         }
     }
