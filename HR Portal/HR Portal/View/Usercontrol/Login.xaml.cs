@@ -112,7 +112,6 @@ namespace HR_Portal.View.Usercontrol
         {
             SurveyWindow popup = new SurveyWindow();
             var window = Window.GetWindow(this);
-
             popup.Show();
             window.Close();
         }       

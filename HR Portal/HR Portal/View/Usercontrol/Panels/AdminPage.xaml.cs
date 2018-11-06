@@ -1,4 +1,5 @@
 ﻿using HR_Portal.Source;
+using HR_Portal.Source.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,6 +39,18 @@ namespace HR_Portal.View.Usercontrol.Panels
         protected void UserListLoadup()
         {
             UserListBox.ItemsSource = UserData.GetAll();
+        }
+
+        private void UserValidationUnchecked(object sender, RoutedEventArgs e)
+        {
+            ModelUserData item = (sender as CheckBox).DataContext as ModelUserData;
+            UserData.ModifyValidation(item.id,false);
+        }
+
+        private void UserValidationChecked(object sender, RoutedEventArgs e)
+        {
+            ModelUserData item = (sender as CheckBox).DataContext as ModelUserData;
+            UserData.ModifyValidation(item.id, true);
         }
     }
 }

@@ -41,7 +41,12 @@ namespace HR_Portal.Source
         ///</summary>
         public static void ModifyValidation(int id, bool valid)
         {
-            MySql.Update("UPDATE users SET validitas = '" + valid + "' WHERE users.id = '" + id + "';");
+            string seged;
+            if (valid)
+                seged = "1";
+            else
+                seged = "0";
+            MySql.Update("UPDATE users SET validitas = '" + seged + "' WHERE users.id = '" + id + "';");
             MySql.Close();
         }
 
