@@ -232,7 +232,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             Session.ApplicantID = items.id;
             if (items.frissValue)
             {
-                Applicant.ChangeFirstOpen();
+                Applicant.FirstOpen(items.id);
             }
             CommonUtility.SetReturnPage(CommonUtility.Views.ApplicantList);
             Session.ApplicantSearchValue = GetSearchValues();

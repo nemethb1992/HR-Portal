@@ -165,7 +165,7 @@ namespace HR_Portal.View.Usercontrol.Panels
                         {
                             case MessageBoxResult.Yes:
                                 Utility.jeloltKapcsDelete(items.id);
-                                Email.Send(items.email, emailTemplate.Elutasito_Email(items.nev));
+                                new Email().Send(items.email, emailTemplate.Elutasito_Email(items.nev));
                                 break;
                             case MessageBoxResult.No:
                                 Utility.jeloltKapcsDelete(items.id);
@@ -183,7 +183,7 @@ namespace HR_Portal.View.Usercontrol.Panels
                     break;
                 case "3":
                     Utility.jeloltKapcsUpdate(items.id, Convert.ToInt32(mitem.Tag));
-                    Email.Send(items.email, emailTemplate.Elutasito_Email(items.nev));
+                    new Email().Send(items.email, emailTemplate.Elutasito_Email(items.nev));
                     break;
             }
             listLoader();
@@ -383,7 +383,7 @@ namespace HR_Portal.View.Usercontrol.Panels
         {
             try
             {
-                Email.Send(email_tbx.Text, emailTemplate.ProjektPublikalo(projekt_profile_title.Text, hirdetes(), szoveg()));
+                new Email().Send(email_tbx.Text, emailTemplate.ProjektPublikalo(projekt_profile_title.Text, hirdetes(), szoveg()));
             }
             catch (Exception)
             {

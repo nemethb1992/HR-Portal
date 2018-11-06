@@ -159,7 +159,7 @@ namespace HR_Portal.Source
 
         public List<ModelErtesitendok> Data_ErtesitendokKapcs() // javítva
         {
-            string command = "SELECT users.id, name, email, kategoria, jogosultsag, validitas FROM users INNER JOIN projekt_ertesitendok_kapcs ON users.id = projekt_ertesitendok_kapcs.ertesitendok_id  WHERE projekt_ertesitendok_kapcs.projekt_id =" + Session.ProjektID + " GROUP BY users.id";
+            string command = "SELECT users.id, name, email, kategoria, jogosultsag, validitas FROM users INNER JOIN projekt_ertesitendok_kapcs ON users.id = projekt_ertesitendok_kapcs.ertesitendok_id  WHERE projekt_ertesitendok_kapcs.projekt_id =" + Session.ProjektID + " AND users.validitas = 1 GROUP BY users.id";
             List<ModelErtesitendok> list = ModelErtesitendok.GetModelErtesitendok(command);
             MySql.Close();
             return list;
@@ -292,7 +292,7 @@ namespace HR_Portal.Source
         }
         public List<ModelErtesitendok> Data_Ertesitendok()
         {
-            string command = "SELECT * FROM users WHERE kategoria = 0";
+            string command = "SELECT * FROM users WHERE kategoria = 0 AND validitas = 1";
             List<ModelErtesitendok> list = ModelErtesitendok.GetModelErtesitendok(command);
             MySql.Close();
             return list;

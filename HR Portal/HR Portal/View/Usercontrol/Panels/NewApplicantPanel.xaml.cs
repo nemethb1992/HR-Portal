@@ -21,6 +21,7 @@ namespace HR_Portal.View.Usercontrol.Panels
 
         private Grid grid;
         private ApplicantDataSheet applicantDataSheet;
+        private ApplicantList applicantList;
 
         public NewApplicantPanel(Grid grid)
         {
@@ -179,6 +180,12 @@ namespace HR_Portal.View.Usercontrol.Panels
         {
             Regex regex = new Regex("[^0-9]+");
             e.Handled = regex.IsMatch(e.Text);
+        }
+
+        private void BackButton(object sender, RoutedEventArgs e)
+        {
+            grid.Children.Clear();
+            grid.Children.Add(applicantList = new ApplicantList(grid));
         }
     }
 }

@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:HR_Portal.View.Usercontrol.Panels.SzakmaiLayouts"
              mc:Ignorable="d" 
             d:DesignHeight="750" d:DesignWidth="1150">
-    <Grid Height="740" Style="{StaticResource switch_grid_style}" >
+    <Grid Style="{StaticResource switch_grid_style}" >
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="50" />
             <ColumnDefinition Width="*" />
@@ -44,7 +44,7 @@
             </ListBox.Resources>
             <ListBox.ItemTemplate>
                 <DataTemplate  DataType="ProjectListItems">
-                    <Grid Height="40">
+                    <Grid Height="35">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="320" />
                             <ColumnDefinition Width="150" />
@@ -53,10 +53,10 @@
                             <ColumnDefinition Width="100" />
                         </Grid.ColumnDefinitions>
                         <!--<Rectangle Panel.ZIndex="0" Grid.Column="0" Grid.ColumnSpan="6" Fill="#f8f8f8" Stroke="{StaticResource racs_color}"/>-->
-                        <TextBlock  Panel.ZIndex="1" Style="{StaticResource panelTbl_style}" Padding="8,10,0,0" FontSize="15" Grid.Column="0" Text="{Binding projekt_megnevezes}" />
-                        <TextBlock  Panel.ZIndex="1" Style="{StaticResource panelTbl_style}" Padding="8,10,0,0" FontSize="15" Grid.Column="1" Text="{Binding jelolt_megnevezes}" />
-                        <TextBlock  Panel.ZIndex="1" Style="{StaticResource panelTbl_style}" Padding="8,10,0,0" FontSize="15" Grid.Column="2" Text="{Binding helyszin}" />
-                        <TextBlock  Panel.ZIndex="1" Style="{StaticResource panelTbl_style}" Padding="8,10,0,0" FontSize="15" Grid.Column="3" Text="{Binding interju_datum}" />
+                        <TextBlock  Panel.ZIndex="1" Style="{StaticResource panelTbl_style}" Padding="8,8,0,0" FontSize="15" Grid.Column="0" Text="{Binding projekt_megnevezes}" />
+                        <TextBlock  Panel.ZIndex="1" Style="{StaticResource panelTbl_style}" Padding="8,8,0,0" FontSize="15" Grid.Column="1" Text="{Binding jelolt_megnevezes}" />
+                        <TextBlock  Panel.ZIndex="1" Style="{StaticResource panelTbl_style}" Padding="8,8,0,0" FontSize="15" Grid.Column="2" Text="{Binding helyszin}" />
+                        <TextBlock  Panel.ZIndex="1" Style="{StaticResource panelTbl_style}" Padding="8,8,0,0" FontSize="15" Grid.Column="3" Text="{Binding interju_datum}" />
                         <Button x:Name="projekt_open_btn" Style="{StaticResource StandardButton}" Grid.Column="4" Margin="2" Content="Megtekint" Click="Szakmai_interju_open_Click"/>
                     </Grid>
                 </DataTemplate>

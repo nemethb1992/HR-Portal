@@ -9,7 +9,7 @@ namespace HR_Portal.Source.ViewModel
     {
         public static bool Authentication(string username)
         {
-            if (MySql.Bind("SELECT count(id) FROM users WHERE username='" + username + "'"))
+            if (MySql.Bind("SELECT count(id) FROM users WHERE username='" + username + "' AND validitas = 1"))
             {
                 DateTime dateTime = DateTime.Now;
                 MySql.Update("UPDATE users SET belepve = '" + dateTime.ToString("yyyy. MM. dd.") + "' WHERE username = '" + username + "';");
@@ -38,12 +38,14 @@ namespace HR_Portal.Source.ViewModel
             MySql.Close();
             return user;
         }
+
         public static void SaveUser(string username) //javítva használja: login
         {
             SqLite.Update("DELETE FROM 'app';");
             SqLite.Update("INSERT INTO 'app' (username) VALUES ('" + username + "');");
             MySql.Close();
         }
+
         public static void DeleteSavedUser() //javítva használja: login
         {
             SqLite.Update("DELETE FROM 'app';");

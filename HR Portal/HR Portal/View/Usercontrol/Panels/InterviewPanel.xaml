@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:HR_Portal.View.Usercontrol.Panels"
              mc:Ignorable="d" 
              d:DesignHeight="750" d:DesignWidth="1150">
-    <Grid Height="740" Style="{StaticResource switch_grid_style}" >
+    <Grid Style="{StaticResource switch_grid_style}" >
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="50" />
             <ColumnDefinition Width="*" />
@@ -143,7 +143,7 @@
 
             <Button Grid.Row="2" x:Name="addPerson" Style="{StaticResource StandardButton}" Content="Új meghívása" VerticalAlignment="Top" Height="40" Click="openColleaguePanelClick"/>
             
-            <Button Grid.Row="4" x:Name="invitePerson" Panel.ZIndex="1" Visibility="Visible" Style="{StaticResource StandardButton}" Content="Meghívók küldése" VerticalAlignment="Top" Height="40" Click="addColleague" />
+            <Button Grid.Row="4" x:Name="invitePerson" Panel.ZIndex="1" Visibility="Visible" Style="{StaticResource StandardButton}" Content="Meghívók küldése" VerticalAlignment="Top" Height="40" Click="SendInvitations" />
 
         </Grid>
         <Grid x:Name="Blur_Grid" Grid.ColumnSpan="5" Grid.RowSpan="4" Background="White" Opacity="0.5" Visibility="Hidden"></Grid>

@@ -1,4 +1,5 @@
-﻿using HR_Portal.Source.Model.Applicant;
+﻿using HR_Portal.Public.templates;
+using HR_Portal.Source.Model.Applicant;
 using HR_Portal.Source.Model.Project;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ namespace HR_Portal.Source.ViewModel
     {
         List<ModelApplicantList> GetApplicantList(List<ModelApplicantSearchBar> searchValue = null);
 
-        List<ModelFullApplicant> GetFullApplicant();
+        List<ModelFullApplicant> GetFullApplicant(int id = 0);
 
         List<ModelSmallProject> Data_ProjectList();
 
@@ -25,7 +26,7 @@ namespace HR_Portal.Source.ViewModel
 
         void AddToProject(int jelolt_index, int projekt_index);
 
-        void ChangeFirstOpen();
+        void FirstOpen(int applicantId);
     }
     class ApplicantImplementation : Applicant
     {
@@ -126,8 +127,10 @@ namespace HR_Portal.Source.ViewModel
             return list;
         }
 
-        public List<ModelFullApplicant> GetFullApplicant()
+        public List<ModelFullApplicant> GetFullApplicant(int id = 0)
         {
+            if (id == 0)
+                id = Session.ApplicantID;
             string command = "SELECT jeloltek.id,nev,email,telefon,lakhely,pmk_ismerte,szuldatum,neme,tapasztalat_ev, reg_date,felvett,jeloltek.megjegyzes,jeloltek.statusz,folderUrl,hirlevel," +
                 "coalesce((SELECT nem FROM nemek WHERE nemek.id = jeloltek.neme),'') AS neme," +
                 "(SELECT nemek.id FROM nemek WHERE nemek.id = jeloltek.neme) AS id_neme," +
@@ -145,7 +148,7 @@ namespace HR_Portal.Source.ViewModel
                 "coalesce((SELECT ertesulesek.id FROM ertesulesek WHERE ertesulesek.id = jeloltek.ertesult),0) AS id_ertesult, " +
                 "coalesce((SELECT megnevezes_vegzettseg FROM vegzettsegek WHERE vegzettsegek.id = jeloltek.vegz_terulet),'') AS vegz_terulet, " +
                 "coalesce((SELECT vegzettsegek.id FROM vegzettsegek WHERE vegzettsegek.id = jeloltek.vegz_terulet),0) AS id_vegz_terulet " +
-                "FROM jeloltek WHERE jeloltek.id = " + Session.ApplicantID + "";
+                "FROM jeloltek WHERE jeloltek.id = " + id + "";
 
             List<ModelFullApplicant> list = ModelFullApplicant.GetModelFullApplicant(command);
 
@@ -223,11 +226,22 @@ namespace HR_Portal.Source.ViewModel
             return list;
         }
 
-        public void ChangeFirstOpen()  
+        public void FirstOpen(int applicantId)  
         {
-            string command = "UPDATE jeloltek SET friss = false WHERE id = " + Session.ApplicantID + ";";
+            string command = "UPDATE jeloltek SET friss = false WHERE id = " + applicantId + ";";
             MySql.Update(command);
             MySql.Close();
+
+            try
+            {
+                List<ModelFullApplicant> applicantData = GetFullApplicant();
+                new Email().Send(applicantData[0].email, new EmailTemplate().Udvozlo_Email(applicantData[0].nev));
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         public void DeleteProject(int id)  

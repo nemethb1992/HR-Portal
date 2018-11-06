@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:HR_Portal.View.Usercontrol.Panels.SzakmaiLayouts"
              mc:Ignorable="d" 
              d:DesignHeight="750" d:DesignWidth="1150">
-    <Grid Height="740" Style="{StaticResource switch_grid_style}" >
+    <Grid Style="{StaticResource switch_grid_style}" >
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="50" />
             <ColumnDefinition Width="*" />
@@ -27,14 +27,14 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="50" />
                 <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="50" />
+                <ColumnDefinition Width="0.1*" />
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="50" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="80"/>
                 <RowDefinition Height="1*"/>
-                <RowDefinition Height="2*"/>
+                <RowDefinition Height="1*"/>
                 <RowDefinition Height="80"/>
             </Grid.RowDefinitions>
             <Button Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" Style="{StaticResource StandardButton_Interju}" Panel.ZIndex="1" Click="navigateToSzakmaiList" />
@@ -43,7 +43,7 @@
             <TextBlock Grid.Column="3" Grid.Row="1" Style="{StaticResource big_title_style}" Panel.ZIndex="0" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Interjúk"/>
             <TextBlock x:Name="projekt_no" Grid.Column="1" Grid.Row="1" Style="{StaticResource Standard_Textblock}" Panel.ZIndex="0" Margin="0,100,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" Text="6 db"/>
             <TextBlock x:Name="interju_no" Grid.Column="3" Grid.Row="1" Style="{StaticResource Standard_Textblock}" Panel.ZIndex="0" Margin="0,100,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" Text="3 db"/>
-            <Image Grid.Column="1" Grid.Row="2" Margin="50,50,50,75" Source="/Public/imgs/job.png" />
+            <Image Grid.Column="1" Grid.Row="2" Margin="50,00,50,100" Source="/Public/imgs/job.png" />
             <Image Grid.Column="3" Grid.Row="2" Margin="50,10,50,75" Source="/Public/imgs/interview.png" />
         </Grid>
     </Grid>

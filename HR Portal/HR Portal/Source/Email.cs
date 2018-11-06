@@ -63,13 +63,12 @@ namespace HR_Portal.Source
             return list;
         }
 
-        public static void Send(string to, string email_body)
+        public void Send(string to, string email_body)
         {
             List<ModelEmail> li = SMTP_List();
             try
             {
                 MailMessage mail = new MailMessage();
-
                 System.Net.Mail.SmtpClient SmtpServer = new System.Net.Mail.SmtpClient(li[0].mailserver);
                 SmtpServer.Port = li[0].port;
                 SmtpServer.Credentials = new NetworkCredential(li[0].login, "pmhr2018");
@@ -81,6 +80,7 @@ namespace HR_Portal.Source
                 mail.Body = email_body;
                 mail.IsBodyHtml = true;
 
+                //SmtpServer.Send(mail);
                 SmtpServer.SendMailAsync(mail);
             }
             catch

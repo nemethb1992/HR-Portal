@@ -184,7 +184,7 @@ namespace HR_Portal.View.Usercontrol.Panels
                     grid.Children.Clear();
                     grid.Children.Add(projectDataSheet = new ProjectDataSheet(grid));
                     EmailTemplate email = new EmailTemplate();
-                    Email.Send(applicantData[0].email, email.Elutasito_Email(applicantData[0].nev));
+                    new Email().Send(applicantData[0].email, email.Elutasito_Email(applicantData[0].nev));
                     break;
                 case MessageBoxResult.No:
                     break;

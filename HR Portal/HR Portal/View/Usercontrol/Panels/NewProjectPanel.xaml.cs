@@ -20,6 +20,7 @@ namespace HR_Portal.View.Usercontrol.Panels
 
         private Grid grid;
         private ProjectDataSheet projectDataSheet;
+        private ProjectList projectList;
 
         public NewProjectPanel(Grid grid)
         {
@@ -181,5 +182,10 @@ namespace HR_Portal.View.Usercontrol.Panels
             e.Handled = regex.IsMatch(e.Text);
         }
 
+        private void BackButton(object sender, RoutedEventArgs e)
+        {
+            grid.Children.Clear();
+            grid.Children.Add(projectList = new ProjectList(grid));
+        }
     }
 }

@@ -33,7 +33,7 @@
     <SuiteName>Phoenix Mecano Kecskemét Kft.</SuiteName>
     <WebPage>publish.htm</WebPage>
     <AutorunEnabled>true</AutorunEnabled>
-    <ApplicationRevision>17</ApplicationRevision>
+    <ApplicationRevision>19</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -216,6 +216,9 @@
     <Compile Include="View\Usercontrol\Login.xaml.cs">
       <DependentUpon>login.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Usercontrol\Panels\AdminPage.xaml.cs">
+      <DependentUpon>AdminPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Usercontrol\Panels\ApplicantDataSheet.xaml.cs">
       <DependentUpon>ApplicantDataSheet.xaml</DependentUpon>
     </Compile>
@@ -284,6 +287,10 @@
     <Page Include="View\Usercontrol\login.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Usercontrol\Panels\AdminPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Usercontrol\Panels\ApplicantDataSheet.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -496,6 +503,9 @@
     <Resource Include="Public\imgs\dots.png" />
     <Resource Include="Public\imgs\leftArrow.png" />
     <Resource Include="Public\imgs\rightArrow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Public\imgs\adminEye.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\System.Data.SQLite.Core.1.0.109.2\build\net46\System.Data.SQLite.Core.targets" Condition="Exists('..\packages\System.Data.SQLite.Core.1.0.109.2\build\net46\System.Data.SQLite.Core.targets')" />

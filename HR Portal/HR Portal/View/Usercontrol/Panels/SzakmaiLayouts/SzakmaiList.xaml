@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:HR_Portal.View.Usercontrol.Panels"
              mc:Ignorable="d" 
              d:DesignHeight="750" d:DesignWidth="1150">
-    <Grid Height="740" Style="{StaticResource switch_grid_style}" >
+    <Grid Style="{StaticResource switch_grid_style}" >
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="50" />
             <ColumnDefinition Width="*" />
@@ -31,7 +31,7 @@
                 <ColumnDefinition Width="100" />
             </Grid.ColumnDefinitions>
             <Label x:Name="project_label_2" Content="Projektnév" Grid.Column="0" Style="{StaticResource project_label_style}"/>
-            <Label x:Name="project_label_4" Content="Jelölt" Grid.Column="1" Style="{StaticResource project_label_style}"/>
+            <Label x:Name="project_label_4" Content="Jelöltek" Grid.Column="1" Style="{StaticResource project_label_style}"/>
         </Grid>
         <ListBox x:Name="bevont_projekt_lista" Style="{StaticResource small_listBox_style}" Grid.Column="1" Grid.Row="2" Padding="5" HorizontalContentAlignment="Stretch" SelectionMode="Extended">
             <ListBox.Resources>
@@ -40,7 +40,7 @@
             </ListBox.Resources>
             <ListBox.ItemTemplate>
                 <DataTemplate  DataType="ProjectListItems">
-                    <Grid Height="40">
+                    <Grid Height="35">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="50" />

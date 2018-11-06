@@ -16,6 +16,7 @@ namespace HR_Portal.View.Windows
         private SettingsPanel settings_p;
         private SzakmaiKezdolap szakmai_Kezdolap;
         private FavouritesPanel favourites_Panel;
+        private AdminPage adminPage;
         //private applicant_DataView applicant_dv;
         //private project_DataView project_dv;
         public Main()
@@ -67,29 +68,18 @@ namespace HR_Portal.View.Windows
             grid.Children.Clear();
             grid.Children.Add(szakmai_Kezdolap = new SzakmaiKezdolap(grid));
         }
-
         private void mw_btn4_Click(object sender, RoutedEventArgs e)
         {
             grid.Children.Clear();
             grid.Children.Add(favourites_Panel = new FavouritesPanel(grid));
         }
+        private void mw_btn5_Click(object sender, RoutedEventArgs e)
+        {
+            grid.Children.Clear();
+            grid.Children.Add(adminPage = new AdminPage(grid));
+        }
 
-        //private void profil_notiBtn_MouseEnter(object sender, MouseEventArgs e)
-        //{
-        //    profil_notiRec.Fill = new SolidColorBrush(Colors.White);
-        //}
-        //private void profil_settBtn_MouseEnter(object sender, MouseEventArgs e)
-        //{
-        //    profil_settRec.Fill = new SolidColorBrush(Colors.White);
-        //}
-        //private void profil_settBtn_MouseLeave(object sender, MouseEventArgs e)
-        //{
-        //    profil_settRec.Fill = new SolidColorBrush(Colors.Transparent);
-        //}
-        //private void profil_notiBtn_MouseLeave(object sender, MouseEventArgs e)
-        //{
-        //    profil_notiRec.Fill = new SolidColorBrush(Colors.Transparent);
-        //}
+
         private void Maximize_Window_Click(object sender, RoutedEventArgs e)
         {
             Window window = Window.GetWindow(this);

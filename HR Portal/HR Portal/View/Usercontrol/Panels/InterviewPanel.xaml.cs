@@ -154,7 +154,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             ertesitendok_editlist.ItemsSource = Interview.Data_InterjuErtesitendokKapcsolt();
         }
 
-        protected void addColleague(object sender, RoutedEventArgs e)
+        protected void SendInvitations(object sender, RoutedEventArgs e)
         {
             EmailTemplate et = new EmailTemplate();
             Email email = new Email();
@@ -168,9 +168,9 @@ namespace HR_Portal.View.Usercontrol.Panels
             }
             foreach (var item in szemelyek)
             {
-                Email.Send(item.email, et.Belsos_Meghivo_Email(item.name, interju[0].interju_cim, interju[0].interju_datum+" - " + interju[0].idopont, interju[0].helyszin, interju[0].jelolt_megnevezes));
+                new Email().Send(item.email, et.Belsos_Meghivo_Email(item.name, interju[0].interju_cim, interju[0].interju_datum+" - " + interju[0].idopont, interju[0].helyszin, interju[0].jelolt_megnevezes));
             }
-            Email.Send(interju[0].jelolt_email, et.Jelolt_Meghivo_Email(interju[0].jelolt_megnevezes, interju[0].projekt_megnevezes, interju[0].interju_datum + " - " + interju[0].idopont, resztvevok));
+            new Email().Send(interju[0].jelolt_email, et.Jelolt_Meghivo_Email(interju[0].jelolt_megnevezes, interju[0].projekt_megnevezes, interju[0].interju_datum + " - " + interju[0].idopont, resztvevok));
       }
     }
 }

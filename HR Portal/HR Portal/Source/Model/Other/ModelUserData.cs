@@ -16,6 +16,7 @@ namespace HR_Portal.Source.Model
         public int kategoria { get; set; }
         public int jogosultsag { get; set; }
         public int validitas { get; set; }
+        public bool validitasBool { get; set; }
         public string belepve { get; set; }
         public string reg_datum { get; set; }
 
@@ -38,6 +39,7 @@ namespace HR_Portal.Source.Model
                         kategoria = Convert.ToInt32(MySql.sdr["kategoria"]),
                         jogosultsag = Convert.ToInt32(MySql.sdr["jogosultsag"]),
                         validitas = Convert.ToInt32(MySql.sdr["validitas"]),
+                        validitasBool = Convert.ToBoolean(MySql.sdr["validitas"]),
                         belepve = MySql.sdr["belepve"].ToString(),
                         reg_datum = MySql.sdr["reg_datum"].ToString(),
                     });
