@@ -83,7 +83,7 @@ namespace HR_Portal.View.Usercontrol
                     if (Source.ViewModel.Login.Authentication(Luser_tbx.Text))
                 {
                     Session.ActiveDirectoryDomain = Luser_tbx.Text;
-                    Session.UserData = UserData.GetByID();
+                    Session.UserData = UserData.GetOwnDatas();
                     Main mw = new Main();
                     var window = Window.GetWindow(this);
                     //usernameRemember();

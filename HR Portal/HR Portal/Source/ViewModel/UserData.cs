@@ -11,7 +11,7 @@ namespace HR_Portal.Source
 {
     public class UserData
     {
-        public static List<ModelUserData> GetByID()
+        public static List<ModelUserData> GetOwnDatas()
         {
             List<ModelUserData> list = new List<ModelUserData>();
             string username = Session.ActiveDirectoryDomain;
@@ -20,6 +20,11 @@ namespace HR_Portal.Source
                 list = ModelUserData.GetUserSession("SELECT * FROM users WHERE username = '" + username + "'");
             }
             return list;
+        }
+
+        public static List<ModelUserData> GetById(int userId)
+        {
+            return ModelUserData.GetUserSession("SELECT * FROM users WHERE id = '" + userId + "'"); ;
         }
 
         ///<summary>
@@ -58,6 +63,12 @@ namespace HR_Portal.Source
         public static void ModifyType(int id, int type)
         {
             MySql.Update("UPDATE users SET kategoria = '" + type + "' WHERE users.id = '" + id + "';");
+            MySql.Close();
+        }
+
+        public static void Modify(int id, string mezo, string value)
+        {
+            MySql.Update("UPDATE users SET "+mezo+" = '" + value + "' WHERE users.id = '" + id + "';");
             MySql.Close();
         }
 

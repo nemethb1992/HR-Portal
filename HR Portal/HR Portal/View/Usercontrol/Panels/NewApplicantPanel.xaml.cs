@@ -61,29 +61,16 @@ namespace HR_Portal.View.Usercontrol.Panels
             eletkor_tbx.Text = li[0].szuldatum.ToString();
             tapasztalat_tbx.Text = li[0].tapasztalat_ev.ToString();
 
-            munkakor_cbx.SelectedIndex = checkboxCounter(Utility.Data_Munkakor().ConvertAll(x => new ModelId { id = x.id, }), li.ConvertAll(x => new ModelId { id = x.id_munkakor, }));
-            munkakor2_cbx.SelectedIndex = checkboxCounter(Utility.Data_Munkakor().ConvertAll(x => new ModelId { id = x.id, }), li.ConvertAll(x => new ModelId { id = x.id_munkakor2, }));
-            munkakor3_cbx.SelectedIndex = checkboxCounter(Utility.Data_Munkakor().ConvertAll(x => new ModelId { id = x.id, }), li.ConvertAll(x => new ModelId { id = x.id_munkakor3, }));
-            nyelv_cbx.SelectedIndex = checkboxCounter(Utility.Data_Nyelv().ConvertAll(x => new ModelId { id = x.id, }), li.ConvertAll(x => new ModelId { id = x.id_nyelvtudas, }));
-            nyelv2_cbx.SelectedIndex = checkboxCounter(Utility.Data_Nyelv().ConvertAll(x => new ModelId { id = x.id, }), li.ConvertAll(x => new ModelId { id = x.id_nyelvtudas2, }));
-            ertesules_cbx.SelectedIndex = checkboxCounter(Utility.Data_Ertesulesek().ConvertAll(x => new ModelId { id = x.id, }), li.ConvertAll(x => new ModelId { id = x.id_ertesult, }));
-            vegzettseg_cbx.SelectedIndex = checkboxCounter(Utility.Data_Vegzettseg().ConvertAll(x => new ModelId { id = x.id, }), li.ConvertAll(x => new ModelId { id = x.id_vegz_terulet, }));
-            neme_cbx.SelectedIndex = checkboxCounter(Utility.Data_Nemek().ConvertAll(x => new ModelId { id = x.id, }), li.ConvertAll(x => new ModelId { id = x.id_neme, }));
+            munkakor_cbx.SelectedIndex = CommonUtility.ComboBoxValueSetter(Utility.Data_Munkakor().ConvertAll(x => new ModelId { id = x.id, }), li.ConvertAll(x => new ModelId { id = x.id_munkakor, }));
+            munkakor2_cbx.SelectedIndex = CommonUtility.ComboBoxValueSetter(Utility.Data_Munkakor().ConvertAll(x => new ModelId { id = x.id, }), li.ConvertAll(x => new ModelId { id = x.id_munkakor2, }));
+            munkakor3_cbx.SelectedIndex = CommonUtility.ComboBoxValueSetter(Utility.Data_Munkakor().ConvertAll(x => new ModelId { id = x.id, }), li.ConvertAll(x => new ModelId { id = x.id_munkakor3, }));
+            nyelv_cbx.SelectedIndex = CommonUtility.ComboBoxValueSetter(Utility.Data_Nyelv().ConvertAll(x => new ModelId { id = x.id, }), li.ConvertAll(x => new ModelId { id = x.id_nyelvtudas, }));
+            nyelv2_cbx.SelectedIndex = CommonUtility.ComboBoxValueSetter(Utility.Data_Nyelv().ConvertAll(x => new ModelId { id = x.id, }), li.ConvertAll(x => new ModelId { id = x.id_nyelvtudas2, }));
+            ertesules_cbx.SelectedIndex = CommonUtility.ComboBoxValueSetter(Utility.Data_Ertesulesek().ConvertAll(x => new ModelId { id = x.id, }), li.ConvertAll(x => new ModelId { id = x.id_ertesult, }));
+            vegzettseg_cbx.SelectedIndex = CommonUtility.ComboBoxValueSetter(Utility.Data_Vegzettseg().ConvertAll(x => new ModelId { id = x.id, }), li.ConvertAll(x => new ModelId { id = x.id_vegz_terulet, }));
+            neme_cbx.SelectedIndex = CommonUtility.ComboBoxValueSetter(Utility.Data_Nemek().ConvertAll(x => new ModelId { id = x.id, }), li.ConvertAll(x => new ModelId { id = x.id_neme, }));
         }
 
-        protected int checkboxCounter(List<ModelId> ossz_li, List<ModelId> projekt_li)
-        {
-            int i = 0;
-            foreach (var item in ossz_li)
-            {
-                if (item.id == projekt_li[0].id)
-                {
-                    break;
-                }
-                i++;
-            }
-            return i;
-        }
         protected bool isFulfilled()
         {
             if (

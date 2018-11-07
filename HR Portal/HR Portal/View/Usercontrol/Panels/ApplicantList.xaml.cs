@@ -270,7 +270,7 @@ namespace HR_Portal.View.Usercontrol.Panels
                 applicantListLoader();
         }
 
-        protected void numericPreviewTextInput(object sender, TextCompositionEventArgs e)
+        protected void Numeric(object sender, TextCompositionEventArgs e)
         {
             Regex regex = new Regex("[^0-9]+");
             e.Handled = regex.IsMatch(e.Text);
@@ -384,6 +384,12 @@ namespace HR_Portal.View.Usercontrol.Panels
         {
             applicantListLoader();
         }
+
+        private void interju_srcinp_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+
+        }
+        
     }
 
 }
