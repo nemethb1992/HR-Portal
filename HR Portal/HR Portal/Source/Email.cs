@@ -66,28 +66,46 @@ namespace HR_Portal.Source
 
         public void Send(string to, string email_body)
         {
-            List<ModelEmail> li = SMTP_List();
+            //List<ModelEmail> li = SMTP_List();
             try
             {
-                MailMessage mail = new MailMessage();
-                System.Net.Mail.SmtpClient SmtpServer = new System.Net.Mail.SmtpClient(li[0].mailserver);
-                SmtpServer.Port = li[0].port;
-                //SmtpServer.Credentials = new NetworkCredential(li[0].login, "pmhr2018");
-                SmtpServer.EnableSsl = false;
+                using (System.Net.Mail.SmtpClient client = new System.Net.Mail.SmtpClient("192.168.144.14"))
+                {
+                client.UseDefaultCredentials = true;
 
-                mail.From = new MailAddress(li[0].login);
-                mail.To.Add(to);
-                mail.Subject = "HR Portal - Phoenix Mecano Kecskemét kft.";
-                mail.Body = email_body;
-                mail.IsBodyHtml = true;
-
-                //SmtpServer.Send(mail);
-                SmtpServer.Send(mail);
+                    using (MailMessage mail = new MailMessage())
+                    {
+                        mail.Subject = "HR Portal - Phoenix Mecano Kecskemét kft.";
+                        mail.Body = email_body;
+                        mail.From = new MailAddress("hrportal@pm-hungaria.hu");
+                        mail.To.Add(to);
+                        client.Send(mail);
+                    }
+                }
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Üzenet elküldése sikertelen!" + ex);
             }
+                //MailMessage mail = new MailMessage();
+                //System.Net.Mail.SmtpClient SmtpServer = new System.Net.Mail.SmtpClient(li[0].mailserver);
+                //SmtpServer.Port = li[0].port;
+                ////SmtpServer.Credentials = new NetworkCredential(li[0].login, "pmhr2018");
+                //SmtpServer.EnableSsl = false;
+
+                //mail.From = new MailAddress(li[0].login);
+                //mail.To.Add(to);
+                //mail.Subject = "HR Portal - Phoenix Mecano Kecskemét kft.";
+                //mail.Body = email_body;
+                //mail.IsBodyHtml = true;
+
+                ////SmtpServer.Send(mail);
+                //SmtpServer.Send(mail);
+
+
+
+
+
         }
     }
 }

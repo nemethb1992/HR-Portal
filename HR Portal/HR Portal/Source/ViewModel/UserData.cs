@@ -17,7 +17,7 @@ namespace HR_Portal.Source
             string username = Session.ActiveDirectoryDomain;
             if (username.Length>0)
             {
-                list = ModelUserData.GetUserSession("SELECT* FROM users WHERE username = '" + username + "'");
+                list = ModelUserData.GetUserSession("SELECT * FROM users WHERE username = '" + username + "'");
             }
             return list;
         }
@@ -31,8 +31,8 @@ namespace HR_Portal.Source
             List<ModelUserData> list = new List<ModelUserData>();
             string username = Session.ActiveDirectoryDomain;
             if (username.Length > 0)
-            {
-                list = ModelUserData.GetUserSession("SELECT* FROM users");
+            { 
+                list = ModelUserData.GetUserSession("SELECT * FROM users");
             }
             return list;
         }
