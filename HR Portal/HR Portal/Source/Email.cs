@@ -7,6 +7,7 @@ using ActiveUp.Net.Mail;
 using HR_Portal.Public.templates;
 using HR_Portal.Source.Model.Other;
 using System;
+using Microsoft.Exchange.WebServices.Data;
 
 namespace HR_Portal.Source
 {
@@ -27,27 +28,27 @@ namespace HR_Portal.Source
                 Client.Login(login, password);
             }
 
-            public IEnumerable<Message> GetAllMails(string mailBox)
-            {
-                return GetMails(mailBox, "ALL").Cast<Message>();
-            }
+            //public IEnumerable<Message> GetAllMails(string mailBox)
+            //{
+            //    return GetMails(mailBox, "ALL").Cast<Message>();
+            //}
 
-            public IEnumerable<Message> GetUnreadMails(string mailBox)
-            {
-                return GetMails(mailBox, "UNSEEN").Cast<Message>();
-            }
+            //public IEnumerable<Message> GetUnreadMails(string mailBox)
+            //{
+            //    return GetMails(mailBox, "UNSEEN").Cast<Message>();
+            //}
 
             protected Imap4Client Client
             {
                 get { return client ?? (client = new Imap4Client()); }
             }
 
-            private MessageCollection GetMails(string mailBox, string searchPhrase)
-            {
-                Mailbox mails = Client.SelectMailbox(mailBox);
-                MessageCollection messages = mails.SearchParse(searchPhrase);
-                return messages;
-            }
+            //private MessageCollection GetMails(string mailBox, string searchPhrase)
+            //{
+            //    System.Net.Mail.Mailbox mails = Client.SelectMailbox(mailBox);
+            //    MessageCollection messages = mails.SearchParse(searchPhrase);
+            //    return messages;
+            //}
         }
         public List<ModelEmail> IMAP_List()
         {
@@ -68,7 +69,6 @@ namespace HR_Portal.Source
         {
             try
             {
-
                 //using (System.Net.Mail.SmtpClient client = new System.Net.Mail.SmtpClient("192.168.144.14"))
                 //{
                 //    client.UseDefaultCredentials = true;
@@ -83,23 +83,39 @@ namespace HR_Portal.Source
                 //    }
                 //}
 
-                using (System.Net.Mail.SmtpClient client = new System.Net.Mail.SmtpClient())
-                {
-                    client.Credentials = new NetworkCredential("pmhu\\hrportal.pmk ", "pmhr2018!");
-                    client.Host = "192.168.144.14";
-                    client.Port = 25;
-                    client.DeliveryMethod = SmtpDeliveryMethod.Network;
-                    client.EnableSsl = false;
+                ExchangeService service = new ExchangeService();
+                //service.Credentials = new WebCredentials("balazs.nemeth", "3HgB8Wy3HgB8Wy", "pmhu.local");
+                service.UseDefaultCredentials = true;
+                service.AutodiscoverUrl("balazs.nemeth@pmhu.local");
 
-                    using (MailMessage mail = new MailMessage())
-                    {
-                        mail.Subject = "HR Portal - Phoenix Mecano Kecskemét kft.";
-                        mail.Body = email_body;
-                        mail.From = new MailAddress("hrportal@pm-hungaria.hu");
-                        mail.To.Add(to);
-                        client.Send(mail);
-                    }
-                }
+
+                EmailMessage message = new EmailMessage(service);
+                message.Subject = "HR Portal - Phoenix Mecano Kecskemét kft.";
+
+                message.Body = email_body;
+
+                message.ToRecipients.Add(to);
+                message.Send();
+
+
+                //using (System.Net.Mail.SmtpClient client = new System.Net.Mail.SmtpClient())
+                //{
+                //    client.Credentials = new NetworkCredential("pmhu\\hrportal.pmk ", "pmhr2018!");
+                //    client.Host = "192.168.144.14";
+                //    client.Port = 25;
+                //    client.DeliveryMethod = SmtpDeliveryMethod.Network;
+
+                //    client.EnableSsl = false;
+
+                //    using (MailMessage mail = new MailMessage())
+                //    {
+                //        mail.Subject = "HR Portal - Phoenix Mecano Kecskemét kft.";
+                //        mail.Body = email_body;
+                //        mail.From = new MailAddress("hrportal@pm-hungaria.hu");
+                //        mail.To.Add(to);
+                //        client.Send(mail);
+                //    }
+                //}
             }
             catch (System.Net.Mail.SmtpException ex)
             {
