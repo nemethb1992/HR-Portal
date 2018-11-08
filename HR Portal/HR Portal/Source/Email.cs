@@ -84,22 +84,26 @@ namespace HR_Portal.Source
                 //}
 
                 ExchangeService service = new ExchangeService();
+
                 //service.Credentials = new WebCredentials("balazs.nemeth@pmhu.local", "3HgB8Wy3HgB8Wy");
+
                 service.Url = new Uri("http://192.168.144.14:25");
 
                 service.UseDefaultCredentials = true;
+
                 service.AutodiscoverUrl("hrportal@phoenix-mecano.hu");
+
                 //hrportal@phoenix-mecano.hu
-
-
+                
                 EmailMessage message = new EmailMessage(service);
+
                 message.Subject = "HR Portal - Phoenix Mecano Kecskemét kft.";
 
                 message.Body = email_body;
 
                 message.ToRecipients.Add(to);
-                message.Send();
 
+                message.Send();
 
                 //using (System.Net.Mail.SmtpClient client = new System.Net.Mail.SmtpClient())
                 //{
@@ -119,6 +123,8 @@ namespace HR_Portal.Source
                 //        client.Send(mail);
                 //    }
                 //}
+
+
             }
             catch (System.Net.Mail.SmtpException ex)
             {
