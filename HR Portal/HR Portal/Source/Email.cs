@@ -69,37 +69,37 @@ namespace HR_Portal.Source
             try
             {
 
-                //using (System.Net.Mail.SmtpClient client = new System.Net.Mail.SmtpClient("192.168.144.14"))
-                //{
-                //    client.UseDefaultCredentials = true;
-
-                //    using (MailMessage mail = new MailMessage())
-                //    {
-                //        mail.Subject = "subject";
-                //        mail.Body = "body";
-                //        mail.From = new MailAddress("felado@phoenix-mecano.hu");
-                //        mail.To.Add("fzbalu92@gmail.com");
-                //        client.Send(mail);
-                //    }
-                //}
-
-                using (System.Net.Mail.SmtpClient client = new System.Net.Mail.SmtpClient())
+                using (System.Net.Mail.SmtpClient client = new System.Net.Mail.SmtpClient("192.168.144.14"))
                 {
                     client.UseDefaultCredentials = true;
-                    client.Host = "192.168.144.14";
-                    client.Port = 25;
-                    client.DeliveryMethod = SmtpDeliveryMethod.Network;
-                    client.EnableSsl = false;
 
                     using (MailMessage mail = new MailMessage())
                     {
-                        mail.Subject = "HR Portal - Phoenix Mecano Kecskemét kft.";
-                        mail.Body = email_body;
-                        mail.From = new MailAddress("hrportal@pm-hungaria.hu");
-                        mail.To.Add(to);
+                        mail.Subject = "subject";
+                        mail.Body = "body";
+                        mail.From = new MailAddress("felado@phoenix-mecano.hu");
+                        mail.To.Add("fzbalu92@gmail.com");
                         client.Send(mail);
                     }
                 }
+
+                //using (System.Net.Mail.SmtpClient client = new System.Net.Mail.SmtpClient())
+                //{
+                //    client.UseDefaultCredentials = true;
+                //    client.Host = "192.168.144.14";
+                //    client.Port = 25;
+                //    client.DeliveryMethod = SmtpDeliveryMethod.Network;
+                //    client.EnableSsl = false;
+
+                //    using (MailMessage mail = new MailMessage())
+                //    {
+                //        mail.Subject = "HR Portal - Phoenix Mecano Kecskemét kft.";
+                //        mail.Body = email_body;
+                //        mail.From = new MailAddress("hrportal@pm-hungaria.hu");
+                //        mail.To.Add(to);
+                //        client.Send(mail);
+                //    }
+                //}
             }
             catch (System.Net.Mail.SmtpException ex)
             {
