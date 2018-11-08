@@ -25,7 +25,7 @@ namespace HR_Portal.Source
             {
                 try
                 {
-                    conn = new MySqlConnection(CONNECTION_URL_3);
+                    conn = new MySqlConnection(CONNECTION_URL_1);
                 }
                 catch (MySqlException mysqlex)
                 {
