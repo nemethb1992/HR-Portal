@@ -85,8 +85,9 @@ namespace HR_Portal.Source
 
                 ExchangeService service = new ExchangeService();
                 //service.Credentials = new WebCredentials("balazs.nemeth", "3HgB8Wy3HgB8Wy", "pmhu.local");
+                service.Url = new Uri("http://192.168.144.14:25");
                 service.UseDefaultCredentials = true;
-                service.AutodiscoverUrl("balazs.nemeth@pmhu.local");
+                //service.AutodiscoverUrl("balazs.nemeth@pmhu.local");
 
 
                 EmailMessage message = new EmailMessage(service);
