@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -231,7 +232,11 @@ namespace HR_Portal.View.Usercontrol.Panels
             grid.Children.Add(projectDataSheet = new ProjectDataSheet(grid));
         }
 
-
+        protected void Numeric(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
+        }
 
         protected void projectDeleteClick(object sender, RoutedEventArgs e)
         {

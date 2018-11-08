@@ -345,7 +345,19 @@ namespace HR_Portal.Source
             MySql.Close();
         }
 
-
+        public static int ComboBoxValueSetter(List<ModelId> ossz_li, List<ModelId> projekt_li)
+        {
+            int i = 0;
+            foreach (var item in ossz_li)
+            {
+                if (item.id == projekt_li[0].id)
+                {
+                    break;
+                }
+                i++;
+            }
+            return i;
+        }
 
         //public void AddInterPlusOne()
         //{

@@ -22,7 +22,8 @@ namespace HR_Portal.View.Usercontrol.Panels
     /// </summary>
     public partial class AdminPage : UserControl
     {
-        private Grid grid;
+        private Grid grid; 
+        private UserDataSheet userDataSheet; 
 
         public AdminPage(Grid grid)
         {
@@ -51,6 +52,13 @@ namespace HR_Portal.View.Usercontrol.Panels
         {
             ModelUserData item = (sender as CheckBox).DataContext as ModelUserData;
             UserData.ModifyValidation(item.id, true);
+        }
+
+        private void applicant_open_btn_Click(object sender, RoutedEventArgs e)
+        {
+            ModelUserData item = (sender as Button).DataContext as ModelUserData;
+            grid.Children.Clear();
+            grid.Children.Add(userDataSheet = new UserDataSheet(grid, item.id));
         }
     }
 }

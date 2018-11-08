@@ -5,6 +5,13 @@ using System.Collections.Generic;
 
 namespace HR_Portal.Source.Model
 {
+    public class ModelList
+    {
+        public int id { get; set; }
+        public object value { get; set; }
+    }
+
+
     public class ModelNyelv
     {
         public int id { get; set; }

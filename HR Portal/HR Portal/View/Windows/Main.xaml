@@ -125,7 +125,7 @@
                     <Button Grid.Row="3" x:Name="mw_btn3"  Style="{StaticResource mw_navbtn_stlye}" Click="mw_btn3_Click">
                         <Image Source="/Public/imgs/settings_white.png" Height="30"/>
                     </Button>
-                    <Button Grid.Row="4" x:Name="admin_btn" Style="{StaticResource mw_navbtn_stlye}" Click="mw_btn5_Click">
+                    <Button Grid.Row="4" x:Name="admin_btn" Visibility="Hidden" Style="{StaticResource mw_navbtn_stlye}" Click="mw_btn5_Click">
                         <Image Source="/Public/imgs/adminEye.png" Height="30"/>
                     </Button>
                     <!--<Button Grid.Row="4" x:Name="mw_btn4" Visibility="Hidden" Content="Kedvencek" Style="{StaticResource mw_navbtn_stlye}" Click="mw_btn4_Click"/>-->

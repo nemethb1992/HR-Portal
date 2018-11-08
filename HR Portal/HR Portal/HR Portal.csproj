@@ -264,6 +264,9 @@
     <Compile Include="View\Usercontrol\Panels\SzakmaiLayouts\SzakmaiProjektDataSheet.xaml.cs">
       <DependentUpon>SzakmaiProjektDataSheet.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Usercontrol\Panels\UserDataSheet.xaml.cs">
+      <DependentUpon>UserDataSheet.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Usercontrol\Surveys\FirstRegistration.xaml.cs">
       <DependentUpon>FirstRegistration.xaml</DependentUpon>
     </Compile>
@@ -351,6 +354,10 @@
     <Page Include="View\Usercontrol\Panels\SzakmaiLayouts\SzakmaiProjektDataSheet.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Usercontrol\Panels\UserDataSheet.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Usercontrol\Surveys\FirstRegistration.xaml">
       <Generator>MSBuild:Compile</Generator>

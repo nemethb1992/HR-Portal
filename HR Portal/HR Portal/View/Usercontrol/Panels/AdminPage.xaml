@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:HR_Portal.View.Usercontrol.Panels"
              mc:Ignorable="d" 
              d:DesignHeight="740" d:DesignWidth="1150">
-    <Grid MinHeight="740" VerticalAlignment="Top" Style="{StaticResource switch_grid_style}" >
+    <Grid Style="{StaticResource switch_grid_style}" >
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="50" />
             <ColumnDefinition Width="*" />
@@ -42,27 +42,25 @@
                     <DataTemplate>
                         <Grid Height="35">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="250" />
+                                <ColumnDefinition Width="200" />
                                 <ColumnDefinition Width="50" />
-                                <ColumnDefinition Width="110" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="90" />
-                                <ColumnDefinition Width="50" />
+                                <ColumnDefinition Width="100" />
+                                <ColumnDefinition Width="100" />
+                                <ColumnDefinition Width="120" />
+                                <ColumnDefinition Width="85" />
+                                <ColumnDefinition Width="120" />
+                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="80" />
+                                <ColumnDefinition Width="40" />
                             </Grid.ColumnDefinitions>
                             <TextBlock Grid.Column="0" Padding="10" Style="{StaticResource panelTbl_style}" Text="{Binding name}"/>
                             <TextBlock Grid.Column="1" Padding="10" Style="{StaticResource panelTbl_style}" Text="Típus:"/>
                             <TextBlock Grid.Column="2" Padding="10" Style="{StaticResource panelTbl_style}" Text="{Binding kategoriaMegnevezes}"/>
-                            <TextBlock Grid.Column="3" Padding="10" Style="{StaticResource panelTbl_style}" Text="Regisztrált:"/>
-                            <TextBlock Grid.Column="4" Padding="10" Style="{StaticResource panelTbl_style}" Text="{Binding reg_datum}"/>
                             <TextBlock Grid.Column="5" Padding="10" Style="{StaticResource panelTbl_style}" Text="Belépve:"/>
                             <TextBlock Grid.Column="6" Padding="10" Style="{StaticResource panelTbl_style}" Text="{Binding belepve}"/>
-                            <TextBlock Grid.Column="7" Padding="10" Style="{StaticResource panelTbl_style}" Text="Érvényes:"/>
-                            <CheckBox Grid.Column="8" HorizontalAlignment="Right" Margin="10" IsChecked="{Binding validitasBool}" Unchecked="UserValidationUnchecked" Checked="UserValidationChecked"/>
+                            <Button x:Name="applicant_open_btn" Style="{StaticResource StandardButton}" Grid.Column="7" HorizontalAlignment="Right" MinWidth="150" Content="Megtekint" Margin="3" Click="applicant_open_btn_Click"/>
+                            <TextBlock Grid.Column="8" Padding="10" Style="{StaticResource panelTbl_style}" Text="Érvényes:"/>
+                            <CheckBox Grid.Column="9" HorizontalAlignment="Right" Margin="10" IsChecked="{Binding validitasBool}" Unchecked="UserValidationUnchecked" Checked="UserValidationChecked"/>
                         </Grid>
                     </DataTemplate>
                 </ListBox.ItemTemplate>

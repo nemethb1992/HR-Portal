@@ -22,8 +22,11 @@ namespace HR_Portal.View.Windows
         public Main()
         {
             InitializeComponent();
-            if (Session.UserData[0].kategoria== 1)
+            if (Session.UserData[0].kategoria >= 1)
             {
+                if(Session.UserData[0].kategoria >= 2)
+                    admin_btn.Visibility = Visibility.Visible;
+
                 grid.Children.Add(project_p = new ProjectList(grid));
                 HR_navigation_Grid.Visibility = Visibility.Visible;
             }
