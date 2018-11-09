@@ -24,6 +24,7 @@ namespace HR_Portal.Source.Model.Applicant
         public string cimke { get; set; }
         public string szabad { get; set; }
         public bool szabadBool { get; set; }
+        public bool allasbanBool { get; set; }
         public string HeaderSelected { get; set; }
         public string sorrend { get; set; }
     }

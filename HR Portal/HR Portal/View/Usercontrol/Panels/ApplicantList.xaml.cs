@@ -74,9 +74,9 @@ namespace HR_Portal.View.Usercontrol.Panels
                 nemekStr = nemek_item.id.ToString();
             }
 
-            string tapasztalat = tapsztalat_srcinp.Text;
-            if (tapsztalat_srcinp.Text == "")
-                tapasztalat = "";
+            //string tapasztalat = tapsztalat_srcinp.Text;
+            //if (tapsztalat_srcinp.Text == "")
+            //    tapasztalat = "";
 
             string interjuk = interju_srcinp.Text;
             if (interju_srcinp.Text == "")
@@ -95,7 +95,7 @@ namespace HR_Portal.View.Usercontrol.Panels
                 lakhely = lakhely_srcinp.Text,
                 email = email_srcinp.Text,
                 eletkor = eletkor_srcinp.Text,
-                tapasztalat = tapasztalat,
+                //tapasztalat = tapasztalat,
                 regdate = regdate_srcinp.Text,
                 interjuk = interjuk,
                 nemekStr = nemekStr,
@@ -106,6 +106,7 @@ namespace HR_Portal.View.Usercontrol.Panels
                 vegzettsegIndex = nemek_srccbx.SelectedIndex,
                 cimke = cimke_srcinp.Text,
                 szabad = szabad,
+                allasbanBool = allasban_check.IsChecked.Value,
                 szabadBool = szabad_check.IsChecked.Value,
                 HeaderSelected = HeaderSelected,
                 sorrend = sorrend
@@ -122,11 +123,12 @@ namespace HR_Portal.View.Usercontrol.Panels
             vegzettseg_srccbx.SelectedIndex = values[0].vegzettsegIndex;
             nemek_srccbx.SelectedIndex = values[0].nemekIndex;
             szabad_check.IsChecked = values[0].szabadBool;
+            allasban_check.IsChecked = values[0].allasbanBool;
             nev_srcinp.Text = values[0].nev;
             lakhely_srcinp.Text = values[0].lakhely;
             email_srcinp.Text = values[0].email;
             eletkor_srcinp.Text = values[0].eletkor;
-            tapsztalat_srcinp.Text = values[0].tapasztalat;
+            //tapsztalat_srcinp.Text = values[0].tapasztalat;
             regdate_srcinp.Text = values[0].regdate;
             interju_srcinp.Text = values[0].interjuk;
             cimke_srcinp.Text = values[0].cimke;
@@ -139,8 +141,6 @@ namespace HR_Portal.View.Usercontrol.Panels
                 email_label.Visibility = Visibility.Hidden;
             if (values[0].eletkor.Length > 0)
                 eletkor_label.Visibility = Visibility.Hidden;
-            if (values[0].tapasztalat.Length > 0)
-                tapsztalat_label.Visibility = Visibility.Hidden;
             if (values[0].regdate.Length > 0)
                 regdate_label.Visibility = Visibility.Hidden;
             if (values[0].interjuk.Length > 0)
@@ -315,11 +315,12 @@ namespace HR_Portal.View.Usercontrol.Panels
             vegzettseg_srccbx.SelectedIndex = -1;
             nemek_srccbx.SelectedIndex = -1;
             szabad_check.IsChecked = false;
+            allasban_check.IsChecked = false;
             nev_srcinp.Text = "";
             lakhely_srcinp.Text = "";
             email_srcinp.Text = "";
             eletkor_srcinp.Text = "";
-            tapsztalat_srcinp.Text = "";
+            //tapsztalat_srcinp.Text = "";
             regdate_srcinp.Text = "";
             interju_srcinp.Text = "";
             cimke_srcinp.Text = "";
@@ -328,7 +329,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             lakhely_label.Visibility = Visibility.Visible;
             email_label.Visibility = Visibility.Visible;
             eletkor_label.Visibility = Visibility.Visible;
-            tapsztalat_label.Visibility = Visibility.Visible;
+            //tapsztalat_label.Visibility = Visibility.Visible;
             regdate_label.Visibility = Visibility.Visible;
             interju_label.Visibility = Visibility.Visible;
             cimke_label.Visibility = Visibility.Visible;

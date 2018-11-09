@@ -61,10 +61,12 @@ namespace HR_Portal.Source.ViewModel
             {
                 command += " AND jeloltek.szuldatum <= " + searchValue[0].eletkor + " ";
             }
-            if (searchValue[0].tapasztalat != "" && searchValue[0].tapasztalat != "0")
-            {
-                command += "AND jeloltek.tapasztalat_ev >= " + searchValue[0].tapasztalat + " ";
-            }
+
+            //if (searchValue[0].tapasztalat != "" && searchValue[0].tapasztalat != "0")
+            //{
+            //    command += "AND jeloltek.tapasztalat_ev >= " + searchValue[0].tapasztalat + " ";
+            //}
+
             if (searchValue[0].regdate != "")
             {
                 command += " AND jeloltek.reg_date LIKE '%" + searchValue[0].regdate + "%' ";
@@ -93,7 +95,12 @@ namespace HR_Portal.Source.ViewModel
             {
                 command += "  AND projekt_jelolt_kapcs.id IS NULL ";
             }
+            if (searchValue[0].allasbanBool)
+            {
+                command += "  AND projekt_jelolt_kapcs.id IS NOT NULL ";
+            }
             command += " GROUP BY jeloltek.email ";
+
             switch (searchValue[0].HeaderSelected)
             {
                 case "1":
@@ -115,7 +122,7 @@ namespace HR_Portal.Source.ViewModel
                     command += " ORDER BY jeloltek.reg_date" + searchValue[0].sorrend;
                     break;
                 default:
-                    command += " ORDER BY jeloltek.reg_date DESC";
+                    command += " ORDER BY jeloltek.reg_date DESC, friss DESC";
                     break;
             }
             command += " LIMIT 50";
