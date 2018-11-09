@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using HR_Portal.Source.Model;
 using HR_Portal.Source.Model.Applicant;
+using HR_Portal.Source.Model.Other;
 using HR_Portal.Source.Model.Project;
 
 namespace HR_Portal.Source
@@ -116,8 +117,6 @@ namespace HR_Portal.Source
             MySql.Close();
             return list;
         }
-
-
 
         public List<ModelApplicantList> Data_JeloltKapcs()
         {
