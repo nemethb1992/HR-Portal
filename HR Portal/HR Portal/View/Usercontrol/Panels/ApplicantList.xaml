@@ -136,8 +136,8 @@
             <CheckBox x:Name="sorrend_check" Style="{StaticResource Standard_Checkbox}" Content="Csökkenő sorrend" VerticalAlignment="Bottom" Margin="0,0,0,5" IsChecked="False" Grid.Column="7" Checked="sorrendChecked" Unchecked="sorrendUnchecked"/>
         </Grid>
 
-        <ScrollViewer Grid.Row="2" Grid.Column="1" VerticalScrollBarVisibility="Auto">
-            <ListBox x:Name="applicant_listBox"  Style="{StaticResource listBox_style}" BorderBrush="Transparent" HorizontalContentAlignment="Stretch" SelectionMode="Extended">
+        <!--<ScrollViewer Grid.Row="2" Grid.Column="1" VerticalScrollBarVisibility="Auto">-->
+            <ListBox x:Name="applicant_listBox"  Grid.Row="2" Grid.Column="1" Style="{StaticResource listBox_style}" BorderBrush="Transparent" HorizontalContentAlignment="Stretch" SelectionMode="Extended">
                 <ListBox.Resources>
                     <Style TargetType="{x:Type Border}" BasedOn="{StaticResource listCorner}"/>
                     <Style TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource listBoxItem_style_big}"/>
@@ -181,7 +181,7 @@
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
-            </ScrollViewer>
+            <!--</ScrollViewer>-->
         <Grid x:Name="FolderGrid" Grid.Column="1" Grid.Row="3" Visibility="Hidden">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="9*" />

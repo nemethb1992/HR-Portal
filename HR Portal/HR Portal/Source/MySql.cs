@@ -85,7 +85,7 @@ namespace HR_Portal.Source
             }
         }
 
-        public static void Update(string query)
+        public static void Execute(string query)
         {
             if (Open() == true)
             {

@@ -35,14 +35,14 @@ namespace HR_Portal.Source
         {
             DateTime dateTime = DateTime.Now;
             string command = "INSERT INTO `interjuk_kapcs` (`projekt_id`, `jelolt_id`, `hr_id`, `felvitel_datum`, `interju_datum`, `interju_cim`, `interju_leiras`, `helyszin`,  `idopont`) VALUES (" + Session.ProjektID + ", " + Session.ApplicantID + ", " + Session.UserData[0].id + ", '" + dateTime.ToString("yyyy.MM.dd.") + "', '" + interju_datum + "', '" + cim + "', '" + leiras + "', '" + helyszin + "', '" + idopont + "');";
-            MySql.Update(command);
+            MySql.Execute(command);
             MySql.Close();
         }
 
         public void interviewDelete(int id) // javítva
         {
-            MySql.Update("DELETE FROM interjuk_kapcs WHERE interjuk_kapcs.id=" + id + " AND hr_id=" + Session.UserData[0].id + "");
-            MySql.Update("DELETE FROM interju_resztvevo_kapcs WHERE interju_id=" + id + " ");
+            MySql.Execute("DELETE FROM interjuk_kapcs WHERE interjuk_kapcs.id=" + id + " AND hr_id=" + Session.UserData[0].id + "");
+            MySql.Execute("DELETE FROM interju_resztvevo_kapcs WHERE interju_id=" + id + " ");
             MySql.Close();
         }
         
@@ -175,7 +175,7 @@ namespace HR_Portal.Source
         public void addErtesitendokInsert(int index)
         {
             string command = "INSERT INTO projekt_ertesitendok_kapcs (id, projekt_id, ertesitendok_id) VALUES (NULL, " + Session.ProjektID + ", " + index + " );";
-            MySql.Update(command);
+            MySql.Execute(command);
             MySql.Close();
         }
 
@@ -183,30 +183,30 @@ namespace HR_Portal.Source
         {
             string command;
             command = "DELETE FROM projekt_jelolt_kapcs WHERE jelolt_id = " + id + " AND projekt_id = " + Session.ProjektID + ";";
-            MySql.Update(command);
+            MySql.Execute(command);
             command = "DELETE FROM interjuk_kapcs WHERE jelolt_id = " + id + " AND projekt_id = " + Session.ProjektID + ";";
-            MySql.Update(command);
+            MySql.Execute(command);
             MySql.Close();
         }
 
         public void jeloltKapcsUpdate(int id, int allapota)
         {
             string command = "UPDATE projekt_jelolt_kapcs SET allapota = " + allapota + " WHERE jelolt_id = " + id + " AND projekt_id = " + Session.ProjektID + ";";
-            MySql.Update(command);
+            MySql.Execute(command);
             MySql.Close();
         }
 
         public void ertesitendokKapcsDelete(int id)
         {
             string command = "DELETE FROM projekt_ertesitendok_kapcs WHERE ertesitendok_id = " + id + " AND projekt_id = " + Session.ProjektID + ";";
-            MySql.Update(command);
+            MySql.Execute(command);
             MySql.Close();
         }
 
         public void publishProject(int stat)
         {
             string command = "UPDATE projektek SET publikalt= " + stat + " WHERE projektek.id = " + Session.ProjektID + ";";
-            MySql.Update(command);
+            MySql.Execute(command);
             MySql.Close();
         }
 
@@ -221,7 +221,7 @@ namespace HR_Portal.Source
                 statusz = 0;
             }
             string command = "UPDATE projektek SET statusz=" + statusz + " WHERE projektek.id = " + id + ";";
-            MySql.Update(command);
+            MySql.Execute(command);
             MySql.Close();
         }
 
@@ -236,7 +236,7 @@ namespace HR_Portal.Source
                 statusz = 0;
             }
             string command = "UPDATE jeloltek SET statusz=" + statusz + " WHERE jeloltek.id = " + id + ";";
-            MySql.Update(command);
+            MySql.Execute(command);
             MySql.Close();
         }
 
@@ -272,21 +272,21 @@ namespace HR_Portal.Source
                 default:
                     break;
             }
-            MySql.Update(command);
+            MySql.Execute(command);
             MySql.Close();
         }
 
         public void projectCostInsert(string megnevezes, string osszeg)  // javított
         {
             string command = "INSERT INTO `projekt_koltsegek` (id, projekt_id, koltseg_megnevezes, osszeg) VALUES (null, " + Session.ProjektID + ", '" + megnevezes + "', " + osszeg + ");";
-            MySql.Update(command);
+            MySql.Execute(command);
             MySql.Close();
         }
 
         public void projectCostDelete(int id)  // javított
         {
             string command = "DELETE FROM projekt_koltsegek WHERE projekt_koltsegek.id = " + id + "";
-            MySql.Update(command);
+            MySql.Execute(command);
             MySql.Close();
         }
         public List<ModelErtesitendok> Data_Ertesitendok()
@@ -308,7 +308,7 @@ namespace HR_Portal.Source
         public void settingDelete(int id, string table)
         {
             string command = "DELETE FROM " + table + " WHERE id=" + id + "";
-            MySql.Update(command);
+            MySql.Execute(command);
             MySql.Close();
         }
 
@@ -340,7 +340,7 @@ namespace HR_Portal.Source
                     command = "INSERT INTO `kompetenciak` (`id`, `kompetencia_megnevezes`) VALUES (NULL, '" + content + "');";
                     break;
             }
-            MySql.Update(command);
+            MySql.Execute(command);
             MySql.Close();
         }
 

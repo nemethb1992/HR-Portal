@@ -196,6 +196,7 @@
     <Compile Include="Source\Model\Applicant\ModelApplicantSearchBar.cs" />
     <Compile Include="Source\Model\Applicant\ModelFullApplicant.cs" />
     <Compile Include="Source\Model\Other\ModelEmail.cs" />
+    <Compile Include="Source\Model\Other\ModelErrorLog.cs" />
     <Compile Include="Source\Model\Other\ModelListSource.cs" />
     <Compile Include="Source\Model\Other\ModelOther.cs" />
     <Compile Include="Source\Model\Other\ModelUserData.cs" />
@@ -214,6 +215,7 @@
     <Compile Include="Source\Test\ThreadTest.cs" />
     <Compile Include="Source\ViewModel\Applicant.cs" />
     <Compile Include="Source\ViewModel\Comment.cs" />
+    <Compile Include="Source\ViewModel\ErrorLog.cs" />
     <Compile Include="Source\ViewModel\Interview.cs" />
     <Compile Include="Source\ViewModel\Login.cs" />
     <Compile Include="Source\ViewModel\Project.cs" />

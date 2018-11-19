@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Windows.Forms;
+using System.Linq;
 using HR_Portal.Source.Model;
 
 namespace HR_Portal.Source
@@ -17,7 +17,7 @@ namespace HR_Portal.Source
             try
             {
                 directory = new DirectoryInfo(ROOTurl() + ApplicantID);
-                articles = directory.GetFiles("*.pdf");
+                articles = directory.GetFiles();
                 foreach (FileInfo file in articles)
                 {
                     list.Add(new ModelJeloltFile { fajlnev = file.Name.Split('.')[0], path = file.FullName });

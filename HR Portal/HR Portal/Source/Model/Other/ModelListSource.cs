@@ -7,10 +7,6 @@ using System.Threading.Tasks;
 
 namespace HR_Portal.Source.Model.Other
 {
-    class ModelListSource
-    {
-
-    }
     public class ModelProjectSmallList
     {
         public int id { get; set; }

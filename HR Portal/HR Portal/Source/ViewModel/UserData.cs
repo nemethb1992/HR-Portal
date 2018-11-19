@@ -51,7 +51,7 @@ namespace HR_Portal.Source
                 seged = "1";
             else
                 seged = "0";
-            MySql.Update("UPDATE users SET validitas = '" + seged + "' WHERE users.id = '" + id + "';");
+            MySql.Execute("UPDATE users SET validitas = '" + seged + "' WHERE users.id = '" + id + "';");
             MySql.Close();
         }
 
@@ -62,13 +62,13 @@ namespace HR_Portal.Source
         ///</summary>
         public static void ModifyType(int id, int type)
         {
-            MySql.Update("UPDATE users SET kategoria = '" + type + "' WHERE users.id = '" + id + "';");
+            MySql.Execute("UPDATE users SET kategoria = '" + type + "' WHERE users.id = '" + id + "';");
             MySql.Close();
         }
 
         public static void Modify(int id, string mezo, string value)
         {
-            MySql.Update("UPDATE users SET "+mezo+" = '" + value + "' WHERE users.id = '" + id + "';");
+            MySql.Execute("UPDATE users SET "+mezo+" = '" + value + "' WHERE users.id = '" + id + "';");
             MySql.Close();
         }
 

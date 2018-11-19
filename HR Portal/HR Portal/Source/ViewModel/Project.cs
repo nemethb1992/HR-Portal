@@ -103,21 +103,21 @@ namespace HR_Portal.Source.ViewModel
         {
             string command;
             command = "DELETE FROM projektek WHERE projektek.id = " + id + ";";
-            MySql.Update(command);
+            MySql.Execute(command);
             command = "DELETE FROM projekt_jelolt_kapcs WHERE projekt_jelolt_kapcs.projekt_id = " + id + ";";
-            MySql.Update(command);
+            MySql.Execute(command);
             command = "DELETE FROM projekt_hr_kapcs WHERE projekt_hr_kapcs.projekt_id = " + id + ";";
-            MySql.Update(command);
+            MySql.Execute(command);
             command = "DELETE FROM projekt_ertesitendok_kapcs WHERE projekt_ertesitendok_kapcs.projekt_id = " + id + ";";
-            MySql.Update(command);
+            MySql.Execute(command);
             command = "DELETE FROM megjegyzesek WHERE megjegyzesek.projekt_id = " + id + ";";
-            MySql.Update(command);
+            MySql.Execute(command);
             command = "DELETE FROM interjuk_kapcs WHERE interjuk_kapcs.projekt_id = " + id + ";";
-            MySql.Update(command);
+            MySql.Execute(command);
             command = "DELETE FROM projekt_koltsegek WHERE projekt_koltsegek.projekt_id = " + id + ";";
-            MySql.Update(command);
+            MySql.Execute(command);
             command = "DELETE FROM interjuk_kapcs WHERE interjuk_kapcs.projekt_id=" + id + " AND hr_id=" + Session.UserData[0].id + "";
-            MySql.Update(command);
+            MySql.Execute(command);
             MySql.Close();
         }
 
@@ -125,11 +125,11 @@ namespace HR_Portal.Source.ViewModel
         {
             string command = "INSERT INTO projektek (`id`, `hr_id`, `megnevezes_projekt`, `pc`, `vegzettseg`, `tapasztalat_ev`, `statusz`, `fel_datum`, `le_datum`, `nyelvtudas`, `munkakor`, `szuldatum`, `ber`,  `kepesseg1`, `kepesseg2`, `kepesseg3`, `kepesseg4`, `kepesseg5`, `feladatok`, `elvarasok`, `kinalunk`)" +
                 " VALUES (NULL, " + items[0].hr_id + ", '" + items[0].megnevezes_projekt + "'," + items[0].pc + "," + items[0].vegzettseg + "," + items[0].tapasztalat_ev + "," + items[0].statusz + ",'" + items[0].fel_datum + "','" + items[0].le_datum + "'," + items[0].nyelvtudas + "," + items[0].munkakor + "," + items[0].szuldatum + "," + items[0].ber + "," + items[0].kepesseg1 + "," + items[0].kepesseg2 + "," + items[0].kepesseg3 + "," + items[0].kepesseg4 + "," + items[0].kepesseg5 + ",'" + items[0].feladatok + "','" + items[0].elvarasok + "','" + items[0].kinalunk + "');";
-            MySql.Update(command);
+            MySql.Execute(command);
             int proID = Convert.ToInt16(MySql.UniqueList("SELECT projektek.id FROM projektek WHERE projektek.megnevezes_projekt = '" + items[0].megnevezes_projekt + "' AND projektek.pc = " + items[0].pc + " AND projektek.munkakor = '" + items[0].munkakor + "'", "projektek", 1)[0]);
             Session.ProjektID = proID;
             command = "INSERT INTO`projekt_ertesitendok_kapcs` (projekt_id,ertesitendok_id) VALUES("+ proID + ","+Session.UserData[0].id+")";
-            MySql.Update(command);
+            MySql.Execute(command);
             MySql.Close();
         }
 
@@ -151,7 +151,7 @@ namespace HR_Portal.Source.ViewModel
                 "`kepesseg3` =  " + items[0].kepesseg3 + ", " +
                 "`kepesseg4` =  " + items[0].kepesseg4 + ", " +
                 "`kepesseg5` =  " + items[0].kepesseg5 + " WHERE id = " + Session.ProjektID + "";
-            MySql.Update(command);
+            MySql.Execute(command);
             int proID = Convert.ToInt16(MySql.UniqueList("SELECT projektek.id FROM projektek WHERE projektek.megnevezes_projekt = '" + items[0].megnevezes_projekt + "' AND projektek.pc = " + items[0].pc + " AND projektek.munkakor = '" + items[0].munkakor + "'", "projektek", 1)[0]);
             Session.ProjektID = proID;
             MySql.Close();
