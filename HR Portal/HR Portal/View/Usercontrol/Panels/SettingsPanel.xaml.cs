@@ -1,5 +1,6 @@
 ﻿using HR_Portal.Source;
 using HR_Portal.Source.Model;
+using HR_Portal.Source.Model.Other;
 using HR_Portal.Source.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -48,7 +49,7 @@ namespace HR_Portal.View.Usercontrol.Panels
         {
             TextBox tbx = sender as TextBox;
 
-            if (tbx.Text == "Új hozzáadása")
+            if (tbx.Text == tbx.Tag.ToString())
             {
                 tbx.Text = "";
             }
@@ -60,7 +61,7 @@ namespace HR_Portal.View.Usercontrol.Panels
 
             if (tbx.Text == "")
             {
-                tbx.Text = "Új hozzáadása";
+                tbx.Text = tbx.Tag.ToString();
             }
         }
         
@@ -238,6 +239,22 @@ namespace HR_Portal.View.Usercontrol.Panels
                 kompetencia_new_tbx.Text = "Új hozzáadása";
                 listLoader();
             }
+        }
+
+        private void SendErrorLog(object sender, RoutedEventArgs e)
+        {
+            string placeofbug = errorlogInput1.Text;
+            string description = errorlogInput2.Text;
+            string solution = errorlogInput3.Text;
+            string date = DateTime.Now.ToString("yyyy.MM.dd.");
+
+            ModelErrorLog logdata = (new ModelErrorLog {placeofbug = placeofbug, description = description, solution = solution, date = date});
+
+            new ErrorLog().Insert(logdata);
+
+            errorlogInput1.Text = errorlogInput1.Tag.ToString();
+            errorlogInput2.Text = errorlogInput2.Tag.ToString();
+            errorlogInput3.Text = errorlogInput3.Tag.ToString();
         }
     }
 }

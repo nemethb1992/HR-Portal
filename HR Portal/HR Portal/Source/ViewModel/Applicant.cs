@@ -264,8 +264,7 @@ namespace HR_Portal.Source.ViewModel
             if (!MySql.IsExists(command))
             {
                 MySql.Close();
-                DateTime dateTime = DateTime.Now;
-                command = "INSERT INTO projekt_jelolt_kapcs (id, projekt_id, jelolt_id, hr_id, datum) VALUES (NULL, " + projekt_index + ", " + jelolt_index + ", " + Session.UserData[0].id + ", '" + dateTime.ToString("yyyy.MM.dd.") + "' );";
+                command = "INSERT INTO projekt_jelolt_kapcs (id, projekt_id, jelolt_id, hr_id, datum) VALUES (NULL, " + projekt_index + ", " + jelolt_index + ", " + Session.UserData[0].id + ", '" + DateTime.Now.ToString("yyyy.MM.dd.") + "' );";
                 MySql.Execute(command);
             }
             MySql.Close();

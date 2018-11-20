@@ -5,21 +5,81 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:HR_Portal.View.Usercontrol.Panels"
              mc:Ignorable="d" 
-             d:DesignHeight="750" d:DesignWidth="1150">
-    <Grid Style="{StaticResource switch_grid_style}" Margin="20,0,20,10">
+             d:DesignHeight="1300" d:DesignWidth="1150">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <Grid Height="1300" Style="{StaticResource switch_grid_style}">
         <Grid.RowDefinitions>
-            <RowDefinition Height="40" />
-            <RowDefinition Height="1*" />
+                <RowDefinition Height="40" />
+                <RowDefinition Height="0.5*" />
+                <RowDefinition Height="1*" />
             <RowDefinition Height="1*" />
             <RowDefinition Height="1*" />
         </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
-        <TextBlock Style="{StaticResource big_title_style}" Text="Dinamikus listák"/>
-        <Grid Grid.Column="0" Grid.Row="1" Margin="20,10" Background="Transparent">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <TextBlock Style="{StaticResource big_title_style}" Grid.Column="1" Text="Beállítások"/>
+
+
+            <Grid Grid.Column="1" Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="1*" />
+                </Grid.RowDefinitions>
+                <TextBlock Style="{StaticResource big_title_style}" Grid.Column="0" VerticalAlignment="Center" FontSize="22" Text="Hibanalpó bejegyzés"/>
+                <Grid Grid.Row="1" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*" />
+                        <RowDefinition Height="1*" />
+                        <RowDefinition Height="1*" />
+                    </Grid.RowDefinitions>
+                    <TextBox x:Name="errorlogInput1" Margin="0,5,0,5" Padding="8,7,0,0" Grid.Column="0" Grid.Row="0" Tag="Felület" Text="Felület" Grid.ColumnSpan="2" Style="{StaticResource Standard_Textbox}"   GotFocus="settingsInputGotFocus" LostFocus="settingsInputLostFocus"  >
+                        <TextBox.Resources>                                       
+                            <Style TargetType="{x:Type Border}">                  
+                                <Setter Property="CornerRadius" Value="3"/>       
+                                <Setter Property="Margin" Value="0,0,5,0"/>       
+                            </Style>                                              
+                        </TextBox.Resources>                                      
+                    </TextBox>
+                    <TextBox x:Name="errorlogInput2" Margin="0,5,0,5"  Padding="8,7,0,0" Grid.Column="0" Grid.Row="1" Tag="Hibaleírás" Text="Hibaleírás" Grid.ColumnSpan="4" Style="{StaticResource Standard_Textbox}"   GotFocus="settingsInputGotFocus" LostFocus="settingsInputLostFocus"  >
+                        <TextBox.Resources>                                       
+                            <Style TargetType="{x:Type Border}">                  
+                                <Setter Property="CornerRadius" Value="3"/>        
+                            </Style>                                              
+                        </TextBox.Resources>                                      
+                    </TextBox>
+                    <TextBox x:Name="errorlogInput3" Margin="0,5,0,5"  Padding="8,7,0,0" Grid.Column="0" Grid.Row="2" Tag="Megoldási javaslat" Text="Megoldási javaslat" Grid.ColumnSpan="4" Style="{StaticResource Standard_Textbox}"   GotFocus="settingsInputGotFocus" LostFocus="settingsInputLostFocus"  >
+                        <TextBox.Resources>                                       
+                            <Style TargetType="{x:Type Border}">                  
+                                <Setter Property="CornerRadius" Value="3"/>        
+                            </Style>                                              
+                        </TextBox.Resources>                                      
+                    </TextBox>
+
+                    <Button Grid.Column="2" Grid.ColumnSpan="2"  Margin="0,5,0,5" Content="Küldés" Grid.Row="0" Click="SendErrorLog"  Style="{StaticResource StandardButton}" />
+                </Grid>
+            </Grid>
+            <Grid Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="3">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="1*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Style="{StaticResource big_title_style}" Grid.Column="0" VerticalAlignment="Center" FontSize="22" Text="Dinamikus Listák"/>
+                <Grid Grid.Column="0" Grid.Row="1" Margin="20,10" Background="Transparent">
             <Grid.RowDefinitions>
                 <RowDefinition Height="1*" />
                 <RowDefinition Height="6*" />
@@ -56,7 +116,7 @@
                 <ColumnDefinition Width="50" />
             </Grid.ColumnDefinitions>
             <TextBlock Style="{StaticResource Standard_Textblock}" Padding="0,5,0,0" Text="Végzettségek"/>
-            <TextBox x:Name="vegzettsegek_new_tbx" Grid.Column="0" Grid.Row="1" Style="{StaticResource Standard_Textbox}" Text="Új hozzáadása"  GotFocus="settingsInputGotFocus" LostFocus="settingsInputLostFocus"  >
+                    <TextBox x:Name="vegzettsegek_new_tbx" Grid.Column="0" Grid.Row="1" Style="{StaticResource Standard_Textbox}" Tag="Új hozzáadása" Text="Új hozzáadása"  GotFocus="settingsInputGotFocus" LostFocus="settingsInputLostFocus"  >
                 <TextBox.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="3"/>
@@ -86,174 +146,184 @@
                 </ListBox.ItemTemplate>
             </ListBox>
         </Grid>
-        <Grid Grid.Column="2" Grid.Row="2" Grid.RowSpan="2" Margin="20,10" Background="Transparent">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="30" />
-                <RowDefinition Height="30" />
-                <RowDefinition Height="6*" />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="5*" />
-                <ColumnDefinition Width="50" />
-            </Grid.ColumnDefinitions>
-            <TextBlock Style="{StaticResource Standard_Textblock}" Padding="0,5,0,0" Text="Munkaterületek"/>
-            <TextBox x:Name="munkakorok_new_tbx" Grid.Column="0" Grid.Row="1" Style="{StaticResource Standard_Textbox}" Text="Új hozzáadása"  GotFocus="settingsInputGotFocus" LostFocus="settingsInputLostFocus"  >
-                <TextBox.Resources>
-                    <Style TargetType="{x:Type Border}">
-                        <Setter Property="CornerRadius" Value="3"/>
-                        <Setter Property="Margin" Value="0,0,5,0"/>
-                    </Style>
-                </TextBox.Resources>
-            </TextBox>
-            <Button Grid.Column="1" Grid.Row="1" Style="{StaticResource StandardButton}" Click="Button_Click_2">
-                <Image Source="/Public/imgs/add.png" Margin="5" Height="15"/>
-            </Button>
-            <ListBox x:Name="munkakorok_editlist" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" Margin="0,5,0,0" Style="{StaticResource small_listBox_style}" HorizontalContentAlignment="Stretch" SelectionMode="Extended" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden" >
-                <ListBox.Resources>
-                    <Style TargetType="{x:Type Border}" BasedOn="{StaticResource listCorner}"/>
-                    <Style TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource thin_listBoxItem_style}"/>
-                </ListBox.Resources>
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <Grid >
-                            <Grid.ContextMenu>
-                                <ContextMenu>
-                                    <MenuItem Header="Törlés" Click="MenuItem_Click_2"/>
-                                </ContextMenu>
-                            </Grid.ContextMenu>
-                            <TextBlock Grid.Column="0" Padding="10,0" Style="{StaticResource panelTbl_style}" Text="{Binding munkakor}"/>
-                        </Grid>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
-        </Grid>
-        <Grid Grid.Column="0" Grid.Row="2" Margin="20,10" Background="Transparent">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="1*" />
-                <RowDefinition Height="30" />
-                <RowDefinition Height="6*" />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="5*" />
-                <ColumnDefinition Width="50" />
-            </Grid.ColumnDefinitions>
-            <TextBlock Style="{StaticResource Standard_Textblock}" Padding="0,5,0,0" Text="PC"/>
-            <TextBox x:Name="pc_new_tbx" Grid.Column="0" Grid.Row="1" Style="{StaticResource Standard_Textbox}" Text="Új hozzáadása"  GotFocus="settingsInputGotFocus" LostFocus="settingsInputLostFocus"  >
-                <TextBox.Resources>
-                    <Style TargetType="{x:Type Border}">
-                        <Setter Property="CornerRadius" Value="3"/>
-                        <Setter Property="Margin" Value="0,0,5,0"/>
-                    </Style>
-                </TextBox.Resources>
-            </TextBox>
-            <Button Grid.Column="1" Grid.Row="1" Style="{StaticResource StandardButton}" Click="Button_Click_3" HorizontalAlignment="Left" Width="50">
-                <Image Source="/Public/imgs/add.png" Margin="5" Height="15"/>
-            </Button>
-            <ListBox x:Name="pc_editlist" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" Margin="0,5,0,0" Style="{StaticResource small_listBox_style}" HorizontalContentAlignment="Stretch" SelectionMode="Extended" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden">
-                <ListBox.Resources>
+            <Grid Grid.Column="2" Grid.Row="1" Margin="20,10" Background="Transparent">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="6*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="5*" />
+                    <ColumnDefinition Width="50" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Style="{StaticResource Standard_Textblock}" Padding="0,5,0,0" Text="Nyelvek"/>
+                    <TextBox x:Name="nyelv_new_tbx" Grid.Column="0" Grid.Row="1" Style="{StaticResource Standard_Textbox}" Tag="Új hozzáadása" Text="Új hozzáadása"  GotFocus="settingsInputGotFocus" LostFocus="settingsInputLostFocus" >
+                    <TextBox.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="3"/>
+                            <Setter Property="Margin" Value="0,0,5,0"/>
+                        </Style>
+                    </TextBox.Resources>
+                </TextBox>
+                <Button Grid.Column="1" Grid.Row="1" Style="{StaticResource StandardButton}" Click="Button_Click_5">
+                    <Image Source="/Public/imgs/add.png" Margin="5" Height="15"/>
+                </Button>
+                <ListBox x:Name="nyelv_editlist" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" Margin="0,5,0,0"  Style="{StaticResource small_listBox_style}" HorizontalContentAlignment="Stretch" SelectionMode="Extended" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden">
+                    <ListBox.Resources>
 
-                    <Style TargetType="{x:Type Border}" BasedOn="{StaticResource listCorner}"/>
-                    <Style TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource thin_listBoxItem_style}"/>
-                </ListBox.Resources>
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <Grid >
-                            <Grid.ContextMenu>
-                                <ContextMenu>
-                                    <MenuItem Header="Törlés" Click="MenuItem_Click_3"/>
-                                </ContextMenu>
-                            </Grid.ContextMenu>
-                            <TextBlock Grid.Column="0" Padding="10,0" Style="{StaticResource panelTbl_style}" Text="{Binding megnevezes_pc}"/>
-                        </Grid>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
+                        <Style TargetType="{x:Type Border}" BasedOn="{StaticResource listCorner}"/>
+                        <Style TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource thin_listBoxItem_style}"/>
+                    </ListBox.Resources>
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid >
+                                <Grid.ContextMenu>
+                                    <ContextMenu>
+                                        <MenuItem Header="Törlés" Click="MenuItem_Click_5"/>
+                                    </ContextMenu>
+                                </Grid.ContextMenu>
+                                <TextBlock Grid.Column="0" Padding="10,0" Style="{StaticResource panelTbl_style}" Text="{Binding nyelv}"/>
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </Grid>
         </Grid>
-        <Grid Grid.Column="1" Grid.Row="2" Margin="20,10" Background="Transparent">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="1*" />
-                <RowDefinition Height="30" />
-                <RowDefinition Height="6*" />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="5*" />
-                <ColumnDefinition Width="50" />
-            </Grid.ColumnDefinitions>
-            <TextBlock Style="{StaticResource Standard_Textblock}" Padding="0,5,0,0" Text="Értesülési módok"/>
-            <TextBox x:Name="ertesules_new_tbx" Grid.Column="0" Grid.Row="1" Style="{StaticResource Standard_Textbox}" Text="Új hozzáadása"  GotFocus="settingsInputGotFocus" LostFocus="settingsInputLostFocus"  >
-                <TextBox.Resources>
-                    <Style TargetType="{x:Type Border}">
-                        <Setter Property="CornerRadius" Value="3"/>
-                        <Setter Property="Margin" Value="0,0,5,0"/>
-                    </Style>
-                </TextBox.Resources>
-            </TextBox>
-            <Button Grid.Column="1" Grid.Row="1" Style="{StaticResource StandardButton}" Click="Button_Click_4">
-                <Image Source="/Public/imgs/add.png" Margin="5" Height="15"/>
-            </Button>
-            <ListBox x:Name="ertesules_editlist" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" Margin="0,5,0,0" Style="{StaticResource small_listBox_style}" HorizontalContentAlignment="Stretch" SelectionMode="Extended" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden">
-                <ListBox.Resources>
 
-                    <Style TargetType="{x:Type Border}" BasedOn="{StaticResource listCorner}"/>
-                    <Style TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource thin_listBoxItem_style}"/>
-                </ListBox.Resources>
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <Grid >
-                            <Grid.ContextMenu>
-                                <ContextMenu>
-                                    <MenuItem Header="Törlés" Click="MenuItem_Click_4"/>
-                                </ContextMenu>
-                            </Grid.ContextMenu>
-                            <TextBlock Grid.Column="0" Padding="10,0" Style="{StaticResource panelTbl_style}" Text="{Binding ertesules_megnevezes}"/>
-                        </Grid>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
-        </Grid>
-        <Grid Grid.Column="2" Grid.Row="1" Margin="20,10" Background="Transparent">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="1*" />
-                <RowDefinition Height="30" />
-                <RowDefinition Height="6*" />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="5*" />
-                <ColumnDefinition Width="50" />
-            </Grid.ColumnDefinitions>
-            <TextBlock Style="{StaticResource Standard_Textblock}" Padding="0,5,0,0" Text="Nyelvek"/>
-            <TextBox x:Name="nyelv_new_tbx" Grid.Column="0" Grid.Row="1" Style="{StaticResource Standard_Textbox}" Text="Új hozzáadása"  GotFocus="settingsInputGotFocus" LostFocus="settingsInputLostFocus" >
-                <TextBox.Resources>
-                    <Style TargetType="{x:Type Border}">
-                        <Setter Property="CornerRadius" Value="3"/>
-                        <Setter Property="Margin" Value="0,0,5,0"/>
-                    </Style>
-                </TextBox.Resources>
-            </TextBox>
-            <Button Grid.Column="1" Grid.Row="1" Style="{StaticResource StandardButton}" Click="Button_Click_5">
-                <Image Source="/Public/imgs/add.png" Margin="5" Height="15"/>
-            </Button>
-            <ListBox x:Name="nyelv_editlist" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" Margin="0,5,0,0"  Style="{StaticResource small_listBox_style}" HorizontalContentAlignment="Stretch" SelectionMode="Extended" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden">
-                <ListBox.Resources>
+            <Grid Grid.Column="1" Grid.Row="3 " Grid.ColumnSpan="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
 
-                    <Style TargetType="{x:Type Border}" BasedOn="{StaticResource listCorner}"/>
-                    <Style TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource thin_listBoxItem_style}"/>
-                </ListBox.Resources>
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <Grid >
-                            <Grid.ContextMenu>
-                                <ContextMenu>
-                                    <MenuItem Header="Törlés" Click="MenuItem_Click_5"/>
-                                </ContextMenu>
-                            </Grid.ContextMenu>
-                            <TextBlock Grid.Column="0" Padding="10,0" Style="{StaticResource panelTbl_style}" Text="{Binding nyelv}"/>
-                        </Grid>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
-        </Grid>
-        <Grid Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2" Margin="20,10" Background="Transparent">
+                <Grid Grid.Column="2" Grid.Row="1" Grid.RowSpan="1" Margin="20,0" Background="Transparent">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30" />
+                        <RowDefinition Height="30" />
+                        <RowDefinition Height="6*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="5*" />
+                        <ColumnDefinition Width="50" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Style="{StaticResource Standard_Textblock}" Padding="0,5,0,0" Text="Munkaterületek"/>
+                    <TextBox x:Name="munkakorok_new_tbx" Grid.Column="0" Grid.Row="1" Style="{StaticResource Standard_Textbox}" Tag="Új hozzáadása" Text="Új hozzáadása"  GotFocus="settingsInputGotFocus" LostFocus="settingsInputLostFocus"  >
+                        <TextBox.Resources>
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="CornerRadius" Value="3"/>
+                                <Setter Property="Margin" Value="0,0,5,0"/>
+                            </Style>
+                        </TextBox.Resources>
+                    </TextBox>
+                    <Button Grid.Column="1" Grid.Row="1" Style="{StaticResource StandardButton}" Click="Button_Click_2">
+                        <Image Source="/Public/imgs/add.png" Margin="5" Height="15"/>
+                    </Button>
+                    <ListBox x:Name="munkakorok_editlist" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" Margin="0,5,0,0" Style="{StaticResource small_listBox_style}" HorizontalContentAlignment="Stretch" SelectionMode="Extended" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden" >
+                        <ListBox.Resources>
+                            <Style TargetType="{x:Type Border}" BasedOn="{StaticResource listCorner}"/>
+                            <Style TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource thin_listBoxItem_style}"/>
+                        </ListBox.Resources>
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Grid >
+                                    <Grid.ContextMenu>
+                                        <ContextMenu>
+                                            <MenuItem Header="Törlés" Click="MenuItem_Click_2"/>
+                                        </ContextMenu>
+                                    </Grid.ContextMenu>
+                                    <TextBlock Grid.Column="0" Padding="10,0" Style="{StaticResource panelTbl_style}" Text="{Binding munkakor}"/>
+                                </Grid>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </Grid>
+                <Grid Grid.Column="0" Grid.Row="1" Margin="20,0" Background="Transparent">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30" />
+                        <RowDefinition Height="30" />
+                        <RowDefinition Height="6*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="5*" />
+                        <ColumnDefinition Width="50" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Style="{StaticResource Standard_Textblock}" Padding="0,5,0,0" Text="PC"/>
+                    <TextBox x:Name="pc_new_tbx" Grid.Column="0" Grid.Row="1" Style="{StaticResource Standard_Textbox}" Tag="Új hozzáadása" Text="Új hozzáadása"  GotFocus="settingsInputGotFocus" LostFocus="settingsInputLostFocus"  >
+                        <TextBox.Resources>
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="CornerRadius" Value="3"/>
+                                <Setter Property="Margin" Value="0,0,5,0"/>
+                            </Style>
+                        </TextBox.Resources>
+                    </TextBox>
+                    <Button Grid.Column="1" Grid.Row="1" Style="{StaticResource StandardButton}" Click="Button_Click_3" HorizontalAlignment="Left" Width="50">
+                        <Image Source="/Public/imgs/add.png" Margin="5" Height="15"/>
+                    </Button>
+                    <ListBox x:Name="pc_editlist" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" Margin="0,5,0,0" Style="{StaticResource small_listBox_style}" HorizontalContentAlignment="Stretch" SelectionMode="Extended" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden">
+                        <ListBox.Resources>
+
+                            <Style TargetType="{x:Type Border}" BasedOn="{StaticResource listCorner}"/>
+                            <Style TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource thin_listBoxItem_style}"/>
+                        </ListBox.Resources>
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Grid >
+                                    <Grid.ContextMenu>
+                                        <ContextMenu>
+                                            <MenuItem Header="Törlés" Click="MenuItem_Click_3"/>
+                                        </ContextMenu>
+                                    </Grid.ContextMenu>
+                                    <TextBlock Grid.Column="0" Padding="10,0" Style="{StaticResource panelTbl_style}" Text="{Binding megnevezes_pc}"/>
+                                </Grid>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </Grid>
+                <Grid Grid.Column="1" Grid.Row="1" Margin="20,0" Background="Transparent">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30" />
+                        <RowDefinition Height="30" />
+                        <RowDefinition Height="6*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="5*" />
+                        <ColumnDefinition Width="50" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Style="{StaticResource Standard_Textblock}" Padding="0,5,0,0" Text="Értesülési módok"/>
+                    <TextBox x:Name="ertesules_new_tbx" Grid.Column="0" Grid.Row="1" Style="{StaticResource Standard_Textbox}" Tag="Új hozzáadása" Text="Új hozzáadása"  GotFocus="settingsInputGotFocus" LostFocus="settingsInputLostFocus"  >
+                        <TextBox.Resources>
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="CornerRadius" Value="3"/>
+                                <Setter Property="Margin" Value="0,0,5,0"/>
+                            </Style>
+                        </TextBox.Resources>
+                    </TextBox>
+                    <Button Grid.Column="1" Grid.Row="1" Style="{StaticResource StandardButton}" Click="Button_Click_4">
+                        <Image Source="/Public/imgs/add.png" Margin="5" Height="15"/>
+                    </Button>
+                    <ListBox x:Name="ertesules_editlist" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" Margin="0,5,0,0" Style="{StaticResource small_listBox_style}" HorizontalContentAlignment="Stretch" SelectionMode="Extended" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden">
+                        <ListBox.Resources>
+
+                            <Style TargetType="{x:Type Border}" BasedOn="{StaticResource listCorner}"/>
+                            <Style TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource thin_listBoxItem_style}"/>
+                        </ListBox.Resources>
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Grid >
+                                    <Grid.ContextMenu>
+                                        <ContextMenu>
+                                            <MenuItem Header="Törlés" Click="MenuItem_Click_4"/>
+                                        </ContextMenu>
+                                    </Grid.ContextMenu>
+                                    <TextBlock Grid.Column="0" Padding="10,0" Style="{StaticResource panelTbl_style}" Text="{Binding ertesules_megnevezes}"/>
+                                </Grid>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </Grid>
+            </Grid>
+            <Grid Grid.Column="1" Grid.Row="4" Margin="20,10" Background="Transparent">
             <Grid.RowDefinitions>
                 <RowDefinition Height="30" />
                 <RowDefinition Height="30" />
@@ -264,7 +334,7 @@
                 <ColumnDefinition Width="50" />
             </Grid.ColumnDefinitions>
             <TextBlock Style="{StaticResource Standard_Textblock}" Padding="0,5,0,0" Text="Kompetenciák"/>
-            <TextBox x:Name="kompetencia_new_tbx" Grid.Column="0" Grid.Row="1" Style="{StaticResource Standard_Textbox}" Text="Új hozzáadása"  GotFocus="settingsInputGotFocus" LostFocus="settingsInputLostFocus" >
+                <TextBox x:Name="kompetencia_new_tbx" Grid.Column="0" Grid.Row="1" Style="{StaticResource Standard_Textbox}" Tag="Új hozzáadása" Text="Új hozzáadása"  GotFocus="settingsInputGotFocus" LostFocus="settingsInputLostFocus" >
                 <TextBox.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="3"/>
@@ -296,4 +366,5 @@
             </ListBox>
         </Grid>
     </Grid>
+    </ScrollViewer>
 </UserControl>

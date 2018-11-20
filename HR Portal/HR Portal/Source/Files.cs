@@ -20,7 +20,7 @@ namespace HR_Portal.Source
                 articles = directory.GetFiles();
                 foreach (FileInfo file in articles)
                 {
-                    list.Add(new ModelJeloltFile { fajlnev = file.Name.Split('.')[0], path = file.FullName });
+                    list.Add(new ModelJeloltFile { fajlnev = file.Name, path = file.FullName });
                 }
             }
             catch (Exception)

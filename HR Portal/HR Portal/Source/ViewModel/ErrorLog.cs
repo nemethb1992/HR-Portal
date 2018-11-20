@@ -9,16 +9,23 @@ namespace HR_Portal.Source.ViewModel
 {
     class ErrorLog
     {
-        public void Insert(List<ModelErrorLog> list)
+        public void Insert(ModelErrorLog data)
         {
-            string command = "INSERT INTO errorlog (`placeofbug`, `description`, `solution`, `date`) VALUES ('" + list[0].placeofbug + "','" + list[0].description + "','" + list[0].solution + "','" + list[0].date+ "')";
+            string command = "INSERT INTO errorlog (`placeofbug`, `description`, `solution`, `date`) VALUES ('" + data.placeofbug + "','" + data.description + "','" + data.solution + "','" + data.date + "')";
             MySql.Execute(command);
             MySql.Close();
         }
 
-        public void Update(List<ModelErrorLog> list)
+        public void Update(ModelErrorLog data)
         {
-            string command = "UPDATE pmkcvtest.errorlog SET placeofbug='"+list[0].placeofbug+ "', description='" + list[0].description + "', solution='" + list[0].solution + "', date='" + list[0].date + "', result='" + list[0].result + "', resultdate='" + list[0].resultdate + "'";
+            string command = "UPDATE pmkcvtest.errorlog SET placeofbug='"+data.placeofbug+ "', description='" + data.description + "', solution='" + data.solution + "', date='" + data.date + "', result='" + data.result + "', resultdate='" + data.resultdate + "'";
+            MySql.Execute(command);
+            MySql.Close();
+        }
+
+        public void Delete(int id)
+        {
+            string command = "DELETE FROM pmkcvtest.errorlog WHERE id ="+id;
             MySql.Execute(command);
             MySql.Close();
         }
