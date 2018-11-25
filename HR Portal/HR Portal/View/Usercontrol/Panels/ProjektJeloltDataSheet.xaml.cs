@@ -47,7 +47,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             projekt_jelolt_title_tbl.Text = projectList[0].megnevezes_projekt + " - " + applicantData[0].nev;
             jelolt_telefon.Text = "( " + applicantData[0].telefon + " )";
             megjegyzes_listBox.ItemsSource = Utility.Data_CommentApplicant();
-            kapcs_jeloltek_listBox.ItemsSource = Interview.Data_Interview();
+            kapcs_jeloltek_listBox.ItemsSource = new Interview().Data_Interview();
             inter_cim.Items.Add("HR interjú");
             inter_cim.Items.Add("Szakmai + HR");
             inter_cim.Items.Add("Szakmai Interjú 1.");

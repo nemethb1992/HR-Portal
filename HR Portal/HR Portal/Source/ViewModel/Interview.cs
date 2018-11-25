@@ -17,7 +17,7 @@ namespace HR_Portal.Source.ViewModel
             return list;
         }
 
-        public static List<ModelInterview> Data_Interview() //javított
+        public List<ModelInterview> Data_Interview() //javított
         {
             string command = "SELECT interjuk_kapcs.id,megnevezes_projekt,jeloltek.nev,interjuk_kapcs.projekt_id,interjuk_kapcs.jelolt_id,jeloltek.email,interjuk_kapcs.hr_id,felvitel_datum,interju_datum,interju_cim,interju_leiras,helyszin ,idopont FROM interjuk_kapcs" +
                 " INNER JOIN projektek ON interjuk_kapcs.projekt_id = projektek.id" +

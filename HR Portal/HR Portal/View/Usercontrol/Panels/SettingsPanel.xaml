@@ -9,9 +9,10 @@
     <ScrollViewer VerticalScrollBarVisibility="Auto">
             <Grid Height="1300" Style="{StaticResource switch_grid_style}">
         <Grid.RowDefinitions>
-                <RowDefinition Height="40" />
-                <RowDefinition Height="0.5*" />
-                <RowDefinition Height="1*" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="0.65*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
             <RowDefinition Height="1*" />
             <RowDefinition Height="1*" />
         </Grid.RowDefinitions>
@@ -68,7 +69,47 @@
                     <Button Grid.Column="2" Grid.ColumnSpan="2"  Margin="0,5,0,5" Content="Küldés" Grid.Row="0" Click="SendErrorLog"  Style="{StaticResource StandardButton}" />
                 </Grid>
             </Grid>
-            <Grid Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="3">
+            <Grid Grid.Column="1" Grid.Row="2" Background="Transparent">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="6*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="5*" />
+                    <ColumnDefinition Width="1*" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Style="{StaticResource Standard_Textblock}" VerticalAlignment="Center" Text="Hibanapló"/>
+
+                <ListBox x:Name="error_listBox" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" Margin="0,5,0,0"  Style="{StaticResource small_listBox_style}" HorizontalContentAlignment="Stretch" SelectionMode="Extended" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden">
+                    <ListBox.Resources>
+                        <Style TargetType="{x:Type Border}" BasedOn="{StaticResource listCorner}"/>
+                        <Style TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource thin_listBoxItem_style}"/>
+
+                    </ListBox.Resources>
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Margin="2">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="150" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="80" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="1*" />
+                                </Grid.RowDefinitions>
+                                <TextBlock Grid.Column="0" Margin="10,0" Style="{StaticResource ListText}" Text="{Binding placeofbug}"/>
+                                <TextBlock Grid.Column="1" Style="{StaticResource ListText}" Text="{Binding description}"/>
+                                <TextBlock Grid.Column="2" Style="{StaticResource ListText}" Text="{Binding solution}"/>
+                                <TextBlock Grid.Column="3" Style="{StaticResource ListText}" Text="{Binding result}"/>
+                                <TextBlock Grid.Column="4" Style="{StaticResource ListText}" Text="{Binding date}"/>
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </Grid>
+            <Grid Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="3">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="40" />
                     <RowDefinition Height="1*" />
@@ -190,7 +231,7 @@
             </Grid>
         </Grid>
 
-            <Grid Grid.Column="1" Grid.Row="3 " Grid.ColumnSpan="3">
+            <Grid Grid.Column="1" Grid.Row="4 " Grid.ColumnSpan="3">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
@@ -323,7 +364,7 @@
                     </ListBox>
                 </Grid>
             </Grid>
-            <Grid Grid.Column="1" Grid.Row="4" Margin="20,10" Background="Transparent">
+            <Grid Grid.Column="1" Grid.Row="5" Margin="20,10" Background="Transparent">
             <Grid.RowDefinitions>
                 <RowDefinition Height="30" />
                 <RowDefinition Height="30" />

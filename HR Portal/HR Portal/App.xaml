@@ -80,6 +80,14 @@
             <Setter Property="Padding" Value="0,4,0,0"></Setter>
             <Setter Property="Foreground" Value="{StaticResource SD_Element_Foreground}"></Setter>
         </Style>
+        <Style TargetType="TextBlock" x:Key="ListText">
+            <Setter Property="FontFamily" Value="/Public/fonts/#Montserrat"></Setter>
+            <Setter Property="FontSize" Value="13"></Setter>
+            <Setter Property="VerticalAlignment" Value="Center"></Setter>
+            <Setter Property="TextWrapping" Value="Wrap"></Setter>
+            <Setter Property="Background" Value="Transparent"></Setter>
+            <Setter Property="Foreground" Value="{StaticResource SD_Element_Foreground}"></Setter>
+        </Style>
         <Style TargetType="PasswordBox" x:Key="Standard_PasswordBox">
             <Setter Property="FontFamily" Value="/Public/fonts/#Montserrat"></Setter>
             <Setter Property="FontSize" Value="17"></Setter>

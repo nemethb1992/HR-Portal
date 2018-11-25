@@ -23,6 +23,7 @@ namespace HR_Portal.View.Usercontrol.Panels
         private ProjectDataSheet projectDataSheet;
         private ProjektJeloltDataSheet projektJeloltDataSheet;
         private ApplicantList applicantList;
+        private InterviewPanel interviewPanel;
         private Grid grid;
 
         public ApplicantDataSheet(Grid grid)
@@ -48,6 +49,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             projekt_cbx.ItemsSource = Applicant.Data_PorjectListSmall();
             csatolmany_listBox.ItemsSource = Files.Read(Session.ApplicantID);
             megjegyzes_listBox.ItemsSource = Utility.Data_CommentApplicant();
+            interju_listBox.ItemsSource = new Interview().Data_Interview();
             kapcsolodo_projekt_list.ItemsSource = Applicant.Data_ProjectList();
         }
 
@@ -150,6 +152,18 @@ namespace HR_Portal.View.Usercontrol.Panels
 
         private void megjegyzes_listBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+
+        }
+
+        private void interjuOpenClick(object sender, RoutedEventArgs e)
+        {
+            Button btn = sender as Button;
+            ModelInterview item = btn.DataContext as ModelInterview;
+            Session.InterViewID = item.id;
+            Session.ProjektID = item.projekt_id;
+            CommonUtility.SetReturnPage(CommonUtility.Views.ApplicantDataSheet);
+            grid.Children.Clear();
+            grid.Children.Add(interviewPanel = new InterviewPanel(grid));
 
         }
     }

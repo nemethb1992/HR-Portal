@@ -19,6 +19,8 @@ namespace HR_Portal.View.Usercontrol.Panels
 
         private Grid grid;
         private ProjektJeloltDataSheet projektJeloltDataSheet;
+        private ApplicantDataSheet applicantDataSheet;
+
         private SzakmaiInterviewList szakmaiInterviewList;
 
         public InterviewPanel(Grid grid)
@@ -27,7 +29,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             InitializeComponent();
 
             interviewLoader();
-            if (Session.UserData[0].kategoria != 1)
+            if (Session.UserData[0].kategoria < 1)
             {
                 addPerson.Visibility = Visibility.Hidden;
                 invitePerson.Visibility = Visibility.Hidden;
@@ -36,10 +38,17 @@ namespace HR_Portal.View.Usercontrol.Panels
 
         protected void navigateBackFromInterview(object sender, RoutedEventArgs e)
         {
-            if(Session.UserData[0].kategoria == 1)
+            if(Session.UserData[0].kategoria > 1)
             {
                 grid.Children.Clear();
-                grid.Children.Add(projektJeloltDataSheet = new ProjektJeloltDataSheet(grid));
+                if (Session.lastPage == CommonUtility.Views.ProjectJeloltDataSheet)
+                {
+                    grid.Children.Add(projektJeloltDataSheet = new ProjektJeloltDataSheet(grid));
+                }
+                else
+                {
+                    grid.Children.Add(applicantDataSheet = new ApplicantDataSheet(grid));
+                }
             }
             else
             {

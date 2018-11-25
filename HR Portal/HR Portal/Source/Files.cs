@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Windows;
 using HR_Portal.Source.Model;
 
 namespace HR_Portal.Source
@@ -10,17 +11,14 @@ namespace HR_Portal.Source
     {
         public static List<ModelJeloltFile> Read(int ApplicantID)
         {
-            DirectoryInfo directory;
             List<ModelJeloltFile> list = new List<ModelJeloltFile>();
-            FileInfo[] articles;
 
             try
             {
-                directory = new DirectoryInfo(ROOTurl() + ApplicantID);
-                articles = directory.GetFiles();
+                FileInfo[] articles = new DirectoryInfo(ROOTurl() + ApplicantID).GetFiles();
                 foreach (FileInfo file in articles)
                 {
-                    list.Add(new ModelJeloltFile { fajlnev = file.Name, path = file.FullName });
+                    list.Add(new ModelJeloltFile { fajlnev = file.Name, color = (file.Extension == ".pdf" ? "#e3202a" : "#2a579a"), path = file.FullName });
                 }
             }
             catch (Exception)

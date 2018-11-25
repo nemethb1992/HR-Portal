@@ -16,6 +16,7 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="50" />
+            <RowDefinition Height="1.2*" />
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
             <RowDefinition Height="50" />
@@ -33,8 +34,6 @@
                 <ColumnDefinition Width="1*" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="1*" />
-                <RowDefinition Height="0.8*" />
                 <RowDefinition Height="1*" />
                 <RowDefinition Height="0.8*" />
                 <RowDefinition Height="1*" />
@@ -98,7 +97,7 @@
         </Grid>
 
         
-        <Grid x:Name="grid_1_2" Grid.Column="1" Grid.Row="2">
+        <Grid x:Name="grid_1_2" Grid.Column="1" Grid.Row="2" Grid.RowSpan="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
@@ -152,7 +151,7 @@
             </TextBox>
         </Grid>
 
-        <Grid x:Name="grid_1_4" Grid.Column="3" Grid.Row="1"  Margin="0,0,0,30" >
+        <Grid x:Name="grid_1_4" Grid.Column="3" Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="120" />
@@ -183,7 +182,7 @@
                                     <MenuItem Header="Törlés" Click="projectDelete" />
                                 </ContextMenu>
                             </Grid.ContextMenu>
-                            <TextBlock Grid.Column="0" Margin="10,2" Style="{StaticResource panelTbl_style}" Text="{Binding megnevezes_projekt}"/>
+                            <TextBlock Grid.Column="0" Margin="10,2" Style="{StaticResource ListText}" Text="{Binding megnevezes_projekt}"/>
                             <Button x:Name="tovabb_projektre_btn" Grid.Column="1" Margin="4,2" Style="{StaticResource StandardButton}" Content="Tovább" Click="navigateToProjectDataSheet" />
                             <!--<Image x:Name="projekt_delete" Grid.Column="3" Source="/HRCloud;component/Public/imgs/bin.png" HorizontalAlignment="Right" Height="20" MouseDown="projekt_delete_MouseDown"/>-->
                         </Grid>
@@ -205,7 +204,7 @@
             <Button x:Name="projekt_csat" Grid.Row="5" Grid.Column="1" Style="{StaticResource StandardButton}" Content="Hozzáad" Click="projektClick"/>
         </Grid>
 
-        <Grid x:Name="grid_2_3" Grid.Column="3"  Grid.Row="2">
+        <Grid x:Name="grid_2_3" Grid.Column="3"  Grid.Row="3">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
@@ -226,23 +225,63 @@
                 </ListBox.Resources>
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <Grid Margin="0,2" Height="30">
+                        <Grid Margin="2" Height="30" Background="{Binding color}">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="10" />
                                 <ColumnDefinition Width="5*" />
                                 <ColumnDefinition Width="100" />
                             </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="1*" />
                             </Grid.RowDefinitions>
-                            <Image Grid.Column="0" Height="20" Width="30" Source="{Binding kep}"/>
-                            <TextBlock Grid.Column="1" Style="{StaticResource Standard_Textblock}" Text="{Binding fajlnev}"/>
-                            <Button x:Name="csatolmany_download" Grid.Column="2" Style="{StaticResource StandardButton}" Margin="4,2" Content="Megnyitás" Click="attachmentOpenClick"/>
+                            <TextBlock Grid.Column="0" Margin="10,0" Foreground="White" Style="{StaticResource ListText}" Text="{Binding fajlnev}"/>
+                            <Button x:Name="csatolmany_download" Grid.Column="1" Style="{StaticResource StandardButton}" Margin="4,2" Content="Megnyitás" Click="attachmentOpenClick"/>
                         </Grid>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
             <Button x:Name="projekt_open_btn" Background="White" Grid.Row="5" Grid.RowSpan="3" Style="{StaticResource StandardButton}" Content="Új feltöltés" Click="UploadClick"/>
+        </Grid>
+
+        <Grid x:Name="grid_2_2" Grid.Column="3"  Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="40" />
+            </Grid.RowDefinitions>
+            <TextBlock x:Name="interju_label" Grid.Column="0" Grid.Row="0"  Style="{StaticResource Standard_Textblock}" Text="Interjúk" />
+
+            <ListBox Grid.Column="0" Grid.Row="1" Grid.RowSpan="5" x:Name="interju_listBox" AllowDrop="True" Style="{StaticResource small_listBox_style}"   HorizontalContentAlignment="Stretch" SelectionMode="Extended">
+                <ListBox.Resources>
+                    <Style TargetType="{x:Type Border}" BasedOn="{StaticResource listCorner}"/>
+                    <Style TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource listBoxItem_style}"/>
+                </ListBox.Resources>
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Margin="2" Height="30" Background="{Binding color}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="90" />
+                                <ColumnDefinition Width="100" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="1*" />
+                            </Grid.RowDefinitions>
+                            <TextBlock Grid.Column="0" Margin="10,0" Style="{StaticResource ListText}" Text="{Binding projekt_megnevezes}"/>
+                            <TextBlock Grid.Column="1" Style="{StaticResource ListText}" Text="{Binding interju_cim}"/>
+                            <TextBlock Grid.Column="2" Style="{StaticResource ListText}" Text="{Binding interju_datum}"/>
+                            <Button x:Name="interju_open_btn" Grid.Column="10" Style="{StaticResource StandardButton}" Margin="4,2" Content="Megnyitás" Click="interjuOpenClick"/>
+                        </Grid>
+                     
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
         </Grid>
     </Grid>
 

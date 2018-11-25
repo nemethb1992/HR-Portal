@@ -305,6 +305,7 @@ namespace HR_Portal.Source.Model
     public class ModelJeloltFile
     {
         public string fajlnev { get; set; }
+        public string color { get; set; }
         public string path { get; set; }
     }
 

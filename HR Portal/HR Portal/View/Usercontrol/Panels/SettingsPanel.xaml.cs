@@ -42,6 +42,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             pc_editlist.ItemsSource = Utility.Data_Pc();
             ertesules_editlist.ItemsSource = Utility.Data_Ertesulesek();
             nyelv_editlist.ItemsSource = Utility.Data_Nyelv();
+            error_listBox.ItemsSource = new ErrorLog().GetErrorLog();
             kompetencia_editlist.ItemsSource = Interview.Data_Kompetencia();
         }
 
@@ -255,6 +256,8 @@ namespace HR_Portal.View.Usercontrol.Panels
             errorlogInput1.Text = errorlogInput1.Tag.ToString();
             errorlogInput2.Text = errorlogInput2.Tag.ToString();
             errorlogInput3.Text = errorlogInput3.Tag.ToString();
+            
+            error_listBox.ItemsSource = new ErrorLog().GetErrorLog();
         }
     }
 }
