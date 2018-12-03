@@ -78,8 +78,8 @@ namespace HR_Portal.View.Usercontrol
         {
             if (dbConnectionOpener())
             {
-                if (ActiveDirecotry.Bind(Luser_tbx.Text, Lpass_pwd.Password))
-                {
+                //if (ActiveDirecotry.Bind(Luser_tbx.Text, Lpass_pwd.Password))
+                //{
                     if (Source.ViewModel.Login.Authentication(Luser_tbx.Text))
                     {
                     Session.ActiveDirectoryDomain = Luser_tbx.Text;
@@ -94,11 +94,11 @@ namespace HR_Portal.View.Usercontrol
                     {
                         LoginSign.Text = "Kérem regisztráljon!";
                     }
-                }
-                else
-                {
-                    LoginSign.Text = "Sikertelen hitelesítés!";
-                }
+                //}
+                //else
+                //{
+                //    LoginSign.Text = "Sikertelen hitelesítés!";
+                //}
             }
             else
             {
