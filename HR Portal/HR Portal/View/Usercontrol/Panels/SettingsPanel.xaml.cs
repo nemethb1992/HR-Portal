@@ -42,7 +42,6 @@ namespace HR_Portal.View.Usercontrol.Panels
             pc_editlist.ItemsSource = Utility.Data_Pc();
             ertesules_editlist.ItemsSource = Utility.Data_Ertesulesek();
             nyelv_editlist.ItemsSource = Utility.Data_Nyelv();
-            error_listBox.ItemsSource = new ErrorLog().GetErrorLog();
             kompetencia_editlist.ItemsSource = Interview.Data_Kompetencia();
         }
 
@@ -242,22 +241,6 @@ namespace HR_Portal.View.Usercontrol.Panels
             }
         }
 
-        private void SendErrorLog(object sender, RoutedEventArgs e)
-        {
-            string placeofbug = errorlogInput1.Text;
-            string description = errorlogInput2.Text;
-            string solution = errorlogInput3.Text;
-            string date = DateTime.Now.ToString("yyyy.MM.dd.");
 
-            ModelErrorLog logdata = (new ModelErrorLog {placeofbug = placeofbug, description = description, solution = solution, date = date});
-
-            new ErrorLog().Insert(logdata);
-
-            errorlogInput1.Text = errorlogInput1.Tag.ToString();
-            errorlogInput2.Text = errorlogInput2.Tag.ToString();
-            errorlogInput3.Text = errorlogInput3.Tag.ToString();
-            
-            error_listBox.ItemsSource = new ErrorLog().GetErrorLog();
-        }
     }
 }
