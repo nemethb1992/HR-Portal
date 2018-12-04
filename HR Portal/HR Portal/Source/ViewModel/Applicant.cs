@@ -99,7 +99,7 @@ namespace HR_Portal.Source.ViewModel
             {
                 command += "  AND projekt_jelolt_kapcs.id IS NOT NULL ";
             }
-            command += " GROUP BY jeloltek.email ";
+            //command += " GROUP BY jeloltek.email ";
 
             switch (searchValue[0].HeaderSelected)
             {
@@ -239,16 +239,16 @@ namespace HR_Portal.Source.ViewModel
             MySql.Execute(command);
             MySql.Close();
 
-            //try
-            //{
-            //    List<ModelFullApplicant> applicantData = GetFullApplicant();
-            //    new Email().Send(applicantData[0].email, new EmailTemplate().Udvozlo_Email(applicantData[0].nev));
-            //}
-            //catch (Exception)
-            //{
+            try
+            {
+                List<ModelFullApplicant> applicantData = GetFullApplicant();
+                new Email().Send(applicantData[0].email, new EmailTemplate().Udvozlo_Email(applicantData[0].nev));
+            }
+            catch (Exception)
+            {
 
-            //    throw;
-            //}
+                throw;
+            }
         }
 
         public void DeleteProject(int id)  

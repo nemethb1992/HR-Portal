@@ -8,6 +8,7 @@ using HR_Portal.Source.Model;
 using HR_Portal.Source.Model.Applicant;
 using HR_Portal.Source.ViewModel;
 using HR_Portal.Source.Model.Project;
+using HR_Portal.Public.templates;
 
 namespace HR_Portal.View.Usercontrol.Panels
 {
@@ -26,16 +27,18 @@ namespace HR_Portal.View.Usercontrol.Panels
         private InterviewPanel interviewPanel;
         private Grid grid;
 
+        private List<ModelFullApplicant> list;
+
         public ApplicantDataSheet(Grid grid)
         {
             this.grid = grid;
             InitializeComponent();
+            list =  Applicant.GetFullApplicant();
             formLoader();
         }
 
         protected void formLoader()
         {
-            List<ModelFullApplicant> list = Applicant.GetFullApplicant();
 
             applicant_profile_title.Text = list[0].nev;
             app_input_1.Text = list[0].email;
@@ -165,6 +168,46 @@ namespace HR_Portal.View.Usercontrol.Panels
             grid.Children.Clear();
             grid.Children.Add(interviewPanel = new InterviewPanel(grid));
 
+        }
+
+        private void SendCustomMail(object sender, RoutedEventArgs e)
+        {
+            new Email().Send(list[0].email,new EmailTemplate().Egyedi_Email(email_content.Text));
+            email_content.Text = "";
+            mailPanelClose();
+        }
+
+        protected void send_mail_megsem(object sender, RoutedEventArgs e)
+        {
+            mailPanelClose();
+        }
+
+        protected void mailPanelOpenClick(object sender, RoutedEventArgs e)
+        {
+            mailPanelOpen();
+        }
+
+        protected void ui_bg_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            mailPanelClose();
+        }
+
+        protected void mailPanelOpen()
+        {
+            var grid = (Grid)this.FindName("ui_bg");
+            var grid2 = (Grid)this.FindName("send_mail");
+
+            grid.Visibility = Visibility.Visible;
+            grid2.Visibility = Visibility.Visible;
+        }
+
+        protected void mailPanelClose()
+        {
+            var grid = (Grid)this.FindName("ui_bg");
+            var grid2 = (Grid)this.FindName("send_mail");
+
+            grid.Visibility = Visibility.Hidden;
+            grid2.Visibility = Visibility.Hidden;
         }
     }
 }

@@ -177,7 +177,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             }
             foreach (var item in szemelyek)
             {
-                new Email().Send(item.email, et.Belsos_Meghivo_Email(item.name, interju[0].interju_cim, interju[0].interju_datum+" - " + interju[0].idopont, interju[0].helyszin, interju[0].jelolt_megnevezes));
+                new Email().Send(item.email, et.Belsos_Meghivo_Email(item.name, interju[0].projekt_megnevezes, interju[0].interju_datum+" - " + interju[0].idopont, interju[0].helyszin, interju[0].jelolt_megnevezes));
             }
             new Email().Send(interju[0].jelolt_email, et.Jelolt_Meghivo_Email(interju[0].jelolt_megnevezes, interju[0].projekt_megnevezes, interju[0].interju_datum + " - " + interju[0].idopont, resztvevok));
       }

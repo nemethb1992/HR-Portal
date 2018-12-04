@@ -14,7 +14,7 @@ namespace HR_Portal.Public.templates
             string content = @"
                                             <h2>Tisztelt "+ name + @"!</h2>
                                                    <p class=''>
-                                                Köszönjük jelentkezését, kollegáink megkezdik pályázata feldolgozását.
+                                                Köszönjük jelentkezését, kollegáink megkezdték pályázata feldolgozását.
 
                                                 Amennyiben megtaláljuk az Ön számára alkalmas pozíciót, felvesszük Önnel a kapcsolatot.
                                             </p>
@@ -24,7 +24,7 @@ namespace HR_Portal.Public.templates
                                             <p Style='margin-bottom: 30px'>
                                                 Amennyiben szeretné módosítani adatait vagy törölni jelentkezését, kérjük jelezze a privacy@phoenix-mecano.hu e-mail címen.
                                             </p>
-                                            <p>Üdvözlettel,</p>
+                                            <p>Üdvözlettel:</p>
                                             <p>Phoenix Mecano Kecskemét Kft.</p>
                                             <p>Személyügyi Osztály</p></td>";
             return front + content + bottom;
@@ -42,7 +42,7 @@ namespace HR_Portal.Public.templates
                                                 </p>
                                                 <p> Amennyiben szeretné módosítani adatait vagy törölni jelentkezését, kérjük jelezze a privacy@phoenix-mecano.hu e-mail címen.</p>
                                                 <p Style='margin-bottom: 30px;'>További pályafutásához sok sikert kívánunk!</p>
-                                                <p>Üdvözlettel,</p>
+                                                <p>Üdvözlettel:</p>
                                                 <p>Phoenix Mecano Kecskemét Kft.</p>
                                                 <p>Személyügyi Osztály</p>";
             return front + content + bottom;
@@ -56,11 +56,12 @@ namespace HR_Portal.Public.templates
             string content = @"
                                             <h2>Tisztelt " + name + @"!</h2>
                                             <p Style='margin-bottom: 30px;' class=''>
-                                                A következő interjúd időpontja <b>"+projekt_name+"</b> pozícióra:  <b>"+date+ @"</b>
+                                                A következő interjúd időpontja pozícióra:  <b>" + date+ @"</b>
+                                                Pozíció megnevezése: neve: <b>" + projekt_name + @"</b>
                                                 Jelentkező neve: <b>" + jeloltnev + @"</b>
                                                 Helyszín: <b>" + helyszin + @"</b>
                                             </p>
-                                            <p>Üdvözlettel,</p>
+                                            <p>Üdvözlettel:</p>
                                             <p>Phoenix Mecano Kecskemét Kft.</p>
                                             <p>Személyügyi Osztály</p>";
             return front + content + bottom;
@@ -104,7 +105,7 @@ namespace HR_Portal.Public.templates
                                                 " + szovegSeged + @"<br>
 
                                             </p>
-                                            <p>Üdvözlettel,</p>
+                                            <p>Üdvözlettel:</p>
                                             <p>Phoenix Mecano Kecskemét Kft.</p>
                                             <p>Személyügyi Osztály</p>";
             return front + content + bottom;
@@ -125,12 +126,15 @@ namespace HR_Portal.Public.templates
                                             <p>A portán személyi igazolvány bemutatása szükséges.</p>
                                             <p>Az interjú időtartama kb. <b>1,5  órát</b> vesz igénybe, kérjük hogy a beléptetésre tekintettel az interjú kezdete előtt 15 perccel szíveskedjék megjelenni.</p>
                                             <p Style='margin-bottom: 30px;'>Várjuk a megbeszélt időpontban!</p>
-                                            <p>Üdvözlettel,</p>
+                                            <p>Üdvözlettel:</p>
                                             <p>Phoenix Mecano Kecskemét Kft.</p>
                                             <p>Személyügyi Osztály</p>";
             return front + content + bottom;
         }
-
+        public string Egyedi_Email(string content)
+        {
+            return front + content + bottom;
+        }
 
 
         string front = @"<html>
@@ -462,7 +466,7 @@ namespace HR_Portal.Public.templates
                         <tr>
                             <td class='wrapper'>
                                 <table border='0' cellpadding='0' cellspacing='0' Style='padding: 10px;'>
-                                    <img src='https://www.phoenix-mecano.hu/wp-content/uploads/2017/02/PMK1_CMYK-300x70.png' width='215' alt='Smiley face' height='50'>
+                                    <img src='https://www.phoenix-mecano.hu/wp-content/uploads/2017/02/PMK1_CMYK-300x70.png' width='215' float='right' alt='Smiley face' height='50'>
                                     <tr>
                                         <td>
                                             <p></p>";
