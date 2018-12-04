@@ -30,10 +30,9 @@ namespace HR_Portal.Source.ViewModel
     }
     class ApplicantImplementation : Applicant
     {
-        public List<ModelApplicantList> GetApplicantList(List<ModelApplicantSearchBar> searchValue = null)
+        public List<ModelApplicantList> GetApplicantList(List<ModelApplicantSearchBar> sw = null)
         {
-            string command = "SELECT " +
-                "coalesce((SELECT count(projekt_id) FROM interjuk_kapcs WHERE jelolt_id = jeloltek.id GROUP BY jelolt_id),0) as interjuk_db, " +
+            string command = "SELECT coalesce((SELECT count(projekt_id) FROM interjuk_kapcs WHERE jelolt_id = jeloltek.id GROUP BY jelolt_id),0) as interjuk_db, " +
                 "(SELECT megnevezes_munka FROM munkakor WHERE munkakor.id = jeloltek.munkakor) as munkakor, " +
                 "(SELECT megnevezes_munka FROM munkakor WHERE munkakor.id = jeloltek.munkakor2) as munkakor2, " +
                 "(SELECT megnevezes_munka FROM munkakor WHERE munkakor.id = jeloltek.munkakor3) as munkakor3, " +
@@ -45,21 +44,21 @@ namespace HR_Portal.Source.ViewModel
                 "LEFT JOIN projekt_jelolt_kapcs ON jeloltek.id = projekt_jelolt_kapcs.jelolt_id " +
                 "WHERE jeloltek.id LIKE '%%' AND jeloltek.statusz =" + Session.ApplicantStatusz;
 
-            if (searchValue[0].nev != "")
+            if (sw[0].nev != "")
             {
-                command += " AND jeloltek.nev LIKE '%" + searchValue[0].nev + "%' ";
+                command += " AND jeloltek.nev LIKE '%" + sw[0].nev + "%' ";
             }
-            if (searchValue[0].lakhely != "")
+            if (sw[0].lakhely != "")
             {
-                command += " AND jeloltek.lakhely LIKE '%" + searchValue[0].lakhely + "%' ";
+                command += " AND jeloltek.lakhely LIKE '%" + sw[0].lakhely + "%' ";
             }
-            if (searchValue[0].email != "")
+            if (sw[0].email != "")
             {
-                command += " AND jeloltek.email LIKE '%" + searchValue[0].email + "%' ";
+                command += " AND jeloltek.email LIKE '%" + sw[0].email + "%' ";
             }
-            if (searchValue[0].eletkor != "")
+            if (sw[0].eletkor != "")
             {
-                command += " AND jeloltek.szuldatum <= " + searchValue[0].eletkor + " ";
+                command += " AND jeloltek.szuldatum <= " + sw[0].eletkor + " ";
             }
 
             //if (searchValue[0].tapasztalat != "" && searchValue[0].tapasztalat != "0")
@@ -67,59 +66,59 @@ namespace HR_Portal.Source.ViewModel
             //    command += "AND jeloltek.tapasztalat_ev >= " + searchValue[0].tapasztalat + " ";
             //}
 
-            if (searchValue[0].regdate != "")
+            if (sw[0].regdate != "")
             {
-                command += " AND jeloltek.reg_date LIKE '%" + searchValue[0].regdate + "%' ";
+                command += " AND jeloltek.reg_date LIKE '%" + sw[0].regdate + "%' ";
             }
-            if (searchValue[0].interjuk != "" && searchValue[0].interjuk != "0")
+            if (sw[0].interjuk != "" && sw[0].interjuk != "0")
             {
-                command += " AND coalesce((SELECT count(projekt_id) FROM interjuk_kapcs WHERE jelolt_id = jeloltek.id Group by projekt_id),0) >= " + searchValue[0].interjuk + " ";
+                command += " AND coalesce((SELECT count(projekt_id) FROM interjuk_kapcs WHERE jelolt_id = jeloltek.id Group by projekt_id),0) >= " + sw[0].interjuk + " ";
             }
-            if (searchValue[0].nemekStr != "")
+            if (sw[0].nemekStr != "")
             {
-                command += " AND jeloltek.neme LIKE '%" + searchValue[0].nemekStr + "%' ";
+                command += " AND jeloltek.neme LIKE '%" + sw[0].nemekStr + "%' ";
             }
-            if (searchValue[0].munkakorStr != "")
+            if (sw[0].munkakorStr != "")
             {
-                command += " AND jeloltek.munkakor LIKE '%" + searchValue[0].munkakorStr + "%' ";
+                command += " AND jeloltek.munkakor LIKE '%" + sw[0].munkakorStr + "%' ";
             }
-            if (searchValue[0].vegzettsegStr != "")
+            if (sw[0].vegzettsegStr != "")
             {
-                command += " AND jeloltek.vegz_terulet LIKE '%" + searchValue[0].vegzettsegStr + "%' ";
+                command += " AND jeloltek.vegz_terulet LIKE '%" + sw[0].vegzettsegStr + "%' ";
             }
-            if (searchValue[0].cimke != "")
+            if (sw[0].cimke != "")
             {
-                command += " AND megjegyzesek.megjegyzes LIKE '%" + searchValue[0].cimke + "%' ";
+                command += " AND megjegyzesek.megjegyzes LIKE '%" + sw[0].cimke + "%' ";
             }
-            if (searchValue[0].szabad == "1")
+            if (sw[0].szabad == "1")
             {
                 command += "  AND projekt_jelolt_kapcs.id IS NULL ";
             }
-            if (searchValue[0].allasbanBool)
+            if (sw[0].allasbanBool)
             {
                 command += "  AND projekt_jelolt_kapcs.id IS NOT NULL ";
             }
             //command += " GROUP BY jeloltek.email ";
 
-            switch (searchValue[0].HeaderSelected)
+            switch (sw[0].HeaderSelected)
             {
                 case "1":
-                    command += " ORDER BY jeloltek.id" + searchValue[0].sorrend;
+                    command += " ORDER BY jeloltek.id" + sw[0].sorrend;
                     break;
                 case "2":
-                    command += " ORDER BY jeloltek.nev" + searchValue[0].sorrend;
+                    command += " ORDER BY jeloltek.nev" + sw[0].sorrend;
                     break;
                 case "3":
-                    command += " ORDER BY jeloltek.munkakor" + searchValue[0].sorrend;
+                    command += " ORDER BY jeloltek.munkakor" + sw[0].sorrend;
                     break;
                 case "4":
-                    command += " ORDER BY interjuk_db" + searchValue[0].sorrend;
+                    command += " ORDER BY interjuk_db" + sw[0].sorrend;
                     break;
                 case "5":
-                    command += " ORDER BY jeloltek.szuldatum" + searchValue[0].sorrend;
+                    command += " ORDER BY jeloltek.szuldatum" + sw[0].sorrend;
                     break;
                 case "6":
-                    command += " ORDER BY jeloltek.reg_date" + searchValue[0].sorrend;
+                    command += " ORDER BY jeloltek.reg_date" + sw[0].sorrend;
                     break;
                 default:
                     command += " ORDER BY jeloltek.reg_date DESC, friss DESC";
@@ -264,7 +263,7 @@ namespace HR_Portal.Source.ViewModel
             if (!MySql.IsExists(command))
             {
                 MySql.Close();
-                command = "INSERT INTO projekt_jelolt_kapcs (id, projekt_id, jelolt_id, hr_id, datum) VALUES (NULL, " + projekt_index + ", " + jelolt_index + ", " + Session.UserData[0].id + ", '" + DateTime.Now.ToString("yyyy.MM.dd.") + "' );";
+                command = "INSERT INTO projekt_jelolt_kapcs (id, projekt_id, jelolt_id, hr_id, datum) VALUES (NULL, " + projekt_index + ", " + jelolt_index + ", " + Session.UserData.id + ", '" + DateTime.Now.ToString("yyyy.MM.dd.") + "' );";
                 MySql.Execute(command);
             }
             MySql.Close();

@@ -29,7 +29,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             InitializeComponent();
 
             interviewLoader();
-            if (Session.UserData[0].kategoria < 1)
+            if (Session.UserData.kategoria < 1)
             {
                 addPerson.Visibility = Visibility.Hidden;
                 invitePerson.Visibility = Visibility.Hidden;
@@ -38,7 +38,7 @@ namespace HR_Portal.View.Usercontrol.Panels
 
         protected void navigateBackFromInterview(object sender, RoutedEventArgs e)
         {
-            if(Session.UserData[0].kategoria > 1)
+            if(Session.UserData.kategoria > 1)
             {
                 grid.Children.Clear();
                 if (Session.lastPage == CommonUtility.Views.ProjectJeloltDataSheet)
@@ -141,7 +141,7 @@ namespace HR_Portal.View.Usercontrol.Panels
 
         protected void removeColleague(object sender, RoutedEventArgs e)
         {
-            if(Session.UserData[0].kategoria == 1)
+            if(Session.UserData.kategoria == 1)
             {
                 MenuItem menu = sender as MenuItem;
                 ModelErtesitendok items = menu.DataContext as ModelErtesitendok;

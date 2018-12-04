@@ -347,6 +347,8 @@
             <Setter Property="FontSize" Value="19"></Setter>
             <Setter Property="Foreground" Value="{StaticResource FontColor}"></Setter>
         </Style>
+        
+        
 
         <Style TargetType="TextBlock" x:Key="telefonos_form_tbl">
             <Setter Property="FontFamily" Value="/Public/fonts/#Montserrat"></Setter>
@@ -624,6 +626,20 @@
         </Style>
 
 
+        <Style TargetType="Border" x:Key="kezdolap_panel">
+            <Setter Property="Background" Value="#F1F1F1"></Setter>
+            <Setter Property="BorderBrush" Value="#858585"></Setter>
+            <Setter Property="Margin" Value="10"></Setter>
+            <Setter Property="BorderThickness" Value="1"></Setter>
+            <Setter Property="CornerRadius" Value="10"></Setter>
+
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#e6e6e6"/>
+                    <Setter Property="BorderBrush" Value="#e6e6e6"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
 
         <Style TargetType="ComboBox" x:Key="cbx_style">
 

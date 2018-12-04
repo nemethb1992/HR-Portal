@@ -97,19 +97,19 @@ namespace HR_Portal.Source
 
         public static int Count(string command)
         {
-            int[] rows = new int[1];
+            int rows = 0;
             if (Open() == true)
             {
                 cmd = new MySqlCommand(command, conn);
                 sdr = cmd.ExecuteReader();
                 while (sdr.Read())
                 {
-                    rows[0] = Convert.ToInt32(sdr[0]);
+                    rows = Convert.ToInt32(sdr[0]);
                 }
                 sdr.Close();
             }
             
-            return rows[0];
+            return rows;
         }
 
         public static bool IsExists(string command)

@@ -5,13 +5,13 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:HR_Portal.View.Usercontrol.Panels"
              mc:Ignorable="d" 
-             d:DesignHeight="1300" d:DesignWidth="1150">
+             d:DesignHeight="900" d:DesignWidth="1150">
     <ScrollViewer VerticalScrollBarVisibility="Auto">
-            <Grid Height="1300" Style="{StaticResource switch_grid_style}">
+            <Grid Height="900" Style="{StaticResource switch_grid_style}">
         <Grid.RowDefinitions>
             <RowDefinition Height="40" />
-            <RowDefinition Height="0.65*" />
-            <RowDefinition Height="1*" />
+            <RowDefinition Height="0*" />
+            <RowDefinition Height="0*" />
             <RowDefinition Height="1*" />
             <RowDefinition Height="1*" />
             <RowDefinition Height="1*" />

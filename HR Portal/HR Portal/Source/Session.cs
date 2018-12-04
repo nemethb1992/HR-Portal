@@ -8,8 +8,8 @@ namespace HR_Portal.Source
 {
     class Session
     {
-        private static List<ModelUserData> UserDatas;
-        public static List<ModelUserData> UserData { get { return UserDatas; } set { UserDatas = value; } }
+        private static ModelUserData UserDatas;
+        public static ModelUserData UserData { get { return UserDatas; } set { UserDatas = value; } }
 
         private static List<ModelApplicantSearchBar> ApplicantSearchValues;
         public static List<ModelApplicantSearchBar> ApplicantSearchValue { get { return ApplicantSearchValues; } set { ApplicantSearchValues = value; } }

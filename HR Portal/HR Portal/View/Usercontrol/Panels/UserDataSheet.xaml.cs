@@ -81,7 +81,7 @@ namespace HR_Portal.View.Usercontrol.Panels
 
         protected List<ModelUserData> GetUserData(int userId)
         {
-            return UserData.GetById(userId);
+            return UserData.GetByIdList(userId);
         }
 
         private void BackButton(object sender, RoutedEventArgs e)

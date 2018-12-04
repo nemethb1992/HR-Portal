@@ -1,0 +1,153 @@
+﻿<UserControl x:Class="HR_Portal.View.Usercontrol.Panels.HomePanel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:HR_Portal.View.Usercontrol.Panels"
+             mc:Ignorable="d" 
+             d:DesignHeight="750" d:DesignWidth="1150">
+    <Grid Style="{StaticResource switch_grid_style}" >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="50" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="50" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        <TextBlock x:Name="projekt_profile_title" 
+                   Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="3" 
+                   Style="{StaticResource big_title_style}"
+                   Text="Kezdőlap"
+                   Margin="0,0,200,0"/>
+        <Grid Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1.2*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0" Grid.Column="0" Margin="5" MouseDown="ToApplicant">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1.5*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <TextBlock Style="{StaticResource big_title_style}" HorizontalAlignment="Left" Margin="40,0" VerticalAlignment="Bottom"  Text="Jelöltek"/>
+                <Image Grid.Column="1" Grid.Row="1" Margin="30" VerticalAlignment="Bottom" Source="/Public/imgs/employee2.png" />
+                <Border x:Name="applicant_button" Panel.ZIndex="-1" Grid.ColumnSpan="2" Grid.RowSpan="10" Style="{StaticResource kezdolap_panel}">
+                </Border>
+                <Grid Grid.Row="1" Margin="10,10,0,10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Row="0" Text="Új jelöltek:" Margin="20,0" VerticalAlignment="Center" Style="{StaticResource minor_title_style}"/>
+                    <TextBlock Grid.Row="0" Grid.Column="1" x:Name="uj_jelolt_result" VerticalAlignment="Center"  Text="0" Style="{StaticResource minor_title_style}"/>
+                    <TextBlock Grid.Row="1" Text="Összes:" Margin="20,0" VerticalAlignment="Center" Style="{StaticResource minor_title_style}"/>
+                    <TextBlock Grid.Row="1" Grid.Column="1" x:Name="osszes_jelolt_result" VerticalAlignment="Center"  Text="0" Style="{StaticResource minor_title_style}"/>
+                    <TextBlock Grid.Row="2" Text="Projektben:" Margin="20,0" VerticalAlignment="Center" Style="{StaticResource minor_title_style}"/>
+                    <TextBlock Grid.Row="2" Grid.Column="1" x:Name="projektben_jelolt_result" VerticalAlignment="Center"  Text="0" Style="{StaticResource minor_title_style}"/>
+                </Grid>
+            </Grid>
+
+            <Grid Grid.Row="0" Grid.Column="1" Margin="5" MouseDown="ToProject">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1.5*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <TextBlock Style="{StaticResource big_title_style}" HorizontalAlignment="Left" Margin="40,0" VerticalAlignment="Bottom"  Text="Projektek"/>
+                <Image Grid.Column="1" Grid.Row="1" Margin="30" VerticalAlignment="Bottom" Source="/Public/imgs/projects.png" />
+                <Border x:Name="projekt_button" Panel.ZIndex="-1" Grid.ColumnSpan="2" Grid.RowSpan="10" Style="{StaticResource kezdolap_panel}">
+                </Border>
+                <Grid Grid.Row="1" Margin="10,10,0,10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1.2*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Row="0" Text="Aktív projekt:" Margin="20,0" VerticalAlignment="Center" Style="{StaticResource minor_title_style}"/>
+                    <TextBlock Grid.Row="0" Grid.Column="1" x:Name="aktiv_projekt_result" VerticalAlignment="Center"  Text="0" Style="{StaticResource minor_title_style}"/>
+                </Grid>
+            </Grid>
+
+
+
+
+            <!--<Grid Grid.Row="0" Grid.Column="1" Margin="5" MouseDown="ToApplicant">
+                <Border x:Name="jeloltek_button" Style="{StaticResource kezdolap_panel}">
+                    <Image Height="200" Margin="0,50,0,0" VerticalAlignment="Top" Source="/Public/imgs/employee2.png" />
+                </Border>
+                <TextBlock Style="{StaticResource big_title_style}" Panel.ZIndex="0" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,30" Text="Jelöltek"/>
+            </Grid>-->
+            
+            
+            
+            
+            <Grid Grid.ColumnSpan="2" Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Row="0" Grid.Column="0" Margin="5" MouseDown="ToSettings">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Image Margin="0,50,0,0" Grid.Row="0" VerticalAlignment="Top" Source="/Public/imgs/settings_big.png" />
+                    <Border x:Name="settings_button" Grid.RowSpan="2" Panel.ZIndex="-1" Style="{StaticResource kezdolap_panel}">
+                    </Border>
+                    <TextBlock Style="{StaticResource big_title_style}" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,30" Text="Beállítások"/>
+                </Grid>
+                <Grid Grid.Row="0" Grid.Column="1" Margin="5" MouseDown="ToAdmin">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Image Margin="0,50,0,0"  Grid.Row="0" VerticalAlignment="Top" Source="/Public/imgs/key2.png" />
+                    <Border x:Name="admin_button" Grid.RowSpan="2" Panel.ZIndex="-1" Style="{StaticResource kezdolap_panel}">
+                   </Border>
+                    <TextBlock Style="{StaticResource big_title_style}" Grid.Row="1" Panel.ZIndex="0" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,30" Text="Admin"/>
+                </Grid>
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>
+<!--<Button Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" Style="{StaticResource StandardButton_Interju}" Panel.ZIndex="1" Click="navigateToSzakmaiList" />
+            <Button Grid.Column="3" Grid.Row="1" Grid.RowSpan="2" Style="{StaticResource StandardButton_Interju}" Panel.ZIndex="1" Click="navigateToSzakmaiInterviewList" />
+            <TextBlock Grid.Column="1" Grid.Row="1" Style="{StaticResource big_title_style}" Panel.ZIndex="0" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Bevont projektek"/>
+            <TextBlock Grid.Column="3" Grid.Row="1" Style="{StaticResource big_title_style}" Panel.ZIndex="0" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Interjúk"/>
+            <TextBlock x:Name="projekt_no" Grid.Column="1" Grid.Row="1" Style="{StaticResource Standard_Textblock}" Panel.ZIndex="0" Margin="0,100,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" Text="6 db"/>
+            <TextBlock x:Name="interju_no" Grid.Column="3" Grid.Row="1" Style="{StaticResource Standard_Textblock}" Panel.ZIndex="0" Margin="0,100,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" Text="3 db"/>
+            <Image Grid.Column="1" Grid.Row="2" Margin="50,00,50,100" Source="/Public/imgs/job.png" />
+            <Image Grid.Column="3" Grid.Row="2" Margin="50,10,50,75" Source="/Public/imgs/interview.png" />-->
+     
+    

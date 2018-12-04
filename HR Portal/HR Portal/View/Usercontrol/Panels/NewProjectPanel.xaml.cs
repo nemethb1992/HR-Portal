@@ -109,7 +109,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             list.Add(new ModelInsertProject
             {
                 id = 0,
-                hr_id = Session.UserData[0].id,
+                hr_id = Session.UserData.id,
                 megnevezes_projekt = nev_tbx.Text,
                 pc = pcComboBox.id,
                 vegzettseg = vegzettsegComboBox.id,

@@ -11,20 +11,24 @@ namespace HR_Portal.Source
 {
     public class UserData
     {
-        public static List<ModelUserData> GetOwnDatas()
+        public static ModelUserData GetOwnDatas()
         {
-            List<ModelUserData> list = new List<ModelUserData>();
+            ModelUserData data = new ModelUserData();
             string username = Session.ActiveDirectoryDomain;
             if (username.Length>0)
             {
-                list = ModelUserData.GetUserSession("SELECT * FROM users WHERE username = '" + username + "'");
+                data = ModelUserData.GetUserSession("SELECT * FROM users WHERE username = '" + username + "'")[0];
             }
-            return list;
+            return data;
         }
 
-        public static List<ModelUserData> GetById(int userId)
+        public static ModelUserData GetById(int userId)
         {
-            return ModelUserData.GetUserSession("SELECT * FROM users WHERE id = '" + userId + "'"); ;
+            return ModelUserData.GetUserSession("SELECT * FROM users WHERE id = '" + userId + "'")[0];
+        }
+        public static List<ModelUserData> GetByIdList(int userId)
+        {
+            return ModelUserData.GetUserSession("SELECT * FROM users WHERE id = '" + userId + "'");
         }
 
         ///<summary>

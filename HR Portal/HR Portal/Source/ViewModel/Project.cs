@@ -116,7 +116,7 @@ namespace HR_Portal.Source.ViewModel
             MySql.Execute(command);
             command = "DELETE FROM projekt_koltsegek WHERE projekt_koltsegek.projekt_id = " + id + ";";
             MySql.Execute(command);
-            command = "DELETE FROM interjuk_kapcs WHERE interjuk_kapcs.projekt_id=" + id + " AND hr_id=" + Session.UserData[0].id + "";
+            command = "DELETE FROM interjuk_kapcs WHERE interjuk_kapcs.projekt_id=" + id + " AND hr_id=" + Session.UserData.id + "";
             MySql.Execute(command);
             MySql.Close();
         }
@@ -128,7 +128,7 @@ namespace HR_Portal.Source.ViewModel
             MySql.Execute(command);
             int proID = Convert.ToInt16(MySql.UniqueList("SELECT projektek.id FROM projektek WHERE projektek.megnevezes_projekt = '" + items[0].megnevezes_projekt + "' AND projektek.pc = " + items[0].pc + " AND projektek.munkakor = '" + items[0].munkakor + "'", "projektek", 1)[0]);
             Session.ProjektID = proID;
-            command = "INSERT INTO`projekt_ertesitendok_kapcs` (projekt_id,ertesitendok_id) VALUES("+ proID + ","+Session.UserData[0].id+")";
+            command = "INSERT INTO`projekt_ertesitendok_kapcs` (projekt_id,ertesitendok_id) VALUES("+ proID + ","+Session.UserData.id+")";
             MySql.Execute(command);
             MySql.Close();
         }

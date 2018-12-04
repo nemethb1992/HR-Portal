@@ -11,23 +11,17 @@ namespace HR_Portal.View.Windows
     /// </summary>
     public partial class Main : Window
     {
-        private ApplicantList applicant_p;
-        private ProjectList project_p;
-        private SettingsPanel settings_p;
+
         private SzakmaiKezdolap szakmai_Kezdolap;
-        private FavouritesPanel favourites_Panel;
-        private AdminPage adminPage;
+        private HomePanel homePanel;
         //private applicant_DataView applicant_dv;
         //private project_DataView project_dv;
         public Main()
         {
             InitializeComponent();
-            if (Session.UserData[0].kategoria >= 1)
+            if (Session.UserData.kategoria >= 1)
             {
-                if(Session.UserData[0].kategoria >= 2)
-                    admin_btn.Visibility = Visibility.Visible;
-
-                grid.Children.Add(project_p = new ProjectList(grid));
+                grid.Children.Add(homePanel = new HomePanel(grid));
                 HR_navigation_Grid.Visibility = Visibility.Visible;
             }
             else
@@ -51,36 +45,13 @@ namespace HR_Portal.View.Windows
             window.Close();
             mw.Show();
         }
-        private void mw_btn1_Click(object sender, RoutedEventArgs e)
-        {
-            grid.Children.Clear();
-            grid.Children.Add(project_p = new ProjectList(grid));
-        }
-        private void mw_btn2_Click(object sender, RoutedEventArgs e)
-        {
-            grid.Children.Clear();
-            grid.Children.Add(applicant_p = new ApplicantList(grid));
-        }
-        private void mw_btn3_Click(object sender, RoutedEventArgs e)
-        {
-            grid.Children.Clear();
-            grid.Children.Add(settings_p = new SettingsPanel(grid));
-        }
+
         private void szakmai_mainpage_btn_Click(object sender, RoutedEventArgs e)
         {
             grid.Children.Clear();
             grid.Children.Add(szakmai_Kezdolap = new SzakmaiKezdolap(grid));
         }
-        private void mw_btn4_Click(object sender, RoutedEventArgs e)
-        {
-            grid.Children.Clear();
-            grid.Children.Add(favourites_Panel = new FavouritesPanel(grid));
-        }
-        private void mw_btn5_Click(object sender, RoutedEventArgs e)
-        {
-            grid.Children.Clear();
-            grid.Children.Add(adminPage = new AdminPage(grid));
-        }
+
 
 
         private void Maximize_Window_Click(object sender, RoutedEventArgs e)
@@ -95,6 +66,12 @@ namespace HR_Portal.View.Windows
                 window.WindowState = WindowState.Normal;
             }
 
+        }
+
+        private void HomeButtonClick(object sender, RoutedEventArgs e)
+        {
+            grid.Children.Clear();
+            grid.Children.Add(homePanel = new HomePanel(grid));
         }
 
         //private void Button_Click(object sender, RoutedEventArgs e)
