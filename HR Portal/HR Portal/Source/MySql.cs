@@ -15,6 +15,7 @@ namespace HR_Portal.Source
         private const string CONNECTION_URL_3 = "Data Source = mysql.nethely.hu; Port=3306; Initial Catalog = hrcloudtest; User ID=hrcloudtest; Password=hrcloudtest2018";
         private const string CONNECTION_URL_4 = "Data Source = mysql.nethely.hu; Port=3306; Initial Catalog = pmkcvtest; User ID=pmkcvtest; Password=pmkcvtest";
         private const string CONNECTION_URL_5 = "Data Source = vpn.phoenix-mecano.hu; Port=29920; Initial Catalog = pmkcvtest; User ID=hr-admin; Password=pmhr2018";
+        private const string CONNECTION_URL_6 = "Data Source = localhost; Port=3306; Initial Catalog = xamphr; User ID=root; Password=";
 
         public static MySqlConnection conn;
         public static MySqlCommand cmd;
@@ -26,7 +27,7 @@ namespace HR_Portal.Source
             {
                 try
                 {
-                    conn = new MySqlConnection(CONNECTION_URL_2);
+                    conn = new MySqlConnection(CONNECTION_URL_6);
                 }
                 catch (MySqlException mysqlex)
                 {

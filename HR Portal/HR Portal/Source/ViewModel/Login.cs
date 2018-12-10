@@ -11,8 +11,9 @@ namespace HR_Portal.Source.ViewModel
         {
             if (MySql.Bind("SELECT count(id) FROM users WHERE username='" + username + "' AND validitas = 1"))
             {
+                Session.UserData = UserData.GetOwnDatas();
                 DateTime dateTime = DateTime.Now;
-                MySql.Execute("UPDATE users SET belepve = '" + dateTime.ToString("yyyy. MM. dd.") + "' WHERE username = '" + username + "';");
+                MySql.Execute("UPDATE users SET belepve = '" + dateTime.ToString("yyyy.MM.dd") + "' WHERE username = '" + username + "';");
                 MySql.Close();
                 return true;
             }
@@ -55,7 +56,7 @@ namespace HR_Portal.Source.ViewModel
         public static void Registration(string username, string name, string email, int kategoria)
         {
             DateTime dateTime = DateTime.Now;
-            MySql.Execute("INSERT INTO `users` (`id`, `username`, `name`, `email`, `kategoria`, `jogosultsag`, `validitas`, `belepve`, `reg_datum`) VALUES (NULL, '" + username + "', '" + name + "', '" + email + "', '" + kategoria + "', '1', '1', '" + dateTime.ToString("yyyy. MM. dd.") + "', '" + dateTime.ToString("yyyy. MM. dd.") + "');");
+            MySql.Execute("INSERT INTO `users` (`id`, `username`, `name`, `email`, `kategoria`, `jogosultsag`, `validitas`, `belepve`, `reg_datum`) VALUES (NULL, '" + username + "', '" + name + "', '" + email + "', '" + kategoria + "', '1', '1', '" + dateTime.ToString("yyyy.MM.dd") + "', '" + dateTime.ToString("yyyy.MM.dd") + "');");
             MySql.Close();
         }
         

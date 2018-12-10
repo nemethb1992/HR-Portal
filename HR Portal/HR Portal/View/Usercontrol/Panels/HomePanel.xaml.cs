@@ -40,7 +40,8 @@ namespace HR_Portal.View.Usercontrol.Panels
 
         private void ButtonInfoLoad()
         {
-            uj_jelolt_result.Text = Source.MySql.Count("SELECT count(jeloltek.id) FROM jeloltek WHERE friss = 1").ToString() +" db";
+            uj_jelolt_result.Text = Source.MySql.Count("SELECT count(jeloltek.id) FROM jeloltek WHERE friss=1 AND jeloltek.reg_date > '"+Session.UserData.belepve+"'").ToString() + " db";
+            nem_megnyitott_result.Text = Source.MySql.Count("SELECT count(jeloltek.id) FROM jeloltek WHERE friss = 1").ToString() +" db";
             osszes_jelolt_result.Text = Source.MySql.Count("SELECT count(jeloltek.id) FROM jeloltek").ToString() + " db";
             projektben_jelolt_result.Text = Source.MySql.Count("SELECT COUNT(DISTINCT jelolt_id) FROM projekt_jelolt_kapcs;").ToString() + " db";
             aktiv_projekt_result.Text = Source.MySql.Count("SELECT count(id) FROM projektek WHERE statusz = 1;").ToString() + " db";

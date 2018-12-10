@@ -7,6 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="750" d:DesignWidth="1150">
     <Grid Style="{StaticResource switch_grid_style}" >
+        
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="50" />
             <ColumnDefinition Width="*" />
@@ -55,15 +56,17 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="2.1*" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
                     <TextBlock Grid.Row="0" Text="Új jelöltek:" Margin="20,0" VerticalAlignment="Center" Style="{StaticResource minor_title_style}"/>
                     <TextBlock Grid.Row="0" Grid.Column="1" x:Name="uj_jelolt_result" VerticalAlignment="Center"  Text="0" Style="{StaticResource minor_title_style}"/>
-                    <TextBlock Grid.Row="1" Text="Összes:" Margin="20,0" VerticalAlignment="Center" Style="{StaticResource minor_title_style}"/>
-                    <TextBlock Grid.Row="1" Grid.Column="1" x:Name="osszes_jelolt_result" VerticalAlignment="Center"  Text="0" Style="{StaticResource minor_title_style}"/>
-                    <TextBlock Grid.Row="2" Text="Projektben:" Margin="20,0" VerticalAlignment="Center" Style="{StaticResource minor_title_style}"/>
-                    <TextBlock Grid.Row="2" Grid.Column="1" x:Name="projektben_jelolt_result" VerticalAlignment="Center"  Text="0" Style="{StaticResource minor_title_style}"/>
+                    <TextBlock Grid.Row="1" Text="Nem megnyitott:" Margin="20,0" VerticalAlignment="Center" Style="{StaticResource minor_title_style}"/>
+                    <TextBlock Grid.Row="1" Grid.Column="1" x:Name="nem_megnyitott_result" VerticalAlignment="Center"  Text="0" Style="{StaticResource minor_title_style}"/>
+                    <TextBlock Grid.Row="2" Text="Összes:" Margin="20,0" VerticalAlignment="Center" Style="{StaticResource minor_title_style}"/>
+                    <TextBlock Grid.Row="2" Grid.Column="1" x:Name="osszes_jelolt_result" VerticalAlignment="Center"  Text="0" Style="{StaticResource minor_title_style}"/>
+                    <TextBlock Grid.Row="3" Text="Projektben:" Margin="20,0" VerticalAlignment="Center" Style="{StaticResource minor_title_style}"/>
+                    <TextBlock Grid.Row="3" Grid.Column="1" x:Name="projektben_jelolt_result" VerticalAlignment="Center"  Text="0" Style="{StaticResource minor_title_style}"/>
                 </Grid>
             </Grid>
 
@@ -90,10 +93,10 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="1.2*" />
+                        <ColumnDefinition Width="2*" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-                    <TextBlock Grid.Row="0" Text="Aktív projekt:" Margin="20,0" VerticalAlignment="Center" Style="{StaticResource minor_title_style}"/>
+                    <TextBlock Grid.Row="0" Text="Aktív projektek:" Margin="20,0" VerticalAlignment="Center" Style="{StaticResource minor_title_style}"/>
                     <TextBlock Grid.Row="0" Grid.Column="1" x:Name="aktiv_projekt_result" VerticalAlignment="Center"  Text="0" Style="{StaticResource minor_title_style}"/>
                 </Grid>
             </Grid>
