@@ -225,7 +225,7 @@ namespace HR_Portal.View.Usercontrol.Panels
         {
             TextBox textbox = sender as TextBox;
 
-            if (textbox.Text == "E-mail cím")
+            if (textbox.Text == "E-mail cím" || textbox.Text == "Elküldve!")
             {
                 textbox.Text = "";
             }
@@ -384,6 +384,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             try
             {
                 new Email().Send(email_tbx.Text, emailTemplate.ProjektPublikalo(projekt_profile_title.Text, hirdetes(), szoveg()));
+                email_tbx.Text = "Elküldve!";
             }
             catch (Exception)
             {
