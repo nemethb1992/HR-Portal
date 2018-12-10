@@ -131,8 +131,9 @@ namespace HR_Portal.Public.templates
                                             <p>Személyügyi Osztály</p>";
             return front + content + bottom;
         }
-        public string Egyedi_Email(string content)
+        public string Egyedi_Email(string abstractContent, string name)
         {
+            string content = "<h2>Tisztelt " + name + @"!</h2><p>" + abstractContent + "</p><br><p>Üdvözlettel:</p><p>Phoenix Mecano Kecskemét Kft.</p><p>Személyügyi Osztály</p>";
             return front + content + bottom;
         }
 

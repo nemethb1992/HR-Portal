@@ -41,6 +41,7 @@ namespace HR_Portal.View.Usercontrol.Panels
         {
 
             applicant_profile_title.Text = list[0].nev;
+            header.Text = "Tisztelt "+ list[0].nev + "!";
             app_input_1.Text = list[0].email;
             app_input_2.Text = list[0].telefon.ToString();
             app_input_3.Text = list[0].lakhely;
@@ -172,7 +173,7 @@ namespace HR_Portal.View.Usercontrol.Panels
 
         private void SendCustomMail(object sender, RoutedEventArgs e)
         {
-            new Email().Send(list[0].email,new EmailTemplate().Egyedi_Email(email_content.Text));
+            new Email().Send(list[0].email,new EmailTemplate().Egyedi_Email(email_content.Text, list[0].nev));
             email_content.Text = "";
             mailPanelClose();
         }
