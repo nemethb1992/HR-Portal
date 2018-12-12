@@ -93,12 +93,12 @@ namespace HR_Portal.View.Usercontrol
                     {
                         LoginSign.Text = "Kérem regisztráljon!";
                     }
-                }
-                else
-                {
-                    LoginSign.Text = "Sikertelen hitelesítés!";
-                }
             }
+            else
+            {
+                LoginSign.Text = "Sikertelen hitelesítés!";
+            }
+        }
             else
             {
                 LoginSign.Text = "Nincs adatkapcsolat!";

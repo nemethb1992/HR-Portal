@@ -98,7 +98,7 @@ namespace HR_Portal.Source.ViewModel
             {
                 command += "  AND projekt_jelolt_kapcs.id IS NOT NULL ";
             }
-            //command += " GROUP BY jeloltek.email ";
+            command += " GROUP BY jeloltek.email ";
 
             switch (sw[0].HeaderSelected)
             {

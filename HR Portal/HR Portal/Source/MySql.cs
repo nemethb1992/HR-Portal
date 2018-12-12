@@ -10,7 +10,7 @@ namespace HR_Portal.Source
 {
     public static class MySql
     {
-        private const string CONNECTION_URL_1 = "Data Source = 192.168.144.189; Port=3306; Initial Catalog = pmkcvtest; User ID=hr-admin; Password=pmhr2018";
+        private const string CONNECTION_URL_1 = "Data Source = 192.168.144.189; Port=3306; Initial Catalog = pmkcvtest; User ID=hr-admin; Password=pmhr2018; charset=utf8;";
         private const string CONNECTION_URL_2 = "Data Source = 192.168.144.189; Port=3306; Initial Catalog = pmhrdemo; User ID=hr-admin; Password=pmhr2018";
         private const string CONNECTION_URL_3 = "Data Source = mysql.nethely.hu; Port=3306; Initial Catalog = hrcloudtest; User ID=hrcloudtest; Password=hrcloudtest2018";
         private const string CONNECTION_URL_4 = "Data Source = mysql.nethely.hu; Port=3306; Initial Catalog = pmkcvtest; User ID=pmkcvtest; Password=pmkcvtest";
