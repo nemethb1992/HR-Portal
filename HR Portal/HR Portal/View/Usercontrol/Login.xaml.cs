@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using HR_Portal.Public.templates;
 using HR_Portal.Source;
 using HR_Portal.Source.ViewModel;
 using HR_Portal.View.Windows;
@@ -19,7 +20,6 @@ namespace HR_Portal.View.Usercontrol
         {
             this.grid = sgrid;
             InitializeComponent();
-
             //setartUp();
         }
 
