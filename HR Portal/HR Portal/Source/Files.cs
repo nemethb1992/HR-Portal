@@ -52,8 +52,37 @@ namespace HR_Portal.Source
 
         public static string GetProfessionUrl()
         {
-            return MySql.GetRootUrl("SELECT url FROM ROOTurl WHERE id=0");
+            return MySql.GetRootUrl("SELECT url FROM ROOTurl WHERE id=1");
         }
+
+        public void DeleteFolder(int ApplicantID)
+        {
+            Directory.Delete(GetApplicantUrl() + ApplicantID, true);
+        }
+
+        public void DeleteProfessionFolder(int ApplicantID)
+        {
+            Directory.Delete(GetProfessionUrl()+ ApplicantID, true);
+        }
+
+        public static void CopyAll(DirectoryInfo source, DirectoryInfo target)
+        {
+            Directory.CreateDirectory(target.FullName);
+            
+            foreach (FileInfo fi in source.GetFiles())
+            {
+                Console.WriteLine(@"Copying {0}\{1}", target.FullName, fi.Name);
+                fi.CopyTo(Path.Combine(target.FullName, fi.Name), true);
+            }
+            
+            foreach (DirectoryInfo diSourceSubDir in source.GetDirectories())
+            {
+                DirectoryInfo nextTargetSubDir =
+                    target.CreateSubdirectory(diSourceSubDir.Name);
+                CopyAll(diSourceSubDir, nextTargetSubDir);
+            }
+        }
+
 
         public static void Upload(int to)
         {

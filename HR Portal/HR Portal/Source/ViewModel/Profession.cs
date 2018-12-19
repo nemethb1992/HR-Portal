@@ -14,5 +14,12 @@ namespace HR_Portal.Source.ViewModel
             string command = "SELECT * FROM profession_jeloltek";
             return new ModelProfession().Get(command); 
         }
+
+        public void Delete(int ApplicantID)
+        {
+            string command = "DELETE FROM profession_jeloltek WHERE id="+ApplicantID;
+            MySql.Execute(command);
+        }
+
     }
 }

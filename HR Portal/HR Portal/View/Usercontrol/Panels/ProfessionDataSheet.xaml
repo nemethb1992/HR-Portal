@@ -69,13 +69,13 @@
                 <TextBlock x:Name="app_3" Grid.Column="0" Grid.Row="6" Style="{StaticResource Standard_Textblock}" Text="Beérkezés dátuma" />
                 <TextBlock x:Name="app_4" Grid.Column="0" Grid.Row="8" Style="{StaticResource Standard_Textblock}" Text="Megjelölt állás" />
 
-                <TextBlock Grid.Column="0" Grid.Row="3"   Text="-" Padding="10,0,0,0" Foreground="#4f608a" Style="{StaticResource Standard_Textblock}" x:Name="app_input_1" />
-                <TextBlock Grid.Column="0" Grid.Row="5"   Text="-" Padding="10,0,0,0" Foreground="#4f608a" Style="{StaticResource Standard_Textblock}" x:Name="app_input_2" />
-                <TextBlock Grid.Column="0" Grid.Row="7"   Text="-" Padding="10,0,0,0" Foreground="#4f608a" Style="{StaticResource Standard_Textblock}" x:Name="app_input_3" />
-                <TextBlock Grid.Column="0" Grid.Row="9"   Text="-" Padding="10,0,0,0" Foreground="#4f608a" Style="{StaticResource Standard_Textblock}" x:Name="app_input_4" />
+                <TextBlock Grid.Column="0" Grid.Row="3"   Text="-" Padding="10,0,0,0" Foreground="#FF404E70" Style="{StaticResource Standard_Textblock}" x:Name="app_input_1" />
+                <TextBlock Grid.Column="0" Grid.Row="5"   Text="-" Padding="10,0,0,0" Foreground="#FF404E70" Style="{StaticResource Standard_Textblock}" x:Name="app_input_2" />
+                <TextBlock Grid.Column="0" Grid.Row="7"   Text="-" Padding="10,0,0,0" Foreground="#FF404E70" Style="{StaticResource Standard_Textblock}" x:Name="app_input_3" />
+                <TextBlock Grid.Column="0" Grid.Row="9"   Text="-" Padding="10,0,0,0" Foreground="#FF404E70" Style="{StaticResource Standard_Textblock}" x:Name="app_input_4" />
             </Grid>
 
-            <Grid x:Name="ProfessionAttachments" Grid.Column="1"  Grid.Row="2">
+            <Grid x:Name="ProfessionAttachments" Grid.Column="1" Margin="0,20,0,0" Grid.Row="2">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>

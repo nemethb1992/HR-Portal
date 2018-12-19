@@ -249,6 +249,8 @@ namespace HR_Portal.View.Usercontrol.Panels
                     MenuItem menuItem = sender as MenuItem;
                     ModelApplicantList items = menuItem.DataContext as ModelApplicantList;
                     Applicant.DeleteApplicant(items.id);
+                    Files file = new Files();
+                    file.DeleteFolder(items.id);
                     applicantListLoader();
                     break;
                 case MessageBoxResult.No:
@@ -320,7 +322,6 @@ namespace HR_Portal.View.Usercontrol.Panels
             lakhely_srcinp.Text = "";
             email_srcinp.Text = "";
             eletkor_srcinp.Text = "";
-            //tapsztalat_srcinp.Text = "";
             regdate_srcinp.Text = "";
             interju_srcinp.Text = "";
             cimke_srcinp.Text = "";
@@ -329,7 +330,6 @@ namespace HR_Portal.View.Usercontrol.Panels
             lakhely_label.Visibility = Visibility.Visible;
             email_label.Visibility = Visibility.Visible;
             eletkor_label.Visibility = Visibility.Visible;
-            //tapsztalat_label.Visibility = Visibility.Visible;
             regdate_label.Visibility = Visibility.Visible;
             interju_label.Visibility = Visibility.Visible;
             cimke_label.Visibility = Visibility.Visible;
