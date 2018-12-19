@@ -23,7 +23,10 @@
                    Style="{StaticResource big_title_style}"
                    Text="Profession jelentkezések"
                    Margin="0,0,200,0"/>
-        <ListBox x:Name="abstractApplicant_ListBox"  Grid.Row="1" Grid.Column="1" Style="{StaticResource listBox_style}" BorderBrush="Transparent" HorizontalContentAlignment="Stretch" SelectionMode="Extended">
+        <Border Grid.Row="1" Grid.Column="1" Style="{StaticResource listCorner}" Background="#FFE2E2E2">
+        </Border>
+
+        <ListBox x:Name="abstractApplicant_ListBox" Background="Transparent" Grid.Row="1" Padding="10" Grid.Column="1" Style="{StaticResource listBox_style}" BorderBrush="Transparent" HorizontalContentAlignment="Stretch" SelectionMode="Extended">
             <ListBox.Resources>
                 <Style TargetType="{x:Type Border}" BasedOn="{StaticResource listCorner}"/>
                 <Style TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource listBoxItem_style_big}"/>
