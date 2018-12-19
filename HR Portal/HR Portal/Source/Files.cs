@@ -15,7 +15,7 @@ namespace HR_Portal.Source
 
             try
             {
-                FileInfo[] articles = new DirectoryInfo(ROOTurl() + ApplicantID).GetFiles();
+                FileInfo[] articles = new DirectoryInfo(GetApplicantUrl() + ApplicantID).GetFiles();
                 foreach (FileInfo file in articles)
                 {
                     list.Add(new ModelJeloltFile { fajlnev = file.Name, color = (file.Extension == ".pdf" ? "#e3202a" : "#2a579a"), path = file.FullName });
@@ -27,9 +27,14 @@ namespace HR_Portal.Source
             return list;
         }
 
-        public static string ROOTurl()
+        public static string GetApplicantUrl()
         {
-            return MySql.GetRootUrl("SELECT * FROM ROOTurl");
+            return MySql.GetRootUrl("SELECT url FROM ROOTurl WHERE id=0");
+        }
+
+        public static string GetProfessionUrl()
+        {
+            return MySql.GetRootUrl("SELECT url FROM ROOTurl WHERE id=0");
         }
 
         public static void Upload(int to)
@@ -46,7 +51,7 @@ namespace HR_Portal.Source
 
             string[] FileNames = ofd.SafeFileNames;
 
-            string newPath = ROOTurl() + "\\" + to + "\\";
+            string newPath = GetApplicantUrl() + "\\" + to + "\\";
 
             List<byte[]> fileInByteList = new List<byte[]>();
             

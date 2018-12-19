@@ -81,7 +81,7 @@ namespace HR_Portal.Source
         ///</summary>
         public static bool IsAdmin(int applicantId)
         {
-            bool value = MySql.Bind("SELECT * FROM users WHERE users.id = '" + applicantId + "' AND admin = 1;");
+            bool value = MySql.Bind("SELECT count(id) FROM users WHERE users.id = '" + applicantId + "' AND admin = 1;");
             MySql.Close();
             return value;
         }

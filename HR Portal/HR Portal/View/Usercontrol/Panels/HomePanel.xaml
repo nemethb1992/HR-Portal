@@ -120,7 +120,7 @@
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <Grid Grid.Row="0" Grid.Column="0" Margin="5" MouseDown="ToSettings">
+                <Grid Grid.Row="0" Grid.Column="1" Margin="5" MouseDown="ToSettings">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="2*"/>
                         <RowDefinition Height="*"/>
@@ -130,7 +130,7 @@
                     </Border>
                     <TextBlock Style="{StaticResource big_title_style}" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,30" Text="Beállítások"/>
                 </Grid>
-                <Grid Grid.Row="0" Grid.Column="1" Margin="5" MouseDown="ToAdmin">
+                <Grid Grid.Row="0" Grid.Column="3" Margin="5" MouseDown="ToAdmin">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="2*"/>
                         <RowDefinition Height="*"/>
@@ -139,6 +139,16 @@
                     <Border x:Name="admin_button" Grid.RowSpan="2" Panel.ZIndex="-1" Style="{StaticResource kezdolap_panel}">
                    </Border>
                     <TextBlock Style="{StaticResource big_title_style}" Grid.Row="1" Panel.ZIndex="0" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,30" Text="Admin"/>
+                </Grid>
+                <Grid Grid.Row="0" Grid.Column="0" Margin="5" MouseDown="ToProfession">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Image Margin="0,50,0,0"  Grid.Row="0" VerticalAlignment="Top" Source="/Public/imgs/profession.png" />
+                    <Border x:Name="profession_btn" Grid.RowSpan="2" Panel.ZIndex="-1" Style="{StaticResource kezdolap_panel}">
+                    </Border>
+                    <TextBlock Style="{StaticResource big_title_style}" Grid.Row="1" Panel.ZIndex="0" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,30" Text="Profession"/>
                 </Grid>
             </Grid>
         </Grid>

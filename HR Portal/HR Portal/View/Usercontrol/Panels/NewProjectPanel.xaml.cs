@@ -115,7 +115,7 @@ namespace HR_Portal.View.Usercontrol.Panels
                 vegzettseg = vegzettsegComboBox.id,
                 tapasztalat_ev = Convert.ToInt32(tapasztalat_tbx.Text),
                 statusz = 1,
-                fel_datum = localDate.ToString("yyyy.MM.dd."),
+                fel_datum = localDate.ToString("yyyy.MM.dd"),
                 le_datum = "-",
                 nyelvtudas = nyelvComboBox.id,
                 munkakor = munkakorComboBox.id,

@@ -14,6 +14,7 @@ namespace HR_Portal.View.Usercontrol.Panels
         private ApplicantList applicant_p;
         private ProjectList project_p;
         private SettingsPanel settings_p;
+        private ProfessionPage professionPage;
         private AdminPage adminPage;
 
 
@@ -25,7 +26,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             //if (Session.UserData.kategoria >= 2)
             //    admin_btn.Visibility = Visibility.Visible;
 
-            new Email().Send("hrportal@pm-hungaria.com", new EmailTemplate().Teszt());
+            //new Email().Send("hrportal@pm-hungaria.com", new EmailTemplate().Teszt());
         }
 
         private void ButtonInfoLoad()
@@ -48,6 +49,11 @@ namespace HR_Portal.View.Usercontrol.Panels
         {
             grid.Children.Clear();
             grid.Children.Add(applicant_p = new ApplicantList(grid));
+        }
+        private void ToProfession(object sender, MouseButtonEventArgs e)
+        {
+            grid.Children.Clear();
+            grid.Children.Add(professionPage = new ProfessionPage(grid));
         }
         private void ToSettings(object sender, MouseButtonEventArgs e)
         {
