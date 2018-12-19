@@ -37,6 +37,7 @@
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="150" />
+                            <ColumnDefinition Width="50" />
                             <ColumnDefinition Width="150" />
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
@@ -49,7 +50,8 @@
                         <TextBlock Style="{StaticResource panelTbl_style}" Padding="11" Grid.Row="0" Grid.Column="2" Text="{Binding email}" />
                         <TextBlock Style="{StaticResource panelTbl_style}" Padding="11" Grid.Row="0" Grid.Column="3" Text="{Binding telephone}" />
                         <TextBlock Style="{StaticResource panelTbl_style}" Padding="11" Grid.Row="1" Grid.Column="3" Text="{Binding reg_date}"/>
-                        <Button x:Name="applicant_open_btn" Style="{StaticResource StandardButton}" Grid.Column="6" Grid.RowSpan="2" Content="Kiegészít" Margin="3"/>
+                        <Button x:Name="discard_btn" Style="{StaticResource StandardButton}" Grid.Column="4" Grid.RowSpan="2" Content="x" Margin="3" Click="DiscardProfessionApplicant"/>
+                        <Button x:Name="applicant_open_btn" Style="{StaticResource StandardButton}" Grid.Column="5" Grid.RowSpan="2" Content="Kiegészít" Margin="3" Click="OpenProfessionApplicant"/>
                         <!--<Button Style="{StaticResource panelBtn_style}" Grid.Column="6" Margin="10,0,10,0" Content="Módosít"/>-->
                     </Grid>
                 </DataTemplate>

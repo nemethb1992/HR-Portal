@@ -27,6 +27,24 @@ namespace HR_Portal.Source
             return list;
         }
 
+        public static List<ModelJeloltFile> ReadProfession(int ApplicantID)
+        {
+            List<ModelJeloltFile> list = new List<ModelJeloltFile>();
+
+            try
+            {
+                FileInfo[] articles = new DirectoryInfo(GetApplicantUrl()+ "ProfessionDocuments\\" + ApplicantID).GetFiles();
+                foreach (FileInfo file in articles)
+                {
+                    list.Add(new ModelJeloltFile { fajlnev = file.Name, color = "White", path = file.FullName });
+                }
+            }
+            catch (Exception)
+            {
+            }
+            return list;
+        }
+
         public static string GetApplicantUrl()
         {
             return MySql.GetRootUrl("SELECT url FROM ROOTurl WHERE id=0");

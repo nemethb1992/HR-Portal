@@ -1,0 +1,118 @@
+﻿<UserControl x:Class="HR_Portal.View.Usercontrol.Panels.ProfessionDataSheet"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:HR_Portal.View.Usercontrol.Panels"
+             mc:Ignorable="d" 
+             d:DesignHeight="750" d:DesignWidth="1150">
+    <Grid Style="{StaticResource switch_grid_style}" >
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="50" />
+            <ColumnDefinition Width="3*" />
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="50" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        <TextBlock x:Name="ProfessionDataSheetName" 
+                   Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="3" 
+                   Style="{StaticResource big_title_style}"
+                   Text="Jelentkezésilap"
+                   Margin="0,0,200,0"/>
+        <Button Grid.Column="2" Grid.Row="0" Content="Vissza" HorizontalAlignment="Right" Width="200"  Style="{StaticResource StandardButton}" Click="BackButton"/>
+
+        <Border Grid.Row="1" Grid.RowSpan="1" Grid.Column="1" Style="{StaticResource listCorner}" Background="#FFD7D9E0">
+        </Border>
+        <Grid Grid.Column="1" Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="40" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="40" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="80"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="30"/>
+            </Grid.RowDefinitions>
+            <Image Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="0" HorizontalAlignment="Left" Margin="0,20,0,0"  Source="/Public/imgs/profession-long.png"/>
+
+            <Grid x:Name="ProfessionSheet" Grid.Column="1" Grid.Row="1" Margin="0,10,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <TextBlock x:Name="ProfessionName" 
+                   Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" 
+                   Style="{StaticResource big_title_style}"
+                   Text="-"
+                   Margin="0,0,200,0"/>
+
+                <TextBlock x:Name="app_1" Grid.Column="0" Grid.Row="2" Style="{StaticResource Standard_Textblock}" Text="E-mail" />
+                <TextBlock x:Name="app_2" Grid.Column="0" Grid.Row="4" Style="{StaticResource Standard_Textblock}" Text="Telefon" />
+                <TextBlock x:Name="app_3" Grid.Column="0" Grid.Row="6" Style="{StaticResource Standard_Textblock}" Text="Beérkezés dátuma" />
+                <TextBlock x:Name="app_4" Grid.Column="0" Grid.Row="8" Style="{StaticResource Standard_Textblock}" Text="Megjelölt állás" />
+
+                <TextBlock Grid.Column="0" Grid.Row="3"   Text="-" Padding="10,0,0,0" Foreground="#4f608a" Style="{StaticResource Standard_Textblock}" x:Name="app_input_1" />
+                <TextBlock Grid.Column="0" Grid.Row="5"   Text="-" Padding="10,0,0,0" Foreground="#4f608a" Style="{StaticResource Standard_Textblock}" x:Name="app_input_2" />
+                <TextBlock Grid.Column="0" Grid.Row="7"   Text="-" Padding="10,0,0,0" Foreground="#4f608a" Style="{StaticResource Standard_Textblock}" x:Name="app_input_3" />
+                <TextBlock Grid.Column="0" Grid.Row="9"   Text="-" Padding="10,0,0,0" Foreground="#4f608a" Style="{StaticResource Standard_Textblock}" x:Name="app_input_4" />
+            </Grid>
+
+            <Grid x:Name="ProfessionAttachments" Grid.Column="1"  Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="40" />
+                </Grid.RowDefinitions>
+                <TextBlock x:Name="csatolmanyok_label" Grid.Column="0" Grid.Row="0"  Style="{StaticResource Standard_Textblock}" Text="Csatolmányok" />
+
+                <ListBox Grid.Column="0" Grid.Row="1" Grid.RowSpan="5" x:Name="ProfessionAttachmentListBox" AllowDrop="True" Style="{StaticResource small_listBox_style}"   HorizontalContentAlignment="Stretch" SelectionMode="Extended">
+                    <ListBox.Resources>
+                        <Style TargetType="{x:Type Border}" BasedOn="{StaticResource listCorner}"/>
+                        <Style TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource listBoxItem_style}"/>
+                    </ListBox.Resources>
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Margin="2" Height="30" Background="{Binding color}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="5*" />
+                                    <ColumnDefinition Width="100" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="1*" />
+                                </Grid.RowDefinitions>
+                                <TextBlock Grid.Column="0" Margin="10,0" Style="{StaticResource ListText}" Text="{Binding fajlnev}"/>
+                                <Button x:Name="csatolmany_download" Grid.Column="1" Style="{StaticResource StandardButton}" Margin="4,2" Content="Megnyitás" Click="ProfessionAttachemntOpen"/>
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </Grid>
+        </Grid>
+
+
+    </Grid>
+</UserControl>
