@@ -8,7 +8,8 @@ using HR_Portal.Source.Model;
 namespace HR_Portal.Source
 {
     class Files
-    {
+    { 
+
         public static List<ModelJeloltFile> Read(int ApplicantID)
         {
             List<ModelJeloltFile> list = new List<ModelJeloltFile>();

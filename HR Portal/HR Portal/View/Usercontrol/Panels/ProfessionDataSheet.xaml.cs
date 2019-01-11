@@ -1,6 +1,7 @@
 ﻿using HR_Portal.Source;
 using HR_Portal.Source.Model;
 using HR_Portal.Source.Model.Applicant;
+using HR_Portal.Source.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -55,6 +56,12 @@ namespace HR_Portal.View.Usercontrol.Panels
         {
             ModelJeloltFile item = (sender as Button).DataContext as ModelJeloltFile;
             Process.Start(item.path);
+        }
+
+        private void SaveApplicant(object sender, RoutedEventArgs e)
+        {
+            Profession prof = new Profession();
+            prof.Fullify(data);
         }
     }
 }

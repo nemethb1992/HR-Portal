@@ -26,6 +26,7 @@ namespace HR_Portal.Source
         {
             return ModelUserData.GetUserSession("SELECT * FROM users WHERE id = '" + userId + "'")[0];
         }
+        
         public static List<ModelUserData> GetByIdList(int userId)
         {
             return ModelUserData.GetUserSession("SELECT * FROM users WHERE id = '" + userId + "'");

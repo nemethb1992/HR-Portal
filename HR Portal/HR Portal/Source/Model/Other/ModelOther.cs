@@ -10,9 +10,8 @@ namespace HR_Portal.Source.Model
         public int id { get; set; }
         public object value { get; set; }
     }
-
-
-    public class ModelNyelv
+    
+        public class ModelNyelv
     {
         public int id { get; set; }
         public string nyelv { get; set; }
