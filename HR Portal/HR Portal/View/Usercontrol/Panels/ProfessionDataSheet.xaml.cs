@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -28,6 +29,7 @@ namespace HR_Portal.View.Usercontrol.Panels
         private Grid grid;
         private ModelProfession data;
         private ProfessionPage professionPage;
+        CommonUtility Utility = new CommonUtility();
         public ProfessionDataSheet(Grid grid, ModelProfession data)
         {
             this.data = data;
@@ -43,6 +45,11 @@ namespace HR_Portal.View.Usercontrol.Panels
             app_input_3.Text = data.reg_date;
             app_input_4.Text = data.projekt;
             ProfessionAttachmentListBox.ItemsSource = Files.ReadProfession(data.id);
+
+            cbx1.ItemsSource = Utility.Data_Nemek();
+            cbx2.ItemsSource = Utility.Data_Vegzettseg();
+            cbx3.ItemsSource = Utility.Data_Nyelv();
+            cbx4.ItemsSource = Utility.Data_Ertesulesek();
         }
 
         private void BackButton(object sender, RoutedEventArgs e)
@@ -61,7 +68,20 @@ namespace HR_Portal.View.Usercontrol.Panels
         private void SaveApplicant(object sender, RoutedEventArgs e)
         {
             Profession prof = new Profession();
+
+            data.neme = ((cbx1 as ComboBox).SelectedItem as ModelNem).id;
+            data.vegzettseg = ((cbx2 as ComboBox).SelectedItem as ModelVegzettseg).id;
+            data.nyelvtudas = ((cbx3 as ComboBox).SelectedItem as ModelNyelv).id;
+            data.ertesult = ((cbx4 as ComboBox).SelectedItem as ModelErtesulesek).id;
+
             prof.Fullify(data);
+        }
+
+
+        protected void numericTextBox(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
         }
     }
 }

@@ -89,7 +89,7 @@
                 </Grid.RowDefinitions>
                 <TextBlock x:Name="csatolmanyok_label" Grid.Column="0" Grid.Row="0"  Style="{StaticResource Standard_Textblock}" Text="Csatolmányok" />
 
-                <ListBox Grid.Column="0" Grid.Row="1" Grid.RowSpan="5" x:Name="ProfessionAttachmentListBox" AllowDrop="True" Style="{StaticResource small_listBox_style}"   HorizontalContentAlignment="Stretch" SelectionMode="Extended">
+                  <ListBox Grid.Column="0" Grid.Row="1" Grid.RowSpan="5" x:Name="ProfessionAttachmentListBox" AllowDrop="True" Style="{StaticResource small_listBox_style}"   HorizontalContentAlignment="Stretch" SelectionMode="Extended">
                     <ListBox.Resources>
                         <Style TargetType="{x:Type Border}" BasedOn="{StaticResource listCorner}"/>
                         <Style TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource listBoxItem_style}"/>
@@ -113,25 +113,40 @@
             </Grid>
         </Grid>
 
-        <Grid Grid.Column="2" Grid.Row="1">
+        <Grid Grid.Column="2" Margin="30,0" Grid.Row="1">
 
             <Grid.RowDefinitions>
-                <RowDefinition Height="0.3*" />
+                <RowDefinition Height="0.4*" />
                 <RowDefinition Height="1*" />
-                <RowDefinition Height="0.3*" />
+                <RowDefinition Height="0.4*" />
                 <RowDefinition Height="1*" />
-                <RowDefinition Height="0.3*" />
+                <RowDefinition Height="0.4*" />
                 <RowDefinition Height="1*" />
-                <RowDefinition Height="0.3*" />
+                <RowDefinition Height="0.4*" />
                 <RowDefinition Height="1*" />
-                <RowDefinition Height="0.3*" />
+                <RowDefinition Height="0.4*" />
                 <RowDefinition Height="1*" />
-                <RowDefinition Height="0.3*" />
+                <RowDefinition Height="0.4*" />
                 <RowDefinition Height="1*" />
                 <RowDefinition Height="3*" />
                 <RowDefinition Height="1*" />
             </Grid.RowDefinitions>
-            <ComboBox Grid.Row="1" Text="" Margin="10" x:Name="cbx1" >
+            <TextBlock Grid.Row="0" VerticalAlignment="Center" Style="{StaticResource Standard_Textblock}" Text="Neme" />
+            <TextBlock Grid.Row="2" VerticalAlignment="Center" Style="{StaticResource Standard_Textblock}" Text="Végzettség" />
+            <TextBlock Grid.Row="4" VerticalAlignment="Center" Style="{StaticResource Standard_Textblock}" Text="Elsődleges idegen nyelv" />
+            <TextBlock Grid.Row="6" VerticalAlignment="Center" Style="{StaticResource Standard_Textblock}" Text="Hol értesült az állásról?" />
+            <TextBlock Grid.Row="8" VerticalAlignment="Center" Style="{StaticResource Standard_Textblock}" Text="Születési év" />
+            <TextBlock Grid.Row="10" VerticalAlignment="Center" Style="{StaticResource Standard_Textblock}" Text="Lakhely (város)" />
+            <ComboBox Grid.Row="1" Text="" Margin="0,10" x:Name="cbx1" >
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid >
+                            <TextBlock Style="{StaticResource checkbox_item_style}" Grid.Column="1" Text="{Binding nem}"/>
+                        </Grid>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            <ComboBox Grid.Row="3" Text="" Margin="0,10" x:Name="cbx2" >
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
                         <Grid >
@@ -140,39 +155,30 @@
                     </DataTemplate>
                 </ComboBox.ItemTemplate>
             </ComboBox>
-            <ComboBox Grid.Row="3" Text="" Margin="10" x:Name="cbx2" >
+            <ComboBox Grid.Row="5" Text=""  Margin="0,10"  x:Name="cbx3" >
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
                         <Grid >
-                            <TextBlock Style="{StaticResource checkbox_item_style}" Grid.Column="1" Text="{Binding megnevezes_vegzettseg}"/>
+                            <TextBlock Style="{StaticResource checkbox_item_style}" Grid.Column="1" Text="{Binding nyelv}"/>
                         </Grid>
                     </DataTemplate>
                 </ComboBox.ItemTemplate>
             </ComboBox>
-            <ComboBox Grid.Row="5" Text="" Margin="10" x:Name="cbx3" >
+            <ComboBox Grid.Row="7" Text="" Margin="0,10" x:Name="cbx4" >
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
                         <Grid >
-                            <TextBlock Style="{StaticResource checkbox_item_style}" Grid.Column="1" Text="{Binding megnevezes_vegzettseg}"/>
-                        </Grid>
-                    </DataTemplate>
-                </ComboBox.ItemTemplate>
-            </ComboBox>
-            <ComboBox Grid.Row="7" Text="" Margin="10" x:Name="cbx4" >
-                <ComboBox.ItemTemplate>
-                    <DataTemplate>
-                        <Grid >
-                            <TextBlock Style="{StaticResource checkbox_item_style}" Grid.Column="1" Text="{Binding megnevezes_vegzettseg}"/>
+                            <TextBlock Style="{StaticResource checkbox_item_style}" Grid.Column="1" Text="{Binding ertesules_megnevezes}"/>
                         </Grid>
                     </DataTemplate>
                 </ComboBox.ItemTemplate>
             </ComboBox>
 
-            <TextBox Grid.Column="0" Grid.Row="9" Margin="10" Text="" Style="{StaticResource Standard_Textbox}" x:Name="input1" />
-            <TextBox Grid.Column="0" Grid.Row="11" Margin="10" Text="" Style="{StaticResource Standard_Textbox}" x:Name="input2"/>
+            <TextBox Grid.Column="0" Grid.Row="9" Margin="0,10" Text="" Style="{StaticResource Standard_Textbox}" x:Name="input1" PreviewTextInput="numericTextBox"/>
+            <TextBox Grid.Column="0" Grid.Row="11" Margin="0,10" Text="" Style="{StaticResource Standard_Textbox}" x:Name="input2"/>
 
 
-            <Button Content="Nyomj meg" Grid.Row="13" Margin="10" Click="SaveApplicant"/>
+            <Button Content="Mentés" Grid.Row="13" Style="{StaticResource StandardButton}"  Click="SaveApplicant"/>
         </Grid>
     </Grid>
 </UserControl>

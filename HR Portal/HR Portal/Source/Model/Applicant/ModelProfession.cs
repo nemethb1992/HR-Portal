@@ -16,6 +16,13 @@ namespace HR_Portal.Source.Model.Applicant
         public string reg_date { get; set; }
         public string projekt { get; set; }
 
+        public int vegzettseg { get; set; }
+        public int nyelvtudas { get; set; }
+        public int neme { get; set; }
+        public int ertesult { get; set; }
+        public string telefon { get; set; }
+        public string lakhely { get; set; }
+
 
         public List<ModelProfession> Get(string command)
         {
