@@ -20,7 +20,7 @@ namespace HR_Portal.Source.Model.Applicant
         public int nyelvtudas { get; set; }
         public int neme { get; set; }
         public int ertesult { get; set; }
-        public string telefon { get; set; }
+        public string szuldatum { get; set; }
         public string lakhely { get; set; }
 
 

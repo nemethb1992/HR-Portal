@@ -68,12 +68,13 @@ namespace HR_Portal.View.Usercontrol.Panels
         private void SaveApplicant(object sender, RoutedEventArgs e)
         {
             Profession prof = new Profession();
-
-            data.neme = ((cbx1 as ComboBox).SelectedItem as ModelNem).id;
-            data.vegzettseg = ((cbx2 as ComboBox).SelectedItem as ModelVegzettseg).id;
-            data.nyelvtudas = ((cbx3 as ComboBox).SelectedItem as ModelNyelv).id;
-            data.ertesult = ((cbx4 as ComboBox).SelectedItem as ModelErtesulesek).id;
-
+            data.szuldatum = input1.Text;
+            data.lakhely = input2.Text;
+            
+            data.neme = (cbx1.SelectedIndex != -1 ? ((cbx1 as ComboBox).SelectedItem as ModelNem).id : 9999);
+            data.vegzettseg = (cbx2.SelectedIndex != -1 ? ((cbx2 as ComboBox).SelectedItem as ModelVegzettseg).id : 9999);
+            data.nyelvtudas = (cbx3.SelectedIndex != -1 ? ((cbx3 as ComboBox).SelectedItem as ModelNyelv).id : 9999);
+            data.ertesult = (cbx4.SelectedIndex != -1 ? ((cbx4 as ComboBox).SelectedItem as ModelErtesulesek).id : 9999);
             prof.Fullify(data);
         }
 

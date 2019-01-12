@@ -17,23 +17,31 @@ namespace HR_Portal.Source.ViewModel
             return new ModelProfession().Get(command); 
         }
         
-        public int Fullify(ModelProfession prof, ModelFullApplicant applicant = null)
+        public int Fullify(ModelProfession prof)
         {
-            if(applicant == null)
-            {
-                string command = "INSERT INTO jeloltek (nev,email,telefon,reg_date) VALUES ('" + prof.name + "','" + prof.email + "','" + prof.telephone + "','" + prof.reg_date + "')";
-                MySql.Execute(command);
-            }
-            else
-            {
-                string command = "INSERT INTO jeloltek (nev,email,telefon,reg_date) VALUES ('" + prof.name + "','" + prof.email + "','" + prof.telephone + "','" + prof.reg_date + "')";
-                MySql.Execute(command);
-            }
-            ModelFullApplicant udata = new ApplicantImplementation().GetFullApplicantByEmail(prof.email);
-            DirectoryInfo profession = new DirectoryInfo(Files.GetProfessionUrl() + prof.id);
-            DirectoryInfo newID = new DirectoryInfo(Files.GetApplicantUrl() + udata.id);
-            Files.CopyAll(profession,newID);
-            return (udata != null ? udata.id : 0);
+            string command = "INSERT INTO jeloltek (nev,email,telefon,reg_date" +
+                (!prof.szuldatum.Equals("") ? ",szuldatum" : "") +
+                (!prof.lakhely.Equals("") ? ",lakhely" : "") +
+                (!prof.neme.Equals(9999) ? ",neme": "") +
+                (!prof.vegzettseg.Equals(9999) ? ",vegz_terulet" : "") +
+                (!prof.nyelvtudas.Equals(9999) ? ",nyelvtudas" : "") +
+                (!prof.ertesult.Equals(9999) ? ",ertesult" : "") 
+                +") VALUES ('" + prof.name + "','" + prof.email + "','" + prof.telephone + "','" + prof.reg_date + "'" +
+                (!prof.szuldatum.Equals("") ? "," + prof.szuldatum.ToString() : "") +
+                (!prof.lakhely.Equals("") ? "," + prof.lakhely.ToString() : "") +
+                (!prof.neme.Equals(9999) ? ","+prof.neme.ToString() : "") +
+                (!prof.vegzettseg.Equals(9999) ? "," + prof.vegzettseg.ToString() : "") +
+                (!prof.nyelvtudas.Equals(9999) ? "," + prof.nyelvtudas.ToString() : "") +
+                (!prof.ertesult.Equals(9999) ? "," + prof.ertesult.ToString() : "")
+                +")";
+            System.Windows.MessageBox.Show(command);
+            //MySql.Execute(command);
+            //ModelFullApplicant udata = new ApplicantImplementation().GetFullApplicantByEmail(prof.email);
+            //DirectoryInfo profession = new DirectoryInfo(Files.GetProfessionUrl() + prof.id);
+            //DirectoryInfo newID = new DirectoryInfo(Files.GetApplicantUrl() + udata.id);
+            //Files.CopyAll(profession,newID);
+            //return (udata != null ? udata.id : 0);
+            return 0;
         }
 
         public void Delete(int ApplicantID)
