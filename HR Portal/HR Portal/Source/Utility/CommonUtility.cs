@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Windows;
+using System.Windows.Controls;
 using HR_Portal.Source.Model;
 using HR_Portal.Source.Model.Applicant;
 using HR_Portal.Source.Model.Other;
 using HR_Portal.Source.Model.Project;
+using HR_Portal.View.Usercontrol.Panels;
 
 namespace HR_Portal.Source
 {
@@ -53,7 +56,9 @@ namespace HR_Portal.Source
             MySql.Close();
             return list;
         }
-        
+
+    
+
         public List<ModelTamogatas> Data_KompetenciaTamogatas() // javítva
         {
             string command = "SELECT tamogatom FROM kompetencia_jelolt_kapcs WHERE jelolt_id = " + Session.ApplicantID + " AND projekt_id = " + Session.ProjektID + "";
@@ -357,7 +362,11 @@ namespace HR_Portal.Source
             }
             return i;
         }
-
+        public static void NavigateTo(Grid grid, UIElement obj)
+        {
+            grid.Children.Clear();
+            grid.Children.Add(obj);
+        }
         //public void AddInterPlusOne()
         //{
         //    string command = "UPDATE projekt_jelolt_kapcs SET allapot = allapot + 1 WHERE projekt_id = "+pcontrol.ProjektID+ " AND jelolt_id = "+acontrol.ApplicantID+"";
