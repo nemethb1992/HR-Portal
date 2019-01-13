@@ -76,6 +76,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             data.nyelvtudas = (cbx3.SelectedIndex != -1 ? ((cbx3 as ComboBox).SelectedItem as ModelNyelv).id : 9999);
             data.ertesult = (cbx4.SelectedIndex != -1 ? ((cbx4 as ComboBox).SelectedItem as ModelErtesulesek).id : 9999);
             prof.Fullify(data);
+            //visszanavigálni a listához
         }
 
 
