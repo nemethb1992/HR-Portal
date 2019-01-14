@@ -486,6 +486,7 @@
     <Resource Include="Public\imgs\refresh.png" />
     <Resource Include="Public\imgs\settings.png" />
     <Resource Include="Public\imgs\settings_white.png" />
+    <Resource Include="Public\imgs\user-list-icon.png" />
     <Resource Include="Public\imgs\user.png" />
     <Resource Include="Public\imgs\x-mark.png" />
     <Resource Include="Public\imgs\x_mark_2.png" />

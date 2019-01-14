@@ -10,6 +10,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using HR_Portal.Public.templates;
 using HR_Portal.Source;
 using HR_Portal.Source.Model;
 using HR_Portal.Source.Model.Applicant;
@@ -390,7 +391,12 @@ namespace HR_Portal.View.Usercontrol.Panels
         {
 
         }
-        
+
+        private void VisszautasitIdeiglenes(object sender, RoutedEventArgs e)
+        {
+            ModelApplicantList applicant = (sender as MenuItem).DataContext as ModelApplicantList;
+            new Email().Send(applicant.email, new EmailTemplate().NincsPozicioElutasito(applicant.nev));
+        }
     }
 
 }

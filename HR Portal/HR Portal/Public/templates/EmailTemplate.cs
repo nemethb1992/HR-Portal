@@ -35,6 +35,8 @@ namespace HR_Portal.Public.templates
                                             <h2>Tisztelt " + name + @"!</h2>
                                                  <p  class=''>
                                                 Köszönjük jelentkezését a Phoenix Mecano Kecskemét Kft-hez.
+                                                </p>
+                                                 <p  class=''>
                                                 Sajnálattal közöljük, hogy a megpályázott pozícióra nem került kiválasztásra.
                                                 </p>
                                                 <p>
@@ -55,12 +57,15 @@ namespace HR_Portal.Public.templates
                                             <h2>Tisztelt " + name + @"!</h2>
                                                  <p  class=''>
                                                 Köszönjük jelentkezését a Phoenix Mecano Kecskemét Kft-hez.
+                                                    </p>
+
+                                                 <p  class=''>
                                                 Sajnálattal közöljük, hogy jelenleg nem tudunk Önnek olyan pozíciót ajánlani, ami a végzettségének és szakmai tapasztalatainak megfelelő lenne.
                                                 </p>
                                                 <p>
                                                     Felhívjuk figyelmét, hogy adatait 1 évig tároljuk adatbázisunkban.
                                                 </p>
-                                                <p> Amennyiben szeretné módosítani adatait vagy törölni jelentkezését, kérjük jelezze a privacy@phoenix-mecano.hu e-mail címen.</p>
+                                                <p>Amennyiben szeretné módosítani adatait vagy törölni jelentkezését, kérjük jelezze a privacy@phoenix-mecano.hu e-mail címen.</p>
                                                 <p Style='margin-bottom: 30px;'>További pályafutásához sok sikert kívánunk!</p>
                                                 <p>Üdvözlettel:</p>
                                                 <p>Phoenix Mecano Kecskemét Kft.</p>

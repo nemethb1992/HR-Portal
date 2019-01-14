@@ -60,6 +60,9 @@ namespace HR_Portal.Source.Model.Applicant
                         case 3:
                             allapot_megnev = "Elutasított";
                             break;
+                        case 4:
+                            allapot_megnev = "Projekthez kapcsolt";
+                            break;
 
                         default:
                             allapot_megnev = "Beérkezett";

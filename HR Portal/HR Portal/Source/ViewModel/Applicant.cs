@@ -100,26 +100,17 @@ namespace HR_Portal.Source.ViewModel
             {
                 command += "  AND projekt_jelolt_kapcs.id IS NOT NULL ";
             }
-            //command += " GROUP BY jeloltek.email ";
+            command += " GROUP BY jeloltek.email ";
 
             switch (sw[0].HeaderSelected)
             {
                 case "1":
-                    command += " ORDER BY jeloltek.id" + sw[0].sorrend;
-                    break;
-                case "2":
                     command += " ORDER BY jeloltek.nev" + sw[0].sorrend;
                     break;
+                case "2":
+                    command += " ORDER BY jeloltek.statusz" + sw[0].sorrend;
+                    break;
                 case "3":
-                    command += " ORDER BY jeloltek.munkakor" + sw[0].sorrend;
-                    break;
-                case "4":
-                    command += " ORDER BY interjuk_db" + sw[0].sorrend;
-                    break;
-                case "5":
-                    command += " ORDER BY jeloltek.szuldatum" + sw[0].sorrend;
-                    break;
-                case "6":
                     command += " ORDER BY jeloltek.reg_date" + sw[0].sorrend;
                     break;
                 default:
@@ -293,7 +284,7 @@ namespace HR_Portal.Source.ViewModel
             if (!MySql.IsExists(command))
             {
                 MySql.Close();
-                command = "INSERT INTO projekt_jelolt_kapcs (id, projekt_id, jelolt_id, hr_id, datum) VALUES (NULL, " + projekt_index + ", " + jelolt_index + ", " + Session.UserData.id + ", '" + DateTime.Now.ToString("yyyy.MM.dd.") + "' );";
+                command = "INSERT INTO projekt_jelolt_kapcs (id, projekt_id, jelolt_id, hr_id,allapota, datum) VALUES (NULL, " + projekt_index + ", " + jelolt_index + ", " + Session.UserData.id + ",4, '" + DateTime.Now.ToString("yyyy.MM.dd.") + "' );";
                 MySql.Execute(command);
             }
             MySql.Close();

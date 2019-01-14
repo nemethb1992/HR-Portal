@@ -118,21 +118,15 @@
         </Grid>
         <Grid Grid.Row="1" Grid.Column="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="20" />
-                <ColumnDefinition Width="40" />
+                <ColumnDefinition Width="55" />
                 <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="185" />
-                <ColumnDefinition Width="60" />
-                <ColumnDefinition Width="75" />
+                <ColumnDefinition Width="150" />
                 <ColumnDefinition Width="110" />
                 <ColumnDefinition Width="140" />
             </Grid.ColumnDefinitions>
-            <Label x:Name="project_label_1" Tag="1" VerticalAlignment="Bottom" Content="id" Grid.Column="1" Style="{StaticResource project_label_style}" MouseDown="headerClick"/>
-            <Label x:Name="project_label_2" Tag="2" VerticalAlignment="Bottom" Content="Név" Grid.Column="2" Style="{StaticResource project_label_style}" MouseDown="headerClick"/>
-            <Label x:Name="project_label_3" Tag="3" VerticalAlignment="Bottom" Content="Munkaterület" Grid.Column="3" Style="{StaticResource project_label_style}" MouseDown="headerClick"/>
-            <Label x:Name="project_label_4" Tag="4" VerticalAlignment="Bottom" Content="Interjúk" Grid.Column="4" Style="{StaticResource project_label_style}" MouseDown="headerClick"/>
-            <Label x:Name="project_label_5" Tag="5" VerticalAlignment="Bottom" Content="Született" Grid.Column="5" Style="{StaticResource project_label_style}" MouseDown="headerClick"/>
-            <Label x:Name="project_label_6" Tag="6" VerticalAlignment="Bottom" Content="Regisztrált" Grid.Column="6" Style="{StaticResource project_label_style}" MouseDown="headerClick"/>
+            <Label x:Name="project_label_2" Tag="1" VerticalAlignment="Bottom" Content="Név" Grid.Column="1" Style="{StaticResource project_label_style}" MouseDown="headerClick"/>
+            <Label x:Name="project_label_3" Tag="2" VerticalAlignment="Bottom" Content="Státusz" Grid.Column="2" Style="{StaticResource project_label_style}" MouseDown="headerClick"/>
+            <Label x:Name="project_label_4" Tag="3" VerticalAlignment="Bottom" Content="Regisztrált" Grid.Column="3" Style="{StaticResource project_label_style}" MouseDown="headerClick"/>
             <CheckBox x:Name="sorrend_check" Style="{StaticResource Standard_Checkbox}" Content="Csökkenő sorrend" VerticalAlignment="Bottom" Margin="0,0,0,5" IsChecked="False" Grid.Column="7" Checked="sorrendChecked" Unchecked="sorrendUnchecked"/>
         </Grid>
 
@@ -146,13 +140,10 @@
                     <DataTemplate>
                         <Grid Height="40" Margin="4,0,0,0">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="10" />
                                 <ColumnDefinition Width="40" />
                                 <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="200" />
-                                <ColumnDefinition Width="50" />
-                                <ColumnDefinition Width="70" />
-                                <ColumnDefinition Width="110" />
+                                <ColumnDefinition Width="150" />
+                                <ColumnDefinition Width="100" />
                                 <ColumnDefinition Width="140" />
                             </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
@@ -160,22 +151,21 @@
                                 <RowDefinition Height="*" />
                             </Grid.RowDefinitions>
 
-                            <Grid.ContextMenu>
-                                <ContextMenu>
-                                    <MenuItem x:Name="modositas" Header="Módosítás" Click="modositasClick"/>
-                                    <MenuItem x:Name="archivalas" Header="Archiválás / Aktiválás" Click="applicantArchivateClick"/>
-                                    <MenuItem x:Name="asd" Header="Törlés" Click="applicantDeleteClick"/>
-                                </ContextMenu>
-                            </Grid.ContextMenu>
-                            <Rectangle Panel.ZIndex="0" Margin="0,1,0,3" Grid.Column="0" Grid.Row="1" Visibility="{Binding allasban}" Fill="#FFFFE46A" Stroke="#FFBBBBBB"/>
-                            <Rectangle Panel.ZIndex="0" Margin="0,3,0,1" Grid.Column="0" Grid.Row="0" Visibility="{Binding friss}" Fill="#FF85FF85" Stroke="#FFBBBBBB"/>
-                            <TextBlock Style="{StaticResource panelTbl_style}" Padding="11" Grid.Column="1" Grid.RowSpan="2" Text="{Binding id}" />
-                            <TextBlock Style="{StaticResource panelTbl_style}" Padding="11" Grid.Column="2" Grid.RowSpan="2" Text="{Binding nev}" />
-                            <TextBlock Style="{StaticResource panelTbl_style}" Padding="11" Grid.Column="3" Grid.RowSpan="2" Text="{Binding munkakor}" />
-                            <TextBlock Style="{StaticResource panelTbl_style}" Padding="11" Grid.Column="4" Grid.RowSpan="2" Text="{Binding interjuk_db}" />
-                            <TextBlock Style="{StaticResource panelTbl_style}" Padding="11" Grid.Column="5" Grid.RowSpan="2" Text="{Binding szuldatum}" />
-                            <TextBlock Style="{StaticResource panelTbl_style}" Padding="11" Grid.Column="6" Grid.RowSpan="2" Text="{Binding reg_datum}"/>
-                            <Button x:Name="applicant_open_btn" Style="{StaticResource StandardButton}" Grid.Column="7" Grid.RowSpan="2" Content="Megtekint" Margin="3" Click="applicantOpenClick"/>
+                        <Grid.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem x:Name="line" Header="{Binding id}"/>
+                                <MenuItem x:Name="send_reject_email" Header="Ideiglenes elutasítás" Click="VisszautasitIdeiglenes"/>
+                                <MenuItem x:Name="modositas" Header="Módosítás" Click="modositasClick"/>
+                                <MenuItem x:Name="archivalas" Header="Archiválás / Aktiválás" Click="applicantArchivateClick"/>
+                                <MenuItem x:Name="asd" Header="Törlés" Click="applicantDeleteClick"/>
+                            </ContextMenu>
+                        </Grid.ContextMenu>
+                        <!--<TextBlock Style="{StaticResource panelTbl_style}" Padding="11" Grid.Column="1" Grid.RowSpan="2" Text="{Binding id}" />-->
+                        <Image Source="/HR Portal;component/Public/imgs/user-list-icon.png" Grid.Column="0" Grid.RowSpan="2" Margin="6"/>
+                        <TextBlock Style="{StaticResource panelTbl_style}" Padding="11" Grid.Column="1" Grid.RowSpan="2" Text="{Binding nev}" />
+                        <TextBlock Style="{StaticResource panelTbl_style}" Padding="11" Grid.Column="2" Grid.RowSpan="2" Text="{Binding allapot_megnevezes}" />
+                        <TextBlock Style="{StaticResource panelTbl_style}" Padding="11" Grid.Column="3" Grid.RowSpan="2" Text="{Binding reg_datum}"/>
+                            <Button x:Name="applicant_open_btn" Style="{StaticResource StandardButton}" Grid.Column="4" Grid.RowSpan="2" Content="Megtekint" Margin="3" Click="applicantOpenClick"/>
                             <!--<Button Style="{StaticResource panelBtn_style}" Grid.Column="6" Margin="10,0,10,0" Content="Módosít"/>-->
                         </Grid>
                     </DataTemplate>
