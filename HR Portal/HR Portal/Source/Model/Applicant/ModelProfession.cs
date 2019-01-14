@@ -14,6 +14,7 @@ namespace HR_Portal.Source.Model.Applicant
         public string email { get; set; }
         public string telephone { get; set; }
         public string reg_date { get; set; }
+        public int projekt_id { get; set; }
         public string projekt { get; set; }
 
         public int vegzettseg { get; set; }
