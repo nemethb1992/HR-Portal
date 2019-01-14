@@ -34,7 +34,6 @@ namespace HR_Portal.Source.ViewModel
                 (!prof.nyelvtudas.Equals(9999) ? "," + prof.nyelvtudas.ToString() : "") +
                 (!prof.ertesult.Equals(9999) ? "," + prof.ertesult.ToString() : "")
                 +")";
-            System.Windows.MessageBox.Show(command);
             MySql.Execute(command);
             ModelFullApplicant udata = new ApplicantImplementation().GetFullApplicantByEmail(prof.email);
             DirectoryInfo profession = new DirectoryInfo(Files.GetProfessionUrl() + prof.id);

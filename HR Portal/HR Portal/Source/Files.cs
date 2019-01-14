@@ -58,7 +58,15 @@ namespace HR_Portal.Source
 
         public void DeleteFolder(int ApplicantID)
         {
-            Directory.Delete(GetApplicantUrl() + ApplicantID, true);
+            try
+            {
+
+                Directory.Delete(GetApplicantUrl() + ApplicantID, true);
+            }
+            catch
+            {
+
+            }
         }
 
         public void DeleteProfessionFolder(int ApplicantID)
