@@ -1,6 +1,8 @@
-﻿using HR_Portal.Source;
+﻿using HR_Portal.Public.templates;
+using HR_Portal.Source;
 using HR_Portal.Source.Model;
 using HR_Portal.Source.Model.Applicant;
+using HR_Portal.Source.Model.Project;
 using HR_Portal.Source.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -28,7 +30,6 @@ namespace HR_Portal.View.Usercontrol.Panels
     {
         private Grid grid;
         private ModelProfession data;
-        private ProfessionPage professionPage;
         CommonUtility Utility = new CommonUtility();
         public ProfessionDataSheet(Grid grid, ModelProfession data)
         {
@@ -50,12 +51,12 @@ namespace HR_Portal.View.Usercontrol.Panels
             cbx2.ItemsSource = Utility.Data_Vegzettseg();
             cbx3.ItemsSource = Utility.Data_Nyelv();
             cbx4.ItemsSource = Utility.Data_Ertesulesek();
+            cbx_projekt.ItemsSource = new ApplicantImplementation().Data_PorjectListSmall();
         }
 
         private void BackButton(object sender, RoutedEventArgs e)
         {
-            grid.Children.Clear();
-            grid.Children.Add(professionPage = new ProfessionPage(grid));
+            CommonUtility.NavigateTo(grid, new ProfessionPage(grid));
             
         }
 
@@ -75,8 +76,18 @@ namespace HR_Portal.View.Usercontrol.Panels
             data.vegzettseg = (cbx2.SelectedIndex != -1 ? ((cbx2 as ComboBox).SelectedItem as ModelVegzettseg).id : 9999);
             data.nyelvtudas = (cbx3.SelectedIndex != -1 ? ((cbx3 as ComboBox).SelectedItem as ModelNyelv).id : 9999);
             data.ertesult = (cbx4.SelectedIndex != -1 ? ((cbx4 as ComboBox).SelectedItem as ModelErtesulesek).id : 9999);
-            prof.Fullify(data);
-            //visszanavigálni a listához
+            data.projekt_id = (cbx_projekt.SelectedIndex != -1 ? ((cbx_projekt as ComboBox).SelectedItem as ModelSmallProject).id : 9999);
+            int new_id = prof.Fullify(data);
+
+            if (!data.projekt_id.Equals(9999))
+            {
+                new ApplicantImplementation().AddToProject(new_id, data.projekt_id);
+            }
+            if (!new_id.Equals(0))
+            {
+                new Email().Send(data.email, new EmailTemplate().Udvozlo_Email(data.name));
+                CommonUtility.NavigateTo(grid, new ProfessionPage(grid));
+            }
         }
 
 

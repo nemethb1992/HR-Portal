@@ -39,8 +39,8 @@ namespace HR_Portal.Source.ViewModel
             ModelFullApplicant udata = new ApplicantImplementation().GetFullApplicantByEmail(prof.email);
             DirectoryInfo profession = new DirectoryInfo(Files.GetProfessionUrl() + prof.id);
             DirectoryInfo newID = new DirectoryInfo(Files.GetApplicantUrl() + udata.id);
-            Files.CopyAll(profession,newID);
-            //törölni a professionos jelöltet
+            Delete(prof.id);
+            Files.CopyAll(profession, newID);
             return (udata != null ? udata.id : 0);
         }
 
