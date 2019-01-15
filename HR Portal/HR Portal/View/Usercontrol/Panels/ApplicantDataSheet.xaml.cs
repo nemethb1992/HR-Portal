@@ -17,8 +17,8 @@ namespace HR_Portal.View.Usercontrol.Panels
     /// </summary>
     public partial class ApplicantDataSheet : UserControl
     {
-        ApplicantImplementation Applicant = new ApplicantImplementation();
-        CommonUtility Utility = new CommonUtility();
+        Applicant Applicant = new Applicant();
+        Utility Utility = new Utility();
         Files fControl = new Files();
 
         private ProjectDataSheet projectDataSheet;
@@ -63,9 +63,9 @@ namespace HR_Portal.View.Usercontrol.Panels
             ModelSmallProject items = button.DataContext as ModelSmallProject;
 
             Session.ProjektID = items.id;
-            CommonUtility.SetReturnPage(CommonUtility.Views.ApplicantDataSheet);
+            Utility.SetReturnPage(Utility.Views.ApplicantDataSheet);
             grid.Children.Clear();
-            grid.Children.Add(projectDataSheet = new ProjectDataSheet(grid));
+            grid.Children.Add(projectDataSheet = new ProjectDataSheet(grid, new Project(items.id)));
         }
 
         protected void projectDelete(object sender, RoutedEventArgs e)
@@ -144,9 +144,9 @@ namespace HR_Portal.View.Usercontrol.Panels
         private void BackButton(object sender, RoutedEventArgs e)
         {
             grid.Children.Clear();
-            if (Session.lastPage == CommonUtility.Views.ProjectJeloltDataSheet)
+            if (Session.lastPage == Utility.Views.ProjectJeloltDataSheet)
             {
-                grid.Children.Add(projektJeloltDataSheet = new ProjektJeloltDataSheet(grid));
+                grid.Children.Add(projektJeloltDataSheet = new ProjektJeloltDataSheet(grid, new Project(0)));
             }
             else
             {
@@ -165,7 +165,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             ModelInterview item = btn.DataContext as ModelInterview;
             Session.InterViewID = item.id;
             Session.ProjektID = item.projekt_id;
-            CommonUtility.SetReturnPage(CommonUtility.Views.ApplicantDataSheet);
+            Utility.SetReturnPage(Utility.Views.ApplicantDataSheet);
             grid.Children.Clear();
             grid.Children.Add(interviewPanel = new InterviewPanel(grid));
 

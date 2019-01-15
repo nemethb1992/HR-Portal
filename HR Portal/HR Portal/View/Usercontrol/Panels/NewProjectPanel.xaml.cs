@@ -16,7 +16,7 @@ namespace HR_Portal.View.Usercontrol.Panels
     /// </summary>
     public partial class NewProjectPanel : UserControl
     {
-        CommonUtility Utility = new CommonUtility();
+        Utility Utility = new Utility();
 
         private Grid grid;
         private ProjectDataSheet projectDataSheet;
@@ -57,15 +57,15 @@ namespace HR_Portal.View.Usercontrol.Panels
             nev_tbx.Text = list[0].megnevezes_projekt;
             tapasztalat_tbx.Text = list[0].tapasztalat_ev.ToString();
             ber_tbx.Text = list[0].ber.ToString();
-            pc_cbx.SelectedIndex = CommonUtility.ComboBoxValueSetter(Utility.Data_Pc().ConvertAll(x => new ModelId { id = x.id, }), list.ConvertAll(x => new ModelId { id = x.pc, }));
-            vegzettseg_cbx.SelectedIndex = CommonUtility.ComboBoxValueSetter(Utility.Data_Vegzettseg().ConvertAll(x => new ModelId { id = x.id, }), list.ConvertAll(x => new ModelId { id = x.vegzettseg, }));
-            nyelv_cbx.SelectedIndex = CommonUtility.ComboBoxValueSetter(Utility.Data_Nyelv().ConvertAll(x => new ModelId { id = x.id, }), list.ConvertAll(x => new ModelId { id = x.nyelvtudas, }));
-            munkakor_cbx.SelectedIndex = CommonUtility.ComboBoxValueSetter(Utility.Data_Munkakor().ConvertAll(x => new ModelId { id = x.id, }), list.ConvertAll(x => new ModelId { id = x.munkakor, }));
-            k1_cbx.SelectedIndex = CommonUtility.ComboBoxValueSetter(Interview.Data_Kompetencia().ConvertAll(x => new ModelId { id = x.id, }), list.ConvertAll(x => new ModelId { id = x.kepesseg1, }));
-            k2_cbx.SelectedIndex = CommonUtility.ComboBoxValueSetter(Interview.Data_Kompetencia().ConvertAll(x => new ModelId { id = x.id, }), list.ConvertAll(x => new ModelId { id = x.kepesseg2, }));
-            k3_cbx.SelectedIndex = CommonUtility.ComboBoxValueSetter(Interview.Data_Kompetencia().ConvertAll(x => new ModelId { id = x.id, }), list.ConvertAll(x => new ModelId { id = x.kepesseg3, }));
-            k4_cbx.SelectedIndex = CommonUtility.ComboBoxValueSetter(Interview.Data_Kompetencia().ConvertAll(x => new ModelId { id = x.id, }), list.ConvertAll(x => new ModelId { id = x.kepesseg4, }));
-            k5_cbx.SelectedIndex = CommonUtility.ComboBoxValueSetter(Interview.Data_Kompetencia().ConvertAll(x => new ModelId { id = x.id, }), list.ConvertAll(x => new ModelId { id = x.kepesseg5, }));
+            pc_cbx.SelectedIndex = Utility.ComboBoxValueSetter(Utility.Data_Pc().ConvertAll(x => new ModelId { id = x.id, }), list.ConvertAll(x => new ModelId { id = x.pc, }));
+            vegzettseg_cbx.SelectedIndex = Utility.ComboBoxValueSetter(Utility.Data_Vegzettseg().ConvertAll(x => new ModelId { id = x.id, }), list.ConvertAll(x => new ModelId { id = x.vegzettseg, }));
+            nyelv_cbx.SelectedIndex = Utility.ComboBoxValueSetter(Utility.Data_Nyelv().ConvertAll(x => new ModelId { id = x.id, }), list.ConvertAll(x => new ModelId { id = x.nyelvtudas, }));
+            munkakor_cbx.SelectedIndex = Utility.ComboBoxValueSetter(Utility.Data_Munkakor().ConvertAll(x => new ModelId { id = x.id, }), list.ConvertAll(x => new ModelId { id = x.munkakor, }));
+            k1_cbx.SelectedIndex = Utility.ComboBoxValueSetter(Interview.Data_Kompetencia().ConvertAll(x => new ModelId { id = x.id, }), list.ConvertAll(x => new ModelId { id = x.kepesseg1, }));
+            k2_cbx.SelectedIndex = Utility.ComboBoxValueSetter(Interview.Data_Kompetencia().ConvertAll(x => new ModelId { id = x.id, }), list.ConvertAll(x => new ModelId { id = x.kepesseg2, }));
+            k3_cbx.SelectedIndex = Utility.ComboBoxValueSetter(Interview.Data_Kompetencia().ConvertAll(x => new ModelId { id = x.id, }), list.ConvertAll(x => new ModelId { id = x.kepesseg3, }));
+            k4_cbx.SelectedIndex = Utility.ComboBoxValueSetter(Interview.Data_Kompetencia().ConvertAll(x => new ModelId { id = x.id, }), list.ConvertAll(x => new ModelId { id = x.kepesseg4, }));
+            k5_cbx.SelectedIndex = Utility.ComboBoxValueSetter(Interview.Data_Kompetencia().ConvertAll(x => new ModelId { id = x.id, }), list.ConvertAll(x => new ModelId { id = x.kepesseg5, }));
         }
 
 
@@ -140,7 +140,7 @@ namespace HR_Portal.View.Usercontrol.Panels
                 {
                     Project.Insert(getData());
                     grid.Children.Clear();
-                    grid.Children.Add(projectDataSheet = new ProjectDataSheet(grid));
+                    grid.Children.Add(projectDataSheet = new ProjectDataSheet(grid, new Project(0)));
                 }
                 else
                 {
@@ -156,7 +156,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             {
                 Project.Update(getData());
                 grid.Children.Clear();
-                grid.Children.Add(projectDataSheet = new ProjectDataSheet(grid));
+                grid.Children.Add(projectDataSheet = new ProjectDataSheet(grid, new Project(0)));
             }
             else
             {

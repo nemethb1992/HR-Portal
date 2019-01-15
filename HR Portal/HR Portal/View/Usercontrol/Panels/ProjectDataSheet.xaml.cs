@@ -15,18 +15,20 @@ namespace HR_Portal.View.Usercontrol.Panels
 {
     public partial class ProjectDataSheet : UserControl
     {
-        CommonUtility Utility = new CommonUtility();
-        ApplicantImplementation Applicant = new ApplicantImplementation();
+        Utility Utility = new Utility();
+        Applicant Applicant = new Applicant();
         EmailTemplate emailTemplate = new EmailTemplate();
 
+        private Project project;
         private Grid grid;
         private ProjektJeloltDataSheet projektJeloltDataSheet;
         private ApplicantDataSheet applicantDataSheet;
         private ProjectList projectList;
 
-        public ProjectDataSheet(Grid grid)
+        public ProjectDataSheet(Grid grid, Project project)
         {
             this.grid = grid;
+            this.project = project;
             InitializeComponent();
             try
             {
@@ -43,38 +45,37 @@ namespace HR_Portal.View.Usercontrol.Panels
         protected void formLoader()
         {
             listLoader();
-            List<ModelFullProject> li = Project.GetFullProject();
-            projekt_profile_title.Text = li[0].megnevezes_projekt;
-            projekt_input_1.Text = li[0].statusz.ToString();
-            projekt_input_2.Text = li[0].megnevezes_munka;
-            projekt_input_3.Text = li[0].megnevezes_pc;
-            projekt_input_4.Text = li[0].megnevezes_vegzettseg;
-            projekt_input_5.Text = li[0].megnevezes_nyelv;
-            projekt_input_6.Text = li[0].jeloltek_db.ToString();
-            projekt_input_7.Text = li[0].megnevezes_hr;
-            projekt_input_8.Text = li[0].fel_datum.ToString();
-            projekt_input_9.Text = li[0].ber.ToString() + " Ft";
-            projekt_input_10.Text = li[0].tapasztalat_ev.ToString();
+            projekt_profile_title.Text = project.list.megnevezes_projekt;
+            projekt_input_1.Text = project.list.statusz.ToString();
+            projekt_input_2.Text = project.list.megnevezes_munka;
+            projekt_input_3.Text = project.list.megnevezes_pc;
+            projekt_input_4.Text = project.list.megnevezes_vegzettseg;
+            projekt_input_5.Text = project.list.megnevezes_nyelv;
+            projekt_input_6.Text = project.list.jeloltek_db.ToString();
+            projekt_input_7.Text = project.list.megnevezes_hr;
+            projekt_input_8.Text = project.list.fel_datum.ToString();
+            projekt_input_9.Text = project.list.ber.ToString() + " Ft";
+            projekt_input_10.Text = project.list.tapasztalat_ev.ToString();
 
             List<ModelKompetenciak> li_k = Interview.Data_Kompetencia();
             foreach (var item in li_k)
             {
-                if(item.id == li[0].kepesseg1)
+                if(item.id == project.list.kepesseg1)
                 { kompetencia1.Text = item.kompetencia_megnevezes; }
-                if (item.id == li[0].kepesseg2)
+                if (item.id == project.list.kepesseg2)
                 { kompetencia2.Text = item.kompetencia_megnevezes; }
-                if (item.id == li[0].kepesseg3)
+                if (item.id == project.list.kepesseg3)
                 { kompetencia3.Text = item.kompetencia_megnevezes; }
-                if (item.id == li[0].kepesseg4)
+                if (item.id == project.list.kepesseg4)
                 { kompetencia4.Text = item.kompetencia_megnevezes; }
-                if (item.id == li[0].kepesseg5)
+                if (item.id == project.list.kepesseg5)
                 { kompetencia5.Text = item.kompetencia_megnevezes; }
             }
 
-            feladatok_tbx.Text = li[0].feladatok;
-            elvarasok_tbx.Text = li[0].elvarasok;
-            kinalunk_tbx.Text = li[0].kinalunk;
-            elonyok_tbx.Text = li[0].elonyok;
+            feladatok_tbx.Text = project.list.feladatok;
+            elvarasok_tbx.Text = project.list.elvarasok;
+            kinalunk_tbx.Text = project.list.kinalunk;
+            elonyok_tbx.Text = project.list.elonyok;
             projectCost();
         }
 
@@ -102,7 +103,7 @@ namespace HR_Portal.View.Usercontrol.Panels
                 Session.TelefonSzurt = 0;
             }
             grid.Children.Clear();
-            grid.Children.Add(projektJeloltDataSheet = new ProjektJeloltDataSheet(grid));
+            grid.Children.Add(projektJeloltDataSheet = new ProjektJeloltDataSheet(grid, new Project(0)));
         }
 
         //protected void jeloltTabClick(object sender, RoutedEventArgs e)
@@ -128,7 +129,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             Image delete = sender as Image;
             ModelApplicantList items = delete.DataContext as ModelApplicantList;
 
-            Utility.jeloltKapcsDelete(items.id);
+            project.jeloltKapcsDelete(items.id);
             kapcs_jeloltek_listBox.ItemsSource = Utility.Data_JeloltKapcs();
         }
 
@@ -137,7 +138,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             Button delete = sender as Button;
             ModelErtesitendok items = delete.DataContext as ModelErtesitendok;
 
-            Utility.ertesitendokKapcsDelete(items.id);
+            project.ertesitendokKapcsDelete(items.id);
             kapcs_ertesitendo_listBox.ItemsSource = Utility.Data_ErtesitendokKapcs();
         }
         
@@ -164,11 +165,11 @@ namespace HR_Portal.View.Usercontrol.Panels
                         switch (result)
                         {
                             case MessageBoxResult.Yes:
-                                Utility.jeloltKapcsDelete(items.id);
+                                project.jeloltKapcsDelete(items.id);
                                 new Email().Send(items.email, emailTemplate.Elutasito_Email(items.nev));
                                 break;
                             case MessageBoxResult.No:
-                                Utility.jeloltKapcsDelete(items.id);
+                                project.jeloltKapcsDelete(items.id);
                                 break;
                             case MessageBoxResult.Cancel:
                                 break;
@@ -176,13 +177,13 @@ namespace HR_Portal.View.Usercontrol.Panels
                         break;
                     }
                 case "1":
-                    Utility.jeloltKapcsUpdate(items.id, Convert.ToInt32(mitem.Tag));
+                    project.jeloltKapcsUpdate(items.id, Convert.ToInt32(mitem.Tag));
                     break;
                 case "2":
-                    Utility.jeloltKapcsUpdate(items.id, Convert.ToInt32(mitem.Tag));
+                    project.jeloltKapcsUpdate(items.id, Convert.ToInt32(mitem.Tag));
                     break;
                 case "3":
-                    Utility.jeloltKapcsUpdate(items.id, Convert.ToInt32(mitem.Tag));
+                    project.jeloltKapcsUpdate(items.id, Convert.ToInt32(mitem.Tag));
                     new Email().Send(items.email, emailTemplate.Elutasito_Email(items.nev));
                     break;
             }
@@ -286,7 +287,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             if (selectedTabCode == 2)
             {
                 ModelErtesitendok items = btn.DataContext as ModelErtesitendok;
-                Utility.addErtesitendokInsert(items.id);
+                project.addErtesitendokInsert(items.id);
                 projekt_kapcsolodo_list.ItemsSource = Utility.Data_ErtesitendokCheckbox(Ember_Search_tbx.Text);
                 kapcs_ertesitendo_listBox.ItemsSource = Utility.Data_ErtesitendokKapcs();
             }
@@ -302,7 +303,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             TextBox textbox = sender as TextBox;
 
             string type = textbox.Tag.ToString();
-            Utility.projectDescriptionUpdate(type, textbox.Text);
+            project.projectDescriptionUpdate(type, textbox.Text);
             formLoader();
         }
 
@@ -320,7 +321,7 @@ namespace HR_Portal.View.Usercontrol.Panels
 
         protected void addCost(object sender, RoutedEventArgs e)
         {
-            Utility.projectCostInsert(k_megnevezes_tbx.Text, k_osszeg_tbx.Text);
+            project.projectCostInsert(k_megnevezes_tbx.Text, k_osszeg_tbx.Text);
             koltseg_listBox.ItemsSource = Project.Data_ProjectCost();
             projectCost();
             Koltseg_insert_grid.Visibility = Visibility.Hidden;
@@ -348,19 +349,19 @@ namespace HR_Portal.View.Usercontrol.Panels
         {
             MenuItem menu = sender as MenuItem;
             ModelKoltsegek item = menu.DataContext as ModelKoltsegek;
-            Utility.projectCostDelete(item.id);
+            project.projectCostDelete(item.id);
             koltseg_listBox.ItemsSource = Project.Data_ProjectCost();
             projectCost();
         }
 
         protected void publishChecked(object sender, RoutedEventArgs e)
         {
-            Utility.publishProject(1);
+            project.publishProject(1);
         }
 
         protected void publishUnchecked(object sender, RoutedEventArgs e)
         {
-            Utility.publishProject(0);
+            project.publishProject(0);
         }
 
         protected void gridMouseDown(object sender, MouseButtonEventArgs e)
@@ -425,7 +426,7 @@ namespace HR_Portal.View.Usercontrol.Panels
         private void BackButton(object sender, RoutedEventArgs e)
         {
             grid.Children.Clear();
-            if (Session.lastPage == CommonUtility.Views.ApplicantDataSheet)
+            if (Session.lastPage == Utility.Views.ApplicantDataSheet)
             {
                 grid.Children.Add(applicantDataSheet = new ApplicantDataSheet(grid));
             }

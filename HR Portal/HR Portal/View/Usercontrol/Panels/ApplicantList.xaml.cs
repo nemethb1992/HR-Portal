@@ -27,8 +27,8 @@ namespace HR_Portal.View.Usercontrol.Panels
         private static string HeaderSelecteds;
         public string HeaderSelected { get { return HeaderSelecteds; } set { HeaderSelecteds = value; } }
 
-        CommonUtility Utility = new CommonUtility();
-        ApplicantImplementation Applicant = new ApplicantImplementation();
+        Utility Utility = new Utility();
+        Applicant Applicant = new Applicant();
 
 
         private ApplicantDataSheet applicantDataSheet;
@@ -235,7 +235,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             {
                 Applicant.FirstOpen(items.id);
             }
-            CommonUtility.SetReturnPage(CommonUtility.Views.ApplicantList);
+            Utility.SetReturnPage(Utility.Views.ApplicantList);
             Session.ApplicantSearchValue = GetSearchValues();
             grid.Children.Clear();
             grid.Children.Add(applicantDataSheet = new ApplicantDataSheet(grid));
@@ -352,7 +352,7 @@ namespace HR_Portal.View.Usercontrol.Panels
 
         protected void navigateToNewApplicantPanel(object sender, RoutedEventArgs e)
         {
-            CommonUtility.SetReturnPage(CommonUtility.Views.ApplicantList);
+            Utility.SetReturnPage(Utility.Views.ApplicantList);
             Session.isUpdate = false;
             Session.ApplicantSearchValue = GetSearchValues();
             grid.Children.Clear();

@@ -17,7 +17,7 @@ namespace HR_Portal.View.Usercontrol.Panels.SzakmaiLayouts
     {
         
         //ControlApplicant aControl = new ControlApplicant();
-        CommonUtility Utility = new CommonUtility();
+        Utility Utility = new Utility();
 
         private SzakmaiApplicantDataView szakmaiApplicantDataView;
         private SzakmaiList szakmaiList;

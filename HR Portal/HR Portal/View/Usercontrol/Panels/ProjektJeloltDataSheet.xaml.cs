@@ -20,19 +20,21 @@ namespace HR_Portal.View.Usercontrol.Panels
     public partial class ProjektJeloltDataSheet : UserControl
     {
 
-        ApplicantImplementation Applicant = new ApplicantImplementation();
-        CommonUtility Utility = new CommonUtility();
+        Applicant Applicant = new Applicant();
+        Utility Utility = new Utility();
 
         private ProjectDataSheet projectDataSheet;
         private ApplicantDataSheet applicantDataSheet;
         private InterviewPanel interviewPanel;
         private Grid grid;
+        private Project project;
 
         List<ModelFullApplicant> applicantData;
 
-        public ProjektJeloltDataSheet(Grid grid)
+        public ProjektJeloltDataSheet(Grid grid, Project project)
         {
                 this.grid = grid;
+            this.project = project;
                 InitializeComponent();
             projectFormLoader();
         }
@@ -95,7 +97,7 @@ namespace HR_Portal.View.Usercontrol.Panels
         protected void backToProjectDataSheet(object sender, RoutedEventArgs e)
         {
             grid.Children.Clear();
-            grid.Children.Add(projectDataSheet = new ProjectDataSheet(grid));
+            grid.Children.Add(projectDataSheet = new ProjectDataSheet(grid,new Project(Session.ProjektID)));
         }
 
         protected void enterComment(object sender, KeyEventArgs e)
@@ -180,9 +182,10 @@ namespace HR_Portal.View.Usercontrol.Panels
             switch (result)
             {
                 case MessageBoxResult.Yes:
-                    Utility.jeloltKapcsUpdate(Session.ApplicantID, 3);
+                    Project project = new Project(0);
+                    project.jeloltKapcsUpdate(Session.ApplicantID, 3);
                     grid.Children.Clear();
-                    grid.Children.Add(projectDataSheet = new ProjectDataSheet(grid));
+                    grid.Children.Add(projectDataSheet = new ProjectDataSheet(grid, project));
                     EmailTemplate email = new EmailTemplate();
                     new Email().Send(applicantData[0].email, email.Elutasito_Email(applicantData[0].nev));
                     break;
@@ -237,7 +240,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             catch{ }
             try
             {
-                Utility.addInterview(datum, inter_cim.SelectedItem.ToString(), inter_leiras.Text, inter_helyszin.Text, inter_idopont.Text);
+                new Interview().addInterview(datum, inter_cim.SelectedItem.ToString(), inter_leiras.Text, inter_helyszin.Text, inter_idopont.Text);
                 projectFormLoader();
                 interviewPanelClose();
             }
@@ -262,7 +265,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             MenuItem menu = sender as MenuItem;
             ModelInterview items = menu.DataContext as ModelInterview;
 
-            Utility.interviewDelete(items.id);
+            new Interview().interviewDelete(items.id);
             projectFormLoader();
         }
 
@@ -292,7 +295,7 @@ namespace HR_Portal.View.Usercontrol.Panels
 
         private void ApplicantDataSheetNavigation(object sender, RoutedEventArgs e)
         {
-            CommonUtility.SetReturnPage(CommonUtility.Views.ProjectJeloltDataSheet);
+            Utility.SetReturnPage(Utility.Views.ProjectJeloltDataSheet);
             grid.Children.Clear();
             grid.Children.Add(applicantDataSheet = new ApplicantDataSheet(grid));
         }

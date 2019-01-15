@@ -302,7 +302,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Source\Utility\CommonUtility.cs" />
+    <Compile Include="Source\Utility\Utility.cs" />
     <Compile Include="Source\Email.cs" />
     <Compile Include="Source\Files.cs" />
     <Page Include="MainWindow.xaml">

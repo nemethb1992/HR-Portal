@@ -41,9 +41,9 @@ namespace HR_Portal.View.Usercontrol.Panels
             if(Session.UserData.kategoria > 1)
             {
                 grid.Children.Clear();
-                if (Session.lastPage == CommonUtility.Views.ProjectJeloltDataSheet)
+                if (Session.lastPage == Utility.Views.ProjectJeloltDataSheet)
                 {
-                    grid.Children.Add(projektJeloltDataSheet = new ProjektJeloltDataSheet(grid));
+                    grid.Children.Add(projektJeloltDataSheet = new ProjektJeloltDataSheet(grid, new Project(0)));
                 }
                 else
                 {

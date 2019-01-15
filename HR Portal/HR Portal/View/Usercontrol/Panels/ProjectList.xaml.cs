@@ -22,7 +22,7 @@ namespace HR_Portal.View.Usercontrol.Panels
         private static string HeaderSelecteds;
         protected string HeaderSelected { get { return HeaderSelecteds; } set { HeaderSelecteds = value; } }
 
-        CommonUtility Utility = new CommonUtility();
+        Utility Utility = new Utility();
 
         private ProjectDataSheet projectDataSheet;
         private NewProjectPanel newProjectPanel;
@@ -226,10 +226,10 @@ namespace HR_Portal.View.Usercontrol.Panels
         {
             ModelProjectList items = (sender as Button).DataContext as ModelProjectList;
             Session.ProjektID = items.id;
-            CommonUtility.SetReturnPage(CommonUtility.Views.ProjectList);
+            Utility.SetReturnPage(Utility.Views.ProjectList);
             Session.ProjectSearchValue = GetSearchValues();
             grid.Children.Clear();
-            grid.Children.Add(projectDataSheet = new ProjectDataSheet(grid));
+            grid.Children.Add(projectDataSheet = new ProjectDataSheet(grid, new Project(items.id)));
         }
 
         protected void Numeric(object sender, TextCompositionEventArgs e)
@@ -262,7 +262,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             {
                 case MessageBoxResult.Yes:
                     ModelProjectList items = (sender as MenuItem).DataContext as ModelProjectList;
-                    Utility.projectArchiver(items.id, items.statusz);
+                    new Project(0).projectArchiver(items.id, items.statusz);
                     projectListLoader();
                     break;
                 case MessageBoxResult.No:
@@ -274,14 +274,14 @@ namespace HR_Portal.View.Usercontrol.Panels
 
         protected void projectPassivateClick(object sender, RoutedEventArgs e)
         {
-            Utility.ProjectStatusChange(0);
+            new Project(0).ProjectStatusChange(0);
             project_listBox.ItemsSource = Project.GetProjectList(GetSearchValues());
             buttonColorChange();
         }
 
         protected void projectActivateClick(object sender, RoutedEventArgs e)
         {
-            Utility.ProjectStatusChange(1);
+            new Project(0).ProjectStatusChange(1);
             project_listBox.ItemsSource = Project.GetProjectList(GetSearchValues());
             buttonColorChange();
         }
@@ -342,7 +342,7 @@ namespace HR_Portal.View.Usercontrol.Panels
         protected void New_projekt_btn_Click(object sender, RoutedEventArgs e)
         {
             Session.isUpdate = false;
-            CommonUtility.SetReturnPage(CommonUtility.Views.ProjectList);
+            Utility.SetReturnPage(Utility.Views.ProjectList);
             Session.ProjectSearchValue = GetSearchValues();
             grid.Children.Clear();
             grid.Children.Add(newProjectPanel = new NewProjectPanel(grid));

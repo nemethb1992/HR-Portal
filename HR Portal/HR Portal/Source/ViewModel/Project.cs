@@ -5,8 +5,14 @@ using System.Collections.Generic;
 
 namespace HR_Portal.Source.ViewModel
 {
-    class Project
+    public class Project
     {
+        public ModelFullProject list;
+        public Project(int projectId)
+        {
+            this.list = GetFullProject(projectId)[0];
+        }
+
         public static List<ModelProjectList> GetProjectList(List<ModelProjectSearchBar> searchValue)
         {
             List<ModelProjectList> list = new List<ModelProjectList>();
@@ -79,7 +85,9 @@ namespace HR_Portal.Source.ViewModel
             return ModelProjectList.GetModelProjectList(command);
         }
 
-        public static List<ModelFullProject> GetFullProject()
+
+
+        public static List<ModelFullProject> GetFullProject(int id = 0)
         {
             string command = "SELECT (SELECT count(projekt_id) FROM projekt_jelolt_kapcs WHERE projekt_id = "+Session.ProjektID+") as jeloltek_db, " +
                 "projektek.id, projektek.hr_id, megnevezes_projekt, megnevezes_vegzettseg, megnevezes_nyelv,megnevezes_munka,megnevezes_pc,name,fel_datum,le_datum,pc,vegzettseg,tapasztalat_ev,allapot,nyelvtudas,munkakor,szuldatum,ber,kepesseg1,kepesseg2,kepesseg3,kepesseg4,kepesseg5,feladatok,elvarasok,kinalunk, elonyok, publikalt  " +
@@ -90,7 +98,7 @@ namespace HR_Portal.Source.ViewModel
                 "LEFT JOIN users ON users.id = projektek.hr_id " +
                 "LEFT JOIN pc ON pc.id = projektek.pc " +
                 "LEFT JOIN statusz ON projektek.statusz = statusz.id " +
-                "WHERE projektek.id = " + Session.ProjektID + " GROUP BY projektek.id";
+                "WHERE projektek.id = " + (!id.Equals(0) ? id : Session.ProjektID) + " GROUP BY projektek.id";
 
             List<ModelFullProject> list = ModelFullProject.GetModelFullProject(command);
 
@@ -163,6 +171,104 @@ namespace HR_Portal.Source.ViewModel
             List<ModelKoltsegek> list = ModelKoltsegek.GetModelKoltsegek(command);
             MySql.Close();
             return list;
+        }
+
+        public void projectDescriptionUpdate(string type, string content) // javított
+        {
+            string command = "";
+            switch (type)
+            {
+                case "feladatok":
+                    command = "UPDATE projektek SET feladatok='" + content + "' WHERE projektek.id = " + Session.ProjektID + "";
+                    break;
+                case "elvarasok":
+                    command = "UPDATE projektek SET elvarasok='" + content + "' WHERE projektek.id = " + Session.ProjektID + "";
+                    break;
+                case "kinalunk":
+                    command = "UPDATE projektek SET kinalunk='" + content + "' WHERE projektek.id = " + Session.ProjektID + "";
+                    break;
+                case "elonyok":
+                    command = "UPDATE projektek SET elonyok='" + content + "' WHERE projektek.id = " + Session.ProjektID + "";
+                    break;
+                default:
+                    break;
+            }
+            MySql.Execute(command);
+            MySql.Close();
+        }
+
+        public void ProjectStatusChange(int stat) // javított
+        {
+            Session.ProjectStatusz = 0;
+            Session.ProjectStatusz = stat;
+        }
+
+
+        public void projectCostInsert(string megnevezes, string osszeg)  // javított
+        {
+            string command = "INSERT INTO `projekt_koltsegek` (id, projekt_id, koltseg_megnevezes, osszeg) VALUES (null, " + Session.ProjektID + ", '" + megnevezes + "', " + osszeg + ");";
+            MySql.Execute(command);
+            MySql.Close();
+        }
+
+        public void projectCostDelete(int id)  // javított
+        {
+            string command = "DELETE FROM projekt_koltsegek WHERE projekt_koltsegek.id = " + id + "";
+            MySql.Execute(command);
+            MySql.Close();
+        }
+
+        public void addErtesitendokInsert(int index)
+        {
+            string command = "INSERT INTO projekt_ertesitendok_kapcs (id, projekt_id, ertesitendok_id) VALUES (NULL, " + Session.ProjektID + ", " + index + " );";
+            MySql.Execute(command);
+            MySql.Close();
+        }
+
+        public void jeloltKapcsDelete(int id)
+        {
+            string command;
+            command = "DELETE FROM projekt_jelolt_kapcs WHERE jelolt_id = " + id + " AND projekt_id = " + Session.ProjektID + ";";
+            MySql.Execute(command);
+            command = "DELETE FROM interjuk_kapcs WHERE jelolt_id = " + id + " AND projekt_id = " + Session.ProjektID + ";";
+            MySql.Execute(command);
+            MySql.Close();
+        }
+
+        public void jeloltKapcsUpdate(int id, int allapota)
+        {
+            string command = "UPDATE projekt_jelolt_kapcs SET allapota = " + allapota + " WHERE jelolt_id = " + id + " AND projekt_id = " + Session.ProjektID + ";";
+            MySql.Execute(command);
+            MySql.Close();
+        }
+
+        public void ertesitendokKapcsDelete(int id)
+        {
+            string command = "DELETE FROM projekt_ertesitendok_kapcs WHERE ertesitendok_id = " + id + " AND projekt_id = " + Session.ProjektID + ";";
+            MySql.Execute(command);
+            MySql.Close();
+        }
+
+        public void publishProject(int stat)
+        {
+            string command = "UPDATE projektek SET publikalt= " + stat + " WHERE projektek.id = " + Session.ProjektID + ";";
+            MySql.Execute(command);
+            MySql.Close();
+        }
+
+        public void projectArchiver(int id, int statusz) // javított
+        {
+            if (statusz == 0)
+            {
+                statusz = 1;
+            }
+            else
+            {
+                statusz = 0;
+            }
+            string command = "UPDATE projektek SET statusz=" + statusz + " WHERE projektek.id = " + id + ";";
+            MySql.Execute(command);
+            MySql.Close();
         }
     }
 }

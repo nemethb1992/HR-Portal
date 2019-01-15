@@ -49,8 +49,8 @@ namespace HR_Portal.View.Usercontrol.Panels
             Input_reg_datum.Text = list[0].reg_datum;
             Input_belepve.Text = list[0].belepve;
 
-            KategoriaCbx.SelectedIndex = CommonUtility.ComboBoxValueSetter(KategoriaLoadUp().ConvertAll(x => new ModelId { id = x.id, }), list.ConvertAll(x => new ModelId { id = x.kategoria, }));
-            JogosultsagCbx.SelectedIndex = CommonUtility.ComboBoxValueSetter(ValiditasLoadUp().ConvertAll(x => new ModelId { id = x.id, }), list.ConvertAll(x => new ModelId { id = x.validitas, })); 
+            KategoriaCbx.SelectedIndex = Utility.ComboBoxValueSetter(KategoriaLoadUp().ConvertAll(x => new ModelId { id = x.id, }), list.ConvertAll(x => new ModelId { id = x.kategoria, }));
+            JogosultsagCbx.SelectedIndex = Utility.ComboBoxValueSetter(ValiditasLoadUp().ConvertAll(x => new ModelId { id = x.id, }), list.ConvertAll(x => new ModelId { id = x.validitas, })); 
 
         }
 

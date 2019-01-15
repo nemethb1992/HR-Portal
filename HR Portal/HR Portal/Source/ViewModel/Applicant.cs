@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace HR_Portal.Source.ViewModel
 {
-    interface Applicant
+    interface ApplicantInterface
     {
         List<ModelApplicantList> GetApplicantList(List<ModelApplicantSearchBar> searchValue = null);
 
@@ -30,7 +30,7 @@ namespace HR_Portal.Source.ViewModel
 
         ModelFullApplicant GetFullApplicantByEmail(string email);
     }
-    class ApplicantImplementation : Applicant
+    class Applicant : ApplicantInterface
     {
         public List<ModelApplicantList> GetApplicantList(List<ModelApplicantSearchBar> sw = null)
         {

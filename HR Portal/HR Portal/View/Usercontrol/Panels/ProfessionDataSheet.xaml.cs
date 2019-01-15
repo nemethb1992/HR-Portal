@@ -30,7 +30,7 @@ namespace HR_Portal.View.Usercontrol.Panels
     {
         private Grid grid;
         private ModelProfession data;
-        CommonUtility Utility = new CommonUtility();
+        Utility Utility = new Utility();
         public ProfessionDataSheet(Grid grid, ModelProfession data)
         {
             this.data = data;
@@ -51,12 +51,12 @@ namespace HR_Portal.View.Usercontrol.Panels
             cbx2.ItemsSource = Utility.Data_Vegzettseg();
             cbx3.ItemsSource = Utility.Data_Nyelv();
             cbx4.ItemsSource = Utility.Data_Ertesulesek();
-            cbx_projekt.ItemsSource = new ApplicantImplementation().Data_PorjectListSmall();
+            cbx_projekt.ItemsSource = new Applicant().Data_PorjectListSmall();
         }
 
         private void BackButton(object sender, RoutedEventArgs e)
         {
-            CommonUtility.NavigateTo(grid, new ProfessionPage(grid));
+            Utility.NavigateTo(grid, new ProfessionPage(grid));
             
         }
 
@@ -81,12 +81,12 @@ namespace HR_Portal.View.Usercontrol.Panels
 
             if (!data.projekt_id.Equals(9999))
             {
-                new ApplicantImplementation().AddToProject(new_id, data.projekt_id);
+                new Applicant().AddToProject(new_id, data.projekt_id);
             }
             if (!new_id.Equals(0))
             {
                 new Email().Send(data.email, new EmailTemplate().Udvozlo_Email(data.name));
-                CommonUtility.NavigateTo(grid, new ProfessionPage(grid));
+                Utility.NavigateTo(grid, new ProfessionPage(grid));
             }
         }
 
