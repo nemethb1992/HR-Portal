@@ -6,33 +6,16 @@ using System.Collections.Generic;
 
 namespace HR_Portal.Source.ViewModel
 {
-    interface ApplicantInterface
+
+    public class Applicant
     {
-        List<ModelApplicantList> GetApplicantList(List<ModelApplicantSearchBar> searchValue = null);
 
-        List<ModelFullApplicant> GetFullApplicant(int id = 0);
-
-        List<ModelSmallProject> Data_ProjectList();
-
-        List<ModelSmallProject> Data_PorjectListSmall();
-
-        void Insert(List<ModelFullApplicant> items);
-
-        void Update(List<ModelFullApplicant> items);
-
-        void DeleteApplicant(int id);
-
-        void DeleteProject(int id);
-
-        void AddToProject(int jelolt_index, int projekt_index);
-
-        void FirstOpen(int applicantId);
-
-        ModelFullApplicant GetFullApplicantByEmail(string email);
-    }
-    class Applicant : ApplicantInterface
-    {
-        public List<ModelApplicantList> GetApplicantList(List<ModelApplicantSearchBar> sw = null)
+        public ModelFullApplicant data;
+        public Applicant(int applicantId = 0)
+        {
+            this.data = GetFullApplicant(applicantId)[0];
+        }
+        List<ModelApplicantList> GetApplicantList(List<ModelApplicantSearchBar> sw = null)
         {
             string command = "SELECT coalesce((SELECT count(projekt_id) FROM interjuk_kapcs WHERE jelolt_id = jeloltek.id GROUP BY jelolt_id),0) as interjuk_db, " +
                 "(SELECT megnevezes_munka FROM munkakor WHERE munkakor.id = jeloltek.munkakor) as munkakor, " +
@@ -156,8 +139,6 @@ namespace HR_Portal.Source.ViewModel
 
         public List<ModelFullApplicant> GetFullApplicant(int id = 0)
         {
-            if (id == 0)
-                id = Session.ApplicantID;
             string command = "SELECT jeloltek.id,nev,email,telefon,lakhely,pmk_ismerte,szuldatum,neme,tapasztalat_ev, reg_date,felvett,jeloltek.megjegyzes,jeloltek.statusz,folderUrl,hirlevel," +
                 "coalesce((SELECT nem FROM nemek WHERE nemek.id = jeloltek.neme),'') AS neme," +
                 "(SELECT nemek.id FROM nemek WHERE nemek.id = jeloltek.neme) AS id_neme," +
@@ -175,7 +156,7 @@ namespace HR_Portal.Source.ViewModel
                 "coalesce((SELECT ertesulesek.id FROM ertesulesek WHERE ertesulesek.id = jeloltek.ertesult),0) AS id_ertesult, " +
                 "coalesce((SELECT megnevezes_vegzettseg FROM vegzettsegek WHERE vegzettsegek.id = jeloltek.vegz_terulet),'') AS vegz_terulet, " +
                 "coalesce((SELECT vegzettsegek.id FROM vegzettsegek WHERE vegzettsegek.id = jeloltek.vegz_terulet),0) AS id_vegz_terulet " +
-                "FROM jeloltek WHERE jeloltek.id = " + id + "";
+                "FROM jeloltek WHERE jeloltek.id = " + (id.Equals(0) ? Session.ApplicantID : id) + "";
 
             List<ModelFullApplicant> list = ModelFullApplicant.GetModelFullApplicant(command);
 

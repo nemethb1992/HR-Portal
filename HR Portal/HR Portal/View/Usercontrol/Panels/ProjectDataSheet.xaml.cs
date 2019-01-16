@@ -428,7 +428,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             grid.Children.Clear();
             if (Session.lastPage == Utility.Views.ApplicantDataSheet)
             {
-                grid.Children.Add(applicantDataSheet = new ApplicantDataSheet(grid));
+                Utility.NavigateTo(grid, new ApplicantDataSheet(grid, new Applicant()));
             }
             else
             {

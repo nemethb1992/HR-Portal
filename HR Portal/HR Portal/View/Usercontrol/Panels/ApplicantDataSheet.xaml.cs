@@ -9,7 +9,6 @@ using HR_Portal.Source.Model.Applicant;
 using HR_Portal.Source.ViewModel;
 using HR_Portal.Source.Model.Project;
 using HR_Portal.Public.templates;
-
 namespace HR_Portal.View.Usercontrol.Panels
 {
     /// <summary>
@@ -17,44 +16,43 @@ namespace HR_Portal.View.Usercontrol.Panels
     /// </summary>
     public partial class ApplicantDataSheet : UserControl
     {
-        Applicant Applicant = new Applicant();
         Utility Utility = new Utility();
         Files fControl = new Files();
 
+        private Applicant applicant;
         private ProjectDataSheet projectDataSheet;
         private ProjektJeloltDataSheet projektJeloltDataSheet;
         private ApplicantList applicantList;
         private InterviewPanel interviewPanel;
         private Grid grid;
+        
 
-        private List<ModelFullApplicant> list;
-
-        public ApplicantDataSheet(Grid grid)
+        public ApplicantDataSheet(Grid grid, Applicant applicant)
         {
             this.grid = grid;
+            //this.applicant = applicant;
             InitializeComponent();
-            list =  Applicant.GetFullApplicant();
             formLoader();
         }
 
         protected void formLoader()
         {
 
-            applicant_profile_title.Text = list[0].nev;
-            header.Text = "Tisztelt "+ list[0].nev + "!";
-            app_input_1.Text = list[0].email;
-            app_input_2.Text = list[0].telefon.ToString();
-            app_input_3.Text = list[0].lakhely;
-            app_input_5.Text = list[0].nyelvtudas.ToString();
-            app_input_6.Text = list[0].nyelvtudas2.ToString();
-            app_input_8.Text = list[0].munkakor;
-            app_input_9.Text = list[0].ertesult.ToString();
-            app_input_10.Text = list[0].szuldatum.ToString();
-            projekt_cbx.ItemsSource = Applicant.Data_PorjectListSmall();
+            applicant_profile_title.Text = applicant.data.nev;
+            header.Text = "Tisztelt "+ applicant.data.nev + "!";
+            app_input_1.Text = applicant.data.email;
+            app_input_2.Text = applicant.data.telefon.ToString();
+            app_input_3.Text = applicant.data.lakhely;
+            app_input_5.Text = applicant.data.nyelvtudas.ToString();
+            app_input_6.Text = applicant.data.nyelvtudas2.ToString();
+            app_input_8.Text = applicant.data.munkakor;
+            app_input_9.Text = applicant.data.ertesult.ToString();
+            app_input_10.Text = applicant.data.szuldatum.ToString();
+            projekt_cbx.ItemsSource = applicant.Data_PorjectListSmall();
             csatolmany_listBox.ItemsSource = Files.Read(Session.ApplicantID);
             megjegyzes_listBox.ItemsSource = Utility.Data_CommentApplicant();
             interju_listBox.ItemsSource = new Interview().Data_Interview();
-            kapcsolodo_projekt_list.ItemsSource = Applicant.Data_ProjectList();
+            kapcsolodo_projekt_list.ItemsSource = applicant.Data_ProjectList();
         }
 
         protected void navigateToProjectDataSheet(object sender, RoutedEventArgs e)
@@ -73,8 +71,8 @@ namespace HR_Portal.View.Usercontrol.Panels
             MenuItem delete = sender as MenuItem;
             ModelSmallProject items = delete.DataContext as ModelSmallProject;
 
-            Applicant.DeleteProject(items.id);
-            kapcsolodo_projekt_list.ItemsSource = Applicant.Data_ProjectList();
+            applicant.DeleteProject(items.id);
+            kapcsolodo_projekt_list.ItemsSource = applicant.Data_ProjectList();
         }
 
         protected void commentDeleteClick(object sender, RoutedEventArgs e)
@@ -123,8 +121,8 @@ namespace HR_Portal.View.Usercontrol.Panels
             ModelSmallProject item = cbx.SelectedItem as ModelSmallProject;
             if(item != null)
             {
-                Applicant.AddToProject(Session.ApplicantID, item.id);
-                kapcsolodo_projekt_list.ItemsSource = Applicant.Data_ProjectList();
+                applicant.AddToProject(Session.ApplicantID, item.id);
+                kapcsolodo_projekt_list.ItemsSource = applicant.Data_ProjectList();
             }
         }
 
@@ -173,7 +171,7 @@ namespace HR_Portal.View.Usercontrol.Panels
 
         private void SendCustomMail(object sender, RoutedEventArgs e)
         {
-            new Email().Send(list[0].email,new EmailTemplate().Egyedi_Email(email_content.Text, list[0].nev));
+            new Email().Send(applicant.data.email,new EmailTemplate().Egyedi_Email(email_content.Text, applicant.data.nev));
             email_content.Text = "";
             mailPanelClose();
         }
