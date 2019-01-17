@@ -8,7 +8,7 @@ namespace HR_Portal.Source.ViewModel
     public class Project
     {
         public ModelFullProject list;
-        public Project(int projectId)
+        public Project(int projectId = 0)
         {
             this.list = GetFullProject(projectId)[0];
         }

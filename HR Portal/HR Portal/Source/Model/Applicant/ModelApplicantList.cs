@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace HR_Portal.Source.Model.Applicant
 {
-    class ModelApplicantList
+    public class ModelApplicantList
     {
         public int id { get; set; }
         public string nev { get; set; }

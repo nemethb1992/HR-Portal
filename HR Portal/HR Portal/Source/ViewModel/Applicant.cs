@@ -15,7 +15,7 @@ namespace HR_Portal.Source.ViewModel
         {
             this.data = GetFullApplicant(applicantId)[0];
         }
-        List<ModelApplicantList> GetApplicantList(List<ModelApplicantSearchBar> sw = null)
+        public static List<ModelApplicantList> GetApplicantList(List<ModelApplicantSearchBar> sw)
         {
             string command = "SELECT coalesce((SELECT count(projekt_id) FROM interjuk_kapcs WHERE jelolt_id = jeloltek.id GROUP BY jelolt_id),0) as interjuk_db, " +
                 "(SELECT megnevezes_munka FROM munkakor WHERE munkakor.id = jeloltek.munkakor) as munkakor, " +
@@ -102,11 +102,7 @@ namespace HR_Portal.Source.ViewModel
             }
             command += " LIMIT 50";
 
-            List<ModelApplicantList> list = ModelApplicantList.GetModelApplicantList(command);
-
-            MySql.Close();
-
-            return list;
+            return ModelApplicantList.GetModelApplicantList(command);
         }
 
         public ModelFullApplicant GetFullApplicantByEmail(string email)
@@ -165,7 +161,7 @@ namespace HR_Portal.Source.ViewModel
             return list;
         }
 
-        public void DeleteApplicant(int id)   //javított használja: applicantlist
+        public static void DeleteApplicant(int id)   //javított használja: applicantlist
         {
             string command = "DELETE FROM jeloltek WHERE jeloltek.id = " + id + ";";
             MySql.Execute(command);
@@ -234,7 +230,7 @@ namespace HR_Portal.Source.ViewModel
             return list;
         }
 
-        public void FirstOpen(int applicantId)  
+        public static void FirstOpen(int applicantId)  
         {
             string command = "UPDATE jeloltek SET friss = false WHERE id = " + applicantId + ";";
             MySql.Execute(command);

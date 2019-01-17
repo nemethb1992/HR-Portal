@@ -96,8 +96,7 @@ namespace HR_Portal.View.Usercontrol.Panels
 
         protected void backToProjectDataSheet(object sender, RoutedEventArgs e)
         {
-            grid.Children.Clear();
-            grid.Children.Add(projectDataSheet = new ProjectDataSheet(grid,new Project(Session.ProjektID)));
+            Utility.NavigateTo(grid, new ProjectDataSheet(grid,project));
         }
 
         protected void enterComment(object sender, KeyEventArgs e)
@@ -184,8 +183,7 @@ namespace HR_Portal.View.Usercontrol.Panels
                 case MessageBoxResult.Yes:
                     Project project = new Project(0);
                     project.jeloltKapcsUpdate(Session.ApplicantID, 3);
-                    grid.Children.Clear();
-                    grid.Children.Add(projectDataSheet = new ProjectDataSheet(grid, project));
+                    Utility.NavigateTo(grid, new ProjectDataSheet(grid, project));
                     EmailTemplate email = new EmailTemplate();
                     new Email().Send(applicantData[0].email, email.Elutasito_Email(applicantData[0].nev));
                     break;
@@ -256,8 +254,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             ModelInterview items = btn.DataContext as ModelInterview;
 
             Session.InterViewID = items.id;
-            grid.Children.Clear();
-            grid.Children.Add(interviewPanel = new InterviewPanel(grid));
+            Utility.NavigateTo(grid, new InterviewPanel(grid));
         }
 
         protected void deleteInterview(object sender, RoutedEventArgs e)
@@ -296,8 +293,7 @@ namespace HR_Portal.View.Usercontrol.Panels
         private void ApplicantDataSheetNavigation(object sender, RoutedEventArgs e)
         {
             Utility.SetReturnPage(Utility.Views.ProjectJeloltDataSheet);
-            grid.Children.Clear();
-            grid.Children.Add(applicantDataSheet = new ApplicantDataSheet(grid));
+            Utility.NavigateTo(grid, new ApplicantDataSheet(grid,new Applicant()));
         }
     }
 

@@ -228,8 +228,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             Session.ProjektID = items.id;
             Utility.SetReturnPage(Utility.Views.ProjectList);
             Session.ProjectSearchValue = GetSearchValues();
-            grid.Children.Clear();
-            grid.Children.Add(projectDataSheet = new ProjectDataSheet(grid, new Project(items.id)));
+            Utility.NavigateTo(grid, new ProjectDataSheet(grid, new Project(items.id)));
         }
 
         protected void Numeric(object sender, TextCompositionEventArgs e)
@@ -344,8 +343,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             Session.isUpdate = false;
             Utility.SetReturnPage(Utility.Views.ProjectList);
             Session.ProjectSearchValue = GetSearchValues();
-            grid.Children.Clear();
-            grid.Children.Add(newProjectPanel = new NewProjectPanel(grid));
+            Utility.NavigateTo(grid, new NewProjectPanel(grid));
         }
 
         protected void modositasClick(object sender, RoutedEventArgs e)
@@ -354,8 +352,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             ModelProjectList itemSource = (sender as MenuItem).DataContext as ModelProjectList;
 
             Session.ProjektID = itemSource.id;
-            grid.Children.Clear();
-            grid.Children.Add(newProjectPanel = new NewProjectPanel(grid));
+            Utility.NavigateTo(grid, new NewProjectPanel(grid));
         }
 
         protected void headerClick(object sender, MouseButtonEventArgs e)

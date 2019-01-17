@@ -28,7 +28,6 @@ namespace HR_Portal.View.Usercontrol.Panels
         public string HeaderSelected { get { return HeaderSelecteds; } set { HeaderSelecteds = value; } }
 
         Utility Utility = new Utility();
-        Applicant Applicant = new Applicant();
 
 
         private ApplicantDataSheet applicantDataSheet;
@@ -237,8 +236,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             }
             Utility.SetReturnPage(Utility.Views.ApplicantList);
             Session.ApplicantSearchValue = GetSearchValues();
-            grid.Children.Clear();
-            grid.Children.Add(applicantDataSheet = new ApplicantDataSheet(grid));
+            Utility.NavigateTo(grid,new ApplicantDataSheet(grid,new Applicant(items.id)));
         }
 
         protected void applicantDeleteClick(object sender, RoutedEventArgs e)
@@ -355,8 +353,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             Utility.SetReturnPage(Utility.Views.ApplicantList);
             Session.isUpdate = false;
             Session.ApplicantSearchValue = GetSearchValues();
-            grid.Children.Clear();
-            grid.Children.Add(newApplicantPanel = new NewApplicantPanel(grid));
+            Utility.NavigateTo(grid, new NewApplicantPanel(grid));
         }
 
         protected void modositasClick(object sender, RoutedEventArgs e)
@@ -366,8 +363,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             Session.isUpdate = true;
             Session.ApplicantID = itemSource.id;
             Session.ApplicantSearchValue = GetSearchValues();
-            grid.Children.Clear();
-            grid.Children.Add(newApplicantPanel = new NewApplicantPanel(grid));
+            Utility.NavigateTo(grid, new NewApplicantPanel(grid));
         }
 
         protected void headerClick(object sender, MouseButtonEventArgs e)
