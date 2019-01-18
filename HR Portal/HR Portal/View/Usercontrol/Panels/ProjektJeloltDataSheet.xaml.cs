@@ -6,7 +6,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using HR_Portal.Source.Model;
-using HR_Portal.Source.Model.Applicant;
 using HR_Portal.Source.ViewModel;
 using HR_Portal.Source.Model.Project;
 using HR_Portal.Public.templates;
@@ -19,21 +18,18 @@ namespace HR_Portal.View.Usercontrol.Panels
     /// 
     public partial class ProjektJeloltDataSheet : UserControl
     {
-
-        Applicant Applicant = new Applicant();
+    
         Utility Utility = new Utility();
-
-        private ProjectDataSheet projectDataSheet;
-        private ApplicantDataSheet applicantDataSheet;
-        private InterviewPanel interviewPanel;
+        
         private Grid grid;
         private Project project;
+        private Applicant applicant;
+        
 
-        List<ModelFullApplicant> applicantData;
-
-        public ProjektJeloltDataSheet(Grid grid, Project project)
+        public ProjektJeloltDataSheet(Grid grid, Project project, Applicant applicant)
         {
                 this.grid = grid;
+            this.applicant = applicant;
             this.project = project;
                 InitializeComponent();
             projectFormLoader();
@@ -41,13 +37,12 @@ namespace HR_Portal.View.Usercontrol.Panels
 
         protected void projectFormLoader()
         {
-            applicantData = Applicant.GetFullApplicant();
-            List<ModelFullProject> projectList = Project.GetFullProject();
+            //List<ModelFullProject> project = Project.GetFullProject();
             List<ModelKompetenciak> kompetenciaList = Interview.Data_Kompetencia();
             List<ModelKompetenciaSummary> summaryList = Utility.Data_KompetenciaJeloltKapcs();
 
-            projekt_jelolt_title_tbl.Text = projectList[0].megnevezes_projekt + " - " + applicantData[0].nev;
-            jelolt_telefon.Text = "( " + applicantData[0].telefon + " )";
+            projekt_jelolt_title_tbl.Text = project.data.megnevezes_projekt + " - " + applicant.data.nev;
+            jelolt_telefon.Text = "( " + applicant.data.telefon + " )";
             megjegyzes_listBox.ItemsSource = Utility.Data_CommentApplicant();
             kapcs_jeloltek_listBox.ItemsSource = new Interview().Data_Interview();
             inter_cim.Items.Add("HR interjú");
@@ -71,15 +66,15 @@ namespace HR_Portal.View.Usercontrol.Panels
             }
             foreach (var item in kompetenciaList)
             {
-                if (item.id == projectList[0].kepesseg1)
+                if (item.id == project.data.kepesseg1)
                 { kompetencia_1.Text = item.kompetencia_megnevezes; }
-                if (item.id == projectList[0].kepesseg2)
+                if (item.id == project.data.kepesseg2)
                 { kompetencia_2.Text = item.kompetencia_megnevezes; }
-                if (item.id == projectList[0].kepesseg3)
+                if (item.id == project.data.kepesseg3)
                 { kompetencia_3.Text = item.kompetencia_megnevezes; }
-                if (item.id == projectList[0].kepesseg4)
+                if (item.id == project.data.kepesseg4)
                 { kompetencia_4.Text = item.kompetencia_megnevezes; }
-                if (item.id == projectList[0].kepesseg5)
+                if (item.id == project.data.kepesseg5)
                 { kompetencia_5.Text = item.kompetencia_megnevezes; }
             }
             telephoneInspectedLayout();
@@ -185,7 +180,7 @@ namespace HR_Portal.View.Usercontrol.Panels
                     project.jeloltKapcsUpdate(Session.ApplicantID, 3);
                     Utility.NavigateTo(grid, new ProjectDataSheet(grid, project));
                     EmailTemplate email = new EmailTemplate();
-                    new Email().Send(applicantData[0].email, email.Elutasito_Email(applicantData[0].nev));
+                    new Email().Send(applicant.data.email, email.Elutasito_Email(applicant.data.nev));
                     break;
                 case MessageBoxResult.No:
                     break;
@@ -254,7 +249,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             ModelInterview items = btn.DataContext as ModelInterview;
 
             Session.InterViewID = items.id;
-            Utility.NavigateTo(grid, new InterviewPanel(grid));
+            Utility.NavigateTo(grid, new InterviewPanel(grid, new Project(items.projekt_id), new Applicant(items.jelolt_id)));
         }
 
         protected void deleteInterview(object sender, RoutedEventArgs e)

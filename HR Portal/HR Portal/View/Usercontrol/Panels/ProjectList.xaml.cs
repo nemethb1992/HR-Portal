@@ -23,9 +23,7 @@ namespace HR_Portal.View.Usercontrol.Panels
         protected string HeaderSelected { get { return HeaderSelecteds; } set { HeaderSelecteds = value; } }
 
         Utility Utility = new Utility();
-
-        private ProjectDataSheet projectDataSheet;
-        private NewProjectPanel newProjectPanel;
+        
         private Grid grid;
 
         public ProjectList(Grid grid)

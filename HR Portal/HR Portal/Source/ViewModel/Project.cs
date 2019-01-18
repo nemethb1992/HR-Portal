@@ -7,10 +7,10 @@ namespace HR_Portal.Source.ViewModel
 {
     public class Project
     {
-        public ModelFullProject list;
+        public ModelFullProject data;
         public Project(int projectId = 0)
         {
-            this.list = GetFullProject(projectId)[0];
+            this.data = GetFullProject(projectId)[0];
         }
 
         public static List<ModelProjectList> GetProjectList(List<ModelProjectSearchBar> searchValue)

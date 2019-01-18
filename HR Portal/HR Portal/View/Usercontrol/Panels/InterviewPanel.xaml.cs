@@ -18,14 +18,14 @@ namespace HR_Portal.View.Usercontrol.Panels
     {
 
         private Grid grid;
-        private ProjektJeloltDataSheet projektJeloltDataSheet;
-        private ApplicantDataSheet applicantDataSheet;
+        private Project project;
+        private Applicant applicant;
 
-        private SzakmaiInterviewList szakmaiInterviewList;
-
-        public InterviewPanel(Grid grid)
+        public InterviewPanel(Grid grid, Project project, Applicant applicant)
         {
             this.grid = grid;
+            this.project = project;
+            this.applicant = applicant;
             InitializeComponent();
 
             interviewLoader();
@@ -40,20 +40,18 @@ namespace HR_Portal.View.Usercontrol.Panels
         {
             if(Session.UserData.kategoria > 1)
             {
-                grid.Children.Clear();
                 if (Session.lastPage == Utility.Views.ProjectJeloltDataSheet)
                 {
-                    grid.Children.Add(projektJeloltDataSheet = new ProjektJeloltDataSheet(grid, new Project(0)));
+                    Utility.NavigateTo(grid,new ProjektJeloltDataSheet(grid, project, applicant));
                 }
                 else
                 {
-                    grid.Children.Add(applicantDataSheet = new ApplicantDataSheet(grid));
+                    Utility.NavigateTo(grid, new ApplicantDataSheet(grid,applicant));
                 }
             }
             else
             {
-                grid.Children.Clear();
-                grid.Children.Add(szakmaiInterviewList = new SzakmaiInterviewList(grid));
+                Utility.NavigateTo(grid, new SzakmaiInterviewList(grid));
             }
         }
 

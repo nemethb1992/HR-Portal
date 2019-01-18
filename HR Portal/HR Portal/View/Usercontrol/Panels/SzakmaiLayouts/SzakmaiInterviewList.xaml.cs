@@ -51,7 +51,7 @@ namespace HR_Portal.View.Usercontrol.Panels.SzakmaiLayouts
             Session.ApplicantID = items.jelolt_id;
 
             grid.Children.Clear();
-            grid.Children.Add(interviewPanel = new InterviewPanel(grid));
+            grid.Children.Add(interviewPanel = new InterviewPanel(grid, new Project(items.projekt_id),new Applicant(items.jelolt_id)));
         }
     }
 }

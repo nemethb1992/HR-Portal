@@ -20,17 +20,13 @@ namespace HR_Portal.View.Usercontrol.Panels
         Files fControl = new Files();
 
         private Applicant applicant;
-        private ProjectDataSheet projectDataSheet;
-        private ProjektJeloltDataSheet projektJeloltDataSheet;
-        private ApplicantList applicantList;
-        private InterviewPanel interviewPanel;
         private Grid grid;
         
 
         public ApplicantDataSheet(Grid grid, Applicant applicant)
         {
             this.grid = grid;
-            //this.applicant = applicant;
+            this.applicant = applicant;
             InitializeComponent();
             formLoader();
         }
@@ -62,8 +58,7 @@ namespace HR_Portal.View.Usercontrol.Panels
 
             Session.ProjektID = items.id;
             Utility.SetReturnPage(Utility.Views.ApplicantDataSheet);
-            grid.Children.Clear();
-            grid.Children.Add(projectDataSheet = new ProjectDataSheet(grid, new Project(items.id)));
+            Utility.NavigateTo(grid, new ProjectDataSheet(grid, new Project(items.id)));
         }
 
         protected void projectDelete(object sender, RoutedEventArgs e)
@@ -141,14 +136,13 @@ namespace HR_Portal.View.Usercontrol.Panels
 
         private void BackButton(object sender, RoutedEventArgs e)
         {
-            grid.Children.Clear();
             if (Session.lastPage == Utility.Views.ProjectJeloltDataSheet)
             {
-                grid.Children.Add(projektJeloltDataSheet = new ProjektJeloltDataSheet(grid, new Project(0)));
+                Utility.NavigateTo(grid, new ProjektJeloltDataSheet(grid, new Project(0), applicant));
             }
             else
             {
-                grid.Children.Add(applicantList = new ApplicantList(grid));
+                Utility.NavigateTo(grid, new ApplicantList(grid));
             }
         }
 
@@ -164,8 +158,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             Session.InterViewID = item.id;
             Session.ProjektID = item.projekt_id;
             Utility.SetReturnPage(Utility.Views.ApplicantDataSheet);
-            grid.Children.Clear();
-            grid.Children.Add(interviewPanel = new InterviewPanel(grid));
+            Utility.NavigateTo(grid, new InterviewPanel(grid,new Project(item.projekt_id), new Applicant(item.jelolt_id)));
 
         }
 

@@ -17,15 +17,14 @@ namespace HR_Portal.View.Usercontrol.Panels
     public partial class NewApplicantPanel : UserControl
     {
         Utility Utility = new Utility();
-        Applicant Applicant = new Applicant();
-
+        private Applicant applicant;
         private Grid grid;
-        private ApplicantDataSheet applicantDataSheet;
         private ApplicantList applicantList;
 
-        public NewApplicantPanel(Grid grid)
+        public NewApplicantPanel(Grid grid, Applicant applicant = null)
         {
             this.grid = grid;
+            this.applicant = applicant;
             InitializeComponent();
             checkboxLoader();
         }
@@ -53,22 +52,22 @@ namespace HR_Portal.View.Usercontrol.Panels
 
         protected void modifyFormLoader()
         {
-            List<ModelFullApplicant> li = Applicant.GetFullApplicant();
-            nev_tbx.Text = li[0].nev;
-            email_tbx.Text = li[0].email;
-            lakhely_tbx.Text = li[0].lakhely;
-            telefon_tbx.Text = li[0].telefon;
-            eletkor_tbx.Text = li[0].szuldatum.ToString();
-            tapasztalat_tbx.Text = li[0].tapasztalat_ev.ToString();
+            
+            nev_tbx.Text = applicant.data.nev;
+            email_tbx.Text = applicant.data.email;
+            lakhely_tbx.Text = applicant.data.lakhely;
+            telefon_tbx.Text = applicant.data.telefon;
+            eletkor_tbx.Text = applicant.data.szuldatum.ToString();
+            tapasztalat_tbx.Text = applicant.data.tapasztalat_ev.ToString();
 
-            munkakor_cbx.SelectedIndex = Utility.ComboBoxValueSetter(Utility.Data_Munkakor().ConvertAll(x => new ModelId { id = x.id, }), li.ConvertAll(x => new ModelId { id = x.id_munkakor, }));
-            munkakor2_cbx.SelectedIndex = Utility.ComboBoxValueSetter(Utility.Data_Munkakor().ConvertAll(x => new ModelId { id = x.id, }), li.ConvertAll(x => new ModelId { id = x.id_munkakor2, }));
-            munkakor3_cbx.SelectedIndex = Utility.ComboBoxValueSetter(Utility.Data_Munkakor().ConvertAll(x => new ModelId { id = x.id, }), li.ConvertAll(x => new ModelId { id = x.id_munkakor3, }));
-            nyelv_cbx.SelectedIndex = Utility.ComboBoxValueSetter(Utility.Data_Nyelv().ConvertAll(x => new ModelId { id = x.id, }), li.ConvertAll(x => new ModelId { id = x.id_nyelvtudas, }));
-            nyelv2_cbx.SelectedIndex = Utility.ComboBoxValueSetter(Utility.Data_Nyelv().ConvertAll(x => new ModelId { id = x.id, }), li.ConvertAll(x => new ModelId { id = x.id_nyelvtudas2, }));
-            ertesules_cbx.SelectedIndex = Utility.ComboBoxValueSetter(Utility.Data_Ertesulesek().ConvertAll(x => new ModelId { id = x.id, }), li.ConvertAll(x => new ModelId { id = x.id_ertesult, }));
-            vegzettseg_cbx.SelectedIndex = Utility.ComboBoxValueSetter(Utility.Data_Vegzettseg().ConvertAll(x => new ModelId { id = x.id, }), li.ConvertAll(x => new ModelId { id = x.id_vegz_terulet, }));
-            neme_cbx.SelectedIndex = Utility.ComboBoxValueSetter(Utility.Data_Nemek().ConvertAll(x => new ModelId { id = x.id, }), li.ConvertAll(x => new ModelId { id = x.id_neme, }));
+            munkakor_cbx.SelectedIndex = Utility.ComboBoxValueSetter(Utility.Data_Munkakor().ConvertAll(x => new ModelId { id = x.id, }), applicant.list.ConvertAll(x => new ModelId { id = x.id_munkakor, }));
+            munkakor2_cbx.SelectedIndex = Utility.ComboBoxValueSetter(Utility.Data_Munkakor().ConvertAll(x => new ModelId { id = x.id, }), applicant.list.ConvertAll(x => new ModelId { id = x.id_munkakor2, }));
+            munkakor3_cbx.SelectedIndex = Utility.ComboBoxValueSetter(Utility.Data_Munkakor().ConvertAll(x => new ModelId { id = x.id, }), applicant.list.ConvertAll(x => new ModelId { id = x.id_munkakor3, }));
+            nyelv_cbx.SelectedIndex = Utility.ComboBoxValueSetter(Utility.Data_Nyelv().ConvertAll(x => new ModelId { id = x.id, }), applicant.list.ConvertAll(x => new ModelId { id = x.id_nyelvtudas, }));
+            nyelv2_cbx.SelectedIndex = Utility.ComboBoxValueSetter(Utility.Data_Nyelv().ConvertAll(x => new ModelId { id = x.id, }), applicant.list.ConvertAll(x => new ModelId { id = x.id_nyelvtudas2, }));
+            ertesules_cbx.SelectedIndex = Utility.ComboBoxValueSetter(Utility.Data_Ertesulesek().ConvertAll(x => new ModelId { id = x.id, }), applicant.list.ConvertAll(x => new ModelId { id = x.id_ertesult, }));
+            vegzettseg_cbx.SelectedIndex = Utility.ComboBoxValueSetter(Utility.Data_Vegzettseg().ConvertAll(x => new ModelId { id = x.id, }), applicant.list.ConvertAll(x => new ModelId { id = x.id_vegz_terulet, }));
+            neme_cbx.SelectedIndex = Utility.ComboBoxValueSetter(Utility.Data_Nemek().ConvertAll(x => new ModelId { id = x.id, }), applicant.list.ConvertAll(x => new ModelId { id = x.id_neme, }));
         }
 
         protected bool isFulfilled()
@@ -138,9 +137,9 @@ namespace HR_Portal.View.Usercontrol.Panels
         {
             if (isFulfilled())
             {
-                Applicant.Insert(getFormData());
+                applicant.Insert(getFormData());
                 grid.Children.Clear();
-                grid.Children.Add(applicantDataSheet = new ApplicantDataSheet(grid));
+                Utility.NavigateTo(grid, new ApplicantDataSheet(grid, applicant));
             }
             else
             {
@@ -152,9 +151,8 @@ namespace HR_Portal.View.Usercontrol.Panels
         {
             if (isFulfilled())
             {
-                Applicant.Update(getFormData());
-                grid.Children.Clear();
-                grid.Children.Add(applicantDataSheet = new ApplicantDataSheet(grid));
+                applicant.Update(getFormData());
+                Utility.NavigateTo(grid, new ApplicantDataSheet(grid, applicant));
             }
             else
             {

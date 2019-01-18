@@ -11,9 +11,11 @@ namespace HR_Portal.Source.ViewModel
     {
 
         public ModelFullApplicant data;
+        public List<ModelFullApplicant> list;
         public Applicant(int applicantId = 0)
         {
             this.data = GetFullApplicant(applicantId)[0];
+            this.list = GetFullApplicant(applicantId);
         }
         public static List<ModelApplicantList> GetApplicantList(List<ModelApplicantSearchBar> sw)
         {

@@ -29,9 +29,7 @@ namespace HR_Portal.View.Usercontrol.Panels
 
         Utility Utility = new Utility();
 
-
-        private ApplicantDataSheet applicantDataSheet;
-        private NewApplicantPanel newApplicantPanel;
+        
         private Grid grid;
 
         public ApplicantList(Grid grid)
