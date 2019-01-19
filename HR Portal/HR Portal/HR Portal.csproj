@@ -253,9 +253,6 @@
     <Compile Include="View\Usercontrol\Panels\ProfessionDataSheet.xaml.cs">
       <DependentUpon>ProfessionDataSheet.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Usercontrol\Panels\ProfessionEditPanel.xaml.cs">
-      <DependentUpon>ProfessionEditPanel.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\Usercontrol\Panels\ProfessionPage.xaml.cs">
       <DependentUpon>ProfessionPage.xaml</DependentUpon>
     </Compile>
@@ -346,10 +343,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="View\Usercontrol\Panels\ProfessionDataSheet.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\Usercontrol\Panels\ProfessionEditPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

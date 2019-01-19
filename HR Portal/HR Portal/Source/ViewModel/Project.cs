@@ -13,6 +13,11 @@ namespace HR_Portal.Source.ViewModel
             this.data = GetFullProject(projectId)[0];
         }
 
+        public void RefreshData()
+        {
+            this.data = GetFullProject(data.id)[0];
+        }
+
         public static List<ModelProjectList> GetProjectList(List<ModelProjectSearchBar> searchValue)
         {
             List<ModelProjectList> list = new List<ModelProjectList>();

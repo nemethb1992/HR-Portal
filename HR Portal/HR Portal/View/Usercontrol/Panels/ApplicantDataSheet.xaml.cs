@@ -27,6 +27,7 @@ namespace HR_Portal.View.Usercontrol.Panels
         {
             this.grid = grid;
             this.applicant = applicant;
+            DataContext = applicant.data;
             InitializeComponent();
             formLoader();
         }
@@ -44,7 +45,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             app_input_8.Text = applicant.data.munkakor;
             app_input_9.Text = applicant.data.ertesult.ToString();
             app_input_10.Text = applicant.data.szuldatum.ToString();
-            projekt_cbx.ItemsSource = applicant.Data_PorjectListSmall();
+            projekt_cbx.ItemsSource = new Utility().Data_PorjectListSmall();
             csatolmany_listBox.ItemsSource = Files.Read(Session.ApplicantID);
             megjegyzes_listBox.ItemsSource = Utility.Data_CommentApplicant();
             interju_listBox.ItemsSource = new Interview().Data_Interview();
@@ -116,7 +117,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             ModelSmallProject item = cbx.SelectedItem as ModelSmallProject;
             if(item != null)
             {
-                applicant.AddToProject(Session.ApplicantID, item.id);
+                applicant.AddToProject(item.id);
                 kapcsolodo_projekt_list.ItemsSource = applicant.Data_ProjectList();
             }
         }

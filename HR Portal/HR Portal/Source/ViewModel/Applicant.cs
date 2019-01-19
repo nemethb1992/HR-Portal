@@ -224,13 +224,6 @@ namespace HR_Portal.Source.ViewModel
             return list;
         }
 
-        public List<ModelSmallProject> Data_PorjectListSmall()  
-        {
-            string command = "SELECT projektek.id, megnevezes_projekt FROM projektek WHERE statusz = 1";
-            List<ModelSmallProject> list = ModelSmallProject.GetModelSmallProject(command);
-            MySql.Close();
-            return list;
-        }
 
         public static void FirstOpen(int applicantId)  
         {
@@ -257,13 +250,13 @@ namespace HR_Portal.Source.ViewModel
             MySql.Close();
         }
         
-        public void AddToProject(int jelolt_index, int projekt_index)
+        public void AddToProject(int projekt_index)
         {
-            string command = "SELECT * FROM projekt_jelolt_kapcs WHERE jelolt_id = " + jelolt_index + " AND projekt_id = "+projekt_index+"";
+            string command = "SELECT * FROM projekt_jelolt_kapcs WHERE jelolt_id = " + data.id + " AND projekt_id = "+projekt_index+"";
             if (!MySql.IsExists(command))
             {
                 MySql.Close();
-                command = "INSERT INTO projekt_jelolt_kapcs (id, projekt_id, jelolt_id, hr_id,allapota, datum) VALUES (NULL, " + projekt_index + ", " + jelolt_index + ", " + Session.UserData.id + ",4, '" + DateTime.Now.ToString("yyyy.MM.dd.") + "' );";
+                command = "INSERT INTO projekt_jelolt_kapcs (id, projekt_id, jelolt_id, hr_id,allapota, datum) VALUES (NULL, " + projekt_index + ", " + data.id + ", " + Session.UserData.id + ",4, '" + DateTime.Now.ToString("yyyy.MM.dd.") + "' );";
                 MySql.Execute(command);
             }
             MySql.Close();

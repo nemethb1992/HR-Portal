@@ -361,7 +361,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             Session.isUpdate = true;
             Session.ApplicantID = itemSource.id;
             Session.ApplicantSearchValue = GetSearchValues();
-            Utility.NavigateTo(grid, new NewApplicantPanel(grid));
+            Utility.NavigateTo(grid, new NewApplicantPanel(grid,new Applicant(itemSource.id)));
         }
 
         protected void headerClick(object sender, MouseButtonEventArgs e)

@@ -42,7 +42,14 @@ namespace HR_Portal.Source
             return list;
         }
 
-    
+
+        public List<ModelSmallProject> Data_PorjectListSmall()
+        {
+            string command = "SELECT projektek.id, megnevezes_projekt FROM projektek WHERE statusz = 1";
+            List<ModelSmallProject> list = ModelSmallProject.GetModelSmallProject(command);
+            MySql.Close();
+            return list;
+        }
 
         public List<ModelTamogatas> Data_KompetenciaTamogatas() // javítva
         {

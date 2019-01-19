@@ -61,7 +61,7 @@
                 <TextBlock x:Name="ProfessionName" 
                    Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" 
                    Style="{StaticResource big_title_style}"
-                   Text="-"
+                   Text="{Binding name}"
                    Margin="0,0,0,0"/>
 
                 <TextBlock x:Name="app_1" Grid.Column="0" Grid.Row="2" Style="{StaticResource Standard_Textblock}" Text="E-mail" />
@@ -69,10 +69,10 @@
                 <TextBlock x:Name="app_3" Grid.Column="0" Grid.Row="6" Style="{StaticResource Standard_Textblock}" Text="Beérkezés dátuma" />
                 <TextBlock x:Name="app_4" Grid.Column="0" Grid.Row="8" Style="{StaticResource Standard_Textblock}" Text="Megjelölt állás" />
 
-                <TextBlock Grid.Column="0" Grid.Row="3"   Text="-" Padding="10,0,0,0" Foreground="#FF404E70" Style="{StaticResource Standard_Textblock}" x:Name="app_input_1" />
-                <TextBlock Grid.Column="0" Grid.Row="5"   Text="-" Padding="10,0,0,0" Foreground="#FF404E70" Style="{StaticResource Standard_Textblock}" x:Name="app_input_2" />
-                <TextBlock Grid.Column="0" Grid.Row="7"   Text="-" Padding="10,0,0,0" Foreground="#FF404E70" Style="{StaticResource Standard_Textblock}" x:Name="app_input_3" />
-                <TextBlock Grid.Column="0" Grid.Row="9"   Text="-" Padding="10,0,0,0" Foreground="#FF404E70" Style="{StaticResource Standard_Textblock}" x:Name="app_input_4" />
+                <TextBlock Grid.Column="0" Grid.Row="3"   Text="{Binding email}" Padding="10,0,0,0" Foreground="#FF404E70" Style="{StaticResource Standard_Textblock}" x:Name="app_input_1" />
+                <TextBlock Grid.Column="0" Grid.Row="5"   Text="{Binding telephone}" Padding="10,0,0,0" Foreground="#FF404E70" Style="{StaticResource Standard_Textblock}" x:Name="app_input_2" />
+                <TextBlock Grid.Column="0" Grid.Row="7"   Text="{Binding reg_date}" Padding="10,0,0,0" Foreground="#FF404E70" Style="{StaticResource Standard_Textblock}" x:Name="app_input_3" />
+                <TextBlock Grid.Column="0" Grid.Row="9"   Text="{Binding projekt}" Padding="10,0,0,0" Foreground="#FF404E70" Style="{StaticResource Standard_Textblock}" x:Name="app_input_4" />
             </Grid>
 
             <Grid x:Name="ProfessionAttachments" Grid.Column="1" Margin="0,20,0,0" Grid.Row="2">

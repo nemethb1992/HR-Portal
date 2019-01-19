@@ -23,7 +23,6 @@ namespace HR_Portal.View.Usercontrol.Panels
     /// </summary>
     public partial class ProfessionPage : UserControl
     {
-        private ProfessionDataSheet professionDataSheet;
         private Grid grid;
         public ProfessionPage(Grid grid)
         {
@@ -35,8 +34,7 @@ namespace HR_Portal.View.Usercontrol.Panels
         private void OpenProfessionApplicant(object sender, RoutedEventArgs e)
         {
             ModelProfession item = (sender as Button).DataContext as ModelProfession;
-            grid.Children.Clear();
-            grid.Children.Add(professionDataSheet = new ProfessionDataSheet(grid,item));
+            Utility.NavigateTo(grid, new ProfessionDataSheet(grid,item));
         }
 
         private void DiscardProfessionApplicant(object sender, RoutedEventArgs e)

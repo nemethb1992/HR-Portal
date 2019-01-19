@@ -16,7 +16,6 @@ namespace HR_Portal.View.Usercontrol.Panels
     public partial class ProjectDataSheet : UserControl
     {
         Utility util = new Utility();
-        Applicant Applicant = new Applicant();
         EmailTemplate emailTemplate = new EmailTemplate();
 
         private Project project;
@@ -26,6 +25,7 @@ namespace HR_Portal.View.Usercontrol.Panels
         {
             this.grid = grid;
             this.project = project;
+            this.DataContext = project.data;
             InitializeComponent();
             try
             {
@@ -53,6 +53,11 @@ namespace HR_Portal.View.Usercontrol.Panels
             projekt_input_9.Text = project.data.ber.ToString() + " Ft";
             projekt_input_10.Text = project.data.tapasztalat_ev.ToString();
 
+            feladatok_tbx.Text = project.data.feladatok;
+            elvarasok_tbx.Text = project.data.elvarasok;
+            kinalunk_tbx.Text = project.data.kinalunk;
+            elonyok_tbx.Text = project.data.elonyok;
+
             List<ModelKompetenciak> li_k = Interview.Data_Kompetencia();
             foreach (var item in li_k)
             {
@@ -68,10 +73,7 @@ namespace HR_Portal.View.Usercontrol.Panels
                 { kompetencia5.Text = item.kompetencia_megnevezes; }
             }
 
-            feladatok_tbx.Text = project.data.feladatok;
-            elvarasok_tbx.Text = project.data.elvarasok;
-            kinalunk_tbx.Text = project.data.kinalunk;
-            elonyok_tbx.Text = project.data.elonyok;
+
             projectCost();
         }
 
@@ -275,7 +277,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             if(selectedTabCode == 1)
             {
                 ModelApplicantListbox items = btn.DataContext as ModelApplicantListbox;
-                Applicant.AddToProject(items.id, Session.ProjektID);
+                new Applicant(items.id).AddToProject(project.data.id);
                 projekt_kapcsolodo_list.ItemsSource = util.Data_JeloltForCheckbox(Ember_Search_tbx.Text);
                 kapcs_jeloltek_listBox.ItemsSource = util.Data_JeloltKapcs();
             }
@@ -299,6 +301,7 @@ namespace HR_Portal.View.Usercontrol.Panels
 
             string type = textbox.Tag.ToString();
             project.projectDescriptionUpdate(type, textbox.Text);
+            project.RefreshData();
             formLoader();
         }
 

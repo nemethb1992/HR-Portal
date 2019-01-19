@@ -35,29 +35,23 @@ namespace HR_Portal.View.Usercontrol.Panels
         {
             this.data = data;
             this.grid = grid;
+            this.DataContext = data;
             InitializeComponent();
             LoadUp();
         }
         protected void LoadUp()
         {
-            ProfessionName.Text = data.name;
-            app_input_1.Text = data.email;
-            app_input_2.Text = data.telephone;
-            app_input_3.Text = data.reg_date;
-            app_input_4.Text = data.projekt;
             ProfessionAttachmentListBox.ItemsSource = Files.ReadProfession(data.id);
-
             cbx1.ItemsSource = Utility.Data_Nemek();
             cbx2.ItemsSource = Utility.Data_Vegzettseg();
             cbx3.ItemsSource = Utility.Data_Nyelv();
             cbx4.ItemsSource = Utility.Data_Ertesulesek();
-            cbx_projekt.ItemsSource = new Applicant().Data_PorjectListSmall();
+            cbx_projekt.ItemsSource = new Utility().Data_PorjectListSmall();
         }
 
         private void BackButton(object sender, RoutedEventArgs e)
         {
             Utility.NavigateTo(grid, new ProfessionPage(grid));
-            
         }
 
         private void ProfessionAttachemntOpen(object sender, RoutedEventArgs e)
@@ -81,7 +75,7 @@ namespace HR_Portal.View.Usercontrol.Panels
 
             if (!data.projekt_id.Equals(9999))
             {
-                new Applicant().AddToProject(new_id, data.projekt_id);
+                new Applicant(new_id).AddToProject(data.projekt_id);
             }
             if (!new_id.Equals(0))
             {
