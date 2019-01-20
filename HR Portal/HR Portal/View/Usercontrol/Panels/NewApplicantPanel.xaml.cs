@@ -19,7 +19,6 @@ namespace HR_Portal.View.Usercontrol.Panels
         Utility Utility = new Utility();
         private Applicant applicant;
         private Grid grid;
-        private ApplicantList applicantList;
 
         public NewApplicantPanel(Grid grid, Applicant applicant = null)
         {
@@ -73,21 +72,9 @@ namespace HR_Portal.View.Usercontrol.Panels
         protected bool isFulfilled()
         {
             if (
-                munkakor_cbx.SelectedItem == null ||
-                nyelv_cbx.SelectedItem == null ||
-                neme_cbx.SelectedItem == null ||
-                nyelv2_cbx.SelectedItem == null ||
-                ertesules_cbx.SelectedItem == null ||
-                munkakor_cbx.SelectedItem == null ||
-                munkakor2_cbx.SelectedItem == null ||
-                munkakor3_cbx.SelectedItem == null ||
-                vegzettseg_cbx.SelectedItem == null ||
                 nev_tbx.Text.Length == 0 ||
-                email_tbx.Text.Length == 0 ||
-                telefon_tbx.Text.Length == 0 ||
-                lakhely_tbx.Text.Length == 0 ||
-                eletkor_tbx.Text.Length == 0 ||
-                tapasztalat_tbx.Text.Length == 0
+                email_tbx.Text.Length == 0
+
                 )
             {
                 return false;
@@ -97,10 +84,10 @@ namespace HR_Portal.View.Usercontrol.Panels
                 return true;
             }
         }
-        protected List<ModelFullApplicant> getFormData()
+        protected ModelFullApplicant getFormData()
         {
             DateTime localDate = DateTime.Now;
-            List<ModelFullApplicant> items = new List<ModelFullApplicant>();
+            ModelFullApplicant items;
 
             ModelNem nemeComboBoxItem = (neme_cbx as ComboBox).SelectedItem as ModelNem;
             ModelNyelv nyelvComboBoxItem = (nyelv_cbx as ComboBox).SelectedItem as ModelNyelv;
@@ -111,25 +98,26 @@ namespace HR_Portal.View.Usercontrol.Panels
             ModelMunkakor munkakor3ComboBoxItem = (munkakor3_cbx as ComboBox).SelectedItem as ModelMunkakor;
             ModelVegzettseg vegzettsegComboBoxItem = (vegzettseg_cbx as ComboBox).SelectedItem as ModelVegzettseg;
             
-            items.Add(new ModelFullApplicant
+            items = new ModelFullApplicant
             {
                 id = 0,
                 nev = nev_tbx.Text,
                 email = email_tbx.Text,
                 telefon = telefon_tbx.Text,
                 lakhely = lakhely_tbx.Text,
-                ertesult = ertesulesComboBoxItem.id.ToString(),
-                szuldatum = Convert.ToInt32(eletkor_tbx.Text),
-                neme = nemeComboBoxItem.id.ToString(),
-                tapasztalat_ev = Convert.ToInt32(tapasztalat_tbx.Text),
-                munkakor = munkakorComboBoxItem.id.ToString(),
-                munkakor2 = munkakor2ComboBoxItem.id.ToString(),
-                munkakor3 = munkakor3ComboBoxItem.id.ToString(),
-                vegz_terulet = vegzettsegComboBoxItem.id.ToString(),
-                nyelvtudas = nyelvComboBoxItem.id.ToString(),
-                nyelvtudas2 = nyelv2ComboBoxItem.id.ToString(),
+                tapasztalat_ev = Convert.ToInt32((tapasztalat_tbx.Text.Length > 0? tapasztalat_tbx.Text : "0")),
+                szuldatum = Convert.ToInt32(eletkor_tbx.Text.Length > 0 ? eletkor_tbx.Text : "0"),
                 reg_date = localDate.ToString("yyyy.MM.dd."),
-            });
+
+                neme = (neme_cbx.SelectedIndex.Equals(-1) ? "0" : nemeComboBoxItem.id.ToString()),
+                munkakor = (munkakor_cbx.SelectedIndex.Equals(-1) ? "1" : munkakorComboBoxItem.id.ToString()),
+                munkakor2 = (munkakor2_cbx.SelectedIndex.Equals(-1) ? "1" : munkakor2ComboBoxItem.id.ToString()),
+                munkakor3 = (munkakor3_cbx.SelectedIndex.Equals(-1) ? "1" : munkakor3ComboBoxItem.id.ToString()),
+                vegz_terulet = (vegzettseg_cbx.SelectedIndex.Equals(-1) ? "1" : vegzettsegComboBoxItem.id.ToString()),
+                nyelvtudas = (nyelv_cbx.SelectedIndex.Equals(-1) ? "0" : nyelvComboBoxItem.id.ToString()),
+                nyelvtudas2 = (nyelv2_cbx.SelectedIndex.Equals(-1) ? "0" : nyelv2ComboBoxItem.id.ToString()),
+                ertesult = (ertesules_cbx.SelectedIndex.Equals(-1) ? "0" : ertesulesComboBoxItem.id.ToString())
+            };
             return items;
         }
 
@@ -137,9 +125,9 @@ namespace HR_Portal.View.Usercontrol.Panels
         {
             if (isFulfilled())
             {
-                applicant.Insert(getFormData());
-                grid.Children.Clear();
-                Utility.NavigateTo(grid, new ApplicantDataSheet(grid, applicant));
+                ModelFullApplicant applicant = getFormData();
+                Applicant.Insert(applicant);
+                Utility.NavigateTo(grid, new ApplicantDataSheet(grid, new Applicant(applicant.id)));
             }
             else
             {
@@ -151,8 +139,9 @@ namespace HR_Portal.View.Usercontrol.Panels
         {
             if (isFulfilled())
             {
-                applicant.Update(getFormData());
-                Utility.NavigateTo(grid, new ApplicantDataSheet(grid, applicant));
+                ModelFullApplicant applicant = getFormData();
+                Applicant.Update(getFormData());
+                Utility.NavigateTo(grid, new ApplicantDataSheet(grid, new Applicant(applicant.id)));
             }
             else
             {
@@ -169,8 +158,7 @@ namespace HR_Portal.View.Usercontrol.Panels
 
         private void BackButton(object sender, RoutedEventArgs e)
         {
-            grid.Children.Clear();
-            grid.Children.Add(applicantList = new ApplicantList(grid));
+            Utility.NavigateTo(grid, new ApplicantList(grid));
         }
     }
 }

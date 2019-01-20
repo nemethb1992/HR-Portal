@@ -254,12 +254,12 @@ namespace HR_Portal.View.Usercontrol.Panels
 
         protected void projectArchivateClick(object sender, RoutedEventArgs e)
         {
-            MessageBoxResult result = MessageBox.Show("Biztosan archiválni szeretnéd? \n\nArchiválás esetén, a kiválasztott projekt, passzív állapotba kerül\nés nem jelenik meg a weblapon.", "HR Cloud", MessageBoxButton.YesNoCancel);
+            MessageBoxResult result = MessageBox.Show("Biztosan módosítani szeretnéd?", "HR Cloud", MessageBoxButton.YesNoCancel);
             switch (result)
             {
                 case MessageBoxResult.Yes:
                     ModelProjectList items = (sender as MenuItem).DataContext as ModelProjectList;
-                    new Project(0).projectArchiver(items.id, items.statusz);
+                    new Project(items.id).projectArchiver(items.id, items.statusz);
                     projectListLoader();
                     break;
                 case MessageBoxResult.No:
@@ -271,14 +271,14 @@ namespace HR_Portal.View.Usercontrol.Panels
 
         protected void projectPassivateClick(object sender, RoutedEventArgs e)
         {
-            new Project(0).ProjectStatusChange(0);
+            Project.ProjectStatusChange(0);
             project_listBox.ItemsSource = Project.GetProjectList(GetSearchValues());
             buttonColorChange();
         }
 
         protected void projectActivateClick(object sender, RoutedEventArgs e)
         {
-            new Project(0).ProjectStatusChange(1);
+            Project.ProjectStatusChange(1);
             project_listBox.ItemsSource = Project.GetProjectList(GetSearchValues());
             buttonColorChange();
         }

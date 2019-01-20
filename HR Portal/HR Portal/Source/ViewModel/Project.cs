@@ -134,38 +134,38 @@ namespace HR_Portal.Source.ViewModel
             MySql.Close();
         }
 
-        public static void Insert(List<ModelInsertProject> items) // javított newprojectpanel
+        public static void Insert(ModelInsertProject data) // javított newprojectpanel
         {
             string command = "INSERT INTO projektek (`id`, `hr_id`, `megnevezes_projekt`, `pc`, `vegzettseg`, `tapasztalat_ev`, `statusz`, `fel_datum`, `le_datum`, `nyelvtudas`, `munkakor`, `szuldatum`, `ber`,  `kepesseg1`, `kepesseg2`, `kepesseg3`, `kepesseg4`, `kepesseg5`, `feladatok`, `elvarasok`, `kinalunk`)" +
-                " VALUES (NULL, " + items[0].hr_id + ", '" + items[0].megnevezes_projekt + "'," + items[0].pc + "," + items[0].vegzettseg + "," + items[0].tapasztalat_ev + "," + items[0].statusz + ",'" + items[0].fel_datum + "','" + items[0].le_datum + "'," + items[0].nyelvtudas + "," + items[0].munkakor + "," + items[0].szuldatum + "," + items[0].ber + "," + items[0].kepesseg1 + "," + items[0].kepesseg2 + "," + items[0].kepesseg3 + "," + items[0].kepesseg4 + "," + items[0].kepesseg5 + ",'" + items[0].feladatok + "','" + items[0].elvarasok + "','" + items[0].kinalunk + "');";
+                " VALUES (NULL, " + data.hr_id + ", '" + data.megnevezes_projekt + "'," + data.pc + "," + data.vegzettseg + "," + data.tapasztalat_ev + "," + data.statusz + ",'" + data.fel_datum + "','" + data.le_datum + "'," + data.nyelvtudas + "," + data.munkakor + "," + data.szuldatum + "," + data.ber + "," + data.kepesseg1 + "," + data.kepesseg2 + "," + data.kepesseg3 + "," + data.kepesseg4 + "," + data.kepesseg5 + ",'" + data.feladatok + "','" + data.elvarasok + "','" + data.kinalunk + "');";
             MySql.Execute(command);
-            int proID = Convert.ToInt16(MySql.UniqueList("SELECT projektek.id FROM projektek WHERE projektek.megnevezes_projekt = '" + items[0].megnevezes_projekt + "' AND projektek.pc = " + items[0].pc + " AND projektek.munkakor = '" + items[0].munkakor + "'", "projektek", 1)[0]);
+            int proID = Convert.ToInt16(MySql.UniqueList("SELECT projektek.id FROM projektek WHERE projektek.megnevezes_projekt = '" + data.megnevezes_projekt + "' AND projektek.pc = " + data.pc + " AND projektek.munkakor = '" + data.munkakor + "'", "projektek", 1)[0]);
             Session.ProjektID = proID;
             command = "INSERT INTO`projekt_ertesitendok_kapcs` (projekt_id,ertesitendok_id) VALUES("+ proID + ","+Session.UserData.id+")";
             MySql.Execute(command);
             MySql.Close();
         }
 
-        public static void Update(List<ModelInsertProject> items) // javított newprojectpanel
+        public static void Update(ModelInsertProject data) // javított newprojectpanel
         {
             string command = "UPDATE projektek SET " +
-                " `hr_id` =  " + items[0].hr_id + ", " +
-                "`megnevezes_projekt` =  '" + items[0].megnevezes_projekt + "', " +
-                " `pc` =  " + items[0].pc + ", " +
-                "`vegzettseg` =  " + items[0].vegzettseg + ", " +
-                "`tapasztalat_ev` =  " + items[0].tapasztalat_ev + ", " +
-                "`statusz` =  " + items[0].statusz + ", " +
-                "`nyelvtudas` =  " + items[0].nyelvtudas + ", " +
-                "`munkakor` =  " + items[0].munkakor + ", " +
-                "`szuldatum` =  " + items[0].szuldatum + ", " +
-                "`ber` =  " + items[0].ber + ", " +
-                "`kepesseg1` =  " + items[0].kepesseg1 + ", " +
-                "`kepesseg2` =  " + items[0].kepesseg2 + ", " +
-                "`kepesseg3` =  " + items[0].kepesseg3 + ", " +
-                "`kepesseg4` =  " + items[0].kepesseg4 + ", " +
-                "`kepesseg5` =  " + items[0].kepesseg5 + " WHERE id = " + Session.ProjektID + "";
+                " `hr_id` =  " + data.hr_id + ", " +
+                "`megnevezes_projekt` =  '" + data.megnevezes_projekt + "', " +
+                " `pc` =  " + data.pc + ", " +
+                "`vegzettseg` =  " + data.vegzettseg + ", " +
+                "`tapasztalat_ev` =  " + data.tapasztalat_ev + ", " +
+                "`statusz` =  " + data.statusz + ", " +
+                "`nyelvtudas` =  " + data.nyelvtudas + ", " +
+                "`munkakor` =  " + data.munkakor + ", " +
+                "`szuldatum` =  " + data.szuldatum + ", " +
+                "`ber` =  " + data.ber + ", " +
+                "`kepesseg1` =  " + data.kepesseg1 + ", " +
+                "`kepesseg2` =  " + data.kepesseg2 + ", " +
+                "`kepesseg3` =  " + data.kepesseg3 + ", " +
+                "`kepesseg4` =  " + data.kepesseg4 + ", " +
+                "`kepesseg5` =  " + data.kepesseg5 + " WHERE id = " + Session.ProjektID + "";
             MySql.Execute(command);
-            int proID = Convert.ToInt16(MySql.UniqueList("SELECT projektek.id FROM projektek WHERE projektek.megnevezes_projekt = '" + items[0].megnevezes_projekt + "' AND projektek.pc = " + items[0].pc + " AND projektek.munkakor = '" + items[0].munkakor + "'", "projektek", 1)[0]);
+            int proID = Convert.ToInt16(MySql.UniqueList("SELECT projektek.id FROM projektek WHERE projektek.megnevezes_projekt = '" + data.megnevezes_projekt + "' AND projektek.pc = " + data.pc + " AND projektek.munkakor = '" + data.munkakor + "'", "projektek", 1)[0]);
             Session.ProjektID = proID;
             MySql.Close();
         }
@@ -202,7 +202,7 @@ namespace HR_Portal.Source.ViewModel
             MySql.Close();
         }
 
-        public void ProjectStatusChange(int stat) // javított
+        public static void ProjectStatusChange(int stat) // javított
         {
             Session.ProjectStatusz = 0;
             Session.ProjectStatusz = stat;

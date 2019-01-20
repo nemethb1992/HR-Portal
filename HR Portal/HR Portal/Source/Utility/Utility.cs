@@ -145,7 +145,7 @@ namespace HR_Portal.Source
             return list;
         }
 
-        public List<ModelErtesitendok> Data_ErtesitendokCheckbox(string ertesitendok_src)
+        public List<ModelErtesitendok> Data_ErtesitendokCheckbox(string ertesitendok_src = "")
         {
             string command = "SELECT id, name ,email, kategoria, jogosultsag, validitas FROM users WHERE name LIKE '%" + ertesitendok_src + "%'";
             List<ModelErtesitendok> list = ModelErtesitendok.GetModelErtesitendok(command);
@@ -161,7 +161,7 @@ namespace HR_Portal.Source
             return list;
         }
 
-        public List<ModelApplicantListbox> Data_JeloltForCheckbox(string nevsrc)
+        public List<ModelApplicantListbox> Data_JeloltForCheckbox()
         {
             string command = "SELECT jeloltek.id, nev FROM jeloltek LEFT JOIN projekt_jelolt_kapcs ON projekt_jelolt_kapcs.jelolt_id = jeloltek.id WHERE projekt_jelolt_kapcs.projekt_id != " + Session.ProjektID + " OR projekt_jelolt_kapcs.projekt_id IS NULL GROUP BY jeloltek.id";
             List<ModelApplicantListbox> list = ModelApplicantListbox.GetModelApplicantListboxShort(command);

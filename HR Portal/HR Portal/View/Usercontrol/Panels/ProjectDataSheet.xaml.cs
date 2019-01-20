@@ -238,11 +238,11 @@ namespace HR_Portal.View.Usercontrol.Panels
                 textbox.Text = "E-mail cím";
             }
         }
-        protected void addPanelClose(object sender, RoutedEventArgs e)
-        {
-            Ember_hozzaadas_Grid.Visibility = System.Windows.Visibility.Hidden;
-            formLoader();
-        }
+        //protected void addPanelClose(object sender, RoutedEventArgs e)
+        //{
+        //    Ember_hozzaadas_Grid.Visibility = System.Windows.Visibility.Hidden;
+        //    formLoader();
+        //}
 
         private static int SelectedTabCode;
         public int selectedTabCode { get { return SelectedTabCode; } set { SelectedTabCode = value; } }
@@ -252,7 +252,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             Blur_Grid.Visibility = System.Windows.Visibility.Visible;
             projekt_kapcsolodo_grid.Visibility = System.Windows.Visibility.Visible;
             selectedTabCode = 1;
-            projekt_kapcsolodo_list.ItemsSource = util.Data_JeloltForCheckbox(Ember_Search_tbx.Text);
+            projekt_kapcsolodo_list.ItemsSource = Applicant.GetAllActive(AddApplicantSearchTbx.Text);
             formLoader();
         }
 
@@ -261,7 +261,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             Blur_Grid.Visibility = System.Windows.Visibility.Visible;
             projekt_kapcsolodo_grid.Visibility = System.Windows.Visibility.Visible;
             selectedTabCode = 2;
-            projekt_kapcsolodo_list.ItemsSource = util.Data_ErtesitendokCheckbox(Ember_Search_tbx.Text);
+            projekt_kapcsolodo_list.ItemsSource = util.Data_ErtesitendokCheckbox(AddApplicantSearchTbx.Text);
             formLoader();
         }
 
@@ -274,25 +274,32 @@ namespace HR_Portal.View.Usercontrol.Panels
         protected void addPerson(object sender, RoutedEventArgs e)
         {
             Button btn = sender as Button;
-            if(selectedTabCode == 1)
+            if (selectedTabCode == 1)
             {
                 ModelApplicantListbox items = btn.DataContext as ModelApplicantListbox;
                 new Applicant(items.id).AddToProject(project.data.id);
-                projekt_kapcsolodo_list.ItemsSource = util.Data_JeloltForCheckbox(Ember_Search_tbx.Text);
+                projekt_kapcsolodo_list.ItemsSource = Applicant.GetAllActive(AddApplicantSearchTbx.Text);
                 kapcs_jeloltek_listBox.ItemsSource = util.Data_JeloltKapcs();
             }
             if (selectedTabCode == 2)
             {
                 ModelErtesitendok items = btn.DataContext as ModelErtesitendok;
                 project.addErtesitendokInsert(items.id);
-                projekt_kapcsolodo_list.ItemsSource = util.Data_ErtesitendokCheckbox(Ember_Search_tbx.Text);
+                projekt_kapcsolodo_list.ItemsSource = util.Data_ErtesitendokCheckbox(AddApplicantSearchTbx.Text);
                 kapcs_ertesitendo_listBox.ItemsSource = util.Data_ErtesitendokKapcs();
             }
         }
 
-        protected void personSearchTextChanged(object sender, TextChangedEventArgs e)
+        private void AddApplicantSearchTbx_TextChanged(object sender, TextChangedEventArgs e)
         {
-            Ember_Search_Listbox.ItemsSource = util.Data_JeloltForCheckbox(Ember_Search_tbx.Text);
+            if (selectedTabCode == 1)
+            {
+                projekt_kapcsolodo_list.ItemsSource = Applicant.GetAllActive(AddApplicantSearchTbx.Text);
+            }
+            if (selectedTabCode == 2)
+            {
+                projekt_kapcsolodo_list.ItemsSource = util.Data_ErtesitendokCheckbox(AddApplicantSearchTbx.Text);
+            }
         }
 
         protected void descriptionLostFocus(object sender, RoutedEventArgs e)
@@ -432,5 +439,7 @@ namespace HR_Portal.View.Usercontrol.Panels
                 Utility.NavigateTo(grid, new ProjectList(grid));
             }
         }
+
+
     }
 }

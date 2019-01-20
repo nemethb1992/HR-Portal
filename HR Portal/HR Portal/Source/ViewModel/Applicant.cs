@@ -1,5 +1,4 @@
-﻿using HR_Portal.Public.templates;
-using HR_Portal.Source.Model.Applicant;
+﻿using HR_Portal.Source.Model.Applicant;
 using HR_Portal.Source.Model.Project;
 using System;
 using System.Collections.Generic;
@@ -176,38 +175,38 @@ namespace HR_Portal.Source.ViewModel
             MySql.Close();
         }
 
-        public void Insert(List<ModelFullApplicant> items)  //javított
+        public static void Insert(ModelFullApplicant data)  //javított
         {
             string command = "INSERT INTO jeloltek (`id`, `nev`, `email`, `telefon`, `lakhely`, `ertesult`, `szuldatum`, neme, `tapasztalat_ev`, `munkakor`, `munkakor2`, `munkakor3`, `vegz_terulet`, `nyelvtudas`,`nyelvtudas2`, `reg_date`) " +
-                "VALUES(NULL, '" + items[0].nev + "',  '" + items[0].email + "', '" + items[0].telefon + "', '" + items[0].lakhely + "', " + items[0].ertesult + ", " + items[0].szuldatum + ", " + items[0].neme + "," + items[0].tapasztalat_ev + "," + items[0].munkakor + "," + items[0].munkakor2 + "," + items[0].munkakor3 + "," + items[0].vegz_terulet + "," + items[0].nyelvtudas + "," + items[0].nyelvtudas2 + ",'" + items[0].reg_date + "');";
+                "VALUES(NULL, '" + data.nev + "',  '" + data.email + "', '" + data.telefon + "', '" + data.lakhely + "', " + data.ertesult + ", " + data.szuldatum + ", " + data.neme + "," + data.tapasztalat_ev + "," + data.munkakor + "," + data.munkakor2 + "," + data.munkakor3 + "," + data.vegz_terulet + "," + data.nyelvtudas + "," + data.nyelvtudas2 + ",'" + data.reg_date + "');";
             MySql.Execute(command);
-            command = "SELECT jeloltek.id FROM jeloltek WHERE jeloltek.email = '" + items[0].email + "' AND jeloltek.nev = '" + items[0].nev + "'";
+            command = "SELECT jeloltek.id FROM jeloltek WHERE jeloltek.email = '" + data.email + "' AND jeloltek.nev = '" + data.nev + "'";
             MySql.Close();
             Session.ApplicantID = Convert.ToInt16(MySql.UniqueList(command, "jeloltek", 1)[0]);
             MySql.Close();
         }
 
-        public void Update(List<ModelFullApplicant> items)  //javított
+        public static void Update(ModelFullApplicant data)  //javított
         {
             string query = "UPDATE jeloltek SET " +
-                " `nev` = '" + items[0].nev + "'" +
-                ", `email` = '" + items[0].email + "'" +
-                ", `telefon` = '" + items[0].telefon + "'" +
-                ", `lakhely` = '" + items[0].lakhely + "'" +
-                ", `ertesult` = " + items[0].ertesult + "" +
-                ", `szuldatum` = '" + items[0].szuldatum + "'" +
-                ", `neme` = " + items[0].neme + "" +
-                ", `tapasztalat_ev` = " + items[0].tapasztalat_ev + "" +
-                ", `munkakor` = " + items[0].munkakor + "" +
-                ", `munkakor2` = " + items[0].munkakor2 + "" +
-                ", `munkakor3` = " + items[0].munkakor3 + "" +
-                ", `vegz_terulet` = " + items[0].vegz_terulet + "" +
-                ", `nyelvtudas` = " + items[0].nyelvtudas + "" +
-                ",`nyelvtudas2` = " + items[0].nyelvtudas2 + "" +
-                ", `reg_date`  = '" + items[0].reg_date + "'" +
+                " `nev` = '" + data.nev + "'" +
+                ", `email` = '" + data.email + "'" +
+                ", `telefon` = '" + data.telefon + "'" +
+                ", `lakhely` = '" + data.lakhely + "'" +
+                ", `ertesult` = " + data.ertesult + "" +
+                ", `szuldatum` = '" + data.szuldatum + "'" +
+                ", `neme` = " + data.neme + "" +
+                ", `tapasztalat_ev` = " + data.tapasztalat_ev + "" +
+                ", `munkakor` = " + data.munkakor + "" +
+                ", `munkakor2` = " + data.munkakor2 + "" +
+                ", `munkakor3` = " + data.munkakor3 + "" +
+                ", `vegz_terulet` = " + data.vegz_terulet + "" +
+                ", `nyelvtudas` = " + data.nyelvtudas + "" +
+                ",`nyelvtudas2` = " + data.nyelvtudas2 + "" +
+                ", `reg_date`  = '" + data.reg_date + "'" +
                 "WHERE jeloltek.id = " + Session.ApplicantID + "";
             MySql.Execute(query);
-            int appID = Convert.ToInt16(MySql.UniqueList("SELECT jeloltek.id FROM jeloltek WHERE jeloltek.email = '" + items[0].email + "' AND jeloltek.nev = '" + items[0].nev + "' AND jeloltek.lakhely = '" + items[0].lakhely + "'", "jeloltek", 1)[0]);
+            int appID = Convert.ToInt16(MySql.UniqueList("SELECT jeloltek.id FROM jeloltek WHERE jeloltek.email = '" + data.email + "' AND jeloltek.nev = '" + data.nev + "' AND jeloltek.lakhely = '" + data.lakhely + "'", "jeloltek", 1)[0]);
             Session.ApplicantID = appID;
             MySql.Close();
         }
@@ -220,6 +219,14 @@ namespace HR_Portal.Source.ViewModel
                 "WHERE jeloltek.id = " + Session.ApplicantID + " " +
                 "GROUP BY projektek.id";
             List<ModelSmallProject> list = ModelSmallProject.GetModelSmallProject(command);
+            MySql.Close();
+            return list;
+        }
+
+        public static List<ModelApplicantListbox> GetAllActive(string name = "") //javított
+        {
+            string command = "SELECT id, nev FROM jeloltek WHERE jeloltek.statusz = 1 AND nev LIKE '%"+name+"%'";
+            List<ModelApplicantListbox> list = ModelApplicantListbox.GetModelApplicantListboxShort(command);
             MySql.Close();
             return list;
         }

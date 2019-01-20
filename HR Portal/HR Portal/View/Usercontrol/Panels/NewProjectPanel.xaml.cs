@@ -19,7 +19,6 @@ namespace HR_Portal.View.Usercontrol.Panels
         Utility Utility = new Utility();
 
         private Grid grid;
-        private ProjectDataSheet projectDataSheet;
         private ProjectList projectList;
 
         public NewProjectPanel(Grid grid)
@@ -71,19 +70,7 @@ namespace HR_Portal.View.Usercontrol.Panels
 
         protected bool isFulfilled()
         {
-            if (
-                vegzettseg_cbx.SelectedItem == null ||
-                munkakor_cbx.SelectedItem == null ||
-                nyelv_cbx.SelectedItem == null ||
-                k1_cbx.SelectedItem == null ||
-                k2_cbx.SelectedItem == null ||
-                k3_cbx.SelectedItem == null ||
-                k4_cbx.SelectedItem == null ||
-                k5_cbx.SelectedItem == null ||
-                pc_cbx.SelectedItem == null ||
-                nev_tbx.Text.Length == 0 ||
-                tapasztalat_tbx.Text.Length == 0 ||
-                ber_tbx.Text.Length == 0)
+            if ( pc_cbx.SelectedIndex.Equals(-1) || nev_tbx.Text.Length == 0)
             {
                 return false;
             }
@@ -92,7 +79,7 @@ namespace HR_Portal.View.Usercontrol.Panels
                 return true;
             }
         }
-        protected List<ModelInsertProject> getData()
+        protected ModelInsertProject getData()
         {
             ModelVegzettseg vegzettsegComboBox = (vegzettseg_cbx as ComboBox).SelectedItem as ModelVegzettseg;
             ModelMunkakor munkakorComboBox = (munkakor_cbx as ComboBox).SelectedItem as ModelMunkakor;
@@ -104,31 +91,35 @@ namespace HR_Portal.View.Usercontrol.Panels
             ModelKompetenciak kepzettseg5ComboBox = (k5_cbx as ComboBox).SelectedItem as ModelKompetenciak;
             ModelPc pcComboBox = (pc_cbx as ComboBox).SelectedItem as ModelPc;
             DateTime localDate = DateTime.Now;
-            List<ModelInsertProject> list = new List<ModelInsertProject>();
+            ModelInsertProject data;
 
-            list.Add(new ModelInsertProject
+            data = new ModelInsertProject
             {
+
                 id = 0,
-                hr_id = Session.UserData.id,
-                megnevezes_projekt = nev_tbx.Text,
-                pc = pcComboBox.id,
-                vegzettseg = vegzettsegComboBox.id,
-                tapasztalat_ev = Convert.ToInt32(tapasztalat_tbx.Text),
-                statusz = 1,
                 fel_datum = localDate.ToString("yyyy.MM.dd"),
                 le_datum = "-",
-                nyelvtudas = nyelvComboBox.id,
-                munkakor = munkakorComboBox.id,
+                statusz = 1,
                 szuldatum = 0,
-                ber = Convert.ToInt32(ber_tbx.Text),
-                kepesseg1 = Convert.ToInt32(kepzettseg1ComboBox.id),
-                kepesseg2 = Convert.ToInt32(kepzettseg2ComboBox.id),
-                kepesseg3 = Convert.ToInt32(kepzettseg3ComboBox.id),
-                kepesseg4 = Convert.ToInt32(kepzettseg4ComboBox.id),
-                kepesseg5 = Convert.ToInt32(kepzettseg5ComboBox.id)
 
-            });
-            return list;
+                megnevezes_projekt = nev_tbx.Text,
+                hr_id = Session.UserData.id,
+                tapasztalat_ev = Convert.ToInt32((tapasztalat_tbx.Text.Length > 0 ? tapasztalat_tbx.Text : "0")),
+                ber = Convert.ToInt32((ber_tbx.Text.Length > 0 ? ber_tbx.Text : "0")),
+
+                pc = pcComboBox.id,
+
+                nyelvtudas = Convert.ToInt32(nyelv_cbx.SelectedIndex.Equals(-1) ? "0" : nyelvComboBox.id.ToString()),
+                munkakor = Convert.ToInt32(munkakor_cbx.SelectedIndex.Equals(-1) ? "0" : munkakorComboBox.id.ToString()),
+                vegzettseg = Convert.ToInt32(vegzettseg_cbx.SelectedIndex.Equals(-1) ? "0" : vegzettsegComboBox.id.ToString()),
+                kepesseg1 = Convert.ToInt32(k1_cbx.SelectedIndex.Equals(-1) ? "0" : kepzettseg1ComboBox.id.ToString()),
+                kepesseg2 = Convert.ToInt32(k2_cbx.SelectedIndex.Equals(-1) ? "0" : kepzettseg2ComboBox.id.ToString()),
+                kepesseg3 = Convert.ToInt32(k3_cbx.SelectedIndex.Equals(-1) ? "0" : kepzettseg3ComboBox.id.ToString()),
+                kepesseg4 = Convert.ToInt32(k4_cbx.SelectedIndex.Equals(-1) ? "0" : kepzettseg4ComboBox.id.ToString()),
+                kepesseg5 = Convert.ToInt32(k5_cbx.SelectedIndex.Equals(-1) ? "0" : kepzettseg5ComboBox.id.ToString()),
+
+            };
+            return data;
         }
 
         protected void projektInsertClick(object sender, RoutedEventArgs e)
@@ -137,10 +128,10 @@ namespace HR_Portal.View.Usercontrol.Panels
             Session.isUpdate = false;
 
                 if(isFulfilled())
-                {
-                    Project.Insert(getData());
-                    grid.Children.Clear();
-                    grid.Children.Add(projectDataSheet = new ProjectDataSheet(grid, new Project(0)));
+            {
+                ModelInsertProject data = getData();
+                Project.Insert(data);
+                Utility.NavigateTo(grid, new ProjectDataSheet(grid, new Project(0)));
                 }
                 else
                 {
@@ -154,9 +145,9 @@ namespace HR_Portal.View.Usercontrol.Panels
 
             if (isFulfilled())
             {
-                Project.Update(getData());
-                grid.Children.Clear();
-                grid.Children.Add(projectDataSheet = new ProjectDataSheet(grid, new Project(0)));
+                ModelInsertProject data = getData();
+                Project.Update(data);
+                Utility.NavigateTo(grid,new ProjectDataSheet(grid, new Project(0)));
             }
             else
             {

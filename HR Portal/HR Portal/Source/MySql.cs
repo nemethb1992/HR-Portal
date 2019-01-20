@@ -31,7 +31,6 @@ namespace HR_Portal.Source
                 }
                 catch (MySqlException mysqlex)
                 {
-
                     System.Windows.MessageBox.Show(mysqlex.ToString());
                     throw;
                 }
