@@ -16,24 +16,25 @@ namespace HR_Portal.Source.Model.Project
         public static List<ModelSmallProject> GetModelSmallProject(string command)
         {
             List<ModelSmallProject> list = new List<ModelSmallProject>();
-
-            if (MySql.Open() == true)
+            MySql mySql = new MySql();
+            if (mySql.Open() == true)
             {
-                MySql.cmd = new MySqlCommand(command, MySql.conn);
-                MySql.sdr = MySql.cmd.ExecuteReader();
+                mySql.cmd = new MySqlCommand(command, mySql.conn);
+                mySql.sdr = mySql.cmd.ExecuteReader();
                 int j = 0;
-                while (MySql.sdr.Read())
+                while (mySql.sdr.Read())
                 {
                     list.Add(new ModelSmallProject
                     {
-                        id = Convert.ToInt32(MySql.sdr["id"]),
-                        megnevezes_projekt = MySql.sdr["megnevezes_projekt"].ToString(),
+                        id = Convert.ToInt32(mySql.sdr["id"]),
+                        megnevezes_projekt = mySql.sdr["megnevezes_projekt"].ToString(),
                         jeloltek_db = 0
                     });
                     j++;
                 }
-                MySql.sdr.Close();
+                mySql.sdr.Close();
             }
+            mySql.Close();
             return list;
         }
     }

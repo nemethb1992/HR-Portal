@@ -27,27 +27,29 @@ namespace HR_Portal.Source.Model.Applicant
 
         public List<ModelProfession> Get(string command)
         {
+            MySql mySql = new MySql();
             List<ModelProfession> list = new List<ModelProfession>();
 
-            if (MySql.Open() == true)
+            if (mySql.Open() == true)
             {
-                MySql.cmd = new MySqlCommand(command, MySql.conn);
-                MySql.sdr = MySql.cmd.ExecuteReader();
-                while (MySql.sdr.Read())
+                mySql.cmd = new MySqlCommand(command, mySql.conn);
+                mySql.sdr = mySql.cmd.ExecuteReader();
+                while (mySql.sdr.Read())
                 {
                     list.Add(new ModelProfession
                     {
-                        id = Convert.ToInt32(MySql.sdr["id"]),
-                        name = MySql.sdr["nev"].ToString(),
-                        email = MySql.sdr["email"].ToString(),
-                        telephone = MySql.sdr["telefon"].ToString(),
-                        reg_date = MySql.sdr["reg_date"].ToString(),
-                        projekt = MySql.sdr["projekt"].ToString(),
+                        id = Convert.ToInt32(mySql.sdr["id"]),
+                        name = mySql.sdr["nev"].ToString(),
+                        email = mySql.sdr["email"].ToString(),
+                        telephone = mySql.sdr["telefon"].ToString(),
+                        reg_date = mySql.sdr["reg_date"].ToString(),
+                        projekt = mySql.sdr["projekt"].ToString(),
 
                     });
                 }
-                MySql.sdr.Close();
+                mySql.sdr.Close();
             }
+            mySql.Close();
             return list;
         }
     }

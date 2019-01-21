@@ -18,24 +18,25 @@ namespace HR_Portal.Source.Model.Project
 
         public static List<ModelKompetenciaSummary> GetModelKompetenciaSummary(string command)
         {
+            MySql mySql = new MySql();
             List<ModelKompetenciaSummary> list = new List<ModelKompetenciaSummary>();
 
-            if (MySql.Open() == true)
+            if (mySql.Open() == true)
             {
                 try
                 {
-                    MySql.cmd = new MySqlCommand(command, MySql.conn);
-                    MySql.sdr = MySql.cmd.ExecuteReader();
-                    while (MySql.sdr.Read())
+                    mySql.cmd = new MySqlCommand(command, mySql.conn);
+                    mySql.sdr = mySql.cmd.ExecuteReader();
+                    while (mySql.sdr.Read())
                     {
                         list.Add(new ModelKompetenciaSummary
                         {
-                            k1_val = Convert.ToInt32(MySql.sdr["k1_val"]),
-                            k2_val = Convert.ToInt32(MySql.sdr["k2_val"]),
-                            k3_val = Convert.ToInt32(MySql.sdr["k3_val"]),
-                            k4_val = Convert.ToInt32(MySql.sdr["k4_val"]),
-                            k5_val = Convert.ToInt32(MySql.sdr["k5_val"]),
-                            tamogatom = Convert.ToInt32(MySql.sdr["tamogatom"]),
+                            k1_val = Convert.ToInt32(mySql.sdr["k1_val"]),
+                            k2_val = Convert.ToInt32(mySql.sdr["k2_val"]),
+                            k3_val = Convert.ToInt32(mySql.sdr["k3_val"]),
+                            k4_val = Convert.ToInt32(mySql.sdr["k4_val"]),
+                            k5_val = Convert.ToInt32(mySql.sdr["k5_val"]),
+                            tamogatom = Convert.ToInt32(mySql.sdr["tamogatom"]),
                         });
                     }
                 }
@@ -43,8 +44,9 @@ namespace HR_Portal.Source.Model.Project
                 {
                 }
 
-                MySql.sdr.Close();
+                mySql.sdr.Close();
             }
+            mySql.Close();
             return list;
         }
     }

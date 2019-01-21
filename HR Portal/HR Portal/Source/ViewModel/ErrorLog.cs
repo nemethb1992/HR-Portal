@@ -11,23 +11,26 @@ namespace HR_Portal.Source.ViewModel
     {
         public void Insert(ModelErrorLog data)
         {
+            MySql mySql = new MySql();
             string command = "INSERT INTO errorlog (`placeofbug`, `description`, `solution`, `date`) VALUES ('" + data.placeofbug + "','" + data.description + "','" + data.solution + "','" + data.date + "')";
-            MySql.Execute(command);
-            MySql.Close();
+            mySql.Execute(command);
+            mySql.Close();
         }
 
         public void Update(ModelErrorLog data)
         {
+            MySql mySql = new MySql();
             string command = "UPDATE pmkcvtest.errorlog SET placeofbug='"+data.placeofbug+ "', description='" + data.description + "', solution='" + data.solution + "', date='" + data.date + "', result='" + data.result + "', resultdate='" + data.resultdate + "'";
-            MySql.Execute(command);
-            MySql.Close();
+            mySql.Execute(command);
+            mySql.Close();
         }
 
         public void Delete(int id)
         {
+            MySql mySql = new MySql();
             string command = "DELETE FROM pmkcvtest.errorlog WHERE id ="+id;
-            MySql.Execute(command);
-            MySql.Close();
+            mySql.Execute(command);
+            mySql.Close();
         }
 
         public List<ModelErrorLog> GetErrorLog()

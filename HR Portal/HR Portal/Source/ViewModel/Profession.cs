@@ -19,6 +19,7 @@ namespace HR_Portal.Source.ViewModel
         
         public int Fullify(ModelProfession prof)
         {
+            MySql mySql = new MySql();
             string command = "INSERT INTO jeloltek (nev,email,telefon,reg_date" +
                 (!prof.szuldatum.Equals("") ? ",szuldatum" : "") +
                 (!prof.lakhely.Equals("") ? ",lakhely" : "") +
@@ -34,7 +35,8 @@ namespace HR_Portal.Source.ViewModel
                 (!prof.nyelvtudas.Equals(9999) ? "," + prof.nyelvtudas.ToString() : "") +
                 (!prof.ertesult.Equals(9999) ? "," + prof.ertesult.ToString() : "")
                 +")";
-            MySql.Execute(command);
+            mySql.Execute(command);
+            mySql.Close();
             ModelFullApplicant udata = new Applicant().GetFullApplicantByEmail(prof.email);
             DirectoryInfo profession = new DirectoryInfo(Files.GetProfessionUrl() + prof.id);
             DirectoryInfo newID = new DirectoryInfo(Files.GetApplicantUrl() + udata.id);
@@ -45,8 +47,10 @@ namespace HR_Portal.Source.ViewModel
 
         public void Delete(int ApplicantID)
         {
+            MySql mySql = new MySql();
             string command = "DELETE FROM profession_jeloltek WHERE id="+ApplicantID;
-            MySql.Execute(command);
+            mySql.Execute(command);
+            mySql.Close();
         }
 
     }

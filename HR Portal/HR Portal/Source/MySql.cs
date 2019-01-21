@@ -8,7 +8,7 @@ using HR_Portal.Source.Model.Other;
 
 namespace HR_Portal.Source
 {
-    public static class MySql
+    public class MySql
     {
         private const string CONNECTION_URL_1 = "Data Source = 192.168.144.189; Port=3306; Initial Catalog = pmkcvtest; User ID=hr-admin; Password=pmhr2018; charset=utf8;";
         private const string CONNECTION_URL_2 = "Data Source = 192.168.144.189; Port=3306; Initial Catalog = pmhrdemo; User ID=hr-admin; Password=pmhr2018;  charset=utf8;";
@@ -17,11 +17,11 @@ namespace HR_Portal.Source
         private const string CONNECTION_URL_5 = "Data Source = vpn.phoenix-mecano.hu; Port=29920; Initial Catalog = pmkcvtest; User ID=hr-admin; Password=pmhr2018";
         private const string CONNECTION_URL_6 = "Data Source = localhost; Port=3306; Initial Catalog = xamphr; User ID=root; Password=";
 
-        public static MySqlConnection conn;
-        public static MySqlCommand cmd;
-        public static MySqlDataReader sdr;
+        public MySqlConnection conn;
+        public MySqlCommand cmd;
+        public MySqlDataReader sdr;
 
-        static MySql()
+        public MySql()
         {
             if (conn == null)
             {
@@ -37,7 +37,7 @@ namespace HR_Portal.Source
             }
         }
         
-        public static bool IsConnected()
+        public bool IsConnected()
         {
             try
             {
@@ -57,7 +57,7 @@ namespace HR_Portal.Source
             return false;
         }
 
-        public static bool Open()
+        public bool Open()
         {
             try
             {
@@ -73,7 +73,7 @@ namespace HR_Portal.Source
             }
         }
 
-        public static bool Close()
+        public bool Close()
         {
             try
             {
@@ -86,7 +86,7 @@ namespace HR_Portal.Source
             }
         }
 
-        public static void Execute(string query)
+        public void Execute(string query)
         {
             if (Open() == true)
             {
@@ -95,7 +95,7 @@ namespace HR_Portal.Source
             }
         }
 
-        public static int Count(string command)
+        public int Count(string command)
         {
             int rows = 0;
             if (Open() == true)
@@ -112,7 +112,7 @@ namespace HR_Portal.Source
             return rows;
         }
 
-        public static bool IsExists(string command)
+        public bool IsExists(string command)
         {
             int[] rows = new int[1];
             if (Open() == true)
@@ -134,7 +134,7 @@ namespace HR_Portal.Source
             return false;
         }
 
-        public static List<string> UniqueList(string command, string table, int b)
+        public List<string> UniqueList(string command, string table, int b)
         {
             List<string> dataSource = new List<string>();
             if (Open() == true)
@@ -154,7 +154,7 @@ namespace HR_Portal.Source
             return dataSource;
         }
 
-        public static bool Bind(string query)
+        public bool Bind(string query)
         {
             bool valid = false;
             if (Open() == true)
@@ -179,7 +179,7 @@ namespace HR_Portal.Source
             return valid;
         }
 
-        public static string GetRootUrl(string query)
+        public string GetRootUrl(string query)
         {
             string url = "";
             if (Open() == true)
@@ -196,7 +196,7 @@ namespace HR_Portal.Source
             return url;
         }
 
-        public static List<Dictionary<string, string>> GetData(string command, string firstField, params string[] moreFields)
+        public List<Dictionary<string, string>> GetData(string command, string firstField, params string[] moreFields)
         {
             List<Dictionary<string, string>> li = new List<Dictionary<string, string>>();
             if (Open() == true)

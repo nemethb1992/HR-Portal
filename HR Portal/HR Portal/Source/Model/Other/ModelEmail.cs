@@ -18,30 +18,32 @@ namespace HR_Portal.Source.Model.Other
 
         public static List<ModelEmail> GetModelEmail(string command)
         {
+            MySql mySql = new MySql();
             List<ModelEmail> items = new List<ModelEmail>();
 
-            if (MySql.Open() == true)
+            if (mySql.Open() == true)
             {
-                MySql.cmd = new MySqlCommand(command, MySql.conn);
-                MySql.sdr = MySql.cmd.ExecuteReader();
-                while (MySql.sdr.Read())
+                mySql.cmd = new MySqlCommand(command, mySql.conn);
+                mySql.sdr = mySql.cmd.ExecuteReader();
+                while (mySql.sdr.Read())
                 {
                     bool ssl = true;
-                    if (Convert.ToInt32(MySql.sdr["ssl"]) == 0)
+                    if (Convert.ToInt32(mySql.sdr["ssl"]) == 0)
                     {
                         ssl = false;
                     }
                     items.Add(new ModelEmail
                     {
-                        type = MySql.sdr["type"].ToString(),
-                        mailserver = MySql.sdr["mailserver"].ToString(),
-                        port = Convert.ToInt32(MySql.sdr["port"]),
+                        type = mySql.sdr["type"].ToString(),
+                        mailserver = mySql.sdr["mailserver"].ToString(),
+                        port = Convert.ToInt32(mySql.sdr["port"]),
                         ssl = ssl,
-                        login = MySql.sdr["login"].ToString()
+                        login = mySql.sdr["login"].ToString()
                     });
                 }
-                MySql.sdr.Close();
+                mySql.sdr.Close();
             }
+            mySql.Close();
             return items;
         }
     }

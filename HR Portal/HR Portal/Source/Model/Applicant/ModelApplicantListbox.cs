@@ -15,21 +15,22 @@ namespace HR_Portal.Source.Model.Applicant
         public static List<ModelApplicantListbox> GetModelApplicantListboxShort(string command)
         {
             List<ModelApplicantListbox> list = new List<ModelApplicantListbox>();
-
-            if (MySql.Open() == true)
+            MySql mySql = new MySql();
+            if (mySql.Open() == true)
             {
-                MySql.cmd = new MySqlCommand(command, MySql.conn);
-                MySql.sdr = MySql.cmd.ExecuteReader();
-                while (MySql.sdr.Read())
+                mySql.cmd = new MySqlCommand(command, mySql.conn);
+                mySql.sdr = mySql.cmd.ExecuteReader();
+                while (mySql.sdr.Read())
                 {
                     list.Add(new ModelApplicantListbox
                     {
-                        id = Convert.ToInt32(MySql.sdr["id"]),
-                        nev = MySql.sdr["nev"].ToString(),
+                        id = Convert.ToInt32(mySql.sdr["id"]),
+                        nev = mySql.sdr["nev"].ToString(),
                     });
                 }
-                MySql.sdr.Close();
+                mySql.sdr.Close();
             }
+            mySql.Close();
             return list;
         }
     }

@@ -1,4 +1,5 @@
-﻿using MySql.Data.MySqlClient;
+﻿using HR_Portal.Source.Model.Project;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,23 +29,24 @@ namespace HR_Portal.Source.Model.Applicant
         public string allasban { get; set; }
         public bool szabad { get; set; }
         public int statusz { get; set; }
+        public List<ModelSmallProject> connectedProjects { get; set; }
 
         public static List<ModelApplicantList> GetModelApplicantList(string command)
         {
             List<ModelApplicantList> list = new List<ModelApplicantList>();
-
-            if (MySql.Open() == true)
+            MySql mySql = new MySql();
+            if (mySql.Open() == true)
             {
-                MySql.cmd = new MySqlCommand(command, MySql.conn);
-                MySql.sdr = MySql.cmd.ExecuteReader();
+                mySql.cmd = new MySqlCommand(command, mySql.conn);
+                mySql.sdr = mySql.cmd.ExecuteReader();
 
-                while (MySql.sdr.Read())
+                while (mySql.sdr.Read())
                 {
                     string allapot_megnev = "Beérkezett", kolcsonzott = "", frissSeged = "Hidden", allasbanSeged = "Hidden";
                     int allapot = 0;
                     try
                     {
-                        allapot = Convert.ToInt32(MySql.sdr["allapota"]);
+                        allapot = Convert.ToInt32(mySql.sdr["allapota"]);
                     }
                     catch (Exception)
                     {
@@ -68,39 +70,40 @@ namespace HR_Portal.Source.Model.Applicant
                             allapot_megnev = "Beérkezett";
                             break;
                     }
-                    if (Convert.ToBoolean(MySql.sdr["allasban"]))
+                    if (Convert.ToBoolean(mySql.sdr["allasban"]))
                         allasbanSeged = "Visible";
 
-                    if (Convert.ToBoolean(MySql.sdr["friss"]))
+                    if (Convert.ToBoolean(mySql.sdr["friss"]))
                        frissSeged = "Visible";
 
-                    if (Convert.ToInt32(MySql.sdr["kolcsonzott"]) == 1)
+                    if (Convert.ToInt32(mySql.sdr["kolcsonzott"]) == 1)
                         kolcsonzott = "Kölcsönzött";
 
                     list.Add(new ModelApplicantList
                     {
-                        id = Convert.ToInt32(MySql.sdr["id"]),
-                        nev = MySql.sdr["nev"].ToString(),
-                        munkakor = MySql.sdr["munkakor"].ToString(),
-                        munkakor2 = MySql.sdr["munkakor2"].ToString(),
-                        munkakor3 = MySql.sdr["munkakor3"].ToString(),
-                        email = MySql.sdr["email"].ToString(),
-                        szuldatum = Convert.ToInt32(MySql.sdr["szuldatum"]),
-                        statusz = Convert.ToInt32(MySql.sdr["statusz"]),
-                        interjuk_db = Convert.ToInt32(MySql.sdr["interjuk_db"]),
+                        //connectedProjects = new ViewModel.Applicant().Data_ProjectList(Convert.ToInt32(mySql.sdr["id"])),
+                        id = Convert.ToInt32(mySql.sdr["id"]),
+                        nev = mySql.sdr["nev"].ToString(),
+                        munkakor = mySql.sdr["munkakor"].ToString(),
+                        munkakor2 = mySql.sdr["munkakor2"].ToString(),
+                        munkakor3 = mySql.sdr["munkakor3"].ToString(),
+                        email = mySql.sdr["email"].ToString(),
+                        szuldatum = Convert.ToInt32(mySql.sdr["szuldatum"]),
+                        statusz = Convert.ToInt32(mySql.sdr["statusz"]),
+                        interjuk_db = Convert.ToInt32(mySql.sdr["interjuk_db"]),
                         friss = frissSeged,
-                        frissValue = Convert.ToBoolean(MySql.sdr["friss"]),
+                        frissValue = Convert.ToBoolean(mySql.sdr["friss"]),
                         allasban = allasbanSeged,
-                        allasbanValue = Convert.ToBoolean(MySql.sdr["allasban"]),
+                        allasbanValue = Convert.ToBoolean(mySql.sdr["allasban"]),
                         allapota = allapot,
                         kolcsonzott = kolcsonzott,
                         allapot_megnevezes = allapot_megnev,
-                        reg_datum = MySql.sdr["reg_date"].ToString(),
+                        reg_datum = mySql.sdr["reg_date"].ToString(),
                     });
                 }
-                MySql.sdr.Close();
+                mySql.sdr.Close();
             }
-            MySql.Close();
+            mySql.Close();
             return list;
         }
 

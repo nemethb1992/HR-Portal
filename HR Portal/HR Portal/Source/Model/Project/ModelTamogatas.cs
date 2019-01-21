@@ -13,19 +13,20 @@ namespace HR_Portal.Source.Model.Project
 
         public static List<ModelTamogatas> GetModelTamogatas(string command)
         {
+            MySql mySql = new MySql();
             List<ModelTamogatas> list = new List<ModelTamogatas>();
 
-            if (MySql.Open() == true)
+            if (mySql.Open() == true)
             {
                 try
                 {
-                    MySql.cmd = new MySqlCommand(command, MySql.conn);
-                    MySql.sdr = MySql.cmd.ExecuteReader();
-                    while (MySql.sdr.Read())
+                    mySql.cmd = new MySqlCommand(command, mySql.conn);
+                    mySql.sdr = mySql.cmd.ExecuteReader();
+                    while (mySql.sdr.Read())
                     {
                         list.Add(new ModelTamogatas
                         {
-                            tamogatom = Convert.ToInt32(MySql.sdr["tamogatom"]),
+                            tamogatom = Convert.ToInt32(mySql.sdr["tamogatom"]),
                         });
                     }
                 }
@@ -33,8 +34,9 @@ namespace HR_Portal.Source.Model.Project
                 {
                 }
 
-                MySql.sdr.Close();
+                mySql.sdr.Close();
             }
+            mySql.Close();
             return list;
         }
     }

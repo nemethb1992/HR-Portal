@@ -56,8 +56,9 @@ namespace HR_Portal.Source
                 seged = "1";
             else
                 seged = "0";
-            MySql.Execute("UPDATE users SET validitas = '" + seged + "' WHERE users.id = '" + id + "';");
-            MySql.Close();
+            MySql mySql = new MySql();
+            mySql.Execute("UPDATE users SET validitas = '" + seged + "' WHERE users.id = '" + id + "';");
+            mySql.Close();
         }
 
         ///<summary>
@@ -67,14 +68,16 @@ namespace HR_Portal.Source
         ///</summary>
         public static void ModifyType(int id, int type)
         {
-            MySql.Execute("UPDATE users SET kategoria = '" + type + "' WHERE users.id = '" + id + "';");
-            MySql.Close();
+            MySql mySql = new MySql();
+            mySql.Execute("UPDATE users SET kategoria = '" + type + "' WHERE users.id = '" + id + "';");
+            mySql.Close();
         }
 
         public static void Modify(int id, string mezo, string value)
         {
-            MySql.Execute("UPDATE users SET "+mezo+" = '" + value + "' WHERE users.id = '" + id + "';");
-            MySql.Close();
+            MySql mySql = new MySql();
+            mySql.Execute("UPDATE users SET "+mezo+" = '" + value + "' WHERE users.id = '" + id + "';");
+            mySql.Close();
         }
 
         ///<summary>
@@ -82,8 +85,9 @@ namespace HR_Portal.Source
         ///</summary>
         public static bool IsAdmin(int applicantId)
         {
-            bool value = MySql.Bind("SELECT count(id) FROM users WHERE users.id = '" + applicantId + "' AND admin = 1;");
-            MySql.Close();
+            MySql mySql = new MySql();
+            bool value = mySql.Bind("SELECT count(id) FROM users WHERE users.id = '" + applicantId + "' AND admin = 1;");
+            mySql.Close();
             return value;
         }
     }

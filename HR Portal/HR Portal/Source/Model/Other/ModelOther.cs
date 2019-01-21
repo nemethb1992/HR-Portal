@@ -18,23 +18,24 @@ namespace HR_Portal.Source.Model
 
         public static List<ModelNyelv> GetModelNyelv(string query)
         {
+            MySql mySql = new MySql();
             List<ModelNyelv> items = new List<ModelNyelv>();
-            if (MySql.Open() == true)
+            if (mySql.Open() == true)
             {
-                MySql.cmd = new MySqlCommand(query, MySql.conn);
-                MySql.sdr.Close();
-                MySql.sdr = MySql.cmd.ExecuteReader();
-                while (MySql.sdr.Read())
+                mySql.cmd = new MySqlCommand(query, mySql.conn);
+                mySql.sdr = mySql.cmd.ExecuteReader();
+                while (mySql.sdr.Read())
                 {
                     items.Add(new ModelNyelv
                     {
-                        id = Convert.ToInt32(MySql.sdr["id"]),
-                        nyelv = MySql.sdr["megnevezes_nyelv"].ToString(),
+                        id = Convert.ToInt32(mySql.sdr["id"]),
+                        nyelv = mySql.sdr["megnevezes_nyelv"].ToString(),
 
                     });
                 }
-                MySql.sdr.Close();
+                mySql.sdr.Close();
             }
+            mySql.Close();
             return items;
         }
     }
@@ -46,21 +47,23 @@ namespace HR_Portal.Source.Model
 
         public static List<ModelErtesulesek> GetModelErtesulesek(string command)
         {
+            MySql mySql = new MySql();
             List<ModelErtesulesek> list = new List<ModelErtesulesek>();
-            if (MySql.Open() == true)
+            if (mySql.Open() == true)
             {
-                MySql.cmd = new MySqlCommand(command, MySql.conn);
-                MySql.sdr = MySql.cmd.ExecuteReader();
-                while (MySql.sdr.Read())
+                mySql.cmd = new MySqlCommand(command, mySql.conn);
+                mySql.sdr = mySql.cmd.ExecuteReader();
+                while (mySql.sdr.Read())
                 {
                     list.Add(new ModelErtesulesek
                     {
-                        id = Convert.ToInt32(MySql.sdr["id"]),
-                        ertesules_megnevezes = MySql.sdr["ertesules_megnevezes"].ToString(),
+                        id = Convert.ToInt32(mySql.sdr["id"]),
+                        ertesules_megnevezes = mySql.sdr["ertesules_megnevezes"].ToString(),
                     });
                 }
-                MySql.sdr.Close();
+                mySql.sdr.Close();
             }
+            mySql.Close();
             return list;
         }
     }
@@ -72,22 +75,24 @@ namespace HR_Portal.Source.Model
 
         public static List<ModelNem> GetModelNem(string command)
         {
+            MySql mySql = new MySql();
             List<ModelNem> list = new List<ModelNem>();
-            if (MySql.Open() == true)
+            if (mySql.Open() == true)
             {
-                MySql.cmd = new MySqlCommand(command, MySql.conn);
-                MySql.sdr = MySql.cmd.ExecuteReader();
-                while (MySql.sdr.Read())
+                mySql.cmd = new MySqlCommand(command, mySql.conn);
+                mySql.sdr = mySql.cmd.ExecuteReader();
+                while (mySql.sdr.Read())
                 {
                     list.Add(new ModelNem
                     {
-                        id = Convert.ToInt32(MySql.sdr["id"]),
-                        nem = MySql.sdr["nem"].ToString(),
+                        id = Convert.ToInt32(mySql.sdr["id"]),
+                        nem = mySql.sdr["nem"].ToString(),
 
                     });
                 }
-                MySql.sdr.Close();
+                mySql.sdr.Close();
             }
+            mySql.Close();
             return list;
         }
     }
@@ -99,22 +104,24 @@ namespace HR_Portal.Source.Model
 
         public static List<ModelMunkakor> GetModelMunkakor(string comannd)
         {
+            MySql mySql = new MySql();
             List<ModelMunkakor> list = new List<ModelMunkakor>();
-            if (MySql.Open() == true)
+            if (mySql.Open() == true)
             {
-                MySql.cmd = new MySqlCommand(comannd, MySql.conn);
-                MySql.sdr = MySql.cmd.ExecuteReader();
-                while (MySql.sdr.Read())
+                mySql.cmd = new MySqlCommand(comannd, mySql.conn);
+                mySql.sdr = mySql.cmd.ExecuteReader();
+                while (mySql.sdr.Read())
                 {
                     list.Add(new ModelMunkakor
                     {
-                        id = Convert.ToInt32(MySql.sdr["id"]),
-                        munkakor = MySql.sdr["megnevezes_munka"].ToString(),
+                        id = Convert.ToInt32(mySql.sdr["id"]),
+                        munkakor = mySql.sdr["megnevezes_munka"].ToString(),
 
                     });
                 }
-                MySql.sdr.Close();
+                mySql.sdr.Close();
             }
+            mySql.Close();
             return list;
         }
     }
@@ -126,21 +133,23 @@ namespace HR_Portal.Source.Model
 
         public static List<ModelStatusz> GetModelStatusz(string command)
         {
+            MySql mySql = new MySql();
             List<ModelStatusz> list = new List<ModelStatusz>();
-            if (MySql.Open() == true)
+            if (mySql.Open() == true)
             {
-                MySql.cmd = new MySqlCommand(command, MySql.conn);
-                MySql.sdr = MySql.cmd.ExecuteReader();
-                while (MySql.sdr.Read())
+                mySql.cmd = new MySqlCommand(command, mySql.conn);
+                mySql.sdr = mySql.cmd.ExecuteReader();
+                while (mySql.sdr.Read())
                 {
                     list.Add(new ModelStatusz
                     {
-                        id = Convert.ToInt32(MySql.sdr["id"]),
-                        allapot = MySql.sdr["allapot"].ToString(),
+                        id = Convert.ToInt32(mySql.sdr["id"]),
+                        allapot = mySql.sdr["allapot"].ToString(),
                     });
                 }
-                MySql.sdr.Close();
+                mySql.sdr.Close();
             }
+            mySql.Close();
             return list;
         }
     }
@@ -152,21 +161,23 @@ namespace HR_Portal.Source.Model
 
         public static List<ModelPc> GetModelPc(string command)
         {
+            MySql mySql = new MySql();
             List<ModelPc> list = new List<ModelPc>();
-            if (MySql.Open() == true)
+            if (mySql.Open() == true)
             {
-                MySql.cmd = new MySqlCommand(command, MySql.conn);
-                MySql.sdr = MySql.cmd.ExecuteReader();
-                while (MySql.sdr.Read())
+                mySql.cmd = new MySqlCommand(command, mySql.conn);
+                mySql.sdr = mySql.cmd.ExecuteReader();
+                while (mySql.sdr.Read())
                 {
                     list.Add(new ModelPc
                     {
-                        id = Convert.ToInt32(MySql.sdr["id"]),
-                        megnevezes_pc = MySql.sdr["megnevezes_pc"].ToString(),
+                        id = Convert.ToInt32(mySql.sdr["id"]),
+                        megnevezes_pc = mySql.sdr["megnevezes_pc"].ToString(),
                     });
                 }
-                MySql.sdr.Close();
+                mySql.sdr.Close();
             }
+            mySql.Close();
             return list;
         }
     }
@@ -178,21 +189,23 @@ namespace HR_Portal.Source.Model
 
         public static List<ModelVegzettseg> GetModelVegzettseg(string command)
         {
+            MySql mySql = new MySql();
             List<ModelVegzettseg> list = new List<ModelVegzettseg>();
-            if (MySql.Open() == true)
+            if (mySql.Open() == true)
             {
-                MySql.cmd = new MySqlCommand(command, MySql.conn);
-                MySql.sdr = MySql.cmd.ExecuteReader();
-                while (MySql.sdr.Read())
+                mySql.cmd = new MySqlCommand(command, mySql.conn);
+                mySql.sdr = mySql.cmd.ExecuteReader();
+                while (mySql.sdr.Read())
                 {
                     list.Add(new ModelVegzettseg
                     {
-                        id = Convert.ToInt32(MySql.sdr["id"]),
-                        megnevezes_vegzettseg = MySql.sdr["megnevezes_vegzettseg"].ToString(),
+                        id = Convert.ToInt32(mySql.sdr["id"]),
+                        megnevezes_vegzettseg = mySql.sdr["megnevezes_vegzettseg"].ToString(),
                     });
                 }
-                MySql.sdr.Close();
+                mySql.sdr.Close();
             }
+            mySql.Close();
             return list;
         }
     }
@@ -208,26 +221,28 @@ namespace HR_Portal.Source.Model
 
         public static List<ModelErtesitendok> GetModelErtesitendok(string command)
         {
+            MySql mySql = new MySql();
             List<ModelErtesitendok> list = new List<ModelErtesitendok>();
-            if (MySql.Open() == true)
+            if (mySql.Open() == true)
             {
-                MySql.cmd = new MySqlCommand(command, MySql.conn);
-                MySql.sdr = MySql.cmd.ExecuteReader();
-                while (MySql.sdr.Read())
+                mySql.cmd = new MySqlCommand(command, mySql.conn);
+                mySql.sdr = mySql.cmd.ExecuteReader();
+                while (mySql.sdr.Read())
                 {
                     list.Add(new ModelErtesitendok
                     {
-                        id = Convert.ToInt32(MySql.sdr["id"]),
-                        name = MySql.sdr["name"].ToString(),
-                        email = MySql.sdr["email"].ToString(),
-                        kategoria = Convert.ToInt32(MySql.sdr["kategoria"]),
-                        jogosultsag = Convert.ToInt32(MySql.sdr["jogosultsag"]),
-                        validitas = Convert.ToInt32(MySql.sdr["validitas"]),
+                        id = Convert.ToInt32(mySql.sdr["id"]),
+                        name = mySql.sdr["name"].ToString(),
+                        email = mySql.sdr["email"].ToString(),
+                        kategoria = Convert.ToInt32(mySql.sdr["kategoria"]),
+                        jogosultsag = Convert.ToInt32(mySql.sdr["jogosultsag"]),
+                        validitas = Convert.ToInt32(mySql.sdr["validitas"]),
 
                     });
                 }
-                MySql.sdr.Close();
+                mySql.sdr.Close();
             }
+            mySql.Close();
             return list;
         }
     }
@@ -243,22 +258,22 @@ namespace HR_Portal.Source.Model
     //    public static List<ModelHr> GetModelHr(string command)
     //    {
     //        List<ModelHr> list = new List<ModelHr>();
-    //        if (MySql.Open() == true)
+    //        if (mySql.Open() == true)
     //        {
-    //            MySql.cmd = new MySqlCommand(command, MySql.conn);
-    //            MySql.sdr = MySql.cmd.ExecuteReader();
-    //            while (MySql.sdr.Read())
+    //            mySql.cmd = new MySqlCommand(command, mySql.conn);
+    //            mySql.sdr = mySql.cmd.ExecuteReader();
+    //            while (mySql.sdr.Read())
     //            {
     //                list.Add(new ModelHr
     //                {
-    //                    id = Convert.ToInt32(MySql.sdr["id"]),
-    //                    name = MySql.sdr["name"].ToString(),
-    //                    kategoria = Convert.ToInt32(MySql.sdr["kategoria"]),
-    //                    jogosultsag = Convert.ToInt32(MySql.sdr["jogosultsag"]),
-    //                    validitas = Convert.ToInt32(MySql.sdr["validitas"]),
+    //                    id = Convert.ToInt32(mySql.sdr["id"]),
+    //                    name = mySql.sdr["name"].ToString(),
+    //                    kategoria = Convert.ToInt32(mySql.sdr["kategoria"]),
+    //                    jogosultsag = Convert.ToInt32(mySql.sdr["jogosultsag"]),
+    //                    validitas = Convert.ToInt32(mySql.sdr["validitas"]),
     //                });
     //            }
-    //            MySql.sdr.Close();
+    //            mySql.sdr.Close();
     //        }
     //        return list;
     //    }
@@ -276,27 +291,29 @@ namespace HR_Portal.Source.Model
 
         public static List<ModelComment> GetModelComment(string command)
         {
+            MySql mySql = new MySql();
             List<ModelComment> list = new List<ModelComment>();
-            if (MySql.Open() == true)
+            if (mySql.Open() == true)
             {
-                MySql.cmd = new MySqlCommand(command, MySql.conn);
-                MySql.sdr = MySql.cmd.ExecuteReader();
-                while (MySql.sdr.Read())
+                mySql.cmd = new MySqlCommand(command, mySql.conn);
+                mySql.sdr = mySql.cmd.ExecuteReader();
+                while (mySql.sdr.Read())
                 {
                     list.Add(new ModelComment
                     {
-                        id = Convert.ToInt32(MySql.sdr["id"]),
-                        jelolt_id = Convert.ToInt32(MySql.sdr["jelolt_id"]),
-                        projekt_id = Convert.ToInt32(MySql.sdr["projekt_id"]),
-                        hr_id = Convert.ToInt32(MySql.sdr["hr_id"]),
-                        hr_nev = MySql.sdr["hr_nev"].ToString(),
-                        megjegyzes = MySql.sdr["megjegyzes"].ToString(),
-                        datum = MySql.sdr["datum"].ToString(),
+                        id = Convert.ToInt32(mySql.sdr["id"]),
+                        jelolt_id = Convert.ToInt32(mySql.sdr["jelolt_id"]),
+                        projekt_id = Convert.ToInt32(mySql.sdr["projekt_id"]),
+                        hr_id = Convert.ToInt32(mySql.sdr["hr_id"]),
+                        hr_nev = mySql.sdr["hr_nev"].ToString(),
+                        megjegyzes = mySql.sdr["megjegyzes"].ToString(),
+                        datum = mySql.sdr["datum"].ToString(),
 
                     });
                 }
-                MySql.sdr.Close();
+                mySql.sdr.Close();
             }
+            mySql.Close();
             return list;
         }
     }
@@ -315,21 +332,23 @@ namespace HR_Portal.Source.Model
 
         public static List<ModelKompetenciak> GetModelKompetenciak(string command)
         {
+            MySql mySql = new MySql();
             List<ModelKompetenciak> list = new List<ModelKompetenciak>();
-            if (MySql.Open() == true)
+            if (mySql.Open() == true)
             {
-                MySql.cmd = new MySqlCommand(command, MySql.conn);
-                MySql.sdr = MySql.cmd.ExecuteReader();
-                while (MySql.sdr.Read())
+                mySql.cmd = new MySqlCommand(command, mySql.conn);
+                mySql.sdr = mySql.cmd.ExecuteReader();
+                while (mySql.sdr.Read())
                 {
                     list.Add(new ModelKompetenciak
                     {
-                        id = Convert.ToInt32(MySql.sdr["id"]),
-                        kompetencia_megnevezes = MySql.sdr["kompetencia_megnevezes"].ToString(),
+                        id = Convert.ToInt32(mySql.sdr["id"]),
+                        kompetencia_megnevezes = mySql.sdr["kompetencia_megnevezes"].ToString(),
                     });
                 }
-                MySql.sdr.Close();
+                mySql.sdr.Close();
             }
+            mySql.Close();
             return list;
         }
     }
@@ -342,23 +361,25 @@ namespace HR_Portal.Source.Model
 
         public static List<ModelKoltsegek> GetModelKoltsegek(string command)
         {
+            MySql mySql = new MySql();
             List<ModelKoltsegek> list = new List<ModelKoltsegek>();
-            if (MySql.Open() == true)
+            if (mySql.Open() == true)
             {
-                MySql.cmd = new MySqlCommand(command, MySql.conn);
-                MySql.sdr = MySql.cmd.ExecuteReader();
-                while (MySql.sdr.Read())
+                mySql.cmd = new MySqlCommand(command, mySql.conn);
+                mySql.sdr = mySql.cmd.ExecuteReader();
+                while (mySql.sdr.Read())
                 {
                     list.Add(new ModelKoltsegek
                     {
-                        id = Convert.ToInt32(MySql.sdr["id"]),
-                        koltseg_megnevezes = MySql.sdr["koltseg_megnevezes"].ToString(),
-                        osszeg = Convert.ToInt32(MySql.sdr["osszeg"])
+                        id = Convert.ToInt32(mySql.sdr["id"]),
+                        koltseg_megnevezes = mySql.sdr["koltseg_megnevezes"].ToString(),
+                        osszeg = Convert.ToInt32(mySql.sdr["osszeg"])
 
                     });
                 }
-                MySql.sdr.Close();
+                mySql.sdr.Close();
             }
+            mySql.Close();
             return list;
         }
     }

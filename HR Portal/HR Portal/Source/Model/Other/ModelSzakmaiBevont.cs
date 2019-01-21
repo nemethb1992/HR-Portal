@@ -16,24 +16,26 @@ namespace HR_Portal.Source
     
         public static List<ModelSzakmaiBevont> GetModelSzakmaiBevont(string command)
         {
+            MySql mySql = new MySql();
             List<ModelSzakmaiBevont> list = new List<ModelSzakmaiBevont>();
-            if (MySql.Open() == true)
+            if (mySql.Open() == true)
             {
-                MySql.cmd = new MySqlCommand(command, MySql.conn);
-                MySql.sdr = MySql.cmd.ExecuteReader();
-                while (MySql.sdr.Read())
+                mySql.cmd = new MySqlCommand(command, mySql.conn);
+                mySql.sdr = mySql.cmd.ExecuteReader();
+                while (mySql.sdr.Read())
                 {
                     list.Add(new ModelSzakmaiBevont
                     {
-                        id = Convert.ToInt32(MySql.sdr["id"]),
-                        megnevezes_projekt = MySql.sdr["megnevezes_projekt"].ToString(),
-                        megnevezes_munka = MySql.sdr["megnevezes_munka"].ToString(),
-                        jeloltek_db = Convert.ToInt32(MySql.sdr["jeloltek_db"]),
+                        id = Convert.ToInt32(mySql.sdr["id"]),
+                        megnevezes_projekt = mySql.sdr["megnevezes_projekt"].ToString(),
+                        megnevezes_munka = mySql.sdr["megnevezes_munka"].ToString(),
+                        jeloltek_db = Convert.ToInt32(mySql.sdr["jeloltek_db"]),
 
                     });
                 }
-                MySql.sdr.Close();
+                mySql.sdr.Close();
             }
+            mySql.Close();
             return list;
         }
     }

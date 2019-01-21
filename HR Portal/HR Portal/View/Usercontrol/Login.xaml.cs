@@ -25,7 +25,9 @@ namespace HR_Portal.View.Usercontrol
 
         private bool dbConnectionOpener()
         {
-            bool conn = Source.MySql.IsConnected();
+            Source.MySql mySql = new Source.MySql();
+            bool conn = mySql.IsConnected();
+            mySql.Close();
             return conn;
         }
 
@@ -62,17 +64,17 @@ namespace HR_Portal.View.Usercontrol
             }
         }
 
-        private void usernameRemember()
-        {
-            if (login_cbx.IsChecked == true)
-            {
-                Source.ViewModel.Login.SaveUser(Luser_tbx.Text);
-            }
-            else
-            {
-                Source.ViewModel.Login.DeleteSavedUser();
-            }
-        }
+        //private void usernameRemember()
+        //{
+        //    if (login_cbx.IsChecked == true)
+        //    {
+        //        Source.ViewModel.Login.SaveUser(Luser_tbx.Text);
+        //    }
+        //    else
+        //    {
+        //        Source.ViewModel.Login.DeleteSavedUser();
+        //    }
+        //}
 
         private void enter()
         {

@@ -48,12 +48,18 @@ namespace HR_Portal.Source
 
         public static string GetApplicantUrl()
         {
-            return MySql.GetRootUrl("SELECT url FROM ROOTurl WHERE id=0");
+            MySql mySql = new MySql();
+            string data = mySql.GetRootUrl("SELECT url FROM ROOTurl WHERE id=0");
+            mySql.Close();
+            return data;
         }
 
         public static string GetProfessionUrl()
         {
-            return MySql.GetRootUrl("SELECT url FROM ROOTurl WHERE id=1");
+            MySql mySql = new MySql();
+            string data = mySql.GetRootUrl("SELECT url FROM ROOTurl WHERE id=1");
+            mySql.Close();
+            return data;   
         }
 
         public void DeleteFolder(int ApplicantID)

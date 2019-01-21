@@ -20,18 +20,19 @@ namespace HR_Portal.Source.Model.Project
 
         public static List<ModelProjectList> GetModelProjectList(string command)
         {
+            MySql mySql = new MySql();
             List<ModelProjectList> list = new List<ModelProjectList>();
 
-            if (MySql.Open() == true)
+            if (mySql.Open() == true)
             {
-                MySql.cmd = new MySqlCommand(command, MySql.conn);
-                MySql.sdr = MySql.cmd.ExecuteReader();
-                while (MySql.sdr.Read())
+                mySql.cmd = new MySqlCommand(command, mySql.conn);
+                mySql.sdr = mySql.cmd.ExecuteReader();
+                while (mySql.sdr.Read())
                 {
                     int jelolt;
                     try
                     {
-                        jelolt = Convert.ToInt32(MySql.sdr["jeloltek_db"]);
+                        jelolt = Convert.ToInt32(mySql.sdr["jeloltek_db"]);
                     }
                     catch (Exception)
                     {
@@ -39,19 +40,19 @@ namespace HR_Portal.Source.Model.Project
                     }
                     list.Add(new ModelProjectList
                     {
-                        id = Convert.ToInt32(MySql.sdr["id"]),
-                        megnevezes_projekt = MySql.sdr["megnevezes_projekt"].ToString(),
-                        megnevezes_munka = MySql.sdr["megnevezes_munka"].ToString(),
-                        interjuk_db = Convert.ToInt32(MySql.sdr["interjuk_db"]),
-                        statusz = Convert.ToInt32(MySql.sdr["statusz"]),
+                        id = Convert.ToInt32(mySql.sdr["id"]),
+                        megnevezes_projekt = mySql.sdr["megnevezes_projekt"].ToString(),
+                        megnevezes_munka = mySql.sdr["megnevezes_munka"].ToString(),
+                        interjuk_db = Convert.ToInt32(mySql.sdr["interjuk_db"]),
+                        statusz = Convert.ToInt32(mySql.sdr["statusz"]),
                         jeloltek_db = jelolt,
-                        fel_datum = MySql.sdr["fel_datum"].ToString(),
+                        fel_datum = mySql.sdr["fel_datum"].ToString(),
                         Completion = 100
                     });
                 }
-                MySql.sdr.Close();
+                mySql.sdr.Close();
             }
-            MySql.Close();
+            mySql.Close();
             return list;
         }
     }

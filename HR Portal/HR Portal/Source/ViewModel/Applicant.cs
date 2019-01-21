@@ -129,8 +129,6 @@ namespace HR_Portal.Source.ViewModel
 
             ModelFullApplicant applicant = ModelFullApplicant.GetModelFullApplicant(command)[0];
 
-            MySql.Close();
-
             return applicant;
         }
 
@@ -156,38 +154,40 @@ namespace HR_Portal.Source.ViewModel
                 "FROM jeloltek WHERE jeloltek.id = " + (id.Equals(0) ? Session.ApplicantID : id) + "";
 
             List<ModelFullApplicant> list = ModelFullApplicant.GetModelFullApplicant(command);
-
-            MySql.Close();
+           
 
             return list;
         }
 
         public static void DeleteApplicant(int id)   //javított használja: applicantlist
         {
+            MySql mySql = new MySql();
             string command = "DELETE FROM jeloltek WHERE jeloltek.id = " + id + ";";
-            MySql.Execute(command);
+            mySql.Execute(command);
             command = "DELETE FROM kepessegek WHERE kepessegek.jelolt_id = " + id + ";";
-            MySql.Execute(command);
+            mySql.Execute(command);
             command = "DELETE FROM projekt_jelolt_kapcs WHERE projekt_jelolt_kapcs.jelolt_id = " + id + ";";
-            MySql.Execute(command);
+            mySql.Execute(command);
             command = "DELETE FROM megjegyzesek WHERE megjegyzesek.jelolt_id = " + id + ";";
-            MySql.Execute(command);
-            MySql.Close();
+            mySql.Execute(command);
+            mySql.Close();
         }
 
         public static void Insert(ModelFullApplicant data)  //javított
         {
+            MySql mySql = new MySql();
             string command = "INSERT INTO jeloltek (`id`, `nev`, `email`, `telefon`, `lakhely`, `ertesult`, `szuldatum`, neme, `tapasztalat_ev`, `munkakor`, `munkakor2`, `munkakor3`, `vegz_terulet`, `nyelvtudas`,`nyelvtudas2`, `reg_date`) " +
                 "VALUES(NULL, '" + data.nev + "',  '" + data.email + "', '" + data.telefon + "', '" + data.lakhely + "', " + data.ertesult + ", " + data.szuldatum + ", " + data.neme + "," + data.tapasztalat_ev + "," + data.munkakor + "," + data.munkakor2 + "," + data.munkakor3 + "," + data.vegz_terulet + "," + data.nyelvtudas + "," + data.nyelvtudas2 + ",'" + data.reg_date + "');";
-            MySql.Execute(command);
+            mySql.Execute(command);
             command = "SELECT jeloltek.id FROM jeloltek WHERE jeloltek.email = '" + data.email + "' AND jeloltek.nev = '" + data.nev + "'";
-            MySql.Close();
-            Session.ApplicantID = Convert.ToInt16(MySql.UniqueList(command, "jeloltek", 1)[0]);
-            MySql.Close();
+            mySql.Close();
+            Session.ApplicantID = Convert.ToInt16(mySql.UniqueList(command, "jeloltek", 1)[0]);
+            mySql.Close();
         }
 
         public static void Update(ModelFullApplicant data)  //javított
         {
+            MySql mySql = new MySql();
             string query = "UPDATE jeloltek SET " +
                 " `nev` = '" + data.nev + "'" +
                 ", `email` = '" + data.email + "'" +
@@ -205,21 +205,20 @@ namespace HR_Portal.Source.ViewModel
                 ",`nyelvtudas2` = " + data.nyelvtudas2 + "" +
                 ", `reg_date`  = '" + data.reg_date + "'" +
                 "WHERE jeloltek.id = " + Session.ApplicantID + "";
-            MySql.Execute(query);
-            int appID = Convert.ToInt16(MySql.UniqueList("SELECT jeloltek.id FROM jeloltek WHERE jeloltek.email = '" + data.email + "' AND jeloltek.nev = '" + data.nev + "' AND jeloltek.lakhely = '" + data.lakhely + "'", "jeloltek", 1)[0]);
+            mySql.Execute(query);
+            int appID = Convert.ToInt16(mySql.UniqueList("SELECT jeloltek.id FROM jeloltek WHERE jeloltek.email = '" + data.email + "' AND jeloltek.nev = '" + data.nev + "' AND jeloltek.lakhely = '" + data.lakhely + "'", "jeloltek", 1)[0]);
             Session.ApplicantID = appID;
-            MySql.Close();
+            mySql.Close();
         }
 
-        public List<ModelSmallProject> Data_ProjectList() //javított
+        public List<ModelSmallProject> Data_ProjectList(int id = 0) //javított
         {
             string command = "SELECT projektek.id, megnevezes_projekt FROM projektek " +
                 "INNER JOIN projekt_jelolt_kapcs ON projektek.id = projekt_jelolt_kapcs.projekt_id " +
                 "INNER JOIN jeloltek ON jeloltek.id = projekt_jelolt_kapcs.jelolt_id " +
-                "WHERE jeloltek.id = " + Session.ApplicantID + " " +
+                "WHERE jeloltek.id = " + (id.Equals(0) ? Session.ApplicantID : id) + " " +
                 "GROUP BY projektek.id";
             List<ModelSmallProject> list = ModelSmallProject.GetModelSmallProject(command);
-            MySql.Close();
             return list;
         }
 
@@ -227,16 +226,16 @@ namespace HR_Portal.Source.ViewModel
         {
             string command = "SELECT id, nev FROM jeloltek WHERE jeloltek.statusz = 1 AND nev LIKE '%"+name+"%'";
             List<ModelApplicantListbox> list = ModelApplicantListbox.GetModelApplicantListboxShort(command);
-            MySql.Close();
             return list;
         }
 
 
-        public static void FirstOpen(int applicantId)  
+        public static void FirstOpen(int applicantId)
         {
+            MySql mySql = new MySql();
             string command = "UPDATE jeloltek SET friss = false WHERE id = " + applicantId + ";";
-            MySql.Execute(command);
-            MySql.Close();
+            mySql.Execute(command);
+            mySql.Close();
 
             //try
             //{
@@ -250,23 +249,25 @@ namespace HR_Portal.Source.ViewModel
             //}
         }
 
-        public void DeleteProject(int id)  
+        public void DeleteProject(int id)
         {
+            MySql mySql = new MySql();
             string command = "DELETE FROM projekt_jelolt_kapcs WHERE projekt_id = " + id + " AND jelolt_id = " + Session.ApplicantID + ";";
-            MySql.Execute(command);
-            MySql.Close();
+            mySql.Execute(command);
+            mySql.Close();
         }
         
         public void AddToProject(int projekt_index)
         {
+            MySql mySql = new MySql();
             string command = "SELECT * FROM projekt_jelolt_kapcs WHERE jelolt_id = " + data.id + " AND projekt_id = "+projekt_index+"";
-            if (!MySql.IsExists(command))
+            if (!mySql.IsExists(command))
             {
-                MySql.Close();
+                mySql.Close();
                 command = "INSERT INTO projekt_jelolt_kapcs (id, projekt_id, jelolt_id, hr_id,allapota, datum) VALUES (NULL, " + projekt_index + ", " + data.id + ", " + Session.UserData.id + ",4, '" + DateTime.Now.ToString("yyyy.MM.dd.") + "' );";
-                MySql.Execute(command);
+                mySql.Execute(command);
             }
-            MySql.Close();
+            mySql.Close();
         }
     }
 }

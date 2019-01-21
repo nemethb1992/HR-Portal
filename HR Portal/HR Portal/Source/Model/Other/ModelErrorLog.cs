@@ -19,30 +19,31 @@ namespace HR_Portal.Source.Model.Other
 
         public List<ModelErrorLog> Get(string command)
         {
+            MySql mySql = new MySql();
             List<ModelErrorLog> list = new List<ModelErrorLog>();
 
-            if (MySql.Open() == true)
+            if (mySql.Open() == true)
             {
-                MySql.cmd = new MySqlCommand(command, MySql.conn);
-                MySql.sdr = MySql.cmd.ExecuteReader();
+                mySql.cmd = new MySqlCommand(command, mySql.conn);
+                mySql.sdr = mySql.cmd.ExecuteReader();
                 int j = 0;
-                while (MySql.sdr.Read())
+                while (mySql.sdr.Read())
                 {
                     list.Add(new ModelErrorLog
                     {
-                        id = (Convert.ToInt32(MySql.sdr["id"])),
-                        placeofbug = MySql.sdr["placeofbug"].ToString(),
-                        description = MySql.sdr["description"].ToString(),
-                        solution = MySql.sdr["solution"].ToString(),
-                        date = MySql.sdr["date"].ToString(),
-                        result = MySql.sdr["result"].ToString(),
-                        resultdate = MySql.sdr["resultdate"].ToString()
+                        id = (Convert.ToInt32(mySql.sdr["id"])),
+                        placeofbug = mySql.sdr["placeofbug"].ToString(),
+                        description = mySql.sdr["description"].ToString(),
+                        solution = mySql.sdr["solution"].ToString(),
+                        date = mySql.sdr["date"].ToString(),
+                        result = mySql.sdr["result"].ToString(),
+                        resultdate = mySql.sdr["resultdate"].ToString()
                     });
                     j++;
                 }
-                MySql.sdr.Close();
+                mySql.sdr.Close();
             }
-            MySql.Close();
+            mySql.Close();
             return list;
         }
     }

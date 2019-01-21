@@ -38,7 +38,6 @@ namespace HR_Portal.Source
         {
             string command = "SELECT coalesce(AVG(k1_val),0) as k1_val,coalesce(AVG(k2_val),0) as k2_val,coalesce(AVG(k3_val),0) as k3_val,coalesce(AVG(k4_val),0) as k4_val,coalesce(AVG(k5_val),0) as k5_val, tamogatom FROM kompetencia_jelolt_kapcs WHERE jelolt_id = " + Session.ApplicantID +" AND projekt_id = "+ Session.ProjektID+"";
             List < ModelKompetenciaSummary > list = ModelKompetenciaSummary.GetModelKompetenciaSummary(command);
-            MySql.Close();
             return list;
         }
 
@@ -47,7 +46,6 @@ namespace HR_Portal.Source
         {
             string command = "SELECT projektek.id, megnevezes_projekt FROM projektek WHERE statusz = 1";
             List<ModelSmallProject> list = ModelSmallProject.GetModelSmallProject(command);
-            MySql.Close();
             return list;
         }
 
@@ -55,7 +53,6 @@ namespace HR_Portal.Source
         {
             string command = "SELECT tamogatom FROM kompetencia_jelolt_kapcs WHERE jelolt_id = " + Session.ApplicantID + " AND projekt_id = " + Session.ProjektID + "";
             List<ModelTamogatas> list = ModelTamogatas.GetModelTamogatas(command);
-            MySql.Close();
             return list;
         }
 
@@ -63,7 +60,6 @@ namespace HR_Portal.Source
         {
             string command = "SELECT * FROM munkakor";
             List<ModelMunkakor> list = ModelMunkakor.GetModelMunkakor(command);
-            MySql.Close();
             return list;
         }
 
@@ -71,7 +67,6 @@ namespace HR_Portal.Source
         {
             string command = "SELECT * FROM statusz";
             List<ModelStatusz> list = ModelStatusz.GetModelStatusz(command);
-            MySql.Close();
             return list;
         }
 
@@ -79,7 +74,6 @@ namespace HR_Portal.Source
         {
             string command = "SELECT * FROM pc";
             List<ModelPc> list = ModelPc.GetModelPc(command);
-            MySql.Close();
             return list;
         }
 
@@ -87,7 +81,6 @@ namespace HR_Portal.Source
         {
             string command = "SELECT * FROM vegzettsegek";
             List<ModelVegzettseg> list = ModelVegzettseg.GetModelVegzettseg(command);
-            MySql.Close();
             return list;
         }
 
@@ -95,7 +88,6 @@ namespace HR_Portal.Source
         {
             string command = "SELECT * FROM nyelv";
             List<ModelNyelv> list = ModelNyelv.GetModelNyelv(command);
-            MySql.Close();
             return list;
         }
 
@@ -103,7 +95,6 @@ namespace HR_Portal.Source
         {
             string command = "SELECT * FROM ertesulesek";
             List<ModelErtesulesek> list = ModelErtesulesek.GetModelErtesulesek(command);
-            MySql.Close();
             return list;
         }
 
@@ -111,7 +102,6 @@ namespace HR_Portal.Source
         {
             string command = "SELECT * FROM nemek";
             List<ModelNem> list = ModelNem.GetModelNem(command);
-            MySql.Close();
             return list;
         }
 
@@ -125,7 +115,6 @@ namespace HR_Portal.Source
                 "LEFT JOIN projektek ON projektek.id = projekt_jelolt_kapcs.projekt_id " +
                 "LEFT JOIN munkakor ON jeloltek.munkakor = munkakor.id WHERE projektek.id =" + Session.ProjektID + " GROUP BY jeloltek.id ";
             List<ModelApplicantList> list = ModelApplicantList.GetModelApplicantList(command);
-            MySql.Close();
             return list;
         }
         
@@ -133,7 +122,6 @@ namespace HR_Portal.Source
         {
             string command = "SELECT id, jelolt_id, projekt_id, hr_id, hr_nev, megjegyzes, datum FROM megjegyzesek WHERE projekt_id=" + Session.ProjektID;
             List<ModelComment> list = ModelComment.GetModelComment(command);
-            MySql.Close();
             return list;
         }
 
@@ -141,7 +129,6 @@ namespace HR_Portal.Source
         {
             string command = "SELECT id, jelolt_id, projekt_id, hr_id, hr_nev, megjegyzes, datum FROM megjegyzesek WHERE jelolt_id=" + Session.ApplicantID;
             List<ModelComment> list = ModelComment.GetModelComment(command);
-            MySql.Close();
             return list;
         }
 
@@ -149,7 +136,6 @@ namespace HR_Portal.Source
         {
             string command = "SELECT id, name ,email, kategoria, jogosultsag, validitas FROM users WHERE name LIKE '%" + ertesitendok_src + "%'";
             List<ModelErtesitendok> list = ModelErtesitendok.GetModelErtesitendok(command);
-            MySql.Close();
             return list;
         }
 
@@ -157,7 +143,6 @@ namespace HR_Portal.Source
         {
             string command = "SELECT users.id, name, email, kategoria, jogosultsag, validitas FROM users INNER JOIN projekt_ertesitendok_kapcs ON users.id = projekt_ertesitendok_kapcs.ertesitendok_id  WHERE projekt_ertesitendok_kapcs.projekt_id =" + Session.ProjektID + " AND users.validitas = 1 GROUP BY users.id";
             List<ModelErtesitendok> list = ModelErtesitendok.GetModelErtesitendok(command);
-            MySql.Close();
             return list;
         }
 
@@ -165,7 +150,6 @@ namespace HR_Portal.Source
         {
             string command = "SELECT jeloltek.id, nev FROM jeloltek LEFT JOIN projekt_jelolt_kapcs ON projekt_jelolt_kapcs.jelolt_id = jeloltek.id WHERE projekt_jelolt_kapcs.projekt_id != " + Session.ProjektID + " OR projekt_jelolt_kapcs.projekt_id IS NULL GROUP BY jeloltek.id";
             List<ModelApplicantListbox> list = ModelApplicantListbox.GetModelApplicantListboxShort(command);
-            MySql.Close();
             return list;
         }
 
@@ -184,8 +168,9 @@ namespace HR_Portal.Source
                 statusz = 0;
             }
             string command = "UPDATE jeloltek SET statusz=" + statusz + " WHERE jeloltek.id = " + id + ";";
-            MySql.Execute(command);
-            MySql.Close();
+            MySql mySql = new MySql();
+            mySql.Execute(command);
+            mySql.Close();
         }
 
 
@@ -202,7 +187,6 @@ namespace HR_Portal.Source
         {
             string command = "SELECT * FROM users WHERE kategoria = 0 AND validitas = 1";
             List<ModelErtesitendok> list = ModelErtesitendok.GetModelErtesitendok(command);
-            MySql.Close();
             return list;
         }
 
@@ -210,15 +194,15 @@ namespace HR_Portal.Source
         {
             string command = "SELECT * FROM munkakor";
             List<ModelMunkakor> list = ModelMunkakor.GetModelMunkakor(command);
-            MySql.Close();
             return list;
         }
         
         public void Delete(int id, string table)
         {
+            MySql mySql = new MySql();
             string command = "DELETE FROM " + table + " WHERE id=" + id + "";
-            MySql.Execute(command);
-            MySql.Close();
+            mySql.Execute(command);
+            mySql.Close();
         }
 
         public void SettingsInsert(string content, string table)
@@ -249,8 +233,9 @@ namespace HR_Portal.Source
                     command = "INSERT INTO `kompetenciak` (`id`, `kompetencia_megnevezes`) VALUES (NULL, '" + content + "');";
                     break;
             }
-            MySql.Execute(command);
-            MySql.Close();
+            MySql mySql = new MySql();
+            mySql.Execute(command);
+            mySql.Close();
         }
 
         public static int ComboBoxValueSetter(List<ModelId> ossz_li, List<ModelId> projekt_li)

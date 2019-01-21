@@ -41,17 +41,18 @@ namespace HR_Portal.Source.Model.Project
 
         public static List<ModelFullProject> GetModelFullProject(string command)
         {
+            MySql mySql = new MySql();
             List<ModelFullProject> list = new List<ModelFullProject>();
-            if (MySql.Open() == true)
+            if (mySql.Open() == true)
             {
-                MySql.cmd = new MySqlCommand(command, MySql.conn);
-                MySql.sdr = MySql.cmd.ExecuteReader();
-                while (MySql.sdr.Read())
+                mySql.cmd = new MySqlCommand(command, mySql.conn);
+                mySql.sdr = mySql.cmd.ExecuteReader();
+                while (mySql.sdr.Read())
                 {
                     int jelolt;
                     try
                     {
-                        jelolt = Convert.ToInt32(MySql.sdr["jeloltek_db"]);
+                        jelolt = Convert.ToInt32(mySql.sdr["jeloltek_db"]);
                     }
                     catch (Exception)
                     {
@@ -59,40 +60,41 @@ namespace HR_Portal.Source.Model.Project
                     }
                     list.Add(new ModelFullProject
                     {
-                        id = Convert.ToInt32(MySql.sdr["id"]),
-                        hr_id = Convert.ToInt32(MySql.sdr["hr_id"]),
-                        megnevezes_projekt = MySql.sdr["megnevezes_projekt"].ToString(),
-                        megnevezes_vegzettseg = MySql.sdr["megnevezes_vegzettseg"].ToString(),
-                        megnevezes_nyelv = MySql.sdr["megnevezes_nyelv"].ToString(),
-                        megnevezes_munka = MySql.sdr["megnevezes_munka"].ToString(),
-                        megnevezes_pc = MySql.sdr["megnevezes_pc"].ToString(),
-                        megnevezes_hr = MySql.sdr["name"].ToString(),
-                        fel_datum = MySql.sdr["fel_datum"].ToString(),
-                        le_datum = MySql.sdr["le_datum"].ToString(),
-                        pc = Convert.ToInt32(MySql.sdr["pc"]),
-                        vegzettseg = Convert.ToInt32(MySql.sdr["vegzettseg"]),
-                        tapasztalat_ev = Convert.ToInt32(MySql.sdr["tapasztalat_ev"]),
-                        statusz = MySql.sdr["allapot"].ToString(),
-                        publikalt = Convert.ToInt32(MySql.sdr["publikalt"]),
-                        nyelvtudas = Convert.ToInt32(MySql.sdr["nyelvtudas"]),
-                        munkakor = Convert.ToInt32(MySql.sdr["munkakor"]),
-                        szuldatum = Convert.ToInt32(MySql.sdr["szuldatum"]),
-                        ber = Convert.ToInt32(MySql.sdr["ber"]),
+                        id = Convert.ToInt32(mySql.sdr["id"]),
+                        hr_id = Convert.ToInt32(mySql.sdr["hr_id"]),
+                        megnevezes_projekt = mySql.sdr["megnevezes_projekt"].ToString(),
+                        megnevezes_vegzettseg = mySql.sdr["megnevezes_vegzettseg"].ToString(),
+                        megnevezes_nyelv = mySql.sdr["megnevezes_nyelv"].ToString(),
+                        megnevezes_munka = mySql.sdr["megnevezes_munka"].ToString(),
+                        megnevezes_pc = mySql.sdr["megnevezes_pc"].ToString(),
+                        megnevezes_hr = mySql.sdr["name"].ToString(),
+                        fel_datum = mySql.sdr["fel_datum"].ToString(),
+                        le_datum = mySql.sdr["le_datum"].ToString(),
+                        pc = Convert.ToInt32(mySql.sdr["pc"]),
+                        vegzettseg = Convert.ToInt32(mySql.sdr["vegzettseg"]),
+                        tapasztalat_ev = Convert.ToInt32(mySql.sdr["tapasztalat_ev"]),
+                        statusz = mySql.sdr["allapot"].ToString(),
+                        publikalt = Convert.ToInt32(mySql.sdr["publikalt"]),
+                        nyelvtudas = Convert.ToInt32(mySql.sdr["nyelvtudas"]),
+                        munkakor = Convert.ToInt32(mySql.sdr["munkakor"]),
+                        szuldatum = Convert.ToInt32(mySql.sdr["szuldatum"]),
+                        ber = Convert.ToInt32(mySql.sdr["ber"]),
                         jeloltek_db = jelolt,
-                        kepesseg1 = Convert.ToInt32(MySql.sdr["kepesseg1"]),
-                        kepesseg2 = Convert.ToInt32(MySql.sdr["kepesseg2"]),
-                        kepesseg3 = Convert.ToInt32(MySql.sdr["kepesseg3"]),
-                        kepesseg4 = Convert.ToInt32(MySql.sdr["kepesseg4"]),
-                        kepesseg5 = Convert.ToInt32(MySql.sdr["kepesseg5"]),
-                        feladatok = MySql.sdr["feladatok"].ToString(),
-                        elvarasok = MySql.sdr["elvarasok"].ToString(),
-                        kinalunk = MySql.sdr["kinalunk"].ToString(),
-                        elonyok = MySql.sdr["elonyok"].ToString(),
+                        kepesseg1 = Convert.ToInt32(mySql.sdr["kepesseg1"]),
+                        kepesseg2 = Convert.ToInt32(mySql.sdr["kepesseg2"]),
+                        kepesseg3 = Convert.ToInt32(mySql.sdr["kepesseg3"]),
+                        kepesseg4 = Convert.ToInt32(mySql.sdr["kepesseg4"]),
+                        kepesseg5 = Convert.ToInt32(mySql.sdr["kepesseg5"]),
+                        feladatok = mySql.sdr["feladatok"].ToString(),
+                        elvarasok = mySql.sdr["elvarasok"].ToString(),
+                        kinalunk = mySql.sdr["kinalunk"].ToString(),
+                        elonyok = mySql.sdr["elonyok"].ToString(),
                     });
 
                 }
-                MySql.sdr.Close();
+                mySql.sdr.Close();
             }
+            mySql.Close();
             return list;
         }
     }

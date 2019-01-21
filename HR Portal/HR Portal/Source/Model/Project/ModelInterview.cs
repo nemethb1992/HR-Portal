@@ -25,60 +25,64 @@ namespace HR_Portal.Source.Model.Project
 
         public static List<ModelInterview> GetModelInterview(string command)
         {
+            MySql mySql = new MySql();
             List<ModelInterview> list = new List<ModelInterview>();
 
-            if (MySql.Open() == true)
+            if (mySql.Open() == true)
             {
-                MySql.cmd = new MySqlCommand(command, MySql.conn);
-                MySql.sdr = MySql.cmd.ExecuteReader();
-                while (MySql.sdr.Read())
+                mySql.cmd = new MySqlCommand(command, mySql.conn);
+                mySql.sdr = mySql.cmd.ExecuteReader();
+                while (mySql.sdr.Read())
                 {
                     list.Add(new ModelInterview
                     {
-                        id = Convert.ToInt32(MySql.sdr["id"]),
-                        projekt_megnevezes = MySql.sdr["megnevezes_projekt"].ToString(),
-                        jelolt_megnevezes = MySql.sdr["nev"].ToString(),
-                        jelolt_email = MySql.sdr["email"].ToString(),
-                        projekt_id = Convert.ToInt32(MySql.sdr["projekt_id"]),
-                        jelolt_id = Convert.ToInt32(MySql.sdr["jelolt_id"]),
-                        hr_id = Convert.ToInt32(MySql.sdr["hr_id"]),
-                        felvitel_datum = MySql.sdr["felvitel_datum"].ToString(),
-                        interju_datum = MySql.sdr["interju_datum"].ToString(),
-                        interju_cim = MySql.sdr["interju_cim"].ToString(),
-                        interju_leiras = MySql.sdr["interju_leiras"].ToString(),
-                        helyszin = MySql.sdr["helyszin"].ToString(),
-                        idopont = MySql.sdr["idopont"].ToString()
+                        id = Convert.ToInt32(mySql.sdr["id"]),
+                        projekt_megnevezes = mySql.sdr["megnevezes_projekt"].ToString(),
+                        jelolt_megnevezes = mySql.sdr["nev"].ToString(),
+                        jelolt_email = mySql.sdr["email"].ToString(),
+                        projekt_id = Convert.ToInt32(mySql.sdr["projekt_id"]),
+                        jelolt_id = Convert.ToInt32(mySql.sdr["jelolt_id"]),
+                        hr_id = Convert.ToInt32(mySql.sdr["hr_id"]),
+                        felvitel_datum = mySql.sdr["felvitel_datum"].ToString(),
+                        interju_datum = mySql.sdr["interju_datum"].ToString(),
+                        interju_cim = mySql.sdr["interju_cim"].ToString(),
+                        interju_leiras = mySql.sdr["interju_leiras"].ToString(),
+                        helyszin = mySql.sdr["helyszin"].ToString(),
+                        idopont = mySql.sdr["idopont"].ToString()
                     });
                 }
-                MySql.sdr.Close();
+                mySql.sdr.Close();
             }
+            mySql.Close();
             return list;
         }
 
         public static List<ModelInterview> GetSzakmaiInterview(string command)
         {
+            MySql mySql = new MySql();
             List<ModelInterview> list = new List<ModelInterview>();
 
-            if (MySql.Open() == true)
+            if (mySql.Open() == true)
             {
-                MySql.cmd = new MySqlCommand(command, MySql.conn);
-                MySql.sdr = MySql.cmd.ExecuteReader();
-                while (MySql.sdr.Read())
+                mySql.cmd = new MySqlCommand(command, mySql.conn);
+                mySql.sdr = mySql.cmd.ExecuteReader();
+                while (mySql.sdr.Read())
                 {
                     list.Add(new ModelInterview
                     {
-                        id = Convert.ToInt32(MySql.sdr["id"]),
-                        projekt_megnevezes = MySql.sdr["megnevezes_projekt"].ToString(),
-                        projekt_id = Convert.ToInt32(MySql.sdr["projekt_id"]),
-                        jelolt_id = Convert.ToInt32(MySql.sdr["jelolt_id"]),
-                        jelolt_megnevezes = MySql.sdr["nev"].ToString(),
-                        interju_datum = MySql.sdr["interju_datum"].ToString(),
-                        interju_cim = MySql.sdr["interju_cim"].ToString(),
-                        helyszin = MySql.sdr["helyszin"].ToString(),
+                        id = Convert.ToInt32(mySql.sdr["id"]),
+                        projekt_megnevezes = mySql.sdr["megnevezes_projekt"].ToString(),
+                        projekt_id = Convert.ToInt32(mySql.sdr["projekt_id"]),
+                        jelolt_id = Convert.ToInt32(mySql.sdr["jelolt_id"]),
+                        jelolt_megnevezes = mySql.sdr["nev"].ToString(),
+                        interju_datum = mySql.sdr["interju_datum"].ToString(),
+                        interju_cim = mySql.sdr["interju_cim"].ToString(),
+                        helyszin = mySql.sdr["helyszin"].ToString(),
                     });
                 }
-                MySql.sdr.Close();
+                mySql.sdr.Close();
             }
+            mySql.Close();
             return list;
         }
     }

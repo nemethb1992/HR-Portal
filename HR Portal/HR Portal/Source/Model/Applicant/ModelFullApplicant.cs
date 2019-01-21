@@ -40,45 +40,46 @@ namespace HR_Portal.Source.Model.Applicant
         public static List<ModelFullApplicant> GetModelFullApplicant(string command)
         {
             List<ModelFullApplicant> list = new List<ModelFullApplicant>();
-
-            if (MySql.Open() == true)
+            MySql mySql = new MySql();
+            if (mySql.Open() == true)
             {
-                MySql.cmd = new MySqlCommand(command, MySql.conn);
-                MySql.sdr = MySql.cmd.ExecuteReader();
-                while (MySql.sdr.Read())
+                mySql.cmd = new MySqlCommand(command, mySql.conn);
+                mySql.sdr = mySql.cmd.ExecuteReader();
+                while (mySql.sdr.Read())
                 {
                     list.Add(new ModelFullApplicant
                     {
-                        id = Convert.ToInt32(MySql.sdr["id"]),
-                        nev = MySql.sdr["nev"].ToString(),
-                        email = MySql.sdr["email"].ToString(),
-                        telefon = MySql.sdr["telefon"].ToString(),
-                        lakhely = MySql.sdr["lakhely"].ToString(),
-                        ertesult = MySql.sdr["ertesules_megnevezes"].ToString(),
-                        id_ertesult = Convert.ToInt32(MySql.sdr["id_ertesult"]),
-                        szuldatum = Convert.ToInt32(MySql.sdr["szuldatum"]),
-                        neme = MySql.sdr["neme"].ToString(),
-                        id_neme = Convert.ToInt32(MySql.sdr["id_neme"]),
-                        tapasztalat_ev = Convert.ToInt32(MySql.sdr["tapasztalat_ev"]),
-                        munkakor = MySql.sdr["munkakor"].ToString(),
-                        munkakor2 = MySql.sdr["munkakor2"].ToString(),
-                        munkakor3 = MySql.sdr["munkakor3"].ToString(),
-                        id_munkakor = Convert.ToInt32(MySql.sdr["id_munkakor"]),
-                        id_munkakor2 = Convert.ToInt32(MySql.sdr["id_munkakor2"]),
-                        id_munkakor3 = Convert.ToInt32(MySql.sdr["id_munkakor3"]),
-                        vegz_terulet = MySql.sdr["vegz_terulet"].ToString(),
-                        id_vegz_terulet = Convert.ToInt32(MySql.sdr["id_vegz_terulet"]),
-                        nyelvtudas = MySql.sdr["nyelvtudas"].ToString(),
-                        nyelvtudas2 = MySql.sdr["nyelvtudas2"].ToString(),
-                        id_nyelvtudas = Convert.ToInt32(MySql.sdr["id_nyelvtudas"]),
-                        id_nyelvtudas2 = Convert.ToInt32(MySql.sdr["id_nyelvtudas2"]),
-                        reg_date = MySql.sdr["reg_date"].ToString(),
-                        megjegyzes = MySql.sdr["megjegyzes"].ToString(),
-                        folderUrl = MySql.sdr["folderUrl"].ToString(),
+                        id = Convert.ToInt32(mySql.sdr["id"]),
+                        nev = mySql.sdr["nev"].ToString(),
+                        email = mySql.sdr["email"].ToString(),
+                        telefon = mySql.sdr["telefon"].ToString(),
+                        lakhely = mySql.sdr["lakhely"].ToString(),
+                        ertesult = mySql.sdr["ertesules_megnevezes"].ToString(),
+                        id_ertesult = Convert.ToInt32(mySql.sdr["id_ertesult"]),
+                        szuldatum = Convert.ToInt32(mySql.sdr["szuldatum"]),
+                        neme = mySql.sdr["neme"].ToString(),
+                        id_neme = Convert.ToInt32(mySql.sdr["id_neme"]),
+                        tapasztalat_ev = Convert.ToInt32(mySql.sdr["tapasztalat_ev"]),
+                        munkakor = mySql.sdr["munkakor"].ToString(),
+                        munkakor2 = mySql.sdr["munkakor2"].ToString(),
+                        munkakor3 = mySql.sdr["munkakor3"].ToString(),
+                        id_munkakor = Convert.ToInt32(mySql.sdr["id_munkakor"]),
+                        id_munkakor2 = Convert.ToInt32(mySql.sdr["id_munkakor2"]),
+                        id_munkakor3 = Convert.ToInt32(mySql.sdr["id_munkakor3"]),
+                        vegz_terulet = mySql.sdr["vegz_terulet"].ToString(),
+                        id_vegz_terulet = Convert.ToInt32(mySql.sdr["id_vegz_terulet"]),
+                        nyelvtudas = mySql.sdr["nyelvtudas"].ToString(),
+                        nyelvtudas2 = mySql.sdr["nyelvtudas2"].ToString(),
+                        id_nyelvtudas = Convert.ToInt32(mySql.sdr["id_nyelvtudas"]),
+                        id_nyelvtudas2 = Convert.ToInt32(mySql.sdr["id_nyelvtudas2"]),
+                        reg_date = mySql.sdr["reg_date"].ToString(),
+                        megjegyzes = mySql.sdr["megjegyzes"].ToString(),
+                        folderUrl = mySql.sdr["folderUrl"].ToString(),
                     });
                 }
-                MySql.sdr.Close();
+                mySql.sdr.Close();
             }
+            mySql.Close();
             return list;
         }
     }
