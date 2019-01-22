@@ -246,8 +246,7 @@ namespace HR_Portal.View.Usercontrol.Panels
                     MenuItem menuItem = sender as MenuItem;
                     ModelApplicantList items = menuItem.DataContext as ModelApplicantList;
                     Applicant.DeleteApplicant(items.id);
-                    Files file = new Files();
-                    file.DeleteFolder(items.id);
+                    Files.DeleteFolder(items.id);
                     applicantListLoader();
                     break;
                 case MessageBoxResult.No:

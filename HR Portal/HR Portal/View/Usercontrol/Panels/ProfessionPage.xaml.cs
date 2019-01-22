@@ -42,8 +42,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             if (MessageBox.Show("  Biztosan törli a jelentkezőt?", "HR Portal", MessageBoxButton.YesNo, MessageBoxImage.Information) == MessageBoxResult.Yes)
             {
                 ModelProfession item = (sender as Button).DataContext as ModelProfession;
-                Files file = new Files();
-                file.DeleteProfessionFolder(item.id);
+                Files.DeleteProfessionFolder(item.id);
                 Profession prof = new Profession();
                 prof.Delete(item.id);
                 abstractApplicant_ListBox.ItemsSource = prof.GetAll();

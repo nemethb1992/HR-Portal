@@ -62,11 +62,10 @@ namespace HR_Portal.Source
             return data;   
         }
 
-        public void DeleteFolder(int ApplicantID)
+        public static void DeleteFolder(int ApplicantID)
         {
             try
             {
-
                 Directory.Delete(GetApplicantUrl() + ApplicantID, true);
             }
             catch
@@ -75,9 +74,16 @@ namespace HR_Portal.Source
             }
         }
 
-        public void DeleteProfessionFolder(int ApplicantID)
+        public static void DeleteProfessionFolder(int ApplicantID)
         {
-            Directory.Delete(GetProfessionUrl()+ ApplicantID, true);
+            try
+            {
+                Directory.Delete(GetProfessionUrl()+ ApplicantID, true);
+            }
+            catch
+            {
+
+            }
         }
 
         public static void CopyAll(DirectoryInfo source, DirectoryInfo target)

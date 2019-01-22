@@ -18,6 +18,7 @@ namespace HR_Portal.Source.Model.Applicant
         public int szuldatum { get; set; }
         public string email { get; set; }
         public int interjuk_db { get; set; }
+        public int project_db { get; set; }
         public int allapota { get; set; }
         public string kolcsonzott { get; set; }
         public string allapot_megnevezes { get; set; }
@@ -29,7 +30,6 @@ namespace HR_Portal.Source.Model.Applicant
         public string allasban { get; set; }
         public bool szabad { get; set; }
         public int statusz { get; set; }
-        public List<ModelSmallProject> connectedProjects { get; set; }
 
         public static List<ModelApplicantList> GetModelApplicantList(string command)
         {
@@ -42,7 +42,7 @@ namespace HR_Portal.Source.Model.Applicant
 
                 while (mySql.sdr.Read())
                 {
-                    string allapot_megnev = "Beérkezett", kolcsonzott = "", frissSeged = "Hidden", allasbanSeged = "Hidden";
+                    string allapot_megnev = "Beérkezett", kolcsonzott = "", frissSeged = "Transparent", allasbanSeged = "Hidden";
                     int allapot = 0;
                     try
                     {
@@ -74,14 +74,13 @@ namespace HR_Portal.Source.Model.Applicant
                         allasbanSeged = "Visible";
 
                     if (Convert.ToBoolean(mySql.sdr["friss"]))
-                       frissSeged = "Visible";
+                       frissSeged = "#defee3";
 
                     if (Convert.ToInt32(mySql.sdr["kolcsonzott"]) == 1)
                         kolcsonzott = "Kölcsönzött";
-
+                    
                     list.Add(new ModelApplicantList
                     {
-                        //connectedProjects = new ViewModel.Applicant().Data_ProjectList(Convert.ToInt32(mySql.sdr["id"])),
                         id = Convert.ToInt32(mySql.sdr["id"]),
                         nev = mySql.sdr["nev"].ToString(),
                         munkakor = mySql.sdr["munkakor"].ToString(),
@@ -91,6 +90,7 @@ namespace HR_Portal.Source.Model.Applicant
                         szuldatum = Convert.ToInt32(mySql.sdr["szuldatum"]),
                         statusz = Convert.ToInt32(mySql.sdr["statusz"]),
                         interjuk_db = Convert.ToInt32(mySql.sdr["interjuk_db"]),
+                        project_db = Convert.ToInt32(mySql.sdr["project_db"]),
                         friss = frissSeged,
                         frissValue = Convert.ToBoolean(mySql.sdr["friss"]),
                         allasban = allasbanSeged,

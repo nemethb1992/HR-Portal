@@ -37,11 +37,12 @@ namespace HR_Portal.Source.ViewModel
                 +")";
             mySql.Execute(command);
             mySql.Close();
-            ModelFullApplicant udata = new Applicant().GetFullApplicantByEmail(prof.email);
+            ModelFullApplicant udata = Applicant.GetFullApplicantByEmail(prof.email);
             DirectoryInfo profession = new DirectoryInfo(Files.GetProfessionUrl() + prof.id);
             DirectoryInfo newID = new DirectoryInfo(Files.GetApplicantUrl() + udata.id);
             Delete(prof.id);
             Files.CopyAll(profession, newID);
+            Files.DeleteProfessionFolder(prof.id);
             return (udata != null ? udata.id : 0);
         }
 
@@ -51,6 +52,7 @@ namespace HR_Portal.Source.ViewModel
             string command = "DELETE FROM profession_jeloltek WHERE id="+ApplicantID;
             mySql.Execute(command);
             mySql.Close();
+            Files.DeleteProfessionFolder(ApplicantID);
         }
 
     }

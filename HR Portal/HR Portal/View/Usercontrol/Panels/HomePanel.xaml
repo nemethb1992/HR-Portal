@@ -25,7 +25,7 @@
                    Margin="0,0,200,0"/>
         <Grid Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="1*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
@@ -35,8 +35,8 @@
 
             <Grid Grid.Row="0" Grid.Column="0" Margin="5" MouseDown="ToApplicant">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1.5*" />
                     <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="200" />
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="60"/>
@@ -56,7 +56,7 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="2.1*" />
+                        <ColumnDefinition Width="230" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
                     <TextBlock Grid.Row="0" Text="Új jelöltek:" Margin="20,0" VerticalAlignment="Center" Style="{StaticResource minor_title_style}"/>
@@ -72,8 +72,8 @@
 
             <Grid Grid.Row="0" Grid.Column="1" Margin="5" MouseDown="ToProject">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1.5*" />
                     <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="200" />
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="60"/>
@@ -93,11 +93,33 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="2*" />
+                        <ColumnDefinition Width="140" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-                    <TextBlock Grid.Row="0" Text="Aktív projektek:" Margin="20,0" VerticalAlignment="Center" Style="{StaticResource minor_title_style}"/>
+                    <TextBlock Grid.Row="0" Text="Aktív:" Margin="20,0" VerticalAlignment="Center" Style="{StaticResource minor_title_style}"/>
                     <TextBlock Grid.Row="0" Grid.Column="1" x:Name="aktiv_projekt_result" VerticalAlignment="Center"  Text="0" Style="{StaticResource minor_title_style}"/>
+                    <TextBlock Grid.Row="1" Text="Passzív:" Margin="20,0" VerticalAlignment="Center" Style="{StaticResource minor_title_style}"/>
+                    <TextBlock Grid.Row="1" Grid.Column="1" x:Name="passziv_projekt_result" VerticalAlignment="Center"  Text="0" Style="{StaticResource minor_title_style}"/>
+                    <TextBlock Grid.Row="2" Text="Kapcsolt:" Margin="20,0" VerticalAlignment="Center" Style="{StaticResource minor_title_style}"/>
+                    <TextBlock Grid.Row="2" Grid.Column="1" x:Name="kapcsolt_projekt_result" VerticalAlignment="Center"  Text="0" Style="{StaticResource minor_title_style}"/>
+                    <ListBox x:Name="projektek_list" Grid.Column="0" Grid.Row="3" Grid.RowSpan="3" Grid.ColumnSpan="2" Style="{StaticResource small_listBox_style}" Background="White" Margin="10"  HorizontalContentAlignment="Stretch" SelectionMode="Extended">
+                        <ListBox.Resources>
+                            <Style TargetType="{x:Type Border}" BasedOn="{StaticResource listCorner}"/>
+                            <Style TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource thin_listBoxItem_style}"/>
+                        </ListBox.Resources>
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Grid  Height="15" MouseDown="OpenProjectClick">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Grid.Column="0" Margin="10,0" Style="{StaticResource ListText}" Text="{Binding megnevezes_projekt}"/>
+                                    <!--<Image x:Name="projekt_delete" Grid.Column="3" Source="/HRCloud;component/Public/imgs/bin.png" HorizontalAlignment="Right" Height="20" MouseDown="projekt_delete_MouseDown"/>-->
+                                </Grid>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+
                 </Grid>
             </Grid>
 
@@ -138,7 +160,10 @@
                     <Image Margin="0,50,0,0"  Grid.Row="0" VerticalAlignment="Top" Source="/Public/imgs/key2.png" />
                     <Border x:Name="admin_button" Grid.RowSpan="2" Panel.ZIndex="-1" Style="{StaticResource kezdolap_panel}">
                    </Border>
-                    <TextBlock Style="{StaticResource big_title_style}" Grid.Row="1" Panel.ZIndex="0" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,30" Text="Admin"/>
+                    <StackPanel Grid.Row="1" Panel.ZIndex="0">
+                        <TextBlock Style="{StaticResource big_title_style}" Grid.Row="1" Panel.ZIndex="0" HorizontalAlignment="Center" Margin="0,5" Text="Admin"/>
+                        <TextBlock x:Name="admin_result" Style="{StaticResource minor_title_style}" Panel.ZIndex="0" HorizontalAlignment="Center"  Text="Üres"/>
+                    </StackPanel>
                 </Grid>
                 <Grid Grid.Row="0" Grid.Column="0" Margin="5" MouseDown="ToProfession">
                     <Grid.RowDefinitions>
@@ -148,8 +173,11 @@
                     <Image Margin="0,50,0,0"  Grid.Row="0" VerticalAlignment="Top" Source="/Public/imgs/profession.png" />
                     <Border x:Name="profession_btn" Grid.RowSpan="2" Panel.ZIndex="-1" Style="{StaticResource kezdolap_panel}">
                     </Border>
-                    <TextBlock Style="{StaticResource big_title_style}" Grid.Row="1" Panel.ZIndex="0" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,30" Text="Profession"/>
-                </Grid>
+                    <StackPanel Grid.Row="1" Panel.ZIndex="0">
+                        <TextBlock Style="{StaticResource big_title_style}" Panel.ZIndex="0" HorizontalAlignment="Center" Margin="0,5" Text="Profession"/>
+                        <TextBlock x:Name="profession_list_result" Style="{StaticResource minor_title_style}" Panel.ZIndex="0" HorizontalAlignment="Center"  Text="Üres"/>
+                    </StackPanel>
+               </Grid>
             </Grid>
         </Grid>
     </Grid>

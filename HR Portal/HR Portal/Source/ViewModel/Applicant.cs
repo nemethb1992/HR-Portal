@@ -1,4 +1,5 @@
-﻿using HR_Portal.Source.Model.Applicant;
+﻿using HR_Portal.Public.templates;
+using HR_Portal.Source.Model.Applicant;
 using HR_Portal.Source.Model.Project;
 using System;
 using System.Collections.Generic;
@@ -19,6 +20,7 @@ namespace HR_Portal.Source.ViewModel
         public static List<ModelApplicantList> GetApplicantList(List<ModelApplicantSearchBar> sw)
         {
             string command = "SELECT coalesce((SELECT count(projekt_id) FROM interjuk_kapcs WHERE jelolt_id = jeloltek.id GROUP BY jelolt_id),0) as interjuk_db, " +
+                "coalesce((SELECT count(projekt_id) FROM projekt_jelolt_kapcs WHERE projekt_jelolt_kapcs.jelolt_id = jeloltek.id),0) as project_db, " +
                 "(SELECT megnevezes_munka FROM munkakor WHERE munkakor.id = jeloltek.munkakor) as munkakor, " +
                 "(SELECT megnevezes_munka FROM munkakor WHERE munkakor.id = jeloltek.munkakor2) as munkakor2, " +
                 "(SELECT megnevezes_munka FROM munkakor WHERE munkakor.id = jeloltek.munkakor3) as munkakor3, " +
@@ -106,7 +108,7 @@ namespace HR_Portal.Source.ViewModel
             return ModelApplicantList.GetModelApplicantList(command);
         }
 
-        public ModelFullApplicant GetFullApplicantByEmail(string email)
+        public static ModelFullApplicant GetFullApplicantByEmail(string email)
         {
             string command = "SELECT jeloltek.id,nev,email,telefon,lakhely,pmk_ismerte,szuldatum,neme,tapasztalat_ev, reg_date,felvett,jeloltek.megjegyzes,jeloltek.statusz,folderUrl,hirlevel," +
                 "coalesce((SELECT nem FROM nemek WHERE nemek.id = jeloltek.neme),'') AS neme," +
@@ -171,6 +173,11 @@ namespace HR_Portal.Source.ViewModel
             command = "DELETE FROM megjegyzesek WHERE megjegyzesek.jelolt_id = " + id + ";";
             mySql.Execute(command);
             mySql.Close();
+            try{
+                Files.DeleteFolder(id);
+            }
+            catch {
+            }
         }
 
         public static void Insert(ModelFullApplicant data)  //javított
@@ -237,16 +244,16 @@ namespace HR_Portal.Source.ViewModel
             mySql.Execute(command);
             mySql.Close();
 
-            //try
-            //{
-            //    List<ModelFullApplicant> applicantData = GetFullApplicant();
-            //    new Email().Send(applicantData[0].email, new EmailTemplate().Udvozlo_Email(applicantData[0].nev));
-            //}
-            //catch (Exception)
-            //{
+            try
+            {
+                Applicant applicant = new Applicant(applicantId);
+                new Email().Send(applicant.data.email, new EmailTemplate().Udvozlo_Email(applicant.data.nev));
+            }
+            catch (Exception)
+            {
 
-            //    throw;
-            //}
+                throw;
+            }
         }
 
         public void DeleteProject(int id)

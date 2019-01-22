@@ -80,7 +80,7 @@
                     </Grid.RowDefinitions>
 
                     <Grid Grid.Row="0" Style="{StaticResource Standard_Grid_Shadow}" Background="{StaticResource ThemeColor}" Panel.ZIndex="2"/>
-                    <Button Grid.Row="1" x:Name="HomeButton" Style="{StaticResource mw_navbtn_stlye}" Click="HomeButtonClick">
+                    <Button Grid.Row="1" Grid.RowSpan="2" x:Name="HomeButton" Style="{StaticResource mw_navbtn_stlye}" Click="HomeButtonClick">
                         <Image Source="/Public/imgs/home.png"  Height="30"/>
                     </Button>
                     <!--<Button Grid.Row="1" x:Name="mw_btn1" Style="{StaticResource mw_navbtn_stlye}" Click="mw_btn1_Click">

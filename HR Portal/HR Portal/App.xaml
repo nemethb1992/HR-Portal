@@ -522,7 +522,7 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
                         <Border Name="border" 
-                            BorderThickness="3,0,0,0"
+                            BorderThickness="0,0,0,0"
                             Padding="4,2" 
                             CornerRadius="0" 
                             Background="{TemplateBinding Background}">
