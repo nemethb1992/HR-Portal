@@ -135,6 +135,10 @@
     <Reference Include="Microsoft.Exchange.WebServices.Auth, Version=15.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Exchange.WebServices.2.2\lib\40\Microsoft.Exchange.WebServices.Auth.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Office.Interop.Excel.15.0.4795.1000\lib\net20\Microsoft.Office.Interop.Excel.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
     <Reference Include="MySql.Data, Version=8.0.13.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <HintPath>..\packages\MySql.Data.8.0.13\lib\net452\MySql.Data.dll</HintPath>
     </Reference>
@@ -200,6 +204,7 @@
     <Compile Include="Source\Model\Other\ModelErrorLog.cs" />
     <Compile Include="Source\Model\Other\ModelListSource.cs" />
     <Compile Include="Source\Model\Other\ModelOther.cs" />
+    <Compile Include="Source\Model\Other\ModelStat.cs" />
     <Compile Include="Source\Model\Other\ModelUserData.cs" />
     <Compile Include="Source\Model\Project\ModelFullProject.cs" />
     <Compile Include="Source\Model\Project\ModelInsertProject.cs" />
@@ -214,6 +219,7 @@
     <Compile Include="Source\SqLite.cs" />
     <Compile Include="Source\Test\ftpEntities.cs" />
     <Compile Include="Source\Test\ThreadTest.cs" />
+    <Compile Include="Source\Utility\ExcelMethod.cs" />
     <Compile Include="Source\ViewModel\Applicant.cs" />
     <Compile Include="Source\ViewModel\Comment.cs" />
     <Compile Include="Source\ViewModel\ErrorLog.cs" />
@@ -299,7 +305,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Source\Utility\Utility.cs" />
+    <Compile Include="Source\Utility\Utilities.cs" />
     <Compile Include="Source\Email.cs" />
     <Compile Include="Source\Files.cs" />
     <Page Include="MainWindow.xaml">

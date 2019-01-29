@@ -5,13 +5,13 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:HR_Portal.View.Usercontrol.Panels"
              mc:Ignorable="d" 
-             d:DesignHeight="900" d:DesignWidth="1150">
+             d:DesignHeight="1000" d:DesignWidth="1150">
     <ScrollViewer VerticalScrollBarVisibility="Auto">
-            <Grid Height="900" Style="{StaticResource switch_grid_style}">
+            <Grid Height="1000" Style="{StaticResource switch_grid_style}">
         <Grid.RowDefinitions>
             <RowDefinition Height="40" />
             <RowDefinition Height="0*" />
-            <RowDefinition Height="0*" />
+            <RowDefinition Height="0.5*" />
             <RowDefinition Height="1*" />
             <RowDefinition Height="1*" />
             <RowDefinition Height="1*" />
@@ -21,6 +21,21 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <TextBlock Style="{StaticResource big_title_style}" Grid.Column="1" Text="Beállítások"/>
+
+            <Grid Grid.Column="1" Grid.Row="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="1*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="200" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Style="{StaticResource big_title_style}" Grid.Column="0" VerticalAlignment="Center" FontSize="22" Text="Statisztikák"/>
+                <Button Tag="1" Grid.Row="1" x:Name="Stat_1_btn" VerticalAlignment="Center" Content="Statisztika 1" Style="{StaticResource StandardButton}" Height="50" Click="PressStatButton" />
+
+            </Grid>
             <!--<Grid Grid.Column="1" Grid.Row="1">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="40" />
@@ -115,8 +130,7 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />            </Grid.ColumnDefinitions>
                 <TextBlock Style="{StaticResource big_title_style}" Grid.Column="0" VerticalAlignment="Center" FontSize="22" Text="Dinamikus Listák"/>
                 <Grid Grid.Column="0" Grid.Row="1" Margin="20,10" Background="Transparent">
             <Grid.RowDefinitions>

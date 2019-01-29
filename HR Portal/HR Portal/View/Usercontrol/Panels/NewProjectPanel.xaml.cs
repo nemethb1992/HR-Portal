@@ -16,7 +16,7 @@ namespace HR_Portal.View.Usercontrol.Panels
     /// </summary>
     public partial class NewProjectPanel : UserControl
     {
-        Utility Utility = new Utility();
+        Utilities Utility = new Utilities();
 
         private Grid grid;
         private ProjectList projectList;
@@ -56,15 +56,15 @@ namespace HR_Portal.View.Usercontrol.Panels
             nev_tbx.Text = list[0].megnevezes_projekt;
             tapasztalat_tbx.Text = list[0].tapasztalat_ev.ToString();
             ber_tbx.Text = list[0].ber.ToString();
-            pc_cbx.SelectedIndex = Utility.ComboBoxValueSetter(Utility.Data_Pc().ConvertAll(x => new ModelId { id = x.id, }), list.ConvertAll(x => new ModelId { id = x.pc, }));
-            vegzettseg_cbx.SelectedIndex = Utility.ComboBoxValueSetter(Utility.Data_Vegzettseg().ConvertAll(x => new ModelId { id = x.id, }), list.ConvertAll(x => new ModelId { id = x.vegzettseg, }));
-            nyelv_cbx.SelectedIndex = Utility.ComboBoxValueSetter(Utility.Data_Nyelv().ConvertAll(x => new ModelId { id = x.id, }), list.ConvertAll(x => new ModelId { id = x.nyelvtudas, }));
-            munkakor_cbx.SelectedIndex = Utility.ComboBoxValueSetter(Utility.Data_Munkakor().ConvertAll(x => new ModelId { id = x.id, }), list.ConvertAll(x => new ModelId { id = x.munkakor, }));
-            k1_cbx.SelectedIndex = Utility.ComboBoxValueSetter(Interview.Data_Kompetencia().ConvertAll(x => new ModelId { id = x.id, }), list.ConvertAll(x => new ModelId { id = x.kepesseg1, }));
-            k2_cbx.SelectedIndex = Utility.ComboBoxValueSetter(Interview.Data_Kompetencia().ConvertAll(x => new ModelId { id = x.id, }), list.ConvertAll(x => new ModelId { id = x.kepesseg2, }));
-            k3_cbx.SelectedIndex = Utility.ComboBoxValueSetter(Interview.Data_Kompetencia().ConvertAll(x => new ModelId { id = x.id, }), list.ConvertAll(x => new ModelId { id = x.kepesseg3, }));
-            k4_cbx.SelectedIndex = Utility.ComboBoxValueSetter(Interview.Data_Kompetencia().ConvertAll(x => new ModelId { id = x.id, }), list.ConvertAll(x => new ModelId { id = x.kepesseg4, }));
-            k5_cbx.SelectedIndex = Utility.ComboBoxValueSetter(Interview.Data_Kompetencia().ConvertAll(x => new ModelId { id = x.id, }), list.ConvertAll(x => new ModelId { id = x.kepesseg5, }));
+            pc_cbx.SelectedIndex = Utilities.ComboBoxValueSetter(Utility.Data_Pc().ConvertAll(x => new ModelId { id = x.id, }), list.ConvertAll(x => new ModelId { id = x.pc, }));
+            vegzettseg_cbx.SelectedIndex = Utilities.ComboBoxValueSetter(Utility.Data_Vegzettseg().ConvertAll(x => new ModelId { id = x.id, }), list.ConvertAll(x => new ModelId { id = x.vegzettseg, }));
+            nyelv_cbx.SelectedIndex = Utilities.ComboBoxValueSetter(Utility.Data_Nyelv().ConvertAll(x => new ModelId { id = x.id, }), list.ConvertAll(x => new ModelId { id = x.nyelvtudas, }));
+            munkakor_cbx.SelectedIndex = Utilities.ComboBoxValueSetter(Utility.Data_Munkakor().ConvertAll(x => new ModelId { id = x.id, }), list.ConvertAll(x => new ModelId { id = x.munkakor, }));
+            k1_cbx.SelectedIndex = Utilities.ComboBoxValueSetter(Interview.Data_Kompetencia().ConvertAll(x => new ModelId { id = x.id, }), list.ConvertAll(x => new ModelId { id = x.kepesseg1, }));
+            k2_cbx.SelectedIndex = Utilities.ComboBoxValueSetter(Interview.Data_Kompetencia().ConvertAll(x => new ModelId { id = x.id, }), list.ConvertAll(x => new ModelId { id = x.kepesseg2, }));
+            k3_cbx.SelectedIndex = Utilities.ComboBoxValueSetter(Interview.Data_Kompetencia().ConvertAll(x => new ModelId { id = x.id, }), list.ConvertAll(x => new ModelId { id = x.kepesseg3, }));
+            k4_cbx.SelectedIndex = Utilities.ComboBoxValueSetter(Interview.Data_Kompetencia().ConvertAll(x => new ModelId { id = x.id, }), list.ConvertAll(x => new ModelId { id = x.kepesseg4, }));
+            k5_cbx.SelectedIndex = Utilities.ComboBoxValueSetter(Interview.Data_Kompetencia().ConvertAll(x => new ModelId { id = x.id, }), list.ConvertAll(x => new ModelId { id = x.kepesseg5, }));
         }
 
 
@@ -131,7 +131,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             {
                 ModelInsertProject data = getData();
                 Project.Insert(data);
-                Utility.NavigateTo(grid, new ProjectDataSheet(grid, new Project(0)));
+                Utilities.NavigateTo(grid, new ProjectDataSheet(grid, new Project(0)));
                 }
                 else
                 {
@@ -147,7 +147,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             {
                 ModelInsertProject data = getData();
                 Project.Update(data);
-                Utility.NavigateTo(grid,new ProjectDataSheet(grid, new Project(0)));
+                Utilities.NavigateTo(grid,new ProjectDataSheet(grid, new Project(0)));
             }
             else
             {

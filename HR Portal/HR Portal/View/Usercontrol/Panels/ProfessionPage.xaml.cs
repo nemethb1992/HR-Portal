@@ -34,7 +34,7 @@ namespace HR_Portal.View.Usercontrol.Panels
         private void OpenProfessionApplicant(object sender, RoutedEventArgs e)
         {
             ModelProfession item = (sender as Button).DataContext as ModelProfession;
-            Utility.NavigateTo(grid, new ProfessionDataSheet(grid,item));
+            Utilities.NavigateTo(grid, new ProfessionDataSheet(grid,item));
         }
 
         private void DiscardProfessionApplicant(object sender, RoutedEventArgs e)

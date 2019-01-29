@@ -1,6 +1,7 @@
 ﻿using HR_Portal.Source;
 using HR_Portal.Source.Model;
 using HR_Portal.Source.Model.Other;
+using HR_Portal.Source.Utility;
 using HR_Portal.Source.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -24,7 +25,7 @@ namespace HR_Portal.View.Usercontrol.Panels
     /// </summary>
     public partial class SettingsPanel : UserControl
     {
-        Utility Utility = new Utility();
+        Utilities util = new Utilities();
 
         private Grid grid;
 
@@ -36,12 +37,12 @@ namespace HR_Portal.View.Usercontrol.Panels
         }
         protected void listLoader()
         {
-            ertesitendok_editlist.ItemsSource = Utility.Data_Ertesitendok();
-            vegzettsegek_editlist.ItemsSource = Utility.Data_Vegzettseg();
-            munkakorok_editlist.ItemsSource = Utility.Data_Munkakorok();
-            pc_editlist.ItemsSource = Utility.Data_Pc();
-            ertesules_editlist.ItemsSource = Utility.Data_Ertesulesek();
-            nyelv_editlist.ItemsSource = Utility.Data_Nyelv();
+            ertesitendok_editlist.ItemsSource = util.Data_Ertesitendok();
+            vegzettsegek_editlist.ItemsSource = util.Data_Vegzettseg();
+            munkakorok_editlist.ItemsSource = util.Data_Munkakorok();
+            pc_editlist.ItemsSource = util.Data_Pc();
+            ertesules_editlist.ItemsSource = util.Data_Ertesulesek();
+            nyelv_editlist.ItemsSource = util.Data_Nyelv();
             kompetencia_editlist.ItemsSource = Interview.Data_Kompetencia();
         }
 
@@ -74,7 +75,7 @@ namespace HR_Portal.View.Usercontrol.Panels
                     MenuItem menuItem = sender as MenuItem;
                     ModelVegzettseg items = menuItem.DataContext as ModelVegzettseg;
                     if (items.megnevezes_vegzettseg != "Összes")
-                        Utility.Delete(items.id, "vegzettsegek");
+                        util.Delete(items.id, "vegzettsegek");
                     listLoader();
                     break;
                 case MessageBoxResult.No:
@@ -93,7 +94,7 @@ namespace HR_Portal.View.Usercontrol.Panels
                     MenuItem menuItem = sender as MenuItem;
                     ModelMunkakor items = menuItem.DataContext as ModelMunkakor;
                     if (items.munkakor != "Összes")
-                        Utility.Delete(items.id, "munkakor");
+                        util.Delete(items.id, "munkakor");
                     listLoader();
                     break;
                 case MessageBoxResult.No:
@@ -112,7 +113,7 @@ namespace HR_Portal.View.Usercontrol.Panels
                     MenuItem menuItem = sender as MenuItem;
                     ModelPc items = menuItem.DataContext as ModelPc;
                     if (items.megnevezes_pc != "Összes")
-                        Utility.Delete(items.id, "pc");
+                        util.Delete(items.id, "pc");
                     listLoader();
                     break;
                 case MessageBoxResult.No:
@@ -131,7 +132,7 @@ namespace HR_Portal.View.Usercontrol.Panels
                     MenuItem menuItem = sender as MenuItem;
                     ModelErtesulesek items = menuItem.DataContext as ModelErtesulesek;
                     if (items.ertesules_megnevezes != "Összes")
-                        Utility.Delete(items.id, "ertesulesek");
+                        util.Delete(items.id, "ertesulesek");
                     listLoader();
                     break;
                 case MessageBoxResult.No:
@@ -150,7 +151,7 @@ namespace HR_Portal.View.Usercontrol.Panels
                     MenuItem menuItem = sender as MenuItem;
                     ModelNyelv items = menuItem.DataContext as ModelNyelv;
                     if (items.nyelv != "Összes")
-                        Utility.Delete(items.id, "nyelv");
+                        util.Delete(items.id, "nyelv");
                     listLoader();
                     break;
                 case MessageBoxResult.No:
@@ -169,7 +170,7 @@ namespace HR_Portal.View.Usercontrol.Panels
                     MenuItem menuItem = sender as MenuItem;
                     ModelKompetenciak items = menuItem.DataContext as ModelKompetenciak;
                     if (items.kompetencia_megnevezes != "Összes")
-                        Utility.Delete(items.id, "kompetenciak");
+                        util.Delete(items.id, "kompetenciak");
                     listLoader();
                     break;
                 case MessageBoxResult.No:
@@ -183,7 +184,7 @@ namespace HR_Portal.View.Usercontrol.Panels
         {
             if (vegzettsegek_new_tbx.Text != "" && vegzettsegek_new_tbx.Text != "Új hozzáadása")
             {
-                Utility.SettingsInsert(vegzettsegek_new_tbx.Text, "vegzettsegek");
+                util.SettingsInsert(vegzettsegek_new_tbx.Text, "vegzettsegek");
                 vegzettsegek_new_tbx.Text = "Új hozzáadása";
                 listLoader();
             }
@@ -193,7 +194,7 @@ namespace HR_Portal.View.Usercontrol.Panels
         {
             if (munkakorok_new_tbx.Text != "" && munkakorok_new_tbx.Text != "Új hozzáadása")
             {
-                Utility.SettingsInsert(munkakorok_new_tbx.Text, "munkakor");
+                util.SettingsInsert(munkakorok_new_tbx.Text, "munkakor");
                 munkakorok_new_tbx.Text = "Új hozzáadása";
                 listLoader();
             }
@@ -203,7 +204,7 @@ namespace HR_Portal.View.Usercontrol.Panels
         {
             if (pc_new_tbx.Text != "" && pc_new_tbx.Text != "Új hozzáadása")
             {
-                Utility.SettingsInsert(pc_new_tbx.Text, "pc");
+                util.SettingsInsert(pc_new_tbx.Text, "pc");
                 pc_new_tbx.Text = "Új hozzáadása";
                 listLoader();
             }
@@ -213,7 +214,7 @@ namespace HR_Portal.View.Usercontrol.Panels
         {
             if (ertesules_new_tbx.Text != "" && ertesules_new_tbx.Text != "Új hozzáadása")
             {
-                Utility.SettingsInsert(ertesules_new_tbx.Text, "ertesulesek");
+                util.SettingsInsert(ertesules_new_tbx.Text, "ertesulesek");
                 ertesules_new_tbx.Text = "Új hozzáadása";
                 listLoader();
             }
@@ -223,7 +224,7 @@ namespace HR_Portal.View.Usercontrol.Panels
         {
             if (nyelv_new_tbx.Text != "" && nyelv_new_tbx.Text != "Új hozzáadása")
             {
-                Utility.SettingsInsert(nyelv_new_tbx.Text, "nyelv");
+                util.SettingsInsert(nyelv_new_tbx.Text, "nyelv");
                 nyelv_new_tbx.Text = "Új hozzáadása";
                 listLoader();
             }
@@ -235,12 +236,25 @@ namespace HR_Portal.View.Usercontrol.Panels
         {
             if (kompetencia_new_tbx.Text != "" && kompetencia_new_tbx.Text != "Új hozzáadása")
             {
-                Utility.SettingsInsert(kompetencia_new_tbx.Text, "kompetenciak");
+                util.SettingsInsert(kompetencia_new_tbx.Text, "kompetenciak");
                 kompetencia_new_tbx.Text = "Új hozzáadása";
                 listLoader();
             }
         }
 
-
+        private void PressStatButton(object sender, RoutedEventArgs e)
+        {
+            string button = (sender as Button).Tag.ToString();
+            switch (button)
+            {
+                case "1":
+                    {
+                        new ExcelMethod().Stat1(22);
+                        break;
+                    }
+                default:
+                    break;
+            }
+        }
     }
 }

@@ -22,7 +22,7 @@ namespace HR_Portal.View.Usercontrol.Panels
         private static string HeaderSelecteds;
         protected string HeaderSelected { get { return HeaderSelecteds; } set { HeaderSelecteds = value; } }
 
-        Utility Utility = new Utility();
+        Utilities Utility = new Utilities();
         
         private Grid grid;
 
@@ -224,9 +224,9 @@ namespace HR_Portal.View.Usercontrol.Panels
         {
             ModelProjectList items = (sender as Button).DataContext as ModelProjectList;
             Session.ProjektID = items.id;
-            Utility.SetReturnPage(Utility.Views.ProjectList);
+            Utilities.SetReturnPage(Utilities.Views.ProjectList);
             Session.ProjectSearchValue = GetSearchValues();
-            Utility.NavigateTo(grid, new ProjectDataSheet(grid, new Project(items.id)));
+            Utilities.NavigateTo(grid, new ProjectDataSheet(grid, new Project(items.id)));
         }
 
         protected void Numeric(object sender, TextCompositionEventArgs e)
@@ -339,9 +339,9 @@ namespace HR_Portal.View.Usercontrol.Panels
         protected void New_projekt_btn_Click(object sender, RoutedEventArgs e)
         {
             Session.isUpdate = false;
-            Utility.SetReturnPage(Utility.Views.ProjectList);
+            Utilities.SetReturnPage(Utilities.Views.ProjectList);
             Session.ProjectSearchValue = GetSearchValues();
-            Utility.NavigateTo(grid, new NewProjectPanel(grid));
+            Utilities.NavigateTo(grid, new NewProjectPanel(grid));
         }
 
         protected void modositasClick(object sender, RoutedEventArgs e)
@@ -350,7 +350,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             ModelProjectList itemSource = (sender as MenuItem).DataContext as ModelProjectList;
 
             Session.ProjektID = itemSource.id;
-            Utility.NavigateTo(grid, new NewProjectPanel(grid));
+            Utilities.NavigateTo(grid, new NewProjectPanel(grid));
         }
 
         protected void headerClick(object sender, MouseButtonEventArgs e)

@@ -28,7 +28,7 @@ namespace HR_Portal.View.Usercontrol.Panels
         private void ButtonInfoLoad()
         {
             Source.MySql mySql = new Source.MySql();
-            projektek_list.ItemsSource = new Utility().Data_PorjectListSmall();
+            projektek_list.ItemsSource = new Utilities().Data_PorjectListSmall();
             admin_result.Text = (Session.UserData.kategoria == 2 ? "Jogosult" : "Nem jogosult");
             uj_jelolt_result.Text = mySql.Count("SELECT count(jeloltek.id) FROM jeloltek WHERE friss=1 AND jeloltek.reg_date > '"+Session.UserData.belepve+"'").ToString() + " db";
             nem_megnyitott_result.Text = mySql.Count("SELECT count(jeloltek.id) FROM jeloltek WHERE friss = 1").ToString() +" db";
@@ -44,30 +44,30 @@ namespace HR_Portal.View.Usercontrol.Panels
 
         private void ToProject(object sender, MouseButtonEventArgs e)
         {
-            Utility.NavigateTo(grid, new ProjectList(grid));
+            Utilities.NavigateTo(grid, new ProjectList(grid));
         }
         private void ToApplicant(object sender, MouseButtonEventArgs e)
         {
-            Utility.NavigateTo(grid, new ApplicantList(grid));
+            Utilities.NavigateTo(grid, new ApplicantList(grid));
         }
         private void ToProfession(object sender, MouseButtonEventArgs e)
         {
-            Utility.NavigateTo(grid, new ProfessionPage(grid));
+            Utilities.NavigateTo(grid, new ProfessionPage(grid));
         }
         private void ToSettings(object sender, MouseButtonEventArgs e)
         {
-            Utility.NavigateTo(grid, new SettingsPanel(grid));
+            Utilities.NavigateTo(grid, new SettingsPanel(grid));
         }
         private void ToAdmin(object sender, MouseButtonEventArgs e)
         {
             if(Session.UserData.kategoria == 2)
-            Utility.NavigateTo(grid, new AdminPage(grid));
+            Utilities.NavigateTo(grid, new AdminPage(grid));
         }
 
         private void OpenProjectClick(object sender, MouseButtonEventArgs e)
         {
             ModelSmallProject project = (sender as Grid).DataContext as ModelSmallProject;
-            Utility.NavigateTo(grid, new ProjectDataSheet(grid, new Source.ViewModel.Project(project.id)));
+            Utilities.NavigateTo(grid, new ProjectDataSheet(grid, new Source.ViewModel.Project(project.id)));
         }
     }
 }

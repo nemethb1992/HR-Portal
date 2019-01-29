@@ -21,7 +21,7 @@ namespace HR_Portal.View.Usercontrol.Panels.SzakmaiLayouts
     {
         Session session = new Session();
         Applicant Applicant = new Applicant();
-        Utility Utility = new Utility();
+        Utilities Utility = new Utilities();
 
         private SzakmaiProjektDataSheet szakmaiProjektDataSheet;
         private Grid grid;

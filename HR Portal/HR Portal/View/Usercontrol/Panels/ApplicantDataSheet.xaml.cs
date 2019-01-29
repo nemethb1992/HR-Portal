@@ -16,7 +16,7 @@ namespace HR_Portal.View.Usercontrol.Panels
     /// </summary>
     public partial class ApplicantDataSheet : UserControl
     {
-        Utility Utility = new Utility();
+        Utilities Utility = new Utilities();
         Files fControl = new Files();
 
         private Applicant applicant;
@@ -45,7 +45,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             app_input_8.Text = applicant.data.munkakor;
             app_input_9.Text = applicant.data.ertesult.ToString();
             app_input_10.Text = applicant.data.szuldatum.ToString();
-            projekt_cbx.ItemsSource = new Utility().Data_PorjectListSmall();
+            projekt_cbx.ItemsSource = new Utilities().Data_PorjectListSmall();
             csatolmany_listBox.ItemsSource = Files.Read(Session.ApplicantID);
             megjegyzes_listBox.ItemsSource = Utility.Data_CommentApplicant();
             interju_listBox.ItemsSource = new Interview().Data_Interview();
@@ -58,8 +58,8 @@ namespace HR_Portal.View.Usercontrol.Panels
             ModelSmallProject items = button.DataContext as ModelSmallProject;
 
             Session.ProjektID = items.id;
-            Utility.SetReturnPage(Utility.Views.ApplicantDataSheet);
-            Utility.NavigateTo(grid, new ProjectDataSheet(grid, new Project(items.id)));
+            Utilities.SetReturnPage(Utilities.Views.ApplicantDataSheet);
+            Utilities.NavigateTo(grid, new ProjectDataSheet(grid, new Project(items.id)));
         }
 
         protected void projectDelete(object sender, RoutedEventArgs e)
@@ -137,13 +137,13 @@ namespace HR_Portal.View.Usercontrol.Panels
 
         private void BackButton(object sender, RoutedEventArgs e)
         {
-            if (Session.lastPage == Utility.Views.ProjectJeloltDataSheet)
+            if (Session.lastPage == Utilities.Views.ProjectJeloltDataSheet)
             {
-                Utility.NavigateTo(grid, new ProjektJeloltDataSheet(grid, new Project(0), applicant));
+                Utilities.NavigateTo(grid, new ProjektJeloltDataSheet(grid, new Project(0), applicant));
             }
             else
             {
-                Utility.NavigateTo(grid, new ApplicantList(grid));
+                Utilities.NavigateTo(grid, new ApplicantList(grid));
             }
         }
 
@@ -158,8 +158,8 @@ namespace HR_Portal.View.Usercontrol.Panels
             ModelInterview item = btn.DataContext as ModelInterview;
             Session.InterViewID = item.id;
             Session.ProjektID = item.projekt_id;
-            Utility.SetReturnPage(Utility.Views.ApplicantDataSheet);
-            Utility.NavigateTo(grid, new InterviewPanel(grid,new Project(item.projekt_id), new Applicant(item.jelolt_id)));
+            Utilities.SetReturnPage(Utilities.Views.ApplicantDataSheet);
+            Utilities.NavigateTo(grid, new InterviewPanel(grid,new Project(item.projekt_id), new Applicant(item.jelolt_id)));
 
         }
 

@@ -15,7 +15,7 @@ namespace HR_Portal.View.Usercontrol.Panels
 {
     public partial class ProjectDataSheet : UserControl
     {
-        Utility util = new Utility();
+        Utilities util = new Utilities();
         EmailTemplate emailTemplate = new EmailTemplate();
 
         private Project project;
@@ -34,7 +34,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             catch (Exception ext)
             {
                 MessageBox.Show(ext.ToString());
-                Utility.NavigateTo(grid,new ProjectList(grid));
+                Utilities.NavigateTo(grid,new ProjectList(grid));
             }
         }
 
@@ -100,7 +100,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             {
                 Session.TelefonSzurt = 0;
             }
-            Utility.NavigateTo(grid, new ProjektJeloltDataSheet(grid, new Project(0), new Applicant(items.id)));
+            Utilities.NavigateTo(grid, new ProjektJeloltDataSheet(grid, new Project(0), new Applicant(items.id)));
         }
 
         //protected void jeloltTabClick(object sender, RoutedEventArgs e)
@@ -430,13 +430,13 @@ namespace HR_Portal.View.Usercontrol.Panels
         }
         private void BackButton(object sender, RoutedEventArgs e)
         {
-            if (Session.lastPage == Utility.Views.ApplicantDataSheet)
+            if (Session.lastPage == Utilities.Views.ApplicantDataSheet)
             {
-                Utility.NavigateTo(grid, new ApplicantDataSheet(grid, new Applicant()));
+                Utilities.NavigateTo(grid, new ApplicantDataSheet(grid, new Applicant()));
             }
             else
             {
-                Utility.NavigateTo(grid, new ProjectList(grid));
+                Utilities.NavigateTo(grid, new ProjectList(grid));
             }
         }
 

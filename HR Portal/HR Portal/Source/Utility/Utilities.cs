@@ -10,7 +10,7 @@ using HR_Portal.View.Usercontrol.Panels;
 
 namespace HR_Portal.Source
 {
-    class Utility
+    class Utilities
     {
 
         public enum Views { ApplicantList, ApplicantDataSheet, ProjectList, ProjectDataSheet, InterviewPanel, ProjectJeloltDataSheet };

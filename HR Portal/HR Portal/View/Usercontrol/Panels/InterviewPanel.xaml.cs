@@ -40,18 +40,18 @@ namespace HR_Portal.View.Usercontrol.Panels
         {
             if(Session.UserData.kategoria > 1)
             {
-                if (Session.lastPage == Utility.Views.ProjectJeloltDataSheet)
+                if (Session.lastPage == Utilities.Views.ProjectJeloltDataSheet)
                 {
-                    Utility.NavigateTo(grid,new ProjektJeloltDataSheet(grid, project, applicant));
+                    Utilities.NavigateTo(grid,new ProjektJeloltDataSheet(grid, project, applicant));
                 }
                 else
                 {
-                    Utility.NavigateTo(grid, new ApplicantDataSheet(grid,applicant));
+                    Utilities.NavigateTo(grid, new ApplicantDataSheet(grid,applicant));
                 }
             }
             else
             {
-                Utility.NavigateTo(grid, new SzakmaiInterviewList(grid));
+                Utilities.NavigateTo(grid, new SzakmaiInterviewList(grid));
             }
         }
 

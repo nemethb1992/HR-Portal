@@ -27,7 +27,7 @@ namespace HR_Portal.View.Usercontrol.Panels
         private static string HeaderSelecteds;
         public string HeaderSelected { get { return HeaderSelecteds; } set { HeaderSelecteds = value; } }
 
-        Utility Utility = new Utility();
+        Utilities Utility = new Utilities();
 
         
         private Grid grid;
@@ -232,9 +232,9 @@ namespace HR_Portal.View.Usercontrol.Panels
             {
                 Applicant.FirstOpen(items.id);
             }
-            Utility.SetReturnPage(Utility.Views.ApplicantList);
+            Utilities.SetReturnPage(Utilities.Views.ApplicantList);
             Session.ApplicantSearchValue = GetSearchValues();
-            Utility.NavigateTo(grid,new ApplicantDataSheet(grid,new Applicant(items.id)));
+            Utilities.NavigateTo(grid,new ApplicantDataSheet(grid,new Applicant(items.id)));
         }
 
         protected void applicantDeleteClick(object sender, RoutedEventArgs e)
@@ -347,10 +347,10 @@ namespace HR_Portal.View.Usercontrol.Panels
 
         protected void navigateToNewApplicantPanel(object sender, RoutedEventArgs e)
         {
-            Utility.SetReturnPage(Utility.Views.ApplicantList);
+            Utilities.SetReturnPage(Utilities.Views.ApplicantList);
             Session.isUpdate = false;
             Session.ApplicantSearchValue = GetSearchValues();
-            Utility.NavigateTo(grid, new NewApplicantPanel(grid));
+            Utilities.NavigateTo(grid, new NewApplicantPanel(grid));
         }
 
         protected void modositasClick(object sender, RoutedEventArgs e)
@@ -360,7 +360,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             Session.isUpdate = true;
             Session.ApplicantID = itemSource.id;
             Session.ApplicantSearchValue = GetSearchValues();
-            Utility.NavigateTo(grid, new NewApplicantPanel(grid,new Applicant(itemSource.id)));
+            Utilities.NavigateTo(grid, new NewApplicantPanel(grid,new Applicant(itemSource.id)));
         }
 
         protected void headerClick(object sender, MouseButtonEventArgs e)

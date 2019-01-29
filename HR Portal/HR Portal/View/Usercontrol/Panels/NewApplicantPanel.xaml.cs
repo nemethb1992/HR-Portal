@@ -16,7 +16,7 @@ namespace HR_Portal.View.Usercontrol.Panels
     /// </summary>
     public partial class NewApplicantPanel : UserControl
     {
-        Utility Utility = new Utility();
+        Utilities Utility = new Utilities();
         private Applicant applicant;
         private Grid grid;
 
@@ -59,14 +59,14 @@ namespace HR_Portal.View.Usercontrol.Panels
             eletkor_tbx.Text = applicant.data.szuldatum.ToString();
             tapasztalat_tbx.Text = applicant.data.tapasztalat_ev.ToString();
 
-            munkakor_cbx.SelectedIndex = Utility.ComboBoxValueSetter(Utility.Data_Munkakor().ConvertAll(x => new ModelId { id = x.id, }), applicant.list.ConvertAll(x => new ModelId { id = x.id_munkakor, }));
-            munkakor2_cbx.SelectedIndex = Utility.ComboBoxValueSetter(Utility.Data_Munkakor().ConvertAll(x => new ModelId { id = x.id, }), applicant.list.ConvertAll(x => new ModelId { id = x.id_munkakor2, }));
-            munkakor3_cbx.SelectedIndex = Utility.ComboBoxValueSetter(Utility.Data_Munkakor().ConvertAll(x => new ModelId { id = x.id, }), applicant.list.ConvertAll(x => new ModelId { id = x.id_munkakor3, }));
-            nyelv_cbx.SelectedIndex = Utility.ComboBoxValueSetter(Utility.Data_Nyelv().ConvertAll(x => new ModelId { id = x.id, }), applicant.list.ConvertAll(x => new ModelId { id = x.id_nyelvtudas, }));
-            nyelv2_cbx.SelectedIndex = Utility.ComboBoxValueSetter(Utility.Data_Nyelv().ConvertAll(x => new ModelId { id = x.id, }), applicant.list.ConvertAll(x => new ModelId { id = x.id_nyelvtudas2, }));
-            ertesules_cbx.SelectedIndex = Utility.ComboBoxValueSetter(Utility.Data_Ertesulesek().ConvertAll(x => new ModelId { id = x.id, }), applicant.list.ConvertAll(x => new ModelId { id = x.id_ertesult, }));
-            vegzettseg_cbx.SelectedIndex = Utility.ComboBoxValueSetter(Utility.Data_Vegzettseg().ConvertAll(x => new ModelId { id = x.id, }), applicant.list.ConvertAll(x => new ModelId { id = x.id_vegz_terulet, }));
-            neme_cbx.SelectedIndex = Utility.ComboBoxValueSetter(Utility.Data_Nemek().ConvertAll(x => new ModelId { id = x.id, }), applicant.list.ConvertAll(x => new ModelId { id = x.id_neme, }));
+            munkakor_cbx.SelectedIndex = Utilities.ComboBoxValueSetter(Utility.Data_Munkakor().ConvertAll(x => new ModelId { id = x.id, }), applicant.list.ConvertAll(x => new ModelId { id = x.id_munkakor, }));
+            munkakor2_cbx.SelectedIndex = Utilities.ComboBoxValueSetter(Utility.Data_Munkakor().ConvertAll(x => new ModelId { id = x.id, }), applicant.list.ConvertAll(x => new ModelId { id = x.id_munkakor2, }));
+            munkakor3_cbx.SelectedIndex = Utilities.ComboBoxValueSetter(Utility.Data_Munkakor().ConvertAll(x => new ModelId { id = x.id, }), applicant.list.ConvertAll(x => new ModelId { id = x.id_munkakor3, }));
+            nyelv_cbx.SelectedIndex = Utilities.ComboBoxValueSetter(Utility.Data_Nyelv().ConvertAll(x => new ModelId { id = x.id, }), applicant.list.ConvertAll(x => new ModelId { id = x.id_nyelvtudas, }));
+            nyelv2_cbx.SelectedIndex = Utilities.ComboBoxValueSetter(Utility.Data_Nyelv().ConvertAll(x => new ModelId { id = x.id, }), applicant.list.ConvertAll(x => new ModelId { id = x.id_nyelvtudas2, }));
+            ertesules_cbx.SelectedIndex = Utilities.ComboBoxValueSetter(Utility.Data_Ertesulesek().ConvertAll(x => new ModelId { id = x.id, }), applicant.list.ConvertAll(x => new ModelId { id = x.id_ertesult, }));
+            vegzettseg_cbx.SelectedIndex = Utilities.ComboBoxValueSetter(Utility.Data_Vegzettseg().ConvertAll(x => new ModelId { id = x.id, }), applicant.list.ConvertAll(x => new ModelId { id = x.id_vegz_terulet, }));
+            neme_cbx.SelectedIndex = Utilities.ComboBoxValueSetter(Utility.Data_Nemek().ConvertAll(x => new ModelId { id = x.id, }), applicant.list.ConvertAll(x => new ModelId { id = x.id_neme, }));
         }
 
         protected bool isFulfilled()
@@ -127,7 +127,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             {
                 ModelFullApplicant applicant = getFormData();
                 Applicant.Insert(applicant);
-                Utility.NavigateTo(grid, new ApplicantDataSheet(grid, new Applicant(applicant.id)));
+                Utilities.NavigateTo(grid, new ApplicantDataSheet(grid, new Applicant(applicant.id)));
             }
             else
             {
@@ -141,7 +141,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             {
                 ModelFullApplicant applicant = getFormData();
                 Applicant.Update(getFormData());
-                Utility.NavigateTo(grid, new ApplicantDataSheet(grid, new Applicant(applicant.id)));
+                Utilities.NavigateTo(grid, new ApplicantDataSheet(grid, new Applicant(applicant.id)));
             }
             else
             {
@@ -158,7 +158,7 @@ namespace HR_Portal.View.Usercontrol.Panels
 
         private void BackButton(object sender, RoutedEventArgs e)
         {
-            Utility.NavigateTo(grid, new ApplicantList(grid));
+            Utilities.NavigateTo(grid, new ApplicantList(grid));
         }
     }
 }

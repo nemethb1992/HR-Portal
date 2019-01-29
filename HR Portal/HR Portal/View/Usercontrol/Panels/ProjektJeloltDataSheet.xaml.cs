@@ -19,7 +19,7 @@ namespace HR_Portal.View.Usercontrol.Panels
     public partial class ProjektJeloltDataSheet : UserControl
     {
     
-        Utility Utility = new Utility();
+        Utilities Utility = new Utilities();
         
         private Grid grid;
         private Project project;
@@ -91,7 +91,7 @@ namespace HR_Portal.View.Usercontrol.Panels
 
         protected void backToProjectDataSheet(object sender, RoutedEventArgs e)
         {
-            Utility.NavigateTo(grid, new ProjectDataSheet(grid,project));
+            Utilities.NavigateTo(grid, new ProjectDataSheet(grid,project));
         }
 
         protected void enterComment(object sender, KeyEventArgs e)
@@ -178,7 +178,7 @@ namespace HR_Portal.View.Usercontrol.Panels
                 case MessageBoxResult.Yes:
                     Project project = new Project(0);
                     project.jeloltKapcsUpdate(Session.ApplicantID, 3);
-                    Utility.NavigateTo(grid, new ProjectDataSheet(grid, project));
+                    Utilities.NavigateTo(grid, new ProjectDataSheet(grid, project));
                     EmailTemplate email = new EmailTemplate();
                     new Email().Send(applicant.data.email, email.Elutasito_Email(applicant.data.nev));
                     break;
@@ -249,7 +249,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             ModelInterview items = btn.DataContext as ModelInterview;
 
             Session.InterViewID = items.id;
-            Utility.NavigateTo(grid, new InterviewPanel(grid, new Project(items.projekt_id), new Applicant(items.jelolt_id)));
+            Utilities.NavigateTo(grid, new InterviewPanel(grid, new Project(items.projekt_id), new Applicant(items.jelolt_id)));
         }
 
         protected void deleteInterview(object sender, RoutedEventArgs e)
@@ -287,8 +287,8 @@ namespace HR_Portal.View.Usercontrol.Panels
 
         private void ApplicantDataSheetNavigation(object sender, RoutedEventArgs e)
         {
-            Utility.SetReturnPage(Utility.Views.ProjectJeloltDataSheet);
-            Utility.NavigateTo(grid, new ApplicantDataSheet(grid,new Applicant()));
+            Utilities.SetReturnPage(Utilities.Views.ProjectJeloltDataSheet);
+            Utilities.NavigateTo(grid, new ApplicantDataSheet(grid,new Applicant()));
         }
     }
 
