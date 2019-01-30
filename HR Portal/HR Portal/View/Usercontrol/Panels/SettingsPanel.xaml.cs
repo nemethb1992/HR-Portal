@@ -244,12 +244,13 @@ namespace HR_Portal.View.Usercontrol.Panels
 
         private void PressStatButton(object sender, RoutedEventArgs e)
         {
+            
             string button = (sender as Button).Tag.ToString();
             switch (button)
             {
                 case "1":
                     {
-                        new ExcelMethod().Stat1(22);
+                        new ExcelMethod().Stat1((stat_week_cbx.SelectedIndex.Equals(-1)? 5 : Convert.ToInt32(stat_week_cbx.SelectedIndex.ToString())+1));
                         break;
                     }
                 default:

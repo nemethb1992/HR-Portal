@@ -26,14 +26,44 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="40" />
                     <RowDefinition Height="1*" />
+                    <RowDefinition Height="1*" />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="200" />
+                    <ColumnDefinition Width="250" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0" Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Style="{StaticResource Standard_Textblock}" Text="Hetek száma visszamenőleg:"/>
+                    <ComboBox x:Name="stat_week_cbx" Grid.Column="1" Margin="10" Padding="10,5">
+                        <ComboBox.Resources>
+                            <Style TargetType="{x:Type Border}" BasedOn="{StaticResource listCorner_square}"/>
+                        </ComboBox.Resources>
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <Grid >
+                                    <TextBlock Grid.Column="1"  Style="{StaticResource checkbox_item_style}" Text="{Binding megnevezes_projekt}"/>
+                                </Grid>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
 
-                <TextBlock Style="{StaticResource big_title_style}" Grid.Column="0" VerticalAlignment="Center" FontSize="22" Text="Statisztikák"/>
-                <Button Tag="1" Grid.Row="1" x:Name="Stat_1_btn" VerticalAlignment="Center" Content="Statisztika 1" Style="{StaticResource StandardButton}" Height="50" Click="PressStatButton" />
+                        <ComboBoxItem Name="item1">1</ComboBoxItem>
+                        <ComboBoxItem Name="item2">2</ComboBoxItem>
+                        <ComboBoxItem Name="item3">3</ComboBoxItem>
+                        <ComboBoxItem Name="item4">4</ComboBoxItem>
+                        <ComboBoxItem Name="item5">5</ComboBoxItem>
+                        <ComboBoxItem Name="item6">6</ComboBoxItem>
+                        <ComboBoxItem Name="item7">7</ComboBoxItem>
+                        <ComboBoxItem Name="item8">8</ComboBoxItem>
+                        <ComboBoxItem Name="item9">9</ComboBoxItem>
+                        <ComboBoxItem Name="item10">10</ComboBoxItem>
+                    </ComboBox>
+                </Grid>
+                <TextBlock Style="{StaticResource big_title_style}" Grid.Column="0" VerticalAlignment="Center" FontSize="22" Text="Statisztika 1"/>
+                <Button Tag="1" Grid.Row="2" x:Name="Stat_1_btn" Content="Mentés" Margin="0,5"  Style="{StaticResource StandardButton}" Click="PressStatButton" />
 
             </Grid>
             <!--<Grid Grid.Column="1" Grid.Row="1">
