@@ -40,9 +40,8 @@ namespace HR_Portal.Source.ViewModel
             ModelFullApplicant udata = Applicant.GetFullApplicantByEmail(prof.email);
             DirectoryInfo profession = new DirectoryInfo(Files.GetProfessionUrl() + prof.id);
             DirectoryInfo newID = new DirectoryInfo(Files.GetApplicantUrl() + udata.id);
-            Delete(prof.id);
             Files.CopyAll(profession, newID);
-            Files.DeleteProfessionFolder(prof.id);
+            Delete(prof.id);
             return (udata != null ? udata.id : 0);
         }
 

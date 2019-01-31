@@ -89,18 +89,25 @@ namespace HR_Portal.Source
         public static void CopyAll(DirectoryInfo source, DirectoryInfo target)
         {
             Directory.CreateDirectory(target.FullName);
-            
-            foreach (FileInfo fi in source.GetFiles())
+
+            try
             {
-                Console.WriteLine(@"Copying {0}\{1}", target.FullName, fi.Name);
-                fi.CopyTo(Path.Combine(target.FullName, fi.Name), true);
+                foreach (FileInfo fi in source.GetFiles())
+                {
+                    Console.WriteLine(@"Copying {0}\{1}", target.FullName, fi.Name);
+                    fi.CopyTo(Path.Combine(target.FullName, fi.Name), true);
+                }
+            
+                foreach (DirectoryInfo diSourceSubDir in source.GetDirectories())
+                {
+                    DirectoryInfo nextTargetSubDir =
+                        target.CreateSubdirectory(diSourceSubDir.Name);
+                    CopyAll(diSourceSubDir, nextTargetSubDir);
+                }
             }
-            
-            foreach (DirectoryInfo diSourceSubDir in source.GetDirectories())
+            catch
             {
-                DirectoryInfo nextTargetSubDir =
-                    target.CreateSubdirectory(diSourceSubDir.Name);
-                CopyAll(diSourceSubDir, nextTargetSubDir);
+
             }
         }
 
