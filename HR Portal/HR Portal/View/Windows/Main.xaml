@@ -68,7 +68,7 @@
             <Grid x:Name="Left_Navigation_Grid" Style="{StaticResource gridShadow}" Background="{StaticResource ThemeColor}" Grid.Column="1" Grid.Row="1" Panel.ZIndex="2">
 
 
-                <Grid x:Name="HR_navigation_Grid" Visibility="Visible" Grid.Row="1"  Panel.ZIndex="2"  >
+                <Grid x:Name="HR_navigation_Grid"  Visibility="Visible" Grid.Row="1"  Panel.ZIndex="2"  >
                     <Grid.RowDefinitions>
                         <RowDefinition Height="15" />
                         <RowDefinition Height="50" />

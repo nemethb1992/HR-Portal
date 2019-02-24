@@ -37,14 +37,12 @@ namespace HR_Portal.View.Usercontrol.Panels
 
             applicant_profile_title.Text = applicant.data.nev;
             header.Text = "Tisztelt "+ applicant.data.nev + "!";
-            app_input_1.Text = applicant.data.email;
-            app_input_2.Text = applicant.data.telefon.ToString();
-            app_input_3.Text = applicant.data.lakhely;
-            app_input_5.Text = applicant.data.nyelvtudas.ToString();
-            app_input_6.Text = applicant.data.nyelvtudas2.ToString();
-            app_input_8.Text = applicant.data.munkakor;
-            app_input_9.Text = applicant.data.ertesult.ToString();
-            app_input_10.Text = applicant.data.szuldatum.ToString();
+            //app_input_1.Text = applicant.data.email;
+            //app_input_2.Text = applicant.data.telefon.ToString();
+            //app_input_3.Text = applicant.data.lakhely;
+            //app_input_5.Text = applicant.data.nyelvtudas.ToString();
+            //app_input_9.Text = applicant.data.ertesult.ToString();
+            //app_input_10.Text = applicant.data.szuldatum.ToString();
             projekt_cbx.ItemsSource = new Utilities().Data_PorjectListSmall();
             csatolmany_listBox.ItemsSource = Files.Read(Session.ApplicantID);
             megjegyzes_listBox.ItemsSource = Utility.Data_CommentApplicant();

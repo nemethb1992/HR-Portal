@@ -97,6 +97,8 @@
             <Setter Property="Foreground" Value="{StaticResource SD_Element_Foreground}"></Setter>
         </Style>
 
+        
+        
         <Style TargetType="Grid" x:Key="Standard_Grid_Shadow">
 
             <!--<Setter Property="Background"  Value="{StaticResource NavGridColor}"></Setter>-->
@@ -398,6 +400,12 @@
             <Setter Property="Foreground" Value="{StaticResource SD_Element_Foreground}"></Setter>
         </Style>
         <Style TargetType="Label" x:Key="project_label_style">
+            <Setter Property="FontFamily" Value="/Public/fonts/#Raleway"></Setter>
+            <Setter Property="FontSize" Value="14"></Setter>
+            <Setter Property="Foreground" Value="{StaticResource FontColor}"></Setter>
+
+        </Style>
+        <Style TargetType="Label" x:Key="DataSheet-Label">
             <Setter Property="FontFamily" Value="/Public/fonts/#Raleway"></Setter>
             <Setter Property="FontSize" Value="14"></Setter>
             <Setter Property="Foreground" Value="{StaticResource FontColor}"></Setter>
