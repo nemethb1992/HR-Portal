@@ -50,6 +50,7 @@ namespace HR_Portal.Source
                     client.Host = "192.168.144.14";
                     client.Port = 25;
                     client.UseDefaultCredentials = true;
+                    //client.Credentials = new NetworkCredential("hrportal@phoenix-mecano.hu", "pmhr2018!");
 
 
                     using (MailMessage mail = new MailMessage())
@@ -57,6 +58,7 @@ namespace HR_Portal.Source
                         mail.Subject = "HR Portal - Phoenix Mecano Kecskemét kft.";
                         mail.Body = email_body;
                         mail.From = new MailAddress(Session.UserData.email);
+                        //mail.From = new MailAddress("hrportal@phoenix-mecano.hu");
                         mail.IsBodyHtml = true;
                         mail.To.Add(to);
                         client.Send(mail);
