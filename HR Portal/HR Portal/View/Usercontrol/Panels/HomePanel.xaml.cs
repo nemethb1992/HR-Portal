@@ -37,7 +37,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             aktiv_projekt_result.Text = mySql.Count("SELECT count(id) FROM projektek WHERE statusz = 1;").ToString() + " db";
             passziv_projekt_result.Text = mySql.Count("SELECT count(id) FROM projektek WHERE statusz = 0;").ToString() + " db";
             kapcsolt_projekt_result.Text = mySql.Count("SELECT count(projekt_id) FROM projekt_ertesitendok_kapcs LEFT JOIN projektek ON projekt_id = projektek.id WHERE statusz = 1 AND ertesitendok_id = " + Session.UserData.id + ";").ToString() + " db";
-            profession_list_result.Text = mySql.Count("SELECT count(id) FROM pmkcvtest.profession_jeloltek").ToString() + " db";
+            //profession_list_result.Text = mySql.Count("SELECT count(id) FROM pmkcvtest.profession_jeloltek").ToString() + " db";
             mySql.Close(); 
 
         }
@@ -50,9 +50,9 @@ namespace HR_Portal.View.Usercontrol.Panels
         {
             Utilities.NavigateTo(grid, new ApplicantList(grid));
         }
-        private void ToProfession(object sender, MouseButtonEventArgs e)
+        private void ToStatistics(object sender, MouseButtonEventArgs e)
         {
-            Utilities.NavigateTo(grid, new ProfessionPage(grid));
+            //Utilities.NavigateTo(grid, new ProfessionPage(grid));
         }
         private void ToSettings(object sender, MouseButtonEventArgs e)
         {

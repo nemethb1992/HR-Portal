@@ -230,7 +230,15 @@ namespace HR_Portal.View.Usercontrol.Panels
             Session.ApplicantID = items.id;
             if (items.frissValue)
             {
-                Applicant.FirstOpen(items.id);
+                MessageBoxResult result = MessageBox.Show("Üdvözlő üzenet küldése? \n", "HR Cloud", MessageBoxButton.YesNo);
+                switch (result)
+                {
+                    case MessageBoxResult.Yes:
+                        Applicant.FirstOpen(items.id);
+                        break;
+                    case MessageBoxResult.No:
+                        break;
+                }
             }
             Utilities.SetReturnPage(Utilities.Views.ApplicantList);
             Session.ApplicantSearchValue = GetSearchValues();

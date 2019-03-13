@@ -11,32 +11,18 @@ namespace HR_Portal.Public.templates
 
         public string Udvozlo_Email(string name)
         {
-            string content = @"
-                                            <h2>Tisztelt "+ name + @"!</h2>
-                                                   <p class=''>
-                                                Köszönjük jelentkezését, kollegáink megkezdték pályázata feldolgozását.
-
-                                                Amennyiben megtaláljuk az Ön számára alkalmas pozíciót, felvesszük Önnel a kapcsolatot.
-                                            </p>
-                                            <p>
-                                                Felhívjuk figyelmét, hogy adatait 1 évig tároljuk adatbázisunkban.
-                                            </p>
-                                            <p Style='margin-bottom: 30px'>
-                                                Amennyiben szeretné módosítani adatait vagy törölni jelentkezését, kérjük jelezze a privacy@phoenix-mecano.hu e-mail címen.
-                                            </p>
-                                            <p>Üdvözlettel:</p>
-                                            <p>Phoenix Mecano Kecskemét Kft.</p>
-                                            <p>Személyügyi Osztály</p></td>";
-            return front + content + bottom;
+            string content = "<h2>Tisztelt "+ name + @"!</h2><p>Köszönjük jelentkezését, kollegáink megkezdték pályázata feldolgozását.Amennyiben megtaláljuk az Ön számára alkalmas pozíciót, felvesszük Önnel a kapcsolatot.</p><p>Felhívjuk figyelmét, hogy adatait 1 évig tároljuk adatbázisunkban.</p><p Style='margin-bottom: 30px'>Amennyiben szeretné módosítani adatait vagy törölni jelentkezését, kérjük jelezze a privacy@phoenix-mecano.hu e-mail címen.</p><p>Üdvözlettel:</p><p>Phoenix Mecano Kecskemét Kft.</p><p>Személyügyi Osztály</p></td>";
+            string value = (front + content + bottom).Replace("\'", "\"");
+            return value;
         }
         public string Elutasito_Email(string name)
         {
             string content = @"
                                             <h2>Tisztelt " + name + @"!</h2>
-                                                 <p  class=''>
+                                                 <p>
                                                 Köszönjük jelentkezését a Phoenix Mecano Kecskemét Kft-hez.
                                                 </p>
-                                                 <p  class=''>
+                                                 <p>
                                                 Sajnálattal közöljük, hogy a megpályázott pozícióra nem került kiválasztásra.
                                                 </p>
                                                 <p>
@@ -55,11 +41,11 @@ namespace HR_Portal.Public.templates
         {
             string content = @"
                                             <h2>Tisztelt " + name + @"!</h2>
-                                                 <p  class=''>
+                                                 <p>
                                                 Köszönjük jelentkezését a Phoenix Mecano Kecskemét Kft-hez.
                                                     </p>
 
-                                                 <p  class=''>
+                                                 <p>
                                                 Sajnálattal közöljük, hogy jelenleg nem tudunk Önnek olyan pozíciót ajánlani, ami a végzettségének és szakmai tapasztalatainak megfelelő lenne.
                                                 </p>
                                                 <p>
@@ -90,106 +76,7 @@ namespace HR_Portal.Public.templates
             return front + content + bottom;
         }
 
-        public string Teszt()
-        {
-            return @"<div align='center'>
-< span class='HOEnZb'><font color = '#888888' >
- </ font ></ span >< span class='HOEnZb'><font color = '#888888' >
-      </ font ></ span >< span class='HOEnZb'><font color = '#888888' >
-           </ font ></ span >< table class='m_6158300992703895552MsoNormalTable' border='0' cellspacing='0' cellpadding='0' width='580' style='width:435.0pt;background:white'>
-<tbody>
-<tr>
-<td width = '100%' style='width:100.0%;padding:0cm 0cm 0cm 0cm'>
-<table class='m_6158300992703895552MsoNormalTable' border='0' cellspacing='0' cellpadding='0' width='100%' style='width:100.0%;background:white'>
-<tbody>
-<tr style = 'height:46.5pt' >
-< td width='565' style='width:423.75pt;padding:0cm 0cm 0cm 0cm;height:46.5pt'>
-<p class='MsoNormal'><span style = 'font-size:10.5pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;;color:#5e5e5e' >< img border='0' id='m_6158300992703895552_x0000_i1025' src='https://ci4.googleusercontent.com/proxy/gjzu1NsKeAkbadIgiNRivgc5cAhk9ss-XypmZVJw-_pHaN02SHSiE5fl7Tidn0W0oJQsIM9TCvJ-3g=s0-d-e1-ft#https://profession.hu/images/logo_3.png' class='CToWUd'><u></u><u></u></span></p>
-</td>
-</tr>
-</tbody>
-</table>
-</td>
-</tr>
-<tr style = 'height:12.0pt' >
-< td style='padding:0cm 0cm 0cm 0cm;height:12.0pt'></td>
-</tr>
-<tr>
-<td width = '100%' style='width:100.0%;padding:0cm 0cm 0cm 0cm'>
-<table class='m_6158300992703895552MsoNormalTable' border='0' cellspacing='0' cellpadding='0' width='100%' style='width:100.0%;background:white'>
-<tbody>
-<tr>
-<td width = '100%' style='width:100.0%;padding:0cm 7.5pt 0cm 7.5pt'>
-<p class='MsoNormal'><span style = 'font-size:10.5pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;;color:#5e5e5e' > Tisztelt Hirdetőnk!
-<br>
-<br>
-Az Ön által feladott álláshirdetésre az alábbi pályázat érkezett a<a href= 'https://www.profession.hu' target= '_blank' data-saferedirecturl= 'https://www.google.com/url?q=https://www.profession.hu&amp;source=gmail&amp;ust=1544885879082000&amp;usg=AFQjCNF_XG0A3yVDqVXBFUVegUwsX4tABQ' >
-< u > Profession.hu </ u ></ a > rendszerén keresztül. <br>
-<br>
-<b><u>Hirdetés:</u></b><br>
-Pozíció/cég: <b>Takarítónő</b> (Phoenix Mecano Kecskemét KFT)<br>
-Az álláshirdetés érvényessége: 2018.10.17.<br>
-<a href = 'https://www.profession.hu/hu/allas/1233517' target='_blank' data-saferedirecturl='https://www.google.com/url?q=https://www.profession.hu/hu/allas/1233517&amp;source=gmail&amp;ust=1544885879082000&amp;usg=AFQjCNGgCYU_cYrH7uy6l9RDiURXz74v3Q'><u>Az álláshirdetés szövege ide kattintva olvasható</u></a><br>
-<br>
-<b><u>Jelentkező:</u></b><br>
-Név: <b>Bugyi Zsolt</b><br>
-E-mail: <b><a href = 'mailto:bugyi17@gmail.com' target= '_blank' >< u > bugyi17@gmail.com</u></a></b><br>
-Telefonszám: 06202753820<br>
-<br>
-<b>Csatolt dokumentumok:</b><br>
-zsolt önéletrajz 2018.pdf, zsolt motivációs levél 2018.pdf, <br>
-<br>
-Jelentkezés elküldve: <b>2018.10.12. 15:08</b> <br>
-<br>
-<b><u>A jelentkezéshez írt kísérőlevél:</u></b><u></u><u></u></span></p>
-<div>
-<p class='MsoNormal'><span style = 'font-size:10.5pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;;color:#5e5e5e' > Tisztelt Hölgyem / Uram!<br>
-<br>
-Ezúton szeretnék jelentkezni az Önök által, a Profession.hu oldalán meghirdetett Takarító pozícióra.
-<br>
-A jelentkezéshez szükséges dokumentumokat csatolva küldöm Önöknek.<br>
-Ha pályázatom elnyeri tetszésüket, kérem keressenek az alábbi elérhetőségek egyikén.<br>
-<br>
-Üdvözlettel:<br>
-Bugyi Zsolt<br>
-<a href = 'mailto:bugyi17@gmail.com' target= '_blank' > bugyi17@gmail.com</a><br>
-06202753820 <u></u><u></u></span></p>
-</div>
-<p class='MsoNormal'><span style = 'font-size:10.5pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;;color:#5e5e5e' > A
-< b > jelentkező részletes adatai</b> megtekinthető a <b>Profession ATS</b> jelöltkezelő felületén:<br>
-<a href = 'https://www.profession.hu/hu/munkaado/miniats/jelolt/10766098' target= '_blank' data-saferedirecturl= 'https://www.google.com/url?q=https://www.profession.hu/hu/munkaado/miniats/jelolt/10766098&amp;source=gmail&amp;ust=1544885879082000&amp;usg=AFQjCNEU-9n6g142raffzay9-Hxv-gN4tQ' > https://www.profession.hu/hu/<wbr>munkaado/miniats/jelolt/<wbr>10766098</a>
-<br>
-<br>
-A hirdetés <b>összes jelentkezője</b> elérhető az ATS felületen ide kattintva:<br>
-<a href = 'https://www.profession.hu/hu/munkaado/miniats?adv_id=1233517' target= '_blank' data-saferedirecturl= 'https://www.google.com/url?q=https://www.profession.hu/hu/munkaado/miniats?adv_id%3D1233517&amp;source=gmail&amp;ust=1544885879082000&amp;usg=AFQjCNHaHUXCIXLy8Z4BjmSYxp7fkLIntA' > https://www.profession.hu/hu/<wbr>munkaado/miniats?adv_id=<wbr>1233517</a>
-<br>
-<br>
-Sikeres toborzást kívánunk!<br>
-<a href = 'https://www.profession.hu' target= '_blank' data-saferedirecturl= 'https://www.google.com/url?q=https://www.profession.hu&amp;source=gmail&amp;ust=1544885879082000&amp;usg=AFQjCNF_XG0A3yVDqVXBFUVegUwsX4tABQ' >< u > Profession.hu </ u ></ a > < u ></ u >< u ></ u ></ span ></ p >
-   </ td >
-   </ tr >
-   </ tbody >
-   </ table >
-   </ td >
-   </ tr >
-   < tr style= 'height:12.0pt' >
-   < td style= 'padding:0cm 0cm 0cm 0cm;height:12.0pt' ></ td >
-   </ tr >
-   < tr >
-   < td width= '100%' style= 'width:100.0%;padding:0cm 0cm 0cm 0cm' >
-   < span class='HOEnZb'><font color = '#888888' >
-    </ font ></ span >< span class='HOEnZb'><font color = '#888888' >
-         </ font ></ span >< span class='HOEnZb'><font color = '#888888' >
-              </ font ></ span >< table class='m_6158300992703895552MsoNormalTable' border='0' cellspacing='0' cellpadding='0' width='100%' style='width:100.0%;background:white'>
-<tbody>
-<tr>
-<td style = 'padding:0cm 0cm 0cm 0cm' >
-< p class='MsoNormal'><span style = 'font-size:10.5pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;;color:#5e5e5e' >< img border='0' id='m_6158300992703895552_x0000_i1026' src='https://ci4.googleusercontent.com/proxy/04MdM_g3vHTMnjlYv8bStMrCoiFVG39BdCLHHO_RfJhfgTe3pXpVxziREM16Vm6kaJoMag8nr2qafqHRuQ=s0-d-e1-ft#https://profession.hu/images/lablogo_2.png' class='CToWUd'><span class='HOEnZb'><font color = '#888888' >< u ></ u >< u ></ u ></ font ></ span ></ span ></ p >< span class='HOEnZb'><font color = '#888888' >
-                         </ font ></ span ></ td ></ tr ></ tbody ></ table >< span class='HOEnZb'><font color = '#888888' >
-                                      </ font ></ span ></ td ></ tr ></ tbody ></ table >< div class='yj6qo ajU'><div id = ':25h' class='ajR' role='button' tabindex='0' data-tooltip='Csonkolt tartalom megjelenítése' aria-label='Csonkolt tartalom megjelenítése' aria-expanded='false'><img class='ajT' src='//ssl.gstatic.com/ui/v1/icons/mail/images/cleardot.gif'></div></div><span class='HOEnZb adL'><font color = '#888888' >
-                                                     </ font ></ span ></ div > ";
-        }
-
+     
         public string ProjektPublikalo(string name, List<string> hirdetes, List<string> szoveg)
         {
             string hirdetesSeged = "";

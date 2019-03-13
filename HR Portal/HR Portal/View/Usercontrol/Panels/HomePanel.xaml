@@ -165,17 +165,17 @@
                         <TextBlock x:Name="admin_result" Style="{StaticResource minor_title_style}" Panel.ZIndex="0" HorizontalAlignment="Center"  Text="Üres"/>
                     </StackPanel>
                 </Grid>
-                <Grid Grid.Row="0" Grid.Column="0" Margin="5" MouseDown="ToProfession">
+                <Grid Grid.Row="0" Grid.Column="0" Margin="5" MouseDown="ToStatistics">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="2*"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-                    <Image Margin="0,50,0,0"  Grid.Row="0" VerticalAlignment="Top" Source="/Public/imgs/profession.png" />
+                    <Image Margin="0,50,0,0"  Grid.Row="0" VerticalAlignment="Top" Source="/Public/imgs/pie-chart.png" />
                     <Border x:Name="profession_btn" Grid.RowSpan="2" Panel.ZIndex="-1" Style="{StaticResource kezdolap_panel}">
                     </Border>
                     <StackPanel Grid.Row="1" Panel.ZIndex="0">
-                        <TextBlock Style="{StaticResource big_title_style}" Panel.ZIndex="0" HorizontalAlignment="Center" Margin="0,5" Text="Profession"/>
-                        <TextBlock x:Name="profession_list_result" Style="{StaticResource minor_title_style}" Panel.ZIndex="0" HorizontalAlignment="Center"  Text="Üres"/>
+                        <TextBlock Style="{StaticResource big_title_style}" Panel.ZIndex="0" HorizontalAlignment="Center" Margin="0,5" Text="Statisztikák"/>
+                        <TextBlock x:Name="stat_info" Style="{StaticResource minor_title_style}" Panel.ZIndex="0" HorizontalAlignment="Center"  Text="folyamatban..."/>
                     </StackPanel>
                </Grid>
             </Grid>
