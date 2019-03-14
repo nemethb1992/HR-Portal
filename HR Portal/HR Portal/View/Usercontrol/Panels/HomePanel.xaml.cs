@@ -52,7 +52,7 @@ namespace HR_Portal.View.Usercontrol.Panels
         }
         private void ToStatistics(object sender, MouseButtonEventArgs e)
         {
-            //Utilities.NavigateTo(grid, new ProfessionPage(grid));
+            Utilities.NavigateTo(grid, new StatisticsPage(grid));
         }
         private void ToSettings(object sender, MouseButtonEventArgs e)
         {

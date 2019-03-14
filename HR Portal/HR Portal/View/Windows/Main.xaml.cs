@@ -14,11 +14,11 @@ namespace HR_Portal.View.Windows
 
         private SzakmaiKezdolap szakmai_Kezdolap;
         private HomePanel homePanel;
-        //private applicant_DataView applicant_dv;
-        //private project_DataView project_dv;
+
         public Main()
         {
             InitializeComponent();
+
             if (Session.UserData.kategoria >= 1)
             {
                 grid.Children.Add(homePanel = new HomePanel(grid));
@@ -30,8 +30,6 @@ namespace HR_Portal.View.Windows
                 Szakmai_navigation_Grid.Visibility = Visibility.Visible;
                 HR_navigation_Grid.Visibility = Visibility.Hidden;
             }
-            //f_control.Applicant_Folder_Structure_Creator();
-            //f_control.Projekt_Folder_Structure_Creator();
         }
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {

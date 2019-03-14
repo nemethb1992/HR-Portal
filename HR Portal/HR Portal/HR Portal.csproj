@@ -257,11 +257,8 @@
     <Compile Include="View\Usercontrol\Panels\NewProjectPanel.xaml.cs">
       <DependentUpon>NewProjectPanel.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Usercontrol\Panels\ProfessionDataSheet.xaml.cs">
-      <DependentUpon>ProfessionDataSheet.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Usercontrol\Panels\ProfessionPage.xaml.cs">
-      <DependentUpon>ProfessionPage.xaml</DependentUpon>
+    <Compile Include="View\Usercontrol\Panels\StatisticsPage.xaml.cs">
+      <DependentUpon>StatisticsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Usercontrol\Panels\ProjectDataSheet.xaml.cs">
       <DependentUpon>ProjectDataSheet.xaml</DependentUpon>
@@ -349,11 +346,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\Usercontrol\Panels\ProfessionDataSheet.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\Usercontrol\Panels\ProfessionPage.xaml">
+    <Page Include="View\Usercontrol\Panels\StatisticsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -497,42 +490,42 @@
   <ItemGroup>
     <PublishFile Include="HR Portal.pdb">
       <Visible>False</Visible>
+      <PublishState>Auto</PublishState>
+      <IncludeHash>False</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
-      <PublishState>Auto</PublishState>
-      <IncludeHash>False</IncludeHash>
       <FileType>File</FileType>
     </PublishFile>
     <PublishFile Include="MySql.Data.Entity.EF6">
       <Visible>False</Visible>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
       <FileType>Assembly</FileType>
     </PublishFile>
     <PublishFile Include="System.Data.SQLite.EF6">
       <Visible>False</Visible>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
       <FileType>Assembly</FileType>
     </PublishFile>
     <PublishFile Include="System.Data.SQLite.Linq">
       <Visible>False</Visible>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
       <FileType>Assembly</FileType>
     </PublishFile>
   </ItemGroup>
