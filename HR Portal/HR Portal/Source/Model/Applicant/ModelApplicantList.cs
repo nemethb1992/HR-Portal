@@ -23,6 +23,7 @@ namespace HR_Portal.Source.Model.Applicant
         public string kolcsonzott { get; set; }
         public string allapot_megnevezes { get; set; }
         public string reg_datum { get; set; }
+        public string megjegyzes { get; set; }
         public bool checkbox { get; set; }
         public bool frissValue { get; set; }
         public string friss { get; set; }
@@ -99,6 +100,7 @@ namespace HR_Portal.Source.Model.Applicant
                         kolcsonzott = kolcsonzott,
                         allapot_megnevezes = allapot_megnev,
                         reg_datum = mySql.sdr["reg_date"].ToString(),
+                        megjegyzes = mySql.sdr["megjegyzes"].ToString()
                     });
                 }
                 mySql.sdr.Close();

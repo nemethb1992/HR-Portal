@@ -24,7 +24,7 @@ namespace HR_Portal.Source.ViewModel
                 "(SELECT megnevezes_munka FROM munkakor WHERE munkakor.id = jeloltek.munkakor) as munkakor, " +
                 "(SELECT megnevezes_munka FROM munkakor WHERE munkakor.id = jeloltek.munkakor2) as munkakor2, " +
                 "(SELECT megnevezes_munka FROM munkakor WHERE munkakor.id = jeloltek.munkakor3) as munkakor3, " +
-                "jeloltek.id,jeloltek.nev,szuldatum,reg_date,allapota,kolcsonzott,jeloltek.statusz,email,friss, " +
+                "jeloltek.id,jeloltek.nev,szuldatum,reg_date,allapota,kolcsonzott,jeloltek.statusz,jeloltek.megjegyzes,email,friss, " +
                 "(SELECT EXISTS(SELECT * FROM projekt_jelolt_kapcs WHERE projekt_jelolt_kapcs.jelolt_id = jeloltek.id)) as allasban " +
                 "FROM jeloltek " +
                 "LEFT JOIN megjegyzesek ON jeloltek.id = megjegyzesek.jelolt_id " +
@@ -110,7 +110,7 @@ namespace HR_Portal.Source.ViewModel
 
         public static ModelFullApplicant GetFullApplicantByEmail(string email)
         {
-            string command = "SELECT jeloltek.id,nev,email,telefon,lakhely,pmk_ismerte,szuldatum,neme,tapasztalat_ev, reg_date,felvett,jeloltek.megjegyzes,jeloltek.statusz,folderUrl,hirlevel," +
+            string command = "SELECT jeloltek.id,nev,email,telefon,lakhely,pmk_ismerte,szuldatum,neme,tapasztalat_ev, reg_date,felvett,jeloltek.megjegyzes,jeloltek.statusz,folderUrl,hirlevel,jeloltek.megjegyzes," +
                 "coalesce((SELECT nem FROM nemek WHERE nemek.id = jeloltek.neme),'') AS neme," +
                 "(SELECT nemek.id FROM nemek WHERE nemek.id = jeloltek.neme) AS id_neme," +
                 "coalesce((SELECT megnevezes_munka FROM munkakor WHERE munkakor.id = jeloltek.munkakor),'') AS munkakor," +
