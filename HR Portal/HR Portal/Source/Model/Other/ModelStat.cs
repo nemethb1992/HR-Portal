@@ -17,10 +17,11 @@ namespace HR_Portal.Source.Model.Other
 
         public static ModelStat GetModelStat1(string from, string to)
         {
-            string command = @"SELECT (SELECT COUNT(*) FROM jeloltek left join munkakor on jeloltek.munkakor = munkakor.id WHERE munkakor.id = 16 AND reg_date BETWEEN '"+from+"' AND '"+to+ @"') as szerelo,
-(SELECT COUNT(*) FROM jeloltek left join munkakor on jeloltek.munkakor = munkakor.id WHERE munkakor.id = 3 AND reg_date BETWEEN '" + from + "' AND '" + to + @"') as raktar,
-(SELECT COUNT(*) FROM jeloltek left join munkakor on jeloltek.munkakor = munkakor.id WHERE munkakor.id = 9 AND reg_date BETWEEN '" + from + "' AND '" + to + @"') as qs,
-(SELECT COUNT(*) FROM jeloltek left join munkakor on jeloltek.munkakor = munkakor.id WHERE munkakor.id IN(2,6,7,8,12,20,21) AND reg_date BETWEEN '" + from + "' AND '" + to + @"')as szellemi FROM jeloltek  LIMIT 1";
+            //web db-ből
+            string command = @"SELECT projektek.megnevezes_projekt, count(regisztraltak.email) FROM regisztraltak 
+                               LEFT JOIN projektek on projektek.id = regisztraltak.projekt_id 
+                               WHERE regisztraltak.reg_date > '2019.03.10' AND regisztraltak.reg_date < '2019.03.18' 
+                               GROUP BY projektek.megnevezes_projekt";
 
             MySql mySql = new MySql();
             ModelStat data = new ModelStat();
