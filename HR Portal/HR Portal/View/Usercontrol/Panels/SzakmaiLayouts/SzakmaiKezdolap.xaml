@@ -37,13 +37,17 @@
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="80"/>
             </Grid.RowDefinitions>
-            <Button Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" Style="{StaticResource StandardButton_Interju}" Panel.ZIndex="1" Click="navigateToSzakmaiList" />
-            <Button Grid.Column="3" Grid.Row="1" Grid.RowSpan="2" Style="{StaticResource StandardButton_Interju}" Panel.ZIndex="1" Click="navigateToSzakmaiInterviewList" />
+            <Border x:Name="projekt_button" Panel.ZIndex="-1" Margin="0" Padding="0" Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" Style="{StaticResource kezdolap_panel}">
+            </Border>
+            <Border x:Name="interview_button" Panel.ZIndex="-1" Margin="0" Padding="0" Grid.Column="3" Grid.Row="1" Grid.RowSpan="2" Style="{StaticResource kezdolap_panel}">
+            </Border>
+            <Button Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" Style="{StaticResource InvincibleButton}" Panel.ZIndex="1" Click="navigateToSzakmaiList" />
+            <Button Grid.Column="3" Grid.Row="1" Grid.RowSpan="2" Style="{StaticResource InvincibleButton}" Panel.ZIndex="1" Click="navigateToSzakmaiInterviewList" />
             <TextBlock Grid.Column="1" Grid.Row="1" Style="{StaticResource big_title_style}" Panel.ZIndex="0" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Bevont projektek"/>
             <TextBlock Grid.Column="3" Grid.Row="1" Style="{StaticResource big_title_style}" Panel.ZIndex="0" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Interjúk"/>
             <TextBlock x:Name="projekt_no" Grid.Column="1" Grid.Row="1" Style="{StaticResource Standard_Textblock}" Panel.ZIndex="0" Margin="0,100,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" Text="6 db"/>
             <TextBlock x:Name="interju_no" Grid.Column="3" Grid.Row="1" Style="{StaticResource Standard_Textblock}" Panel.ZIndex="0" Margin="0,100,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" Text="3 db"/>
-            <Image Grid.Column="1" Grid.Row="2" Margin="50,00,50,100" Source="/Public/imgs/job.png" />
+            <Image Grid.Column="1" Grid.Row="2" Margin="50,00,50,100" Source="/Public/imgs/projects.png" />
             <Image Grid.Column="3" Grid.Row="2" Margin="50,10,50,75" Source="/Public/imgs/interview.png" />
         </Grid>
     </Grid>

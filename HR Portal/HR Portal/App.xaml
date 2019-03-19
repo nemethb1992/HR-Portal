@@ -283,7 +283,29 @@
                 </Setter.Value>
             </Setter>
         </Style>
-
+        <Style TargetType="Button" x:Key="InvincibleButton" BasedOn="{StaticResource StandardButton}">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Name="border" 
+                            BorderBrush="{StaticResource SD_Element_Borderbrush}" 
+                            BorderThickness ="0"
+                            CornerRadius="0" 
+                            Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#197A4F4F"/>
+                                <Setter Property="BorderBrush" Value="{StaticResource SD_Element_Borderbrush}"/>
+                                <Setter Property="Foreground" Value="{StaticResource SD_Element_Foreground}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
         <Style TargetType="DatePicker" x:Key="Standard_DatePicker">
             <Setter Property="FontFamily" Value="/Public/fonts/#Montserrat"></Setter>
             <Setter Property="FontSize" Value="17"></Setter>
@@ -644,6 +666,7 @@
 
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="CornerRadius" Value="10"/>
                     <Setter Property="Background" Value="#e6e6e6"/>
                     <Setter Property="BorderBrush" Value="#e6e6e6"/>
                 </Trigger>
