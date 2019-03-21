@@ -398,6 +398,34 @@ namespace HR_Portal.View.Usercontrol.Panels
             ModelApplicantList applicant = (sender as MenuItem).DataContext as ModelApplicantList;
             new Email().Send(applicant.email, new EmailTemplate().NincsPozicioElutasito(applicant.nev));
         }
+
+        private void PreviousPageButton_Click(object sender, RoutedEventArgs e)
+        {
+            int value = Session.ApplicantSearchPage;
+            if(!value.Equals(0))
+            {
+                Session.ApplicantSearchPage--;
+                applicantListLoader();
+                actualPageTbl.Text = (Session.ApplicantSearchPage + 1).ToString();
+            }
+        }
+
+        private void NextPageButton_Click(object sender, RoutedEventArgs e)
+        {
+            Session.ApplicantSearchPage++;
+            applicantListLoader();
+            actualPageTbl.Text = (Session.ApplicantSearchPage + 1).ToString();
+        }
+
+        private void FirstPageButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void LastPageButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 
 }

@@ -103,7 +103,7 @@ namespace HR_Portal.Source.ViewModel
                     command += " ORDER BY jeloltek.reg_date DESC, friss DESC";
                     break;
             }
-            command += " LIMIT 50";
+            command += " LIMIT 9 OFFSET "+Session.ApplicantSearchPage * 9+"";
 
             return ModelApplicantList.GetModelApplicantList(command);
         }

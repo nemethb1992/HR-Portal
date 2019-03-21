@@ -44,6 +44,9 @@ namespace HR_Portal.Source
         private static Utilities.Views lastPages;
         public static Utilities.Views lastPage { get { return lastPages; } set { lastPages = value; } }
 
+        private static int ApplicantSearchPages;
+        public static int ApplicantSearchPage { get { return ApplicantSearchPages; } set { ApplicantSearchPages = value; } }
+
     }
 
 }
