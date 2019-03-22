@@ -27,9 +27,9 @@
                    Style="{StaticResource big_title_style}"
                    Text="" Grid.RowSpan="2"/>
 
-        <Button Grid.Column="3" Grid.Row="0" Content="Üzenet küldése" HorizontalAlignment="Left" Width="250" Style="{StaticResource StandardButton}" Click="mailPanelOpenClick" Grid.RowSpan="2"/>
+        <Button Grid.Column="3" Grid.Row="0" Content="Üzenet küldése" HorizontalAlignment="Left" Width="250" Style="{StaticResource StandardButtonWhite}" Click="mailPanelOpenClick" Grid.RowSpan="2"/>
 
-        <Button Grid.Column="3" Grid.Row="0" Content="Vissza" HorizontalAlignment="Right" Width="200" Style="{StaticResource StandardButton}" Click="BackButton" Grid.RowSpan="2"/>
+        <Button Grid.Column="3" Grid.Row="0" Content="Vissza" HorizontalAlignment="Right" Width="200" Style="{StaticResource StandardButtonWhite}" Click="BackButton" Grid.RowSpan="2"/>
 
         <Grid x:Name="grid_1_1" Grid.Column="1" Grid.Row="2" Grid.RowSpan="3" Margin="0,10,0,0">
             <Grid.ColumnDefinitions>
@@ -86,8 +86,7 @@
                 <Label x:Name="megjegyzes_label" Grid.Row="0" Style="{StaticResource DataSheet-Label}" Content="Megjegyzések" />
                 <ListBox x:Name="megjegyzes_listBox" Style="{StaticResource small_listBox_style}" Grid.Row="1" Grid.RowSpan="5"  HorizontalContentAlignment="Stretch" SelectionMode="Extended" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden" SelectionChanged="megjegyzes_listBox_SelectionChanged">
                     <ListBox.Resources>
-                        <Style TargetType="{x:Type Border}" BasedOn="{StaticResource listCorner}">
-                            <Setter Property="CornerRadius" Value="10,10,0,0"/>
+                        <Style TargetType="{x:Type Border}" BasedOn="{StaticResource BasicContentBorder}">
                         </Style>
                         <Style TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource listBoxItem_style}"/>
                     </ListBox.Resources>
@@ -117,7 +116,7 @@
                 <TextBox x:Name="comment_tartalom" Grid.Row="4" BorderBrush="{StaticResource racs_light}" Background="White" Padding="5,7" KeyUp="enterComment" Text="Új megjegyzés" Style="{StaticResource Standard_Textbox}" GotFocus="commentGotFocus" LostFocus="commentLostFocus">
                     <TextBox.Resources>
                         <Style TargetType="{x:Type Border}">
-                            <Setter Property="CornerRadius" Value="0,0,5,5"/>
+                            <Setter Property="CornerRadius" Value="0,0,10,10"/>
                             <Setter Property = "BitmapEffect" >
                                 <Setter.Value>
                                     <DropShadowBitmapEffect Color="Gray" Direction="90" ShadowDepth="2" Softness="0.3" Opacity="0.2"/>
@@ -178,7 +177,7 @@
             <TextBlock x:Name="projektek_label" Grid.Column="0" Grid.Row="0" Style="{StaticResource Standard_Textblock}" Text="Projektek" />
             <ListBox x:Name="kapcsolodo_projekt_list" Grid.Column="0" Grid.Row="1" Grid.RowSpan="4" Grid.ColumnSpan="2" Style="{StaticResource small_listBox_style}"   HorizontalContentAlignment="Stretch" SelectionMode="Extended">
                 <ListBox.Resources>
-                    <Style TargetType="{x:Type Border}" BasedOn="{StaticResource listCorner}"/>
+                    <Style TargetType="{x:Type Border}" BasedOn="{StaticResource BasicContentBorder}"/>
                     <Style TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource listBoxItem_style}"/>
                 </ListBox.Resources>
                 <ListBox.ItemTemplate>
@@ -231,7 +230,7 @@
 
             <ListBox Grid.Column="0" Grid.Row="1" Grid.RowSpan="5" x:Name="csatolmany_listBox" AllowDrop="True" Style="{StaticResource small_listBox_style}"   HorizontalContentAlignment="Stretch" SelectionMode="Extended">
                 <ListBox.Resources>
-                    <Style TargetType="{x:Type Border}" BasedOn="{StaticResource listCorner}"/>
+                    <Style TargetType="{x:Type Border}" BasedOn="{StaticResource BasicContentBorder}"/>
                     <Style TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource listBoxItem_style}"/>
                 </ListBox.Resources>
                 <ListBox.ItemTemplate>
@@ -250,7 +249,7 @@
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
-            <Button x:Name="projekt_open_btn" Background="White" Grid.Row="5" Grid.RowSpan="3" Style="{StaticResource StandardButton}" Content="Új feltöltés" Click="UploadClick"/>
+            <Button x:Name="projekt_open_btn" Background="White" Grid.Row="5" Grid.RowSpan="3" Style="{StaticResource StandardButtonWhite}" Content="Új feltöltés" Click="UploadClick"/>
         </Grid>
 
         <Grid x:Name="grid_2_2" Grid.Column="3"  Grid.Row="3">
@@ -269,7 +268,7 @@
 
             <ListBox Grid.Column="0" Grid.Row="1" Grid.RowSpan="5" x:Name="interju_listBox" AllowDrop="True" Style="{StaticResource small_listBox_style}"   HorizontalContentAlignment="Stretch" SelectionMode="Extended">
                 <ListBox.Resources>
-                    <Style TargetType="{x:Type Border}" BasedOn="{StaticResource listCorner}"/>
+                    <Style TargetType="{x:Type Border}" BasedOn="{StaticResource BasicContentBorder}"/>
                     <Style TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource listBoxItem_style}"/>
                 </ListBox.Resources>
                 <ListBox.ItemTemplate>

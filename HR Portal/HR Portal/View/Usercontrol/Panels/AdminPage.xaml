@@ -34,7 +34,7 @@
 
             <ListBox x:Name="UserListBox" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" Margin="0,5,0,0"  Style="{StaticResource small_listBox_style}" HorizontalContentAlignment="Stretch" SelectionMode="Extended" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden">
                 <ListBox.Resources>
-                    <Style TargetType="{x:Type Border}" BasedOn="{StaticResource listCorner}"/>
+                    <Style TargetType="{x:Type Border}" BasedOn="{StaticResource BasicContentBorder}"/>
                     <Style TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource listBoxItem_style}"/>
 
                 </ListBox.Resources>

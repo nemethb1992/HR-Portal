@@ -56,6 +56,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             ModelMunkakor munkakor_item = (munkakor_srccbx as ComboBox).SelectedItem as ModelMunkakor;
             ModelVegzettseg vegzettseg_item = (vegzettseg_srccbx as ComboBox).SelectedItem as ModelVegzettseg;
 
+            double listSize = Math.Round(applicant_listBox.RenderSize.Height / 55);
             string munkakorStr = "";
             string vegzettsegStr = "";
             string nemekStr = "";
@@ -108,7 +109,8 @@ namespace HR_Portal.View.Usercontrol.Panels
                 allasbanBool = allasban_check.IsChecked.Value,
                 szabadBool = szabad_check.IsChecked.Value,
                 HeaderSelected = HeaderSelected,
-                sorrend = sorrend
+                sorrend = sorrend,
+                numberLimit = listSize
             });
             return list;
         }
@@ -199,19 +201,13 @@ namespace HR_Portal.View.Usercontrol.Panels
             var bc = new BrushConverter();
             if (Session.ApplicantStatusz == 1)
             {
-                applicant_aktiv_btn.Background = (Brush)bc.ConvertFrom("#bfbfbf");
-                applicant_aktiv_btn.BorderBrush = (Brush)bc.ConvertFrom("#bfbfbf");
-                applicant_aktiv_btn.Foreground = (Brush)bc.ConvertFrom("#ffffff");
+                applicant_aktiv_btn.Background = (Brush)bc.ConvertFrom("#ffe6e6");
                 applicant_passziv_btn.Background = (Brush)bc.ConvertFrom("#ffffff");
-                applicant_passziv_btn.Foreground = (Brush)bc.ConvertFrom("#404040");
             }
             else
             {
                 applicant_aktiv_btn.Background = (Brush)bc.ConvertFrom("#ffffff");
-                applicant_aktiv_btn.Foreground = (Brush)bc.ConvertFrom("#404040");
-                applicant_passziv_btn.Background = (Brush)bc.ConvertFrom("#bfbfbf");
-                applicant_passziv_btn.BorderBrush = (Brush)bc.ConvertFrom("#bfbfbf");
-                applicant_passziv_btn.Foreground = (Brush)bc.ConvertFrom("#ffffff");
+                applicant_passziv_btn.Background = (Brush)bc.ConvertFrom("#ffe6e6");
             }
         }
 
@@ -395,15 +391,22 @@ namespace HR_Portal.View.Usercontrol.Panels
             applicantListLoader();
         }
 
-        private void interju_srcinp_PreviewTextInput(object sender, TextCompositionEventArgs e)
-        {
-
-        }
-
         private void VisszautasitIdeiglenes(object sender, RoutedEventArgs e)
         {
             ModelApplicantList applicant = (sender as MenuItem).DataContext as ModelApplicantList;
             new Email().Send(applicant.email, new EmailTemplate().NincsPozicioElutasito(applicant.nev));
+        }
+        
+        private void PageSwitchEventHandler()
+        {
+            applicantListLoader();
+            actualPageTbl.Text = (Session.ApplicantSearchPage + 1).ToString() + "."; ;
+        }
+
+        private void SetPageNull()
+        {
+            Session.ApplicantSearchPage = 0;
+            PageSwitchEventHandler();
         }
 
         private void PreviousPageButton_Click(object sender, RoutedEventArgs e)
@@ -412,34 +415,26 @@ namespace HR_Portal.View.Usercontrol.Panels
             if(!value.Equals(0))
             {
                 Session.ApplicantSearchPage--;
-                applicantListLoader();
-                actualPageTbl.Text = (Session.ApplicantSearchPage + 1).ToString();
+                PageSwitchEventHandler();
             }
-        }
-
-        private void SetPageNull()
-        {
-            Session.ApplicantSearchPage = 0;
-            actualPageTbl.Text = (Session.ApplicantSearchPage + 1).ToString();
         }
 
         private void NextPageButton_Click(object sender, RoutedEventArgs e)
         {
             Session.ApplicantSearchPage++;
-            applicantListLoader();
-            actualPageTbl.Text = (Session.ApplicantSearchPage + 1).ToString();
+            PageSwitchEventHandler();
         }
 
         private void FirstPageButton_Click(object sender, RoutedEventArgs e)
         {
             SetPageNull();
-            applicantListLoader();
-            actualPageTbl.Text = (Session.ApplicantSearchPage + 1).ToString();
+            PageSwitchEventHandler();
         }
 
-        private void LastPageButton_Click(object sender, RoutedEventArgs e)
+        private async void Applicant_listBox_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-
+            await Task.Delay(400);
+            PageSwitchEventHandler();
         }
     }
 

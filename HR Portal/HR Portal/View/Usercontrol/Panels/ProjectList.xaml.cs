@@ -204,19 +204,13 @@ namespace HR_Portal.View.Usercontrol.Panels
             var bc = new BrushConverter();
             if (Session.ProjectStatusz == 1)
             {
-                projekt_aktiv_btn.Background = (Brush)bc.ConvertFrom("#bfbfbf");
-                projekt_aktiv_btn.BorderBrush = (Brush)bc.ConvertFrom("#bfbfbf");
-                projekt_aktiv_btn.Foreground = (Brush)bc.ConvertFrom("#ffffff");
+                projekt_aktiv_btn.Background = (Brush)bc.ConvertFrom("#ffe6e6");
                 projekt_passziv_btn.Background = (Brush)bc.ConvertFrom("#ffffff");
-                projekt_passziv_btn.Foreground = (Brush)bc.ConvertFrom("#404040");
             }
             else
             {
                 projekt_aktiv_btn.Background = (Brush)bc.ConvertFrom("#ffffff");
-                projekt_aktiv_btn.Foreground = (Brush)bc.ConvertFrom("#404040");
-                projekt_passziv_btn.Background = (Brush)bc.ConvertFrom("#bfbfbf");
-                projekt_passziv_btn.BorderBrush = (Brush)bc.ConvertFrom("#bfbfbf");
-                projekt_passziv_btn.Foreground = (Brush)bc.ConvertFrom("#ffffff");
+                projekt_passziv_btn.Background = (Brush)bc.ConvertFrom("#ffe6e6");
             }
         }
 

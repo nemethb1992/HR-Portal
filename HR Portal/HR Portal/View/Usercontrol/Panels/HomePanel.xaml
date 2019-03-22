@@ -44,7 +44,7 @@
                 </Grid.RowDefinitions>
                 <TextBlock Style="{StaticResource big_title_style}" HorizontalAlignment="Left" Margin="40,0" VerticalAlignment="Bottom"  Text="Jelöltek"/>
                 <Image Grid.Column="1" Grid.Row="1" Margin="30" VerticalAlignment="Bottom" Source="/Public/imgs/employee2.png" />
-                <Border x:Name="applicant_button" Panel.ZIndex="-1" Grid.ColumnSpan="2" Grid.RowSpan="10" Style="{StaticResource kezdolap_panel}">
+                <Border x:Name="applicant_button" Panel.ZIndex="-1" Grid.ColumnSpan="2" Grid.RowSpan="10" Style="{StaticResource HomeContentBorder}">
                 </Border>
                 <Grid Grid.Row="1" Margin="10,10,0,10">
                     <Grid.RowDefinitions>
@@ -81,7 +81,7 @@
                 </Grid.RowDefinitions>
                 <TextBlock Style="{StaticResource big_title_style}" HorizontalAlignment="Left" Margin="40,0" VerticalAlignment="Bottom"  Text="Projektek"/>
                 <Image Grid.Column="1" Grid.Row="1" Margin="30" VerticalAlignment="Bottom" Source="/Public/imgs/projects.png" />
-                <Border x:Name="projekt_button" Panel.ZIndex="-1" Grid.ColumnSpan="2" Grid.RowSpan="10" Style="{StaticResource kezdolap_panel}">
+                <Border x:Name="projekt_button" Panel.ZIndex="-1" Grid.ColumnSpan="2" Grid.RowSpan="10" Style="{StaticResource HomeContentBorder}">
                 </Border>
                 <Grid Grid.Row="1" Margin="10,10,0,10">
                     <Grid.RowDefinitions>
@@ -148,7 +148,7 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <Image Margin="0,50,0,0" Grid.Row="0" VerticalAlignment="Top" Source="/Public/imgs/settings_big.png" />
-                    <Border x:Name="settings_button" Grid.RowSpan="2" Panel.ZIndex="-1" Style="{StaticResource kezdolap_panel}">
+                    <Border x:Name="settings_button" Grid.RowSpan="2" Panel.ZIndex="-1" Style="{StaticResource HomeContentBorder}">
                     </Border>
                     <TextBlock Style="{StaticResource big_title_style}" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,30" Text="Beállítások"/>
                 </Grid>
@@ -158,7 +158,7 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <Image Margin="0,50,0,0"  Grid.Row="0" VerticalAlignment="Top" Source="/Public/imgs/key2.png" />
-                    <Border x:Name="admin_button" Grid.RowSpan="2" Panel.ZIndex="-1" Style="{StaticResource kezdolap_panel}">
+                    <Border x:Name="admin_button" Grid.RowSpan="2" Panel.ZIndex="-1" Style="{StaticResource HomeContentBorder}">
                    </Border>
                     <StackPanel Grid.Row="1" Panel.ZIndex="0">
                         <TextBlock Style="{StaticResource big_title_style}" Grid.Row="1" Panel.ZIndex="0" HorizontalAlignment="Center" Margin="0,5" Text="Admin"/>
@@ -171,7 +171,7 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <Image Margin="0,50,0,0"  Grid.Row="0" VerticalAlignment="Top" Source="/Public/imgs/pie-chart.png" />
-                    <Border x:Name="profession_btn" Grid.RowSpan="2" Panel.ZIndex="-1" Style="{StaticResource kezdolap_panel}">
+                    <Border x:Name="profession_btn" Grid.RowSpan="2" Panel.ZIndex="-1" Style="{StaticResource HomeContentBorder}">
                     </Border>
                     <StackPanel Grid.Row="1" Panel.ZIndex="0">
                         <TextBlock Style="{StaticResource big_title_style}" Panel.ZIndex="0" HorizontalAlignment="Center" Margin="0,5" Text="Statisztikák"/>

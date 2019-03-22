@@ -31,11 +31,12 @@ namespace HR_Portal.View.Windows
                 HR_navigation_Grid.Visibility = Visibility.Hidden;
             }
         }
-        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+
+        public void DragWindow(object sender, MouseButtonEventArgs args)
         {
-            if (e.ChangedButton == MouseButton.Left)
-                this.DragMove();
+            DragMove();
         }
+
         private void logout_btn_Click(object sender, RoutedEventArgs e)
         {
             MainWindow mw = new MainWindow();

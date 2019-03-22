@@ -27,5 +27,6 @@ namespace HR_Portal.Source.Model.Applicant
         public bool allasbanBool { get; set; }
         public string HeaderSelected { get; set; }
         public string sorrend { get; set; }
+        public double numberLimit { get; set; }
     }
 }

@@ -27,9 +27,9 @@
                 <ColumnDefinition Width="0.2*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="2" Grid.Row="0" Content="Vissza" Style="{StaticResource StandardButton}" Click="BackButton"/>
-            <Button x:Name="projekt_INSERT_btn" Style="{StaticResource StandardButton}" Grid.Column="0" Grid.Row="0" Content="Mentés" Click="projektInsertClick" />
-            <Button x:Name="projekt_UPDATE_btn" Visibility="Hidden" Style="{StaticResource StandardButton}" Grid.Column="0" Grid.Row="0" Content="Módosítás" Click="projektUpdateClick" />
+            <Button Grid.Column="2" Grid.Row="0" Content="Vissza" Style="{StaticResource StandardButtonWhite}" Click="BackButton"/>
+            <Button x:Name="projekt_INSERT_btn" Style="{StaticResource StandardButtonWhite}" Grid.Column="0" Grid.Row="0" Content="Mentés" Click="projektInsertClick" />
+            <Button x:Name="projekt_UPDATE_btn" Visibility="Hidden" Style="{StaticResource StandardButtonWhite}" Grid.Column="0" Grid.Row="0" Content="Módosítás" Click="projektUpdateClick" />
 
         </Grid>
   

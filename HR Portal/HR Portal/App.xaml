@@ -8,14 +8,14 @@
         <SolidColorBrush x:Key="FontColor_Light" Color="#808080"/>
         <SolidColorBrush x:Key="GrayGridColor" Color="#FFF9F9F9"/>
         <SolidColorBrush x:Key="LightGrayGridColor" Color="#FFF9F9F9"/>
-        <SolidColorBrush x:Key="SearchPanelColor" Color="#FFF3F3F3"/>
+        <SolidColorBrush x:Key="SearchPanelColor" Color="White"/>
         <SolidColorBrush x:Key="NavGridColor" Color="#ff4d4d"/>
         <SolidColorBrush x:Key="tbxBorderColor" Color="#cccccc"/>
         <SolidColorBrush x:Key="racs_color" Color="#737373"/>
         <SolidColorBrush x:Key="NavFontColor" Color="white"/>
         <SolidColorBrush x:Key="greenColor" Color="#4cb71a"/>
         <SolidColorBrush x:Key="ThemeColor" Color="#FFFF4141"/>
-        <SolidColorBrush x:Key="Listbox_light" Color="#f7f4f4"/>
+        <SolidColorBrush x:Key="Listbox_light" Color="White"/>
         <SolidColorBrush x:Key="racs_light" Color="#808080"/>
         <SolidColorBrush x:Key="itemBackground" Color="white"/>
         <SolidColorBrush x:Key="itemBackground_hover" Color="#FFF9F9F9"/>
@@ -137,8 +137,37 @@
             </Setter>
         </Style>
 
+
+        <Style TargetType="Button" x:Key="StandardButtonWhite">
+            <Setter Property="Background" Value="{StaticResource SD_Element_Hover_Background}"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Foreground" Value="{StaticResource SD_Element_Foreground}"></Setter>
+            <Setter Property="FontSize" Value="15"></Setter>
+            <Setter Property="FontFamily" Value="/Public/fonts/#Montserrat"></Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Name="border" 
+                            BorderBrush="{StaticResource SD_Element_Borderbrush}" 
+                            BorderThickness ="1"
+                            CornerRadius="3" 
+                            Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="{StaticResource SD_Element_Background}"/>
+                                <Setter Property="BorderBrush" Value="{StaticResource SD_Element_Borderbrush}"/>
+                                <Setter Property="Foreground" Value="{StaticResource SD_Element_Foreground}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
         <Style TargetType="Button" x:Key="InterviewApplicantButton" BasedOn="{StaticResource StandardButton}">
-            <Setter Property="Background" Value="{StaticResource SD_Element_Background}"/>
+            <Setter Property="Background" Value="{StaticResource SD_Element_Hover_Background}"/>
             <Setter Property="Cursor" Value="Hand"/>
             <Setter Property="Foreground" Value="{StaticResource SD_Element_Foreground}"></Setter>
             <Setter Property="FontSize" Value="15"></Setter>
@@ -155,7 +184,7 @@
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="{StaticResource SD_Element_Hover_Background}"/>
+                                <Setter Property="Background" Value="{StaticResource SD_Element_Background}"/>
                                 <Setter Property="BorderBrush" Value="{StaticResource SD_Element_Borderbrush}"/>
                                 <Setter Property="Foreground" Value="{StaticResource SD_Element_Foreground}"/>
                             </Trigger>
@@ -166,7 +195,7 @@
         </Style>
 
         <Style TargetType="Button" x:Key="InterviewAddButton" BasedOn="{StaticResource StandardButton}">
-            <Setter Property="Background" Value="{StaticResource SD_Element_Background}"/>
+            <Setter Property="Background" Value="{StaticResource SD_Element_Hover_Background}"/>
             <Setter Property="Cursor" Value="Hand"/>
             <Setter Property="Foreground" Value="{StaticResource SD_Element_Foreground}"></Setter>
             <Setter Property="FontSize" Value="15"></Setter>
@@ -183,7 +212,7 @@
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="{StaticResource SD_Element_Hover_Background}"/>
+                                <Setter Property="Background" Value="{StaticResource SD_Element_Background}"/>
                                 <Setter Property="BorderBrush" Value="{StaticResource SD_Element_Borderbrush}"/>
                                 <Setter Property="Foreground" Value="{StaticResource SD_Element_Foreground}"/>
                             </Trigger>
@@ -417,7 +446,7 @@
             <Setter Property="AcceptsReturn" Value="True"></Setter>
             <Setter Property="TextWrapping" Value="Wrap"></Setter>
             <Setter Property="BorderBrush" Value ="{StaticResource SD_Element_Borderbrush}"/>
-            <Setter Property="Background" Value="Transparent"></Setter>
+            <Setter Property="Background" Value="White"></Setter>
             <Setter Property="Padding" Value="5"></Setter>
             <Setter Property="Foreground" Value="{StaticResource SD_Element_Foreground}"></Setter>
         </Style>
@@ -507,7 +536,7 @@
         <Style TargetType="CheckBox" x:Key="Standard_Checkbox">
             <Setter Property="HorizontalAlignment" Value="Center"></Setter>
             <Setter Property="VerticalAlignment" Value="Center"></Setter>
-            <Setter Property="Foreground" Value="{StaticResource SD_Element_Borderbrush}"></Setter>
+            <Setter Property="Foreground" Value="{StaticResource SD_Element_Foreground}"></Setter>
             <Setter Property="Background" Value="Transparent"></Setter>
             <Setter Property="FontFamily" Value="/Public/fonts/#Montserrat"></Setter>
         </Style>
@@ -621,16 +650,16 @@
         </Style>
 
         <Style TargetType="Grid" x:Key="switch_grid_style">
-            <Setter Property="Background" Value="White"></Setter>
+            <Setter Property="Background" Value="Transparent"></Setter>
         </Style>
-        <Style TargetType="Grid" x:Key="sgrid_style">
+        <!--<Style TargetType="Grid" x:Key="sgrid_style">
             <Setter Property="Background" Value="White"></Setter>
             <Setter Property = "BitmapEffect" >
                 <Setter.Value>
                     <DropShadowBitmapEffect Color="#808080" Direction="135" ShadowDepth="5" Softness="0.4" Opacity="0.3"/>
                 </Setter.Value>
             </Setter>
-        </Style>
+        </Style>-->
         <Style TargetType="Grid" x:Key="l_grid_style">
             <!--<Setter Property="Background" Value="#FFF9F9F9"></Setter>-->
             <Setter Property="Background" Value="White"></Setter>
@@ -768,7 +797,7 @@
             </Setter>
         </Style>
         <Style TargetType="Label" x:Key="search_placeholder_style">
-            <Setter Property="Foreground" Value="{StaticResource FontColor_Light}"/>
+            <Setter Property="Foreground" Value="{StaticResource FontColor}"/>
             <Setter Property="FontSize" Value="14"></Setter>
             <Setter Property="FontFamily" Value="/Public/fonts/#Raleway"></Setter>
         </Style>
@@ -779,11 +808,12 @@
             <Setter Property="FontFamily" Value="/Public/fonts/#Montserrat"></Setter>
         </Style>
         <Style TargetType="ListBox" x:Key="listBox_style">
+            <Setter Property="Padding" Value="5"/>
             <Setter Property="BorderBrush" Value="Transparent"/>
             <Setter Property="Background" Value="White"></Setter>
         </Style>
         <Style TargetType="ListBox" x:Key="small_listBox_style">
-            <Setter Property="Background" Value="{StaticResource Listbox_light}"></Setter>
+            <!--<Setter Property="Background" Value="{StaticResource Listbox_light}"></Setter>-->
             <Setter Property="BorderBrush" Value ="{StaticResource Listbox_light}"/>
             <Setter Property="BorderThickness" Value="1,1,1,1"/>
             <!--<Setter Property = "BitmapEffect" >
@@ -792,7 +822,8 @@
                 </Setter.Value>
             </Setter>-->
         </Style>
-
+         
+        
 
         <Style TargetType="ListBoxItem" x:Key="listBoxItem_style">
             <!--<Setter Property="OverridesDefaultStyle" Value="true"/>-->
@@ -871,6 +902,28 @@
             </Setter>-->
 
         </Style>
+
+
+        <Style TargetType="Border" x:Key="BasicContentBorder">
+
+            <Setter Property="Background" Value="{StaticResource itemBackground}"/>
+            <Setter Property="CornerRadius" Value="10"/>
+            <Setter Property = "BitmapEffect" >
+                <Setter.Value>
+                    <DropShadowBitmapEffect Color="#333333" Direction="300" ShadowDepth="1" Softness="0.2" Opacity="0.5"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+
+
+        <Style TargetType="Border" x:Key="HomeContentBorder" BasedOn="{StaticResource BasicContentBorder}">
+
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Margin" Value="5"/>
+
+        </Style>
+
         <Style TargetType="Border" x:Key="preogress_border">
             <Setter Property="Background" Value="{StaticResource greenColor}"></Setter>
             <Setter Property="BorderBrush" Value="{StaticResource greenColor}"></Setter>

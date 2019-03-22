@@ -15,7 +15,7 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="160" />
-            <RowDefinition Height="40" />
+            <RowDefinition Height="30" />
             <RowDefinition Height="*" />
             <RowDefinition Height="50" />
         </Grid.RowDefinitions>
@@ -39,19 +39,20 @@
                     <ColumnDefinition Width="1*" />
                     <ColumnDefinition Width="1*" />
                 </Grid.ColumnDefinitions>
-                <Button Grid.Column="0" x:Name="applicant_aktiv_btn" Width="90" Height="30" Style="{StaticResource Switch_Button}" Click="projectActivateClick">Aktív</Button>
-                <Button Grid.Column="1" x:Name="applicant_passziv_btn"  Width="90" Height="30" Style="{StaticResource Switch_Button}" Click="projectPassivateClick" >Archív</Button>
+                <Button Grid.Column="0" x:Name="applicant_aktiv_btn" Width="90" Height="30" Style="{StaticResource StandardButtonWhite}" Click="projectActivateClick">Aktív</Button>
+                <Button Grid.Column="1" x:Name="applicant_passziv_btn"  Width="90" Height="30" Style="{StaticResource StandardButtonWhite}" Click="projectPassivateClick" >Archív</Button>
             </Grid>
             <TextBlock Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="1" Style="{StaticResource big_title_style}" Text="Jelöltek" TextAlignment="Left"></TextBlock>
             <TextBlock Grid.Column="0" Grid.Row="1" Style="{StaticResource minor_title_style}" VerticalAlignment="Top" Text="Kereső:" TextAlignment="Left" ></TextBlock>
-            <Button x:Name="refresh_btn" Grid.Column="3" Grid.Row="2" Style="{StaticResource StandardButton}" Width="70" Margin="0,0,0,0" Click="ClearSearchbar">
+            <Button x:Name="refresh_btn" Grid.Column="3" Grid.Row="2" Style="{StaticResource StandardButtonWhite}" Width="70" Margin="0,0,0,0" Click="ClearSearchbar">
                 <Image Source="/Public/imgs/reload.png" Margin="5" Height="32"/>
             </Button>
-            <Button x:Name="projekt_open_btn" Grid.Column="5" Grid.Row="2" Style="{StaticResource StandardButton}" Width="70" Margin="0,0,0,0" Content="Új" Click="navigateToNewApplicantPanel"/>
+            <Button x:Name="projekt_open_btn" Grid.Column="5" Grid.Row="2" Style="{StaticResource StandardButtonWhite}" Width="70" Margin="0,0,0,0" Content="Új" Click="navigateToNewApplicantPanel"/>
             <TextBlock x:Name="talalat_tbl" Grid.Column="1" HorizontalAlignment="Left" Grid.Row="0" Style="{StaticResource minor_title_style}" Text="" Width="400"  Margin="45,5,0,0" TextAlignment="Left"></TextBlock>
 
-            <Border x:Name="Search_Border" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" CornerRadius="5" Background="{StaticResource SearchPanelColor}">
-            <Grid  Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2">
+            <Border x:Name="Search_Border" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" Padding="3" CornerRadius="5" Style="{StaticResource BasicContentBorder}">
+
+                <Grid  Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1*" />
                     <ColumnDefinition Width="1*" />
@@ -133,9 +134,10 @@
         </Grid>
 
         <!--<ScrollViewer Grid.Row="2" Grid.Column="1" VerticalScrollBarVisibility="Auto">-->
-            <ListBox x:Name="applicant_listBox"  Grid.Row="2" Grid.Column="1" Style="{StaticResource listBox_style}" BorderBrush="Transparent" HorizontalContentAlignment="Stretch" SelectionMode="Extended">
+            <ListBox x:Name="applicant_listBox"  Grid.Row="2" Grid.Column="1" SizeChanged="Applicant_listBox_SizeChanged" Style="{StaticResource listBox_style}" BorderBrush="Transparent" HorizontalContentAlignment="Stretch" SelectionMode="Extended">
                 <ListBox.Resources>
-                    <Style TargetType="{x:Type Border}" BasedOn="{StaticResource listCorner}"/>
+                <!--<Style TargetType="{x:Type Border}" BasedOn="{StaticResource listCorner}"/>-->
+                <Style TargetType="{x:Type Border}" BasedOn="{StaticResource BasicContentBorder}"/>
                 <Style TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource listBoxItem_style_big}"/>
             </ListBox.Resources>
                 <ListBox.ItemTemplate>
@@ -193,19 +195,20 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            <Button x:Name="firstPageButton" Grid.Column="1" Style="{StaticResource next_panelBtn_style}" Click="FirstPageButton_Click">
+            <Button x:Name="firstPageButton" Grid.Column="1" Margin="8" Style="{StaticResource StandardButtonWhite}" Click="FirstPageButton_Click">
                 <Image Source="/Public/imgs/leftEndArrow.png" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center"/>
             </Button>
-            <Button x:Name="previousPageButton" Grid.Column="2" Style="{StaticResource next_panelBtn_style}" Click="PreviousPageButton_Click">
+            <Button x:Name="previousPageButton" Grid.Column="2" Margin="8" Style="{StaticResource StandardButtonWhite}" Click="PreviousPageButton_Click">
                 <Image Source="/Public/imgs/leftArrow.png" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center"/>
             </Button>
-            <TextBlock x:Name="actualPageTbl" Grid.Column="4" Text="1" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource minor_title_style}"/>
+            <TextBlock x:Name="actualPageTbl" Grid.Column="3" Text="1." VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource minor_title_style}"/>
+            <TextBlock Grid.Column="4" Grid.ColumnSpan="2" Text="oldal" VerticalAlignment="Center" HorizontalAlignment="Left" Style="{StaticResource minor_title_style}"/>
             <!--<Image Source="/Public/imgs/dots.png" Grid.Column="3" Height="16" VerticalAlignment="Center" HorizontalAlignment="Center"/>
             <TextBlock x:Name="allPageTbl" Grid.Column="4" Text="82" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource minor_title_style}"/>-->
             <!--<Button x:Name="lastPageButton" Grid.Column="7" Style="{StaticResource next_panelBtn_style}" Click="LastPageButton_Click">
                 <Image Source="/Public/imgs/rightEndArrow.png" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center"/>
             </Button>-->
-            <Button x:Name="nextPageButton" Grid.Column="6" Style="{StaticResource next_panelBtn_style}" Click="NextPageButton_Click">
+            <Button x:Name="nextPageButton" Grid.Column="6" Margin="8" Style="{StaticResource StandardButtonWhite}" Click="NextPageButton_Click">
                 <Image Source="/Public/imgs/rightArrow.png" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center"/>
             </Button>
 

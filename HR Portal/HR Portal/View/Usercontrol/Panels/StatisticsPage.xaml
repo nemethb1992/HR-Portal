@@ -24,7 +24,21 @@
                    Text="Statisztikák"
                    Margin="0,0,200,0"/>
 
+        <Grid Grid.Column="1" Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Border Grid.ColumnSpan="2" >
+                
+            </Border>
 
-       
+
+
+        </Grid>
     </Grid>
 </UserControl>

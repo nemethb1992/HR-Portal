@@ -29,7 +29,7 @@
                    Style="{StaticResource big_title_style}"
                    Text=""
                    Margin="0,0,200,0"/>
-            <Button Grid.Column="3" Grid.Row="0" Content="Vissza" HorizontalAlignment="Right" Width="200" Style="{StaticResource StandardButton}" Click="BackButton" />
+            <Button Grid.Column="3" Grid.Row="0" Content="Vissza" HorizontalAlignment="Right" Width="200" Style="{StaticResource StandardButtonWhite}" Click="BackButton" />
             <!--<TextBlock x:Name="applicant_profile_title2" 
                    Grid.Column="2" Grid.Row="0" 
                    Style="{StaticResource big_title_style}"
@@ -158,15 +158,14 @@
                 <!--<Button x:Name="hr_tabbtn" Grid.Column="2" Grid.Row="1"  Panel.ZIndex="4" Style="{StaticResource TabButton}" Content="HR" Click="hrTabClick"/>-->
                 <TextBlock x:Name="jeloltek_tbl" Grid.Column="0" Grid.Row="0" Margin="0,10,0,0" Panel.ZIndex="4" Style="{StaticResource Standard_Textblock}" Text="Jelöltek:" />
                 <TextBlock x:Name="ertesitendok_tbl" Grid.Column="0" Grid.Row="3" Margin="0,10,0,0" Panel.ZIndex="4" Style="{StaticResource Standard_Textblock}" Text="Értesítendők:" />
-                <Button x:Name="jeloltek_addbtn" Tag="jelolt" Grid.Column="1" Margin="0,10,0,0" Grid.Row="0" Style="{StaticResource StandardButton}" Content="Jelöltek hozzáadása" Click="addJeloltToProject"/>
-                <Button x:Name="ertesitendok_addbtn" Tag="ertesitendo" Grid.Column="1" Margin="0,10,0,0" Grid.Row="3" Style="{StaticResource StandardButton}" Content="Értesítendők hozzáadása" Click="addUserToProject"/>
-                <ListBox x:Name="kapcs_jeloltek_listBox" Grid.Column="0" Background="{StaticResource Listbox_light}" Panel.ZIndex="1" Grid.ColumnSpan="3" Grid.Row="1" Grid.RowSpan="2" Visibility="Visible"  Style="{StaticResource small_listBox_style}"   HorizontalContentAlignment="Stretch" SelectionMode="Extended">
+                <Button x:Name="jeloltek_addbtn" Tag="jelolt" Grid.Column="1" Margin="0,10,0,0" Grid.Row="0" Style="{StaticResource StandardButtonWhite}" Content="Jelöltek hozzáadása" Click="addJeloltToProject"/>
+                <Button x:Name="ertesitendok_addbtn" Tag="ertesitendo" Grid.Column="1" Margin="0,10,0,0" Grid.Row="3" Style="{StaticResource StandardButtonWhite}" Content="Értesítendők hozzáadása" Click="addUserToProject"/>
+                <ListBox x:Name="kapcs_jeloltek_listBox" Grid.Column="0"  Panel.ZIndex="1" Grid.ColumnSpan="3" Grid.Row="1" Grid.RowSpan="2" Visibility="Visible"  Style="{StaticResource small_listBox_style}"   HorizontalContentAlignment="Stretch" SelectionMode="Extended">
                 <ListBox.Resources>
-                    <Style TargetType="{x:Type Border}" BasedOn="{StaticResource listCorner}">
-                        <Setter Property="CornerRadius" Value="10,0,10,10"/>
-                    </Style>
-                    <Style TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource listBoxItem_style}"/>
-                </ListBox.Resources>
+                        <Style TargetType="{x:Type Border}" BasedOn="{StaticResource BasicContentBorder}">
+                            <Setter Property="CornerRadius" Value="10,0,10,10"/>
+                        </Style>
+                    </ListBox.Resources>
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Grid Height="50" Margin="0,2">
@@ -207,7 +206,7 @@
             </ListBox>
             <ListBox x:Name="kapcs_ertesitendo_listBox" Grid.Column="0" Grid.ColumnSpan="3"  Grid.Row="4" Grid.RowSpan="2" Visibility="Visible"  Style="{StaticResource small_listBox_style}"   HorizontalContentAlignment="Stretch" SelectionMode="Extended">
                 <ListBox.Resources>
-                        <Style TargetType="{x:Type Border}" BasedOn="{StaticResource listCorner}">
+                        <Style TargetType="{x:Type Border}" BasedOn="{StaticResource BasicContentBorder}">
                             <Setter Property="CornerRadius" Value="10,0,10,10"/>
                         </Style>
                         <Style TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource listBoxItem_style}"/>
@@ -263,8 +262,7 @@
             <TextBlock x:Name="megjegyzes_label" Grid.Column="0" Grid.Row="0" Style="{StaticResource Standard_Textblock}" Padding="0,5" Text="Megjegyzések" />
             <ListBox x:Name="megjegyzes_listBox" Grid.Row="1" Grid.RowSpan="5" Style="{StaticResource small_listBox_style}"  HorizontalContentAlignment="Stretch" SelectionMode="Extended" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden">
                     <ListBox.Resources>
-                        <Style TargetType="{x:Type Border}" BasedOn="{StaticResource listCorner}">
-                            <Setter Property="CornerRadius" Value="5,5,0,0"/>
+                        <Style TargetType="{x:Type Border}" BasedOn="{StaticResource BasicContentBorder}">
                         </Style>
                         <Style TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource listBoxItem_style}"/>
                     </ListBox.Resources>
@@ -294,7 +292,7 @@
             <TextBox x:Name="comment_tartalom" Grid.Row="4" BorderBrush="{StaticResource racs_light}" Background="White" Padding="5,7" KeyUp="enterComment" Text="Új megjegyzés" Style="{StaticResource Standard_Textbox}" GotFocus="commentGotFocus" LostFocus="commentLostFocus">
                 <TextBox.Resources>
                     <Style TargetType="{x:Type Border}">
-                        <Setter Property="CornerRadius" Value="0,0,5,5"/>
+                        <Setter Property="CornerRadius" Value="0,0,10,10"/>
                         <Setter Property = "BitmapEffect" >
                             <Setter.Value>
                                 <DropShadowBitmapEffect Color="Gray" Direction="90" ShadowDepth="2" Softness="0.3" Opacity="0.2"/>
@@ -321,7 +319,7 @@
                 <RowDefinition Height="1*" />
             </Grid.RowDefinitions>
 
-            <Border Grid.Column="1" Grid.RowSpan="6" Background="{StaticResource Listbox_light}" CornerRadius="15"/>
+            <Border Grid.Column="1" Grid.RowSpan="6" Style="{StaticResource BasicContentBorder}" CornerRadius="15"/>
             <TextBlock x:Name="kompetencia_title" Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" Style="{StaticResource Standard_Textblock}" Padding="10,0" Text="Kompetenciák:" />
             <TextBlock x:Name="kompetencia1" Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" Style="{StaticResource Standard_Textblock}" Padding="15,0" Foreground="{StaticResource FontColor_Light}" Text="-" />
             <TextBlock x:Name="kompetencia2" Grid.Column="0" Grid.Row="2" VerticalAlignment="Center" Style="{StaticResource Standard_Textblock}" Padding="15,0" Foreground="{StaticResource FontColor_Light}" Text="-" />
@@ -484,9 +482,8 @@
 
             <ListBox Grid.Column="0" Grid.Row="1" Grid.RowSpan="3" Grid.ColumnSpan="3" x:Name="koltseg_listBox" Style="{StaticResource small_listBox_style}"   HorizontalContentAlignment="Stretch" SelectionMode="Extended" >
                 <ListBox.Resources>
-                    <Style TargetType="{x:Type Border}" BasedOn="{StaticResource listCorner_square}"/>
-                    <Style TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource listBoxItem_style}"/>
-                </ListBox.Resources>
+                        <Style TargetType="{x:Type Border}" BasedOn="{StaticResource BasicContentBorder}"/>
+                    </ListBox.Resources>
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Grid Margin="0,2">
@@ -510,7 +507,7 @@
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
-            <Button x:Name="koltseg_open_btn" Grid.Column="0" Grid.Row="4" Grid.RowSpan="3" Grid.ColumnSpan="3" Style="{StaticResource StandardButton}"  Content="Új" Click="costPanelOpen" />
+            <Button x:Name="koltseg_open_btn" Grid.Column="0" Grid.Row="4" Grid.RowSpan="3" Grid.ColumnSpan="3" Style="{StaticResource StandardButtonWhite}"  Content="Új" Click="costPanelOpen" />
             <Grid x:Name="Koltseg_insert_grid" Grid.Column="0" Grid.Row="0" Grid.RowSpan="5" Grid.ColumnSpan="3" Visibility="Hidden" Background="White" Margin="15" Style="{StaticResource gridShadow}">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="30" />
@@ -567,7 +564,7 @@
                         </Style>
                     </TextBox.Resources>
                 </TextBox>
-                <Border Background="{StaticResource Listbox_light}" Grid.ColumnSpan="2" Grid.RowSpan="5" Panel.ZIndex="-1" CornerRadius="10"/>
+                <Border Style="{StaticResource BasicContentBorder}" Grid.ColumnSpan="2" Grid.RowSpan="5" Panel.ZIndex="-1" CornerRadius="10"/>
 
             </Grid>
             <Grid x:Name="Blur_Grid" Grid.ColumnSpan="5" Grid.RowSpan="7" Background="White" Opacity="0.5" Visibility="Hidden"></Grid>

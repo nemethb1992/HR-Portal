@@ -23,7 +23,7 @@
                    Style="{StaticResource big_title_style}"
                    Text="Bevont Projektek"
                    Margin="0,0,200,0"/>
-        <Button Grid.Column="1" Grid.Row="0" Content="Vissza" HorizontalAlignment="Right" Width="200" Style="{StaticResource StandardButton}" Click="navigateToSzakmaiKezdolap"/>
+        <Button Grid.Column="1" Grid.Row="0" Content="Vissza" HorizontalAlignment="Right" Width="200" Style="{StaticResource StandardButtonWhite}" Click="navigateToSzakmaiKezdolap"/>
         <Grid Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="1" VerticalAlignment="Bottom">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
@@ -35,7 +35,7 @@
         </Grid>
         <ListBox x:Name="bevont_projekt_lista" Style="{StaticResource small_listBox_style}" Grid.Column="1" Grid.Row="2" Padding="5" HorizontalContentAlignment="Stretch" SelectionMode="Extended">
             <ListBox.Resources>
-                <Style TargetType="{x:Type Border}" BasedOn="{StaticResource listCorner}"/>
+                <Style TargetType="{x:Type Border}" BasedOn="{StaticResource BasicContentBorder}"/>
                 <Style TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource listBoxItem_style_big}"/>
             </ListBox.Resources>
             <ListBox.ItemTemplate>

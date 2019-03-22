@@ -19,6 +19,8 @@ namespace HR_Portal.Source.ViewModel
         }
         public static List<ModelApplicantList> GetApplicantList(List<ModelApplicantSearchBar> sw)
         {
+            double listNo = (sw[0].numberLimit != 0 ? sw[0].numberLimit : 10);
+
             string command = "SELECT coalesce((SELECT count(projekt_id) FROM interjuk_kapcs WHERE jelolt_id = jeloltek.id GROUP BY jelolt_id),0) as interjuk_db, " +
                 "coalesce((SELECT count(projekt_id) FROM projekt_jelolt_kapcs WHERE projekt_jelolt_kapcs.jelolt_id = jeloltek.id),0) as project_db, " +
                 "(SELECT megnevezes_munka FROM munkakor WHERE munkakor.id = jeloltek.munkakor) as munkakor, " +
@@ -103,7 +105,7 @@ namespace HR_Portal.Source.ViewModel
                     command += " ORDER BY jeloltek.reg_date DESC, friss DESC";
                     break;
             }
-            command += " LIMIT 9 OFFSET "+Session.ApplicantSearchPage * 9+"";
+            command += " LIMIT "+ listNo + " OFFSET "+Session.ApplicantSearchPage * listNo + "";
 
             return ModelApplicantList.GetModelApplicantList(command);
         }
