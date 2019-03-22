@@ -41,6 +41,7 @@ namespace HR_Portal.View.Usercontrol.Panels
 
         protected void startMethods()
         {
+            Session.ApplicantStatusz = 1;
             checkBoxLoader();
             applicantListLoader();
             if (Session.ApplicantSearchValue != null)
@@ -150,13 +151,11 @@ namespace HR_Portal.View.Usercontrol.Panels
 
         public void applicantListLoader()
         {
-            Session.ApplicantStatusz = 1;
             buttonColorChange();
             try
             {
                 List<ModelApplicantList> list = Applicant.GetApplicantList(GetSearchValues());
                 applicant_listBox.ItemsSource = list;
-                talalat_tbl.Text = "Találatok:  " + list.Count.ToString();
             }
             catch (Exception e)
             {
@@ -273,7 +272,11 @@ namespace HR_Portal.View.Usercontrol.Panels
 
             await Task.Delay(250);
             if (fisrtLength == textbox.Text.Length)
+            {
+                SetPageNull();
                 applicantListLoader();
+            }
+
         }
 
         protected void Numeric(object sender, TextCompositionEventArgs e)
@@ -284,6 +287,7 @@ namespace HR_Portal.View.Usercontrol.Panels
 
         protected void searchCbxSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            SetPageNull();
             applicantListLoader();
         }
 
@@ -339,17 +343,20 @@ namespace HR_Portal.View.Usercontrol.Panels
             cimke_label.Visibility = Visibility.Visible;
 
             Session.ApplicantSearchValue = null;
+            SetPageNull();
             applicantListLoader();
 
         }
 
         protected void szabadChecked(object sender, RoutedEventArgs e)
         {
+            SetPageNull();
             applicantListLoader();
         }
 
         protected void szabadUnchecked(object sender, RoutedEventArgs e)
         {
+            SetPageNull();
             applicantListLoader();
         }
 
@@ -410,6 +417,12 @@ namespace HR_Portal.View.Usercontrol.Panels
             }
         }
 
+        private void SetPageNull()
+        {
+            Session.ApplicantSearchPage = 0;
+            actualPageTbl.Text = (Session.ApplicantSearchPage + 1).ToString();
+        }
+
         private void NextPageButton_Click(object sender, RoutedEventArgs e)
         {
             Session.ApplicantSearchPage++;
@@ -419,7 +432,9 @@ namespace HR_Portal.View.Usercontrol.Panels
 
         private void FirstPageButton_Click(object sender, RoutedEventArgs e)
         {
-
+            SetPageNull();
+            applicantListLoader();
+            actualPageTbl.Text = (Session.ApplicantSearchPage + 1).ToString();
         }
 
         private void LastPageButton_Click(object sender, RoutedEventArgs e)

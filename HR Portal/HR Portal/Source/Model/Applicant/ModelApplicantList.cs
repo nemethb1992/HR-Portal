@@ -79,7 +79,7 @@ namespace HR_Portal.Source.Model.Applicant
 
                     if (Convert.ToInt32(mySql.sdr["kolcsonzott"]) == 1)
                         kolcsonzott = "Kölcsönzött";
-                    
+
                     list.Add(new ModelApplicantList
                     {
                         id = Convert.ToInt32(mySql.sdr["id"]),

@@ -34,10 +34,10 @@
 
 
         <Image Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" Height="25"  Width="25" Source="/Public/imgs/user.png"/>
-        <TextBox Grid.Row="1" Grid.Column="2" x:Name="Luser_tbx" Text="balazs.nemeth"  Style="{StaticResource Login_User_tbx}" KeyUp="usernameEnterKeyUp"/>
+        <TextBox Grid.Row="1" Grid.Column="2" x:Name="Luser_tbx" Text=""  Style="{StaticResource Login_User_tbx}" KeyUp="usernameEnterKeyUp"/>
 
         <Image Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" Height="25" Width="25" Source="/Public/imgs/key.png" />
-        <PasswordBox Grid.Row="2" Grid.Column="2" x:Name="Lpass_pwd" Password="Hxx8ka3hgb8wy" Style="{StaticResource Login_Pass_pwd}" KeyUp="passwordEnterKeyUp"/>
+        <PasswordBox Grid.Row="2" Grid.Column="2" x:Name="Lpass_pwd" Password="" Style="{StaticResource Login_Pass_pwd}" KeyUp="passwordEnterKeyUp"/>
 
         <CheckBox Grid.Row="3" Grid.Column="2" x:Name="login_cbx" Content="Megjegyez" Style="{StaticResource login_check}" Visibility="Hidden" HorizontalAlignment="Left"/>
 

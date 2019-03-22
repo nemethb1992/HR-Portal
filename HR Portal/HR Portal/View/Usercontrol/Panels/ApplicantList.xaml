@@ -193,18 +193,18 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            <Button x:Name="previousPageButton" Grid.Column="2" Style="{StaticResource next_panelBtn_style}" Click="PreviousPageButton_Click">
-                <Image Source="/Public/imgs/leftArrow.png" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-            </Button>
             <Button x:Name="firstPageButton" Grid.Column="1" Style="{StaticResource next_panelBtn_style}" Click="FirstPageButton_Click">
                 <Image Source="/Public/imgs/leftEndArrow.png" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            </Button>
+            <Button x:Name="previousPageButton" Grid.Column="2" Style="{StaticResource next_panelBtn_style}" Click="PreviousPageButton_Click">
+                <Image Source="/Public/imgs/leftArrow.png" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center"/>
             </Button>
             <TextBlock x:Name="actualPageTbl" Grid.Column="4" Text="1" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource minor_title_style}"/>
             <!--<Image Source="/Public/imgs/dots.png" Grid.Column="3" Height="16" VerticalAlignment="Center" HorizontalAlignment="Center"/>
             <TextBlock x:Name="allPageTbl" Grid.Column="4" Text="82" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource minor_title_style}"/>-->
-            <Button x:Name="lastPageButton" Grid.Column="7" Style="{StaticResource next_panelBtn_style}" Click="LastPageButton_Click">
+            <!--<Button x:Name="lastPageButton" Grid.Column="7" Style="{StaticResource next_panelBtn_style}" Click="LastPageButton_Click">
                 <Image Source="/Public/imgs/rightEndArrow.png" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-            </Button>
+            </Button>-->
             <Button x:Name="nextPageButton" Grid.Column="6" Style="{StaticResource next_panelBtn_style}" Click="NextPageButton_Click">
                 <Image Source="/Public/imgs/rightArrow.png" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center"/>
             </Button>
