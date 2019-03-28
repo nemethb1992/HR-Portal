@@ -29,6 +29,7 @@ namespace HR_Portal.Source.Model.Applicant
         public string friss { get; set; }
         public bool allasbanValue { get; set; }
         public string allasban { get; set; }
+        public string profil_icon { get; set; }
         public bool szabad { get; set; }
         public int statusz { get; set; }
 
@@ -52,6 +53,13 @@ namespace HR_Portal.Source.Model.Applicant
                     catch (Exception)
                     {
                     }
+
+                    string imgsrc = "/Public/imgs/pm_logo_mini.png";
+                    if (Convert.ToInt32(mySql.sdr["profession_type"]) == 1)
+                    {
+                        imgsrc = "/Public/imgs/profession-logo-mini.png";
+                    }
+
                     switch (allapot)
                     {
                         case 1:
@@ -100,6 +108,7 @@ namespace HR_Portal.Source.Model.Applicant
                         kolcsonzott = kolcsonzott,
                         allapot_megnevezes = allapot_megnev,
                         reg_datum = mySql.sdr["reg_date"].ToString(),
+                        profil_icon = imgsrc,
                         megjegyzes = mySql.sdr["megjegyzes"].ToString()
                     });
                 }
