@@ -74,7 +74,7 @@
         </Style>
         <Style TargetType="TextBlock" x:Key="Standard_Textblock">
             <Setter Property="FontFamily" Value="/Public/fonts/#Montserrat"></Setter>
-            <Setter Property="FontSize" Value="17"></Setter>
+            <Setter Property="FontSize" Value="15"></Setter>
             <Setter Property="VerticalAlignment" Value="Center"></Setter>
             <Setter Property="TextWrapping" Value="Wrap"></Setter>
             <Setter Property="Background" Value="Transparent"></Setter>

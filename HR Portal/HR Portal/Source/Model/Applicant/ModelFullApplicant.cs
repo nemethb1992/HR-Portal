@@ -32,6 +32,7 @@ namespace HR_Portal.Source.Model.Applicant
         public string nyelvtudas2 { get; set; }
         public int id_nyelvtudas { get; set; }
         public int id_nyelvtudas2 { get; set; }
+        public int profession_type { get; set; }
         public string reg_date { get; set; }
         public string megjegyzes { get; set; }
         public string folderUrl { get; set; }
@@ -72,6 +73,7 @@ namespace HR_Portal.Source.Model.Applicant
                         nyelvtudas2 = mySql.sdr["nyelvtudas2"].ToString(),
                         id_nyelvtudas = Convert.ToInt32(mySql.sdr["id_nyelvtudas"]),
                         id_nyelvtudas2 = Convert.ToInt32(mySql.sdr["id_nyelvtudas2"]),
+                        profession_type = Convert.ToInt32(mySql.sdr["profession_type"]),
                         reg_date = mySql.sdr["reg_date"].ToString(),
                         megjegyzes = mySql.sdr["megjegyzes"].ToString(),
                         folderUrl = mySql.sdr["folderUrl"].ToString(),
