@@ -68,16 +68,16 @@
             <TextBlock x:Name="prop_4" Grid.Column="0" Grid.Row="16" Style="{StaticResource Standard_Textblock}" Text="Készség-4" />
             <TextBlock x:Name="prop_5" Grid.Column="0" Grid.Row="18" Style="{StaticResource Standard_Textblock}" Text="Készség-5" />-->
 
-                <TextBlock Grid.Column="0" Grid.Row="3" Text="{Binding statusz}" Padding="10,0,0,0" Foreground="{StaticResource FontColor_Light}" Style="{StaticResource Standard_Textblock}" x:Name="projekt_input_1" />
-                <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding megnevezes_munka}" Padding="10,0,0,0" Foreground="{StaticResource FontColor_Light}" Style="{StaticResource Standard_Textblock}" x:Name="projekt_input_2" />
-                <TextBlock  Padding="10,0,0,0" Grid.Row="1" Text="{Binding megnevezes_pc}" Foreground="{StaticResource FontColor_Light}" Style="{StaticResource Standard_Textblock}" x:Name="projekt_input_3"/>
-                <TextBlock Grid.Column="1" Grid.Row="3" Text="{Binding megnevezes_vegzettseg}" Padding="10,0,0,0" Foreground="{StaticResource FontColor_Light}" Style="{StaticResource Standard_Textblock}" x:Name="projekt_input_4" />
-                <TextBlock Grid.Column="0" Grid.Row="5" Text="{Binding megnevezes_nyelv}" Padding="10,0,0,0" Foreground="{StaticResource FontColor_Light}" Style="{StaticResource Standard_Textblock}" x:Name="projekt_input_5" />
-                <TextBlock Grid.Column="1" Grid.Row="5" Text="{Binding jeloltek_db}" Padding="10,0,0,0" Foreground="{StaticResource FontColor_Light}" Style="{StaticResource Standard_Textblock}" x:Name="projekt_input_6" />
-                <TextBlock  Padding="10,0,0,0" Text="{Binding megnevezes_hr}" Foreground="{StaticResource FontColor_Light}" Style="{StaticResource Standard_Textblock}" x:Name="projekt_input_7" Grid.Row="9" />
-                <TextBlock Grid.Column="1" Grid.Row="9" Text="{Binding fel_datum}" Padding="10,0,0,0" Foreground="{StaticResource FontColor_Light}" Style="{StaticResource Standard_Textblock}" x:Name="projekt_input_8" />
-                <TextBlock Grid.Column="0" Grid.Row="7" Text="{Binding ber}" Padding="10,0,0,0" Foreground="{StaticResource FontColor_Light}" Style="{StaticResource Standard_Textblock}" x:Name="projekt_input_9" />
-                <TextBlock Grid.Column="1" Text="{Binding tapasztalat_ev}" Padding="10,0,0,0" Foreground="{StaticResource FontColor_Light}" Style="{StaticResource Standard_Textblock}" x:Name="projekt_input_10" Grid.Row="7" />
+                <TextBlock Grid.Column="0" Grid.Row="3" Text="{Binding statusz}" Padding="10,0,0,0" Foreground="{StaticResource FontColor}" Style="{StaticResource Standard_Textblock}" x:Name="projekt_input_1" />
+                <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding megnevezes_munka}" Padding="10,0,0,0" Foreground="{StaticResource FontColor}" Style="{StaticResource Standard_Textblock}" x:Name="projekt_input_2" />
+                <TextBlock  Padding="10,0,0,0" Grid.Row="1" Text="{Binding megnevezes_pc}" Foreground="{StaticResource FontColor}" Style="{StaticResource Standard_Textblock}" x:Name="projekt_input_3"/>
+                <TextBlock Grid.Column="1" Grid.Row="3" Text="{Binding megnevezes_vegzettseg}" Padding="10,0,0,0" Foreground="{StaticResource FontColor}" Style="{StaticResource Standard_Textblock}" x:Name="projekt_input_4" />
+                <TextBlock Grid.Column="0" Grid.Row="5" Text="{Binding megnevezes_nyelv}" Padding="10,0,0,0" Foreground="{StaticResource FontColor}" Style="{StaticResource Standard_Textblock}" x:Name="projekt_input_5" />
+                <TextBlock Grid.Column="1" Grid.Row="5" Text="{Binding jeloltek_db}" Padding="10,0,0,0" Foreground="{StaticResource FontColor}" Style="{StaticResource Standard_Textblock}" x:Name="projekt_input_6" />
+                <TextBlock  Padding="10,0,0,0" Text="{Binding megnevezes_hr}" Foreground="{StaticResource FontColor}" Style="{StaticResource Standard_Textblock}" x:Name="projekt_input_7" Grid.Row="9" />
+                <TextBlock Grid.Column="1" Grid.Row="9" Text="{Binding fel_datum}" Padding="10,0,0,0" Foreground="{StaticResource FontColor}" Style="{StaticResource Standard_Textblock}" x:Name="projekt_input_8" />
+                <TextBlock Grid.Column="0" Grid.Row="7" Text="{Binding ber}" Padding="10,0,0,0" Foreground="{StaticResource FontColor}" Style="{StaticResource Standard_Textblock}" x:Name="projekt_input_9" />
+                <TextBlock Grid.Column="1" Text="{Binding tapasztalat_ev}" Padding="10,0,0,0" Foreground="{StaticResource FontColor}" Style="{StaticResource Standard_Textblock}" x:Name="projekt_input_10" Grid.Row="7" />
 
 
             <!--<ProgressBar x:Name="kepesseg1" Grid.Column="0" Grid.Row="11" Grid.ColumnSpan="2" Margin="0,0,100,0" Minimum="0" Maximum="10" Style="{StaticResource progressStyle}"/>
