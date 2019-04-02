@@ -5,40 +5,89 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:HR_Portal.View.Usercontrol.Panels"
              mc:Ignorable="d" 
-             d:DesignHeight="750" d:DesignWidth="1150">
-    <Grid Style="{StaticResource switch_grid_style}" >
+             d:DesignHeight="1200" d:DesignWidth="1150">
 
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="50" />
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="50" />
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="50"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="50"/>
-        </Grid.RowDefinitions>
-        <TextBlock x:Name="title" 
-                   Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="3" 
-                   Style="{StaticResource big_title_style}"
-                   Text="Statisztikák"
-                   Margin="0,0,200,0"/>
-
-        <Grid Grid.Column="1" Grid.Row="1">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <Grid Height="1200" Style="{StaticResource switch_grid_style}" >
+    
             <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50" />
                 <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="50" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
                 <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="50"/>
             </Grid.RowDefinitions>
-            <Border Grid.ColumnSpan="2" >
-                
-            </Border>
+            <TextBlock x:Name="title" 
+                       Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="3" 
+                       Style="{StaticResource big_title_style}"
+                       Text="Statisztikák"
+                       Margin="0,0,200,0"/>
+    
+            <Grid Grid.Column="1" Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid x:Name="AutomaticStatisticsGrid" Grid.ColumnSpan="2" Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock x:Name="automaticStatisticsLabel" Grid.Column="0" Grid.Row="0" Padding="0,5" Style="{StaticResource minor_title_style}" Text="Automatikus Statisztikák" />
+
+                        <ComboBox x:Name="StatisticTypeCbx" Grid.Row="0" Margin="3" Grid.Column="1">
+                            <ComboBox.Resources>
+                                <Style TargetType="{x:Type Border}" BasedOn="{StaticResource listCorner_square}"/>
+                            </ComboBox.Resources>
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid >
+                                        <TextBlock Grid.Column="1" Padding="3"  Style="{StaticResource checkbox_item_style}" Text="{Binding title}"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                    <ListBox Grid.ColumnSpan="2" Grid.Row="1" Grid.RowSpan="5" x:Name="automaticStatisticsList" AllowDrop="True" Style="{StaticResource small_listBox_style}"   HorizontalContentAlignment="Stretch" SelectionMode="Extended">
+                        <ListBox.Resources>
+                            <Style TargetType="{x:Type Border}" BasedOn="{StaticResource BasicContentBorder}"/>
+                            <Style TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource listBoxItem_style}"/>
+                        </ListBox.Resources>
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Margin="2" Height="30" Background="{Binding color}">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="40" />
+                                        <ColumnDefinition Width="5*" />
+                                        <ColumnDefinition Width="100" />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="1*" />
+                                    </Grid.RowDefinitions>
+                                    <Image Source="/Public/imgs/excel.png" Grid.Column="0" Grid.RowSpan="2" Margin="5,3"/>
+                                    <TextBlock Grid.Column="1" Margin="10,0" Foreground="Black" Style="{StaticResource ListText}" Text="{Binding fajlnev}"/>
+                                    <Button x:Name="csatolmany_download" Grid.Column="2" Style="{StaticResource StandardButton}" Margin="4,2" Content="Megnyitás" Click="attachmentOpenClick"/>
+                                </Grid>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+
+                </Grid>
 
 
-
+            </Grid>
         </Grid>
-    </Grid>
+    </ScrollViewer>
 </UserControl>

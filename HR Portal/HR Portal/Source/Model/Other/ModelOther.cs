@@ -318,11 +318,16 @@ namespace HR_Portal.Source.Model
         }
     }
 
-    public class ModelJeloltFile
+    public class ModelFile
     {
         public string fajlnev { get; set; }
         public string color { get; set; }
         public string path { get; set; }
+    }
+    public class ModelStatList
+    {
+        public string type { get; set; }
+        public string title { get; set; }
     }
 
     public class ModelKompetenciak

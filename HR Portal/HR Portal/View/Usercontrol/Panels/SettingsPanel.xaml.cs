@@ -1,7 +1,6 @@
 ﻿using HR_Portal.Source;
 using HR_Portal.Source.Model;
 using HR_Portal.Source.Model.Other;
-using HR_Portal.Source.Utility;
 using HR_Portal.Source.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -250,7 +249,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             {
                 case "1":
                     {
-                        new ExcelMethod().Stat1((stat_week_cbx.SelectedIndex.Equals(-1)? 5 : Convert.ToInt32(stat_week_cbx.SelectedIndex.ToString())+1));
+                        //new ExcelMethod().Stat1((stat_week_cbx.SelectedIndex.Equals(-1)? 5 : Convert.ToInt32(stat_week_cbx.SelectedIndex.ToString())+1));
                         break;
                     }
                 default:

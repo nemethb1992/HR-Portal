@@ -1,6 +1,7 @@
 ﻿using HR_Portal.Public.templates;
 using HR_Portal.Source;
 using HR_Portal.Source.Model.Project;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
@@ -12,7 +13,6 @@ namespace HR_Portal.View.Usercontrol.Panels
     public partial class HomePanel : UserControl
     {
         private Grid grid;
-
 
         public HomePanel(Grid grid)
         {
@@ -27,11 +27,18 @@ namespace HR_Portal.View.Usercontrol.Panels
 
         private void ButtonInfoLoad()
         {
+            if (Session.UserData.kategoria == 2)
+            {
+                AdminBtn.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                AdminBtn.Visibility = Visibility.Hidden;
+            }
             Source.MySql mySql = new Source.MySql();
             projektek_list.ItemsSource = new Utilities().Data_PorjectListSmall();
-            admin_result.Text = (Session.UserData.kategoria == 2 ? "Jogosult" : "Nem jogosult");
             uj_jelolt_result.Text = mySql.Count("SELECT count(jeloltek.id) FROM jeloltek WHERE friss=1 AND jeloltek.reg_date > '"+Session.UserData.belepve+"'").ToString() + " db";
-            nem_megnyitott_result.Text = mySql.Count("SELECT count(jeloltek.id) FROM jeloltek WHERE friss = 1").ToString() +" db";
+            nem_megnyitott_result.Text = mySql.Count("SELECT count(*) FROM jeloltek WHERE friss = 1").ToString() +" db";
             osszes_jelolt_result.Text = mySql.Count("SELECT count(jeloltek.id) FROM jeloltek").ToString() + " db";
             projektben_jelolt_result.Text = mySql.Count("SELECT COUNT(DISTINCT jelolt_id) FROM projekt_jelolt_kapcs;").ToString() + " db";
             aktiv_projekt_result.Text = mySql.Count("SELECT count(id) FROM projektek WHERE statusz = 1;").ToString() + " db";
@@ -52,7 +59,7 @@ namespace HR_Portal.View.Usercontrol.Panels
         }
         private void ToStatistics(object sender, MouseButtonEventArgs e)
         {
-            //Utilities.NavigateTo(grid, new StatisticsPage(grid));
+            Utilities.NavigateTo(grid, new StatisticsPage(grid));
         }
         private void ToSettings(object sender, MouseButtonEventArgs e)
         {
@@ -63,10 +70,15 @@ namespace HR_Portal.View.Usercontrol.Panels
             if(Session.UserData.kategoria == 2)
             Utilities.NavigateTo(grid, new AdminPage(grid));
         }
+        private void ToFavorites(object sender, MouseButtonEventArgs e)
+        {
+            //Utilities.NavigateTo(grid, new FavoritesPanel(grid));
+        }
 
         private void OpenProjectClick(object sender, MouseButtonEventArgs e)
         {
             ModelSmallProject project = (sender as Grid).DataContext as ModelSmallProject;
+            Session.ProjektID = project.id;
             Utilities.NavigateTo(grid, new ProjectDataSheet(grid, new Source.ViewModel.Project(project.id)));
         }
     }

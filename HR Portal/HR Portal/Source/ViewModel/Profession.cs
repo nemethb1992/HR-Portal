@@ -38,7 +38,7 @@ namespace HR_Portal.Source.ViewModel
             mySql.Execute(command);
             mySql.Close();
             ModelFullApplicant udata = Applicant.GetFullApplicantByEmail(prof.email);
-            DirectoryInfo profession = new DirectoryInfo(Files.GetProfessionUrl() + prof.id);
+            DirectoryInfo profession = new DirectoryInfo(Files.GetStatisticsUrl() + prof.id);
             DirectoryInfo newID = new DirectoryInfo(Files.GetApplicantUrl() + udata.id);
             Files.CopyAll(profession, newID);
             Delete(prof.id);

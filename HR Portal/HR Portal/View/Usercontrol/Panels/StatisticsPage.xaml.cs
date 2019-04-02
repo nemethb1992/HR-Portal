@@ -1,8 +1,10 @@
 ﻿using HR_Portal.Source;
+using HR_Portal.Source.Model;
 using HR_Portal.Source.Model.Applicant;
 using HR_Portal.Source.ViewModel;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,8 +30,23 @@ namespace HR_Portal.View.Usercontrol.Panels
         {
             this.grid = grid;
             InitializeComponent();
+            LoadUp();
         }
 
+        private void LoadUp()
+        {
+            automaticStatisticsList.ItemsSource = Files.ReadStatistics("JeloltEloszlas");
+            //StatisticTypeCbx.Items.Add("Jelentkezők Projektenkénti eloszlása");
+            StatisticTypeCbx.Items.Add(new ModelStatList { type = "JeloltEloszlas", title = "Jelentkezők Projektenkénti eloszlása" });
+            StatisticTypeCbx.SelectedIndex = 0;
+        }
+
+        protected void attachmentOpenClick(object sender, RoutedEventArgs e)
+        {
+            Button btn = sender as Button;
+            ModelFile item = btn.DataContext as ModelFile;
+            Process.Start(item.path);
+        }
 
     }
 }

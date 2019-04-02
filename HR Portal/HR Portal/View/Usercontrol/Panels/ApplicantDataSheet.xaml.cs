@@ -37,7 +37,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             applicant_profile_title.Text = applicant.data.nev + (applicant.data.profession_type == 1 ? " - Profession" : "");
             header.Text = "Tisztelt "+ applicant.data.nev + "!";
             projekt_cbx.ItemsSource = new Utilities().Data_PorjectListSmall();
-            csatolmany_listBox.ItemsSource = Files.Read(Session.ApplicantID);
+            csatolmany_listBox.ItemsSource = Files.ReadApplicantFiles(Session.ApplicantID);
             megjegyzes_listBox.ItemsSource = Utility.Data_CommentApplicant();
             interju_listBox.ItemsSource = new Interview().Data_Interview();
             kapcsolodo_projekt_list.ItemsSource = applicant.Data_ProjectList();
@@ -116,14 +116,14 @@ namespace HR_Portal.View.Usercontrol.Panels
         protected void attachmentOpenClick(object sender, RoutedEventArgs e)
         {
             Button btn = sender as Button;
-            ModelJeloltFile item = btn.DataContext as ModelJeloltFile;
+            ModelFile item = btn.DataContext as ModelFile;
             Process.Start(item.path);
         }
 
         private void UploadClick(object sender, RoutedEventArgs e)
         {
             Files.Upload(Session.ApplicantID);
-            csatolmany_listBox.ItemsSource = Files.Read(Session.ApplicantID);
+            csatolmany_listBox.ItemsSource = Files.ReadApplicantFiles(Session.ApplicantID);
         }
 
         private void BackButton(object sender, RoutedEventArgs e)

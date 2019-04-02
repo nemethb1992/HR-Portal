@@ -40,7 +40,7 @@ namespace HR_Portal.Source.ViewModel
 
         public static List<ModelErtesitendok> Data_ProjektErtesitendokKapcsolt() // javítva használja: interviewpanel
         {
-            string command = "SELECT users.id, name, email, kategoria, jogosultsag, validitas FROM users INNER JOIN projekt_ertesitendok_kapcs ON ertesitendok_id = users.id WHERE projekt_id = " + Session.ProjektID + "";
+            string command = "SELECT users.id, name, email, kategoria, jogosultsag, validitas FROM users INNER JOIN projekt_ertesitendok_kapcs ON ertesitendok_id = users.id WHERE projekt_id = " + Session.ProjektID + " GROUP BY users.id";
             List<ModelErtesitendok> list = ModelErtesitendok.GetModelErtesitendok(command);
             return list;
         }

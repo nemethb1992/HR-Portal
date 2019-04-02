@@ -10,16 +10,16 @@ namespace HR_Portal.Source
     class Files
     { 
 
-        public static List<ModelJeloltFile> Read(int ApplicantID)
+        public static List<ModelFile> ReadApplicantFiles(int ApplicantID)
         {
-            List<ModelJeloltFile> list = new List<ModelJeloltFile>();
+            List<ModelFile> list = new List<ModelFile>();
 
             try
             {
                 FileInfo[] articles = new DirectoryInfo(GetApplicantUrl() + ApplicantID).GetFiles();
                 foreach (FileInfo file in articles)
                 {
-                    list.Add(new ModelJeloltFile { fajlnev = file.Name, color = (file.Extension == ".pdf" ? "#e3202a" : "#2a579a"), path = file.FullName });
+                    list.Add(new ModelFile { fajlnev = file.Name, color = (file.Extension == ".pdf" ? "#e3202a" : "#2a579a"), path = file.FullName });
                 }
             }
             catch (Exception)
@@ -28,16 +28,16 @@ namespace HR_Portal.Source
             return list;
         }
 
-        public static List<ModelJeloltFile> ReadProfession(int ApplicantID)
+        public static List<ModelFile> ReadStatistics(string type)
         {
-            List<ModelJeloltFile> list = new List<ModelJeloltFile>();
+            List<ModelFile> list = new List<ModelFile>();
 
             try
             {
-                FileInfo[] articles = new DirectoryInfo(GetApplicantUrl()+ "ProfessionDocuments\\" + ApplicantID).GetFiles();
+                FileInfo[] articles = new DirectoryInfo(GetStatisticsUrl()+ "Systematic\\"+type).GetFiles();
                 foreach (FileInfo file in articles)
                 {
-                    list.Add(new ModelJeloltFile { fajlnev = file.Name, color = "White", path = file.FullName });
+                    list.Add(new ModelFile { fajlnev = file.Name, color = "White", path = file.FullName });
                 }
             }
             catch (Exception)
@@ -54,7 +54,7 @@ namespace HR_Portal.Source
             return data;
         }
 
-        public static string GetProfessionUrl()
+        public static string GetStatisticsUrl()
         {
             MySql mySql = new MySql();
             string data = mySql.GetRootUrl("SELECT url FROM ROOTurl WHERE id=1");
@@ -78,7 +78,7 @@ namespace HR_Portal.Source
         {
             try
             {
-                Directory.Delete(GetProfessionUrl()+ ApplicantID, true);
+                Directory.Delete(GetStatisticsUrl()+ ApplicantID, true);
             }
             catch
             {

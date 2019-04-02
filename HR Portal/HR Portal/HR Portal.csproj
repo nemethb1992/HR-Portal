@@ -220,7 +220,6 @@
     <Compile Include="Source\SqLite.cs" />
     <Compile Include="Source\Test\ftpEntities.cs" />
     <Compile Include="Source\Test\ThreadTest.cs" />
-    <Compile Include="Source\Utility\ExcelMethod.cs" />
     <Compile Include="Source\ViewModel\Applicant.cs" />
     <Compile Include="Source\ViewModel\Comment.cs" />
     <Compile Include="Source\ViewModel\ErrorLog.cs" />
@@ -242,8 +241,8 @@
     <Compile Include="View\Usercontrol\Panels\ApplicantList.xaml.cs">
       <DependentUpon>ApplicantList.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Usercontrol\Panels\FavouritesPanel.xaml.cs">
-      <DependentUpon>FavouritesPanel.xaml</DependentUpon>
+    <Compile Include="View\Usercontrol\Panels\FavoritesPanel.xaml.cs">
+      <DependentUpon>FavoritesPanel.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Usercontrol\Panels\HomePanel.xaml.cs">
       <DependentUpon>HomePanel.xaml</DependentUpon>
@@ -326,7 +325,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\Usercontrol\Panels\FavouritesPanel.xaml">
+    <Page Include="View\Usercontrol\Panels\FavoritesPanel.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -578,6 +577,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Public\imgs\profession-mini.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Public\imgs\star.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Public\imgs\excel.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\System.Data.SQLite.Core.1.0.109.2\build\net46\System.Data.SQLite.Core.targets" Condition="Exists('..\packages\System.Data.SQLite.Core.1.0.109.2\build\net46\System.Data.SQLite.Core.targets')" />

@@ -45,7 +45,7 @@ namespace HR_Portal.View.Usercontrol.Panels.SzakmaiLayouts
             app_input_9.Text = list[0].ertesult.ToString();
             app_input_10.Text = list[0].szuldatum.ToString();
             commentLoader(megjegyzes_listBox);
-            csatolmany_listBox.ItemsSource = Files.Read(Session.ApplicantID);
+            csatolmany_listBox.ItemsSource = Files.ReadApplicantFiles(Session.ApplicantID);
         }
 
         protected void commentLoader(ListBox lb)
@@ -102,7 +102,7 @@ namespace HR_Portal.View.Usercontrol.Panels.SzakmaiLayouts
         protected void attachmentOpenClick(object sender, RoutedEventArgs e)
         {
             Button btn = sender as Button;
-            ModelJeloltFile item = btn.DataContext as ModelJeloltFile;
+            ModelFile item = btn.DataContext as ModelFile;
             Process.Start(item.path);
         }
     }
