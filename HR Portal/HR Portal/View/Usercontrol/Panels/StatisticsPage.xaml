@@ -33,9 +33,13 @@
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
+                    <RowDefinition Height="40"/>
                     <RowDefinition Height="*"/>
+                    <RowDefinition Height="40"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
+
+                <!--Automatikus statisztikák-->
                 <Grid x:Name="AutomaticStatisticsGrid" Grid.ColumnSpan="2" Grid.Row="0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
@@ -83,10 +87,44 @@
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                     </ListBox>
-
                 </Grid>
 
+                <Grid x:Name="UniqueStatisticsGrid" Grid.ColumnSpan="2" Grid.Row="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock x:Name="UniqueStatisticsLabel" Grid.Column="0" Grid.Row="0" Padding="0,5" Style="{StaticResource minor_title_style}" Text="Egyedi Statisztikák" />
 
+                    <ListBox Grid.ColumnSpan="2" Grid.Row="1" Grid.RowSpan="5" x:Name="UniqueStatisticsList" AllowDrop="True" Style="{StaticResource small_listBox_style}"   HorizontalContentAlignment="Stretch" SelectionMode="Extended">
+                        <ListBox.Resources>
+                            <Style TargetType="{x:Type Border}" BasedOn="{StaticResource BasicContentBorder}"/>
+                            <Style TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource listBoxItem_style}"/>
+                        </ListBox.Resources>
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Margin="2" Height="30" Background="{Binding color}">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="40" />
+                                        <ColumnDefinition Width="5*" />
+                                        <ColumnDefinition Width="100" />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="1*" />
+                                    </Grid.RowDefinitions>
+                                    <Image Source="/Public/imgs/excel.png" Grid.Column="0" Grid.RowSpan="2" Margin="5,3"/>
+                                    <TextBlock Grid.Column="1" Margin="10,0" Foreground="Black" Style="{StaticResource ListText}" Text="{Binding fajlnev}"/>
+                                    <Button x:Name="csatolmany_download" Grid.Column="2" Style="{StaticResource StandardButton}" Margin="4,2" Content="Megnyitás" Click="attachmentOpenClick"/>
+                                </Grid>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </Grid>
             </Grid>
         </Grid>
     </ScrollViewer>
