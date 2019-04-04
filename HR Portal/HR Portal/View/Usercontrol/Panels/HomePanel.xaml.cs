@@ -42,7 +42,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             osszes_jelolt_result.Text = mySql.Count("SELECT count(jeloltek.id) FROM jeloltek").ToString() + " db";
             projektben_jelolt_result.Text = mySql.Count("SELECT COUNT(DISTINCT jelolt_id) FROM projekt_jelolt_kapcs;").ToString() + " db";
             aktiv_projekt_result.Text = mySql.Count("SELECT count(id) FROM projektek WHERE statusz = 1;").ToString() + " db";
-            passziv_projekt_result.Text = mySql.Count("SELECT count(id) FROM projektek WHERE statusz = 0;").ToString() + " db";
+            //passziv_projekt_result.Text = mySql.Count("SELECT count(id) FROM projektek WHERE statusz = 0;").ToString() + " db";
             kapcsolt_projekt_result.Text = mySql.Count("SELECT count(projekt_id) FROM projekt_ertesitendok_kapcs LEFT JOIN projektek ON projekt_id = projektek.id WHERE statusz = 1 AND ertesitendok_id = " + Session.UserData.id + ";").ToString() + " db";
             //profession_list_result.Text = mySql.Count("SELECT count(id) FROM pmkcvtest.profession_jeloltek").ToString() + " db";
             mySql.Close(); 

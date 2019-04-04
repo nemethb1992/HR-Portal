@@ -89,7 +89,7 @@
                     </ListBox>
                 </Grid>
 
-                <Grid x:Name="UniqueStatisticsGrid" Grid.ColumnSpan="2" Grid.Row="2">
+                <!--<Grid x:Name="UniqueStatisticsGrid" Grid.ColumnSpan="2" Grid.Row="2">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*" />
@@ -124,7 +124,7 @@
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                     </ListBox>
-                </Grid>
+                </Grid>-->
             </Grid>
         </Grid>
     </ScrollViewer>

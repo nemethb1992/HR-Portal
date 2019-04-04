@@ -118,11 +118,9 @@
                     </Grid.ColumnDefinitions>
                     <TextBlock Grid.Row="0" Text="Aktív:" Margin="20,0" VerticalAlignment="Center" Style="{StaticResource minor_title_style}"/>
                     <TextBlock Grid.Row="0" Grid.Column="1" x:Name="aktiv_projekt_result" VerticalAlignment="Center"  Text="0" Style="{StaticResource minor_title_style}"/>
-                    <TextBlock Grid.Row="1" Text="Passzív:" Margin="20,0" VerticalAlignment="Center" Style="{StaticResource minor_title_style}"/>
-                    <TextBlock Grid.Row="1" Grid.Column="1" x:Name="passziv_projekt_result" VerticalAlignment="Center"  Text="0" Style="{StaticResource minor_title_style}"/>
-                    <TextBlock Grid.Row="2" Text="Kapcsolt:" Margin="20,0" VerticalAlignment="Center" Style="{StaticResource minor_title_style}"/>
-                    <TextBlock Grid.Row="2" Grid.Column="1" x:Name="kapcsolt_projekt_result" VerticalAlignment="Center"  Text="0" Style="{StaticResource minor_title_style}"/>
-                    <ListBox x:Name="projektek_list" Grid.Column="0" Grid.Row="3" Grid.RowSpan="3" Grid.ColumnSpan="2" Style="{StaticResource small_listBox_style}" Background="White" Margin="10"  HorizontalContentAlignment="Stretch" SelectionMode="Extended">
+                    <TextBlock Grid.Row="1" Text="Kapcsolt:" Margin="20,0" VerticalAlignment="Center" Style="{StaticResource minor_title_style}"/>
+                    <TextBlock Grid.Row="1" Grid.Column="1" x:Name="kapcsolt_projekt_result" VerticalAlignment="Center"  Text="0" Style="{StaticResource minor_title_style}"/>
+                    <ListBox x:Name="projektek_list" Grid.Column="0" Grid.Row="2" Grid.RowSpan="4" Grid.ColumnSpan="2" Style="{StaticResource small_listBox_style}" Background="White" Margin="10"  HorizontalContentAlignment="Stretch" SelectionMode="Extended">
                         <ListBox.Resources>
                             <Style TargetType="{x:Type Border}" BasedOn="{StaticResource listCorner}"/>
                             <Style TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource thin_listBoxItem_style}"/>
