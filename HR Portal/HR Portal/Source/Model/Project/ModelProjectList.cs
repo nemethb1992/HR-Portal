@@ -20,7 +20,7 @@ namespace HR_Portal.Source.Model.Project
 
         public static List<ModelProjectList> GetModelProjectList(string command)
         {
-            MySql mySql = new MySql();
+            MySqlDB mySql = new MySqlDB();
             List<ModelProjectList> list = new List<ModelProjectList>();
 
             if (mySql.Open() == true)

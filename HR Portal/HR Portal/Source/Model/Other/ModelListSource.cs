@@ -14,7 +14,7 @@ namespace HR_Portal.Source.Model.Other
 
         public List<ModelProjectSmallList> GetModelProjectSmallList(string command)
         {
-            MySql mySql = new MySql();
+            MySqlDB mySql = new MySqlDB();
             List<ModelProjectSmallList> list = new List<ModelProjectSmallList>();
 
             if (mySql.Open() == true)

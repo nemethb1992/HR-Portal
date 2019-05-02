@@ -11,7 +11,7 @@ namespace HR_Portal.Source.ViewModel
     {
         public void Insert(ModelErrorLog data)
         {
-            MySql mySql = new MySql();
+            MySqlDB mySql = new MySqlDB();
             string command = "INSERT INTO errorlog (`placeofbug`, `description`, `solution`, `date`) VALUES ('" + data.placeofbug + "','" + data.description + "','" + data.solution + "','" + data.date + "')";
             mySql.Execute(command);
             mySql.Close();
@@ -19,7 +19,7 @@ namespace HR_Portal.Source.ViewModel
 
         public void Update(ModelErrorLog data)
         {
-            MySql mySql = new MySql();
+            MySqlDB mySql = new MySqlDB();
             string command = "UPDATE pmkcvtest.errorlog SET placeofbug='"+data.placeofbug+ "', description='" + data.description + "', solution='" + data.solution + "', date='" + data.date + "', result='" + data.result + "', resultdate='" + data.resultdate + "'";
             mySql.Execute(command);
             mySql.Close();
@@ -27,7 +27,7 @@ namespace HR_Portal.Source.ViewModel
 
         public void Delete(int id)
         {
-            MySql mySql = new MySql();
+            MySqlDB mySql = new MySqlDB();
             string command = "DELETE FROM pmkcvtest.errorlog WHERE id ="+id;
             mySql.Execute(command);
             mySql.Close();

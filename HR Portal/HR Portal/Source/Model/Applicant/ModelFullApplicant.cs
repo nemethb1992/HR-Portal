@@ -41,7 +41,7 @@ namespace HR_Portal.Source.Model.Applicant
         public static List<ModelFullApplicant> GetModelFullApplicant(string command)
         {
             List<ModelFullApplicant> list = new List<ModelFullApplicant>();
-            MySql mySql = new MySql();
+            MySqlDB mySql = new MySqlDB();
             if (mySql.Open() == true)
             {
                 mySql.cmd = new MySqlCommand(command, mySql.conn);
@@ -74,6 +74,7 @@ namespace HR_Portal.Source.Model.Applicant
                         id_nyelvtudas = Convert.ToInt32(mySql.sdr["id_nyelvtudas"]),
                         id_nyelvtudas2 = Convert.ToInt32(mySql.sdr["id_nyelvtudas2"]),
                         profession_type = Convert.ToInt32(mySql.sdr["profession_type"]),
+                        statusz = Convert.ToInt32(mySql.sdr["statusz"]),
                         reg_date = mySql.sdr["reg_date"].ToString(),
                         megjegyzes = mySql.sdr["megjegyzes"].ToString(),
                         folderUrl = mySql.sdr["folderUrl"].ToString(),

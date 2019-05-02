@@ -25,7 +25,7 @@ namespace HR_Portal.View.Usercontrol
 
         private bool dbConnectionOpener()
         {
-            Source.MySql mySql = new Source.MySql();
+            Source.MySqlDB mySql = new Source.MySqlDB();
             bool conn = mySql.IsConnected();
             mySql.Close();
             return conn;
@@ -113,6 +113,7 @@ namespace HR_Portal.View.Usercontrol
             var window = Window.GetWindow(this);
             popup.Show();
             window.Close();
-        }       
+        }
+
     }
 }

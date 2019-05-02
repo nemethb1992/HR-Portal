@@ -13,7 +13,7 @@ namespace HR_Portal.Source.Model.Project
 
         public static List<ModelTamogatas> GetModelTamogatas(string command)
         {
-            MySql mySql = new MySql();
+            MySqlDB mySql = new MySqlDB();
             List<ModelTamogatas> list = new List<ModelTamogatas>();
 
             if (mySql.Open() == true)

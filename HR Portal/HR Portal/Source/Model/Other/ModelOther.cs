@@ -18,7 +18,7 @@ namespace HR_Portal.Source.Model
 
         public static List<ModelNyelv> GetModelNyelv(string query)
         {
-            MySql mySql = new MySql();
+            MySqlDB mySql = new MySqlDB();
             List<ModelNyelv> items = new List<ModelNyelv>();
             if (mySql.Open() == true)
             {
@@ -47,7 +47,7 @@ namespace HR_Portal.Source.Model
 
         public static List<ModelErtesulesek> GetModelErtesulesek(string command)
         {
-            MySql mySql = new MySql();
+            MySqlDB mySql = new MySqlDB();
             List<ModelErtesulesek> list = new List<ModelErtesulesek>();
             if (mySql.Open() == true)
             {
@@ -75,7 +75,7 @@ namespace HR_Portal.Source.Model
 
         public static List<ModelNem> GetModelNem(string command)
         {
-            MySql mySql = new MySql();
+            MySqlDB mySql = new MySqlDB();
             List<ModelNem> list = new List<ModelNem>();
             if (mySql.Open() == true)
             {
@@ -104,7 +104,7 @@ namespace HR_Portal.Source.Model
 
         public static List<ModelMunkakor> GetModelMunkakor(string comannd)
         {
-            MySql mySql = new MySql();
+            MySqlDB mySql = new MySqlDB();
             List<ModelMunkakor> list = new List<ModelMunkakor>();
             if (mySql.Open() == true)
             {
@@ -133,7 +133,7 @@ namespace HR_Portal.Source.Model
 
         public static List<ModelStatusz> GetModelStatusz(string command)
         {
-            MySql mySql = new MySql();
+            MySqlDB mySql = new MySqlDB();
             List<ModelStatusz> list = new List<ModelStatusz>();
             if (mySql.Open() == true)
             {
@@ -161,7 +161,7 @@ namespace HR_Portal.Source.Model
 
         public static List<ModelPc> GetModelPc(string command)
         {
-            MySql mySql = new MySql();
+            MySqlDB mySql = new MySqlDB();
             List<ModelPc> list = new List<ModelPc>();
             if (mySql.Open() == true)
             {
@@ -189,7 +189,7 @@ namespace HR_Portal.Source.Model
 
         public static List<ModelVegzettseg> GetModelVegzettseg(string command)
         {
-            MySql mySql = new MySql();
+            MySqlDB mySql = new MySqlDB();
             List<ModelVegzettseg> list = new List<ModelVegzettseg>();
             if (mySql.Open() == true)
             {
@@ -221,7 +221,7 @@ namespace HR_Portal.Source.Model
 
         public static List<ModelErtesitendok> GetModelErtesitendok(string command)
         {
-            MySql mySql = new MySql();
+            MySqlDB mySql = new MySqlDB();
             List<ModelErtesitendok> list = new List<ModelErtesitendok>();
             if (mySql.Open() == true)
             {
@@ -291,7 +291,7 @@ namespace HR_Portal.Source.Model
 
         public static List<ModelComment> GetModelComment(string command)
         {
-            MySql mySql = new MySql();
+            MySqlDB mySql = new MySqlDB();
             List<ModelComment> list = new List<ModelComment>();
             if (mySql.Open() == true)
             {
@@ -337,7 +337,7 @@ namespace HR_Portal.Source.Model
 
         public static List<ModelKompetenciak> GetModelKompetenciak(string command)
         {
-            MySql mySql = new MySql();
+            MySqlDB mySql = new MySqlDB();
             List<ModelKompetenciak> list = new List<ModelKompetenciak>();
             if (mySql.Open() == true)
             {
@@ -366,7 +366,7 @@ namespace HR_Portal.Source.Model
 
         public static List<ModelKoltsegek> GetModelKoltsegek(string command)
         {
-            MySql mySql = new MySql();
+            MySqlDB mySql = new MySqlDB();
             List<ModelKoltsegek> list = new List<ModelKoltsegek>();
             if (mySql.Open() == true)
             {

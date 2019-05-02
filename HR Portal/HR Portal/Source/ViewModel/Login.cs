@@ -9,7 +9,7 @@ namespace HR_Portal.Source.ViewModel
     {
         public static bool Authentication(string username)
         {
-            MySql mySql = new MySql();
+            MySqlDB mySql = new MySqlDB();
             if (mySql.Bind("SELECT count(id) FROM users WHERE username='" + username + "' AND validitas = 1"))
             {
                 Session.UserData = UserData.GetOwnDatas();
@@ -37,7 +37,7 @@ namespace HR_Portal.Source.ViewModel
                 SqLite.Update("CREATE TABLE IF NOT EXISTS 'app' ('username' TEXT);");
                 user = SqLite.Query("SELECT 'username' FROM 'app';");
             }
-            MySql mySql = new MySql();
+            MySqlDB mySql = new MySqlDB();
             mySql.Close();
             return user;
         }
@@ -57,7 +57,7 @@ namespace HR_Portal.Source.ViewModel
 
         public static void Registration(string username, string name, string email, int kategoria)
         {
-            MySql mySql = new MySql();
+            MySqlDB mySql = new MySqlDB();
             DateTime dateTime = DateTime.Now;
             mySql.Execute("INSERT INTO `users` (`id`, `username`, `name`, `email`, `kategoria`, `jogosultsag`, `validitas`, `belepve`, `reg_datum`) VALUES (NULL, '" + username + "', '" + name + "', '" + email + "', '" + kategoria + "', '1', '1', '" + dateTime.ToString("yyyy.MM.dd") + "', '" + dateTime.ToString("yyyy.MM.dd") + "');");
             mySql.Close();
@@ -65,7 +65,7 @@ namespace HR_Portal.Source.ViewModel
         
         public List<ModelUserData> Data_UserSession(string username)  //javítva használja: login
         {
-            MySql mySql = new MySql();
+            MySqlDB mySql = new MySqlDB();
             MySqlDataReader sdr;
             List<ModelUserData> list = new List<ModelUserData>();
             if (mySql.Open() == true)

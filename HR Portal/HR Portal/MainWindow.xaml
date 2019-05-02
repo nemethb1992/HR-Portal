@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HR_Portal"
         mc:Ignorable="d"
-        Title="MainWindow" Height="500" Width="420"
+        Title="MainWindow" Height="500" Width="600"
     AllowsTransparency="True" Background="Transparent" WindowStyle="None" ResizeMode="NoResize" MouseDown="Window_MouseDown">
     <Border>
         <Border.Effect>
@@ -17,24 +17,37 @@
         </Border.Effect>
 
         <Grid Margin="15">
+            <Grid.Background>
+                <ImageBrush ImageSource="Public/imgs/login_bg.png"/>
+            </Grid.Background>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="2*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="60"/>
                 <RowDefinition Height="7*"/>
             </Grid.RowDefinitions>
-            <Grid Grid.Row="0" x:Name="login_header" Style="{StaticResource navigation_Grid}" Background="White" Panel.ZIndex="1">
-                <Button x:Name="exit_btn" Content="" Style="{StaticResource exit_btn}" HorizontalAlignment="Right" Cursor="Hand" VerticalAlignment="Top" Width="20" Height="20" Click="exit_btn_Click" Margin="0,5,5,0" >
+            <Image HorizontalAlignment="Left" Height="28" Margin="20,0,0,0" Source="Public/imgs/pm_logo_mini.png"/>
+
+            <Label Content="HR Portal" Style="{StaticResource title_header_label}" Foreground="Black" HorizontalAlignment="Left" VerticalAlignment="Center" Height="60"  Width="110" FontSize="23" Margin="65,0,0,0"/>
+               <Grid Grid.Row="0" Grid.RowSpan="2" Grid.Column="1" Style="{StaticResource gridShadow}" x:Name="login_header"  Background="White" Panel.ZIndex="1">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="7*"/>
+                </Grid.RowDefinitions>
+                <Button x:Name="exit_btn" Content="" Style="{StaticResource exit_btn}" HorizontalAlignment="Right" Cursor="Hand" VerticalAlignment="Top" Width="23" Height="23" Click="exit_btn_Click" Margin="0,5,5,0" >
                     <Button.Background>
                         <ImageBrush ImageSource="Public/imgs/x-mark.png"/>
                     </Button.Background>
                 </Button>
-                <Label Content="HR Portal" Style="{StaticResource title_header_label}" HorizontalAlignment="Left" VerticalAlignment="Center" Height="60"  Width="110" FontSize="23" Margin="65,0,0,0"/>
-                <Image HorizontalAlignment="Left" Height="28" Margin="20,0,0,0" Source="Public/imgs/pm_logo_mini.png"/>
-            </Grid>
-            <Grid x:Name="sgrid" Grid.Row="1">
+                <!--<Label Content="HR Portal" Style="{StaticResource title_header_label}" HorizontalAlignment="Left" VerticalAlignment="Center" Height="60"  Width="110" FontSize="23" Margin="65,0,0,0"/>
+                <Image HorizontalAlignment="Left" Height="28" Margin="20,0,0,0" Source="Public/imgs/pm_logo_mini.png"/>-->
 
+                <Grid x:Name="sgrid" Grid.Row="1"  Background="White">
+
+                </Grid>
             </Grid>
 
         </Grid>

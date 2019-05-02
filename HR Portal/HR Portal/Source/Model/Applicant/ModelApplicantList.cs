@@ -36,7 +36,7 @@ namespace HR_Portal.Source.Model.Applicant
         public static List<ModelApplicantList> GetModelApplicantList(string command)
         {
             List<ModelApplicantList> list = new List<ModelApplicantList>();
-            MySql mySql = new MySql();
+            MySqlDB mySql = new MySqlDB();
             if (mySql.Open() == true)
             {
                 mySql.cmd = new MySqlCommand(command, mySql.conn);

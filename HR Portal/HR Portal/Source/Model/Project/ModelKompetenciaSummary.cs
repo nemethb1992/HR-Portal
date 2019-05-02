@@ -18,7 +18,7 @@ namespace HR_Portal.Source.Model.Project
 
         public static List<ModelKompetenciaSummary> GetModelKompetenciaSummary(string command)
         {
-            MySql mySql = new MySql();
+            MySqlDB mySql = new MySqlDB();
             List<ModelKompetenciaSummary> list = new List<ModelKompetenciaSummary>();
 
             if (mySql.Open() == true)

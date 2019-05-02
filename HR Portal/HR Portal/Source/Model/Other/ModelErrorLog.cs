@@ -19,7 +19,7 @@ namespace HR_Portal.Source.Model.Other
 
         public List<ModelErrorLog> Get(string command)
         {
-            MySql mySql = new MySql();
+            MySqlDB mySql = new MySqlDB();
             List<ModelErrorLog> list = new List<ModelErrorLog>();
 
             if (mySql.Open() == true)

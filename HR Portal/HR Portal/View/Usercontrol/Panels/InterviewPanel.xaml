@@ -39,6 +39,8 @@
                 <RowDefinition Height="30"/>
                 <RowDefinition Height="30"/>
                 <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <TextBlock Grid.Row="0" Style="{StaticResource Standard_Textblock}" VerticalAlignment="Center" Text="Jelölt neve"/>
@@ -51,8 +53,8 @@
             <TextBlock x:Name="interju_helye_tbl" Grid.Row="7" Padding="10,0" Foreground="{StaticResource FontColor_Light}" Style="{StaticResource Standard_Textblock}" VerticalAlignment="Center" Text=""/>
             <TextBlock Grid.Row="8" Style="{StaticResource Standard_Textblock}" VerticalAlignment="Center" Text="Időpont"/>
             <TextBlock x:Name="interju_idopont_tbl" Grid.Row="9" Padding="10,0" Foreground="{StaticResource FontColor_Light}" Style="{StaticResource Standard_Textblock}" VerticalAlignment="Center" Text=""/>
-            <TextBlock Grid.Row="10" Style="{StaticResource Standard_Textblock}" VerticalAlignment="Center" Text="Leírás"/>
-            <TextBlock x:Name="interju_liras_tbl" Grid.Row="11" Padding="10,0" Foreground="{StaticResource FontColor_Light}" Style="{StaticResource Standard_Textblock}" Cursor="Arrow" TextWrapping="Wrap"/>
+          <TextBlock Grid.Row="12" Style="{StaticResource Standard_Textblock}" VerticalAlignment="Center" Text="Leírás"/>
+            <TextBlock x:Name="interju_liras_tbl" Grid.Row="13" Padding="10,0" Foreground="{StaticResource FontColor_Light}" Style="{StaticResource Standard_Textblock}" Cursor="Arrow" TextWrapping="Wrap"/>
         </Grid>
         <Grid x:Name="image_grid" Grid.Column="2" Grid.Row="1"  Margin="0,0,0,30" >
             <Image Source="/Public/imgs/interview2.png" VerticalAlignment="Center" Height="256"/>
@@ -112,6 +114,11 @@
         </Grid>
 
         <Grid Grid.Column="3" x:Name="resztvevok_list_grid" Grid.Row="1" Visibility="Visible">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="30" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="30"/>
                 <RowDefinition Height="*"/>
@@ -121,7 +128,7 @@
                 <RowDefinition Height="15"/>
             </Grid.RowDefinitions>
             <TextBlock Grid.Column="0" Grid.Row="0" Style="{StaticResource Standard_Textblock}" Text="Résztvevők:" />
-            <ListBox x:Name="ertesitendok_editlist" Grid.Row="1"  Style="{StaticResource small_listBox_style}" HorizontalContentAlignment="Stretch" SelectionMode="Extended" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden" >
+            <ListBox x:Name="ertesitendok_editlist" Grid.Row="1" Grid.ColumnSpan="3"  Style="{StaticResource small_listBox_style}" HorizontalContentAlignment="Stretch" SelectionMode="Extended" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden" >
                 <ListBox.Resources>
                     <Style TargetType="{x:Type Border}" BasedOn="{StaticResource BasicContentBorder}">
                         <Setter Property="CornerRadius" Value="10,10,0,0"/>
@@ -141,10 +148,10 @@
                 </ListBox.ItemTemplate>
             </ListBox>
 
-            <Button Grid.Row="2" x:Name="addPerson" Style="{StaticResource StandardButtonWhite}" Content="Új meghívása" VerticalAlignment="Top" Height="40" Click="openColleaguePanelClick"/>
+            <Button Grid.Row="2" Grid.ColumnSpan="3" x:Name="addPerson" Style="{StaticResource StandardButtonWhite}" Content="Hozzáadás" VerticalAlignment="Top" Height="30" Click="openColleaguePanelClick"/>
             
-            <Button Grid.Row="4" x:Name="invitePerson" Panel.ZIndex="1" Visibility="Visible" Style="{StaticResource StandardButtonWhite}" Content="Meghívók küldése" VerticalAlignment="Top" Height="40" Click="SendInvitations" />
-
+            <Button Grid.Row="4" Grid.ColumnSpan="3" x:Name="invitePerson" Panel.ZIndex="1" Visibility="Visible" Style="{StaticResource StandardButtonWhite}" Content="Email kiküldése" VerticalAlignment="Top" Height="40" Click="SendInvitations" />
+        
         </Grid>
         <Grid x:Name="Blur_Grid" Grid.ColumnSpan="5" Grid.RowSpan="4" Background="White" Opacity="0.5" Visibility="Hidden"></Grid>
         <Grid x:Name="resztvevo_felvetel_list" Grid.ColumnSpan="5" Grid.RowSpan="4" Visibility="Hidden">

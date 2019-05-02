@@ -16,7 +16,7 @@ namespace HR_Portal.Source
     
         public static List<ModelSzakmaiBevont> GetModelSzakmaiBevont(string command)
         {
-            MySql mySql = new MySql();
+            MySqlDB mySql = new MySqlDB();
             List<ModelSzakmaiBevont> list = new List<ModelSzakmaiBevont>();
             if (mySql.Open() == true)
             {

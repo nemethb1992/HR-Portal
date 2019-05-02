@@ -8,6 +8,9 @@ using System.Windows.Controls;
 using HR_Portal.Source.Model;
 using HR_Portal.Source.Model.Project;
 using HR_Portal.Source.ViewModel;
+using Microsoft.Exchange.WebServices.Data;
+using HR_Portal.Controller;
+using System.Windows.Media;
 
 namespace HR_Portal.View.Usercontrol.Panels
 {
@@ -20,15 +23,18 @@ namespace HR_Portal.View.Usercontrol.Panels
         private Grid grid;
         private Project project;
         private Applicant applicant;
+        private ModelInterview interview;
 
         public InterviewPanel(Grid grid, Project project, Applicant applicant)
         {
             this.grid = grid;
             this.project = project;
             this.applicant = applicant;
+            this.interview = Interview.Data_InterviewById()[0];
             InitializeComponent();
 
             interviewLoader();
+            SendButtonStatus(interview.sent);
             if (Session.UserData.kategoria < 1)
             {
                 addPerson.Visibility = Visibility.Hidden;
@@ -38,15 +44,22 @@ namespace HR_Portal.View.Usercontrol.Panels
 
         protected void navigateBackFromInterview(object sender, RoutedEventArgs e)
         {
-            if(Session.UserData.kategoria > 1)
+            if(Session.UserData.kategoria >= 1)
             {
-                if (Session.lastPage == Utilities.Views.ProjectJeloltDataSheet)
+                switch (Session.lastPage)
                 {
-                    Utilities.NavigateTo(grid,new ProjektJeloltDataSheet(grid, project, applicant));
-                }
-                else
-                {
-                    Utilities.NavigateTo(grid, new ApplicantDataSheet(grid,applicant));
+                    case Utilities.Views.ApplicantDataSheet:
+                        Utilities.NavigateTo(grid, new ApplicantDataSheet(grid, applicant));
+                        break;
+                    case Utilities.Views.ProjectJeloltDataSheet:
+                        Utilities.NavigateTo(grid, new ProjektJeloltDataSheet(grid, project, applicant));
+                        break;
+                    case Utilities.Views.FavoritePanel:
+                        Utilities.NavigateTo(grid, new FavoritesPanel(grid));
+                        break;
+                    default:
+                        Utilities.NavigateTo(grid, new ProjektJeloltDataSheet(grid, project, applicant));
+                        break;
                 }
             }
             else
@@ -57,30 +70,29 @@ namespace HR_Portal.View.Usercontrol.Panels
 
         protected void interviewLoader()
         {
-            List<ModelInterview> list = Interview.Data_InterviewById();
-            List<ModelFullProject> li = Project.GetFullProject();
+            ModelFullProject li = project.data;
             List<ModelKompetenciak> li_k = Interview.Data_Kompetencia();
 
             foreach (var item in li_k)
             {
-                if (item.id == li[0].kepesseg1)
+                if (item.id == li.kepesseg1)
                 { kompetencia1.Text = item.kompetencia_megnevezes; }
-                if (item.id == li[0].kepesseg2)
+                if (item.id == li.kepesseg2)
                 { kompetencia2.Text = item.kompetencia_megnevezes; }
-                if (item.id == li[0].kepesseg3)
+                if (item.id == li.kepesseg3)
                 { kompetencia3.Text = item.kompetencia_megnevezes; }
-                if (item.id == li[0].kepesseg4)
+                if (item.id == li.kepesseg4)
                 { kompetencia4.Text = item.kompetencia_megnevezes; }
-                if (item.id == li[0].kepesseg5)
+                if (item.id == li.kepesseg5)
                 { kompetencia5.Text = item.kompetencia_megnevezes; }
             }
 
-            interju_jelolt_tbl.Text = list[0].jelolt_megnevezes;
-            interju_projekt_tbl.Text = list[0].projekt_megnevezes;
-            interju_cim_tbl.Text = list[0].interju_cim;
-            interju_helye_tbl.Text = list[0].helyszin;
-            interju_idopont_tbl.Text = list[0].interju_datum +" - "+ list[0].idopont;
-            interju_liras_tbl.Text = list[0].interju_leiras;
+            interju_jelolt_tbl.Text = interview.jelolt_megnevezes;
+            interju_projekt_tbl.Text = interview.projekt_megnevezes;
+            interju_cim_tbl.Text = interview.interju_cim;
+            interju_helye_tbl.Text = interview.helyszin;
+            interju_idopont_tbl.Text = interview.date_start +",  "+ interview.time_start +" - "+ interview.time_end;
+            interju_liras_tbl.Text = interview.interju_leiras;
 
             choose_editlist.ItemsSource = Interview.Data_ProjektErtesitendokKapcsolt();
             ertesitendok_editlist.ItemsSource = Interview.Data_InterjuErtesitendokKapcsolt();
@@ -139,7 +151,7 @@ namespace HR_Portal.View.Usercontrol.Panels
 
         protected void removeColleague(object sender, RoutedEventArgs e)
         {
-            if(Session.UserData.kategoria == 1)
+            if(Session.UserData.kategoria >= 1)
             {
                 MenuItem menu = sender as MenuItem;
                 ModelErtesitendok items = menu.DataContext as ModelErtesitendok;
@@ -163,21 +175,53 @@ namespace HR_Portal.View.Usercontrol.Panels
 
         protected void SendInvitations(object sender, RoutedEventArgs e)
         {
-            EmailTemplate et = new EmailTemplate();
-            Email email = new Email();
-            List<ModelErtesitendok> szemelyek = Interview.Data_InterjuErtesitendokKapcsolt();
-            List<ModelInterview> interju = Interview.Data_InterviewById();
-            List<string> resztvevok = new List<string>();
+            MessageBoxResult result = MessageBox.Show("Biztosan elküldi a meghívókat? \n\n", "HR Cloud", MessageBoxButton.YesNo);
+            switch (result)
+            {
+                case MessageBoxResult.Yes:
+                    EmailTemplate et = new EmailTemplate();
+                    Email email = new Email();
+                    List<ModelErtesitendok> szemelyek = Interview.Data_InterjuErtesitendokKapcsolt();
+                    List<string> resztvevok = new List<string>();
 
-            foreach (var item in szemelyek)
-            {
-                resztvevok.Add(item.name);
+                    foreach (var item in szemelyek)
+                    {
+                        resztvevok.Add(item.name);
+                    }
+                    foreach (var item in szemelyek)
+                    {
+                        new Email().Send(item.email, et.Belsos_Meghivo_Email(item.name, interview.projekt_megnevezes, interview.date_start + " - " + interview.time_start, interview.helyszin, interview.jelolt_megnevezes));
+                    }
+                    new Email().Send(interview.jelolt_email, et.Jelolt_Meghivo_Email(interview.jelolt_megnevezes, interview.projekt_megnevezes, interview.date_start + " - " + interview.time_start, resztvevok));
+
+                    new Appointments().CreateMeeting(new AppointmentModel().TransformData(interview));
+                    new Interview().madeSent(interview.id);
+
+                    break;
+                case MessageBoxResult.No:
+                    break;
             }
-            foreach (var item in szemelyek)
+        }
+        private void SendButtonStatus(int id)
+        {
+            var bc = new BrushConverter();
+            switch (id)
             {
-                new Email().Send(item.email, et.Belsos_Meghivo_Email(item.name, interju[0].projekt_megnevezes, interju[0].interju_datum+" - " + interju[0].idopont, interju[0].helyszin, interju[0].jelolt_megnevezes));
+                case 0:
+                    invitePerson.Content = "Meeting kitűzése";
+                    invitePerson.Background = (Brush)bc.ConvertFrom("#FFD2F9EF");
+                    break;
+                case 1:
+                    invitePerson.Content = "Meeting kitűzve";
+                    invitePerson.Background = (Brush)bc.ConvertFrom("#FFF9D2E2");
+                    break;
+                default:
+                    invitePerson.Content = "Email kiküldése";
+                    invitePerson.Background = (Brush)bc.ConvertFrom("#FFD2F9EF");
+                    break;
             }
-            new Email().Send(interju[0].jelolt_email, et.Jelolt_Meghivo_Email(interju[0].jelolt_megnevezes, interju[0].projekt_megnevezes, interju[0].interju_datum + " - " + interju[0].idopont, resztvevok));
-      }
+        }
+
+
     }
 }

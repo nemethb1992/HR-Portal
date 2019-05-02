@@ -430,16 +430,18 @@ namespace HR_Portal.View.Usercontrol.Panels
         }
         private void BackButton(object sender, RoutedEventArgs e)
         {
-            if (Session.lastPage == Utilities.Views.ApplicantDataSheet)
+            switch (Session.lastPage)
             {
-                Utilities.NavigateTo(grid, new ApplicantDataSheet(grid, new Applicant()));
-            }
-            else
-            {
-                Utilities.NavigateTo(grid, new ProjectList(grid));
+                case Utilities.Views.ApplicantDataSheet:
+                    Utilities.NavigateTo(grid, new ApplicantDataSheet(grid, new Applicant()));
+                    break;
+                case Utilities.Views.ProjectList:
+                    Utilities.NavigateTo(grid, new ProjectList(grid));
+                    break;
+                default:
+                    Utilities.NavigateTo(grid, new ProjectList(grid));
+                    break;
             }
         }
-
-
     }
 }

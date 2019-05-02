@@ -48,7 +48,7 @@ namespace HR_Portal.Source
 
         public static string GetApplicantUrl()
         {
-            MySql mySql = new MySql();
+            MySqlDB mySql = new MySqlDB();
             string data = mySql.GetRootUrl("SELECT url FROM ROOTurl WHERE id=0");
             mySql.Close();
             return data;
@@ -56,7 +56,7 @@ namespace HR_Portal.Source
 
         public static string GetStatisticsUrl()
         {
-            MySql mySql = new MySql();
+            MySqlDB mySql = new MySqlDB();
             string data = mySql.GetRootUrl("SELECT url FROM ROOTurl WHERE id=1");
             mySql.Close();
             return data;   

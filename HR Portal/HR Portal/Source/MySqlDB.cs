@@ -8,7 +8,7 @@ using HR_Portal.Source.Model.Other;
 
 namespace HR_Portal.Source
 {
-    public class MySql
+    public class MySqlDB
     {
         private const string CONNECTION_URL_1 = "Data Source = 192.168.144.189; Port=3306; Initial Catalog = pmkcvtest; User ID=hr-admin; Password=pmhr2018; charset=utf8;";
         private const string CONNECTION_URL_2 = "Data Source = 192.168.144.189; Port=3306; Initial Catalog = hrportal_test; User ID=hr-admin; Password=pmhr2018;  charset=utf8;";
@@ -17,7 +17,7 @@ namespace HR_Portal.Source
         public MySqlCommand cmd;
         public MySqlDataReader sdr;
 
-        public MySql()
+        public MySqlDB()
         {
             if (conn == null)
             {

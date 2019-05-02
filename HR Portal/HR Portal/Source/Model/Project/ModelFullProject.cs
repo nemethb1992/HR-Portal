@@ -41,7 +41,7 @@ namespace HR_Portal.Source.Model.Project
 
         public static List<ModelFullProject> GetModelFullProject(string command)
         {
-            MySql mySql = new MySql();
+            MySqlDB mySql = new MySqlDB();
             List<ModelFullProject> list = new List<ModelFullProject>();
             if (mySql.Open() == true)
             {

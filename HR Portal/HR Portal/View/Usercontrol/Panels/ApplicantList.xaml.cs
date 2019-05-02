@@ -24,6 +24,8 @@ namespace HR_Portal.View.Usercontrol.Panels
     /// </summary>
     public partial class ApplicantList : UserControl
     {
+        private ModelFullApplicant selectedApplicant;
+
         private static string HeaderSelecteds;
         public string HeaderSelected { get { return HeaderSelecteds; } set { HeaderSelecteds = value; } }
 
@@ -48,18 +50,20 @@ namespace HR_Portal.View.Usercontrol.Panels
                 SetSearchValues();
         }
 
-        protected List<ModelApplicantSearchBar> GetSearchValues()
+        protected ModelApplicantSearchBar GetSearchValues()
         {
-            List<ModelApplicantSearchBar> list = new List<ModelApplicantSearchBar>();
+            ModelApplicantSearchBar list = new ModelApplicantSearchBar();
 
             ModelNem nemek_item = (nemek_srccbx as ComboBox).SelectedItem as ModelNem;
             ModelMunkakor munkakor_item = (munkakor_srccbx as ComboBox).SelectedItem as ModelMunkakor;
             ModelVegzettseg vegzettseg_item = (vegzettseg_srccbx as ComboBox).SelectedItem as ModelVegzettseg;
+            ModelCimkek cimke_item = (cimke_srccbx as ComboBox).SelectedItem as ModelCimkek;
 
             double listSize = Math.Round(applicant_listBox.RenderSize.Height / 55);
             string munkakorStr = "";
             string vegzettsegStr = "";
             string nemekStr = "";
+            string cimkeStr = "";
 
             if (munkakor_srccbx.SelectedIndex != -1)
             {
@@ -72,6 +76,13 @@ namespace HR_Portal.View.Usercontrol.Panels
             if (nemek_srccbx.SelectedIndex != -1)
             {
                 nemekStr = nemek_item.id.ToString();
+            }
+            if (cimke_srccbx.SelectedIndex != -1)
+            {
+                cimkeStr = cimke_item.cimke_megnevezes;
+            }
+            else {
+                cimkeStr = cimke_srcinp.Text;
             }
 
             //string tapasztalat = tapsztalat_srcinp.Text;
@@ -89,7 +100,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             string sorrend = " ASC";
 
 
-            list.Add(new ModelApplicantSearchBar
+            list = new ModelApplicantSearchBar
             {
                 nev = nev_srcinp.Text,
                 lakhely = lakhely_srcinp.Text,
@@ -104,14 +115,14 @@ namespace HR_Portal.View.Usercontrol.Panels
                 munkakorIndex = munkakor_srccbx.SelectedIndex,
                 vegzettsegStr = vegzettsegStr,
                 vegzettsegIndex = nemek_srccbx.SelectedIndex,
-                cimke = cimke_srcinp.Text,
+                cimke = cimkeStr,
                 szabad = szabad,
                 allasbanBool = allasban_check.IsChecked.Value,
                 szabadBool = szabad_check.IsChecked.Value,
                 HeaderSelected = HeaderSelected,
                 sorrend = sorrend,
                 numberLimit = listSize
-            });
+            };
             return list;
         }
 
@@ -119,34 +130,34 @@ namespace HR_Portal.View.Usercontrol.Panels
         {
             if (Session.ApplicantSearchValue == null)
                 return;
-            List<ModelApplicantSearchBar> values = Session.ApplicantSearchValue;
-            munkakor_srccbx.SelectedIndex = values[0].munkakorIndex;
-            vegzettseg_srccbx.SelectedIndex = values[0].vegzettsegIndex;
-            nemek_srccbx.SelectedIndex = values[0].nemekIndex;
-            szabad_check.IsChecked = values[0].szabadBool;
-            allasban_check.IsChecked = values[0].allasbanBool;
-            nev_srcinp.Text = values[0].nev;
-            lakhely_srcinp.Text = values[0].lakhely;
-            email_srcinp.Text = values[0].email;
-            eletkor_srcinp.Text = values[0].eletkor;
-            //tapsztalat_srcinp.Text = values[0].tapasztalat;
-            regdate_srcinp.Text = values[0].regdate;
-            interju_srcinp.Text = values[0].interjuk;
-            cimke_srcinp.Text = values[0].cimke;
+            ModelApplicantSearchBar srcValue = Session.ApplicantSearchValue;
+            munkakor_srccbx.SelectedIndex = srcValue.munkakorIndex;
+            vegzettseg_srccbx.SelectedIndex = srcValue.vegzettsegIndex;
+            nemek_srccbx.SelectedIndex = srcValue.nemekIndex;
+            szabad_check.IsChecked = srcValue.szabadBool;
+            allasban_check.IsChecked = srcValue.allasbanBool;
+            nev_srcinp.Text = srcValue.nev;
+            lakhely_srcinp.Text = srcValue.lakhely;
+            email_srcinp.Text = srcValue.email;
+            eletkor_srcinp.Text = srcValue.eletkor;
+            //tapsztalat_srcinp.Text = srcValue.tapasztalat;
+            regdate_srcinp.Text = srcValue.regdate;
+            interju_srcinp.Text = srcValue.interjuk;
+            cimke_srcinp.Text = srcValue.cimke;
 
-            if (values[0].nev.Length > 0)
+            if (srcValue.nev.Length > 0)
                 nev_label.Visibility = Visibility.Hidden;
-            if (values[0].lakhely.Length > 0)
+            if (srcValue.lakhely.Length > 0)
                 lakhely_label.Visibility = Visibility.Hidden;
-            if (values[0].email.Length > 0)
+            if (srcValue.email.Length > 0)
                 email_label.Visibility = Visibility.Hidden;
-            if (values[0].eletkor.Length > 0)
+            if (srcValue.eletkor.Length > 0)
                 eletkor_label.Visibility = Visibility.Hidden;
-            if (values[0].regdate.Length > 0)
+            if (srcValue.regdate.Length > 0)
                 regdate_label.Visibility = Visibility.Hidden;
-            if (values[0].interjuk.Length > 0)
+            if (srcValue.interjuk.Length > 0)
                 interju_label.Visibility = Visibility.Hidden;
-            if (values[0].cimke.Length > 0)
+            if (srcValue.cimke.Length > 0)
                 cimke_label.Visibility = Visibility.Hidden;
 
         }
@@ -174,13 +185,24 @@ namespace HR_Portal.View.Usercontrol.Panels
 
         protected void applicantArchivateClick(object sender, RoutedEventArgs e)
         {
+
             MessageBoxResult result = MessageBox.Show("Biztosan megváltoztatod? \n\n", "HR Cloud", MessageBoxButton.YesNoCancel);
             switch (result)
             {
                 case MessageBoxResult.Yes:
                     ModelApplicantList items = (sender as MenuItem).DataContext as ModelApplicantList;
-                    Utility.applicantArchiver(items.id, items.statusz);
-                    applicantListLoader();
+                    selectedApplicant = new Applicant(items.id).data;
+                    if(selectedApplicant.statusz == 1)
+                    {
+                        Cimke_Grid.Visibility = Visibility.Visible;
+                        cimke_related_list.ItemsSource = new ModelCimkek().GetRelated(selectedApplicant.id);
+                        cimke_title.Text = "Cimkék (" + selectedApplicant.nev + ")";
+                    }
+                    else
+                    {
+                        Utility.applicantArchiver(selectedApplicant.id, selectedApplicant.statusz);
+                        applicantListLoader();
+                    }
                     break;
                 case MessageBoxResult.No:
                     break;
@@ -216,6 +238,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             vegzettseg_srccbx.ItemsSource = Utility.Data_Vegzettseg();
             munkakor_srccbx.ItemsSource = Utility.Data_Munkakor();
             nemek_srccbx.ItemsSource = Utility.Data_Nemek();
+            cimke_srccbx.ItemsSource = Utility.Data_Cimkek();
         }
 
         protected void applicantOpenClick(object sender, RoutedEventArgs e)
@@ -320,6 +343,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             munkakor_srccbx.SelectedIndex = -1;
             vegzettseg_srccbx.SelectedIndex = -1;
             nemek_srccbx.SelectedIndex = -1;
+            cimke_srccbx.SelectedIndex = -1;
             szabad_check.IsChecked = false;
             allasban_check.IsChecked = false;
             nev_srcinp.Text = "";
@@ -396,7 +420,13 @@ namespace HR_Portal.View.Usercontrol.Panels
             ModelApplicantList applicant = (sender as MenuItem).DataContext as ModelApplicantList;
             new Email().Send(applicant.email, new EmailTemplate().NincsPozicioElutasito(applicant.nev));
         }
-        
+
+        private void MegfigyeltekhezAd(object sender, RoutedEventArgs e)
+        {
+            ModelApplicantList applicant = (sender as MenuItem).DataContext as ModelApplicantList;
+            Applicant.AddToFavorite(applicant.id);
+        }
+
         private void PageSwitchEventHandler()
         {
             applicantListLoader();
@@ -435,6 +465,81 @@ namespace HR_Portal.View.Usercontrol.Panels
         {
             await Task.Delay(400);
             PageSwitchEventHandler();
+        }
+
+
+        protected void CimkeSearchInput_GotFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox tbx = sender as TextBox;
+
+            if (tbx.Text == tbx.Tag.ToString())
+            {
+                tbx.Text = "";
+            }
+        }
+
+        protected void CimkeSearchInput_LostFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox tbx = sender as TextBox;
+
+            if (tbx.Text == "")
+            {
+                tbx.Text = tbx.Tag.ToString();
+            }
+        }
+
+        private void Add_cimke_relation_btn_Click(object sender, RoutedEventArgs e)
+        {
+            Button btn = sender as Button;
+            ModelCimkek item = btn.DataContext as ModelCimkek;
+            new ModelCimkek().AddRelation(selectedApplicant.id, item.id);
+            cimke_searched_list.ItemsSource = new ModelCimkek().GetAll();
+            cimke_related_list.ItemsSource = new ModelCimkek().GetRelated(selectedApplicant.id);
+        }
+
+        private void Remove_cimke_relation_btn_Click(object sender, RoutedEventArgs e)
+        {
+            Button btn = sender as Button;
+            ModelCimkek item = btn.DataContext as ModelCimkek;
+            new ModelCimkek().DeleteRelation(selectedApplicant.id, item.id);
+            cimke_related_list.ItemsSource = new ModelCimkek().GetRelated(selectedApplicant.id);
+        }
+
+        private async void Cimke_search_tbx_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            TextBox textbox = (TextBox)sender;
+            int fisrtLength = textbox.Text.Length;
+
+            await Task.Delay(250);
+            if (fisrtLength == textbox.Text.Length)
+            {
+                if (textbox.Text == textbox.Tag.ToString())
+                {
+                    cimke_searched_list.ItemsSource = new ModelCimkek().GetAll();
+                    return;
+                }
+                List<ModelCimkek> list = new ModelCimkek().GetSearched(textbox.Text);
+                cimke_searched_list.ItemsSource = list;
+            }
+        }
+
+        private void CimkePanel_Close(object sender, RoutedEventArgs e)
+        {
+            Cimke_Grid.Visibility = Visibility.Hidden;
+        }
+
+        private void CimkePanel_Open(object sender, RoutedEventArgs e)
+        {
+            Cimke_Grid.Visibility = Visibility.Visible;
+            cimke_searched_list.ItemsSource = new ModelCimkek().GetAll();
+            cimke_related_list.ItemsSource = new ModelCimkek().GetRelated(selectedApplicant.id);
+        }
+
+        private void ArchivateAndClose_Click(object sender, RoutedEventArgs e)
+        {
+            Cimke_Grid.Visibility = Visibility.Hidden;
+            Utility.applicantArchiver(selectedApplicant.id, selectedApplicant.statusz);
+            applicantListLoader();
         }
     }
 

@@ -11,8 +11,8 @@ namespace HR_Portal.Source
         private static ModelUserData UserDatas;
         public static ModelUserData UserData { get { return UserDatas; } set { UserDatas = value; } }
 
-        private static List<ModelApplicantSearchBar> ApplicantSearchValues;
-        public static List<ModelApplicantSearchBar> ApplicantSearchValue { get { return ApplicantSearchValues; } set { ApplicantSearchValues = value; } }
+        private static ModelApplicantSearchBar ApplicantSearchValues;
+        public static ModelApplicantSearchBar ApplicantSearchValue { get { return ApplicantSearchValues; } set { ApplicantSearchValues = value; } }
 
         private static List<ModelProjectSearchBar> ProjectSearchValues;
         public static List<ModelProjectSearchBar> ProjectSearchValue { get { return ProjectSearchValues; } set { ProjectSearchValues = value; } }

@@ -42,6 +42,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             pc_editlist.ItemsSource = util.Data_Pc();
             ertesules_editlist.ItemsSource = util.Data_Ertesulesek();
             nyelv_editlist.ItemsSource = util.Data_Nyelv();
+            cimkek_editlist.ItemsSource = util.Data_Cimkek();
             kompetencia_editlist.ItemsSource = Interview.Data_Kompetencia();
         }
 
@@ -227,8 +228,6 @@ namespace HR_Portal.View.Usercontrol.Panels
                 nyelv_new_tbx.Text = "Új hozzáadása";
                 listLoader();
             }
-
-        
         }
 
         protected void Button_Click_6(object sender, RoutedEventArgs e)
@@ -240,6 +239,16 @@ namespace HR_Portal.View.Usercontrol.Panels
                 listLoader();
             }
         }
+        private void Add_cimke_click(object sender, RoutedEventArgs e)
+        {
+            if (cimkek_new_tbx.Text != "" && cimkek_new_tbx.Text != "Új hozzáadása")
+            {
+                util.SettingsInsert(cimkek_new_tbx.Text, "cimkek");
+                cimkek_new_tbx.Text = "Új hozzáadása";
+                listLoader();
+            }
+        }
+
 
         private void PressStatButton(object sender, RoutedEventArgs e)
         {
@@ -256,5 +265,28 @@ namespace HR_Portal.View.Usercontrol.Panels
                     break;
             }
         }
+
+        private void Cimke_delete_click(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult result = MessageBox.Show("Biztosan törölni szeretnéd? \n", "HR Cloud", MessageBoxButton.YesNoCancel);
+            switch (result)
+            {
+                case MessageBoxResult.Yes:
+                    MenuItem menuItem = sender as MenuItem;
+                    ModelCimkek items = menuItem.DataContext as ModelCimkek;
+                    if (items.cimke_megnevezes != "Összes")
+                    {
+                        new ModelCimkek().Delete(items.id);
+                    }
+                    listLoader();
+                    break;
+                case MessageBoxResult.No:
+                    break;
+                case MessageBoxResult.Cancel:
+                    break;
+            }
+        }
+
+
     }
 }

@@ -27,7 +27,7 @@ namespace HR_Portal.Source.Model.Applicant
 
         public List<ModelProfession> Get(string command)
         {
-            MySql mySql = new MySql();
+            MySqlDB mySql = new MySqlDB();
             List<ModelProfession> list = new List<ModelProfession>();
 
             if (mySql.Open() == true)

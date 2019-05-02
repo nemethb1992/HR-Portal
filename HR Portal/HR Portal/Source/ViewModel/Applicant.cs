@@ -17,11 +17,11 @@ namespace HR_Portal.Source.ViewModel
             this.data = GetFullApplicant(applicantId)[0];
             this.list = GetFullApplicant(applicantId);
         }
-        public static List<ModelApplicantList> GetApplicantList(List<ModelApplicantSearchBar> sw)
+        public static List<ModelApplicantList> GetApplicantList(ModelApplicantSearchBar sw)
         {
-            double listNo = (sw[0].numberLimit != 0 ? sw[0].numberLimit : 10);
+            double listNo = (sw.numberLimit != 0 ? sw.numberLimit : 10);
 
-            string command = "SELECT coalesce((SELECT count(projekt_id) FROM interjuk_kapcs WHERE jelolt_id = jeloltek.id GROUP BY jelolt_id),0) as interjuk_db, " +
+            string command = "SELECT coalesce((SELECT count(projekt_id) FROM interview WHERE jelolt_id = jeloltek.id GROUP BY jelolt_id),0) as interjuk_db, " +
                 "coalesce((SELECT count(projekt_id) FROM projekt_jelolt_kapcs WHERE projekt_jelolt_kapcs.jelolt_id = jeloltek.id),0) as project_db, " +
                 "(SELECT megnevezes_munka FROM munkakor WHERE munkakor.id = jeloltek.munkakor) as munkakor, " +
                 "(SELECT megnevezes_munka FROM munkakor WHERE munkakor.id = jeloltek.munkakor2) as munkakor2, " +
@@ -31,24 +31,26 @@ namespace HR_Portal.Source.ViewModel
                 "FROM jeloltek " +
                 "LEFT JOIN megjegyzesek ON jeloltek.id = megjegyzesek.jelolt_id " +
                 "LEFT JOIN munkakor on jeloltek.munkakor = munkakor.id " +
+                "LEFT JOIN jelolt_cimke_kapcs on jelolt_cimke_kapcs.jelolt_id = jeloltek.id " +
+                "LEFT JOIN jelolt_cimkek on jelolt_cimkek.id = jelolt_cimke_kapcs.cimke_id " +
                 "LEFT JOIN projekt_jelolt_kapcs ON jeloltek.id = projekt_jelolt_kapcs.jelolt_id " +
                 "WHERE jeloltek.id LIKE '%%' AND jeloltek.statusz =" + Session.ApplicantStatusz;
 
-            if (sw[0].nev != "")
+            if (sw.nev != "")
             {
-                command += " AND jeloltek.nev LIKE '%" + sw[0].nev + "%' ";
+                command += " AND jeloltek.nev LIKE '%" + sw.nev + "%' ";
             }
-            if (sw[0].lakhely != "")
+            if (sw.lakhely != "")
             {
-                command += " AND jeloltek.lakhely LIKE '%" + sw[0].lakhely + "%' ";
+                command += " AND jeloltek.lakhely LIKE '%" + sw.lakhely + "%' ";
             }
-            if (sw[0].email != "")
+            if (sw.email != "")
             {
-                command += " AND jeloltek.email LIKE '%" + sw[0].email + "%' ";
+                command += " AND jeloltek.email LIKE '%" + sw.email + "%' ";
             }
-            if (sw[0].eletkor != "")
+            if (sw.eletkor != "")
             {
-                command += " AND jeloltek.szuldatum <= " + sw[0].eletkor + " ";
+                command += " AND jeloltek.szuldatum <= " + sw.eletkor + " ";
             }
 
             //if (searchValue[0].tapasztalat != "" && searchValue[0].tapasztalat != "0")
@@ -56,50 +58,54 @@ namespace HR_Portal.Source.ViewModel
             //    command += "AND jeloltek.tapasztalat_ev >= " + searchValue[0].tapasztalat + " ";
             //}
 
-            if (sw[0].regdate != "")
+            if (sw.regdate != "")
             {
-                command += " AND jeloltek.reg_date LIKE '%" + sw[0].regdate + "%' ";
+                command += " AND jeloltek.reg_date LIKE '%" + sw.regdate + "%' ";
             }
-            if (sw[0].interjuk != "" && sw[0].interjuk != "0")
+            if (sw.interjuk != "" && sw.interjuk != "0")
             {
-                command += " AND coalesce((SELECT count(projekt_id) FROM interjuk_kapcs WHERE jelolt_id = jeloltek.id Group by projekt_id),0) >= " + sw[0].interjuk + " ";
+                command += " AND coalesce((SELECT count(projekt_id) FROM interview WHERE jelolt_id = jeloltek.id Group by projekt_id),0) >= " + sw.interjuk + " ";
             }
-            if (sw[0].nemekStr != "")
+            if (sw.nemekStr != "")
             {
-                command += " AND jeloltek.neme LIKE '%" + sw[0].nemekStr + "%' ";
+                command += " AND jeloltek.neme LIKE '%" + sw.nemekStr + "%' ";
             }
-            if (sw[0].munkakorStr != "")
+            if (sw.munkakorStr != "")
             {
-                command += " AND jeloltek.munkakor LIKE '%" + sw[0].munkakorStr + "%' ";
+                command += " AND jeloltek.munkakor LIKE '%" + sw.munkakorStr + "%' ";
             }
-            if (sw[0].vegzettsegStr != "")
+            if (sw.vegzettsegStr != "")
             {
-                command += " AND jeloltek.vegz_terulet LIKE '%" + sw[0].vegzettsegStr + "%' ";
+                command += " AND jeloltek.vegz_terulet LIKE '%" + sw.vegzettsegStr + "%' ";
             }
-            if (sw[0].cimke != "")
+            if (sw.cimke != "")
             {
-                command += " AND megjegyzesek.megjegyzes LIKE '%" + sw[0].cimke + "%' ";
+                command += " AND jelolt_cimkek.cimke_megnevezes LIKE '%" + sw.cimke + "%' ";
             }
-            if (sw[0].szabad == "1")
+            if (sw.cimke != "")
+            {
+                command += " OR megjegyzesek.megjegyzes LIKE '%" + sw.cimke + "%' ";
+            }
+            if (sw.szabad == "1")
             {
                 command += "  AND projekt_jelolt_kapcs.id IS NULL ";
             }
-            if (sw[0].allasbanBool)
+            if (sw.allasbanBool)
             {
                 command += "  AND projekt_jelolt_kapcs.id IS NOT NULL ";
             }
             command += " GROUP BY jeloltek.email ";
 
-            switch (sw[0].HeaderSelected)
+            switch (sw.HeaderSelected)
             {
                 case "1":
-                    command += " ORDER BY jeloltek.nev" + sw[0].sorrend;
+                    command += " ORDER BY jeloltek.nev" + sw.sorrend;
                     break;
                 case "2":
-                    command += " ORDER BY jeloltek.statusz" + sw[0].sorrend;
+                    command += " ORDER BY jeloltek.statusz" + sw.sorrend;
                     break;
                 case "3":
-                    command += " ORDER BY jeloltek.reg_date" + sw[0].sorrend;
+                    command += " ORDER BY jeloltek.reg_date" + sw.sorrend;
                     break;
                 default:
                     command += " ORDER BY jeloltek.reg_date DESC, friss DESC";
@@ -108,6 +114,21 @@ namespace HR_Portal.Source.ViewModel
             command += " LIMIT "+ listNo + " OFFSET "+Session.ApplicantSearchPage * listNo + "";
 
             return ModelApplicantList.GetModelApplicantList(command);
+        }
+
+        public static List<ModelApplicantList> Data_FavoriteApplicants()
+        {
+            string command = "SELECT coalesce((SELECT count(projekt_id) FROM interview " +
+                "WHERE jelolt_id = jeloltek.id Group by projekt_id),0) as interjuk_db, " +
+                "coalesce((SELECT count(projekt_id) FROM projekt_jelolt_kapcs WHERE projekt_jelolt_kapcs.jelolt_id = jeloltek.id),0) as project_db, " +
+                "jeloltek.id,nev,jeloltek.szuldatum,megnevezes_munka,email,reg_date,kepesseg1,kepesseg2,kepesseg3,kepesseg4,kepesseg5, " +
+                "jeloltek.munkakor, jeloltek.munkakor2, jeloltek.munkakor3, allapota, kolcsonzott,jeloltek.statusz, jeloltek.friss, jeloltek.profession_type, jeloltek.megjegyzes, (SELECT EXISTS(SELECT * FROM projekt_jelolt_kapcs WHERE projekt_jelolt_kapcs.jelolt_id = jeloltek.id)) as allasban " +
+                "FROM jeloltek LEFT JOIN projekt_jelolt_kapcs ON jeloltek.id = projekt_jelolt_kapcs.jelolt_id " +
+                "LEFT JOIN projektek ON projektek.id = projekt_jelolt_kapcs.projekt_id " +
+                "LEFT JOIN munkakor ON jeloltek.munkakor = munkakor.id " +
+                "LEFT JOIN jelolt_megfigyelt ON jeloltek.id = jelolt_megfigyelt.jelolt_id WHERE jelolt_megfigyelt.user_id = "+Session.UserData.id+ " GROUP BY jeloltek.id  ORDER BY jelolt_megfigyelt.date";
+            List<ModelApplicantList> list = ModelApplicantList.GetModelApplicantList(command);
+            return list;
         }
 
         public static ModelFullApplicant GetFullApplicantByEmail(string email)
@@ -165,7 +186,7 @@ namespace HR_Portal.Source.ViewModel
 
         public static void DeleteApplicant(int id)   //javított használja: applicantlist
         {
-            MySql mySql = new MySql();
+            MySqlDB mySql = new MySqlDB();
             string command = "DELETE FROM jeloltek WHERE jeloltek.id = " + id + ";";
             mySql.Execute(command);
             command = "DELETE FROM kepessegek WHERE kepessegek.jelolt_id = " + id + ";";
@@ -182,9 +203,29 @@ namespace HR_Portal.Source.ViewModel
             }
         }
 
+        public static void AddToFavorite(int id)  //javított
+        {
+            MySqlDB mySql = new MySqlDB();
+            if(!mySql.IsExists("SELECT * FROM jelolt_megfigyelt WHERE user_id = "+ Session.UserData.id + " AND jelolt_id = "+id+""))
+            {
+                DateTime date = DateTime.Today;
+                string command = "INSERT INTO jelolt_megfigyelt (user_id,jelolt_id,date) VALUES(" + Session.UserData.id + "," + id + ",'" + date.Year + "." + Utilities.DateCorrect(date.Month) + "." + Utilities.DateCorrect(date.Day) + ".');";
+                mySql.Execute(command);
+            }
+            mySql.Close();
+        }
+        public static void DeleteFromFavorite(int id)  //javított
+        {
+            MySqlDB mySql = new MySqlDB();
+            string command = "DELETE FROM jelolt_megfigyelt WHERE jelolt_megfigyelt.jelolt_id = " + id + ";";
+            mySql.Execute(command);
+            mySql.Close();
+        }
+
+
         public static void Insert(ModelFullApplicant data)  //javított
         {
-            MySql mySql = new MySql();
+            MySqlDB mySql = new MySqlDB();
             string command = "INSERT INTO jeloltek (`id`, `nev`, `email`, `telefon`, `lakhely`, `ertesult`, `szuldatum`, neme, `tapasztalat_ev`, `munkakor`, `munkakor2`, `munkakor3`, `vegz_terulet`, `nyelvtudas`,`nyelvtudas2`, `reg_date`) " +
                 "VALUES(NULL, '" + data.nev + "',  '" + data.email + "', '" + data.telefon + "', '" + data.lakhely + "', " + data.ertesult + ", " + data.szuldatum + ", " + data.neme + "," + data.tapasztalat_ev + "," + data.munkakor + "," + data.munkakor2 + "," + data.munkakor3 + "," + data.vegz_terulet + "," + data.nyelvtudas + "," + data.nyelvtudas2 + ",'" + data.reg_date + "');";
             mySql.Execute(command);
@@ -196,7 +237,7 @@ namespace HR_Portal.Source.ViewModel
 
         public static void Update(ModelFullApplicant data)  //javított
         {
-            MySql mySql = new MySql();
+            MySqlDB mySql = new MySqlDB();
             string query = "UPDATE jeloltek SET " +
                 " `nev` = '" + data.nev + "'" +
                 ", `email` = '" + data.email + "'" +
@@ -241,7 +282,7 @@ namespace HR_Portal.Source.ViewModel
 
         public static void FirstOpen(int applicantId)
         {
-            MySql mySql = new MySql();
+            MySqlDB mySql = new MySqlDB();
             string command = "UPDATE jeloltek SET friss = false WHERE id = " + applicantId + ";";
             mySql.Execute(command);
             mySql.Close();
@@ -260,7 +301,7 @@ namespace HR_Portal.Source.ViewModel
 
         public void DeleteProject(int id)
         {
-            MySql mySql = new MySql();
+            MySqlDB mySql = new MySqlDB();
             string command = "DELETE FROM projekt_jelolt_kapcs WHERE projekt_id = " + id + " AND jelolt_id = " + Session.ApplicantID + ";";
             mySql.Execute(command);
             mySql.Close();
@@ -268,7 +309,7 @@ namespace HR_Portal.Source.ViewModel
         
         public void AddToProject(int projekt_index)
         {
-            MySql mySql = new MySql();
+            MySqlDB mySql = new MySqlDB();
             string command = "SELECT * FROM projekt_jelolt_kapcs WHERE jelolt_id = " + data.id + " AND projekt_id = "+projekt_index+"";
             if (!mySql.IsExists(command))
             {

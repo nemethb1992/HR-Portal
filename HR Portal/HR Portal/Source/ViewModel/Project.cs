@@ -22,7 +22,7 @@ namespace HR_Portal.Source.ViewModel
         {
             List<ModelProjectList> list = new List<ModelProjectList>();
 
-            string command = "SELECT coalesce((SELECT count(jelolt_id) FROM projekt_jelolt_kapcs WHERE projekt_id = projektek.id GROUP BY jeloltek.id LIMIT 1),0) as jeloltek_db, coalesce((SELECT count(jelolt_id) FROM interjuk_kapcs WHERE projekt_id = projektek.id LIMIT 1),0) as interjuk_db, projektek.id, projektek.publikalt, megnevezes_projekt, megnevezes_munka, fel_datum, projektek.statusz FROM projektek LEFT JOIN projekt_jelolt_kapcs ON projektek.id = projekt_jelolt_kapcs.projekt_id LEFT JOIN jeloltek ON jeloltek.id = projekt_jelolt_kapcs.jelolt_id LEFT JOIN munkakor ON munkakor.id = projektek.munkakor LEFT JOIN pc ON pc.id = projektek.pc LEFT JOIN megjegyzesek ON projektek.id = megjegyzesek.projekt_id " +
+            string command = "SELECT coalesce((SELECT count(jelolt_id) FROM projekt_jelolt_kapcs WHERE projekt_id = projektek.id GROUP BY jeloltek.id LIMIT 1),0) as jeloltek_db, coalesce((SELECT count(jelolt_id) FROM interview WHERE projekt_id = projektek.id LIMIT 1),0) as interjuk_db, projektek.id, projektek.publikalt, megnevezes_projekt, megnevezes_munka, fel_datum, projektek.statusz FROM projektek LEFT JOIN projekt_jelolt_kapcs ON projektek.id = projekt_jelolt_kapcs.projekt_id LEFT JOIN jeloltek ON jeloltek.id = projekt_jelolt_kapcs.jelolt_id LEFT JOIN munkakor ON munkakor.id = projektek.munkakor LEFT JOIN pc ON pc.id = projektek.pc LEFT JOIN megjegyzesek ON projektek.id = megjegyzesek.projekt_id " +
             " WHERE projektek.statusz=" + Session.ProjectStatusz;
             if (searchValue[0].projektnev != "")
             {
@@ -38,7 +38,7 @@ namespace HR_Portal.Source.ViewModel
             }
             if (searchValue[0].interjuk != "0")
             {
-                command += " AND coalesce((SELECT count(jelolt_id) FROM interjuk_kapcs WHERE projekt_id = projektek.id Group by jelolt_id LIMIT 1),0) >=" + searchValue[0].interjuk + " ";
+                command += " AND coalesce((SELECT count(jelolt_id) FROM interview WHERE projekt_id = projektek.id Group by jelolt_id LIMIT 1),0) >=" + searchValue[0].interjuk + " ";
             }
             if (searchValue[0].pc != "")
             {
@@ -113,7 +113,7 @@ namespace HR_Portal.Source.ViewModel
 
         public static void Delete(int id) // javított
         {
-            MySql mySql = new MySql();
+            MySqlDB mySql = new MySqlDB();
             string command;
             command = "DELETE FROM projektek WHERE projektek.id = " + id + ";";
             mySql.Execute(command);
@@ -125,18 +125,18 @@ namespace HR_Portal.Source.ViewModel
             mySql.Execute(command);
             command = "DELETE FROM megjegyzesek WHERE megjegyzesek.projekt_id = " + id + ";";
             mySql.Execute(command);
-            command = "DELETE FROM interjuk_kapcs WHERE interjuk_kapcs.projekt_id = " + id + ";";
+            command = "DELETE FROM interview WHERE interview.projekt_id = " + id + ";";
             mySql.Execute(command);
             command = "DELETE FROM projekt_koltsegek WHERE projekt_koltsegek.projekt_id = " + id + ";";
             mySql.Execute(command);
-            command = "DELETE FROM interjuk_kapcs WHERE interjuk_kapcs.projekt_id=" + id + " AND hr_id=" + Session.UserData.id + "";
+            command = "DELETE FROM interview WHERE interview.projekt_id=" + id + " AND hr_id=" + Session.UserData.id + "";
             mySql.Execute(command);
             mySql.Close();
         }
 
         public static void Insert(ModelInsertProject data) // javított newprojectpanel
         {
-            MySql mySql = new MySql();
+            MySqlDB mySql = new MySqlDB();
             string command = "INSERT INTO projektek (`id`, `hr_id`, `megnevezes_projekt`, `pc`, `vegzettseg`, `tapasztalat_ev`, `statusz`, `fel_datum`, `le_datum`, `nyelvtudas`, `munkakor`, `szuldatum`, `ber`,  `kepesseg1`, `kepesseg2`, `kepesseg3`, `kepesseg4`, `kepesseg5`, `feladatok`, `elvarasok`, `kinalunk`)" +
                 " VALUES (NULL, " + data.hr_id + ", '" + data.megnevezes_projekt + "'," + data.pc + "," + data.vegzettseg + "," + data.tapasztalat_ev + "," + data.statusz + ",'" + data.fel_datum + "','" + data.le_datum + "'," + data.nyelvtudas + "," + data.munkakor + "," + data.szuldatum + "," + data.ber + "," + data.kepesseg1 + "," + data.kepesseg2 + "," + data.kepesseg3 + "," + data.kepesseg4 + "," + data.kepesseg5 + ",'" + data.feladatok + "','" + data.elvarasok + "','" + data.kinalunk + "');";
             mySql.Execute(command);
@@ -149,7 +149,7 @@ namespace HR_Portal.Source.ViewModel
 
         public static void Update(ModelInsertProject data) // javított newprojectpanel
         {
-            MySql mySql = new MySql();
+            MySqlDB mySql = new MySqlDB();
             string command = "UPDATE projektek SET " +
                 " `hr_id` =  " + data.hr_id + ", " +
                 "`megnevezes_projekt` =  '" + data.megnevezes_projekt + "', " +
@@ -181,7 +181,7 @@ namespace HR_Portal.Source.ViewModel
 
         public void projectDescriptionUpdate(string type, string content) // javított
         {
-            MySql mySql = new MySql();
+            MySqlDB mySql = new MySqlDB();
             string command = "";
             switch (type)
             {
@@ -213,7 +213,7 @@ namespace HR_Portal.Source.ViewModel
 
         public void projectCostInsert(string megnevezes, string osszeg)  // javított
         {
-            MySql mySql = new MySql();
+            MySqlDB mySql = new MySqlDB();
             string command = "INSERT INTO `projekt_koltsegek` (id, projekt_id, koltseg_megnevezes, osszeg) VALUES (null, " + Session.ProjektID + ", '" + megnevezes + "', " + osszeg + ");";
             mySql.Execute(command);
             mySql.Close();
@@ -221,7 +221,7 @@ namespace HR_Portal.Source.ViewModel
 
         public void projectCostDelete(int id)  // javított
         {
-            MySql mySql = new MySql();
+            MySqlDB mySql = new MySqlDB();
             string command = "DELETE FROM projekt_koltsegek WHERE projekt_koltsegek.id = " + id + "";
             mySql.Execute(command);
             mySql.Close();
@@ -229,26 +229,29 @@ namespace HR_Portal.Source.ViewModel
 
         public void addErtesitendokInsert(int index)
         {
-            MySql mySql = new MySql();
-            string command = "INSERT INTO projekt_ertesitendok_kapcs (id, projekt_id, ertesitendok_id) VALUES (NULL, " + Session.ProjektID + ", " + index + " );";
-            mySql.Execute(command);
+            MySqlDB mySql = new MySqlDB();
+            if (!mySql.IsExists("SELECT * FROM projekt_ertesitendok_kapcs WHERE ertesitendok_id = " + index + " AND projekt_id = "+data.id))
+            {
+                string command = "INSERT INTO projekt_ertesitendok_kapcs (id, projekt_id, ertesitendok_id) VALUES (NULL, " + Session.ProjektID + ", " + index + " );";
+                mySql.Execute(command);
+            }
             mySql.Close();
         }
 
         public void jeloltKapcsDelete(int id)
         {
-            MySql mySql = new MySql();
+            MySqlDB mySql = new MySqlDB();
             string command;
             command = "DELETE FROM projekt_jelolt_kapcs WHERE jelolt_id = " + id + " AND projekt_id = " + Session.ProjektID + ";";
             mySql.Execute(command);
-            command = "DELETE FROM interjuk_kapcs WHERE jelolt_id = " + id + " AND projekt_id = " + Session.ProjektID + ";";
+            command = "DELETE FROM interview WHERE jelolt_id = " + id + " AND projekt_id = " + Session.ProjektID + ";";
             mySql.Execute(command);
             mySql.Close();
         }
 
         public void jeloltKapcsUpdate(int id, int allapota)
         {
-            MySql mySql = new MySql();
+            MySqlDB mySql = new MySqlDB();
             string command = "UPDATE projekt_jelolt_kapcs SET allapota = " + allapota + " WHERE jelolt_id = " + id + " AND projekt_id = " + Session.ProjektID + ";";
             mySql.Execute(command);
             mySql.Close();
@@ -256,7 +259,7 @@ namespace HR_Portal.Source.ViewModel
 
         public void ertesitendokKapcsDelete(int id)
         {
-            MySql mySql = new MySql();
+            MySqlDB mySql = new MySqlDB();
             string command = "DELETE FROM projekt_ertesitendok_kapcs WHERE ertesitendok_id = " + id + " AND projekt_id = " + Session.ProjektID + ";";
             mySql.Execute(command);
             mySql.Close();
@@ -264,7 +267,7 @@ namespace HR_Portal.Source.ViewModel
 
         public void publishProject(int stat)
         {
-            MySql mySql = new MySql();
+            MySqlDB mySql = new MySqlDB();
             string command = "UPDATE projektek SET publikalt= " + stat + " WHERE projektek.id = " + Session.ProjektID + ";";
             mySql.Execute(command);
             mySql.Close();
@@ -272,7 +275,7 @@ namespace HR_Portal.Source.ViewModel
 
         public void projectArchiver(int id, int statusz) // javított
         {
-            MySql mySql = new MySql();
+            MySqlDB mySql = new MySqlDB();
             if (statusz == 0)
             {
                 statusz = 1;

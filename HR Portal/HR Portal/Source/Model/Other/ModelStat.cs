@@ -23,7 +23,7 @@ namespace HR_Portal.Source.Model.Other
                                WHERE regisztraltak.reg_date > '2019.03.10' AND regisztraltak.reg_date < '2019.03.18' 
                                GROUP BY projektek.megnevezes_projekt";
 
-            MySql mySql = new MySql();
+            MySqlDB mySql = new MySqlDB();
             ModelStat data = new ModelStat();
             if (mySql.Open() == true)
             {

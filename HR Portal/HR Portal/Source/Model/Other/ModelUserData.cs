@@ -25,7 +25,7 @@ namespace HR_Portal.Source.Model
 
         public static List<ModelUserData> GetUserSession(string command)
         {
-            MySql mySql = new MySql();
+            MySqlDB mySql = new MySqlDB();
             List<ModelUserData> list = new List<ModelUserData>();
 
             if (mySql.Open() == true)

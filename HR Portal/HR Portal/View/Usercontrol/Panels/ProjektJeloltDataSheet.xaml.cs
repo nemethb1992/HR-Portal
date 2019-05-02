@@ -43,7 +43,6 @@ namespace HR_Portal.View.Usercontrol.Panels
 
             projekt_jelolt_title_tbl.Text = project.data.megnevezes_projekt + " - " + applicant.data.nev;
             jelolt_telefon.Text = "( " + applicant.data.telefon + " )";
-            megjegyzes_listBox.ItemsSource = Utility.Data_CommentApplicant();
             kapcs_jeloltek_listBox.ItemsSource = new Interview().Data_Interview();
             inter_cim.Items.Add("HR interjú");
             inter_cim.Items.Add("Szakmai + HR");
@@ -92,45 +91,6 @@ namespace HR_Portal.View.Usercontrol.Panels
         protected void backToProjectDataSheet(object sender, RoutedEventArgs e)
         {
             Utilities.NavigateTo(grid, new ProjectDataSheet(grid,project));
-        }
-
-        protected void enterComment(object sender, KeyEventArgs e)
-        {
-            TextBox tbx = sender as TextBox;
-
-            if (e.Key != Key.Enter) return;
-            e.Handled = true;
-            Comment.Add(comment_tartalom.Text, 0, Session.ApplicantID);
-            megjegyzes_listBox.ItemsSource = Utility.Data_CommentApplicant();
-            tbx.Text = "";
-        }
-
-        protected void commentGotFocus(object sender, RoutedEventArgs e)
-        {
-            TextBox tbx = sender as TextBox;
-
-            if (tbx.Text == "Új megjegyzés")
-            {
-                tbx.Text = "";
-            }
-        }
-
-        protected void commentLostFocus(object sender, RoutedEventArgs e)
-        {
-            TextBox textbox = sender as TextBox;
-
-            if (textbox.Text == "")
-            {
-                textbox.Text = "Új megjegyzés";
-            }
-        }
-
-        protected void commentDeleteClick(object sender, RoutedEventArgs e)
-        {
-            ModelComment items = (sender as MenuItem).DataContext as ModelComment;
-
-            Comment.Delete(items.id);
-            megjegyzes_listBox.ItemsSource = Utility.Data_CommentApplicant();
         }
 
         protected void telephonePanelOpenClick(object sender, RoutedEventArgs e)
@@ -224,6 +184,26 @@ namespace HR_Portal.View.Usercontrol.Panels
 
         protected void uj_interju_mentes_btn_Click(object sender, RoutedEventArgs e)
         {
+ 
+            int hour_start = Convert.ToInt32(inter_idopont_hour.Text);
+            int minute_start = Convert.ToInt32(inter_idopont_minute.Text);
+            int hour_end = Convert.ToInt32(inter_idopont_hour_end.Text);
+            int minute_end = Convert.ToInt32(inter_idopont_minute_end.Text);
+            if (hour_start == 0 || hour_start > 24 || minute_start > 59 || hour_end == 0 || hour_end > 24 || minute_end > 59)
+            {
+                InterviewInfo_tbx.Text = "Időpont megadása hibás!";
+                return;
+            }
+            if((hour_start == hour_end && minute_end < minute_start) || hour_end < hour_start)
+            {
+                InterviewInfo_tbx.Text = "Időpont megadása hibás!";
+                return;
+            }
+            if (inter_helyszin.Text == "" || inter_idopont_hour.Text == "" || inter_idopont_minute.Text == "" || inter_idopont_hour_end.Text == "" || inter_idopont_minute_end.Text == "" || inter_date.SelectedDate.ToString() == "")
+            {
+                InterviewInfo_tbx.Text = "Minden mező kitöltése kötelező";
+                return;
+            }
             string datum = "";
             string[] seged = inter_date.SelectedDate.ToString().Split(' ');
             try
@@ -231,16 +211,10 @@ namespace HR_Portal.View.Usercontrol.Panels
                 datum = seged[0] + seged[1] + seged[2];
             }
             catch{ }
-            try
-            {
-                new Interview().addInterview(datum, inter_cim.SelectedItem.ToString(), inter_leiras.Text, inter_helyszin.Text, inter_idopont.Text);
+                new Interview().addInterview(datum, inter_cim.SelectedItem.ToString(), inter_leiras.Text, inter_helyszin.Text, hour_start + ":" + minute_start, hour_end + ":" + minute_end);
                 projectFormLoader();
                 interviewPanelClose();
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Nincs kitöltve minden mező!");
-            }
+            
         }
 
         protected void navigateToInterviewPanel(object sender, RoutedEventArgs e)
@@ -249,6 +223,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             ModelInterview items = btn.DataContext as ModelInterview;
 
             Session.InterViewID = items.id;
+            Utilities.SetReturnPage(Utilities.Views.ProjectJeloltDataSheet);
             Utilities.NavigateTo(grid, new InterviewPanel(grid, new Project(items.projekt_id), new Applicant(items.jelolt_id)));
         }
 

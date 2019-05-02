@@ -35,7 +35,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             {
                 AdminBtn.Visibility = Visibility.Hidden;
             }
-            Source.MySql mySql = new Source.MySql();
+            Source.MySqlDB mySql = new Source.MySqlDB();
             projektek_list.ItemsSource = new Utilities().Data_PorjectListSmall();
             uj_jelolt_result.Text = mySql.Count("SELECT count(jeloltek.id) FROM jeloltek WHERE friss=1 AND jeloltek.reg_date > '"+Session.UserData.belepve+"'").ToString() + " db";
             nem_megnyitott_result.Text = mySql.Count("SELECT count(*) FROM jeloltek WHERE friss = 1").ToString() +" db";
@@ -72,7 +72,7 @@ namespace HR_Portal.View.Usercontrol.Panels
         }
         private void ToFavorites(object sender, MouseButtonEventArgs e)
         {
-            //Utilities.NavigateTo(grid, new FavoritesPanel(grid));
+            Utilities.NavigateTo(grid, new FavoritesPanel(grid));
         }
 
         private void OpenProjectClick(object sender, MouseButtonEventArgs e)

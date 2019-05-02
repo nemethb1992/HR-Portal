@@ -9,6 +9,8 @@ using HR_Portal.Source.Model.Applicant;
 using HR_Portal.Source.ViewModel;
 using HR_Portal.Source.Model.Project;
 using HR_Portal.Public.templates;
+using System.Threading.Tasks;
+
 namespace HR_Portal.View.Usercontrol.Panels
 {
     /// <summary>
@@ -128,20 +130,24 @@ namespace HR_Portal.View.Usercontrol.Panels
 
         private void BackButton(object sender, RoutedEventArgs e)
         {
-            if (Session.lastPage == Utilities.Views.ProjectJeloltDataSheet)
+            switch (Session.lastPage)
             {
-                Utilities.NavigateTo(grid, new ProjektJeloltDataSheet(grid, new Project(0), applicant));
+                case Utilities.Views.ApplicantList:
+                    Utilities.NavigateTo(grid, new ApplicantList(grid));
+                    break;
+                case Utilities.Views.ProjectJeloltDataSheet:
+                    Utilities.NavigateTo(grid, new ProjektJeloltDataSheet(grid, new Project(0), applicant));
+                    break;
+                case Utilities.Views.FavoritePanel:
+                    Utilities.NavigateTo(grid, new FavoritesPanel(grid));
+                    break;
+                default:
+                    Utilities.NavigateTo(grid, new ApplicantList(grid));
+                    break;
             }
-            else
-            {
-                Utilities.NavigateTo(grid, new ApplicantList(grid));
-            }
+
         }
 
-        private void megjegyzes_listBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
 
         private void interjuOpenClick(object sender, RoutedEventArgs e)
         {
@@ -192,6 +198,77 @@ namespace HR_Portal.View.Usercontrol.Panels
 
             grid.Visibility = Visibility.Hidden;
             grid2.Visibility = Visibility.Hidden;
+        }
+
+        protected void CimkeSearchInput_GotFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox tbx = sender as TextBox;
+
+            if (tbx.Text == tbx.Tag.ToString())
+            {
+                tbx.Text = "";
+            }
+        }
+
+        protected void CimkeSearchInput_LostFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox tbx = sender as TextBox;
+
+            if (tbx.Text == "")
+            {
+                tbx.Text = tbx.Tag.ToString();
+            }
+        }
+
+        private void Add_cimke_relation_btn_Click(object sender, RoutedEventArgs e)
+        {
+            Button btn = sender as Button;
+            ModelCimkek item = btn.DataContext as ModelCimkek;
+            new ModelCimkek().AddRelation(applicant.data.id, item.id);
+            cimke_searched_list.ItemsSource = new ModelCimkek().GetAll();
+            cimke_related_list.ItemsSource = new ModelCimkek().GetRelated(applicant.data.id);
+        }
+
+        private void Remove_cimke_relation_btn_Click(object sender, RoutedEventArgs e)
+        {
+            Button btn = sender as Button;
+            ModelCimkek item = btn.DataContext as ModelCimkek;
+            new ModelCimkek().DeleteRelation(applicant.data.id, item.id);
+            cimke_related_list.ItemsSource = new ModelCimkek().GetRelated(applicant.data.id);
+        }
+
+        private async void Cimke_search_tbx_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            TextBox textbox = (TextBox)sender;
+            int fisrtLength = textbox.Text.Length;
+
+            await Task.Delay(250);
+            if (fisrtLength == textbox.Text.Length)
+            {
+                if(textbox.Text == textbox.Tag.ToString())
+                {
+                    cimke_searched_list.ItemsSource = new ModelCimkek().GetAll();
+                    return;
+                }
+                List<ModelCimkek> list = new ModelCimkek().GetSearched(textbox.Text);
+                cimke_searched_list.ItemsSource = list;
+            }
+        }
+
+        private void CimkePanel_Close(object sender, RoutedEventArgs e)
+        {
+            var grid = (Grid)this.FindName("ui_bg");
+            grid.Visibility = Visibility.Hidden;
+            Cimke_Grid.Visibility = Visibility.Hidden;
+        }
+
+        private void CimkePanel_Open(object sender, RoutedEventArgs e)
+        {
+            var grid = (Grid)this.FindName("ui_bg");
+            grid.Visibility = Visibility.Visible;
+            Cimke_Grid.Visibility = Visibility.Visible;
+            cimke_searched_list.ItemsSource = new ModelCimkek().GetAll();
+            cimke_related_list.ItemsSource = new ModelCimkek().GetRelated(applicant.data.id);
         }
     }
 }

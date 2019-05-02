@@ -13,7 +13,7 @@ namespace HR_Portal.Source
     class Utilities
     {
 
-        public enum Views { ApplicantList, ApplicantDataSheet, ProjectList, ProjectDataSheet, InterviewPanel, ProjectJeloltDataSheet };
+        public enum Views { ApplicantList, ApplicantDataSheet, ProjectList, ProjectDataSheet, InterviewPanel, ProjectJeloltDataSheet, FavoritePanel };
 
         public static void SetReturnPage(Views view)
         {
@@ -22,9 +22,9 @@ namespace HR_Portal.Source
 
         //public List<ModelInterview> Data_Interview() //javított
         //{
-        //    string command = "SELECT interjuk_kapcs.id,megnevezes_projekt,jeloltek.nev,interjuk_kapcs.projekt_id,interjuk_kapcs.jelolt_id,jeloltek.email,interjuk_kapcs.hr_id,felvitel_datum,interju_datum,interju_cim,interju_leiras,helyszin ,idopont FROM interjuk_kapcs" +
-        //        " INNER JOIN projektek ON interjuk_kapcs.projekt_id = projektek.id" +
-        //        " INNER JOIN jeloltek ON interjuk_kapcs.jelolt_id = jeloltek.id" +
+        //    string command = "SELECT interview.id,megnevezes_projekt,jeloltek.nev,interview.projekt_id,interview.jelolt_id,jeloltek.email,interview.hr_id,felvitel_datum,interju_datum,interju_cim,interju_leiras,helyszin ,idopont FROM interview" +
+        //        " INNER JOIN projektek ON interview.projekt_id = projektek.id" +
+        //        " INNER JOIN jeloltek ON interview.jelolt_id = jeloltek.id" +
         //        " WHERE jelolt_id = " + Session.ApplicantID+"" +
         //        " AND projekt_id="+ Session.ProjektID+"" +
         //        " ORDER BY felvitel_datum";
@@ -40,8 +40,12 @@ namespace HR_Portal.Source
             List < ModelKompetenciaSummary > list = ModelKompetenciaSummary.GetModelKompetenciaSummary(command);
             return list;
         }
-
-
+        
+        public List<ModelCimkek> Data_Cimkek() // javítva
+        {
+            List<ModelCimkek> list = new ModelCimkek().GetAll();
+            return list;
+        }
         public List<ModelSmallProject> Data_PorjectListSmall()
         {
             string command = "SELECT projektek.id, megnevezes_projekt FROM projektek WHERE statusz = 1";
@@ -107,7 +111,7 @@ namespace HR_Portal.Source
 
         public List<ModelApplicantList> Data_JeloltKapcs()
         {
-            string command = "SELECT coalesce((SELECT count(projekt_id) FROM interjuk_kapcs " +
+            string command = "SELECT coalesce((SELECT count(projekt_id) FROM interview " +
                 "WHERE jelolt_id = jeloltek.id AND projekt_id = " + Session.ProjektID + " Group by projekt_id),0) as interjuk_db, " +
                 "coalesce((SELECT count(projekt_id) FROM projekt_jelolt_kapcs WHERE projekt_jelolt_kapcs.jelolt_id = jeloltek.id),0) as project_db, " +
                 "jeloltek.id,nev,jeloltek.szuldatum,megnevezes_munka,email,reg_date,kepesseg1,kepesseg2,kepesseg3,kepesseg4,kepesseg5, " +
@@ -169,7 +173,7 @@ namespace HR_Portal.Source
                 statusz = 0;
             }
             string command = "UPDATE jeloltek SET statusz=" + statusz + " WHERE jeloltek.id = " + id + ";";
-            MySql mySql = new MySql();
+            MySqlDB mySql = new MySqlDB();
             mySql.Execute(command);
             mySql.Close();
         }
@@ -200,7 +204,7 @@ namespace HR_Portal.Source
         
         public void Delete(int id, string table)
         {
-            MySql mySql = new MySql();
+            MySqlDB mySql = new MySqlDB();
             string command = "DELETE FROM " + table + " WHERE id=" + id + "";
             mySql.Execute(command);
             mySql.Close();
@@ -233,8 +237,11 @@ namespace HR_Portal.Source
                 case "kompetenciak":
                     command = "INSERT INTO `kompetenciak` (`id`, `kompetencia_megnevezes`) VALUES (NULL, '" + content + "');";
                     break;
+                case "cimkek":
+                    command = "INSERT INTO `jelolt_cimkek` (`id`, `cimke_megnevezes`) VALUES (NULL, '" + content + "');";
+                    break;
             }
-            MySql mySql = new MySql();
+            MySqlDB mySql = new MySqlDB();
             mySql.Execute(command);
             mySql.Close();
         }
@@ -256,6 +263,11 @@ namespace HR_Portal.Source
         {
             grid.Children.Clear();
             grid.Children.Add(obj);
+        }
+
+        public static string DateCorrect(int num)
+        {
+            return (num < 10 ? "0" + num.ToString() : num.ToString());
         }
         //public void AddInterPlusOne()
         //{

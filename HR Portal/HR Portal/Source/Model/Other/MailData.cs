@@ -20,7 +20,7 @@ namespace HR_Portal.Source.Model.Other
         public static List<MailData> GetMails()
         {
             List<MailData> list = new List<MailData>();
-            MySql mySql = new MySql();
+            MySqlDB mySql = new MySqlDB();
             if (mySql.Open() == true)
             {
                 string command = "SELECT * FROM email_storage WHERE state=0";
@@ -50,7 +50,7 @@ namespace HR_Portal.Source.Model.Other
         public void SetSent()
         {
             state = 1;
-            MySql mySql = new MySql();
+            MySqlDB mySql = new MySqlDB();
             mySql.Execute("UPDATE `email_storage` SET `state` = 1 WHERE `id` = " + id + ";");
         }
     }

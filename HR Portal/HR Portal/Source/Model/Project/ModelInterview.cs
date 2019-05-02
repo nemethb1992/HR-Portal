@@ -16,16 +16,18 @@ namespace HR_Portal.Source.Model.Project
         public int projekt_id { get; set; }
         public int jelolt_id { get; set; }
         public int hr_id { get; set; }
+        public int sent { get; set; }
         public string felvitel_datum { get; set; }
-        public string interju_datum { get; set; }
+        public string date_start { get; set; }
         public string interju_cim { get; set; }
         public string interju_leiras { get; set; }
         public string helyszin { get; set; }
-        public string idopont { get; set; }
+        public string time_start { get; set; }
+        public string time_end { get; set; }
 
         public static List<ModelInterview> GetModelInterview(string command)
         {
-            MySql mySql = new MySql();
+            MySqlDB mySql = new MySqlDB();
             List<ModelInterview> list = new List<ModelInterview>();
 
             if (mySql.Open() == true)
@@ -43,12 +45,14 @@ namespace HR_Portal.Source.Model.Project
                         projekt_id = Convert.ToInt32(mySql.sdr["projekt_id"]),
                         jelolt_id = Convert.ToInt32(mySql.sdr["jelolt_id"]),
                         hr_id = Convert.ToInt32(mySql.sdr["hr_id"]),
+                        sent = Convert.ToInt32(mySql.sdr["sent"]),
                         felvitel_datum = mySql.sdr["felvitel_datum"].ToString(),
-                        interju_datum = mySql.sdr["interju_datum"].ToString(),
+                        date_start = mySql.sdr["date_start"].ToString(),
                         interju_cim = mySql.sdr["interju_cim"].ToString(),
                         interju_leiras = mySql.sdr["interju_leiras"].ToString(),
                         helyszin = mySql.sdr["helyszin"].ToString(),
-                        idopont = mySql.sdr["idopont"].ToString()
+                        time_start = mySql.sdr["time_start"].ToString(),
+                        time_end = mySql.sdr["time_end"].ToString()
                     });
                 }
                 mySql.sdr.Close();
@@ -59,7 +63,7 @@ namespace HR_Portal.Source.Model.Project
 
         public static List<ModelInterview> GetSzakmaiInterview(string command)
         {
-            MySql mySql = new MySql();
+            MySqlDB mySql = new MySqlDB();
             List<ModelInterview> list = new List<ModelInterview>();
 
             if (mySql.Open() == true)
@@ -75,7 +79,9 @@ namespace HR_Portal.Source.Model.Project
                         projekt_id = Convert.ToInt32(mySql.sdr["projekt_id"]),
                         jelolt_id = Convert.ToInt32(mySql.sdr["jelolt_id"]),
                         jelolt_megnevezes = mySql.sdr["nev"].ToString(),
-                        interju_datum = mySql.sdr["interju_datum"].ToString(),
+                        date_start = mySql.sdr["date_start"].ToString(),
+                        time_start = mySql.sdr["time_start"].ToString(),
+                        time_end = mySql.sdr["time_end"].ToString(),
                         interju_cim = mySql.sdr["interju_cim"].ToString(),
                         helyszin = mySql.sdr["helyszin"].ToString(),
                     });

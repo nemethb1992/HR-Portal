@@ -15,7 +15,7 @@ namespace HR_Portal.Source.Model.Applicant
         public static List<ModelApplicantListbox> GetModelApplicantListboxShort(string command)
         {
             List<ModelApplicantListbox> list = new List<ModelApplicantListbox>();
-            MySql mySql = new MySql();
+            MySqlDB mySql = new MySqlDB();
             if (mySql.Open() == true)
             {
                 mySql.cmd = new MySqlCommand(command, mySql.conn);

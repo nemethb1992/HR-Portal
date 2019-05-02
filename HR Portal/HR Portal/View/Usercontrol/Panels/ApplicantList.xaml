@@ -81,38 +81,60 @@
                     <TextBox x:Name="cimke_label" Visibility="Visible" Grid.Column="1" Grid.Row="2" Panel.ZIndex="1"  Style="{StaticResource panelTbx_style}" Text="Kulcsszavas keresés"/>
                     <CheckBox x:Name="szabad_check" Grid.Column="2" Grid.Row="2" Content="Szabad jelölt" Style="{StaticResource login_check}" VerticalAlignment="Center" HorizontalAlignment="Left" Checked="szabadChecked" Unchecked="szabadUnchecked"/>
                     <CheckBox x:Name="allasban_check" Grid.Column="2" Grid.Row="1" Content="Állásban van" Style="{StaticResource login_check}" VerticalAlignment="Center" HorizontalAlignment="left" Checked="szabadChecked" Unchecked="szabadUnchecked"/>
+                    <Grid Grid.Column="3" Grid.ColumnSpan="2" Grid.RowSpan="3">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="2*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Label x:Name="Munkakorok_label" Padding="3" Grid.Row="0" Panel.ZIndex="1" HorizontalAlignment="Right" Style="{StaticResource search_placeholder_style}" Content="Munkaterület:"/>
+                        <Label x:Name="Vegzettsegek_label" Padding="3" Grid.Row="1" Panel.ZIndex="1" HorizontalAlignment="Right" Style="{StaticResource search_placeholder_style}" Content="Végzettség:"/>
+                        <Label x:Name="Nemek_label" Padding="3" Grid.Row="2" Panel.ZIndex="1" HorizontalAlignment="Right" Style="{StaticResource search_placeholder_style}" Content="Nem:"/>
+                        <Label x:Name="Cimke_label" Padding="3" Grid.Row="3" Panel.ZIndex="1" HorizontalAlignment="Right" Style="{StaticResource search_placeholder_style}" Content="Cimke:"/>
 
-                    <Label x:Name="Munkakorok_label" Grid.Column="3" Grid.Row="0" Panel.ZIndex="1" HorizontalAlignment="Right" Style="{StaticResource search_placeholder_style}" Content="Munkaterület:"/>
-                    <Label x:Name="Vegzettsegek_label" Grid.Column="3" Grid.Row="1" Panel.ZIndex="1" HorizontalAlignment="Right" Style="{StaticResource search_placeholder_style}" Content="Végzettségek:"/>
-                    <Label x:Name="Nemek_label" Grid.Column="3" Grid.Row="2" Panel.ZIndex="1" HorizontalAlignment="Right" Style="{StaticResource search_placeholder_style}" Content="Nemek:"/>
+                        <ComboBox x:Name="munkakor_srccbx" Grid.Column="1" Grid.Row="0" Style="{StaticResource cbx_style}" Height="20" SelectionChanged="searchCbxSelectionChanged">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid >
+                                        <TextBlock Grid.Column="1" Style="{StaticResource checkbox_item_style}" Text="{Binding munkakor}"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                        <ComboBox x:Name="vegzettseg_srccbx"  Grid.Column="1" Grid.Row="1" Style="{StaticResource cbx_style}" Height="20" SelectionChanged="searchCbxSelectionChanged" >
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid >
+                                        <TextBlock Grid.Column="1" Style="{StaticResource checkbox_item_style}" Text="{Binding megnevezes_vegzettseg}"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                        <ComboBox x:Name="nemek_srccbx"  Grid.Column="1" Grid.Row="2" Style="{StaticResource cbx_style}" Height="20" SelectionChanged="searchCbxSelectionChanged" >
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid >
+                                        <TextBlock Grid.Column="1" Style="{StaticResource checkbox_item_style}" Text="{Binding nem}"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                        <ComboBox x:Name="cimke_srccbx"  Grid.Column="1" Grid.Row="3" Style="{StaticResource cbx_style}"  Height="20" SelectionChanged="searchCbxSelectionChanged" >
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid >
+                                        <TextBlock Grid.Column="1" Style="{StaticResource checkbox_item_style}" Text="{Binding cimke_megnevezes}"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                    </Grid>
 
-                    <ComboBox x:Name="munkakor_srccbx" Grid.Column="4" Grid.Row="0" Style="{StaticResource cbx_style}" SelectionChanged="searchCbxSelectionChanged">
-                    <ComboBox.ItemTemplate>
-                        <DataTemplate>
-                            <Grid >
-                                    <TextBlock Grid.Column="1" Style="{StaticResource checkbox_item_style}" Text="{Binding munkakor}"/>
-                            </Grid>
-                        </DataTemplate>
-                    </ComboBox.ItemTemplate>
-                </ComboBox>
-                    <ComboBox x:Name="vegzettseg_srccbx"  Grid.Column="4" Grid.Row="1" Style="{StaticResource cbx_style}" SelectionChanged="searchCbxSelectionChanged" >
-                    <ComboBox.ItemTemplate>
-                        <DataTemplate>
-                            <Grid >
-                                    <TextBlock Grid.Column="1" Style="{StaticResource checkbox_item_style}" Text="{Binding megnevezes_vegzettseg}"/>
-                            </Grid>
-                        </DataTemplate>
-                    </ComboBox.ItemTemplate>
-                </ComboBox>
-                    <ComboBox x:Name="nemek_srccbx"  Grid.Column="4" Grid.Row="2" Style="{StaticResource cbx_style}" SelectionChanged="searchCbxSelectionChanged" >
-                        <ComboBox.ItemTemplate>
-                            <DataTemplate>
-                                <Grid >
-                                    <TextBlock Grid.Column="1" Style="{StaticResource checkbox_item_style}" Text="{Binding nem}"/>
-                                </Grid>
-                            </DataTemplate>
-                        </ComboBox.ItemTemplate>
-                    </ComboBox>
                 </Grid>
             </Border>
 
@@ -159,6 +181,7 @@
                         <Grid.ContextMenu>
                             <ContextMenu>
                                 <MenuItem x:Name="line" Header="{Binding id}"/>
+                                <MenuItem x:Name="add_to_favorit" Header="Megfigyeltekhez ad" Click="MegfigyeltekhezAd"/>
                                 <MenuItem x:Name="send_reject_email" Header="Ideiglenes elutasítás" Click="VisszautasitIdeiglenes"/>
                                 <MenuItem x:Name="modositas" Header="Módosítás" Click="modositasClick"/>
                                 <MenuItem x:Name="archivalas" Header="Archiválás / Aktiválás" Click="applicantArchivateClick"/>
@@ -213,6 +236,82 @@
             </Button>
 
         
+        </Grid>
+
+        <!--Cimke Grid-->
+        <Grid x:Name="Cimke_Grid" Grid.Column="1" Visibility="Hidden" Grid.ColumnSpan="1" Grid.Row="0" Grid.RowSpan="3" Panel.ZIndex="2"  Style="{StaticResource switch_grid_style}" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="50" />
+            </Grid.RowDefinitions>
+            <Border Grid.RowSpan="10" Margin="0" Background="#f1f1f1" Style="{StaticResource HomeContentBorder}"/>
+            <TextBlock x:Name="cimke_title" Padding="20,10"
+                   Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2" 
+                   Style="{StaticResource big_title_style}"
+                   Text="Cimkék" Grid.RowSpan="2"/>
+            <Button Grid.Column="3" Grid.Row="0" Margin="8" Content="Bezárás" HorizontalAlignment="Right" Width="200" Style="{StaticResource StandardButtonWhite}" Click="CimkePanel_Close"/>
+            <Grid  Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <TextBox x:Name="Cimke_search_tbx" Margin="8" Style="{StaticResource Standard_Textbox}" Tag="Keresés" Text="Keresés"  GotFocus="CimkeSearchInput_GotFocus" LostFocus="CimkeSearchInput_LostFocus" TextChanged="Cimke_search_tbx_TextChanged" >
+                    <TextBox.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="3"/>
+                            <Setter Property="Margin" Value="0,0,5,0"/>
+                        </Style>
+                    </TextBox.Resources>
+                </TextBox>
+                <TextBlock Grid.Column="1" Style="{StaticResource minor_title_style}" Padding="10" Text="Jelölthöz adott" />
+                <ListBox x:Name="cimke_searched_list" Grid.Column="0" Grid.Row="1" Margin="10,0,10,10"  Style="{StaticResource small_listBox_style}" HorizontalContentAlignment="Stretch" SelectionMode="Extended" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden">
+                    <ListBox.Resources>
+                        <Style TargetType="{x:Type Border}" BasedOn="{StaticResource BasicContentBorder}"/>
+                        <Style TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource thin_listBoxItem_style}"/>
+                    </ListBox.Resources>
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid >
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="110" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Padding="10,0" Style="{StaticResource panelTbl_style}" Text="{Binding cimke_megnevezes}"/>
+                                <Button x:Name="Add_cimke_relation_btn" Style="{StaticResource StandardButton}" Grid.Column="1" Content="Hozzáadás" Click="Add_cimke_relation_btn_Click"/>
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+                <ListBox x:Name="cimke_related_list" Grid.Column="1" Grid.Row="1" Margin="10,0,10,10"  Style="{StaticResource small_listBox_style}" HorizontalContentAlignment="Stretch" SelectionMode="Extended" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden">
+                    <ListBox.Resources>
+                        <Style TargetType="{x:Type Border}" BasedOn="{StaticResource BasicContentBorder}"/>
+                        <Style TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource thin_listBoxItem_style}"/>
+                    </ListBox.Resources>
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid >
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="110" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Padding="10,0" Style="{StaticResource panelTbl_style}" Text="{Binding cimke_megnevezes}"/>
+                                <Button x:Name="Remove_cimke_relation_btn" Style="{StaticResource StandardButton}" Grid.Column="1" Content="Eltávolít" Click="Remove_cimke_relation_btn_Click"/>
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            
+            </Grid>
+            <Button Grid.Column="3" Grid.Row="3" Margin="5" Content="Archiválás és bezárás" HorizontalAlignment="Right" Width="400" Style="{StaticResource StandardButtonWhite}" Click="ArchivateAndClose_Click"/>
+
         </Grid>
 
     </Grid>
