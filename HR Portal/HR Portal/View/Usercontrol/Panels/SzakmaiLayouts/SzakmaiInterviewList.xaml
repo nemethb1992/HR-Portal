@@ -34,8 +34,6 @@
             </Grid.ColumnDefinitions>
             <Label x:Name="project_label_1" Content="Projekt" Grid.Column="0" Style="{StaticResource project_label_style}"/>
             <Label x:Name="project_label_2" Content="Jelölt" Grid.Column="1" Style="{StaticResource project_label_style}"/>
-            <Label x:Name="project_label_3" Content="Helyszín" Grid.Column="2" Style="{StaticResource project_label_style}"/>
-            <Label x:Name="project_label_4" Content="Dátum" Grid.Column="3" Style="{StaticResource project_label_style}"/>
         </Grid>
         <ListBox x:Name="bevont_interjuk_listbox" Style="{StaticResource small_listBox_style}" Grid.Column="1" Padding="5" Grid.Row="2" HorizontalContentAlignment="Stretch" SelectionMode="Extended">
             <ListBox.Resources>
@@ -44,7 +42,7 @@
             </ListBox.Resources>
             <ListBox.ItemTemplate>
                 <DataTemplate  DataType="ProjectListItems">
-                    <Grid Height="35">
+                    <Grid Height="70">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="320" />
                             <ColumnDefinition Width="150" />
@@ -52,12 +50,21 @@
                             <ColumnDefinition Width="100" />
                             <ColumnDefinition Width="100" />
                         </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
                         <!--<Rectangle Panel.ZIndex="0" Grid.Column="0" Grid.ColumnSpan="6" Fill="#f8f8f8" Stroke="{StaticResource racs_color}"/>-->
-                        <TextBlock  Panel.ZIndex="1" Style="{StaticResource panelTbl_style}" Padding="8,8,0,0" FontSize="15" Grid.Column="0" Text="{Binding projekt_megnevezes}" />
-                        <TextBlock  Panel.ZIndex="1" Style="{StaticResource panelTbl_style}" Padding="8,8,0,0" FontSize="15" Grid.Column="1" Text="{Binding jelolt_megnevezes}" />
-                        <TextBlock  Panel.ZIndex="1" Style="{StaticResource panelTbl_style}" Padding="8,8,0,0" FontSize="15" Grid.Column="2" Text="{Binding helyszin}" />
-                        <TextBlock  Panel.ZIndex="1" Style="{StaticResource panelTbl_style}" Padding="8,8,0,0" FontSize="15" Grid.Column="3" Text="{Binding interju_datum}" />
-                        <Button x:Name="projekt_open_btn" Style="{StaticResource StandardButton}" Grid.Column="4" Margin="2" Content="Megtekint" Click="Szakmai_interju_open_Click"/>
+                        <TextBlock  Panel.ZIndex="1" Style="{StaticResource panelTbl_style}" Padding="8,8,0,0" FontSize="19" Grid.Column="0" Text="{Binding projekt_megnevezes}" />
+                        <TextBlock  Panel.ZIndex="1" Style="{StaticResource panelTbl_style}" Padding="8,8,0,0" FontSize="19" Grid.Column="1" Text="{Binding jelolt_megnevezes}" />
+                        <StackPanel Orientation="Horizontal" Grid.Row="1">
+                            <TextBlock  Panel.ZIndex="1" Style="{StaticResource panelTbl_style}" Padding="8,8,0,0" FontSize="15" Text="{Binding helyszin}" />
+                            <TextBlock  Panel.ZIndex="1" Style="{StaticResource panelTbl_style}" Padding="8,8,0,0" Margin="20,0,0,0" FontSize="15" Text="{Binding date_start}" />
+                            <TextBlock  Panel.ZIndex="1" Style="{StaticResource panelTbl_style}" Padding="8,8,0,0" FontSize="15" Text="{Binding time_start}" />
+                            <TextBlock  Panel.ZIndex="1" Style="{StaticResource panelTbl_style}" Padding="8,8,0,0" FontSize="15" Text="-" />
+                            <TextBlock  Panel.ZIndex="1" Style="{StaticResource panelTbl_style}" Padding="8,8,0,0" FontSize="15" Text="{Binding time_end}" />
+                        </StackPanel>
+                        <Button x:Name="projekt_open_btn" Style="{StaticResource StandardButton}" Grid.Column="4" Margin="2" Grid.RowSpan="2" Content="Megtekint" Click="Szakmai_interju_open_Click"/>
                     </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>

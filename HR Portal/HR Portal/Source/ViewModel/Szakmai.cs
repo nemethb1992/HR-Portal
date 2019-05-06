@@ -18,10 +18,10 @@ namespace HR_Portal.Source.ViewModel
 
         public static List<ModelInterview> Data_SzakmaiInterview()
         {
-            string command = "SELECT interview.id, megnevezes_projekt, interview.projekt_id, interview.jelolt_id, jeloltek.nev,interju_datum,interju_cim,helyszin, sent, period FROM interju_resztvevo_kapcs INNER JOIN interview ON interju_resztvevo_kapcs.interju_id = interview.id " +
+            string command = "SELECT interview.id, megnevezes_projekt, interview.projekt_id, interview.jelolt_id, jeloltek.nev,date_start,time_start,time_end,interju_cim,helyszin, sent FROM interju_resztvevo_kapcs INNER JOIN interview ON interju_resztvevo_kapcs.interju_id = interview.id " +
                 " INNER JOIN projektek ON interview.projekt_id = projektek.id" +
                 " INNER JOIN jeloltek ON interview.jelolt_id = jeloltek.id" +
-                " WHERE interju_resztvevo_kapcs.user_id = " + Session.UserData.id + " ORDER BY interju_datum";
+                " WHERE interju_resztvevo_kapcs.user_id = " + Session.UserData.id + " ORDER BY date_start";
             List<ModelInterview> list = ModelInterview.GetSzakmaiInterview(command);
             return list;
         }
