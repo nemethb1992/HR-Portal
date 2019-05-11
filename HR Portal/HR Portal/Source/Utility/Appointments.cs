@@ -9,6 +9,7 @@ using System.Net;
 using HR_Portal.Utils;
 using HR_Portal.Source;
 using System.Windows;
+using HR_Portal.Public.templates;
 
 namespace HR_Portal.Controller
 {
@@ -26,8 +27,7 @@ namespace HR_Portal.Controller
             Appointment meeting = new Appointment(service);
 
             meeting.Subject = data.Subject;
-            //meeting.Body.BodyType = BodyType.HTML;
-            meeting.Body = data.Body;
+            meeting.Body = new EmailTemplate().MeetingMeghivo(data.interview.projekt_megnevezes, data.interview.date_start + "  " + data.interview.time_start + " - " + data.interview.time_end, data.interview.helyszin, data.interview.jelolt_megnevezes);
             DateTime date_start = DateHandler.GenerateFromString(data.Start, data.Time_start);
             DateTime date_end = DateHandler.GenerateFromString(data.Start, data.Time_end);
             meeting.Start = date_start;

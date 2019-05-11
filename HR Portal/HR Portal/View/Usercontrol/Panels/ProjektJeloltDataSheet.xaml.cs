@@ -198,7 +198,7 @@ namespace HR_Portal.View.Usercontrol.Panels
                 InterviewInfo_tbx.Text = "Időpont megadása hibás!";
                 return;
             }
-            if((hour_start == hour_end && minute_end < minute_start) || hour_end < hour_start)
+            if ((hour_start == hour_end && minute_end < minute_start) || hour_end < hour_start)
             {
                 InterviewInfo_tbx.Text = "Időpont megadása hibás!";
                 return;
@@ -210,11 +210,11 @@ namespace HR_Portal.View.Usercontrol.Panels
             {
                 datum = seged[0] + seged[1] + seged[2];
             }
-            catch{ }
-                new Interview().addInterview(datum, inter_cim.SelectedItem.ToString(), inter_leiras.Text, inter_helyszin.Text, hour_start + ":" + minute_start, hour_end + ":" + minute_end);
-                projectFormLoader();
-                interviewPanelClose();
-            
+            catch { }
+            new Interview().addInterview(datum, inter_cim.SelectedItem.ToString(), inter_leiras.Text, inter_helyszin.Text, hour_start + ":" + (minute_start < 10 ? "0" + minute_start.ToString() : minute_start.ToString()), hour_end + ":" + (minute_end < 10 ? "0"+minute_end.ToString() : minute_end.ToString()));
+            projectFormLoader();
+            interviewPanelClose();
+
         }
 
         protected void navigateToInterviewPanel(object sender, RoutedEventArgs e)

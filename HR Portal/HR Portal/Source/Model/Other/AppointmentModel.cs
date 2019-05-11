@@ -20,11 +20,14 @@ namespace HR_Portal.Source
         public string Location { get; set; }
         public List<string> Attendees { get; set; }
 
+        public ModelInterview interview;
+
         public AppointmentModel TransformData(ModelInterview data)
         {
             AppointmentModel appdata = new AppointmentModel();
             appdata = new AppointmentModel()
             {
+                interview = data,
                 Id = data.id,
                 Subject = data.interju_cim,
                 Body = data.interju_leiras,

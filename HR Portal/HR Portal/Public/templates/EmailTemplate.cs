@@ -65,9 +65,24 @@ namespace HR_Portal.Public.templates
             string content = @"
                                             <h2>Tisztelt " + name + @"!</h2>
                                             <p Style='margin-bottom: 30px;' class=''>
-                                                A következő interjúd időpontja pozícióra:  <b>" + date+ @"</b>
-                                                Pozíció megnevezése: neve: <b>" + projekt_name + @"</b>
-                                                Jelentkező neve: <b>" + jeloltnev + @"</b>
+                                                A következő interjúd időpontja:  <b>" + date+ @"</b><br>
+                                                Pozíció megnevezése: <b>" + projekt_name + @"</b><br>
+                                                Jelentkező neve: <b>" + jeloltnev + @"</b><br>
+                                                Helyszín: <b>" + helyszin + @"</b>
+                                            </p>
+                                            <p>Üdvözlettel:</p>
+                                            <p>Phoenix Mecano Kecskemét Kft.</p>
+                                            <p>Személyügyi Osztály</p>";
+            return front + content + bottom;
+        }
+        public string MeetingMeghivo(string projekt_name, string date, string helyszin, string jeloltnev)
+        {
+            string content = @"
+                                            <h2>Tisztelt Kollega!</h2>
+                                            <p Style='margin-bottom: 30px;' class=''>
+                                                A következő interjúd időpontja:  <b>" + date + @"</b><br>
+                                                Pozíció megnevezése: <b>" + projekt_name + @"</b><br>
+                                                Jelentkező neve: <b>" + jeloltnev + @"</b><br>
                                                 Helyszín: <b>" + helyszin + @"</b>
                                             </p>
                                             <p>Üdvözlettel:</p>
@@ -76,7 +91,6 @@ namespace HR_Portal.Public.templates
             return front + content + bottom;
         }
 
-     
         public string ProjektPublikalo(string name, List<string> hirdetes, List<string> szoveg)
         {
             string hirdetesSeged = "";

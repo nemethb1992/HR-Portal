@@ -91,7 +91,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             interju_projekt_tbl.Text = interview.projekt_megnevezes;
             interju_cim_tbl.Text = interview.interju_cim;
             interju_helye_tbl.Text = interview.helyszin;
-            interju_idopont_tbl.Text = interview.date_start +",  "+ interview.time_start +" - "+ interview.time_end;
+            interju_idopont_tbl.Text = interview.date_start +"   "+ interview.time_start +" - "+ interview.time_end;
             interju_liras_tbl.Text = interview.interju_leiras;
 
             choose_editlist.ItemsSource = Interview.Data_ProjektErtesitendokKapcsolt();
@@ -188,10 +188,10 @@ namespace HR_Portal.View.Usercontrol.Panels
                     {
                         resztvevok.Add(item.name);
                     }
-                    foreach (var item in szemelyek)
-                    {
-                        new Email().Send(item.email, et.Belsos_Meghivo_Email(item.name, interview.projekt_megnevezes, interview.date_start + " - " + interview.time_start, interview.helyszin, interview.jelolt_megnevezes));
-                    }
+                    //foreach (var item in szemelyek)
+                    //{
+                    //    new Email().Send(item.email, et.Belsos_Meghivo_Email(item.name, interview.projekt_megnevezes, interview.date_start + " - " + interview.time_start, interview.helyszin, interview.jelolt_megnevezes));
+                    //}
                     new Email().Send(interview.jelolt_email, et.Jelolt_Meghivo_Email(interview.jelolt_megnevezes, interview.projekt_megnevezes, interview.date_start + " - " + interview.time_start, resztvevok));
 
                     new Appointments().CreateMeeting(new AppointmentModel().TransformData(interview));
