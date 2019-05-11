@@ -184,11 +184,15 @@ namespace HR_Portal.View.Usercontrol.Panels
 
         protected void uj_interju_mentes_btn_Click(object sender, RoutedEventArgs e)
         {
- 
+            if (inter_helyszin.Text == "" || inter_idopont_hour.Text == "" || inter_idopont_hour_end.Text == "" || inter_date.SelectedDate.ToString() == "")
+            {
+                InterviewInfo_tbx.Text = "Minden mező kitöltése kötelező";
+                return;
+            }
             int hour_start = Convert.ToInt32(inter_idopont_hour.Text);
-            int minute_start = Convert.ToInt32(inter_idopont_minute.Text);
+            int minute_start = (inter_idopont_minute.Text != "" ? Convert.ToInt32(inter_idopont_minute.Text) : 0);
             int hour_end = Convert.ToInt32(inter_idopont_hour_end.Text);
-            int minute_end = Convert.ToInt32(inter_idopont_minute_end.Text);
+            int minute_end = (inter_idopont_minute_end.Text != "" ? Convert.ToInt32(inter_idopont_minute_end.Text) : 0);
             if (hour_start == 0 || hour_start > 24 || minute_start > 59 || hour_end == 0 || hour_end > 24 || minute_end > 59)
             {
                 InterviewInfo_tbx.Text = "Időpont megadása hibás!";
@@ -199,11 +203,7 @@ namespace HR_Portal.View.Usercontrol.Panels
                 InterviewInfo_tbx.Text = "Időpont megadása hibás!";
                 return;
             }
-            if (inter_helyszin.Text == "" || inter_idopont_hour.Text == "" || inter_idopont_minute.Text == "" || inter_idopont_hour_end.Text == "" || inter_idopont_minute_end.Text == "" || inter_date.SelectedDate.ToString() == "")
-            {
-                InterviewInfo_tbx.Text = "Minden mező kitöltése kötelező";
-                return;
-            }
+
             string datum = "";
             string[] seged = inter_date.SelectedDate.ToString().Split(' ');
             try
