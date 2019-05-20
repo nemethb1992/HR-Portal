@@ -1,4 +1,7 @@
-﻿using HR_Portal.Source.Model.Project;
+﻿using HR_Portal.Source.Model.Applicant;
+using HR_Portal.Source.Model.Project;
+using HR_Portal_Test.Source.Model.Applicant;
+using HR_Portal_Test.Source.Model.Other;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +26,19 @@ namespace HR_Portal.Source.ViewModel
                 " INNER JOIN jeloltek ON interview.jelolt_id = jeloltek.id" +
                 " WHERE interju_resztvevo_kapcs.user_id = " + Session.UserData.id + " ORDER BY date_start";
             List<ModelInterview> list = ModelInterview.GetSzakmaiInterview(command);
+            return list;
+        }
+
+        public List<ModelApplicantSzakmaiList> Data_JeloltKapcsSzakmai(int projekt_id)
+        {
+            string command = " SELECT jeloltek.id, jeloltek.nev, coalesce((jelolt_allapot_szakmai.state),0) as state FROM jeloltek LEFT JOIN projekt_jelolt_kapcs ON projekt_jelolt_kapcs.jelolt_id = jeloltek.id LEFT JOIN jelolt_allapot_szakmai ON jeloltek.id = jelolt_allapot_szakmai.jelolt_id WHERE projekt_jelolt_kapcs.projekt_id = "+ projekt_id;
+            List<ModelApplicantSzakmaiList> list = new ModelApplicantSzakmaiList().Get(command);
+            return list;
+        }
+        public static List<ModelSzakmaiInterviewIgeny> Data_SzakmaiInterviewIgeny(int projekt_id)
+        {
+            string command = "SELECT * FROM jelolt_allapot_szakmai WHERE user_id="+Session.UserData.id +" AND projekt_id="+ projekt_id;
+            List<ModelSzakmaiInterviewIgeny> list = new ModelSzakmaiInterviewIgeny().Get(command);
             return list;
         }
     }

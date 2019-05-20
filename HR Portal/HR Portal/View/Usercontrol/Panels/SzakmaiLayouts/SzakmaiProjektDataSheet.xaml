@@ -169,17 +169,24 @@
                 </ListBox.Resources>
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <Grid Height="50" Margin="0,2">
+                        <Grid Height="50" Margin="2" Background="{Binding color}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="30" />
                                 <ColumnDefinition Width="100" />
                                 <ColumnDefinition Width="80" />
                                 <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="100" />
                                 <ColumnDefinition Width="50" />
                                 <!--<ColumnDefinition Width="18" />-->
                             </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Column="0" Grid.ColumnSpan="4" Margin="15,10,0,0" Style="{StaticResource panelTbl_style}" Text="{Binding nev}"/>
-                            <Button x:Name="tovabb_jeloltre_btn" Grid.Column="4" Grid.RowSpan="2" FontSize="12"  Style="{StaticResource next_panelBtn_style}" Click="openApplicant">
+                            <TextBlock Grid.Column="0" Grid.ColumnSpan="4" Margin="7,0,0,0" FontSize="15" Style="{StaticResource panelTbl_style}" Text="{Binding nev}"/>
+                            <TextBlock Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="4" Margin="10,0,0,0" FontSize="11" Style="{StaticResource panelTbl_style}" Text="{Binding label}"/>
+                            <Button x:Name="interju_igenyles" Grid.Column="4" Grid.RowSpan="2" FontSize="12"  Style="{StaticResource next_panelBtn_style}" Click="Interju_igenyles_Click" Content="Interjú" Background="#f2f2f2"/>
+                            <Button x:Name="tovabb_jeloltre_btn" Grid.Column="5" Grid.RowSpan="2" FontSize="12"  Style="{StaticResource next_panelBtn_style}" Click="openApplicant">
                                 <Image Source="/Public/imgs/next.png" Height="24" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                             </Button>
                         </Grid>
@@ -187,5 +194,94 @@
             </ListBox.ItemTemplate>
         </ListBox>
     </Grid>
+        <Grid x:Name="Interview_request_panel" Tag="ui_bg" Grid.Row="0" Grid.Column="0" Visibility="Hidden" Grid.ColumnSpan="5" Grid.RowSpan="6" Panel.ZIndex="2" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="600" />
+                <ColumnDefinition Width="1*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="700" />
+                <RowDefinition Height="1*" />
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="1" Grid.Column="1" Background="#f1f1f1" Style="{StaticResource gridShadow}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="50" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="30" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="50" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="55" />
+                    <RowDefinition Height="0" />
+                    <RowDefinition Height="20" />
+                    <RowDefinition Height="45" />
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="45" />
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="45" />
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="45" />
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="45" />
+                    <RowDefinition Height="45" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="70" />
+                </Grid.RowDefinitions>
+                <Grid.Resources>
+                    <Style TargetType="{x:Type Border}" BasedOn="{StaticResource listCorner}">
+                        <Setter Property="CornerRadius" Value="5,5,0,0"/>
+                    </Style>
+                    <Style TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource listBoxItem_style}"/>
+                </Grid.Resources>
+                <Border Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="5" Grid.RowSpan="17" CornerRadius="5" Margin="35,65,35,80" Background="{StaticResource SearchPanelColor}"/>
+
+                <TextBlock x:Name="InterviewInfo_tbx" Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="1" Foreground="red" Style="{StaticResource Standard_Textblock}" Padding="0" Text="" />
+                <TextBlock  Style="{StaticResource big_title_style}" Text="Új interjú igénylése" Grid.ColumnSpan="3" Grid.Column="1"  Margin="0,20,0,0"/>
+
+                <TextBlock x:Name="inter_jelolt" Style="{StaticResource big_title_style}" Text=""  Grid.ColumnSpan="2" FontSize="22" Grid.Column="1" Grid.Row="2" Grid.RowSpan="2"  Margin="0,20,0,0"/>
+                <TextBlock x:Name="inter_jelolt_id" Visibility="Hidden" Style="{StaticResource big_title_style}" Text=""  Grid.ColumnSpan="2" FontSize="22" Grid.Column="1" Grid.Row="2" Grid.RowSpan="2"  Margin="0,20,0,0"/>
+                <TextBlock Grid.Column="1" Grid.Row="4" Style="{StaticResource Standard_Textblock}" Text="Helyszín" />
+                <TextBox x:Name="inter_helyszin" Grid.Column="1" Grid.ColumnSpan="3"  Grid.Row="5" Style="{StaticResource Standard_Textbox}" Margin="0,5" Background="White"/>
+                <TextBlock Grid.Column="1" Grid.Row="6" Style="{StaticResource Standard_Textblock}"  Text="Dátum" />
+                <DatePicker x:Name="inter_date" Grid.Column="1" IsEnabled="True"  Grid.ColumnSpan="3" Margin="0,5" Style="{StaticResource Standard_DatePicker}" SelectedDateFormat="Short"  Grid.Row="7"/>
+                <Grid Grid.Column="1" Grid.Row="8" Grid.ColumnSpan="3" Grid.RowSpan="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="60" />
+                        <ColumnDefinition Width="20" />
+                        <ColumnDefinition Width="60" />
+                        <ColumnDefinition Width="70" />
+                        <ColumnDefinition Width="60" />
+                        <ColumnDefinition Width="20" />
+                        <ColumnDefinition Width="60" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30" />
+                        <RowDefinition Height="45" />
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="5" Style="{StaticResource Standard_Textblock}" Text="Kezdés (óra : perc)" />
+                    <TextBlock Grid.Column="4" Grid.Row="0" Grid.ColumnSpan="5" Style="{StaticResource Standard_Textblock}" Text="Vége (óra : perc)" />
+                    <TextBlock Grid.Column="3" Grid.Row="1" TextAlignment="Center" Style="{StaticResource Standard_Textblock}" Text=" - " />
+                    <TextBox x:Name="inter_idopont_hour" Grid.Column="0" Grid.Row="1" Style="{StaticResource Standard_Textbox}" Margin="0,5" Background="White" PreviewTextInput="numericTextBox"/>
+                    <TextBlock Grid.Column="1" Grid.Row="1" TextAlignment="Center" Style="{StaticResource Standard_Textblock}" Text=":" />
+                    <TextBox x:Name="inter_idopont_minute" Grid.Column="2" Grid.Row="1" Style="{StaticResource Standard_Textbox}" Margin="0,5" Background="White" PreviewTextInput="numericTextBox"/>
+
+                    <TextBox x:Name="inter_idopont_hour_end" Grid.Column="4" Grid.Row="1" Style="{StaticResource Standard_Textbox}" Margin="0,5" Background="White" PreviewTextInput="numericTextBox"/>
+                    <TextBlock Grid.Column="5" Grid.Row="1" TextAlignment="Center" Style="{StaticResource Standard_Textblock}" Text=":" />
+                    <TextBox x:Name="inter_idopont_minute_end" Grid.Column="6" Grid.Row="1" Style="{StaticResource Standard_Textbox}" Margin="0,5" Background="White" PreviewTextInput="numericTextBox"/>
+
+                </Grid>
+                <TextBlock Grid.Column="1" Grid.Row="10" Style="{StaticResource Standard_Textblock}"  Text="Megjegyzés" />
+                <TextBox x:Name="inter_leiras" Grid.Column="1"   Grid.ColumnSpan="3" Grid.Row="11" Grid.RowSpan="3" Style="{StaticResource BigText_style}" Margin="0,5,0,20" Background="White" />
+
+                <Button x:Name="uj_interju_megsem_btn" Grid.Column="1" Grid.Row="16" Content="Mégsem"  Style="{StaticResource StandardButtonWhite}" Height="45" VerticalAlignment="Top" Click="Uj_interju_megsem_btn_Click" />
+                <Button x:Name="uj_interju_mentes_btn" Grid.Column="3" Grid.Row="16" Content="Küldés"  Style="{StaticResource StandardButtonWhite}" Height="45" VerticalAlignment="Top" Click="Uj_interju_mentes_btn_Click"/>
+
+            </Grid>
+        </Grid>
+
     </Grid>
 </UserControl>

@@ -198,6 +198,7 @@
     <Compile Include="Source\Model\Applicant\ModelApplicantList.cs" />
     <Compile Include="Source\Model\Applicant\ModelApplicantListbox.cs" />
     <Compile Include="Source\Model\Applicant\ModelApplicantSearchBar.cs" />
+    <Compile Include="Source\Model\Applicant\ModelApplicantSzakmaiList.cs" />
     <Compile Include="Source\Model\Applicant\ModelFullApplicant.cs" />
     <Compile Include="Source\Model\Applicant\ModelProfession.cs" />
     <Compile Include="Source\Model\Other\AppointmentModel.cs" />
@@ -208,6 +209,7 @@
     <Compile Include="Source\Model\Other\MailData.cs" />
     <Compile Include="Source\Model\Other\ModelOther.cs" />
     <Compile Include="Source\Model\Other\ModelStat.cs" />
+    <Compile Include="Source\Model\Other\ModelSzakmaiInterviewIgeny.cs" />
     <Compile Include="Source\Model\Other\ModelUserData.cs" />
     <Compile Include="Source\Model\Project\ModelFullProject.cs" />
     <Compile Include="Source\Model\Project\ModelInsertProject.cs" />

@@ -75,6 +75,28 @@ namespace HR_Portal.Public.templates
                                             <p>Személyügyi Osztály</p>";
             return front + content + bottom;
         }
+
+        public string Meeting_igenyles(string hr_nev, string igenylo_nev,string jelolt_nev, string projekt_name, string date, string idopont, string helyszin, string megjegyzes)
+        {
+            string megjegyzesContent = "";
+            if (megjegyzes != "")
+            {
+                megjegyzesContent = "<br>Megjegyzés:  " + megjegyzes + "<br>";
+            }
+            string content = @"
+                                            <h2>Tisztelt " + hr_nev + @"!</h2>
+                                            <p Style='margin-bottom: 30px;' class=''>
+                                                A következő adatokkal szeretnék interjút igényelni.<br><br>
+                                                Pozíció megnevezése: <b>" + projekt_name + @"</b><br>
+                                                Jelentkező neve: <b>" + jelolt_nev + @"</b><br>
+                                                Időpont:  <b>" + date + "     " + idopont + @"</b><br>
+                                                Helyszín: <b>" + helyszin + @"</b>"+ megjegyzesContent+@"
+                                            </p>
+                                            <p>Üdvözlettel:</p>
+                                            <p>Phoenix Mecano Kecskemét Kft.</p>
+                                            <p>"+ igenylo_nev + "</p>";
+            return front + content + bottom;
+        }
         public string MeetingMeghivo(string projekt_name, string date, string helyszin, string jeloltnev)
         {
             string content = @"
