@@ -9,6 +9,7 @@ using HR_Portal.Source.Model;
 using HR_Portal.Source.ViewModel;
 using HR_Portal.Source.Model.Project;
 using HR_Portal.Public.templates;
+using HR_Portal.Utils;
 
 namespace HR_Portal.View.Usercontrol.Panels
 {
@@ -151,6 +152,9 @@ namespace HR_Portal.View.Usercontrol.Panels
 
         protected void interviewPanelOpen()
         {
+            inter_date_year.Text = DateTime.Now.Year.ToString();
+            inter_date_month.Text = DateTime.Now.Month.ToString();
+            inter_date_day.Text = "";
             var grid = (Grid)this.FindName("ui_bg");
             var grid2 = (Grid)this.FindName("uj_interju_panel");
 
@@ -184,15 +188,26 @@ namespace HR_Portal.View.Usercontrol.Panels
 
         protected void uj_interju_mentes_btn_Click(object sender, RoutedEventArgs e)
         {
-            if (inter_helyszin.Text == "" || inter_idopont_hour.Text == "" || inter_idopont_hour_end.Text == "" || inter_date.SelectedDate.ToString() == "")
+            if (inter_helyszin.Text == "" || inter_idopont_hour.Text == "" || inter_idopont_hour_end.Text == "" || inter_date_year.Text == "" || inter_date_month.Text == "" || inter_date_day.Text == "")
             {
                 InterviewInfo_tbx.Text = "Minden mező kitöltése kötelező";
+                return;
+            }
+            if (Convert.ToUInt32(inter_date_year.Text) < 1900 ||
+                Convert.ToUInt32(inter_date_year.Text) > 2100 ||
+                Convert.ToUInt32(inter_date_day.Text) > 31 ||
+                Convert.ToUInt32(inter_date_day.Text) < 1 ||
+                Convert.ToUInt32(inter_date_month.Text) > 12 ||
+                Convert.ToUInt32(inter_date_month.Text) < 1)
+            {
+                InterviewInfo_tbx.Text = "Dátum megadása hibás!";
                 return;
             }
             int hour_start = Convert.ToInt32(inter_idopont_hour.Text);
             int minute_start = (inter_idopont_minute.Text != "" ? Convert.ToInt32(inter_idopont_minute.Text) : 0);
             int hour_end = Convert.ToInt32(inter_idopont_hour_end.Text);
             int minute_end = (inter_idopont_minute_end.Text != "" ? Convert.ToInt32(inter_idopont_minute_end.Text) : 0);
+    
             if (hour_start == 0 || hour_start > 24 || minute_start > 59 || hour_end == 0 || hour_end > 24 || minute_end > 59)
             {
                 InterviewInfo_tbx.Text = "Időpont megadása hibás!";
@@ -204,13 +219,7 @@ namespace HR_Portal.View.Usercontrol.Panels
                 return;
             }
 
-            string datum = "";
-            string[] seged = inter_date.SelectedDate.ToString().Split(' ');
-            try
-            {
-                datum = seged[0] + seged[1] + seged[2];
-            }
-            catch { }
+            string datum = inter_date_year.Text+"."+DateHandler.NormalForm(Convert.ToUInt32(inter_date_month.Text).ToString()) + "."+ DateHandler.NormalForm(Convert.ToUInt32(inter_date_day.Text).ToString())+".";
             new Interview().addInterview(datum, inter_cim.SelectedItem.ToString(), inter_leiras.Text, inter_helyszin.Text, hour_start + ":" + (minute_start < 10 ? "0" + minute_start.ToString() : minute_start.ToString()), hour_end + ":" + (minute_end < 10 ? "0"+minute_end.ToString() : minute_end.ToString()));
             projectFormLoader();
             interviewPanelClose();

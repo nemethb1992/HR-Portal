@@ -16,5 +16,13 @@ namespace HR_Portal.Utils
             date = new DateTime(Convert.ToInt32(dateSplit[0]), Convert.ToInt32(dateSplit[1]), Convert.ToInt32(dateSplit[2]),Convert.ToInt32(timeSplit[0]),Convert.ToInt32(timeSplit[1]),0);
             return date;
         }
+        public static string NormalForm(string item)
+        {
+            if(Convert.ToUInt32(item) < 10)
+            {
+                item = "0" + item;
+            }
+            return item;
+        }
     }
 }

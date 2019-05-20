@@ -229,7 +229,18 @@
                 <TextBlock Grid.Column="1" Grid.Row="4" Style="{StaticResource Standard_Textblock}" Text="Helyszín" />
                 <TextBox x:Name="inter_helyszin" Grid.Column="1" Grid.ColumnSpan="3"  Grid.Row="5" Style="{StaticResource Standard_Textbox}" Margin="0,5" Background="White"/>
                 <TextBlock Grid.Column="1" Grid.Row="6" Style="{StaticResource Standard_Textblock}"  Text="Dátum" />
-                <DatePicker x:Name="inter_date" Grid.Column="1" IsEnabled="True"  Grid.ColumnSpan="3" Margin="0,5" Style="{StaticResource Standard_DatePicker}" SelectedDateFormat="Short"  Grid.Row="7"/>
+                <!--<DatePicker x:Name="inter_date" Grid.Column="1" IsEnabled="True"  Grid.ColumnSpan="3" Margin="0,5" Style="{StaticResource Standard_DatePicker}" SelectedDateFormat="Short"  Grid.Row="7"/>-->
+                <Grid Grid.Column="1" Grid.Row="7" Grid.ColumnSpan="3">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="80" />
+                        <ColumnDefinition Width="60" />
+                        <ColumnDefinition Width="60" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <TextBox x:Name="inter_date_year" Grid.Column="0" Style="{StaticResource Standard_Textbox}" Margin="0,5" Background="White" PreviewTextInput="numericTextBox"/>
+                    <TextBox x:Name="inter_date_month" Grid.Column="1"  Style="{StaticResource Standard_Textbox}" Margin="5" Background="White" PreviewTextInput="numericTextBox"/>
+                    <TextBox x:Name="inter_date_day" Grid.Column="2"  Style="{StaticResource Standard_Textbox}" Margin="5" Background="White" PreviewTextInput="numericTextBox"/>
+                </Grid>
                 <Grid Grid.Column="1" Grid.Row="8" Grid.ColumnSpan="3" Grid.RowSpan="2">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="60" />

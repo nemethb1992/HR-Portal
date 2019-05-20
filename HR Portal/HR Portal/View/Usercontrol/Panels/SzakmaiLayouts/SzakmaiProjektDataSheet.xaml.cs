@@ -12,6 +12,7 @@ using System;
 using HR_Portal.Public.templates;
 using System.Text.RegularExpressions;
 using HR_Portal_Test.Source.Model.Other;
+using HR_Portal.Utils;
 
 namespace HR_Portal.View.Usercontrol.Panels.SzakmaiLayouts
 {
@@ -134,6 +135,7 @@ namespace HR_Portal.View.Usercontrol.Panels.SzakmaiLayouts
         {
             var grid = (Grid)this.FindName("Interview_request_panel");
             inter_jelolt.Text = "";
+            InterviewInfo_tbx.Text = "";
             inter_helyszin.Text = "";
             inter_idopont_hour.Text = "";
             inter_idopont_minute.Text = "";
@@ -149,9 +151,19 @@ namespace HR_Portal.View.Usercontrol.Panels.SzakmaiLayouts
         }
         private void Uj_interju_mentes_btn_Click(object sender, RoutedEventArgs e)
         {
-            if (inter_helyszin.Text == "" || inter_idopont_hour.Text == "" || inter_idopont_hour_end.Text == "" || inter_date.SelectedDate.ToString() == "")
+            if (inter_helyszin.Text == "" || inter_idopont_hour.Text == "" || inter_idopont_hour_end.Text == "" || inter_date_year.Text == "" || inter_date_month.Text == "" || inter_date_day.Text == "")
             {
                 InterviewInfo_tbx.Text = "Minden mező kitöltése kötelező";
+                return;
+            }
+            if (Convert.ToUInt32(inter_date_year.Text) < 1900 ||
+                Convert.ToUInt32(inter_date_year.Text) > 2100 ||
+                Convert.ToUInt32(inter_date_day.Text) > 31 ||
+                Convert.ToUInt32(inter_date_day.Text) < 1 ||
+                Convert.ToUInt32(inter_date_month.Text) > 12 ||
+                Convert.ToUInt32(inter_date_month.Text) < 1)
+            {
+                InterviewInfo_tbx.Text = "Dátum megadása hibás!";
                 return;
             }
             int hour_start = Convert.ToInt32(inter_idopont_hour.Text);
@@ -169,14 +181,8 @@ namespace HR_Portal.View.Usercontrol.Panels.SzakmaiLayouts
                 return;
             }
 
-            string datum = "";
-            string[] seged = inter_date.SelectedDate.ToString().Split(' ');
-            try
-            {
-                datum = seged[0] + seged[1] + seged[2];
-            }
-            catch { }
-            ModelUserData user = UserData.GetById(projekt.hr_id);
+                string datum = inter_date_year.Text + "." + DateHandler.NormalForm(Convert.ToUInt32(inter_date_month.Text).ToString()) + "." + DateHandler.NormalForm(Convert.ToUInt32(inter_date_day.Text).ToString()) + ".";
+                ModelUserData user = UserData.GetById(projekt.hr_id);
             string idopont = hour_start + ":" + (minute_start < 10 ? "0" + minute_start.ToString() : minute_start.ToString()) +" - "+ hour_end +":" + (minute_end < 10 ? "0" + minute_end.ToString() : minute_end.ToString());
             new Email().Send(user.email, new EmailTemplate().Meeting_igenyles(user.name, Session.UserData.name, inter_jelolt.Text, projekt.megnevezes_projekt, datum, idopont, inter_helyszin.Text, inter_leiras.Text));
             new ModelSzakmaiInterviewIgeny().Insert(new ModelSzakmaiInterviewIgeny { jelolt_id = Convert.ToInt32(inter_jelolt_id.Text), projekt_id = projekt.id, user_id = Session.UserData.id, state = 1 });
@@ -188,6 +194,10 @@ namespace HR_Portal.View.Usercontrol.Panels.SzakmaiLayouts
         {
             Button button = sender as Button;
             ModelApplicantSzakmaiList items = button.DataContext as ModelApplicantSzakmaiList;
+
+            inter_date_year.Text = DateTime.Now.Year.ToString();
+            inter_date_month.Text = DateTime.Now.Month.ToString();
+            inter_date_day.Text = "";
 
             var grid = (Grid)this.FindName("Interview_request_panel");
             grid.Visibility = Visibility.Visible;

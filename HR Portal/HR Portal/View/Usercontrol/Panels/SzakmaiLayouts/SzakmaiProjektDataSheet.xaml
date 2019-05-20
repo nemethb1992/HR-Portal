@@ -216,6 +216,7 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="55" />
                     <RowDefinition Height="0" />
+                    <RowDefinition Height="10" />
                     <RowDefinition Height="20" />
                     <RowDefinition Height="45" />
                     <RowDefinition Height="30" />
@@ -238,16 +239,26 @@
                 </Grid.Resources>
                 <Border Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="5" Grid.RowSpan="17" CornerRadius="5" Margin="35,65,35,80" Background="{StaticResource SearchPanelColor}"/>
 
-                <TextBlock x:Name="InterviewInfo_tbx" Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="1" Foreground="red" Style="{StaticResource Standard_Textblock}" Padding="0" Text="" />
+                <TextBlock x:Name="InterviewInfo_tbx" Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="3" Foreground="red" Style="{StaticResource Standard_Textblock}" Padding="0" />
                 <TextBlock  Style="{StaticResource big_title_style}" Text="Új interjú igénylése" Grid.ColumnSpan="3" Grid.Column="1"  Margin="0,20,0,0"/>
 
-                <TextBlock x:Name="inter_jelolt" Style="{StaticResource big_title_style}" Text=""  Grid.ColumnSpan="2" FontSize="22" Grid.Column="1" Grid.Row="2" Grid.RowSpan="2"  Margin="0,20,0,0"/>
-                <TextBlock x:Name="inter_jelolt_id" Visibility="Hidden" Style="{StaticResource big_title_style}" Text=""  Grid.ColumnSpan="2" FontSize="22" Grid.Column="1" Grid.Row="2" Grid.RowSpan="2"  Margin="0,20,0,0"/>
-                <TextBlock Grid.Column="1" Grid.Row="4" Style="{StaticResource Standard_Textblock}" Text="Helyszín" />
-                <TextBox x:Name="inter_helyszin" Grid.Column="1" Grid.ColumnSpan="3"  Grid.Row="5" Style="{StaticResource Standard_Textbox}" Margin="0,5" Background="White"/>
-                <TextBlock Grid.Column="1" Grid.Row="6" Style="{StaticResource Standard_Textblock}"  Text="Dátum" />
-                <DatePicker x:Name="inter_date" Grid.Column="1" IsEnabled="True"  Grid.ColumnSpan="3" Margin="0,5" Style="{StaticResource Standard_DatePicker}" SelectedDateFormat="Short"  Grid.Row="7"/>
-                <Grid Grid.Column="1" Grid.Row="8" Grid.ColumnSpan="3" Grid.RowSpan="2">
+                <TextBlock x:Name="inter_jelolt" Style="{StaticResource big_title_style}" Text=""  Grid.ColumnSpan="2" FontSize="22" Grid.Column="1" Grid.Row="4"/>
+                <TextBlock x:Name="inter_jelolt_id" Visibility="Hidden" Style="{StaticResource big_title_style}" Text=""  Grid.ColumnSpan="2" FontSize="22" Grid.Column="1" Grid.Row="3" Grid.RowSpan="2"  Margin="0,20,0,0"/>
+                <TextBlock Grid.Column="1" Grid.Row="5" Style="{StaticResource Standard_Textblock}" Text="Helyszín" />
+                <TextBox x:Name="inter_helyszin" Grid.Column="1" Grid.ColumnSpan="3"  Grid.Row="6" Style="{StaticResource Standard_Textbox}" Margin="0,5" Background="White"/>
+                <TextBlock Grid.Column="1" Grid.Row="7" Style="{StaticResource Standard_Textblock}"  Text="Dátum" />
+                <Grid Grid.Column="1" Grid.Row="8" Grid.ColumnSpan="3">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="80" />
+                        <ColumnDefinition Width="60" />
+                        <ColumnDefinition Width="60" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <TextBox x:Name="inter_date_year" Grid.Column="0" Style="{StaticResource Standard_Textbox}" Margin="0,5" Background="White" PreviewTextInput="numericTextBox"/>
+                    <TextBox x:Name="inter_date_month" Grid.Column="1"  Style="{StaticResource Standard_Textbox}" Margin="5" Background="White" PreviewTextInput="numericTextBox"/>
+                    <TextBox x:Name="inter_date_day" Grid.Column="2"  Style="{StaticResource Standard_Textbox}" Margin="5" Background="White" PreviewTextInput="numericTextBox"/>
+                </Grid>
+                <Grid Grid.Column="1" Grid.Row="9" Grid.ColumnSpan="3" Grid.RowSpan="2">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="60" />
                         <ColumnDefinition Width="20" />
@@ -274,8 +285,8 @@
                     <TextBox x:Name="inter_idopont_minute_end" Grid.Column="6" Grid.Row="1" Style="{StaticResource Standard_Textbox}" Margin="0,5" Background="White" PreviewTextInput="numericTextBox"/>
 
                 </Grid>
-                <TextBlock Grid.Column="1" Grid.Row="10" Style="{StaticResource Standard_Textblock}"  Text="Megjegyzés" />
-                <TextBox x:Name="inter_leiras" Grid.Column="1"   Grid.ColumnSpan="3" Grid.Row="11" Grid.RowSpan="3" Style="{StaticResource BigText_style}" Margin="0,5,0,20" Background="White" />
+                <TextBlock Grid.Column="1" Grid.Row="11" Style="{StaticResource Standard_Textblock}"  Text="Megjegyzés" />
+                <TextBox x:Name="inter_leiras" Grid.Column="1"   Grid.ColumnSpan="3" Grid.Row="12" Grid.RowSpan="3" Style="{StaticResource BigText_style}" Margin="0,5,0,20" Background="White" />
 
                 <Button x:Name="uj_interju_megsem_btn" Grid.Column="1" Grid.Row="16" Content="Mégsem"  Style="{StaticResource StandardButtonWhite}" Height="45" VerticalAlignment="Top" Click="Uj_interju_megsem_btn_Click" />
                 <Button x:Name="uj_interju_mentes_btn" Grid.Column="3" Grid.Row="16" Content="Küldés"  Style="{StaticResource StandardButtonWhite}" Height="45" VerticalAlignment="Top" Click="Uj_interju_mentes_btn_Click"/>
