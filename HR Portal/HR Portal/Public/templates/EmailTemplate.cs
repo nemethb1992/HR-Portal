@@ -11,7 +11,7 @@ namespace HR_Portal.Public.templates
 
         public string Udvozlo_Email(string name)
         {
-            string content = "<h2>Tisztelt "+ name + @"!</h2><p>Köszönjük jelentkezését, kollegáink megkezdték pályázata feldolgozását.Amennyiben megtaláljuk az Ön számára alkalmas pozíciót, felvesszük Önnel a kapcsolatot.</p><p>Felhívjuk figyelmét, hogy adatait 1 évig tároljuk adatbázisunkban.</p><p Style='margin-bottom: 30px'>Amennyiben szeretné módosítani adatait vagy törölni jelentkezését, kérjük jelezze a privacy@phoenix-mecano.hu e-mail címen.</p><p>Üdvözlettel:</p><p>Phoenix Mecano Kecskemét Kft.</p><p>Személyügyi Osztály</p></td>";
+            string content = "<br><h2>Tisztelt "+ name + @"!</h2><p>Köszönjük jelentkezését, kollegáink megkezdték pályázata feldolgozását.Amennyiben megtaláljuk az Ön számára alkalmas pozíciót, felvesszük Önnel a kapcsolatot.</p><p>Felhívjuk figyelmét, hogy adatait 1 évig tároljuk adatbázisunkban.</p><p Style='margin-bottom: 30px'>Amennyiben szeretné módosítani adatait vagy törölni jelentkezését, kérjük jelezze a privacy@phoenix-mecano.hu e-mail címen.</p><p>Üdvözlettel:</p><p>Phoenix Mecano Kecskemét Kft.</p><p>Személyügyi Osztály</p></td>";
             string value = front + content + bottom;
             return value;
         }
