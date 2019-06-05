@@ -36,7 +36,7 @@ namespace HR_Portal.View.Usercontrol.Panels
 
         protected void formLoader()
         {
-            applicant_profile_title.Text = applicant.data.nev + (applicant.data.profession_type == 1 ? " - Profession" : "");
+            applicant_profile_title.Text = applicant.data.nev + (applicant.data.kategoria == 1 ? " - Profession" : "");
             header.Text = "Tisztelt "+ applicant.data.nev + "!";
             projekt_cbx.ItemsSource = new Utilities().Data_PorjectListSmall();
             csatolmany_listBox.ItemsSource = Files.ReadApplicantFiles(Session.ApplicantID);

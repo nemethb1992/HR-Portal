@@ -20,7 +20,7 @@ namespace HR_Portal.Source.Model.Applicant
         public int interjuk_db { get; set; }
         public int project_db { get; set; }
         public int allapota { get; set; }
-        public string kolcsonzott { get; set; }
+        public int kategoria { get; set; }
         public string allapot_megnevezes { get; set; }
         public string reg_datum { get; set; }
         public string megjegyzes { get; set; }
@@ -44,7 +44,7 @@ namespace HR_Portal.Source.Model.Applicant
 
                 while (mySql.sdr.Read())
                 {
-                    string allapot_megnev = "Beérkezett", kolcsonzott = "", frissSeged = "Transparent", allasbanSeged = "Hidden";
+                    string allapot_megnev = "Beérkezett", frissSeged = "Transparent", allasbanSeged = "Hidden";
                     int allapot = 0;
                     try
                     {
@@ -55,7 +55,7 @@ namespace HR_Portal.Source.Model.Applicant
                     }
 
                     string imgsrc = "/Public/imgs/pm_logo_mini.png";
-                    if (Convert.ToInt32(mySql.sdr["profession_type"]) == 1)
+                    if (Convert.ToInt32(mySql.sdr["kategoria"]) == 1)
                     {
                         imgsrc = "/Public/imgs/profession-logo-mini.png";
                     }
@@ -85,8 +85,6 @@ namespace HR_Portal.Source.Model.Applicant
                     if (Convert.ToBoolean(mySql.sdr["friss"]))
                        frissSeged = "#defee3";
 
-                    if (Convert.ToInt32(mySql.sdr["kolcsonzott"]) == 1)
-                        kolcsonzott = "Kölcsönzött";
 
                     list.Add(new ModelApplicantList
                     {
@@ -100,12 +98,12 @@ namespace HR_Portal.Source.Model.Applicant
                         statusz = Convert.ToInt32(mySql.sdr["statusz"]),
                         interjuk_db = Convert.ToInt32(mySql.sdr["interjuk_db"]),
                         project_db = Convert.ToInt32(mySql.sdr["project_db"]),
+                        kategoria = Convert.ToInt32(mySql.sdr["kategoria"]),
                         friss = frissSeged,
                         frissValue = Convert.ToBoolean(mySql.sdr["friss"]),
                         allasban = allasbanSeged,
                         allasbanValue = Convert.ToBoolean(mySql.sdr["allasban"]),
                         allapota = allapot,
-                        kolcsonzott = kolcsonzott,
                         allapot_megnevezes = allapot_megnev,
                         reg_datum = mySql.sdr["reg_date"].ToString(),
                         profil_icon = imgsrc,
