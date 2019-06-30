@@ -38,8 +38,8 @@ namespace HR_Portal.View.Usercontrol.Panels
             }
             Source.MySqlDB mySql = new Source.MySqlDB();
             projektek_list.ItemsSource = new Utilities().Data_PorjectListSmall();
-            uj_jelolt_result.Text = mySql.Count("SELECT count(jeloltek.id) FROM jeloltek WHERE friss=1 AND jeloltek.reg_date > '"+Session.UserData.belepve+"'").ToString() + " db";
-            nem_megnyitott_result.Text = mySql.Count("SELECT count(*) FROM jeloltek WHERE friss = 1 AND statusz = 0").ToString() +" db";
+            uj_jelolt_result.Text = mySql.Count("SELECT count(jeloltek.id) FROM jeloltek WHERE friss=1 AND ervenyes=1 AND statusz = 1 AND jeloltek.reg_date > '" + Session.UserData.belepve+"'").ToString() + " db";
+            nem_megnyitott_result.Text = mySql.Count("SELECT count(*) FROM jeloltek WHERE friss = 1 AND ervenyes=1 AND statusz = 1").ToString() +" db";
             osszes_jelolt_result.Text = mySql.Count("SELECT count(jeloltek.id) FROM jeloltek").ToString() + " db";
             projektben_jelolt_result.Text = mySql.Count("SELECT COUNT(DISTINCT jelolt_id) FROM projekt_jelolt_kapcs;").ToString() + " db";
             aktiv_projekt_result.Text = mySql.Count("SELECT count(id) FROM projektek WHERE statusz = 1;").ToString() + " db";
