@@ -11,6 +11,7 @@ using HR_Portal.Source.Model;
 using HR_Portal.Source.Model.Applicant;
 using HR_Portal.Source.Model.Project;
 using HR_Portal.Source.ViewModel;
+using HR_Portal_Test.Source.Utility;
 
 namespace HR_Portal.View.Usercontrol.Panels
 {
@@ -55,7 +56,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             cimke_label.Visibility = Visibility.Visible;
 
             Session.ProjectSearchValue = null;
-            projectListLoader();
+            ProjectListLoad();
         }
 
         protected void StartUp()
@@ -63,12 +64,12 @@ namespace HR_Portal.View.Usercontrol.Panels
             SetSearchValues();
             nyelv_srccbx.ItemsSource = Utility.Data_Nyelv();
             vegzettseg_srccbx.ItemsSource = Utility.Data_Vegzettseg();
-            projectListLoader();
+            ProjectListLoad();
         }
 
-        protected List<ModelProjectSearchBar> GetSearchValues()
+        protected ModelProjectSearchBar GetSearchValues()
         {
-            List<ModelProjectSearchBar> list = new List<ModelProjectSearchBar>();
+            ModelProjectSearchBar value = new ModelProjectSearchBar();
             ModelNyelv nyelvItem = null;
             ModelVegzettseg vegzettsegItem = null;
             string nyelvkStr = "";
@@ -102,7 +103,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             if (sorrend_check.IsChecked == true)
                 sorrend = " DESC";
 
-            list.Add(new ModelProjectSearchBar
+            value = new ModelProjectSearchBar
             {
                 projektnev = projektnev_srcinp.Text,
                 jeloltszam = jeloltszam,
@@ -119,59 +120,59 @@ namespace HR_Portal.View.Usercontrol.Panels
                 publikaltBool = publikalt_check.IsChecked.Value,
                 HeaderSelected = HeaderSelected,
                 sorrend = sorrend
-            });
-            return list;
+            };
+            return value;
         }
 
         protected void SetSearchValues()
         {
             if (Session.ProjectSearchValue == null)
                 return;
-            List<ModelProjectSearchBar> values = Session.ProjectSearchValue;
+            ModelProjectSearchBar value = Session.ProjectSearchValue;
 
-            projektnev_srcinp.Text = values[0].projektnev;
-            jeloltnev_srcinp.Text = values[0].jeloltnev;
-            pc_srcinp.Text = values[0].pc;
-            publikalva_srcinp.Text = values[0].publikalva;
-            cimke_srcinp.Text = values[0].cimke;
-            publikalt_check.IsChecked = values[0].publikaltBool;
-            nyelv_srccbx.SelectedIndex = values[0].nyelvIndex;
-            vegzettseg_srccbx.SelectedIndex = values[0].vegzettsegIndex;
+            projektnev_srcinp.Text = value.projektnev;
+            jeloltnev_srcinp.Text = value.jeloltnev;
+            pc_srcinp.Text = value.pc;
+            publikalva_srcinp.Text = value.publikalva;
+            cimke_srcinp.Text = value.cimke;
+            publikalt_check.IsChecked = value.publikaltBool;
+            nyelv_srccbx.SelectedIndex = value.nyelvIndex;
+            vegzettseg_srccbx.SelectedIndex = value.vegzettsegIndex;
 
-            if (values[0].jeloltszam == "0")
+            if (value.jeloltszam == "0")
             {
-                values[0].jeloltszam = "";
+                value.jeloltszam = "";
                 jeloltszam_label.Visibility = Visibility.Visible;
             }
             else
-                jeloltszam_srcinp.Text = values[0].jeloltszam;
-            if (values[0].interjuk == "0")
+                jeloltszam_srcinp.Text = value.jeloltszam;
+            if (value.interjuk == "0")
             {
-                values[0].interjuk = "";
+                value.interjuk = "";
                 interju_label.Visibility = Visibility.Visible;
             }
             else
-                interju_srcinp.Text = values[0].interjuk;
+                interju_srcinp.Text = value.interjuk;
 
 
-            if (values[0].projektnev.Length > 0)
+            if (value.projektnev.Length > 0)
                 projektnev_label.Visibility = Visibility.Hidden;
-            if (values[0].jeloltnev.Length > 0)
+            if (value.jeloltnev.Length > 0)
                 jeloltnev_label.Visibility = Visibility.Hidden;
-            if (values[0].jeloltszam.Length > 0)
+            if (value.jeloltszam.Length > 0)
                 jeloltszam_label.Visibility = Visibility.Hidden;
-            if (values[0].pc.Length > 0)
+            if (value.pc.Length > 0)
                 pc_label.Visibility = Visibility.Hidden;
-            if (values[0].interjuk.Length > 0)
+            if (value.interjuk.Length > 0)
                 interju_label.Visibility = Visibility.Hidden;
-            if (values[0].publikalva.Length > 0)
+            if (value.publikalva.Length > 0)
                 publikalva_label.Visibility = Visibility.Hidden;
-            if (values[0].cimke.Length > 0)
+            if (value.cimke.Length > 0)
                 cimke_label.Visibility = Visibility.Hidden;
 
         }
 
-        protected void projectListLoader()
+        protected void ProjectListLoad()
         {
             Session.ProjectStatusz = 1;
             buttonColorChange();
@@ -179,25 +180,12 @@ namespace HR_Portal.View.Usercontrol.Panels
             try{
                 List<ModelProjectList> lista = Project.GetProjectList(GetSearchValues());
                 project_listBox.ItemsSource = lista;
-                talalat_tbl.Text = "Találatok:  " + lista.Count.ToString();
             }
             catch (Exception e)
             {
                 MessageBox.Show(e.ToString());
             }
         }
-
-        //protected List<ProjectListItems> projectListLoader2()
-        //{
-        //    List<Projekt_Search_Memory> list = new List<Projekt_Search_Memory>();
-        //    List<ProjectListItems> lista = new List<ProjectListItems>();
-
-        //    list.Add(new Projekt_Search_Memory() { statusz = 1 });
-        //    pControl.projectSearchMemory = list;
-        //    //buttonColorChange();
-        //    lista = pControl.Data_ProjectFull(getSearchData());
-        //    return lista;
-        //}
 
         protected void buttonColorChange()
         {
@@ -237,7 +225,7 @@ namespace HR_Portal.View.Usercontrol.Panels
                 case MessageBoxResult.Yes:
                     ModelProjectList items = (sender as MenuItem).DataContext as ModelProjectList;
                     Project.Delete(items.id);
-                    projectListLoader();
+                    ProjectListLoad();
                     break;
                 case MessageBoxResult.No:
                     break;
@@ -254,7 +242,7 @@ namespace HR_Portal.View.Usercontrol.Panels
                 case MessageBoxResult.Yes:
                     ModelProjectList items = (sender as MenuItem).DataContext as ModelProjectList;
                     new Project(items.id).projectArchiver(items.id, items.statusz);
-                    projectListLoader();
+                    ProjectListLoad();
                     break;
                 case MessageBoxResult.No:
                     break;
@@ -279,55 +267,38 @@ namespace HR_Portal.View.Usercontrol.Panels
 
         protected void textBoxPlaceHolderGotFocus(object sender, RoutedEventArgs e)
         {
-            string Tbx_name = ((TextBox)sender).Tag.ToString();
-            var Tbx = (TextBox)this.FindName(Tbx_name);
-
-            if (((TextBox)sender).Text == "")
-                Tbx.Visibility = Visibility.Hidden;
+            ViewTools.SearchInputGotFocus(sender as TextBox, (TextBox)this.FindName((sender as TextBox).Tag.ToString()));
         }
 
-        protected void textBoxPlaceHolderLostFocus(object sender, RoutedEventArgs e)
+        protected void SearchLostFocus(object sender, RoutedEventArgs e)
         {
-            TextBox textbox = sender as TextBox;
-            TextBox textboxOther = (TextBox)this.FindName(textbox.Tag.ToString());
-
-            if (((TextBox)sender).Text == "")
-            {
-                textboxOther.Visibility = Visibility.Visible;
-                textbox.BorderBrush = (SolidColorBrush)Application.Current.Resources["racs_light"];
-            }
-            else
-            {
-                textbox.BorderBrush = (SolidColorBrush)Application.Current.Resources["ThemeColor"];
-                textbox.Foreground = Brushes.Black;
-            }
+            ViewTools.SearchInputLostFocus(sender as TextBox, (TextBox)this.FindName((sender as TextBox).Tag.ToString()));
         }
 
         protected async void searchInputTextChange(object sender, TextChangedEventArgs e)
         {
-            TextBox textbox = (TextBox)sender;
-            int fisrtLength = textbox.Text.Length;
+            int length = ViewTools.TextBoxLength(sender as TextBox);
 
             await Task.Delay(500);
-            if (fisrtLength == textbox.Text.Length)
+            if (length == ViewTools.TextBoxLength(sender as TextBox))
             {
-                projectListLoader();
+                ProjectListLoad();
             }
         }
 
         protected void comboboxSelection(object sender, SelectionChangedEventArgs e)
         {
-            projectListLoader();
+            ProjectListLoad();
         }
 
         protected void publikaltChecked(object sender, RoutedEventArgs e)
         {
-            projectListLoader();
+            ProjectListLoad();
         }
 
         protected void publikaltUnchecked(object sender, RoutedEventArgs e)
         {
-            projectListLoader();
+            ProjectListLoad();
         }
 
         protected void New_projekt_btn_Click(object sender, RoutedEventArgs e)
@@ -350,17 +321,17 @@ namespace HR_Portal.View.Usercontrol.Panels
         protected void headerClick(object sender, MouseButtonEventArgs e)
         {
             HeaderSelected = (sender as Label).Tag.ToString();
-            projectListLoader();
+            ProjectListLoad();
         }
 
         protected void sorrendChecked(object sender, RoutedEventArgs e)
         {
-            projectListLoader();
+            ProjectListLoad();
         }
 
         protected void sorrendUnchecked(object sender, RoutedEventArgs e)
         {
-            projectListLoader();
+            ProjectListLoad();
         }
     }
 }

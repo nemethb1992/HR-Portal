@@ -157,7 +157,7 @@ namespace HR_Portal.View.Usercontrol.Panels
 
         protected void numericTextBox(object sender, TextCompositionEventArgs e)
         {
-            Regex regex = new Regex("[^0-9-]+");
+            Regex regex = new Regex("[^0-9]+");
             e.Handled = regex.IsMatch(e.Text);
         }
 

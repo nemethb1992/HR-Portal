@@ -18,69 +18,69 @@ namespace HR_Portal.Source.ViewModel
             this.data = GetFullProject(data.id)[0];
         }
 
-        public static List<ModelProjectList> GetProjectList(List<ModelProjectSearchBar> searchValue)
+        public static List<ModelProjectList> GetProjectList(ModelProjectSearchBar value)
         {
             List<ModelProjectList> list = new List<ModelProjectList>();
 
             string command = "SELECT coalesce((SELECT count(jelolt_id) FROM projekt_jelolt_kapcs WHERE projekt_id = projektek.id GROUP BY jeloltek.id LIMIT 1),0) as jeloltek_db, coalesce((SELECT count(jelolt_id) FROM interview WHERE projekt_id = projektek.id LIMIT 1),0) as interjuk_db, projektek.id, projektek.publikalt, megnevezes_projekt, megnevezes_munka, fel_datum, projektek.statusz FROM projektek LEFT JOIN projekt_jelolt_kapcs ON projektek.id = projekt_jelolt_kapcs.projekt_id LEFT JOIN jeloltek ON jeloltek.id = projekt_jelolt_kapcs.jelolt_id LEFT JOIN munkakor ON munkakor.id = projektek.munkakor LEFT JOIN pc ON pc.id = projektek.pc LEFT JOIN megjegyzesek ON projektek.id = megjegyzesek.projekt_id " +
             " WHERE projektek.statusz=" + Session.ProjectStatusz;
-            if (searchValue[0].projektnev != "")
+            if (value.projektnev != "")
             {
-                command += " AND projektek.megnevezes_projekt LIKE '%" + searchValue[0].projektnev + "%' ";
+                command += " AND projektek.megnevezes_projekt LIKE '%" + value.projektnev + "%' ";
             }
-            if (searchValue[0].jeloltszam != "0")
+            if (value.jeloltszam != "0")
             {
-                command += " AND coalesce((SELECT count(projekt_id)  FROM projekt_jelolt_kapcs WHERE projekt_id = projektek.id Group by projekt_id LIMIT 1),0) >=" + searchValue[0].jeloltszam + " ";
+                command += " AND coalesce((SELECT count(projekt_id)  FROM projekt_jelolt_kapcs WHERE projekt_id = projektek.id Group by projekt_id LIMIT 1),0) >=" + value.jeloltszam + " ";
             }
-            if (searchValue[0].publikalva != "")
+            if (value.publikalva != "")
             {
-                command += " AND projektek.fel_datum LIKE '%" + searchValue[0] + "%' ";
+                command += " AND projektek.fel_datum LIKE '%" + value + "%' ";
             }
-            if (searchValue[0].interjuk != "0")
+            if (value.interjuk != "0")
             {
-                command += " AND coalesce((SELECT count(jelolt_id) FROM interview WHERE projekt_id = projektek.id Group by jelolt_id LIMIT 1),0) >=" + searchValue[0].interjuk + " ";
+                command += " AND coalesce((SELECT count(jelolt_id) FROM interview WHERE projekt_id = projektek.id Group by jelolt_id LIMIT 1),0) >=" + value.interjuk + " ";
             }
-            if (searchValue[0].pc != "")
+            if (value.pc != "")
             {
-                command += " AND pc.megnevezes_pc LIKE '%" + searchValue[0].pc + "%' ";
+                command += " AND pc.megnevezes_pc LIKE '%" + value.pc + "%' ";
             }
-            if (searchValue[0].nyelvkStr != "" && searchValue[0].nyelvkStr != "1")
+            if (value.nyelvkStr != "" && value.nyelvkStr != "1")
             {
-                command += " AND projektek.nyelvtudas LIKE '%" + searchValue[0].nyelvkStr + "%' ";
+                command += " AND projektek.nyelvtudas LIKE '%" + value.nyelvkStr + "%' ";
             }
-            if (searchValue[0].vegzettsegStr != "" && searchValue[0].vegzettsegStr != "1")
+            if (value.vegzettsegStr != "" && value.vegzettsegStr != "1")
             {
-                command += " AND projektek.vegzettseg LIKE '%" + searchValue[0].vegzettsegStr + "%' ";
+                command += " AND projektek.vegzettseg LIKE '%" + value.vegzettsegStr + "%' ";
             }
-            if (searchValue[0].cimke != "")
+            if (value.cimke != "")
             {
-                command += " AND megjegyzesek.megjegyzes LIKE '%" + searchValue[0].cimke + "%' ";
+                command += " AND megjegyzesek.megjegyzes LIKE '%" + value.cimke + "%' ";
             }
-            if (searchValue[0].jeloltnev != "")
+            if (value.jeloltnev != "")
             {
-                command += " AND jeloltek.nev LIKE '%" + searchValue[0].jeloltnev + "%' ";
+                command += " AND jeloltek.nev LIKE '%" + value.jeloltnev + "%' ";
             }
-            if (searchValue[0].publikalt != "")
+            if (value.publikalt != "")
             {
-                command += " AND projektek.publikalt LIKE '%" + searchValue[0].publikalt + "%' ";
+                command += " AND projektek.publikalt LIKE '%" + value.publikalt + "%' ";
             }
             command += " GROUP BY projektek.id ";
-            switch (searchValue[0].HeaderSelected)
+            switch (value.HeaderSelected)
             {
                 case "1":
-                    command += " ORDER BY projektek.id" + searchValue[0].sorrend;
+                    command += " ORDER BY projektek.id" + value.sorrend;
                     break;
                 case "2":
-                    command += " ORDER BY projektek.megnevezes_projekt" + searchValue[0].sorrend;
+                    command += " ORDER BY projektek.megnevezes_projekt" + value.sorrend;
                     break;
                 case "3":
-                    command += " ORDER BY projektek.munkakor" + searchValue[0].sorrend;
+                    command += " ORDER BY projektek.munkakor" + value.sorrend;
                     break;
                 case "4":
-                    command += " ORDER BY jeloltek_db" + searchValue[0].sorrend;
+                    command += " ORDER BY jeloltek_db" + value.sorrend;
                     break;
                 case "5":
-                    command += " ORDER BY projektek.fel_datum" + searchValue[0].sorrend;
+                    command += " ORDER BY projektek.fel_datum" + value.sorrend;
                     break;
                 default:
                     command += " ORDER BY projektek.fel_datum DESC";

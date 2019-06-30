@@ -243,8 +243,7 @@ namespace HR_Portal.View.Usercontrol.Panels
 
         protected void applicantOpenClick(object sender, RoutedEventArgs e)
         {
-            Button button = sender as Button;
-            ModelApplicantList items = button.DataContext as ModelApplicantList;
+            ModelApplicantList items = (sender as Button).DataContext as ModelApplicantList;
             Session.ApplicantID = items.id;
             if (items.frissValue)
             {
@@ -281,9 +280,11 @@ namespace HR_Portal.View.Usercontrol.Panels
                     break;
             }
         }
-
-
-
+        protected void Numeric(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
+        }
         protected async void searchInputTextChanged(object sender, TextChangedEventArgs e)
         {
             TextBox textbox = (TextBox)sender;
@@ -296,12 +297,6 @@ namespace HR_Portal.View.Usercontrol.Panels
                 applicantListLoader();
             }
 
-        }
-
-        protected void Numeric(object sender, TextCompositionEventArgs e)
-        {
-            Regex regex = new Regex("[^0-9]+");
-            e.Handled = regex.IsMatch(e.Text);
         }
 
         protected void searchCbxSelectionChanged(object sender, SelectionChangedEventArgs e)

@@ -1,0 +1,192 @@
+﻿<UserControl x:Class="HR_Portal_Test.View.Usercontrol.Panels.RecruitedList"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:HR_Portal_Test.View.Usercontrol.Panels"
+             mc:Ignorable="d" 
+             d:DesignHeight="740" d:DesignWidth="1150">
+    <Grid Style="{StaticResource switch_grid_style}" >
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="50" />
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="50" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100" />
+            <RowDefinition Height="30" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="50" />
+        </Grid.RowDefinitions>
+
+
+        <Grid x:Name="searchbar_grid"  Grid.Column="1" Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="15" />
+                <ColumnDefinition Width="70" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="35" />
+                <RowDefinition Height="30" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="1" Style="{StaticResource big_title_style}" Text="Toborzott jelöltek" TextAlignment="Left"></TextBlock>
+            <TextBlock Grid.Column="0" Grid.Row="1" Style="{StaticResource minor_title_style}" VerticalAlignment="Top" Text="Kereső:" TextAlignment="Left" ></TextBlock>
+            <Button x:Name="refresh_btn" Grid.Column="3" Grid.Row="2" Style="{StaticResource StandardButtonWhite}" Width="70" Margin="0,0,0,0" Click="ClearSearchbar">
+                <Image Source="/Public/imgs/reload.png" Margin="5" Height="22"/>
+            </Button>
+ 
+            <Border x:Name="Search_Border" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="1" Padding="3" CornerRadius="5" Style="{StaticResource BasicContentBorder}">
+
+                <Grid  Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="0.7*" />
+                        <ColumnDefinition Width="1*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="25" />
+                    </Grid.RowDefinitions>
+                    <TextBox x:Name="nev_srcinp" Tag="nev_label" Grid.Column="0" Grid.Row="0" Panel.ZIndex="2"  Style="{StaticResource panelTbx_style}" TextChanged="searchInputTextChanged" GotFocus="textBoxPlaceHolderGotFocus" LostFocus="textBoxPlaceHolderLostFocus" Text=""/>
+                    <TextBox x:Name="nev_label" Grid.Column="0" Grid.Row="0" Panel.ZIndex="1"  Style="{StaticResource panelTbx_style}" Text="Név"/>
+                    <TextBox x:Name="lakhely_srcinp" Tag="lakhely_label" Grid.Column="1" Grid.Row="0" Panel.ZIndex="2"  Style="{StaticResource panelTbx_style}" TextChanged="searchInputTextChanged" GotFocus="textBoxPlaceHolderGotFocus" LostFocus="textBoxPlaceHolderLostFocus" Text="" />
+                    <TextBox x:Name="lakhely_label" Grid.Column="1" Grid.Row="0" Panel.ZIndex="1"  Style="{StaticResource panelTbx_style}" Text="Lakhely"/>
+                    <TextBox x:Name="regdate_srcinp" Tag="regdate_label" Grid.Column="2" Grid.Row="0" Panel.ZIndex="2"  Style="{StaticResource panelTbx_style}" TextChanged="searchInputTextChanged" GotFocus="textBoxPlaceHolderGotFocus" LostFocus="textBoxPlaceHolderLostFocus"  Text=""/>
+                    <TextBox x:Name="regdate_label" Grid.Column="2" Grid.Row="0" Panel.ZIndex="1"  Style="{StaticResource panelTbx_style}" Text="Regisztráció"/>
+                    <Grid Grid.Column="3" Grid.ColumnSpan="2" Grid.RowSpan="3">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="2*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Label x:Name="Toborzo_label" Padding="3" Grid.Row="0" Panel.ZIndex="1" HorizontalAlignment="Right" Style="{StaticResource search_placeholder_style}" Content="Beküldő:"/>
+                        <ComboBox x:Name="toborzo_srccbx" Grid.Column="1" Grid.Row="0" Style="{StaticResource cbx_style}" Height="20" SelectionChanged="searchCbxSelectionChanged">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid >
+                                        <TextBlock Grid.Column="1" Style="{StaticResource checkbox_item_style}" Text="{Binding name}"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                    </Grid>
+
+                </Grid>
+            </Border>
+
+        </Grid>
+
+
+
+        <Grid Grid.Row="1" Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="55" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="160" />
+                <ColumnDefinition Width="150" />
+                <ColumnDefinition Width="110" />
+                <ColumnDefinition Width="140" />
+            </Grid.ColumnDefinitions>
+            <Label x:Name="project_label_1" Tag="1" VerticalAlignment="Bottom" Content="Név" Grid.Column="1" Style="{StaticResource project_label_style}" MouseDown="headerClick"/>
+            <Label x:Name="project_label_2" Tag="1" VerticalAlignment="Bottom" Content="Kapcsolt projektek" Grid.Column="2" Style="{StaticResource project_label_style}" MouseDown="headerClick"/>
+            <Label x:Name="project_label_3" Tag="2" VerticalAlignment="Bottom" Content="Státusz" Grid.Column="3" Style="{StaticResource project_label_style}" MouseDown="headerClick"/>
+            <Label x:Name="project_label_4" Tag="3" VerticalAlignment="Bottom" Content="Regisztrált" Grid.Column="4" Style="{StaticResource project_label_style}" MouseDown="headerClick"/>
+            <CheckBox x:Name="sorrend_check" Style="{StaticResource Standard_Checkbox}" Content="Csökkenő sorrend" VerticalAlignment="Bottom" Margin="0,0,0,5" IsChecked="False" Grid.Column="7" Checked="sorrendChecked" Unchecked="sorrendUnchecked"/>
+        </Grid>
+
+        <!--<ScrollViewer Grid.Row="2" Grid.Column="1" VerticalScrollBarVisibility="Auto">-->
+        <ListBox x:Name="applicant_listBox"  Grid.Row="2" Grid.Column="1" SizeChanged="Applicant_listBox_SizeChanged" Style="{StaticResource listBox_style}" BorderBrush="Transparent" HorizontalContentAlignment="Stretch" SelectionMode="Extended">
+            <ListBox.Resources>
+                <!--<Style TargetType="{x:Type Border}" BasedOn="{StaticResource listCorner}"/>-->
+                <Style TargetType="{x:Type Border}" BasedOn="{StaticResource BasicContentBorder}"/>
+                <Style TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource listBoxItem_style_big}"/>
+            </ListBox.Resources>
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid Height="60" Background="{Binding friss}" Margin="4">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="0.6*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="0.6*" />
+                            <ColumnDefinition Width="0.6*" />
+                            <ColumnDefinition Width="0.6*" />
+                            <ColumnDefinition Width="0.4*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Border Grid.Column="1" Grid.RowSpan="2" BorderThickness="1,0,0,0" Style="{StaticResource LeftWallBorder}"/>
+                        <Border Grid.Column="2" Grid.RowSpan="2" BorderThickness="1,0,0,0" Style="{StaticResource LeftWallBorder}"/>
+                        <Border Grid.Column="3" Grid.RowSpan="2" BorderThickness="1,0,0,0" Style="{StaticResource LeftWallBorder}"/>
+                        <Border Grid.Column="4" Grid.RowSpan="2" BorderThickness="1,0,0,0" Style="{StaticResource LeftWallBorder}"/>
+                        <Border Grid.Column="5" Grid.RowSpan="2" BorderThickness="1,0,0,0" Style="{StaticResource LeftWallBorder}"/>
+                        <Border Grid.Column="6" Grid.RowSpan="2" BorderThickness="1,0,0,0" Style="{StaticResource LeftWallBorder}"/>
+                        <TextBlock Style="{StaticResource ListText}" Padding="11" Grid.Column="0" Text="Név:" />
+                        <TextBlock Style="{StaticResource ListText}" Padding="11" Grid.Column="1" Text="Született:" />
+                        <TextBlock Style="{StaticResource ListText}" Padding="11" Grid.Column="2" Text="Lakhely:" />
+                        <TextBlock Style="{StaticResource ListText}" Padding="11" Grid.Column="3" Text="Beküldő:" />
+                        <TextBlock Style="{StaticResource ListText}" Padding="11" Grid.Column="4" Text="Email:" />
+                        <TextBlock Style="{StaticResource ListText}" Padding="11" Grid.Column="5" Text="Állások:" />
+                        <TextBlock Style="{StaticResource ListText}" Padding="11" Grid.Column="6" Text="Beküldve:" />
+                        <TextBlock Style="{StaticResource ListText}" Padding="11" Grid.Column="0" Grid.Row="1" Text="{Binding nev}" />
+                        <TextBlock Style="{StaticResource ListText}" Padding="11" Grid.Column="1" Grid.Row="1" Text="{Binding szuldatum}" />
+                        <TextBlock Style="{StaticResource ListText}" Padding="11" Grid.Column="2" Grid.Row="1" Text="{Binding lakhely}" />
+                        <TextBlock Style="{StaticResource ListText}" Padding="11" Grid.Column="3" Grid.Row="1" Text="{Binding freelancername}" />
+                        <TextBlock Style="{StaticResource ListText}" Padding="11" Grid.Column="4" Grid.Row="1" Text="{Binding email}" />
+                        <TextBlock Style="{StaticResource ListText}" Padding="11" Grid.Column="5" Grid.Row="1" Text="{Binding project_db}" />
+                        <TextBlock Style="{StaticResource ListText}" Padding="11" Grid.Column="6" Grid.Row="1" Text="{Binding reg_datum}" />
+                        <Button x:Name="accept_btn" Style="{StaticResource GreenButton}" Grid.RowSpan="2" Grid.Column="7" Content="Elfogad" Click="AcceptRecruitedApplicant" Margin="3"/>
+                        <Button x:Name="decline_btn" Style="{StaticResource RedButton}" Grid.RowSpan="2" Grid.Column="8" Content="Elvet" Click="RefuseRecruitedApplicant" Margin="3"/>
+                   </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <!--</ScrollViewer>-->
+        <Grid x:Name="FolderGrid" Grid.Column="1" Grid.Row="3" Visibility="Visible">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="9*" />
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="1.2*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="1.2*" />
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="9*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Button x:Name="firstPageButton" Grid.Column="1" Margin="8" Style="{StaticResource StandardButtonWhite}" Click="FirstPageButton_Click">
+                <Image Source="/Public/imgs/leftEndArrow.png" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            </Button>
+            <Button x:Name="previousPageButton" Grid.Column="2" Margin="8" Style="{StaticResource StandardButtonWhite}" Click="PreviousPageButton_Click">
+                <Image Source="/Public/imgs/leftArrow.png" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            </Button>
+            <TextBlock x:Name="actualPageTbl" Grid.Column="3" Text="1." VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource minor_title_style}"/>
+            <TextBlock Grid.Column="4" Grid.ColumnSpan="2" Text="oldal" VerticalAlignment="Center" HorizontalAlignment="Left" Style="{StaticResource minor_title_style}"/>
+            <!--<Image Source="/Public/imgs/dots.png" Grid.Column="3" Height="16" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <TextBlock x:Name="allPageTbl" Grid.Column="4" Text="82" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource minor_title_style}"/>-->
+            <!--<Button x:Name="lastPageButton" Grid.Column="7" Style="{StaticResource next_panelBtn_style}" Click="LastPageButton_Click">
+                <Image Source="/Public/imgs/rightEndArrow.png" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            </Button>-->
+            <Button x:Name="nextPageButton" Grid.Column="6" Margin="8" Style="{StaticResource StandardButtonWhite}" Click="NextPageButton_Click">
+                <Image Source="/Public/imgs/rightArrow.png" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            </Button>
+
+
+        </Grid>
+    </Grid>
+</UserControl>

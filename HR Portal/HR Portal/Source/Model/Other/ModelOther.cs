@@ -67,6 +67,43 @@ namespace HR_Portal.Source.Model
             return list;
         }
     }
+    public class ModelFreelancerList
+    {
+        public int id { get; set; }
+        public string name { get; set; }
+        public string email { get; set; }
+
+        public static List<ModelFreelancerList> getFreelancerList(string command)
+        {
+            MySqlDB mySql = new MySqlDB();
+            List<ModelFreelancerList> list = new List<ModelFreelancerList>();
+            if (mySql.Open() == true)
+            {
+                mySql.cmd = new MySqlCommand(command, mySql.conn);
+                mySql.sdr = mySql.cmd.ExecuteReader();
+                while (mySql.sdr.Read())
+                {
+                    list.Add(new ModelFreelancerList
+                    {
+                        id = Convert.ToInt32(mySql.sdr["id"]),
+                        name = mySql.sdr["name"].ToString(),
+                        email = mySql.sdr["email"].ToString()
+                    });
+                }
+                mySql.sdr.Close();
+            }
+            return list;
+        }
+
+        public void insertWeb(MySqlDB mySql)
+        {
+            string command = "INSERT INTO `freelancer_list`(`id`, `name`, `email`) VALUES (" + id + ",'" + name + "','" + email + "')";
+            mySql.Execute(command);
+            mySql.Close();
+        }
+
+    }
+
 
     public class ModelNem
     {

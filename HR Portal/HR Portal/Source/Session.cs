@@ -14,8 +14,8 @@ namespace HR_Portal.Source
         private static ModelApplicantSearchBar ApplicantSearchValues;
         public static ModelApplicantSearchBar ApplicantSearchValue { get { return ApplicantSearchValues; } set { ApplicantSearchValues = value; } }
 
-        private static List<ModelProjectSearchBar> ProjectSearchValues;
-        public static List<ModelProjectSearchBar> ProjectSearchValue { get { return ProjectSearchValues; } set { ProjectSearchValues = value; } }
+        private static ModelProjectSearchBar ProjectSearchValues;
+        public static ModelProjectSearchBar ProjectSearchValue { get { return ProjectSearchValues; } set { ProjectSearchValues = value; } }
 
         private static int ProjectStatus;
         public static int ProjectStatusz { get { return ProjectStatus; } set { ProjectStatus = value; } }

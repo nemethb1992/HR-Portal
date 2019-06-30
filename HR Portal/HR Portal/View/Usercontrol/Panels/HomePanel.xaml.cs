@@ -1,6 +1,7 @@
 ﻿using HR_Portal.Public.templates;
 using HR_Portal.Source;
 using HR_Portal.Source.Model.Project;
+using HR_Portal_Test.View.Usercontrol.Panels;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -38,7 +39,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             Source.MySqlDB mySql = new Source.MySqlDB();
             projektek_list.ItemsSource = new Utilities().Data_PorjectListSmall();
             uj_jelolt_result.Text = mySql.Count("SELECT count(jeloltek.id) FROM jeloltek WHERE friss=1 AND jeloltek.reg_date > '"+Session.UserData.belepve+"'").ToString() + " db";
-            nem_megnyitott_result.Text = mySql.Count("SELECT count(*) FROM jeloltek WHERE friss = 1").ToString() +" db";
+            nem_megnyitott_result.Text = mySql.Count("SELECT count(*) FROM jeloltek WHERE friss = 1 AND statusz = 0").ToString() +" db";
             osszes_jelolt_result.Text = mySql.Count("SELECT count(jeloltek.id) FROM jeloltek").ToString() + " db";
             projektben_jelolt_result.Text = mySql.Count("SELECT COUNT(DISTINCT jelolt_id) FROM projekt_jelolt_kapcs;").ToString() + " db";
             aktiv_projekt_result.Text = mySql.Count("SELECT count(id) FROM projektek WHERE statusz = 1;").ToString() + " db";
@@ -80,6 +81,11 @@ namespace HR_Portal.View.Usercontrol.Panels
             ModelSmallProject project = (sender as Grid).DataContext as ModelSmallProject;
             Session.ProjektID = project.id;
             Utilities.NavigateTo(grid, new ProjectDataSheet(grid, new Source.ViewModel.Project(project.id)));
+        }
+
+        private void ToRecruitment(object sender, RoutedEventArgs e)
+        {
+            Utilities.NavigateTo(grid, new RecruitedList(grid));
         }
     }
 }

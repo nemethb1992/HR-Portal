@@ -199,8 +199,10 @@
     <Compile Include="Source\Model\Applicant\ModelApplicantListbox.cs" />
     <Compile Include="Source\Model\Applicant\ModelApplicantSearchBar.cs" />
     <Compile Include="Source\Model\Applicant\ModelApplicantSzakmaiList.cs" />
+    <Compile Include="Source\Model\Applicant\ModelFreelancerApplicant.cs" />
     <Compile Include="Source\Model\Applicant\ModelFullApplicant.cs" />
     <Compile Include="Source\Model\Applicant\ModelProfession.cs" />
+    <Compile Include="Source\Model\Applicant\ModelProjektJeloltKapcs.cs" />
     <Compile Include="Source\Model\Other\AppointmentModel.cs" />
     <Compile Include="Source\Model\Other\ModelCimkek.cs" />
     <Compile Include="Source\Model\Other\ModelEmail.cs" />
@@ -226,6 +228,7 @@
     <Compile Include="Source\Test\ThreadTest.cs" />
     <Compile Include="Source\Utility\Appointments.cs" />
     <Compile Include="Source\Utility\DateHandler.cs" />
+    <Compile Include="Source\Utility\ViewTools.cs" />
     <Compile Include="Source\ViewModel\Applicant.cs" />
     <Compile Include="Source\ViewModel\Comment.cs" />
     <Compile Include="Source\ViewModel\ErrorLog.cs" />
@@ -261,6 +264,9 @@
     </Compile>
     <Compile Include="View\Usercontrol\Panels\NewProjectPanel.xaml.cs">
       <DependentUpon>NewProjectPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Usercontrol\Panels\RecruitedList.xaml.cs">
+      <DependentUpon>RecruitedList.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Usercontrol\Panels\StatisticsPage.xaml.cs">
       <DependentUpon>StatisticsPage.xaml</DependentUpon>
@@ -348,6 +354,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="View\Usercontrol\Panels\NewProjectPanel.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Usercontrol\Panels\RecruitedList.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

@@ -17,6 +17,7 @@ namespace HR_Portal.Source.Model.Applicant
         public string interjuk { get; set; }
         public string nemekStr { get; set; }
         public int nemekIndex { get; set; }
+        public int bekuldo { get; set; }
         public string munkakorStr { get; set; }
         public int munkakorIndex { get; set; }
         public string vegzettsegStr { get; set; }

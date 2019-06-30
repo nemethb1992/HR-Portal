@@ -117,5 +117,7 @@ namespace HR_Portal.Source.Model.Applicant
         }
 
 
+
+
     }
 }

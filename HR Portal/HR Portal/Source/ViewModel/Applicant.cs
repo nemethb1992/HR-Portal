@@ -1,6 +1,7 @@
 ﻿using HR_Portal.Public.templates;
 using HR_Portal.Source.Model.Applicant;
 using HR_Portal.Source.Model.Project;
+using HR_Portal_Test.Source.Model.Applicant;
 using System;
 using System.Collections.Generic;
 
@@ -34,7 +35,7 @@ namespace HR_Portal.Source.ViewModel
                 "LEFT JOIN jelolt_cimke_kapcs on jelolt_cimke_kapcs.jelolt_id = jeloltek.id " +
                 "LEFT JOIN jelolt_cimkek on jelolt_cimkek.id = jelolt_cimke_kapcs.cimke_id " +
                 "LEFT JOIN projekt_jelolt_kapcs ON jeloltek.id = projekt_jelolt_kapcs.jelolt_id " +
-                "WHERE jeloltek.id LIKE '%%' AND jeloltek.statusz =" + Session.ApplicantStatusz;
+                "WHERE jeloltek.id LIKE '%%' AND jeloltek.ervenyes = 1 AND jeloltek.statusz =" + Session.ApplicantStatusz;
 
             if (sw.nev != "")
             {
@@ -94,7 +95,7 @@ namespace HR_Portal.Source.ViewModel
             {
                 command += "  AND projekt_jelolt_kapcs.id IS NOT NULL ";
             }
-            command += " GROUP BY jeloltek.email ";
+            command += " GROUP BY jeloltek.id ";
 
             switch (sw.HeaderSelected)
             {
@@ -114,6 +115,52 @@ namespace HR_Portal.Source.ViewModel
             command += " LIMIT "+ listNo + " OFFSET "+Session.ApplicantSearchPage * listNo + "";
 
             return ModelApplicantList.GetModelApplicantList(command);
+        }
+
+        public static List<ModelFreelancerApplicant> GetRecruitedList(ModelApplicantSearchBar sw)
+        {
+            double listNo = (sw.numberLimit != 0 ? sw.numberLimit : 10);
+
+            string command = "SELECT coalesce((SELECT count(projekt_id) FROM projekt_jelolt_kapcs_kulsos WHERE projekt_jelolt_kapcs_kulsos.jelolt_id = jeloltek.id),0) as project_db, " +
+                "jeloltek.id,jeloltek.nev,szuldatum,reg_date,jeloltek.email,kategoria,bekuldo,lakhely,freelancer_list.name as freelancername " +
+                "FROM jeloltek " +
+                "LEFT JOIN projekt_jelolt_kapcs_kulsos ON jeloltek.id = projekt_jelolt_kapcs_kulsos.jelolt_id " +
+                "LEFT JOIN freelancer_list ON jeloltek.bekuldo = freelancer_list.id " +
+                "WHERE jeloltek.id LIKE '%%' AND kategoria = 2 AND ervenyes = 0";
+
+            if (sw.nev != "")
+            {
+                command += " AND jeloltek.nev LIKE '%" + sw.nev + "%' ";
+            }
+            if (sw.lakhely != "")
+            {
+                command += " AND jeloltek.lakhely LIKE '%" + sw.lakhely + "%' ";
+            }
+            if (sw.bekuldo != 0)
+            {
+                command += " AND jeloltek.bekuldo = " +sw.bekuldo + " ";
+            }
+            if (sw.regdate != "")
+            {
+                command += " AND jeloltek.reg_date LIKE '%" + sw.regdate + "%' ";
+            }
+            command += " GROUP BY jeloltek.id ";
+
+            switch (sw.HeaderSelected)
+            {
+                case "1":
+                    command += " ORDER BY jeloltek.nev" + sw.sorrend;
+                    break;
+                case "2":
+                    command += " ORDER BY jeloltek.reg_date" + sw.sorrend;
+                    break;
+                default:
+                    command += " ORDER BY jeloltek.reg_date DESC";
+                    break;
+            }
+            command += " LIMIT " + listNo + " OFFSET " + Session.ApplicantSearchPage * listNo + "";
+
+            return ModelFreelancerApplicant.GetModelFreelancerApplicantList(command);
         }
 
         public static List<ModelApplicantList> Data_FavoriteApplicants()
@@ -184,15 +231,23 @@ namespace HR_Portal.Source.ViewModel
             return list;
         }
 
-        public static void DeleteApplicant(int id)   //javított használja: applicantlist
+        public static void DeleteApplicant(int id, bool recruited = false)   //javított használja: applicantlist
         {
             MySqlDB mySql = new MySqlDB();
             string command = "DELETE FROM jeloltek WHERE jeloltek.id = " + id + ";";
             mySql.Execute(command);
             command = "DELETE FROM kepessegek WHERE kepessegek.jelolt_id = " + id + ";";
             mySql.Execute(command);
-            command = "DELETE FROM projekt_jelolt_kapcs WHERE projekt_jelolt_kapcs.jelolt_id = " + id + ";";
-            mySql.Execute(command);
+            if (recruited)
+            {
+                command = "DELETE FROM projekt_jelolt_kapcs_kulsos WHERE projekt_jelolt_kapcs_kulsos.jelolt_id = " + id + ";";
+                mySql.Execute(command);
+            }
+            else
+            {
+                command = "DELETE FROM projekt_jelolt_kapcs WHERE projekt_jelolt_kapcs.jelolt_id = " + id + ";";
+                mySql.Execute(command);
+            }
             command = "DELETE FROM megjegyzesek WHERE megjegyzesek.jelolt_id = " + id + ";";
             mySql.Execute(command);
             mySql.Close();
@@ -201,6 +256,22 @@ namespace HR_Portal.Source.ViewModel
             }
             catch {
             }
+        }
+
+        public static void AcceptRecruited(ModelFreelancerApplicant applicant)   //javított használja: applicantlist
+        {
+            List<ModelProjektJeloltKapcs> kapcsolatok = ModelProjektJeloltKapcs.Get("SELECT * FROM projekt_jelolt_kapcs_kulsos WHERE jelolt_id = "+applicant.id+"");
+            MySqlDB mySql = new MySqlDB();
+            string command = "UPDATE jeloltek SET ervenyes = 1 WHERE id = " + applicant.id + ";";
+            mySql.Execute(command);
+            foreach (var item in kapcsolatok)
+            {
+                command = "INSERT INTO projekt_jelolt_kapcs (id, projekt_id, jelolt_id, hr_id,allapota, datum) VALUES (NULL, " + item.projekt_id + ", " + item.jelolt_id + ", " + Session.UserData.id + ",4, '" + DateTime.Now.ToString("yyyy.MM.dd") + "' );";
+                mySql.Execute(command);
+            }
+            command = "DELETE FROM projekt_jelolt_kapcs_kulsos WHERE projekt_jelolt_kapcs_kulsos.jelolt_id = " + applicant.id + ";";
+            mySql.Execute(command);
+
         }
 
         public static void AddToFavorite(int id)  //javított
@@ -274,7 +345,7 @@ namespace HR_Portal.Source.ViewModel
 
         public static List<ModelApplicantListbox> GetAllActive(string name = "") //javított
         {
-            string command = "SELECT id, nev FROM jeloltek WHERE jeloltek.statusz = 1 AND nev LIKE '%"+name+"%'";
+            string command = "SELECT id, nev FROM jeloltek WHERE jeloltek.statusz = 1 AND jeloltek.ervenyes = 1 AND nev LIKE '%"+name+"%'";
             List<ModelApplicantListbox> list = ModelApplicantListbox.GetModelApplicantListboxShort(command);
             return list;
         }
