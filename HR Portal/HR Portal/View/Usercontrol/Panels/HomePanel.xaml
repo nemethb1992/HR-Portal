@@ -87,7 +87,7 @@
                     <TextBlock Grid.Row="2" Grid.Column="1" x:Name="osszes_jelolt_result" VerticalAlignment="Center"  Text="0" Style="{StaticResource minor_title_style}"/>
                     <TextBlock Grid.Row="3" Text="Projektben:" Margin="20,0" VerticalAlignment="Center" Style="{StaticResource minor_title_style}"/>
                     <TextBlock Grid.Row="3" Grid.Column="1" x:Name="projektben_jelolt_result" VerticalAlignment="Center"  Text="0" Style="{StaticResource minor_title_style}"/>
-                    <Button Grid.Row="4" Grid.ColumnSpan="2" Grid.RowSpan="2" Margin="20" Content="Toborzottak" Style="{StaticResource StandardButton}" Click="ToRecruitment"></Button>
+                    <!--<Button Grid.Row="4" Grid.ColumnSpan="2" Grid.RowSpan="2" Margin="20" Content="Toborzottak" Style="{StaticResource StandardButton}" Click="ToRecruitment"></Button>-->
                 </Grid>
             </Grid>
 
