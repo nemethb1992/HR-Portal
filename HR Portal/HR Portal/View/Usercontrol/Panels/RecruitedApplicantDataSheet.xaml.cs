@@ -68,7 +68,7 @@ namespace HR_Portal_Test.View.Usercontrol.Panels
             if (item != null)
             {
                 applicant.AddRecruitedToProject(item.id);
-                kapcsolodo_projekt_list.ItemsSource = applicant.Data_ProjectList();
+                kapcsolodo_projekt_list.ItemsSource = applicant.Data_RecruitedProjectList();
             }
         }
         protected void projectDelete(object sender, RoutedEventArgs e)
@@ -77,7 +77,7 @@ namespace HR_Portal_Test.View.Usercontrol.Panels
             ModelSmallProject items = delete.DataContext as ModelSmallProject;
 
             applicant.DeleteRecruitedProjectConnection(items.id, freelancerApplicant.id);
-            kapcsolodo_projekt_list.ItemsSource = applicant.Data_ProjectList();
+            kapcsolodo_projekt_list.ItemsSource = applicant.Data_RecruitedProjectList();
         }
     }
 }
