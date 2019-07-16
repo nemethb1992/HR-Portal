@@ -220,7 +220,7 @@
                     </DataTemplate>
                 </ComboBox.ItemTemplate>
             </ComboBox>
-            <Button x:Name="projekt_csat" Grid.Row="5" Grid.Column="1" Style="{StaticResource StandardButton}" Content="Hozzáad" Click="projektClick"/>
+            <Button x:Name="projekt_csat" Grid.Row="5" Grid.Column="1" Style="{StaticResource StandardButton}" Content="Hozzáad" Click="AddProjektClick"/>
         </Grid>
 
         <Grid x:Name="grid_2_3" Grid.Column="3"  Grid.Row="4">

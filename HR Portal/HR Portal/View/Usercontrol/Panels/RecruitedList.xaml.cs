@@ -1,4 +1,5 @@
-﻿using HR_Portal.Source;
+﻿using HR_Portal.Public.templates;
+using HR_Portal.Source;
 using HR_Portal.Source.Model;
 using HR_Portal.Source.Model.Applicant;
 using HR_Portal.Source.ViewModel;
@@ -199,6 +200,7 @@ namespace HR_Portal_Test.View.Usercontrol.Panels
                 case MessageBoxResult.Yes:
                     ModelFreelancerApplicant applicant = (sender as Button).DataContext as ModelFreelancerApplicant;
                     Applicant.DeleteApplicant(applicant.id, true);
+                    new Email().Send(applicant.email, new EmailTemplate().Kolcsonzott_Elutasito(applicant));
                     applicantListLoader();
                     break;
                 case MessageBoxResult.No:
@@ -214,11 +216,19 @@ namespace HR_Portal_Test.View.Usercontrol.Panels
                 case MessageBoxResult.Yes:
                     ModelFreelancerApplicant applicant = (sender as Button).DataContext as ModelFreelancerApplicant;
                     Applicant.AcceptRecruited(applicant);
+                    new Email().Send(applicant.email, new EmailTemplate().Kolcsonzott_Elfogado(applicant));
                     applicantListLoader();
                     break;
                 case MessageBoxResult.No:
                     break;
             }
+        }
+
+        private void OpenRecruitedApplicant(object sender, RoutedEventArgs e)
+        {
+            ModelFreelancerApplicant freelancerApplicant = (sender as Button).DataContext as ModelFreelancerApplicant;
+            Session.ApplicantID = freelancerApplicant.id;
+            Utilities.NavigateTo(grid, new RecruitedApplicantDataSheet(grid, freelancerApplicant));
         }
     }
 }

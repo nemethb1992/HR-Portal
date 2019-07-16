@@ -72,6 +72,7 @@ namespace HR_Portal.Source.Model
         public int id { get; set; }
         public string name { get; set; }
         public string email { get; set; }
+        public string rid { get; set; }
 
         public static List<ModelFreelancerList> getFreelancerList(string command)
         {
@@ -87,6 +88,7 @@ namespace HR_Portal.Source.Model
                     {
                         id = Convert.ToInt32(mySql.sdr["id"]),
                         name = mySql.sdr["name"].ToString(),
+                        rid = mySql.sdr["rid"].ToString(),
                         email = mySql.sdr["email"].ToString()
                     });
                 }

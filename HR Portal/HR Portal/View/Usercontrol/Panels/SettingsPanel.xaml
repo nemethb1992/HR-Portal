@@ -10,7 +10,7 @@
             <Grid Height="1500" Style="{StaticResource switch_grid_style}">
         <Grid.RowDefinitions>
             <RowDefinition Height="40" />
-            <RowDefinition Height="0*" />
+            <RowDefinition Height="1.5*" />
             <RowDefinition Height="1.2*" />
                 <RowDefinition Height="1*" />
                 <RowDefinition Height="1*" />
@@ -22,7 +22,87 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <TextBlock Style="{StaticResource big_title_style}" Grid.Column="1" Text="Beállítások"/>
+            <Grid Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="3">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="1*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1.5*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Style="{StaticResource big_title_style}" Grid.Column="0" VerticalAlignment="Center" FontSize="22" Text="Toborzó cégek"/>
+               <Grid Grid.Column="1" Grid.Row="1" Margin="20,10" Background="Transparent">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40" />
+                        <RowDefinition Height="30" />
+                        <RowDefinition Height="40" />
+                        <RowDefinition Height="70" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <TextBlock Style="{StaticResource big_title_style}" VerticalAlignment="Center" FontSize="19" Text="Toborzó cég neve:"/>
+                    <TextBox Style="{StaticResource Standard_Textbox}" x:Name="freel_name" Grid.Row="1" IsReadOnly="True" FontSize="14" Text=""/>
+                    <TextBlock Style="{StaticResource big_title_style}"  Grid.Row="2" VerticalAlignment="Center" FontSize="19" Text="Hozzátartozó link:"/>
+                    <TextBox Style="{StaticResource Standard_Textbox}" x:Name="freel_link" Grid.Row="3"  IsReadOnly="True" FontSize="14" Text=""/>
 
+                </Grid>
+                <Grid Grid.Column="0" Grid.Row="1" Margin="20,10" Background="Transparent">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="5*" />
+                        <ColumnDefinition Width="5*" />
+                        <ColumnDefinition Width="50" />
+                    </Grid.ColumnDefinitions>
+                    <TextBox x:Name="freelancer_name_tbx" Grid.Column="0" Grid.Row="0" Style="{StaticResource Standard_Textbox}" Tag="Név" Text="Név"  GotFocus="settingsInputGotFocus" LostFocus="settingsInputLostFocus" >
+                        <TextBox.Resources>
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="CornerRadius" Value="3"/>
+                                <Setter Property="Margin" Value="0,0,5,0"/>
+                            </Style>
+                        </TextBox.Resources>
+                    </TextBox>
+                    <TextBox x:Name="freelancer_email_tbx" Grid.Column="1" Grid.Row="0" Style="{StaticResource Standard_Textbox}" Tag="Email" Text="Email"  GotFocus="settingsInputGotFocus" LostFocus="settingsInputLostFocus" >
+                        <TextBox.Resources>
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="CornerRadius" Value="3"/>
+                                <Setter Property="Margin" Value="0,0,5,0"/>
+                            </Style>
+                        </TextBox.Resources>
+                    </TextBox>
+                    <Button Grid.Column="2" Grid.Row="0" Style="{StaticResource StandardButtonWhite}" Click="Add_freelancer_click">
+                        <Image Source="/Public/imgs/add.png" Margin="5" Height="15"/>
+                    </Button>
+                    <ListBox x:Name="freelancer_editlist" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="3" Margin="0,5,0,0"  Style="{StaticResource small_listBox_style}" HorizontalContentAlignment="Stretch" SelectionMode="Extended" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden">
+                        <ListBox.Resources>
+
+                            <Style TargetType="{x:Type Border}" BasedOn="{StaticResource BasicContentBorder}"/>
+                            <Style TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource thin_listBoxItem_style}"/>
+                        </ListBox.Resources>
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Grid MouseDown="Grid_MouseDown">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="1.5*" />
+                                        <ColumnDefinition Width="110" />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.ContextMenu>
+                                        <ContextMenu>
+                                            <MenuItem Header="Törlés" Tag="freelancer_list" Click="DeleteListItem"/>
+                                        </ContextMenu>
+                                    </Grid.ContextMenu>
+                                    <TextBlock Grid.Column="0" Padding="10,0" Style="{StaticResource panelTbl_style}" Text="{Binding name}"/>
+                                    <TextBlock Grid.Column="1" Padding="10,0" Style="{StaticResource panelTbl_style}" Text="{Binding email}"/>
+                                    <TextBlock Grid.Column="2" Padding="10,0" Style="{StaticResource panelTbl_style}" Text="{Binding rid}"/>
+                                </Grid>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </Grid>
+            </Grid>
             <Grid Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="3">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="40" />
@@ -66,7 +146,7 @@
                         <Grid >
                             <Grid.ContextMenu>
                                 <ContextMenu>
-                                    <MenuItem Header="Törlés" Click="vegzettseg"/>
+                                            <MenuItem Header="Törlés" Tag="vegzettsegek" Click="DeleteListItem"/>
                                 </ContextMenu>
                             </Grid.ContextMenu>
                             <TextBlock Grid.Column="0" Padding="10,0" Style="{StaticResource panelTbl_style}" Text="{Binding megnevezes_vegzettseg}"/>
@@ -108,7 +188,7 @@
                             <Grid >
                                 <Grid.ContextMenu>
                                     <ContextMenu>
-                                        <MenuItem Header="Törlés" Click="MenuItem_Click_5"/>
+                                            <MenuItem Header="Törlés"  Tag="nyelv"  Click="DeleteListItem"/>
                                     </ContextMenu>
                                 </Grid.ContextMenu>
                                 <TextBlock Grid.Column="0" Padding="10,0" Style="{StaticResource panelTbl_style}" Text="{Binding nyelv}"/>
@@ -185,7 +265,7 @@
                             <Grid >
                                 <Grid.ContextMenu>
                                     <ContextMenu>
-                                        <MenuItem Header="Törlés" Click="Cimke_delete_click"/>
+                                            <MenuItem Header="Törlés" Tag="jelolt_cimkek" Click="DeleteListItem"/>
                                     </ContextMenu>
                                 </Grid.ContextMenu>
                                 <TextBlock Grid.Column="0" Padding="10,0" Style="{StaticResource panelTbl_style}" Text="{Binding cimke_megnevezes}"/>
@@ -234,7 +314,7 @@
                                 <Grid >
                                     <Grid.ContextMenu>
                                         <ContextMenu>
-                                            <MenuItem Header="Törlés" Click="MenuItem_Click_2"/>
+                                            <MenuItem Header="Törlés" Tag="munkakor"  Click="DeleteListItem"/>
                                         </ContextMenu>
                                     </Grid.ContextMenu>
                                     <TextBlock Grid.Column="0" Padding="10,0" Style="{StaticResource panelTbl_style}" Text="{Binding munkakor}"/>
@@ -276,7 +356,7 @@
                                 <Grid >
                                     <Grid.ContextMenu>
                                         <ContextMenu>
-                                            <MenuItem Header="Törlés" Click="MenuItem_Click_3"/>
+                                            <MenuItem Header="Törlés" Tag="pc" Click="DeleteListItem"/>
                                         </ContextMenu>
                                     </Grid.ContextMenu>
                                     <TextBlock Grid.Column="0" Padding="10,0" Style="{StaticResource panelTbl_style}" Text="{Binding megnevezes_pc}"/>
@@ -318,7 +398,7 @@
                                 <Grid >
                                     <Grid.ContextMenu>
                                         <ContextMenu>
-                                            <MenuItem Header="Törlés" Click="MenuItem_Click_4"/>
+                                            <MenuItem Header="Törlés" Tag="ertesulesek"  Click="DeleteListItem"/>
                                         </ContextMenu>
                                     </Grid.ContextMenu>
                                     <TextBlock Grid.Column="0" Padding="10,0" Style="{StaticResource panelTbl_style}" Text="{Binding ertesules_megnevezes}"/>
@@ -361,7 +441,7 @@
                         <Grid >
                             <Grid.ContextMenu>
                                 <ContextMenu>
-                                    <MenuItem Header="Törlés" Click="kompetenciaDelete"/>
+                                        <MenuItem Header="Törlés" Tag="kompetenciak" Click="DeleteListItem"/>
                                 </ContextMenu>
                             </Grid.ContextMenu>
                             <TextBlock Grid.Column="0" Padding="10,0" Style="{StaticResource panelTbl_style}" Text="{Binding kompetencia_megnevezes}"/>

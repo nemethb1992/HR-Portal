@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using HR_Portal.Source.Model;
@@ -15,6 +16,7 @@ namespace HR_Portal.Source
 
         public enum Views { ApplicantList, ApplicantDataSheet, ProjectList, ProjectDataSheet, InterviewPanel, ProjectJeloltDataSheet, FavoritePanel };
 
+        private static Random random = new Random();
         public static void SetReturnPage(Views view)
         {
             Session.lastPage = view;
@@ -43,70 +45,52 @@ namespace HR_Portal.Source
         
         public List<ModelCimkek> Data_Cimkek() // javítva
         {
-            List<ModelCimkek> list = new ModelCimkek().GetAll();
-            return list;
+            return new ModelCimkek().GetAll();
         }
         public List<ModelSmallProject> Data_PorjectListSmall()
         {
-            string command = "SELECT projektek.id, megnevezes_projekt FROM projektek WHERE statusz = 1";
-            List<ModelSmallProject> list = ModelSmallProject.GetModelSmallProject(command);
-            return list;
+            return ModelSmallProject.GetModelSmallProject("SELECT projektek.id, megnevezes_projekt FROM projektek WHERE statusz = 1");
         }
 
         public List<ModelTamogatas> Data_KompetenciaTamogatas() // javítva
         {
             string command = "SELECT tamogatom FROM kompetencia_jelolt_kapcs WHERE jelolt_id = " + Session.ApplicantID + " AND projekt_id = " + Session.ProjektID + "";
-            List<ModelTamogatas> list = ModelTamogatas.GetModelTamogatas(command);
-            return list;
+            return ModelTamogatas.GetModelTamogatas(command);
         }
 
         public List<ModelMunkakor> Data_Munkakor() //javított
         {
-            string command = "SELECT * FROM munkakor";
-            List<ModelMunkakor> list = ModelMunkakor.GetModelMunkakor(command);
-            return list;
+            return ModelMunkakor.GetModelMunkakor("SELECT * FROM munkakor");
         }
 
         public List<ModelStatusz> Data_Statusz() //javított
         {
-            string command = "SELECT * FROM statusz";
-            List<ModelStatusz> list = ModelStatusz.GetModelStatusz(command);
-            return list;
+            return ModelStatusz.GetModelStatusz("SELECT * FROM statusz");
         }
 
         public List<ModelPc> Data_Pc() //javított
         {
-            string command = "SELECT * FROM pc";
-            List<ModelPc> list = ModelPc.GetModelPc(command);
-            return list;
+            return ModelPc.GetModelPc("SELECT * FROM pc");
         }
 
         public List<ModelVegzettseg> Data_Vegzettseg() //javított
         {
-            string command = "SELECT * FROM vegzettsegek";
-            List<ModelVegzettseg> list = ModelVegzettseg.GetModelVegzettseg(command);
-            return list;
+            return ModelVegzettseg.GetModelVegzettseg("SELECT * FROM vegzettsegek");
         }
 
         public List<ModelNyelv> Data_Nyelv() //javított
         {
-            string command = "SELECT * FROM nyelv";
-            List<ModelNyelv> list = ModelNyelv.GetModelNyelv(command);
-            return list;
+            return ModelNyelv.GetModelNyelv("SELECT * FROM nyelv");
         }
 
         public List<ModelErtesulesek> Data_Ertesulesek() //javított
         {
-            string command = "SELECT * FROM ertesulesek";
-            List<ModelErtesulesek> list = ModelErtesulesek.GetModelErtesulesek(command);
-            return list;
+            return ModelErtesulesek.GetModelErtesulesek("SELECT * FROM ertesulesek");
         }
 
         public List<ModelNem> Data_Nemek() //javított
         {
-            string command = "SELECT * FROM nemek";
-            List<ModelNem> list = ModelNem.GetModelNem(command);
-            return list;
+            return ModelNem.GetModelNem("SELECT * FROM nemek");
         }
 
         public List<ModelApplicantList> Data_JeloltKapcs()
@@ -119,36 +103,31 @@ namespace HR_Portal.Source
                 "FROM jeloltek INNER JOIN projekt_jelolt_kapcs ON jeloltek.id = projekt_jelolt_kapcs.jelolt_id " +
                 "LEFT JOIN projektek ON projektek.id = projekt_jelolt_kapcs.projekt_id " +
                 "LEFT JOIN munkakor ON jeloltek.munkakor = munkakor.id WHERE projektek.id =" + Session.ProjektID + " GROUP BY jeloltek.id ";
-            List<ModelApplicantList> list = ModelApplicantList.GetModelApplicantList(command);
-            return list;
+            return ModelApplicantList.GetModelApplicantList(command);
         }
         
         public List<ModelComment> Data_CommentProject()
         {
             string command = "SELECT id, jelolt_id, projekt_id, hr_id, hr_nev, megjegyzes, datum FROM megjegyzesek WHERE projekt_id=" + Session.ProjektID;
-            List<ModelComment> list = ModelComment.GetModelComment(command);
-            return list;
+            return ModelComment.GetModelComment(command);
         }
 
         public List<ModelComment> Data_CommentApplicant()
         {
             string command = "SELECT id, jelolt_id, projekt_id, hr_id, hr_nev, megjegyzes, datum FROM megjegyzesek WHERE jelolt_id=" + Session.ApplicantID;
-            List<ModelComment> list = ModelComment.GetModelComment(command);
-            return list;
+            return ModelComment.GetModelComment(command);
         }
 
         public List<ModelErtesitendok> Data_ErtesitendokCheckbox(string ertesitendok_src = "")
         {
             string command = "SELECT id, name ,email, kategoria, jogosultsag, validitas FROM users WHERE name LIKE '%" + ertesitendok_src + "%'";
-            List<ModelErtesitendok> list = ModelErtesitendok.GetModelErtesitendok(command);
-            return list;
+            return ModelErtesitendok.GetModelErtesitendok(command);
         }
 
         public List<ModelErtesitendok> Data_ErtesitendokKapcs() // javítva
         {
             string command = "SELECT users.id, name, email, kategoria, jogosultsag, validitas FROM users INNER JOIN projekt_ertesitendok_kapcs ON users.id = projekt_ertesitendok_kapcs.ertesitendok_id  WHERE projekt_ertesitendok_kapcs.projekt_id =" + Session.ProjektID + " AND users.validitas = 1 GROUP BY users.id";
-            List<ModelErtesitendok> list = ModelErtesitendok.GetModelErtesitendok(command);
-            return list;
+            return ModelErtesitendok.GetModelErtesitendok(command);
         }
 
         public List<ModelApplicantListbox> Data_JeloltForCheckbox()
@@ -185,21 +164,17 @@ namespace HR_Portal.Source
             Session.ApplicantStatusz = 0;
             Session.ApplicantStatusz = stat;
         }
-
-
-
         public List<ModelErtesitendok> Data_Ertesitendok()
         {
-            string command = "SELECT * FROM users WHERE kategoria = 0 AND validitas = 1";
-            List<ModelErtesitendok> list = ModelErtesitendok.GetModelErtesitendok(command);
-            return list;
+            return ModelErtesitendok.GetModelErtesitendok("SELECT * FROM users WHERE kategoria = 0 AND validitas = 1");
         }
-
+        public List<ModelFreelancerList> Data_Freelancer()
+        {
+            return ModelFreelancerList.getFreelancerList("SELECT * FROM freelancer_list");
+        }
         public List<ModelMunkakor> Data_Munkakorok()
         {
-            string command = "SELECT * FROM munkakor";
-            List<ModelMunkakor> list = ModelMunkakor.GetModelMunkakor(command);
-            return list;
+            return ModelMunkakor.GetModelMunkakor("SELECT * FROM munkakor");
         }
         
         public void Delete(int id, string table)
@@ -210,7 +185,7 @@ namespace HR_Portal.Source
             mySql.Close();
         }
 
-        public void SettingsInsert(string content, string table)
+        public void SettingsInsert(string content, string table, string other = "")
         {
             string command = "";
 
@@ -240,10 +215,20 @@ namespace HR_Portal.Source
                 case "cimkek":
                     command = "INSERT INTO `jelolt_cimkek` (`id`, `cimke_megnevezes`) VALUES (NULL, '" + content + "');";
                     break;
+                case "freelancer":
+                    command = "INSERT INTO `freelancer_list` (`id`, `name`, `email`, `rid`) VALUES (NULL, '" + content + "', '" + other + "', '" + RandomString(10)+"');";
+                    break;
             }
             MySqlDB mySql = new MySqlDB();
             mySql.Execute(command);
             mySql.Close();
+        }
+
+        public static string RandomString(int length)
+        {
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            return new string(Enumerable.Repeat(chars, length)
+              .Select(s => s[random.Next(s.Length)]).ToArray());
         }
 
         public static int ComboBoxValueSetter(List<ModelId> ossz_li, List<ModelId> projekt_li)

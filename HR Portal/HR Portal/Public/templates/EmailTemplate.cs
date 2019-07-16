@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HR_Portal_Test.Source.Model.Applicant;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -112,7 +113,31 @@ namespace HR_Portal.Public.templates
                                             <p>Személyügyi Osztály</p>";
             return front + content + bottom;
         }
-
+        public string Kolcsonzott_Elfogado(ModelFreelancerApplicant data)
+        {
+            string content = @"
+                                            <h2>Tisztelt " + data.freelancername + @"!</h2>
+                                            <p>Köszönjük a megküldött pályázati anyagot <b>" + data.nev+ @"</b> részére.</p>
+                                            <p>Tájékoztatjuk, hogy a jelentkező nem szerepel adatbázisunkban.</p>
+                                            <p>Várjuk a jelölt önéletrajzát, amelyet egyeztetünk a szakmai vezetéssel.</p>
+                                            <p Style='margin-bottom: 30px;'>Várjuk a további pályázati anyagokat!</p>
+                                            <p>Üdvözlettel:</p>
+                                            <p>Phoenix Mecano Kecskemét Kft.</p>
+                                            <p>Személyügyi Osztály</p>";
+            return front + content + bottom;
+        }
+        public string Kolcsonzott_Elutasito(ModelFreelancerApplicant data)
+        {
+            string content = @"
+                                            <h2>Tisztelt "+data.freelancername+ @"!</h2>
+                                            <p>Köszönjük a megküldött pályázati anyagot <b>" + data.nev + @"</b> részére.</p>
+                                            <p>Tájékoztatjuk, hogy a jelentkező szerepel adatbázisunkban, így jelentkezését nem tudjuk fogadni kölcsönzött jogviszonyban.</p>                
+                                            <p Style='margin-bottom: 30px;'>Várjuk a további pályázati anyagokat!</p>
+                                            <p>Üdvözlettel:</p>
+                                            <p>Phoenix Mecano Kecskemét Kft.</p>
+                                            <p>Személyügyi Osztály</p>";
+            return front + content + bottom;
+        }
         public string ProjektPublikalo(string name, List<string> hirdetes, List<string> szoveg)
         {
             string hirdetesSeged = "";

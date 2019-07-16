@@ -10,6 +10,8 @@ using HR_Portal.Source.Model;
 using HR_Portal.Source.Model.Applicant;
 using HR_Portal.Source.Model.Project;
 using HR_Portal.Source.ViewModel;
+using HR_Portal_Test.View.Usercontrol.Panels;
+using HR_Portal_Test.Source.Model.Applicant;
 
 namespace HR_Portal.View.Usercontrol.Panels
 {

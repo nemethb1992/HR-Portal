@@ -137,15 +137,14 @@
                         <TextBlock Style="{StaticResource ListText}" Padding="11" Grid.Column="2" Text="Lakhely:" />
                         <TextBlock Style="{StaticResource ListText}" Padding="11" Grid.Column="3" Text="Beküldő:" />
                         <TextBlock Style="{StaticResource ListText}" Padding="11" Grid.Column="4" Text="Email:" />
-                        <TextBlock Style="{StaticResource ListText}" Padding="11" Grid.Column="5" Text="Állások:" />
-                        <TextBlock Style="{StaticResource ListText}" Padding="11" Grid.Column="6" Text="Beküldve:" />
+                        <TextBlock Style="{StaticResource ListText}" Padding="11" Grid.Column="5" Text="Beküldve:" />
                         <TextBlock Style="{StaticResource ListText}" Padding="11" Grid.Column="0" Grid.Row="1" Text="{Binding nev}" />
                         <TextBlock Style="{StaticResource ListText}" Padding="11" Grid.Column="1" Grid.Row="1" Text="{Binding szuldatum}" />
                         <TextBlock Style="{StaticResource ListText}" Padding="11" Grid.Column="2" Grid.Row="1" Text="{Binding lakhely}" />
                         <TextBlock Style="{StaticResource ListText}" Padding="11" Grid.Column="3" Grid.Row="1" Text="{Binding freelancername}" />
                         <TextBlock Style="{StaticResource ListText}" Padding="11" Grid.Column="4" Grid.Row="1" Text="{Binding email}" />
-                        <TextBlock Style="{StaticResource ListText}" Padding="11" Grid.Column="5" Grid.Row="1" Text="{Binding project_db}" />
-                        <TextBlock Style="{StaticResource ListText}" Padding="11" Grid.Column="6" Grid.Row="1" Text="{Binding reg_datum}" />
+                        <TextBlock Style="{StaticResource ListText}" Padding="11" Grid.Column="5" Grid.Row="1" Text="{Binding reg_datum}" />
+                        <Button x:Name="open_btn" Style="{StaticResource StandardButton}" Grid.RowSpan="2" Grid.Column="6" Content="Megnyitás" Click="OpenRecruitedApplicant" Margin="3"/>
                         <Button x:Name="accept_btn" Style="{StaticResource GreenButton}" Grid.RowSpan="2" Grid.Column="7" Content="Elfogad" Click="AcceptRecruitedApplicant" Margin="3"/>
                         <Button x:Name="decline_btn" Style="{StaticResource RedButton}" Grid.RowSpan="2" Grid.Column="8" Content="Elvet" Click="RefuseRecruitedApplicant" Margin="3"/>
                    </Grid>

@@ -265,6 +265,9 @@
     <Compile Include="View\Usercontrol\Panels\NewProjectPanel.xaml.cs">
       <DependentUpon>NewProjectPanel.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Usercontrol\Panels\RecruitedApplicantDataSheet.xaml.cs">
+      <DependentUpon>RecruitedApplicantDataSheet.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Usercontrol\Panels\RecruitedList.xaml.cs">
       <DependentUpon>RecruitedList.xaml</DependentUpon>
     </Compile>
@@ -354,6 +357,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="View\Usercontrol\Panels\NewProjectPanel.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Usercontrol\Panels\RecruitedApplicantDataSheet.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

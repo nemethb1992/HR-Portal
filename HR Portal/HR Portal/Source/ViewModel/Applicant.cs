@@ -343,6 +343,17 @@ namespace HR_Portal.Source.ViewModel
             return list;
         }
 
+        public List<ModelSmallProject> Data_RecruitedProjectList(int id = 0) //javított
+        {
+            string command = "SELECT projektek.id, megnevezes_projekt FROM projektek " +
+                "INNER JOIN projekt_jelolt_kapcs_kulsos ON projektek.id = projekt_jelolt_kapcs_kulsos.projekt_id " +
+                "INNER JOIN jeloltek ON jeloltek.id = projekt_jelolt_kapcs_kulsos.jelolt_id " +
+                "WHERE jeloltek.id = " + (id.Equals(0) ? Session.ApplicantID : id) + " " +
+                "GROUP BY projektek.id";
+            List<ModelSmallProject> list = ModelSmallProject.GetModelSmallProject(command);
+            return list;
+        }
+
         public static List<ModelApplicantListbox> GetAllActive(string name = "") //javított
         {
             string command = "SELECT id, nev FROM jeloltek WHERE jeloltek.statusz = 1 AND jeloltek.ervenyes = 1 AND nev LIKE '%"+name+"%'";
@@ -370,14 +381,22 @@ namespace HR_Portal.Source.ViewModel
             }
         }
 
-        public void DeleteProject(int id)
+        public void DeleteProjectConncetion(int id)
         {
             MySqlDB mySql = new MySqlDB();
             string command = "DELETE FROM projekt_jelolt_kapcs WHERE projekt_id = " + id + " AND jelolt_id = " + Session.ApplicantID + ";";
             mySql.Execute(command);
             mySql.Close();
         }
-        
+
+        public void DeleteRecruitedProjectConnection(int projectId, int applicantId)
+        {
+            MySqlDB mySql = new MySqlDB();
+            string command = "DELETE FROM projekt_jelolt_kapcs_kulsos WHERE projekt_id = " + projectId + " AND jelolt_id = " + applicantId + ";";
+            mySql.Execute(command);
+            mySql.Close();
+        }
+
         public void AddToProject(int projekt_index)
         {
             MySqlDB mySql = new MySqlDB();
@@ -386,6 +405,19 @@ namespace HR_Portal.Source.ViewModel
             {
                 mySql.Close();
                 command = "INSERT INTO projekt_jelolt_kapcs (id, projekt_id, jelolt_id, hr_id,allapota, datum) VALUES (NULL, " + projekt_index + ", " + data.id + ", " + Session.UserData.id + ",4, '" + DateTime.Now.ToString("yyyy.MM.dd") + "' );";
+                mySql.Execute(command);
+            }
+            mySql.Close();
+        }
+
+        public void AddRecruitedToProject(int projekt_index)
+        {
+            MySqlDB mySql = new MySqlDB();
+            string command = "SELECT * FROM projekt_jelolt_kapcs WHERE jelolt_id = " + data.id + " AND projekt_id = " + projekt_index + "";
+            if (!mySql.IsExists(command))
+            {
+                mySql.Close();
+                command = "INSERT INTO projekt_jelolt_kapcs_kulsos (id, projekt_id, jelolt_id, datum) VALUES (NULL, " + projekt_index + ", " + data.id + ", '" + DateTime.Now.ToString("yyyy.MM.dd") + "' );";
                 mySql.Execute(command);
             }
             mySql.Close();

@@ -31,10 +31,10 @@ namespace HR_Portal.View.Usercontrol.Panels
             this.applicant = applicant;
             DataContext = applicant.data;
             InitializeComponent();
-            formLoader();
+            FormLoader();
         }
 
-        protected void formLoader()
+        protected void FormLoader()
         {
             applicant_profile_title.Text = applicant.data.nev + (applicant.data.kategoria == 1 ? " - Profession" : "");
             header.Text = "Tisztelt "+ applicant.data.nev + "!";
@@ -60,7 +60,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             MenuItem delete = sender as MenuItem;
             ModelSmallProject items = delete.DataContext as ModelSmallProject;
 
-            applicant.DeleteProject(items.id);
+            applicant.DeleteProjectConncetion(items.id);
             kapcsolodo_projekt_list.ItemsSource = applicant.Data_ProjectList();
         }
 
@@ -104,7 +104,7 @@ namespace HR_Portal.View.Usercontrol.Panels
             }
         }
 
-        protected void projektClick(object sender, RoutedEventArgs e)
+        protected void AddProjektClick(object sender, RoutedEventArgs e)
         {
             ComboBox cbx = projekt_cbx as ComboBox;
             ModelSmallProject item = cbx.SelectedItem as ModelSmallProject;
