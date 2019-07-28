@@ -262,7 +262,7 @@ namespace HR_Portal.Source.ViewModel
         {
             List<ModelProjektJeloltKapcs> kapcsolatok = ModelProjektJeloltKapcs.Get("SELECT * FROM projekt_jelolt_kapcs_kulsos WHERE jelolt_id = "+applicant.id+"");
             MySqlDB mySql = new MySqlDB();
-            string command = "UPDATE jeloltek SET ervenyes = 1 WHERE id = " + applicant.id + ";";
+            string command = "UPDATE jeloltek SET ervenyes = 1, friss = false WHERE id = " + applicant.id + ";";
             mySql.Execute(command);
             foreach (var item in kapcsolatok)
             {
