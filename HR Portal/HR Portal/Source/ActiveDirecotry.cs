@@ -16,8 +16,8 @@ namespace HR_Portal.Source
             {
                 try
                 {
-                    LdapDirectoryIdentifier LDAPdi = new LdapDirectoryIdentifier("192.168.144.21", 389);
-                    LdapConnection ldapConnection = new LdapConnection(LDAPdi);
+                    LdapDirectoryIdentifier LDAPdi = new LdapDirectoryIdentifier("ldap.pmhu.local", 389); 
+                     LdapConnection ldapConnection = new LdapConnection(LDAPdi);
                     ldapConnection.AuthType = AuthType.Basic;
                     ldapConnection.SessionOptions.ProtocolVersion = 3;
                     NetworkCredential networkCredential = new NetworkCredential(username + "@pmhu.local", password);
